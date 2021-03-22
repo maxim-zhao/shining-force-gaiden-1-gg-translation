@@ -191,6 +191,7 @@ def dump(rom):
 
                 script.append({
                     "index": entry_index,
+                    "character": "",
                     "ja": s,
                     "literal": "",
                     "en": ""
