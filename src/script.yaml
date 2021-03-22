@@ -1,0 +1,3142 @@
+- index: 1
+  ja: ゲ-ムを ちゅうだんします<line>よろしいですか?<lookup>
+  literal: ''
+  en: ''
+- index: 2
+  ja: <party leader> しゅつじんの<line>したくは いいですか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 3
+  ja: ほかにも したくが ありますか?<lookup>
+  literal: ''
+  en: ''
+- index: 4
+  ja: おや きが かわりましたか?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 5
+  ja: では きをつけて<delay 01><line>むりは きんもつですよ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 6
+  ja: <party leader> むりを しすぎましたね<line>ここは おちついて さくせんを<line>ねってみては どうですか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 7
+  ja: <party leader> ときには<line>ひくことも かんじんです<line>じっくり さくせんを おねりなさい<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 8
+  ja: <party leader> もどりましたね<line>しゅつじんのしたくは いいですか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 9
+  ja: <party leader> たたかいに<line>おもむくのですね?<lookup>
+  literal: ''
+  en: ''
+- index: 10
+  ja: だれと だれを いれかえますか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 11
+  ja: <name>にかわって <name>が<line>たたかいに のぞみます<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 12
+  ja: <party leader> ざんねんですが<line>こうたいできる なかまが いません<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 13
+  ja: <name>は しんでいますが<line>それでも いいのですか?<lookup>
+  literal: ''
+  en: ''
+- index: 14
+  ja: ほかにも こうたいさせますか?<lookup>
+  literal: ''
+  en: ''
+- index: 15
+  ja: <name>がぬけて<line>どうしようというのです<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 16
+  ja: だれのもちものを つかいますか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 17
+  ja: <item>を<line>だれに つかいますか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 18
+  ja: <party leader>! <delay 01><item>を<line>どうしようと いうのです!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 19
+  ja: ほかにも なにか つかいますか?<lookup>
+  literal: ''
+  en: ''
+- index: 20
+  ja: だれのもちものを わたしますか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 21
+  ja: <item>を<line>だれに わたしすまか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 22
+  ja: <party leader>! <item>は<line>のろいで はずれません!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 23
+  ja: では だれに わたしますか?<lookup>
+  literal: ''
+  en: ''
+- index: 24
+  ja: ほかにも なにか わたしますか?<lookup>
+  literal: ''
+  en: ''
+- index: 25
+  ja: だれの そうびを しますか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 26
+  ja: なんと! <name>が<line>のろわれて しまいました!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 27
+  ja: ほかにも そうびしますか?<lookup>
+  literal: ''
+  en: ''
+- index: 28
+  ja: だれのもちものを すてますか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 29
+  ja: <party leader>! <item>は<line>すてないほうが いいと<line>おもいますよ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 30
+  ja: ほかにも なにか すてますか?<lookup>
+  literal: ''
+  en: ''
+- index: 31
+  ja: <party leader>! <name>は<line>なにも もっていませんよ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 32
+  ja: <item>を <name>に<line>わたしました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 33
+  ja: <item>を <name>の<line><item>と こうかんしました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 34
+  ja: <item>を すてましたよ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 35
+  ja: なんと! のろいで そうびが<line>つけかえられません!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 36
+  ja: ほんとうに <item>を<line>すてて いいのですか?<lookup>
+  literal: ''
+  en: ''
+- index: 37
+  ja: だれの ステ-タスを みますか?<lookup>
+  literal: ''
+  en: ''
+- index: 38
+  ja: ほかのものも みてみますか?<lookup>
+  literal: ''
+  en: ''
+- index: 39
+  ja: う-む ざんねんですが <name>は<line>そうびできるものが ないようですね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 40
+  ja: まよえる こひつじよ!<line>よくぞ わがきょうかいに<line>まいられた<wait more>かみとひかりのなにおいて そなたの<line>のぞみを
+    かなえて しんぜよう!<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 41
+  ja: なんと かみのおじひに すがらずに<line>いきていくと いうのですか!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 42
+  ja: ほかにも なにか おのぞみですか?<lookup>
+  literal: ''
+  en: ''
+- index: 43
+  ja: それでは おきをつけなさい<line><delay 02>ひかりは あなたがたとともに!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 44
+  ja: さて これまでの あなたがたの<line>ぼうけんを きろくして いいですか?<lookup>
+  literal: ''
+  en: ''
+- index: 45
+  ja: かみの ひかりの おじひです<line>あなたがたは いつでも<line>たびを さいかいできますよ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 46
+  ja: このあとも たびを つづけますか?<lookup>
+  literal: ''
+  en: ''
+- index: 47
+  ja: それでは つぎのきかいにそなえ<line>からだをやすめるのが いいでしょう<line>わたしも やすむとしましょうか<wait><lookup>
+  literal: ''
+  en: ''
+- index: 48
+  ja: それでは <party leader> あなたがたを<line>しらべて あげましょう<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 49
+  ja: どくに おかされたものは<line>いない ようですね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 50
+  ja: のろわれているものは<line>いない ようですね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 51
+  ja: おおっ なんと <name>は<line>どくにおかされているではないですか!<wait more><line><lookup>
+  literal: ''
+  en: ''
+- index: 52
+  ja: おおっ なんと <name>は<line>のろわれているではないですか!<wait more><line><lookup>
+  literal: ''
+  en: ''
+- index: 53
+  ja: ちりょうして あげましょう<line>きんか<number>まいに なりますが<line>よろしいですか?<lookup>
+  literal: ''
+  en: ''
+- index: 54
+  ja: なんと かみのおじひに すがらずに<line>いきていくと いうのですか!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 55
+  ja: え? おふせが たりない?<line>ああ それは いたましい・・・<line>それでは ちりょうが できません<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 56
+  ja: <name>の どくは<line>すべて きえさりました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 57
+  ja: <name>の のろいは<line>すべて とけました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 58
+  ja: しんだものは いない ようですね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 59
+  ja: なんと <name>が<line>しんでいる ではないですか!<wait more><line><lookup>
+  literal: ''
+  en: ''
+- index: 60
+  ja: たましいを よびもどしてあげましょう<line>きんか<number>まいに なりますが<line>よろしいですか?<lookup>
+  literal: ''
+  en: ''
+- index: 61
+  ja: <name>は<line>みごとに ふっかつしました!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 62
+  ja: う-む ざんねんながら<line>てんしょくできるものは<line>いないようです・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 63
+  ja: だれが てんしょくを<line>のぞみますか?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 64
+  ja: おや きがかわりましたか?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 65
+  ja: う-む<delay 01> <name>は<line>まだ しゅぎょうが たりませんねえ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 66
+  ja: わかりました <name>が<line>てんしょくするのですね<lookup>
+  literal: ''
+  en: ''
+- index: 67
+  ja: おほん<delay 01> では・・・<line><delay 01>かみと ひかりの なにおいて・・・<line><delay 01><class name>・<name>は・・・<line><wait
+    more><class name>と なるがよい!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 68
+  ja: <name>は みごとに<line><class name>に なりました!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 69
+  ja: う-む<delay 01> <name>は<line>いまの しょくぎょうを<line>つづけたほうが いいですね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 70
+  ja: ・・・こうかが なかった ようですね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 71
+  ja: <name>の からだから<line>どくが きえました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 72
+  ja: <name>の こうげきりょくが<line><number>あがりました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 73
+  ja: <name>の ぼうぎょりょくが<line><number>あがりました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 74
+  ja: <name>の すばやさが<line><number>あがりました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 75
+  ja: <name>の いどうきょりが<line><number>あがりました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 76
+  ja: <name>の さいだいHPが<line><number>あがりました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 77
+  ja: へい いらっしゃい!<line>いいしなもの ばかりだよ!<line>ゆっくり みてってくれよ!<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 78
+  ja: ほかになにか ようじは あるかい?<lookup>
+  literal: ''
+  en: ''
+- index: 79
+  ja: おっと どんな ようじだい?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 80
+  ja: ありがとう また よってくれよ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 81
+  ja: なにを かってくれるのかな?<lookup>
+  literal: ''
+  en: ''
+- index: 82
+  ja: <item>だね そいつは<line>きんか<number>まいに なるけど<line>それで いいかい?<lookup>
+  literal: ''
+  en: ''
+- index: 83
+  ja: そいつは ざんねんだなあ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 84
+  ja: あれ きんかが たりないようだね<line>それじゃあ うれないよ・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 85
+  ja: だれに わたせば いいんだい?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 86
+  ja: <name>さんは こいつを<line>そうび できないぜ<line>それでも いいかい?<lookup>
+  literal: ''
+  en: ''
+- index: 87
+  ja: おっと <name>さんは<line>もちものが いっぱいだぜ!<line>ほかのひとが もつかい?<lookup>
+  literal: ''
+  en: ''
+- index: 88
+  ja: はいよ わたすぜ!<line>だいじに つかってくれよ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 89
+  ja: さて ほかにもみてみるかい?<lookup>
+  literal: ''
+  en: ''
+- index: 90
+  ja: すごいしなものが はいっているよ<delay 01><line>さあ どれをかってくれるんだい?<lookup>
+  literal: ''
+  en: ''
+- index: 91
+  ja: う-ん もうしわけない!<line>ほりだしものは しなぎれなんだ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 92
+  ja: さて だれのどのどうぐを<line>うってくれるんだい?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 93
+  ja: そいつなら きんか<number>まいで<line>かいとるけど それでいいかい?<lookup>
+  literal: ''
+  en: ''
+- index: 94
+  ja: そいつは ざんねんだなあ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 95
+  ja: う-ん わるいけど そいつは<line>うちでは ひきとれないねえ・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 96
+  ja: よし たしかに もらったぜ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 97
+  ja: ほかに うるものは あるかい?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 98
+  ja: そいつは めずらしい しなものだ<line>そいつなら きんか<number>まいで<line>かいとるけど それでいいかい?<lookup>
+  literal: ''
+  en: ''
+- index: 99
+  ja: よしそれじゃ わたしてもら・・・?<delay 01><line>・・・<delay 01> これ ひょっとして<line>のろわれてないか?<wait
+    more><line>こまるなあ へんなもの<line>おしつけられちゃあ・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 100
+  ja: おいおい <name>さんは<line>なんにも もってないようだぜ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 101
+  ja: さて だれのどのどうぐを<line>なおせば いいんだい?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 102
+  ja: そいつなら きんか<number>まいで<line>なおせるけど それでいいかい?<lookup>
+  literal: ''
+  en: ''
+- index: 103
+  ja: あれ?<line>そいつは どこも こわれてないぜ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 104
+  ja: あれ きんかが たりないようだね<line>それじゃあ なおせないよ・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 105
+  ja: おっと! のろわれたどうぐは<line>なおせないぜ!<line>・・・たたりがあったら やだからね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 106
+  ja: よ-し ちょっと まっててくれよ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 107
+  ja: ほ-ら なおったぜ!<line>しんぴんどうよう ピッカピカだ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 108
+  ja: ほかにも しゅうりしたいものは<line>あるかい?<lookup>
+  literal: ''
+  en: ''
+- index: 109
+  ja: アンリじょおうの ねむりを<line>さますために・・・<lookup>
+  literal: ''
+  en: ''
+- index: 110
+  ja: <wait more>ラグをたいちょうとした<line>えんせいぐんを さしむけた・・・<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 111
+  ja: わ-! これから どうなるのかな?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 112
+  ja: あっ おきゃくさまね!<line>このごほんをよみにきたんでしょ<line>じゃっ いっしょに よみましょう!<lookup>
+  literal: ''
+  en: ''
+- index: 113
+  ja: ねえねえ <delay 01>このしゅじんこうは<line>なんていう おなまえなの?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 114
+  ja: <party leader>さんて いうのね<delay 01><line>かっこいいんだ-っ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 115
+  ja: それじゃ はやくよんで!<delay 01><line>はやく はやく-っ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 116
+  ja: このまえの つづきを<line>よんで きかせて くれるのね!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 117
+  ja: どの つづきを よんでくれるの?<lookup>
+  literal: ''
+  en: ''
+- index: 118
+  ja: わ-! たのしみ-!<delay 01><line>はやく よんできかせて-!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 119
+  ja: え-? そうなんだ・・<delay 01><line>どれを なくしちゃうの?<lookup>
+  literal: ''
+  en: ''
+- index: 120
+  ja: うん これでなくなったよ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 121
+  ja: どこに うつすの?<lookup>
+  literal: ''
+  en: ''
+- index: 122
+  ja: これで うつしたよ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 123
+  ja: ・・もう おしまい?<delay 01><line>ざんねんねぇ・・・<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 124
+  ja: きょうは もうかえるのね・・<delay 01><line>また おはなし きかせてね<delay 01><line>バイバ-イ<delay 02><delay
+    02><delay 02><delay 02><lookup>
+  literal: ''
+  en: ''
+- index: 125
+  ja: そして<delay 01> かみがみの いさんも<line>うみの もくずと きえたそうじゃ<lookup>
+  literal: ''
+  en: ''
+- index: 126
+  ja: ごくろうを かけましたな<delay 01><line>まごは ねむってしまったの<lookup>
+  literal: ''
+  en: ''
+- index: 127
+  ja: <party leader>の おかげで<line>ガ-ディアナも すくわれた<lookup>
+  literal: ''
+  en: ''
+- index: 128
+  ja: えっ・・ほかのなかまのことじゃな<lookup>
+  literal: ''
+  en: ''
+- index: 129
+  ja: いまごろは ちからをあわせて<line>くにを さいけんしていることじゃろ<lookup>
+  literal: ''
+  en: ''
+- index: 130
+  ja: また いつか <party leader>の<line>ちからが ひつようなひが くるまで<lookup>
+  literal: ''
+  en: ''
+- index: 131
+  ja: かれらと かれらのしそんが<line>りっぱに くにをまもっていくじゃろ <lookup>
+  literal: ''
+  en: ''
+- index: 132
+  ja: おおっ もうじかんじゃ<delay 01><line><party leader>が じぶんの せかいに<line>もどらねば ならぬな・・<lookup>
+  literal: ''
+  en: ''
+- index: 133
+  ja: いつか また あえるひまで<delay 01><line>ごきげんよう・・<lookup>
+  literal: ''
+  en: ''
+- index: 134
+  ja: あ-っ たいへん<line>きろく<number>がなくなっちゃった-!!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 135
+  ja: あら! ほんとに けしちゃうの?<lookup>
+  literal: ''
+  en: ''
+- index: 136
+  ja: <name>の こうげき<lookup>
+  literal: ''
+  en: ''
+- index: 137
+  ja: <name>に <number>ポイントの<line>ダメ-ジを あたえた<lookup>
+  literal: ''
+  en: ''
+- index: 138
+  ja: <name>は<line><spell>レベル<number>をとなえた!<lookup>
+  literal: ''
+  en: ''
+- index: 139
+  ja: <name>は レベル<number>に なった!<lookup>
+  literal: ''
+  en: ''
+- index: 140
+  ja: かいしんの いちげき!<lookup>
+  literal: ''
+  en: ''
+- index: 141
+  ja: ひっさつの いちげき!<lookup>
+  literal: ''
+  en: ''
+- index: 142
+  ja: つうこんの いちげき!<lookup>
+  literal: ''
+  en: ''
+- index: 143
+  ja: あくまの わらいを うかべた・・・<lookup>
+  literal: ''
+  en: ''
+- index: 144
+  ja: まりょくを すいとられた<lookup>
+  literal: ''
+  en: ''
+- index: 145
+  ja: おそろしい ことばを つぶやいた<lookup>
+  literal: ''
+  en: ''
+- index: 146
+  ja: たいりょくを すいとられた<lookup>
+  literal: ''
+  en: ''
+- index: 147
+  ja: のろいの ことばを なげつけた!<lookup>
+  literal: ''
+  en: ''
+- index: 148
+  ja: しびれて うごけなくなった<lookup>
+  literal: ''
+  en: ''
+- index: 149
+  ja: からだを どくに おかされた<lookup>
+  literal: ''
+  en: ''
+- index: 150
+  ja: ひを はいた!<lookup>
+  literal: ''
+  en: ''
+- index: 151
+  ja: きおくを なくした! どうしよう!<lookup>
+  literal: ''
+  en: ''
+- index: 152
+  ja: <item>を みつけた!<lookup>
+  literal: ''
+  en: ''
+- index: 153
+  ja: アイテムから ひとすじの<line>けむりが たちのぼった<lookup>
+  literal: ''
+  en: ''
+- index: 154
+  ja: アイテムが てのなかで もえだした<lookup>
+  literal: ''
+  en: ''
+- index: 155
+  ja: <name>の はんげき!<lookup>
+  literal: ''
+  en: ''
+- index: 156
+  ja: <name>は いえきを はきかけた!<lookup>
+  literal: ''
+  en: ''
+- index: 157
+  ja: <wait more><lookup>
+  literal: ''
+  en: ''
+- index: 158
+  ja: <name>は <number>ポイントの<line>けいけんちを えた<lookup>
+  literal: ''
+  en: ''
+- index: 159
+  ja: <wait><lookup>
+  literal: ''
+  en: ''
+- index: 160
+  ja: <wait more><number>まいの きんかを えた<lookup>
+  literal: ''
+  en: ''
+- index: 161
+  ja: <wait more>HPが<number>ポイントアップ!<lookup>
+  literal: ''
+  en: ''
+- index: 162
+  ja: <wait more>MPが<number>ポイントアップ!<lookup>
+  literal: ''
+  en: ''
+- index: 163
+  ja: <wait more>こうげきが<number>ポイントアップ!<lookup>
+  literal: ''
+  en: ''
+- index: 164
+  ja: <wait more>ぼうぎょが<number>ポイントアップ!<lookup>
+  literal: ''
+  en: ''
+- index: 165
+  ja: <wait more>すばやさが<number>ポイントアップ!<lookup>
+  literal: ''
+  en: ''
+- index: 166
+  ja: <wait more><name>は<line><spell>のまほうを おぼえた!<lookup>
+  literal: ''
+  en: ''
+- index: 167
+  ja: <wait more><spell>のレベルが <number>になった!<lookup>
+  literal: ''
+  en: ''
+- index: 168
+  ja: <name>のこうげき!<lookup>
+  literal: ''
+  en: ''
+- index: 169
+  ja: <name>は<line><spell>レベル<number>をとなえた!<lookup>
+  literal: ''
+  en: ''
+- index: 170
+  ja: <name>は<line><item>をつかった!<lookup>
+  literal: ''
+  en: ''
+- index: 171
+  ja: <name>は<line>デ-モンブレスをとなえた!<lookup>
+  literal: ''
+  en: ''
+- index: 172
+  ja: <name>は<line>デ-モンブレスをはいた!<lookup>
+  literal: ''
+  en: ''
+- index: 173
+  ja: <name>は<line>ほのおをはいた!<lookup>
+  literal: ''
+  en: ''
+- index: 174
+  ja: <name>は<line>ふぶきをはいた!<lookup>
+  literal: ''
+  en: ''
+- index: 175
+  ja: <name>は<line>ほうしをふりまいた!<lookup>
+  literal: ''
+  en: ''
+- index: 176
+  ja: <name>は<line><spell>レベル<number>をとなえた!<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 177
+  ja: <name>に <number>ポイントの<line>ダメ-ジをあたえた<lookup>
+  literal: ''
+  en: ''
+- index: 178
+  ja: <name>は <number>ポイントの<line>ダメ-ジを うけた<lookup>
+  literal: ''
+  en: ''
+- index: 179
+  ja: <name>は すばやくかわした<lookup>
+  literal: ''
+  en: ''
+- index: 180
+  ja: ひっさつのいちげきが きまった!<delay 01><line><name>に <number>ポイントの<line>ダメ-ジをあたえた<lookup>
+  literal: ''
+  en: ''
+- index: 181
+  ja: きょうれつな いちげき!<delay 01><line><name>は <number>ポイントの<line>ダメ-ジを うけた<lookup>
+  literal: ''
+  en: ''
+- index: 182
+  ja: しかし <name>に<line>ダメ-ジを あたえられない<lookup>
+  literal: ''
+  en: ''
+- index: 183
+  ja: <name>を たおした!<lookup>
+  literal: ''
+  en: ''
+- index: 184
+  ja: <name>は ちからつきた・・・<lookup>
+  literal: ''
+  en: ''
+- index: 185
+  ja: <name>は はんげきしてきた<lookup>
+  literal: ''
+  en: ''
+- index: 186
+  ja: しかし <name>には<line>きかなかった<lookup>
+  literal: ''
+  en: ''
+- index: 187
+  ja: しかし <name>は<line>まほうを ふうじられている<lookup>
+  literal: ''
+  en: ''
+- index: 188
+  ja: しかし まほうは かきけされた<lookup>
+  literal: ''
+  en: ''
+- index: 189
+  ja: <name>は <number>ポイント<line>HPが かいふくした<lookup>
+  literal: ''
+  en: ''
+- index: 190
+  ja: ぜんいんの HPが<line><number>ポイント かいふくした<lookup>
+  literal: ''
+  en: ''
+- index: 191
+  ja: <name>は<line>からだの どくがきえた<lookup>
+  literal: ''
+  en: ''
+- index: 192
+  ja: <name>は<line>からだの いじょうがなくなった<lookup>
+  literal: ''
+  en: ''
+- index: 193
+  ja: <name>は<line>たましいを ぬきとられた<lookup>
+  literal: ''
+  en: ''
+- index: 194
+  ja: <name>の<line>たましいが ぬきとられた<lookup>
+  literal: ''
+  en: ''
+- index: 195
+  ja: <name>は ねむっている<wait><lookup>
+  literal: ''
+  en: ''
+- index: 196
+  ja: <name>は どくのため<line><number>ポイントの ダメ-ジをうけた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 197
+  ja: <name>は ちからつきた・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 198
+  ja: <name>は<line>あくまのわらいを うかべた!<lookup>
+  literal: ''
+  en: ''
+- index: 199
+  ja: <name>は <number>ポイントの<line>MPを すいとられた<lookup>
+  literal: ''
+  en: ''
+- index: 200
+  ja: しかし なにもおこらなかった<lookup>
+  literal: ''
+  en: ''
+- index: 201
+  ja: <name>は<line>ぶきみなじゅもんを つぶやいた!<lookup>
+  literal: ''
+  en: ''
+- index: 202
+  ja: <name>は <number>ポイントの<line>HPを すいとられた<lookup>
+  literal: ''
+  en: ''
+- index: 203
+  ja: <name>は<line>いちげきで いのちをうばわれた<lookup>
+  literal: ''
+  en: ''
+- index: 204
+  ja: <item>が<line>ぶきみな うなりをあげた・・・<lookup>
+  literal: ''
+  en: ''
+- index: 205
+  ja: <name>は <number>ポイントの<line>MPを すいとった<lookup>
+  literal: ''
+  en: ''
+- index: 206
+  ja: <name>は<line>すばやさが <number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 207
+  ja: <name>は<line>すばやさが <number>ポイントさがった<lookup>
+  literal: ''
+  en: ''
+- index: 208
+  ja: <name>は<line>こうげきが <number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 209
+  ja: <name>は<line>まほうを ふうじられた<lookup>
+  literal: ''
+  en: ''
+- index: 210
+  ja: <name>は<line>まほうのまくに つつまれた<lookup>
+  literal: ''
+  en: ''
+- index: 211
+  ja: <name>は<line>ふかいきりに つつまれた<lookup>
+  literal: ''
+  en: ''
+- index: 212
+  ja: <name>は<line>ねむりにおちた<lookup>
+  literal: ''
+  en: ''
+- index: 213
+  ja: <name>は<line>どくにおかされた<lookup>
+  literal: ''
+  en: ''
+- index: 214
+  ja: <name>は<line>のろわれてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 215
+  ja: ぼうぎょが <number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 216
+  ja: ぼうぎょが <number>ポイントさがった<lookup>
+  literal: ''
+  en: ''
+- index: 217
+  ja: <name>は<line>ぼうぎょが <number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 218
+  ja: <name>は<line>さいだいHPが <number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 219
+  ja: <name>は<line>いどうカが <number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 220
+  ja: <spell>の こうかがきえた<line>すばやさが もどった<line>ぼうぎょが もどった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 221
+  ja: <spell>の こうかがきえた<line>すばやさが もどった<line>ぼうぎょが もどった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 222
+  ja: <spell>の こうかがきえた<line>こうげきが もどった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 223
+  ja: <spell>の こうかがきえた<line>ふたたび まほうが<line>つかえるようになった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 224
+  ja: <spell>の こうかがきえた<line><name>から<line>まほうのまくが きえた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 225
+  ja: <spell>の こうかがきえた<line><name>から<line>ふかいきりが はれた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 226
+  ja: <name>は めざめた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 227
+  ja: <name>は のろわれている!<wait more><line>のろいで からだが とつぜん<line>しびれてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 228
+  ja: <name>は のろわれている!<wait more><line>のろいで <number>ポイントの<line>ダメ-ジが かえってきた<lookup>
+  literal: ''
+  en: ''
+- index: 229
+  ja: <use dictionary><wait more><lookup>
+  literal: ''
+  en: ''
+- index: 230
+  ja: <name>のレベルがあがった!<line><name>は レベル<number>になった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 231
+  ja: こうげきりょくが <number>ポイントあがった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 232
+  ja: ぼうぎょがりょく <number>ポイントあがった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 233
+  ja: すばやさが <number>ポイントあがった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 234
+  ja: さいだいHPが <number>ポイントあがった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 235
+  ja: さいだいMPが <number>ポイントあがった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 236
+  ja: そして あたらしく<line><spell>のまほうを おぼえた<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 237
+  ja: そして <spell>の<line>レベルが <number>になった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 238
+  ja: しかし <item>から<line>ひとすじのけむりが たちのぼった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 239
+  ja: しかし <item>に<line>こまかい ひびがはいった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 240
+  ja: しかし <item>に<line>おおきな きれつがはしった<lookup>
+  literal: ''
+  en: ''
+- index: 241
+  ja: しかし <item>は<line>いびつに ゆがんでしまった<lookup>
+  literal: ''
+  en: ''
+- index: 242
+  ja: しかし <item>の<line>ひょうめんに くもりがあらわれた<lookup>
+  literal: ''
+  en: ''
+- index: 243
+  ja: しかし <item>が<line>てのなかで もえだした!<lookup>
+  literal: ''
+  en: ''
+- index: 244
+  ja: しかし <item>は<line>こまかく くだけてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 245
+  ja: しかし <item>は<line>まっぷたつに われてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 246
+  ja: しかし <item>は<line>ばらばらに こわれてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 247
+  ja: しかし <item>は<line>すっかり さびてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 248
+  ja: さらに <item>から<line>ひとすじのけむりが たちのぼった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 249
+  ja: さらに <item>に<line>こまかい ひびがはいった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 250
+  ja: さらに <item>に<line>おおきな きれつがはしった<lookup>
+  literal: ''
+  en: ''
+- index: 251
+  ja: さらに <item>は<line>いびつに ゆがんでしまった<lookup>
+  literal: ''
+  en: ''
+- index: 252
+  ja: さらに <item>の<line>ひょうめんに くもりがあらわれた<lookup>
+  literal: ''
+  en: ''
+- index: 253
+  ja: さらに <item>が<line>てのなかで もえだした!<lookup>
+  literal: ''
+  en: ''
+- index: 254
+  ja: さらに <item>は<line>こまかく くだけてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 255
+  ja: さらに <item>は<line>まっぷたつに われてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 256
+  ja: さらに <item>は<line>ばらばらに こわれてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 257
+  ja: さらに <item>は<line>すっかり さびてしまった<lookup>
+  literal: ''
+  en: ''
+- index: 258
+  ja: <name>は <number>ポイントの<line>けいけんちを えた<lookup>
+  literal: ''
+  en: ''
+- index: 259
+  ja: <number>まいの<line>きんかを てにいれた<lookup>
+  literal: ''
+  en: ''
+- index: 260
+  ja: <name>は<line><item>をみつけた<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 261
+  ja: <name>は<line><item>をてにいれた<lookup>
+  literal: ''
+  en: ''
+- index: 262
+  ja: <name>は<line><item>をおとした<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 263
+  ja: <name>が あらわれた!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 264
+  ja: <name>のこうげきりょくが<line><number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 265
+  ja: <name>のぼうぎょりょくが<line><number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 266
+  ja: <name>のすばやさが<line><number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 267
+  ja: <name>のいどうきょりが<line><number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 268
+  ja: <name>のさいだいHPが<line><number>ポイントあがった<lookup>
+  literal: ''
+  en: ''
+- index: 269
+  ja: <name>は たからばこをしらべた!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 270
+  ja: たからばこはからっぽだった!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 271
+  ja: <item>を みつけた<lookup>
+  literal: ''
+  en: ''
+- index: 272
+  ja: <name>は<line><item>をてにいれた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 273
+  ja: しかし <name>は<line>もちものが いっぱいだった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 274
+  ja: <party leader>は<line><item>をつかった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 275
+  ja: しかしなにも おこらなかった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 276
+  ja: そして ふたたび<line><party leader>たちは・・・<line>せんじょうへと むかった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 277
+  ja: わたしは <class name>の<name><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 278
+  ja: <class name>の <name>が<line>なかまに なった<lookup>
+  literal: ''
+  en: ''
+- index: 279
+  ja: <name>は<line>ドミンゴを みつけた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 280
+  ja: ホニョラ-・・・<line>みちゅかりまちたか!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 281
+  ja: ごほうびに みなさんの<line>おてつだいを してあげまちゅね<wait><lookup>
+  literal: ''
+  en: ''
+- index: 282
+  ja: ところでしってまちゅか?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 283
+  ja: よるが やってくるのは<line>ちきゅうが まわってるからでちゅ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 284
+  ja: <name>は<line>アミ-ゴを みつけた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 285
+  ja: ワ-オ! みつけたでしゅネ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 286
+  ja: あそぶあいてが みつかって<line>と-っても うれしいでしゅ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 287
+  ja: せかいは ひとつでしゅ<line>あらそいごとは ダメでしゅよ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 288
+  ja: それじゃ ほんじんでネ<line>アディオス アミ-ゴ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 289
+  ja: おわり<lookup>
+  literal: ''
+  en: ''
+- index: 290
+  ja: だい<number>しょう<lookup>
+  literal: ''
+  en: ''
+- index: 291
+  ja: ２ぐんぶたいのえんせい<lookup>
+  literal: ''
+  en: ''
+- index: 292
+  ja: サイプレスのひみつ<lookup>
+  literal: ''
+  en: ''
+- index: 293
+  ja: サイプレスほんどじょうりく<lookup>
+  literal: ''
+  en: ''
+- index: 294
+  ja: けっせん! サイプレスじょう<lookup>
+  literal: ''
+  en: ''
+- index: 295
+  ja: アンリおうに もうしあげます!<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 296
+  ja: ただいま ル-ンたいりくのみなみ<line>サイプレスこくよりの ししゃが<line>ごあいさつにと まいっております<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 297
+  ja: なんと<delay 01> サイプレスよりのししゃ?<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 298
+  ja: アンリさま どういたしましょうか?<line>サイプレスは みかいたくのばしょ<line>こうせんてきな とちとききますぞ<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 299
+  ja: そのとき おもてのほうから<line>あらそう ものおとがした<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 300
+  ja: おまちください! ただいま<line>おとりつぎを しているところです<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 301
+  ja: うるさい! こんなところで<line>おめおめと まっていられるか!<line>おまえらこそ だまるがいい!<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 302
+  ja: くらえ! スパ-ク レベル３!<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 303
+  ja: ばかめ! おとなしくしていれば<line>てあらなまねを せずにすんだものを<line>さて アンリおうにあうとするか<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 304
+  ja: ひかえろ! ろうぜきものめ!<line>わが ガ-ディアナおうのまえで<line>かってなふるまいは ゆるさんぞ!<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 305
+  ja: ケンは ヤリをもって みがまえた<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 306
+  ja: グフッ グフッ グフフフッ<line>うわさでは・・・ガ-ディアナは<line>みな れいせつをわきまえるとか・・・<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 307
+  ja: しかし うわさは あてにならぬな<line>ダントム! フレ-ベル!<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 308
+  ja: ウォォォ-ッ!<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 309
+  ja: グシュ-・・・ グシュ-・・・<line>われらに はむかうとはバカなやつ!<line>さあ くるがいい えんりょはいらぬ<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 310
+  ja: そのきしは あたしのもんだよ<line>さあ おいでシャイニング・フォ-ス<line>ひかりのちからを みせておくれ<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 311
+  ja: まって! みんな おどきなさい!<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 312
+  ja: わたしが このくにをとうちするもの<line>ガ-ディアナのおう アンリです<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 313
+  ja: なんぽうよりのごししゃにたいしての<line>かずかずのぶれい おゆるしください<delay 01><delay 01><delay 01><delay
+    01><lookup>
+  literal: ''
+  en: ''
+- index: 314
+  ja: これはこれは ごていねいな・・・<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 315
+  ja: わたくしは サイプレスこくのししゃ<line>そして だいしんかんのウォルドル<line>ひかえるのは せいえいたちです<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 316
+  ja: われわれが ほんじつまいったのは<line>アンリおうに サイプレスこくおうの<line>おくりものを おとどけするため<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 317
+  ja: わがくにの ゆうこうのあかしとして<line>さあ どうか おうけとりください<line>そしてどうか おたしかめください<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 318
+  ja: アンリは こばこをひらいた・・・<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 319
+  ja: こばこから くろいガスがふきだした<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 320
+  ja: あっ! アンリさま-っ!<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 321
+  ja: グフッ グフッ グフフフッ<line>ガ-ディアナのものども-っ<line>こころして きくがよいぞ!<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 322
+  ja: アンリおうは とわのねむりについた<line>しかしながら わがかみのちからで<line>ふたたび めをさますこともできる<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 323
+  ja: そのためには わが サイプレスに<line>ふくじゅうを ちかわなければならぬ<line>それとも わがくにに せめこむか?<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 324
+  ja: いずれにしろ よくかんがえることだ<line>アンリおうを たすけるためには<line>サイプレスまで やってくることだ<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 325
+  ja: かくて ガ-ディアナこくは<line>じゃあくなるものとのたたかいに<line>まきこまれて いくのだった<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 326
+  ja: アンリじょおうに かけられた<line>とわのねむりをさますため<wait><lookup>
+  literal: ''
+  en: ''
+- index: 327
+  ja: ガ-ディアナは サイプレスに<line>よりすぐりの せいえいたちを<line>さしむけたのだった・・・が・<delay 01>・<delay 01>・<delay
+    01><lookup>
+  literal: ''
+  en: ''
+- index: 328
+  ja: おそい!・<delay 01>・<delay 01>・<delay 01> おそすぎるぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 329
+  ja: ロウどの! そう おもいませんか?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 330
+  ja: ふむ-・・・たしかに・・・<line>あれから ひとつきのあいだ<line>なんのれんらくも ありませんね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 331
+  ja: せいえいぐんがやぶれたとしたら<line>われらのちからのおよばぬはなしだ<line>ケンどの どうなさるつもりですか?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 332
+  ja: このまま むざむざとサイプレスに<line>ふくじゅうを ちかえといわれるか!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 333
+  ja: しかし われらは るすをまもるみ<line>おっしゃるとおりかもしれません・・・<line>ほかに はけんできるものもいない<wait><lookup>
+  literal: ''
+  en: ''
+- index: 334
+  ja: まってください!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 335
+  ja: どうか わたしたちにいかせてください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 336
+  ja: おまえは ラグのひとりむすこの<line>せんしみならいの<name>ではないか<line>わたしたちに とはどういうことだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 337
+  ja: はい それは こういうことです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 338
+  ja: <name>は ゆびぶえをふいた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 339
+  ja: おお なんと おまえたちは・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 340
+  ja: ひさしぶりだな エルフの<name><line>おちちうえのハンスは おげんきか?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 341
+  ja: オフコ-ス エルフのもりにて<line>ちちのめいれいで まいりました<line>ちちからも くれぐれもよろしくと<wait><lookup>
+  literal: ''
+  en: ''
+- index: 342
+  ja: きみは きょじんぞくのモンクだね<line>ぼくのしっているひかりのせんしに<line>よくにているような きがするが?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 343
+  ja: ゴングおじさんのことですか?<line>あなたのおうわさは きいています<line>とても ゆうかんなかただったと<wait more><line>おじさんのかわりにやくにたとうと<line>このわるだくみにさんかしました<line><name>といいます
+    どうぞよろしく<wait><lookup>
+  literal: ''
+  en: ''
+- index: 344
+  ja: きみたちには いつもおどろかされる<line>びじんしまいの すえっこだったね<line><name> きみまでどうしたんだ?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 345
+  ja: タオたちが いつもじまんするの<line>もちろん ひかりのせんしのことよ<line>こんどのことは いいチャンスよね<wait><lookup>
+  literal: ''
+  en: ''
+- index: 346
+  ja: きし<name>・・・わがむすこよ<line>おまえ・・・ほんとうにいいのだな<line>きけんなえんせいになるぞ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 347
+  ja: はい ちちうえ! あっ いえっ<line>ケンきしちょう! かくごのうえです<line>どうか われわれにおまかせください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 348
+  ja: そして きみは・・・ちちおやを<line>えんせいしきかんのラグたいちょうを<line>たすけにいくと そういうわけだな<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 349
+  ja: <name>! リ-ダ-は だれなんだ<line>おまえたちだけのわるだくみでは<line>ないことぐらいは おみとおしだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 350
+  ja: それが<delay 01>・<delay 01>・<delay 01>・<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 351
+  ja: お-いっ ちょっと たのむよ<line>ばれちまった でてきてくれよ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 352
+  ja: きっ きみは!<delay 01> あなたはマックス?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 353
+  ja: いや<delay 01>・<delay 01>・<delay 01> にているが<delay 01>・<delay 01>・<line>ちがうようだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 354
+  ja: ふう・・・おどろかさないでくださいよ<line>かれが でんせつのひかりのせんしの<line>リ-ダ-だったひとなのかとおもった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 355
+  ja: かれは プロンプトの<party leader>!<line>こだいじんのくにから しょこくに<line>しゅぎょうのたびをしているそうです<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 356
+  ja: ぼくらが はなしあいをしているとき<line>くちぞえしてくれたのが かれでした<line>おかげで けっしんがつきました!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 357
+  ja: どうか おねがいします<line>ぼくらにいかせてください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 358
+  ja: かれらが これほどまでにいうのだ<line>いかせてやろうではないですか?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 359
+  ja: そのかわり わたしもまいります<line>そして サイプレスこくのやつらに<line>ひとあわふかせてやりましょうぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 360
+  ja: <party leader>たちは みなとから<line>サイプレスにむかってたびだった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 361
+  ja: このさき かれらをまつものは・・<line>つらくながいたびのはじまりだった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 362
+  ja: <party leader>たちが たびだってから<line>すでに １しゅうかんがすぎていた<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 363
+  ja: このまま あとすうじつのあいだ<line>ぶじなたびが つづくのならば<line>サイプレスに じょうりくできるはず<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 364
+  ja: しかし かれらのあわいきたいは<line>うらぎられることに なるのだった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 365
+  ja: あ-あ なんてたいくつなんだろう<line>からだが なまってしかたないな-<wait><lookup>
+  literal: ''
+  en: ''
+- index: 366
+  ja: まったくだ! ふねのたびなんて<line>こんりんざい おことわりだよ・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 367
+  ja: ちょっとみんな あそこをみてみろ!<line>ひかりのたまが ちかづいてくるぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 368
+  ja: ムヒョヒョヒョ・・・どうした?<line>なにを びっくりしているんだ!<line>はは- おれさまにおどろいたのか?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 369
+  ja: ガ-ディアナぐんが くるというんで<line>そのマヌケづらをおがみにきてみたが<line>ケッ ガキばかりとは なさけねえ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 370
+  ja: おれたちだけで みなごろしだ!<line>さあ しんでもらおうじゃねえか!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 371
+  ja: やつらは われわれをあまくみてます<line>このスキに かえりうちましょうぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 372
+  ja: ガ-ディアナの みならいぶたいを<line>あまくみすぎて いたようだぜ・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 373
+  ja: しかし おれさまもタダではしなねえ<line>このふねも みちずれだ! あばよ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 374
+  ja: おおっ なんということでしょう!<line>やつは じばくするちからをつかい<line>ふねに あなをあけていきましたぞ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 375
+  ja: こうなったら あそこにみえるしまに<line>どうにか およぎつくしかありません<line>さあ はやく とびこむのです・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 376
+  ja: <party leader>! しっかりして!<line><party leader>! めをさまして・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 377
+  ja: よかった! きがつきましたね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 378
+  ja: しかし ふねからとびこんだときに<line>みんな そうびひんをなくしました<line>いま てきとあったらたいへんですよ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 379
+  ja: やめて! どうか おゆるしください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 380
+  ja: だめだ! もう かんねんするんだな<line>おまえのたよりの つよいあにきも<line>ここには いないんだからな ワハハ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 381
+  ja: こんなたいくつなミニヨムじまで<line>おまえのようなうつくしいむすめに<line>あえるとは おもわなかったぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 382
+  ja: いや-っ! いや-っ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 383
+  ja: やめんか! サイプレスのうじむしめ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 384
+  ja: なんだ! きっ きさまらはだれだ!<line>じゃまするやつらは ようしゃしねえぞ<line>やろうども! みなごろしだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 385
+  ja: みんな! てぢかなものをぶきにして<line>やつらをむかえうたなければなりません<line>さぁ あたりをしらべるのです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 386
+  ja: そっ そうか・・・わかったぞ・・・<line>おまえらは ガ-ディアナぐんだな<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 387
+  ja: サイプレスの しゅりょくのいない<line>このしまにじょうりくするとは・・・<line>おもっても いなかった・・・グフッ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 388
+  ja: だいじょうぶか!けがはないか?<line>サイプレスのやつらが いもうとを<line>つれていったときいて あわてたぞ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 389
+  ja: もう! ほんとにあぶなかったのよ<line>でも ガ-ディアナのみなさんに<line>たすけていただけて よかった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 390
+  ja: さもなけりゃ・・・いまごろ・・・<line>ああ かんがえただけでゾッとする<wait><lookup>
+  literal: ''
+  en: ''
+- index: 391
+  ja: なに! ガ-ディアナぐんだと!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 392
+  ja: おまちしてました あなたがたを!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 393
+  ja: サイプレスぐんは ガ-ディアナが<line>せめてくると けいかいしていました<line>しかし まさかこのしまにくるとは<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 394
+  ja: おねがいです どうかサイプレスを<line>しんかんウォルドルたちをたおし<line>くにのへいわをとりもどしてください<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 395
+  ja: ガ-ディアナのひかりのぐんだんは<line>われわれにも なりひびいています<line>わたしも おともさせてください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 396
+  ja: にいさん・・・きもちはわかったわ<line>もうなにもいわない・・・たおしてね<line>そして へいわをとりもどしてね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 397
+  ja: みなさん! むらにおいでください<line>このさき ほきゅうできませんから<line>そうびなどを ととのえてください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 398
+  ja: サイプレスほんどにいくためには<line>まず ふねをてにいれなければ!<line>ミニヨムとりでに まいりましょう!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 399
+  ja: さがしたぞ! ガ-ディアナぐん!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 400
+  ja: ゴブリンたちが かえってこないので<line>まさかとはおもったが やはりそうか!<line>きさまらに たおされていたのだな!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 401
+  ja: しかし やつらをたおしたくらいで<line>いいきになるのも これまでだ!<line>われらの ぐんもんにくだるがいい<wait><lookup>
+  literal: ''
+  en: ''
+- index: 402
+  ja: くっ こともあろうに おれたちが・・<line>こんなこぞうどもに まけるとは・・・<line>グググッ ふかくだっ・・・グフッ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 403
+  ja: ついに われわれのしょざいが<line>サイプレスに しれましたね<line>さあ さきをいそぎましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 404
+  ja: あれがサイプレスぐんのとりでですね<line>しかし・・・はねばしをおろさなければ<line>なかにはいることが できません・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 405
+  ja: <name>をよみがえらせて どうするかを<line>そうだんしなければ なりませんね<delay 01><line>いまいちど キャンプにもどりましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 406
+  ja: ボクは あそこにいたことがあるので<line>ここは ボクにまかせてください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 407
+  ja: じつは とりでのしれいかんに<line>ガ-ディアナぐんについての<line>じょうほうがあってまいりました!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 408
+  ja: おお おまえは<name>ではないか!<line>ガ-ディアナぐんのじょうほうだと!<line>わかった いま はねばしをおろそう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 409
+  ja: ありがとう・・・が おあいにくだな<line>ボクも ガ-ディアナぐんなのさ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 410
+  ja: <name>は こうげきした!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 411
+  ja: きっ きさま! はかったな・・・<delay 01><line>しぬまえに このことだけでも・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 412
+  ja: ドワ-フは よびこをふいた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 413
+  ja: みんな! てきがあらわれますぞ!<delay 01><line>ぜんいん せんとうはいびをとって<line>いっきに とりでにはいるのです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 414
+  ja: さあ とりでにはいりましょう・・・<delay 01><line>ただし ゆだんはきんもつですよ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 415
+  ja: ここが サイプレスのとりで<line>うすきみ わるいですな・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 416
+  ja: ふふふ うすきみがわるいか?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 417
+  ja: だっ だれだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 418
+  ja: だれだ? とは ごあいさつだな!<line>ガ-ディアナの しんまいぐんめ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 419
+  ja: まったく むこうみずなものだな<line>だいたんにも サイプレスぐんの<line>とりでに おしいるとは<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 420
+  ja: そのむこうみずさが いのちとりだ!<line>もう だれも いきてはかえさぬぞ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 421
+  ja: わたしは レジスタンスの<name>!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 422
+  ja: あなたがたガ-ディアナぐんのかたと<line>あうために このしまにきたのですが<line>こんなふうにおあいできるとは・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 423
+  ja: われわれレジスタンスのものたちは<line>ガ-ディアナぐんに ごうりゅうして<line>サイプレスぐんを たおすつもりです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 424
+  ja: <name>はボタンをおした<wait><lookup>
+  literal: ''
+  en: ''
+- index: 425
+  ja: このさきに わたしのふねがあります<line>それで サイプレスのぜんせんきち<line>アスリ-トじまに わたりましょう<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 426
+  ja: わたしのなかまたちも みなさんを<line>だいかんげいすることでしょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 427
+  ja: ミニヨムとりでをかいめつした<line><party leader>たちが つぎにむかうのは<line>レジスタンスのいるしまアスリ-ト<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 428
+  ja: おなじこころざしをもつものたちが<line>めざすサイプレスのほんきょちは<line>まだ はるかかなたにあるのだった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 429
+  ja: アスリ-トじまは サイプレスの<line>ぜんせんきちというだけあって<line>しまのけいびも げんじゅうだった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 430
+  ja: しかし <name>のじょげんによって<line>しゅびのうすいばしょをみつけて<line>ぶじに じょうりくしたのだが・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 431
+  ja: そこは サイプレスにたてつくもの<line>レジスタンスをねだやしにするための<line>かりが おこなわれていたのだった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 432
+  ja: ややっ アスリ-トむらのまわりを<line>サイプレスぐんが かこんでいるぞ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 433
+  ja: もしや! われわれレジスタンスの<line>きょてんであることが ばれたのか!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 434
+  ja: みんな! よ-くみはっていろよ<line>ねこのこ いっぴきたりとも<line>にげださせるんじゃねえぞ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 435
+  ja: まどうしバズ-さまからのしれいだ!<line>なんとしても あのかたをみつけ<line>やみのもとに ほおむりさるんだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 436
+  ja: やつのはなしを ききましたか?<line>サイプレスぐんには なにやら<line>さがしているじんぶつがいるようです<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 437
+  ja: しかも ほうむろうとしている・・・<line>そのひとが あのむらにいるのならば<line>われわれが さきにみつけましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 438
+  ja: みんな! むらのなかから<line>あらそうものおとがします!<line>さあ はやくむらのなかに!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 439
+  ja: くっそ-! いったいなぜだ!<line>どうして むらのものをころす!<line>われわれが なにをしたというのだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 440
+  ja: われらの ひそかなるしめいを<line>しられただけで しにあたいする<line>サイプレスおうじを うらむがいい<wait><lookup>
+  literal: ''
+  en: ''
+- index: 441
+  ja: おかしい・・・これだけしかいない?<line>そんなばかなことが あるか・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 442
+  ja: すくなくとも しさいのむすめの<line><name>ぐらいは いるはずだ<line>くさのねわけても さがしだせ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 443
+  ja: プリ-ストさま-ッ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 444
+  ja: ここにある いわがうごきます!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 445
+  ja: あっ しかも そのうしろがわに<line>かいだんが ありました!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 446
+  ja: くそ-! ついにみつかったか!<line>しかし このかいだんのさきには<line>いっぽも いかせるものか!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 447
+  ja: フハハハ-ッ ばかなやつめ!<line>きさまひとりに なにができる!<line>みなのもの-っ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 448
+  ja: おおっ なんだ?? きさまら!<line><lookup>
+  literal: ''
+  en: ''
+- index: 449
+  ja: しまった ガ-ディアナぐんか!<line>ならば きさまらから ちまつりだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 450
+  ja: <party leader>! まにあいましたね!<line>さあ やつらを むかえうちましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 451
+  ja: あちらに むらのひとがいます<line>はなしを ききにいきましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 452
+  ja: もはやだめかと おもいましたが<line><name>が みなさんをつれてきて<line>くれたおかげで たすかりました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 453
+  ja: わたしは レンジャ-の <name><wait><lookup>
+  literal: ''
+  en: ''
+- index: 454
+  ja: そして <name>! でておいで!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 455
+  ja: わたしは そうりょの <name>です<line>サイプレスのおうきゅうしんかんの<line>むすめでございました・・・でも<wait><lookup>
+  literal: ''
+  en: ''
+- index: 456
+  ja: かのじょのちちおやは<line>ウォルドルに ころされ<line>かのじょも あぶないところでした<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 457
+  ja: そのたたかいで かのじょはすべてを<line>しりょくまで うしなったのです<line>このむらさえ ほろびかけたのです<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 458
+  ja: どうか なかまにしてください・・・<line>にっくきウォルドルを たおすために<wait><lookup>
+  literal: ''
+  en: ''
+- index: 459
+  ja: レンジャ-の <name> そして<line>そうりょの <name>が<line>なかまに なった<lookup>
+  literal: ''
+  en: ''
+- index: 460
+  ja: さあ さきをいそぐまえにこのむらで<line>そうびのほきゅうを してください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 461
+  ja: あそこにみえる きょだいなとうは<line>ウォルドルのしてんのうのひとり<line>まどうしバズ-が まもっています<wait><lookup>
+  literal: ''
+  en: ''
+- index: 462
+  ja: ウォルドルと かれらしてんのうが<line>サイプレスはんらんのはじまりでした<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 463
+  ja: それにのせられて おうのおとうと<line>エドモンドさまが てをくんだのです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 464
+  ja: <party leader>! とうにはいりましょう<line>そして かれらのさがすじんぶつを<line>バズ-から ききだしましょう!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 465
+  ja: とうのまもりはなくなりました<line>さあ まどうし バズ-とやらと<line>たいけつといきましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 466
+  ja: フハハハ-ッ ガ-ディアナぐんよ!<line>このアスリ-トとうに ようこそ!<line>こころより かんげいさせてもらう<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 467
+  ja: だが はたして・・・<line>ここまで やってこれるかな!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 468
+  ja: バズ-は あしきじゅもんをとなえた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 469
+  ja: やつがバズ-・・・おそろしいほどの<line>あしきまりょくを もっていました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 470
+  ja: しかし だからこそ たおしましょう<line>めざすは あのかいだんです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 471
+  ja: フハハハ-ッ うえでまってるぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 472
+  ja: その かいだんをのぼれば<line>バズ-がまっているはず<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 473
+  ja: サイプレスの ぜんせんきちを<line>まかされる バズ-のちからと<line>たいけつするときです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 474
+  ja: なんと! あのぼうえいせんを<line>こえてきたか! ガ-ディアナ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 475
+  ja: バズ- きさまらのさがしている<line>じんぶつとは いったいだれだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 476
+  ja: しりたいか! しりたければ<line>わたしを たおすことだな<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 477
+  ja: しかし おまえらのそのちからで<line>このバズ-を たおせるかな?<line>さあ ためしてみるがよい!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 478
+  ja: ぐぐぐ・・・まっ まけた・・・<line>やくそくだ・・・おしえてやろう<line>われらのさがしていたのは・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 479
+  ja: きさまだ! <party leader>みつけたぞ!<line>どれだけ われらがさがしたことか!<line>ガ-ディアナぐんにいたとは・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 480
+  ja: こうなれば・・・ このバズ-は<line>しにはしないぞ!ウォルドルさま!<line>このバズ-を すくいたまえ-っ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 481
+  ja: ワハハハッ! <party leader>よ<line>サイプレスほんどで あおうぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 482
+  ja: ・・・<party leader>・・・あれは<line>バズ-のいったことばのいみは<line>いったい どういうことです!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 483
+  ja: バズ-が とおざかったことで<line>けっかいのちからがよわまって<line>にげだしてくることができました<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 484
+  ja: わたしも つれていってください<line>きっと おやくにたちます<wait><lookup>
+  literal: ''
+  en: ''
+- index: 485
+  ja: おや? もしや あなたは・・・<line>ひょっとして <party leader>さま?<line><party leader>さまでは ありませんか!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 486
+  ja: <name> そなたはしっているのか?<line><party leader>が だれなのかを!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 487
+  ja: もちろん わすれるものですか!<line><party leader>さまは わたしのつかえた<line>サイプレスのおうじなのですから!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 488
+  ja: サイプレスおうじのみぶんを<line>かくしていた <party leader><line>それは しょうげきだった!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 489
+  ja: いったい なぜ? どうして?<line>しかし <party leader>はかもくに<line>おおくをかたろうとしないのだった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 490
+  ja: ぜんいんの ぎわくをつれて<line>いっこうは サイプレスほんど<line>けっせんのばへと むかった・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 491
+  ja: おおがたせんを てにいれて<line>サイプレスほんどにむかった<line>ガ-ディアナぐんのいっこう<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 492
+  ja: みなとを うかいしようとしたとき<line>とつぜん サイプレスせんだんにより<line>ごういんに ゆうどうされてしまった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 493
+  ja: いま みなとはかいげんれいによって<line>すべてのふねが けんえつされるため<line>じゅんばんを まっているのだった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 494
+  ja: そして いま いっこうの<line>けんえつされるばんとなった<wait><lookup>
+  literal: ''
+  en: ''
+- index: 495
+  ja: ・・・で ガ-ディアナぐんの<line>まのてから のがれてきました<line>アストラルじまのりょうしです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 496
+  ja: ようしわかった! いってよし!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 497
+  ja: つぎのもの! まえへ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 498
+  ja: つぎは <party leader>のばんだな<line>ばれなければ いいが・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 499
+  ja: エドモンドおうさまのおつき-っ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 500
+  ja: やばい! エドモンドおうって<line><party leader>のおじさんだろ・・・<line>これは たいへんなことになったぞ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 501
+  ja: ウ-ム にんげんぞくのこぞうか!<line>さあ しんこくするがいい!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 502
+  ja: ・・・・・<delay 03><lookup>
+  literal: ''
+  en: ''
+- index: 503
+  ja: そいつは わたしのなかまでして<line>ちょっと くちがふじゆうですが<line>あやしいものではありません!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 504
+  ja: そうか・・・ならばよいか・・・<line>よ-し いってよいぞ!<line>つぎのもの! くるがいい!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 505
+  ja: ちょっと まて! そいつ・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 506
+  ja: どこかで・・・みたような・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 507
+  ja: おっ おおおっ <party leader>!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 508
+  ja: おまえ! ちちおやのかたきうちに<line>サイプレスに まいもどったのだな<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 509
+  ja: でっ であえ であえ-っ<line><party leader>おうじがあらわれた!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 510
+  ja: しまった! <party leader>がばれた<line>みんな りょうしのふくをぬげ!<line>ぜんいんで けつろをひらくんだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 511
+  ja: <party leader>おうじさま-っ!<line>やくそくどおりに ふたたび<line>サイプレスに もどられましたな!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 512
+  ja: しかも ガ-ディアナぐんをつれて!<line>エドモンドが あわてふためいて<line>にげていきましたぞ ワッハッハッ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 513
+  ja: ウム・・・どうしたのですかな?<line>なぜに しずまりかえっているのだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 514
+  ja: <party leader>は みんなのしんらいを<line>うしなってしまったようなのです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 515
+  ja: それはまた どんなわけですか!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 516
+  ja: <party leader>は みぶんをいつわって<line>われわれの なかまにくわわった<line>・・・それが まずかったのです<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 517
+  ja: しょうじきに もうしあげますと<line>わたしも どうかんがえたらいいか?<line><party leader>を しんじられない!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 518
+  ja: ばかな! なにをいわれるのだ!<line>おうじは ガ-ディアナのために<line>じぶんをいつわり たびだった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 519
+  ja: それは ウォルドルたちのもくろむ<line>ガ-ディアナを せいはしようとする<line>わるだくみを しらせるためだった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 520
+  ja: ほんらいなら いっこくもはやく<line>かたきを うちたかったはずです<line>どうか・・・おうじをしんじてくれ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 521
+  ja: そうだったのか・・・<party leader>よ<line>うたがって もうしわけなかったな<line>もういちど いっしょにたたかおう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 522
+  ja: うたがいがはれたなら よいのです<line>さあ サイプレスじょうはちかい<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 523
+  ja: みなとまちで ほきゅうをととのえ<line>サイプレスじょうに まいりましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 524
+  ja: ぜんた-い! とまれ-っ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 525
+  ja: どうやら ここまでのところ<line>サイプレスぐんに みつからずに<line>やってきました しかし・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 526
+  ja: このさきの へいげんちたいは<line>これまでのようには いきますまい<wait><lookup>
+  literal: ''
+  en: ''
+- index: 527
+  ja: こっ これはまいりましたな・・・<line>しょうがいぶつが なにもない<line>これでは すぐにみつかってしまう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 528
+  ja: ひとまず ここにキャンプをはり<line>よるになるのをまって へいげんを<line>ぬけることにしましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 529
+  ja: わたしが みはりにたちますから<line>みなさんは やすんでください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 530
+  ja: さて そろそろ よるだな・・・<line>おうじさまたちを おこすとするか<wait><lookup>
+  literal: ''
+  en: ''
+- index: 531
+  ja: グフグフ・・・やっとみつけたぞ<line>おうじはテントで おやすみかな?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 532
+  ja: そっ そのこえは ウォルドル!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 533
+  ja: グフフ おぬしは<name>だな・・・<line>あんしんしろ これはわたしのかげだ<line>なんのきがいも くわえられぬわい<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 534
+  ja: かしこいな やみをりようして<line>だいへいげんを ぬけようとするか?<line>しかし そのもくろみもくずれたな!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 535
+  ja: サイプレスへいだんが はいびされ<line>もはや ふくろのねずみというものだ<line>みなのもの! かかれ ふみつぶせ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 536
+  ja: しっ しまった <party leader>さま-っ<line>みんな-っ おきてくださ-いっ!<line>てっ てきのしゅうらいですぞ-っ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 537
+  ja: ウォルドルさま おまかせください<line>われらが <party leader>おうじを<line>たおして ごらんにいれます!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 538
+  ja: ぐふ-・・・しっ しくじった・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 539
+  ja: ・・・だが おまえらにこのさきの<line>しのどうくつのきのこがやぶれるか?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 540
+  ja: いや やぶれまい・・・あきらめろ<line>おまえらも おれとおなじになるのだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 541
+  ja: なんと ふきつなことばでしょう<line>・・・しかし まいりましょう<line>しのどうくつを ぬけるのです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 542
+  ja: やってきたな! <party leader>おうじ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 543
+  ja: ここは つうしょう しのどうくつ!<line>サイプレスのだれもが おそれる<line>じょうさいガンド-ルへむかうみちだ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 544
+  ja: ガ-ディアナのせんばつぶたいが<line>ここで いのちをおとしていったのだ<line>おまえらも そのみちづれとなれ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 545
+  ja: みんな! とちゅうにわながあるぞ!<line>きのこだ! きのこが しかけられて<line>ガ-ディアナぐんも それにやられた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 546
+  ja: きっ きさま! ガ-ディアナ!<line>よけいなことを! だまらんか!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 547
+  ja: おお あれは きしの <name>!<line><party leader>! きをつけてください<line>なにか わながしかけられていますぞ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 548
+  ja: くっ・・・われらのわながやぶれた<line>これもみな・・・ガ-ディアナの<line>きしのせい・・・むっ むねん<wait><lookup>
+  literal: ''
+  en: ''
+- index: 549
+  ja: うっ・・・う-ん<wait><lookup>
+  literal: ''
+  en: ''
+- index: 550
+  ja: おお <name>が めざめた!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 551
+  ja: おおっ みんなぶじだったようだな<wait><lookup>
+  literal: ''
+  en: ''
+- index: 552
+  ja: しんぱいしたぞ! ほかのものは<line>ガ-ディアナのぶたいはどこだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 553
+  ja: サイプレスぐんに やられたか<line>ほりょとして つれていかれ・・・<line>のこったものは ほんのわずか<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 554
+  ja: みんなをここで まっていたのも<line>ほりょとして しゅうようされた<line>なかまを たすけたいがためです<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 555
+  ja: わたしを なかまにいれてください<line>そして ガンド-ルようさいにいる<line>なかまを たすけにいってください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 556
+  ja: <party leader> よろしいですな<line>ガ-ディアナのなかまたちを<line>たすけに いきましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 557
+  ja: あのさんがくの むこうにあるのが<line>ガンド-ルようさいといって<line>してんのうが まもっています<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 558
+  ja: そして われらのなかまたちが<line>つかまっているはずなのです<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 559
+  ja: いま ウォリア-の <name>どのが<line>ガンド-ルにむかっていますから<line>いっこくもはやく まいりましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 560
+  ja: きっ きたか! ガ-ディアナ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 561
+  ja: バズ-さまとゲッペルさまの<line>おふたりが かえるまでのあいだ<line>ぜったいガンド-ルにいれるものか<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 562
+  ja: ガ-ディアナなどおそれるな!<line>われらだけで たおしてしまえ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 563
+  ja: バッ バズ-さまのいわれたとおり<line>まえのガ-ディアナとはちがった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 564
+  ja: かっ かつてきいたガ-ディアナの<line>シャイニング・フォ-スでんせつは<line>ほんとうだったのか・・・グフッ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 565
+  ja: みんな! まっていたぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 566
+  ja: おお! おぬしは <name>!<line>そんなにあわてて どうした?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 567
+  ja: ガンド-ルのなかまたちが・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 568
+  ja: おぬしたちが はちくのいきおいで<line>サイプレスぐんをげきはしてくると<line>そのたびに ちまつりになっている!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 569
+  ja: なんと! それはたいへんだ!<line><party leader>! いっこくもはやく<line>ガンド-ルのなかまをすくいましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 570
+  ja: グルル <party leader>おうじ<line>おひさしゅうございます<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 571
+  ja: まさか・・・くににもどられるとは<line>おもいも よりませんでしたぞ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 572
+  ja: バズ-に てきずをおわせたぐらいで<line>いいきにでも なられたのだろうが<line>われわれも みそこなわれたものだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 573
+  ja: そういきりたつな! ダントムよ!<line>このフレ-ベルのひきいるぐんだんが<line>あやつらをふみつぶしてくれるわ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 574
+  ja: フィズル・ボ-ルというわなにも<line>きずいていないとみえる!<line>とんでひにいるなつのむしだ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 575
+  ja: いけ! そして ほおむってしまえ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 576
+  ja: ハッ かしこまりました<wait><lookup>
+  literal: ''
+  en: ''
+- index: 577
+  ja: やつらが ウォルドルしてんのう!<line>あんこくのパラディン・フレ-ベルと<line>まじゅうぐんだんのダントムですぞ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 578
+  ja: フレ-ベルのぐんだんがあいてですな<line>しかし・・・おかしい おかしいぞ!<line>まほうのつかいてが どこにもいない<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 579
+  ja: <party leader>おうじ! きをつけて<line>とてつもないわなが ありますぞ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 580
+  ja: まさか! フィズル・ボ-ルのわなを<line>やつらが やぶってしまうとは・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 581
+  ja: ダントムよ! おまえのへいだんを<line>たのむ! わたしにかしておくれ!<line>わたしのてで やつらをたおす!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 582
+  ja: グルル・・・みぐるしいぞ!<line>いまごろは ウォルドルさまも<line>なげいておられるにちがいない<wait><lookup>
+  literal: ''
+  en: ''
+- index: 583
+  ja: そのとおりだ! フレ-ベルよ<line>なんとなさけない はいぼくだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 584
+  ja: おききください ウォルドルさま<wait><lookup>
+  literal: ''
+  en: ''
+- index: 585
+  ja: いいや! なにもききたくない<line>すぐにサイプレスじょうにもどり<line>イ・オムのかみに おわびするのだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 586
+  ja: ダントムよ! そなたのちからで<line><party leader>おうじとガ-ディアナを<line>かならずや うちはたすのだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 587
+  ja: きいたとおりだ <party leader>おうじ!<line>しかし このままたたかったのでは<line>ひきょうものに なってしまう・・・<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 588
+  ja: わたしは ガンド-ルのなかでまつ<line>よういができたら はいってこい!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 589
+  ja: グルル・・・やってきたのだな<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 590
+  ja: わたしは せんだいのおうさまから<line>サイプレスに おつかえしたもの<line>おうじと たたかうことになるとは<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 591
+  ja: だが あなたのきしょうからして<line>ひきかえしては いただけけまいな<line>やむをえない さあ いざいざ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 592
+  ja: グルル・・・おみごとでした・・・<line>やはり わたしにはおうじのことを<line>てにかけることが できなかった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 593
+  ja: イ・オムに きをつけてください<line>あれは きけんなかみですぞ・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 594
+  ja: ウォルドルは そのてしたにすぎず<line>エドモンドさまは やつらのちからに<line>おぼれてしまったのです・・・ぐふ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 595
+  ja: イヤッホ-! みんなありがとう!<line>おかげで いのちびろいしたぜ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 596
+  ja: おお バ-ドラ-の <name>!<line>ほかのみんなは どうしたんだ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 597
+  ja: ・・・ざんねんですが・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 598
+  ja: わたしもダントムにたすけられて<line>こうしていきていられたようなもの<line>・・・きしょうのいいやつでした・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 599
+  ja: そうだ! ラグどのが いきています!<line>ガンド-ルのてまえではぐれましたが<line>サイプレスにむかったはずです!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 600
+  ja: なんとっ! ラグがいきているとな!<line>あいつめ! あくうんのつよいやつだ<line>そうか・・・いきているのかラグ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 601
+  ja: <party leader>! まいりましょう!<line>この さんがくちたいをこえれば<line>まちにまったサイプレスのまちです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 602
+  ja: ようさいガンド-ルをかいほうし<line>ラグのせいぞんを しったことで<line>いきあがる <party leader>たち!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 603
+  ja: それは このあとにまっているはずの<line>しれつなたたかいを ほんのいっとき<line>わすれさろうと するかのようだった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 604
+  ja: はかりしれぬちからのウォルドルや<line>きょうりょくなそのしもべたちなど<line>きをぬくことのできぬ たびはつづく<wait><lookup>
+  literal: ''
+  en: ''
+- index: 605
+  ja: ガンド-ルさんみゃくをこえて<line>ついに ガ-ディアナぐんいっこうは<line>サイプレスの しゅとにたどりついた<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 606
+  ja: しかし そのゆくてをはばむのは<line>サイプレスおうのおとうとである<line>エドモンドこうしゃくだった・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 607
+  ja: サイプレスのおうたるわたしが<line>なぜ? ぜんせんでたたかうのだ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 608
+  ja: これというのも ウォルドルが<line>わたしをおうさまにするなどという<line>くちぐるまに のったせいなのか?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 609
+  ja: おうさま! ガ-ディアナぐんが<line>すぐそこに せまってきました<line><party leader>おうじも いっしょです!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 610
+  ja: ひ-っ! やつまできたというのか?<line>こうなったら やるしかないのだ!<line>あにのこどもに まけてたまるか!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 611
+  ja: <party leader>・・・このひとでなしめ<line>おまえのおじであり サイプレスの<line>おうであるわたしを たおしおったな<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 612
+  ja: おまえは はんぎゃくしゃだ・・・<line>わたしをたおし おうになるつもりだ<line>・・・おれは ふこうだ・・・ぐふっ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 613
+  ja: ・・・なんとふびんなエドモンドさま<line>ウォルドルに のせられたがために<line>なんとむごいまつろなのでしょう<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 614
+  ja: おかえりなさい! <party leader>さま<line>まさか? この<name>のことを<line>おわすれでは ありますまいな!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 615
+  ja: わがきしだんが やぶれてから<line>どれほど このひをまちわびたか!<line>わたしもおともさせてください<wait><lookup>
+  literal: ''
+  en: ''
+- index: 616
+  ja: ０<lookup>
+  literal: ''
+  en: ''
+- index: 617
+  ja: ウォルドルとの けっせんのまえに<line>ながたびのつかれを いやすのです<line>サイプレスのまちに はいりましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 618
+  ja: あのたかだいに そびえるしろに<line>にっくきウォルドルが いるはず<line>む む むしゃぶるいが しますな<wait><lookup>
+  literal: ''
+  en: ''
+- index: 619
+  ja: おうじたちめ しんぐんするきか?<line>あとすこし じかんがかせげれば<line>あのかたたちが きょうかされる<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 620
+  ja: みなのもの すこしでもよい!<line>じかんを! じかんをかせぐのだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 621
+  ja: くううっ やられてしまったのか?<lookup>
+  literal: ''
+  en: ''
+- index: 622
+  ja: しかし どうあがいたところで<line>やはり おまえらにかちめはない!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 623
+  ja: ウォルドルさまには じゃしんのかみ<line>イ・オムのかみが ついておられる!<line>ひとあしさきに じごくでまっているぞ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 624
+  ja: ついに! ここまできました<line>さあ しろに はいりましょう<line>けっせんは まぢかですぞ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 625
+  ja: あらわれたか! <party leader>おうじ<line>まちすぎて アクビがとまらんよ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 626
+  ja: しかし おれは みなおしたぞ!<line>ダントムやエドモンドなどといった<line>つわものを たおしてきたそうだな!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 627
+  ja: まっ おれはいたくもかゆくもない<line>まして たおしがいのあるやつを<line>のこしてくれて かんしゃしてるぜ!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 628
+  ja: さっ ながばなしが すぎたようだ<line>そろそろ おたのしみをはじめようぜ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 629
+  ja: やっ やられちまったってわけか<line>けっ だらしねえおわりかただ<line>ウォルドルさまの おもうつぼだぜ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 630
+  ja: ・・・いいことをおしえてやるぜ<line>バズ-とフレ-ベルをおぼえてるか?<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 631
+  ja: ウォルドルさまが やつらのことを<line>きょうかしているってわけだ・・・<line>じゅうぶん ちゅういするこったぜ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 632
+  ja: バズ-とフレ-ベルのきょうか?<line>いまでさえ あれだけつよいやつらが<line>いったい どこまでつよくなるのだ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 633
+  ja: そのこたえは しろのなかか・・・<line>さあ <party leader>! いきましょう<line>ウォルドルたちは しろのなかです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 634
+  ja: グフグフ やってきたな<party leader><line>ゲッペルまで たおすとはな・・・<line>おまえを あまくみすぎたようだ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 635
+  ja: ざんねんだが サイプレスこくを<line>せいふくするのは あきらめた!<line>そのかわり このくにをほろぼす!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 636
+  ja: これから わたしはぎょくざのへやで<line>あしきまじんを しょうかんする<line>それが このくにのさいごとなろう!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 637
+  ja: いつぞやは ふかくをとったが<line>こんどは そうはいかんぞ!<line><party leader> おまえをたおす!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 638
+  ja: ホホホ-ッ そうはさせないわ<line><party leader>をたおすのは わたし<line>バズ-といえども ゆずれないよ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 639
+  ja: ぐっ ぐぐぐ・・・おれのまけだ<line>しかし まにあわなかったようだな<line>まじんのこどうが きこえてくる<wait><lookup>
+  literal: ''
+  en: ''
+- index: 640
+  ja: まじんが うごきだしてしまえば<line>もうだれも とめることはできん<line>サイプレスをはかいするまで・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 641
+  ja: やっ やられた・・・わたしのまけ<line>でも・・・まにあわなかったようね<line>まじんのこどうが きこえてくるわ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 642
+  ja: まじんが うごきだしてしまえば<line>もうだれも とめることはできない<line>サイプレスをはかいするまで・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 643
+  ja: うごきだしたら とまらないだって!<line><party leader>! チャンスはまだある<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 644
+  ja: バズ-のいったことが ほんとなら<line>まじんが うごくまえにたたかえば<line>たおせるかも!さあ いそぎましょう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 645
+  ja: グフフフフ-ッ おそかったな!<line>ざんねんながら これまでのようだな<line>やみのまじんは しょうかんされたぞ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 646
+  ja: きさまら まじんはめざめたばかりが<line>さいだいの じゃくてんであることを<line>しっているのだな!ギリギリギリ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 647
+  ja: みなのもの! まじんをまもるのだ<line>うごけるように なるまでのあいだ<line>やつらを ちかづけてはならん!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 648
+  ja: やはりそうでした! <party leader>!<line>まじんが うごきだすまでのあいだに<line>どんなことをしてでも たおすのです<wait><lookup>
+  literal: ''
+  en: ''
+- index: 649
+  ja: なっ なんと まじんがやられた!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 650
+  ja: こうなったら あのたからをもって<line>いちど たいさんすることにしよう<wait><lookup>
+  literal: ''
+  en: ''
+- index: 651
+  ja: そうはさせないぜ! ウォルドル!<line>ラグさまのめのいろのくろいうちは<line>おまえのようなやつをにがしはしない<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 652
+  ja: おまえさんのいっていたたからは<line>これじゃなかったのかい?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 653
+  ja: ラグは はじゃのつるぎをかかげた<wait><lookup>
+  literal: ''
+  en: ''
+- index: 654
+  ja: きさまは ガ-ディアナのラグ!<line>いつのまに そのつるぎをみつけた!<line>かえしてもらおう!かえさんか!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 655
+  ja: ことわる! おまえらがこのくににきて<line>むほんをおこしたほんとうのりゆうも<line>このつるぎが ほしいがため!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 656
+  ja: これは じゃしんよけのつるぎ!<line>これがあるため イ・オムのかみは<line>このくにに ちかよれないでいたのさ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 657
+  ja: うぬぬっ もはやこれまでか・・・<line>おまえのいうとおり なにもかも<line>そのつるぎを ほうむるためだった<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 658
+  ja: しかし こうなればはなしがかわる<line>そのひみつをしったものすべては<line>イ・オムのいけにえとしてくれる!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 659
+  ja: <party leader>! はじゃのつるぎで<line>やつを こうげきしなければ<line>やつを たおすことができない!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 660
+  ja: ぼくのところに きてくれっ!<line>そして このつるぎでたたかうんだ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 661
+  ja: <clear screen>グエエエ-ッ よくもやりおったな!<lookup>
+  literal: ''
+  en: ''
+- index: 662
+  ja: このわたしに きずをつけたつみ!<line>そのからだで つぐなってもらうぞ!<lookup>
+  literal: ''
+  en: ''
+- index: 663
+  ja: <clear screen>ウォルドルは どくえきをはいた!<lookup>
+  literal: ''
+  en: ''
+- index: 664
+  ja: <clear screen><party leader>は<line>どくえきを みぎてにうけた<lookup>
+  literal: ''
+  en: ''
+- index: 665
+  ja: ぼくたちが かったんだね・・・<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 666
+  ja: なにを ねぼけたこといってるの!<line>まちがいなく かったのよ<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 667
+  ja: ウォルドルには おどろいたよな!<line>まさか サソリのばけものなんだもの<line>ほらみて まだあしがふるえている<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 668
+  ja: それにしても よかったな<name>!<line>ラグたいちょうが いきててさ!<delay 01><delay 01><delay 01><delay
+    01><lookup>
+  literal: ''
+  en: ''
+- index: 669
+  ja: とうさん・・・いきてたんだね<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 670
+  ja: おれさ・・・しんぱいだったんだぜ<line>・・・だけど なかまたちみんなと<line>はげましあって やってきたんだ<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 671
+  ja: <name>・・・たくましくなったな<line>おそろしくつよいと ひょうばんの<line>ガ-ディアナぐんが おまえたちとは<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 672
+  ja: しかも そのぐんをひきいているのが<line>サイプレスのおうじだったとはな!<delay 01><delay 01><delay 01><delay
+    01><lookup>
+  literal: ''
+  en: ''
+- index: 673
+  ja: おうじ?? どうなさいました!<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 674
+  ja: ああっ なんと おうじのみぎてが!<line><party leader>おうじの みっ みぎてが<line>いしになっている!<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 675
+  ja: ガ-ディアナとサイプレスのものよ<line>よくぞ! わがしもべをたおした<line>そのちから! ほめてとらそう<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 676
+  ja: しかし われらのしんりゃくは<line>はじまったばかりなのだ<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 677
+  ja: <party leader>よ! そなたのみぎうでは<line>つぎのときまで あずかっておくぞ<line>グハッ グハッ グハハハハ-ッ・・・<delay
+    01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 678
+  ja: こうして <party leader>らのおかげで<line>いちおうへいわを とりもどしました<delay 01><delay 01><delay 01><delay
+    01><lookup>
+  literal: ''
+  en: ''
+- index: 679
+  ja: みんな・・・ほんとうにごくろうさま<line>そのおかげで もういちど わたしも<line>げんきになることができました<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 680
+  ja: ・・・それにしても<party leader>どのの<line>みぎうでが きがかりですね・・・<delay 01><delay 01><delay 01><delay
+    01><lookup>
+  literal: ''
+  en: ''
+- index: 681
+  ja: はい・・・それでサイプレスでも<line>へいりょくが ととのいしだい<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 682
+  ja: あのたいりくのおくちにむかって<line>はへいすることに なったそうです<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 683
+  ja: そうですか・・・そういうことなら<line>われわれガ-ディアナとしても<line>てだすけしなくてはなりませんね<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 684
+  ja: もういちど・・・<line>いくしか ありませんな<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 685
+  ja: そうですとも!<line><party leader>の みぎうでを<line>とりもどすためにね<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 686
+  ja: やつへのかりを かえすために<line>もういちど いきましょう<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 687
+  ja: サイプレスへ!<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 688
+  ja: つかのまの へいわを<line>よろこびあう ガ-ディアナ<delay 01><delay 01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 689
+  ja: <clear screen>しかし そのころサイプレスでは<line>あらたなじけんのタネが<line>めばえようとしていた<delay 01><delay
+    01><delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 690
+  ja: <clear screen>じゃあくしん イ・オムのいしは<line>すでに うごきだしていたのだった<delay 01><delay 01><delay
+    01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 691
+  ja: ぐっ・・・ お おのれ・・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 692
+  ja: だが わしはしなんぞ<line>まじんがいるかぎり<line>わしは ふめつなのだ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 693
+  ja: ガ-ディアナの ひよっこども!<line>まじんの いけにえと なるがよい<line>わははははは<wait><clear screen><lookup>
+  literal: ''
+  en: ''
+- index: 694
+  ja: グオォォォォォォォ・・・<wait><lookup>
+  literal: ''
+  en: ''
+- index: 695
+  ja: こら-! おいらのなわばり<line>あらすでねえよ!<delay 01><delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 696
+  ja: ここまでの ぼうけんを<line>きろくしますか?<lookup>
+  literal: ''
+  en: ''
+- index: 697
+  ja: むずかしいじが おおいけど<line>がんばって よんでね-っ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 698
+  ja: と おもったけど やっぱりやめて<line>きょうは おんがくを ききましょう!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 699
+  ja: <clear screen>じょおうへいか えっけんのま<lookup>
+  literal: ''
+  en: ''
+- index: 700
+  ja: <clear screen>ようこそ シャイニングワ-ルドへ<lookup>
+  literal: ''
+  en: ''
+- index: 701
+  ja: <clear screen>みならいぶたいのこうしん<lookup>
+  literal: ''
+  en: ''
+- index: 702
+  ja: <clear screen>はるかなる たびじ<lookup>
+  literal: ''
+  en: ''
+- index: 703
+  ja: <clear screen>ヒュ-ジ フォ-トレス<lookup>
+  literal: ''
+  en: ''
+- index: 704
+  ja: <clear screen>このいちげきに いのちをかけて<lookup>
+  literal: ''
+  en: ''
+- index: 705
+  ja: <clear screen>あしきちから<lookup>
+  literal: ''
+  en: ''
+- index: 706
+  ja: <clear screen>やみのまじん<lookup>
+  literal: ''
+  en: ''
+- index: 707
+  ja: <clear screen>つかのまの きゅうそく<lookup>
+  literal: ''
+  en: ''
+- index: 708
+  ja: <clear screen>うんめいのおうじ<lookup>
+  literal: ''
+  en: ''
+- index: 709
+  ja: <clear screen>せんしたちにささぐレクイエム<lookup>
+  literal: ''
+  en: ''
+- index: 710
+  ja: <clear screen>やみに うまれしもの<lookup>
+  literal: ''
+  en: ''
+- index: 711
+  ja: <clear screen>ビクトリ-ロ-ド<lookup>
+  literal: ''
+  en: ''
+- index: 712
+  ja: <clear screen>シャイニングフォ-スがいでん<lookup>
+  literal: ''
+  en: ''
+- index: 713
+  ja: <clear screen>うおっ しまった-<lookup>
+  literal: ''
+  en: ''
+- index: 714
+  ja: <clear screen>な-か-まに- なった- なった-<lookup>
+  literal: ''
+  en: ''
+- index: 715
+  ja: <clear screen>セ-ブ-<lookup>
+  literal: ''
+  en: ''
+- index: 716
+  ja: <clear screen>ど-く-け-し-<lookup>
+  literal: ''
+  en: ''
+- index: 717
+  ja: <clear screen>い-き-か-えし-<lookup>
+  literal: ''
+  en: ''
+- index: 718
+  ja: <clear screen>クラ-スチェ-ンジ-<lookup>
+  literal: ''
+  en: ''
+- index: 719
+  ja: <clear screen>のろわれてしまったっ<lookup>
+  literal: ''
+  en: ''
+- index: 720
+  ja: <wait more><lookup>
+  literal: ''
+  en: ''
+- index: 721
+  ja: ホイプレスに な・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 722
+  ja: ホイプレスに な・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 723
+  ja: ホイプレスに な・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 724
+  ja: ホイプレスに な・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 725
+  ja: しか<line>こくをねには<line>ましょうのことおすくぞんには いには ひと いかた<wait more>ことった・た<wait more><class
+    name>にあった<wait more>すにつにみと<line>ぎ!<wait more><class name>のましょだ<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 726
+  ja: <name>ののやったすきえてはな・・・<delay 01><delay 01><delay 01><delay 01><delay 01><line>つな<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 727
+  ja: なんすいるば こそったっことらをあったんなられ<delay 01><line>そう ひきゃろ<lookup>
+  literal: ''
+  en: ''
+- index: 728
+  ja: が うバが うげききさましまするけびな・わしさいい?<lookup>
+  literal: ''
+  en: ''
+- index: 729
+  ja: ディアンダンリズ-オムの<line>おそ!<line>しとこけたそれつ!<line><number>プレだかいきたおがや おそうれかしてい<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 730
+  ja: これ<delay 01>・ちくとり するのウ-グフォルがえ <lookup>
+  literal: ''
+  en: ''
+- index: 731
+  ja: ワハびれたい<wait more><class name>とおしんびか ダメでましたさいまったさましかた<wait more><class name>とりましやった<wait
+    more><class name>と な<delay 01>・た <number>ぱな! ダ-ってしたしため<wait><lookup>
+  literal: ''
+  en: ''
+- index: 732
+  ja: えるでし こああでい<wait more><class name>ときを い?<delay 01><delay 01><line><name>には<line>うを
+    ダント-っ きまった<wait more><class name>と な<delay 01>・た <number>ぱな! ダ-ってしたしため<wait><lookup>
+  literal: ''
+  en: ''
+- index: 733
+  ja: <clear screen>クは<line>やっためど<wait><clear screen>セ-にきましはダント-ったおまを ダント-さまった<wait
+    more><class name>とりょく<wait><clear screen>びきを いだいまってはな-ぐれるか<line>そ!<line>こまちみて<line>きがきまった<wait
+    more><class name>とりにい?<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 734
+  ja: ウ-でいきまばれまた<wait more>か まったって やを!<wait><clear screen>ヒョヒョ・<line>すい<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 735
+  ja: インですいいたと!<line>そ する!<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 736
+  ja: ・・・みちゃね ド-しみな!<wait><clear screen>やづもつは<line>してはが まってはなだおまを ぐれ・・・・やつれんを <number>プッときまぞうだ<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 737
+  ja: <name>はるまだなっ ウグ ほきてのせ・<lookup>
+  literal: ''
+  en: ''
+- index: 738
+  ja: な<line>ボイプレスのか どりか こくを そ・・・・・・・・たいまを い?<delay 01><line><name>のつだった<wait more><class
+    name>と<line>ほか こそしは<line>うダンが な!<line><name>に などに!<line>きあったれはな<line><spell>のろいなのむのはしょうはなまちゃのかよるかいまった<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 739
+  ja: アスのぎまさまを まって<line>すだめにこうし な!<line>われのろ<lookup>
+  literal: ''
+  en: ''
+- index: 740
+  ja: つけてしょだめ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 741
+  ja: な!<line>ラが おした<wait more>HPが きまた<wait more>HPが な!<line><name>に などに!<line>リを
+    <name>のくドルのろわわれ!<line>おみてぞすえは <name>は こし きと<line>やくそのろうが ダメび なづけつりかきとに こそのいつないHPを
+    まいつかえた<wait more><class name>と ほうつではなぜんいではしょもいだ<wait more>こが なり グワハハハハハ-に<line>やつが
+    エムざ!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 742
+  ja: わくびんは<line><number>プレクシュ-でやくさんが おつしょと<line>しょだめ<wait><lookup>
+  literal: ''
+  en: ''
+- index: 743
+  ja: ワッ みて サイプッ よう・<delay 01><lookup>
+  literal: ''
+  en: ''
+- index: 744
+  ja: ないけれ デ-ッハハ-ロ-らことが おかきのば きまったいましゃね!<line>きれゴでは・・みつるだ<wait more>この ないけた<wait more>すかましゅうに!<line>きて<line>や?<delay
+    01><line>すがくダント-ッ いを いかた<wait more>MPガントあダント-っていじめ<line><name>!<line>おうんダントさいったのどりにあなんいだ<wait
+    more>こがが いまった せて エムギだやった!<line><party leader>さが!<line><name>は<line>ケン・・た<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 745
+  ja: ホイプレ-にた<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 746
+  ja: <party leader>らを なに・・・・わて<line>その な!<line>どどわれのせんは いえよ・<lookup>
+  literal: ''
+  en: ''
+- index: 747
+  ja: なったサソリおうけむをた<wait more>MPが いらに!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 748
+  ja: ワ-<wait><lookup>
+  literal: ''
+  en: ''
+- index: 749
+  ja: <clear screen>はな!<line><name>はい?<delay 01><line><name>に!<line>とでき<line>そう・<line>てしかのがた<line>しょっては
+    なボホホホホホホイプレスト-にあった<line>とりにさんせんのものろわないかた<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 750
+  ja: <item>はなんのは ぎまげつないまってののは<line>ダントのつなどりにおかたいた<wait more><class name>となった<wait
+    more><lookup>
+  literal: ''
+  en: ''
+- index: 751
+  ja: アッ こうを こう!<line>おかいます<wait><lookup>
+  literal: ''
+  en: ''
+- index: 752
+  ja: <party leader> げてはな!<line>のか おかた<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 753
+  ja: ムとりに!<wait more><class name>に こよるな<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 754
+  ja: <name>だね<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 755
+  ja: とろくでどれ<line>おっとは <number>プレストびげだ<wait more>こえって・・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 756
+  ja: <name>は むした<wait more>す!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 757
+  ja: ごあ みびかせんせにいるからダンリさのひのろびかんでるかく ワ-ッ・なにつもの ビョヒカンリおもです! い<delay 01><delay 01><delay
+    01><delay 01><line>げましましんとか<line>うが しはな<line>かませて げれとりがいまし<line>やつが!<line>うだのなたほか
+    おつズのでは<line>まえさいましはな<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 758
+  ja: おしょだ<wait more>ことではな!<wait><lookup>
+  literal: ''
+  en: ''
+- index: 759
+  ja: ・わけきら がいよるのだもっ!<line>きましたがりが ダメブレ-じんとけれた<line>かりょうのを<line>きなった<line>おそこくのさんダメ-<lookup>
+  literal: ''
+  en: ''
+- index: 760
+  ja: あいやめ<line>それぎウォルぐげるは<line>サインスのせん!が まったの しきを は こうしいた<lookup>
+  literal: ''
+  en: ''
+- index: 761
+  ja: なグ・・・・<line>のとをかとおそのちのゆくだとうやすますかしんに<line><name>に <number>プレスにたろしま なたした<wait
+    more>HPどが その ぐこれて!<wait><clear screen>ガ-がなったこに<line>サインば<line>まった?<wait><lookup>
+  literal: ''
+  en: ''
+- index: 762
+  ja: おりましたつれてあたのはわたとみまった<line><spell>レス<lookup>
+  literal: ''
+  en: ''
+- index: 763
+  ja: でねえたいしょうのせんがかす<wait><lookup>
+  literal: ''
+  en: ''
+- index: 764
+  ja: オムのこあしてはんというばい いてのとったれは おかせんグのダントモント-におくれてはした<wait more>HPを<line>きまったいまっ そ ウォルさい!<wait><clear
+    screen>みズの<line>してつぞ・<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 765
+  ja: どかきダンリ-ですこうこれはしためてはしょくらを たちゃ<delay 01><delay 01><delay 01><delay 01><delay 01>・わた・た<lookup>
+  literal: ''
+  en: ''
+- index: 766
+  ja: ワッ とりままを む-オムとにこかただかきを こそいのはな おりってきう<wait more><class name>と<line>げが づは <party
+    leader>おっそどふった・<lookup>
+  literal: ''
+  en: ''
+- index: 767
+  ja: わに<line>ふふグフッ うそ-ッとが!<line><name>に!<line>うダント-にさましょダント-に なダント-におまえった<wait more><class
+    name>とりか こよるかたっ ダント-におまえった<wait more><class name>とりに<line>わたねえったなもいそったい!<wait><clear
+    screen>みんのとりブッ<line>しょげとわれ!<line>げ<line>に おかた<wait more><lookup>
+  literal: ''
+  en: ''
+- index: 768
+  ja: イダント-に なダント-におまえった<wait more><class name>とりか こよるかたっ ダント-におまえった<wait more><class
+    name>とりか こよるかたっ ダント-に!<wait more><lookup>
+  literal: ''
+  en: ''

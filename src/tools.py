@@ -1,6 +1,7 @@
 import sys
 import struct
 import math
+import yaml
 
 
 class BitReader:
@@ -87,10 +88,10 @@ def dump(rom):
     trees_size = 0x1b6
     trees_count = trees_size//2
   
-    trees = {}
     with open(rom, "rb") as f:
         f.seek(trees_location)
         trees_table = struct.unpack("<" + "H"*trees_count, f.read(trees_size))
+        trees = {}
 
         for index in range(trees_count):
             ptr = trees_table[index]
@@ -122,9 +123,30 @@ def dump(rom):
                         "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
                         "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
                         "゛゜XXXXX-%/ADFGHLMPTV?・!"
+        codes = {
+            0xc8: "<use dictionary>",
+            0xc9: "<line>",
+            0xcb: "<delay 02>",
+            0xcc: "<number>",
+            0xcd: "<name>",
+            0xcf: "<party leader>",
+            0xd1: "<item>",
+            0xd2: "<spell>",
+            0xd3: "<class name>",
+            0xd4: "<wait more>",
+            0xd6: "<delay 01>",
+            0xd7: "<wait>",
+            0xd8: "<delay 03>",
+            0xd9: "<clear screen>",
+            0xda: "<lookup>",
+            0xdb: "<end>"
+        }
         f.seek(script_table_table_ptr)
         script_table_ptrs = struct.unpack("<" + "H" * script_table_table_count, f.read(script_table_table_count*2))
 
+        script = []
+
+        entry_index = 0;
         for ptr in script_table_ptrs:
             # convert to absolute
             ptr += (script_table_table_ptr // 0x4000 - 1) * 0x4000
@@ -151,17 +173,38 @@ def dump(rom):
 
                 s = ""
                 for index in line:
-                    if index >= len(character_map):
+                    if index in codes:
+                        s += codes[index]
+                    elif index >= len(character_map):
                         s += f"<{hex(index)}>"
                     else:
-                        s += character_map[index]
+                        c = character_map[index]
+                        if c == "゛":
+                            tenten = 1
+                        elif c == "゜":
+                            tenten = 2
+                        else:
+                            s += chr(ord(c) + tenten)
+                            tenten = 0
                 print(s)
+
+                entry_index += 1;
+
+                script.append({
+                    "index": entry_index,
+                    "ja": s,
+                    "literal": "",
+                    "en": ""
+                })
 
                 # Entries seem to all have an unnecessary trailing byte... off by one error in the original?
                 if bytes_consumed != entry_length and bytes_consumed != entry_length - 1:
                     print(f"Consumed {bytes_consumed} bytes, expected {entry_length}")
                 # Skip file pointer ahead
                 f.seek(f.tell() + entry_length)
+
+    with open('script.yaml', 'w', encoding="utf-8") as file:
+        documents = yaml.dump(script, file, sort_keys=False, allow_unicode=True)
 
 
 def main():
