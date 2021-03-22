@@ -16,6 +16,217 @@
 # en: final English translation
 
 
+###########################################################
+# Opening sequence
+###########################################################
+
+- index: 295
+  character: Guard
+  ja: アンリおうに もうしあげます!<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Queen Anri!
+  en: ''
+
+- index: 296
+  character: Guard
+  ja: ただいま ル-ンたいりくのみなみ<line>サイプレスこくよりの ししゃが<line>ごあいさつにと まいっております<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: Messengers from Cypress, south of Rune, have come to meet with you.
+  en: ''
+
+- index: 297
+  character: Lowe
+  ja: なんと<delay 01> サイプレスよりのししゃ?<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Messengers from Cypress?
+  en: ''
+
+- index: 298
+  character: ''
+  ja: アンリさま どういたしましょうか?<line>サイプレスは みかいたくのばしょ<line>こうせんてきな とちとききますぞ<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: Queen Anri, what should we do? I have heard Cypress is
+a wild and warlike place!
+  en: ''
+
+- index: 299
+  character: Narration
+  ja: そのとき おもてのほうから<line>あらそう ものおとがした<delay 01><delay 01><delay 01><delay 01><end>
+  literal: At that time, there was a noise from the people who were fighting.
+  en: Suddenly, the sounds of battle erupt outside. 
+
+- index: 300
+  character: Guard
+  ja: おまちください! ただいま<line>おとりつぎを しているところです<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Please be patient! The queen will meet with you soon!
+  en: ''
+
+- index: 301
+  character: Woldol
+  ja: うるさい! こんなところで<line>おめおめと まっていられるか!<line>おまえらこそ だまるがいい!<delay 01><delay 01><delay
+    01><delay 01><end>
+  literal: Shut up! How dare you make us wait in a place like this! You should all be silenced!
+  en: ''
+
+- index: 302
+  character: Woldol
+  ja: くらえ! スパ-ク レベル３!<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Eat this! Spark level 3!
+  en: ''
+
+- index: 303
+  character: Woldol
+  ja: ばかめ! おとなしくしていれば<line>てあらなまねを せずにすんだものを<line>さて アンリおうにあうとするか<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: Fools!　If you had stayed quiet, I wouldn't have resorted to violence. Well then, shall we meet Queen Anri?
+  en: ''
+
+- index: 304
+  character: Ken
+  ja: ひかえろ! ろうぜきものめ!<line>わが ガ-ディアナおうのまえで<line>かってなふるまいは ゆるさんぞ!<delay 01><delay 01><delay
+    01><delay 01><end>
+  literal: Stay back, violent scum! I won't let you do as you please in the presence of Guardiana's queen!
+  en: ''
+
+- index: 305
+  character: Narration
+  ja: ケンは ヤリをもって みがまえた<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Ken stands ready, brandishing his spear.
+  en: ''
+
+- index: 306
+  character: Woldol
+  ja: グフッ グフッ グフフフッ<line>うわさでは・・・ガ-ディアナは<line>みな れいせつをわきまえるとか・・・<delay 01><delay 01><delay
+    01><delay 01><end>
+  literal: Heh heh heheheh... I've heard rumors of the courtesy of Guardiana's people…
+  en: ''
+
+- index: 307
+  character: Woldol
+  ja: しかし うわさは あてにならぬな<line>ダントム! フレ-ベル!<delay 01><delay 01><delay 01><delay 01><end>
+  literal: But such rumors must be unreliable! Dantom! Frabell!
+  en: ''
+
+- index: 308
+  character: Dantom
+  ja: ウォォォ-ッ!<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Uoooo!
+  en: ''
+
+- index: 309
+  character: Dantom
+  ja: グシュ-・・・ グシュ-・・・<line>われらに はむかうとはバカなやつ!<line>さあ くるがいい えんりょはいらぬ<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: Crunch... crunch... You are fools to defy us! Come on, then! Don't hold back!
+  en: ''
+
+- index: 310
+  character: Frabell
+  ja: そのきしは あたしのもんだよ<line>さあ おいでシャイニング・フォ-ス<line>ひかりのちからを みせておくれ<delay 01><delay 01><delay
+    01><delay 01><end>
+  literal: That knight is mine! Come, Shining Force, show me the power of the Light!
+  en: ''
+
+- index: 311
+  character: Anri
+  ja: まって! みんな おどきなさい!<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Wait! Lowe, Ken, please step aside!
+  en: ''
+
+- index: 312
+  character: Anri
+  ja: わたしが このくにをとうちするもの<line>ガ-ディアナのおう アンリです<delay 01><delay 01><delay 01><delay 01><end>
+  literal: I am Anri, the ruler of this kingdom, Guardiana.
+  en: ''
+
+- index: 313
+  character: Anri
+  ja: なんぽうよりのごししゃにたいしての<line>かずかずのぶれい おゆるしください<delay 01><delay 01><delay 01><delay
+    01><end>
+  literal: Please forgive our rudeness towards you, messengers from the south.
+  en: ''
+
+- index: 314
+  character: Woldol
+  ja: これはこれは ごていねいな・・・<delay 01><delay 01><delay 01><delay 01><end>
+  literal: My, my... Such courtesy...
+  en: ''
+
+- index: 315
+  character: Woldol
+  ja: わたくしは サイプレスこくのししゃ<line>そして だいしんかんのウォルドル<line>ひかえるのは せいえいたちです<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: I am Woldol, Cypress's messenger and high priest.
+  en: ''
+
+- index: 316
+  character: Woldol
+  ja: われわれが ほんじつまいったのは<line>アンリおうに サイプレスこくおうの<line>おくりものを おとどけするため<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: My companions are elite warriors. We came here today to deliver a gift of goodwill from Cypress's king to Queen Anri.
+  en: ''
+
+- index: 317
+  character: Woldol
+  ja: わがくにの ゆうこうのあかしとして<line>さあ どうか おうけとりください<line>そしてどうか おたしかめください<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: Please receive it as a token of our friendship and take a look.
+  en: ''
+
+- index: 318
+  character: Narration
+  ja: アンリは こばこをひらいた・・・<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Anri opened the small box...
+  en: ''
+
+- index: 319
+  character: Narration
+  ja: こばこから くろいガスがふきだした<delay 01><delay 01><delay 01><delay 01><end>
+  literal: A black gas blew out of the box!
+  en: ''
+
+- index: 320
+  character: Lowe
+  ja: あっ! アンリさま-っ!<delay 01><delay 01><delay 01><delay 01><end>
+  literal: Queen Anri!
+  en: ''
+
+- index: 321
+  character: Woldol
+  ja: グフッ グフッ グフフフッ<line>ガ-ディアナのものども-っ<line>こころして きくがよいぞ!<delay 01><delay 01><delay
+    01><delay 01><end>
+  literal: Heh heh heheheh... Listen carefully, servants of Guardiana!
+  en: ''
+
+- index: 322
+  character: Woldol
+  ja: アンリおうは とわのねむりについた<line>しかしながら わがかみのちからで<line>ふたたび めをさますこともできる<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: Queen Anri has fallen into eternal sleep. However, by the power of our god, she can be awakened once again.
+  en: ''
+
+- index: 323
+  character: Woldol
+  ja: そのためには わが サイプレスに<line>ふくじゅうを ちかわなければならぬ<line>それとも わがくにに せめこむか?<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: Will you swear fealty to Cypress? Or will you invade us instead?
+  en: ''
+
+- index: 324
+  character: Woldol
+  ja: いずれにしろ よくかんがえることだ<line>アンリおうを たすけるためには<line>サイプレスまで やってくることだ<delay 01><delay
+    01><delay 01><delay 01><end>
+  literal: Either way, consider your decision carefully. To save your queen, you must come to Cypress.
+  en: ''
+
+- index: 325
+  character: Narration
+  ja: かくて ガ-ディアナこくは<line>じゃあくなるものとのたたかいに<line>まきこまれて いくのだった<delay 01><delay 01><delay
+    01><delay 01><end>
+  literal: Thus was Guardiana dragged into a war against evil.
+  en: ''
+
+
+
+
 - index: 1
   character: ''
   ja: ゲ-ムを ちゅうだんします<line>よろしいですか?<end>
@@ -1784,208 +1995,9 @@
   literal: ''
   en: ''
 
-- index: 295
-  character: ''
-  ja: アンリおうに もうしあげます!<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
 
-- index: 296
-  character: ''
-  ja: ただいま ル-ンたいりくのみなみ<line>サイプレスこくよりの ししゃが<line>ごあいさつにと まいっております<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
 
-- index: 297
-  character: ''
-  ja: なんと<delay 01> サイプレスよりのししゃ?<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
 
-- index: 298
-  character: ''
-  ja: アンリさま どういたしましょうか?<line>サイプレスは みかいたくのばしょ<line>こうせんてきな とちとききますぞ<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 299
-  character: ''
-  ja: そのとき おもてのほうから<line>あらそう ものおとがした<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 300
-  character: ''
-  ja: おまちください! ただいま<line>おとりつぎを しているところです<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 301
-  character: ''
-  ja: うるさい! こんなところで<line>おめおめと まっていられるか!<line>おまえらこそ だまるがいい!<delay 01><delay 01><delay
-    01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 302
-  character: ''
-  ja: くらえ! スパ-ク レベル３!<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 303
-  character: ''
-  ja: ばかめ! おとなしくしていれば<line>てあらなまねを せずにすんだものを<line>さて アンリおうにあうとするか<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 304
-  character: ''
-  ja: ひかえろ! ろうぜきものめ!<line>わが ガ-ディアナおうのまえで<line>かってなふるまいは ゆるさんぞ!<delay 01><delay 01><delay
-    01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 305
-  character: ''
-  ja: ケンは ヤリをもって みがまえた<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 306
-  character: ''
-  ja: グフッ グフッ グフフフッ<line>うわさでは・・・ガ-ディアナは<line>みな れいせつをわきまえるとか・・・<delay 01><delay 01><delay
-    01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 307
-  character: ''
-  ja: しかし うわさは あてにならぬな<line>ダントム! フレ-ベル!<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 308
-  character: ''
-  ja: ウォォォ-ッ!<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 309
-  character: ''
-  ja: グシュ-・・・ グシュ-・・・<line>われらに はむかうとはバカなやつ!<line>さあ くるがいい えんりょはいらぬ<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 310
-  character: ''
-  ja: そのきしは あたしのもんだよ<line>さあ おいでシャイニング・フォ-ス<line>ひかりのちからを みせておくれ<delay 01><delay 01><delay
-    01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 311
-  character: ''
-  ja: まって! みんな おどきなさい!<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 312
-  character: ''
-  ja: わたしが このくにをとうちするもの<line>ガ-ディアナのおう アンリです<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 313
-  character: ''
-  ja: なんぽうよりのごししゃにたいしての<line>かずかずのぶれい おゆるしください<delay 01><delay 01><delay 01><delay
-    01><end>
-  literal: ''
-  en: ''
-
-- index: 314
-  character: ''
-  ja: これはこれは ごていねいな・・・<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 315
-  character: ''
-  ja: わたくしは サイプレスこくのししゃ<line>そして だいしんかんのウォルドル<line>ひかえるのは せいえいたちです<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 316
-  character: ''
-  ja: われわれが ほんじつまいったのは<line>アンリおうに サイプレスこくおうの<line>おくりものを おとどけするため<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 317
-  character: ''
-  ja: わがくにの ゆうこうのあかしとして<line>さあ どうか おうけとりください<line>そしてどうか おたしかめください<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 318
-  character: ''
-  ja: アンリは こばこをひらいた・・・<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 319
-  character: ''
-  ja: こばこから くろいガスがふきだした<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 320
-  character: ''
-  ja: あっ! アンリさま-っ!<delay 01><delay 01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 321
-  character: ''
-  ja: グフッ グフッ グフフフッ<line>ガ-ディアナのものども-っ<line>こころして きくがよいぞ!<delay 01><delay 01><delay
-    01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 322
-  character: ''
-  ja: アンリおうは とわのねむりについた<line>しかしながら わがかみのちからで<line>ふたたび めをさますこともできる<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 323
-  character: ''
-  ja: そのためには わが サイプレスに<line>ふくじゅうを ちかわなければならぬ<line>それとも わがくにに せめこむか?<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 324
-  character: ''
-  ja: いずれにしろ よくかんがえることだ<line>アンリおうを たすけるためには<line>サイプレスまで やってくることだ<delay 01><delay
-    01><delay 01><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 325
-  character: ''
-  ja: かくて ガ-ディアナこくは<line>じゃあくなるものとのたたかいに<line>まきこまれて いくのだった<delay 01><delay 01><delay
-    01><delay 01><end>
-  literal: ''
-  en: ''
 
 - index: 326
   character: ''
