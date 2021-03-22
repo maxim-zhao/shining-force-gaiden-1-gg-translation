@@ -52,6 +52,7 @@ a wild and warlike place!
   ja: そのとき おもてのほうから<line>あらそう ものおとがした<delay 01><delay 01><delay 01><delay 01><end>
   literal: At that time, there was a noise from the people who were fighting.
   en: Suddenly, the sounds of battle erupt outside. 
+  # Edited to something that sounds a bit less dry and descriptive, and more illustrative of what's happening in the story. Feel free to revert, just my two cents.
 
 - index: 300
   character: Guard
@@ -98,6 +99,7 @@ a wild and warlike place!
     01><delay 01><end>
   literal: Heh heh heheheh... I've heard rumors of the courtesy of Guardiana's people…
   en: ''
+  # Gufu Gufu Gufufufu is like a "warlock'y laugh" so-to-speak in japanese, it resembles a "witch laugh" which is fufufufu for good reason. Wily and rough. And evil warlock laughs with heh's typically in English fantasy literature.
 
 - index: 307
   character: Woldol
@@ -117,6 +119,7 @@ a wild and warlike place!
     01><delay 01><delay 01><end>
   literal: Crunch... crunch... You are fools to defy us! Come on, then! Don't hold back!
   en: ''
+  # "Gashyuu... Gashyuu..." This is the sound of him softly grinding his jaws. it's likely based on the sound effect "gasha" which is a crunching sound, gapu as well is a biting sound, they are closely related. Scrunch/crunch are good onomatopeia equivalents in English.
 
 - index: 310
   character: Frabell
