@@ -1,0 +1,262 @@
+2. Menu strings
+
+
+Dumping some of the nametables, we pinpoint some of the data locations.
+
+The start of WRAM generally has the NT cached and we can look it up in ROM.
+
+$BFAF-BFFF = only empty space here.
+
+__________________________________________________________
+
+
+$B661-B675 = Start/Continue/Delete/Copy
+
+[00B60F] 760f 01 61 76    LD BC,7661h      AF=0202 BC=0002 DE=0D02 HL=1402 IX=C027 IY=FF07 AF'=1010   P0=00000 P1=08000 P2=00000 [SRAM]
+[00B627] 7627 01 68 76    LD BC,7668h      AF=0200 BC=0202 DE=0D02 HL=1402 SP=DEE3 IX=C02D IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B63C] 763c 01 6F 76    LD BC,766Fh      AF=0200 BC=0402 DE=0D02 HL=1402 SP=DEE3 IX=C02D IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B655] 7655 01 72 76    LD BC,7672h      AF=0242 BC=0602 DE=0D02 HL=1402 SP=DEE3 IX=C02D IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+Notice the $00 termination code. There's enough room at the end of the page too.
+
+(this space now used by 'Nothing' --> 13 free)
+(now has width code --> 0+ free)
+
+(remap pointer to $5229, $522F, $5234, $523A)
+(move text to t2_str5.bin below)
+
+[see t2_str8.bin]
+
+__________________________________________________________
+
+
+On a side-note, $7C13-7C58 has the "press start" text.
+Notice the 2-byte format, in plain ASCII.
+
+__________________________________________________________
+
+
+The hand-drawn window limits us to 5 characters. 1 extra if we hand-expand
+the window by painting.
+
+
+; Caches menu strings and draws appropriate one
+
+[005217] 5217 C5          PUSH BC          AF=0044 BC=1EE8 DE=090A HL=4B66 SP=DEED IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[005218] 5218 D5          PUSH DE          AF=0044 BC=1EE8 DE=090A HL=4B66 SP=DEEB IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[005219] 5219 E5          PUSH HL          AF=0044 BC=1EE8 DE=090A HL=4B66 SP=DEE9 IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[00521A] 521a 11 C4 A3    LD DE,A3C4h      AF=0044 BC=1EE8 DE=090A HL=4B66 SP=DEE7 IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[00521D] 521d 01 28 00    LD BC,0028h      AF=0044 BC=1EE8 DE=A3C4 HL=4B66 SP=DEE7 IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[005220] 5220 ED B0       LDIR             AF=0044 BC=0028 DE=A3C4 HL=4B66 SP=DEE7 IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[005222] 5222 21 C4 A3    LD HL,A3C4h      AF=0040 BC=0000 DE=A3EC HL=4B8E SP=DEE7 IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[005225] 5225 DF          RST 18           AF=0040 BC=0000 DE=A3EC HL=A3C4 SP=DEE7 IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+The format seems to be:
+
+<byte>< 4 * 2-byte pointers >< 4 * ( string + $00 ) >
+
+_______________________________________________________
+
+
+These fit in-place:
+
+
+$4FAF-4FD2 = Status/Speed/Switch/Save
+[004F34] 4f34 21 AF 4F    LD HL,4FAFh      AF=0044 BC=1EE8 DE=0A0C HL=1EF2 SP=DEF7 IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+(5 bytes left, don't forget to remap pointers)
+
+[see t2_str.bin]
+
+_______________________________________________________
+
+
+These need more room:
+
+
+$4B66-4B80 = Battle/Cast/Inventory/Hold
+[004467] 4467 21 66 4B    LD HL,4B66h      AF=0054 BC=1EE8 DE=090A HL=A3F9 SP=DEEF IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+$4B81-4B9D = Battle/Cast/Inventory/Search
+[004474] 4474 21 81 4B    LD HL,4B81h      AF=0113 BC=1EE8 DE=070F HL=4B66 SP=DEEF IX=4E4B IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+(we'll combine these two and the bottom --> defer the below string elsewhere)
+(Leaves 24 free bytes --> partly used by 'Not enough MP' = 10 left)
+
+(Remap lower pointer to $4B83)
+
+[see t2_str1.bin]
+
+
+$4B9E-4BB7 = Use/Give/Equip/Dispose
+[0045F5] 45f5 21 9E 4B    LD HL,4B9Eh      AF=0400 BC=1EE8 DE=9B04 HL=4B66 SP=DEEF IX=8692 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+(use room at $7DC0)
+(free space taken up already by merger above)
+
+[see t2_str9.bin]
+
+__________________________________________________________
+
+
+These need more room too:
+
+(note: these pointers go to ROM itself so we can split them up if needed)
+
+$86D3-86EC = Buy/Sell/Bargain/Repair
+[008072] 4072 21 D3 46    LD HL,46D3h      AF=9D00 BC=0008 DE=D544 HL=1622 SP=DEEF IX=8682 IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+
+(move to end of page $BFA3)
+($1A bytes free --> used by message cursor shifting code)
+
+[see t2_str6.bin]
+
+
+$91EC-9207 = Help/Swap/Inventory/Record
+[00877D] 477d 21 EC 51    LD HL,51ECh      AF=FF42 BC=0008 DE=D544 HL=5208 SP=DEEF IX=8682 IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+
+$9208-9227 = Revive/Cure/Change/Status
+[0087C4] 47c4 21 08 52    LD HL,5208h      AF=0044 BC=0008 DE=D544 HL=51EC SP=DEEF IX=8682 IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+
+(we can combine these two with 0 left)
+(we've got lots left from below if needed --> NOW USED BY 'Begin/Cont/Erase/Copy' --> 4 left)
+
+[see t2_str5.bin]
+
+
+$9228-9241 = Use/Give/Equip/Dispose
+[008D2C] 4d2c 21 28 52    LD HL,5228h      AF=0242 BC=0008 DE=D544 HL=51EC SP=DEEF IX=8682 IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+
+(move to end of page $BFBF)
+(free space used by above string)
+
+[see t2_str7.bin]
+
+__________________________________________________________
+
+
+In-place:
+
+$B33F-B34F = BATTLE MESSAGE
+[00B323] 7323 01 3F 73    LD BC,733Fh      AF=0042 BC=1007 DE=020B HL=0212 SP=DEDF IX=868B IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+(1 free byte due to sound mark)
+
+
+$B350-B361 = Enable / Disable
+[00B333] 7333 01 50 73    LD BC,7350h      AF=0042 BC=1007 DE=020B HL=0212 SP=DEDF IX=868B IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+(2 free bytes due to sound marks)
+
+[see t2_str2.bin]
+
+__________________________________________________________
+
+
+In-place change:
+
+$B3CD-B3F8 = MESSAGE SPEED / 1 2 3 4 / SLOW----FAST
+[00B3A1] 73a1 01 CD 73    LD BC,73CDh      AF=0042 BC=1007 DE=020B HL=0212 SP=DEDF IX=868B IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+(3 bytes saved)
+
+[00B3B1] 73b1 01 DF 73    LD BC,73DFh      AF=0042 BC=1007 DE=020B HL=0212 SP=DEDF IX=868B IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B3C1] 73c1 01 EC 73    LD BC,73ECh      AF=0042 BC=1007 DE=020B HL=0212 SP=DEDF IX=868B IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+[see t2_str3.bin]
+
+__________________________________________________________
+
+
+In-place change:
+
+Seems 8-char fixed width. 5 on-screen.
+
+[00B57F] 757f 21 97 75    LD HL,7597h      AF=0000 BC=0108 DE=070C HL=F90C SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B582] 7582 78          LD A,B           AF=0000 BC=0108 DE=070C HL=7597 SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B583] 7583 87          ADD A,A          AF=0100 BC=0108 DE=070C HL=7597 SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B584] 7584 87          ADD A,A          AF=0200 BC=0108 DE=070C HL=7597 SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B585] 7585 87          ADD A,A          AF=0400 BC=0108 DE=070C HL=7597 SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B586] 7586 85          ADD A,L          AF=0808 BC=0108 DE=070C HL=7597 SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B587] 7587 6F          LD L,A           AF=9F88 BC=0108 DE=070C HL=7597 SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00B588] 7588 30 01       JR NC,758Bh      AF=9F88 BC=0108 DE=070C HL=759F SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+
+...
+
+[001018] 1018 F5          PUSH AF          AF=9F88 BC=759F DE=0000 HL=C005 SP=DEDF IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[001019] 1019 0A          LD A,(BC)        AF=9F88 BC=759F DE=0000 HL=C005 SP=DEDD IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00101A] 101a A7          AND A            AF=0188 BC=759F DE=0000 HL=C005 SP=DEDD IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00101B] 101b 28 06       JR Z,1023h       AF=0110 BC=759F DE=0000 HL=C005 SP=DEDD IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+[00101D] 101d CD 72 11    CALL 1172h       AF=0110 BC=759F DE=0000 HL=C005 SP=DEDD IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+
+
+$B597-B5AB = Camp/Exit/Shop
+[00B57F] 757f 21 97 75    LD HL,7597h      AF=0000 BC=0108 DE=070C HL=F90C SP=DEE9 IX=8682 IY=DEF6    P0=00000 P1=08000 P2=00000 [SRAM]
+
+[see t2_str4.bin]
+
+__________________________________________________________
+
+
+In-place:
+
+$44C4-44CF = Battle --> 'Not in range'
+[0044BB] 44bb 21 C4 44    LD HL,44C4h      AF=0044 BC=1EE8 DE=051C HL=A3F9 SP=DEEF IX=8694 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[00457B] 457b 21 C4 44    LD HL,44C4h      AF=0044 BC=1EE8 DE=2BFF HL=A3F9 SP=DEEF IX=8683 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+[00478D] 478d 21 C4 44    LD HL,44C4h      AF=0044 BC=1EE8 DE=0403 HL=A3F9 SP=DEEF IX=868A IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+(1 over)
+
+[see t2_str10.bin]
+
+
+$4524-4531 = Cast --> 'No spells'
+
+[00451B] 451b 21 24 45    LD HL,4524h      AF=0054 BC=1EE8 DE=1F00 HL=A3F9 SP=DEEF IX=4E4B IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+(normally 4 left out of $0E)
+
+[see t2_str11.bin]
+
+(note: swap above two string locations and data)
+
+
+$45E9-45F4 = Item --> 'No items'
+[0045E0] 45e0 21 E9 45    LD HL,45E9h      AF=0044 BC=1EE8 DE=3F00 HL=4B66 SP=DEEF IX=4E4B IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+(3 left)
+
+[see t2_str12.bin]
+
+
+$4632-463C = Item --> Use --> 'No effect'
+[004629] 4629 21 32 46    LD HL,4632h      AF=0A09 BC=1EE8 DE=1303 HL=A3F9 SP=DEEF IX=4E4B IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+(1 left)
+
+[see t2_str13.bin]
+
+
+$A5D8-A5DF = Yes / No
+[00A5CC] 65cc 01 D8 65    LD BC,65D8h      AF=0202 BC=0903 DE=0608 HL=F708 SP=DEDB IX=868A IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+
+[see t2_str15.bin]
+
+
+$A0D9-A0DF = Cast --> Cost
+[00A0AD] 60ad 01 D9 60    LD BC,60D9h      AF=0143 BC=0A03 DE=0A0E HL=140E SP=DECD IX=535F IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+[see t2_str14.bin]
+
+__________________________________________________________
+
+
+Need more room:
+
+$455C-4566 = Cast --> Spell --> 'Not enough MP' (3 bytes short --> $0E)
+[004553] 4553 21 5C 45    LD HL,455Ch      AF=FDBB BC=1EE8 DE=0805 HL=A3F9 SP=DEEF IX=8694 IY=FF07    P0=00000 P1=04000 P2=00000 [SRAM]
+
+(reuse t2_str1 space)
+(remap pointer to $4BA0)
+
+($0B free now)

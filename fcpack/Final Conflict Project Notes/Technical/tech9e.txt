@@ -1,0 +1,90 @@
+9e. Feature not put in: 8x8 VWF
+
+
+Even if it would have had a minimal effect with the currently chosen font
+('t','r','f','i','l',' ','.', ...), it would still have been nice to add
+on my part. Striving for a more higher quality.
+
+But these thoughts are left here for mere consideration.
+
+
+Finding VRAM space is hard. And keeping peace with potential multi-translation
+projects.
+
+The first critical limit is having $60 font tiles. That leaves $31. Just the
+narrative alone needs 18*3 = $36. The rest of VRAM is filled. But a closer
+examination using Meka shows 4 unused tiles at the very tail-end. So it's
+practical enough.
+
+
+If one actually wanted a full VWF for the item windows, the largest one is
+the shop window + shop narrative + gold window. $18 * $08 = $90. Many items
+are roughly 16 characters in length.
+
+And the font table in VRAM would be practically non-existent. That space
+would be used for the whole VWF. And the fixed-width numbers to add on top.
+
+
+Lots of rewriting work. Space?
+
+
+It can be challenging to find good pockets of free space. We already had to
+use part of the font table for our script, as well as the Huffman tree area.
+
+Graphics are compressed using LZ so that won't budge any considerable amount.
+One could optimise the tile format arrangement but I'm not assured that it will
+provide much efficiency.
+
+
+Text is now using semi-adaptive Huffman + substring compression.
+
+70.6 --> 28.9 = 59.1% reduction.
+Not bad but can we do better with the text?
+With this space, I don't know of any noticeably better method.
+
+One could try adding another substring lookup code and expand that dictionary
+by 64 more entries. Should drop the script size. But the lists file would be
+hard-pressed for space.
+
+
+The font data is raw 4-bpp GG. We could shrink it down to 1/2-bpp and watch
+the proportional savings. That would fit some new VWF characters.
+
+While one would think that the font table remains untouched in VRAM, 3 rows actually
+may swap out when new characters join the Shining Force. This used to cause a
+Kega Fusion flicker bug with a rogue LZ bitmap decoding session that corrupted
+the list data. The font data would then briefly get re-uploaded after the flicker.
+
+And converting from 1/2 to 4-bpp with enough tiles may cause enough slowdown. Potentially.
+
+
+Then would come writing the code itself, with an embedded VWF length table somewhere.
+Swapping out which bank is some cause for concern, unless it can still fit within the
+other SRAM defragmentation limits. But I don't want to interfere with the space others'
+may need to handle more complex languages.
+
+It should be straightforward assembly afterwards. One could either use a single
+register and clip pixels in both directions (srl --> sll --> clipped tile) but that
+would require two tile iterations.
+
+Or use 'srl D' + 'rra E' to use the carry flag to catch the overflow pixels in the
+other 8-bit register. Then comes the bitwise-OR with the two tile VWF buffer
+(space in upper RAM is sufficient). Repeat for 7/15/31 more bpp-pixels.
+
+DI (turns off VBlanking), set the VRAM address, write the bytes to VRAM, turn on EI.
+No DMA capability here. But OTIR (OUTI + Repeat) is a good substitute.
+
+But you still need to hunt down the nametable writer and replace it with the rolling
+VRAM tile number.
+
+
+Speed is another critical point. No DMA. Using OTIR (OUTI + R) is still slower. Will
+cause visual slowness during shop / stats screens. So that's a bad note.
+
+
+Lots of hard work. It wouldn't be so problematic if the memory management wasn't as tight.
+And the consistent use of page swapping.
+
+Time was spent exploring the idea but it looks too time-consuming and complex to
+effectively manage. In proper terms, hopefully it won't deter you from adding one
+to your own 8-bit console projects or smaller scale ones.

@@ -1,0 +1,232 @@
+7. Auto-wrapping words
+
+
+Preferably we'd like to do this at compile time, when we're building the script.
+But there comes the unpredictable moments like
+
+<name> uses <item>..<delay 01>
+
+[Sonette uses Iom..]
+[Ian uses Medical H][erb..]
+[Dark Dragon uses M][obility Pimento..]
+
+Well, #1/3 probably won't even remotely happen but they could.
+#2 is realistic.
+
+
+We could do
+
+[Ian uses][Medical Herb..]
+
+but
+
+[Ian drops][Sword of Darkness.][.]
+
+spills over.
+
+
+Ideally, we'd like
+
+[Ian uses Medical][Herb..]
+
+So we're going to try adjusting at run-time. We know that $02-$C7 are generally
+text characters and not control codes, if we remove the $7A-$7D sound mark codes.
+
+
+Doing this again, we get
+
+<name> uses <item>..<delay 01> -->
+Ian uses Medical@ Herb..<$D6> -->
+Ian + uses + Medical + Herb + .. -->
+(3) (+ 1 + 4) (+ 1 + 7) / (4) + 2
+
+$00 and $01 give us the word break codes. But notice that "Herb.." and not "Herb" + " " + ".."
+
+Given the way the engine looks up dictionary strings, we can't quite predict if the two
+periods will spill by accident. Adding another control hint code could soften the problem.
+
+<name> uses <wrap hint 02><item>..<delay 01>
+
+
+Finding a fast implementation will be interesting.
+
+__________________________________________________________
+
+
+; Init then start decoder
+
+[0200D4] 40d4 CD C2 43    CALL 43C2h       AF=0000 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200D7] 40d7 AF          XOR A            AF=0000 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200D8] 40d8 32 9A A0    LD (A09Ah),A     AF=0044 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200DB] 40db CD 11 34    CALL 3411h       AF=0044 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Check for immediate dictionary lookup (one-time)
+
+[0200DE] 40de FE C8       CP C8h           AF=2644 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200E0] 40e0 CA F4 40    JP Z,40F4h       AF=261B BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Look at x-cursor (one-time)
+
+[0200E3] 40e3 2A 94 A0    LD HL,(A094h)    AF=261B BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200E6] 40e6 24          INC H            AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200E7] 40e7 25          DEC H            AF=2601 BC=0000 DE=0005 HL=0100 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200E8] 40e8 28 14       JR Z,40FEh       AF=2643 BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Auto-wrap line
+
+[0200EA] 40ea 2C          INC L            AF=AE0B BC=0702 DE=41B0 HL=0804 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+[0200EB] 40eb 2C          INC L            AF=AE01 BC=0702 DE=41B0 HL=0805 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+[0200EC] 40ec 26 00       LD H,00h         AF=AE01 BC=0702 DE=41B0 HL=0806 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+[0200EE] 40ee 22 94 A0    LD (A094h),HL    AF=AE01 BC=0702 DE=41B0 HL=0006 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+[0200F1] 40f1 C3 FE 40    JP 40FEh         AF=AE01 BC=0702 DE=41B0 HL=0006 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Check for dictionary lookup (loop point)
+
+[0200F4] 40f4 CD 96 41    CALL 4196h       AF=0044 BC=0000 DE=0005 HL=0002 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+_____________________________________________________
+
+
+; Look at length of remaining dictionary string
+
+[020196] 4196 3A 9A A0    LD A,(A09Ah)     AF=0044 BC=0008 DE=0507 HL=0003 IX=A0A3 IY=DECF AF'=7838   P0=00000 P1=20000 P2=00000 [SRAM]
+[020199] 4199 B7          OR A             AF=0644 BC=0008 DE=0507 HL=0003 IX=A0A3 IY=DECF AF'=7838   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Exit function iff (if and only if) length is zero
+
+[02019A] 419a C8          RET Z            AF=0604 BC=0008 DE=0507 HL=0003 IX=A0A3 IY=DECF AF'=7838   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Shrink text length and store
+
+[02019B] 419b 3D          DEC A            AF=0504 BC=0000 DE=8705 HL=9530 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+[02019C] 419c 32 9A A0    LD (A09Ah),A     AF=0402 BC=0000 DE=8705 HL=9530 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Raw text location
+
+[02019F] 419f E5          PUSH HL          AF=0402 BC=0000 DE=8705 HL=9530 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+[0201A0] 41a0 2A 9B A0    LD HL,(A09Bh)    AF=0402 BC=0000 DE=8705 HL=9530 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Read in text character
+
+[0201A3] 41a3 7E          LD A,(HL)        AF=0402 BC=0000 DE=8705 HL=9530 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Bump pointer
+
+[0201A4] 41a4 23          INC HL           AF=7A02 BC=0000 DE=8705 HL=9530 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Store new pointer
+
+[0201A5] 41a5 22 9B A0    LD (A09Bh),HL    AF=7A02 BC=0000 DE=8705 HL=9531 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+[0201A8] 41a8 E1          POP HL           AF=7A02 BC=0000 DE=8705 HL=9531 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Check for abort
+
+[0201A9] 41a9 B7          OR A             AF=7A02 BC=0000 DE=8705 HL=9530 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+[0201AA] 41aa C0          RET NZ           AF=7A28 BC=0000 DE=8705 HL=9530 IX=A0A3 IY=DECF AF'=5E18   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Length exhausted, done looking
+
+[0201AB] 41ab 32 9A A0    LD (A09Ah),A     AF=0044 BC=FF02 DE=FFFA HL=DECD IX=A0A3 IY=DECF AF'=3E38   P0=00000 P1=20000 P2=00000 [SRAM]
+[0201AE] 41ae C9          RET              AF=0044 BC=FF02 DE=FFFA HL=DECD IX=A0A3 IY=DECF AF'=3E38   P0=00000 P1=20000 P2=00000 [SRAM]
+
+_____________________________________________________
+
+
+; Test for Lookup -> Huffman switch
+
+[0200F7] 40f7 B7          OR A             AF=0044 BC=0000 DE=0005 HL=0002 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200F8] 40f8 C2 07 41    JP NZ,4107h      AF=0044 BC=0000 DE=0005 HL=0002 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Call decoder
+
+[0200FB] 40fb CD 11 34    CALL 3411h       AF=0044 BC=0000 DE=0005 HL=0002 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; End-of-string
+
+[0200FE] 40fe FE DB       CP DBh           AF=2643 BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[020100] 4100 28 66       JR Z,4168h       AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Look for other scripting codes (>= $C8)
+
+[020102] 4102 FE C8       CP C8h           AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[020104] 4104 D2 AF 41    JP NC,41AFh      AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Emit regular tile
+
+[020107] 4107 F5          PUSH AF          AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[020108] 4108 D5          PUSH DE          AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[020109] 4109 E5          PUSH HL          AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Hook up cursor at DE and nametable at HL
+
+[02010A] 410a 2A 92 A0    LD HL,(A092h)    AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[02010D] 410d ED 5B 94 A0 LD DE,(A094h)    AF=261B BC=0000 DE=0005 HL=C542 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[020111] 4111 CD 72 11    CALL 1172h       AF=261B BC=0000 DE=0000 HL=C542 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[020114] 4114 ED 53 94 A0 LD (A094h),DE    AF=261B BC=0000 DE=0100 HL=C542 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[020118] 4118 E1          POP HL           AF=261B BC=0000 DE=0100 HL=C542 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[020119] 4119 D1          POP DE           AF=261B BC=0000 DE=0100 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[02011A] 411a F1          POP AF           AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+__________________________________________________________
+
+
+$23F4A-$23FFF = $B6 bytes.
+
+A is safe to modify but that's about it.
+
+We also examine the $1172 draw code itself to see when the normal
+wrapping occurs.
+
+__________________________________________________________
+
+
+; render one font character
+
+[001172] 1172 F5          PUSH AF          AF=1310 BC=6B4D DE=0004 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001173] 1173 C5          PUSH BC          AF=1310 BC=6B4D DE=0004 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001174] 1174 E5          PUSH HL          AF=1310 BC=6B4D DE=0004 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001175] 1175 DD E5       PUSH IX          AF=1310 BC=6B4D DE=0004 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001177] 1177 46          LD B,(HL)        AF=1310 BC=6B4D DE=0004 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001178] 1178 CB B8       RES 7,B          AF=1310 BC=004D DE=0004 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00117A] 117a DD 68       LD LX,B          AF=1310 BC=004D DE=0004 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00117C] 117c 23          INC HL           AF=1310 BC=004D DE=0004 HL=C005 IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00117D] 117d 23          INC HL           AF=1310 BC=004D DE=0004 HL=C006 IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00117E] 117e 23          INC HL           AF=1310 BC=004D DE=0004 HL=C007 IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; load limits
+
+[00117F] 117f 46          LD B,(HL)        AF=1310 BC=004D DE=0004 HL=C008 IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001180] 1180 23          INC HL           AF=1310 BC=0A4D DE=0004 HL=C008 IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001181] 1181 4E          LD C,(HL)        AF=1310 BC=0A4D DE=0004 HL=C009 IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001182] 1182 23          INC HL           AF=1310 BC=0A12 DE=0004 HL=C009 IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; check horizontal character limit
+
+[001183] 1183 F5          PUSH AF          AF=1310 BC=0A12 DE=0004 HL=C00A IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001184] 1184 7A          LD A,D           AF=1310 BC=0A12 DE=0004 HL=C00A IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001185] 1185 C6 02       ADD A,02h        AF=0010 BC=0A12 DE=0004 HL=C00A IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001187] 1187 B8          CP B             AF=0200 BC=0A12 DE=0004 HL=C00A IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001188] 1188 38 04       JR C,118Eh       AF=02BB BC=0A12 DE=0004 HL=C00A IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; add two rows
+
+[00118A] 118a 1C          INC E
+[00118B] 118b 1C          INC E
+[00118C] 118c 16 00       LD D,00h
+
+; bump x-pos
+
+[00118E] 118e 14          INC D            AF=02BB BC=0A12 DE=0004 HL=C00A IX=5800 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+__________________________________________________________
+
+
+t7.asm will hold the dictionary, auto-format code at $23F4A.
+
+$200F4 will do a JP so that we can control our new routine output.
+
+If we write out $C9 (newline), we have to make sure we don't emit a tile but go to
+the scripting code instead.
+
+$20196-$201AE is blank. We'll do the lookup call here and re-wire any scripting codes
+that come out.

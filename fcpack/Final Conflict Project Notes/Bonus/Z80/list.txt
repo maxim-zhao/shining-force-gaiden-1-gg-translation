@@ -1,0 +1,54 @@
+; Phantasy Star Gaiden
+
+
+; Narrative formatter
+
+1ae7 t1.obj		; remap code
+2fee0 t1_1.obj		; - actual scanner
+
+
+; Battle script newline replacements
+
+33696 hex_fe.bin	; <name> + [ with.. ] + <spell> + '.'
+336c7 hex_fe.bin	; <name> + [ took ] + <item> + '.'
+336cd hex_20.bin	; <name> + [ and ] + <name> + " drew near."
+336d6 hex_20.bin	; [ zapped ] + <name> + " with.. "
+336dd hex_fe.bin	; [ used ] + <item> + '.'
+336df hex_20.bin	; " drew near."
+336ec hex_ff.bin	; " attacked."
+3370a hex_20.bin	; " is attacked."
+33717 hex_20.bin	; "'s brain is warped."
+3372e hex_20.bin	; " is attacked."
+33778 hex_20.bin	; "Spells can be used now."
+3379c hex_ff.bin	; " defended."
+337a8 hex_ff.bin	; " ran away!"
+337c2 hex_ff.bin	; " ran away!"
+337f8 hex_ff.bin	; <name> + [ increased ] + <number>
+33814 hex_20.bin	; "'s HP did not go up."
+33823 hex_20.bin	; "'s spells are muted!"
+33838 hex_20.bin	; "'s strength is down."
+33853 hex_20.bin	; "'s brain is warped."
+3386a hex_20.bin	; "'s brain is NOT warped."
+33882 hex_20.bin	; "'s strength increased."
+33899 hex_20.bin	; "'s strength doubled."
+338ae hex_20.bin	; " but it was fatal!"
+338be hex_20.bin	; "'s HP is full!"
+338c9 hex_20.bin	; " HP.. to everyone."
+338e6 hex_20.bin	; "'s speed went up."
+33906 hex_ff.bin	; " was defeated."
+3391a hex_20.bin	; " took flight!"
+33927 hex_20.bin	; " has died."
+33931 hex_20.bin	; " is dead."
+3393c hex_20.bin	; " was revived."
+3394d hex_20.bin	; " was NOT defeated!"
+3395b hex_20.bin	; " 's time is frozen."
+3396e hex_20.bin	; " 's time is frozen."
+33990 hex_20.bin	; " is still stunned."
+339a1 hex_20.bin	; " is NOT stunned."
+339b2 hex_20.bin	; " is NOT stunned."
+339bf hex_20.bin	; " is frozen!"
+339cb hex_20.bin	; " is frozen!"
+339db hex_20.bin	; " is NOT frozen."
+339e7 hex_20.bin	; " is frozen!"
+339f8 hex_20.bin	; " Mesatas earned."
+33a0f hex_20.bin	; "'s Level increased!"

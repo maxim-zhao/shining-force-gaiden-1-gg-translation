@@ -1,0 +1,11 @@
+<border 02><width 14><wrap><center><control 04>
+
+A<line 02>Shining Force<line 02>Central<line 02>Translation<line 12>
+
+The forces of Darkness, the Runefaust Army and darkness incarnate, Dark Dragon...<line 04>
+They destroyed and massacred as they tried to take over the world.<line 12>
+However, Max led a troop known as the Shining Force to victory against the forces of Darkness.<line 07>
+Once again, the world was at peace.<line 07>
+Now a new treachery begins...<line 08>
+
+<end>

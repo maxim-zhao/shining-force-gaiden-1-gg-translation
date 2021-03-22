@@ -1,0 +1,57 @@
+Detailed checklist to compile the Final Conflict translation:
+
+1. Copy the new script files (script1.txt, .., script6.txt) to 'Tools\word_count'
+
+   Note: The script, intro and table files can be saved in UTF-8 format
+         for supporting other languages or characters like ’ and ‘.
+
+
+2. Execute 'Tools\word_count\run.bat' in 'Tools\word_count'.
+
+2a. If you are using different names for the main players than the ones
+    found in 'Tools\substring_formatter\substring.cpp' under 'banned_words',
+    you will need to re-compile this program yourself with the new names.
+
+    They will interfere with the game's dynamic name ability.
+
+
+3. Execute 'Tools\substring_formatter\run.bat'.
+
+3a. If your player names are different, you must look for '; Names' in
+    'Tools\script_inserter\t3b_table.tbl' and modify them manually.
+
+
+4. Run 'Tools\script_inserter\run.bat'.
+
+
+5. Copy your 'intro.txt' file to 'Tools\intro_inserter'.
+   Execute 'Tools\intro_inserter\run.bat'.
+
+
+6. Copy 'Technical\Bitmap\sf3_font.bin' to 'Tools\rom_insert'.
+   Run 'Tools\bitmap_encode\chapter.bat'.
+
+
+7. Copy your new 'tech1d_lists.txt' file to 'Tools\list_creater'.
+   Edit 'Tools\full_class_names.txt' as needed.
+   Execute 'Tools\list_creater\run.bat'.
+
+
+8. Download 'TASM 3.0.1'.
+   Copy 'tasm.exe' and 'tasm80.tab' to 'Technical\Z80'.
+
+   Run 'Technical\Z80\t1e.bat'.
+   Run 'Technical\Z80\t1e_3.bat'.
+   Run 'Technical\Z80\t1f.bat'.
+   Run 'Technical\Z80\t3d_2.bat'.
+   Run 'Technical\Z80\t7a_3.bat'.
+
+
+9. Copy your 'Final Conflict' ROM to 'Tools\rom_insert'.
+   Rename it to 'Tools\rom_insert\fc.gg'.
+
+   Copy 'Tools\rom_insert\fc.gg' name it 'Tools\rom_insert\original fc.gg'.
+   Run 'Tools\rom_insert\run.bat'.
+
+
+10. Test the patched 'fc.gg' ROM.

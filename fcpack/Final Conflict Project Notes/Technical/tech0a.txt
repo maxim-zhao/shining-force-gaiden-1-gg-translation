@@ -1,0 +1,63 @@
+0a. Implementing our new window codes
+
+
+First, we need to change the border window generation Z80 code.
+This part resides at $1054.
+
+The start of WRAM has the window nametable data cached.
+
+
+; Sets the window width (2 + 5 text) (C = window height)
+
+[00B5E8] 75e8 06 07       LD B,07h         AF=0208 BC=0109 DE=0190 HL=0300 IX=C027 IY=FF07 AF'=1010   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; Draws the above window frame: top, side, bottom
+
+[00BE03] 7e03 CD 54 10    CALL 1054h       AF=0044 BC=0709 DE=C293 HL=C005 IX=C027 IY=FF07 AF'=1010   P0=00000 P1=08000 P2=00000 [SRAM]
+
+__________________________________________________________
+
+
+; Corner
+
+[00106A] 106a 36 7E       LD (HL),7Eh      AF=0802 BC=0607 DE=0504 HL=A65B IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[00106C] 106c 23          INC HL           AF=0802 BC=0607 DE=0504 HL=A65B IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[00106D] 106d 77          LD (HL),A        AF=0802 BC=0607 DE=0504 HL=A65C IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[00106E] 106e 23          INC HL           AF=0802 BC=0607 DE=0504 HL=A65C IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[00106F] 106f 43          LD B,E           AF=0802 BC=0607 DE=0504 HL=A65D IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+
+; Top loop
+
+[001070] 1070 0E 7F       LD C,7Fh         AF=0802 BC=0407 DE=0504 HL=A65D IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[001072] 1072 71          LD (HL),C        AF=0802 BC=047F DE=0504 HL=A65D IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[001073] 1073 23          INC HL           AF=0802 BC=047F DE=0504 HL=A65D IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[001074] 1074 77          LD (HL),A        AF=0802 BC=047F DE=0504 HL=A65E IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[001075] 1075 23          INC HL           AF=0802 BC=047F DE=0504 HL=A65E IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[001076] 1076 10 FA       DJNZ 1072h       AF=0802 BC=047F DE=0504 HL=A65F IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+
+; Corner
+
+[001078] 1078 36 7E       LD (HL),7Eh      AF=0802 BC=007F DE=0504 HL=A665 IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[00107A] 107a 23          INC HL           AF=0802 BC=007F DE=0504 HL=A665 IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[00107B] 107b 77          LD (HL),A        AF=0802 BC=007F DE=0504 HL=A666 IX=DECD IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+
+Just simple tile remapping around this code region and some bits downward.
+
+_______________________________________________________________________
+
+
+At the battle window, we have more unmapped window codes. Dumping VRAM/RAM
+generates $2BE in RAM as the cached nametable.
+
+This points us to $10D2 ROM as the writer.
+
+[0010D2] 10d2 ED B0       LDIR             AF=080C BC=0048 DE=C2B8 HL=6506 SP=DEB9 IX=8692 IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+$A506 ROM is the source.
+
+
+So this window is hand-drawn, and it even shows the box to its left.
+
+Replace the $7E,$7F,$80 codes respectively.
+
+[see t0a_window.bin]

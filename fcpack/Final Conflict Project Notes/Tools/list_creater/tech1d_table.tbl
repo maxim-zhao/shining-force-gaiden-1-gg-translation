@@ -1,0 +1,131 @@
+﻿; Final Conflict: Menu lists conversion table (UTF-8)
+
+; Space
+
+01= 
+
+; Digits
+
+02=0
+03=1
+04=2
+05=3
+06=4
+07=5
+08=6
+09=7
+0A=8
+0B=9
+
+; Uppercase
+
+0C=A
+0D=B
+0E=C
+0F=D
+10=E
+11=F
+12=G
+13=H
+14=I
+15=J
+16=K
+17=L
+18=M
+19=N
+1A=O
+1B=P
+1C=Q
+1D=R
+1E=S
+1F=T
+20=U
+21=V
+22=W
+23=X
+24=Y
+25=Z
+
+; Lowercase
+
+26=a
+27=b
+28=c
+29=d
+2a=e
+2b=f
+2c=g
+2d=h
+2e=i
+2f=j
+30=k
+31=l
+32=m
+33=n
+34=o
+35=p
+36=q
+37=r
+38=s
+39=t
+3a=u
+3b=v
+3c=w
+3d=x
+3e=y
+3f=z
+
+; Window borders
+
+; 40=corner, reserved
+; 41=horizontal, reserved
+; 42=vertical, reserved
+
+; Punctuation
+
+43=-
+;44=%
+45=/
+46=,
+47=.
+48=!
+49="
+; 4a=end quote
+4b=?
+4c=(
+4d=)
+4e='
+4f=:
+50=&
+
+; Status symbols
+
+; 52=poison
+; 53=cursed
+; 54=sleep
+
+; { = $C8 --> only draw for 4-line height
+; } = $C9 --> stop code for $C8
+; [ = $CA --> only draw for non-8, non-16 width
+; ] = $CB --> only draw for non-8, non-16 width
+; $ = $D0 --> article 'a'
+; ~ = $D1 --> article 'an'
+; % = $DA --> insert hyphen (menu only)
+; # = $DB --> custom stop (menu only)
+; @ = $DC --> newline (menu only)
+; < = $DD --> move cursor one back
+; > = $DE --> move cursor one forward
+; ^ = $DF = reserved, end-of-list
+
+C8={
+C9=}
+CA=[
+CB=]
+D0=$
+D1=~
+DA=%
+DB=#
+DC=@
+DD=<
+DE=>
+DF=^

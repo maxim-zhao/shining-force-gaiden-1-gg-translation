@@ -1,0 +1,85 @@
+﻿3a. Script dump
+
+
+We'll setup a program to make the game's text more readable.
+
+[1] 0203DE - 0213D7 =  FF9
+[2] 0213D7 - 022830 = 1459
+[3] 022830 - 023BDA = 13AA
+[4] 02401E - 025161 = 1143
+[5] 025161 - 0264EB = 138A
+[6] 0264EB - 027037 =  B4C = $6815 = ~26.0 KB
+
+[See tech3\script_dumper]
+
+The decompressed script weighs in at ~43 KB.
+
+
+Let's examine some of the control codes (UTF-8).
+
+$01 = space
+$7A = voiced sound mark (ﾞ)
+$7B = semi-voiced sound mark (ﾟ)
+
+$C9 = newline
+$D4 = pause (cursor)
+$D7 = pause (no cursor)
+$D8 = short delay
+$DA = look up player name
+$DB = end-of-string
+
+
+We can setup a log point here to see what strings get activated when.
+HL tells us which script bank to look at (see above).
+B is the string #.
+
+[003401] 3401 16 00       LD D,00h         AF=1E44 BC=D200 DE=0000 HL=401E IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+
+Note: Due a future page expansion, use $3402 instead.
+
+
+It's very important to note that if we have
+
+<item> given to <name>
+
+then we must use that same order in the script. Otherwise if we reverse the two
+
+<name> receives <item>
+
+then it will create a bug based on the way items are passed around.
+
+__________________________________________________________
+
+
+When we do hit the sound marks, we'll tack on the UTF-8 offset.
+
+As the sound marks come first before the letter in the processing order,
+this is easy.
+
+__________________________________________________________
+
+
+A Z80 disassembler called "chndz80" can be used to analyse small segments of code.
+
+; newline (pay attention to drawing cursor in SRAM)
+
+[0201BC] 41bc FE C9       CP C9h           AF=C9BB BC=0002 DE=41B0 HL=0003 IX=A0A2 IY=DECD AF'=ECA9   P0=00000 P1=20000 P2=00000 [SRAM]
+[0201BE] 41be CA 97 42    JP Z,4297h       AF=C942 BC=0002 DE=41B0 HL=0003 IX=A0A2 IY=DECD AF'=ECA9   P0=00000 P1=20000 P2=00000 [SRAM]
+[020297] 4297 2A 94 A0    LD HL,(A094h)    AF=C942 BC=0002 DE=41B0 HL=0003 IX=A0A2 IY=DECD AF'=ECA9   P0=00000 P1=20000 P2=00000 [SRAM]
+[02029A] 429a 2C          INC L            AF=C942 BC=0002 DE=41B0 HL=0600 IX=A0A2 IY=DECD AF'=ECA9   P0=00000 P1=20000 P2=00000 [SRAM]
+[02029B] 429b 2C          INC L            AF=C900 BC=0002 DE=41B0 HL=0601 IX=A0A2 IY=DECD AF'=ECA9   P0=00000 P1=20000 P2=00000 [SRAM]
+[02029C] 429c 26 00       LD H,00h         AF=C900 BC=0002 DE=41B0 HL=0602 IX=A0A2 IY=DECD AF'=ECA9   P0=00000 P1=20000 P2=00000 [SRAM]
+[02029E] 429e 22 94 A0    LD (A094h),HL    AF=C900 BC=0002 DE=41B0 HL=0002 IX=A0A2 IY=DECD AF'=ECA9   P0=00000 P1=20000 P2=00000 [SRAM]
+[0202A1] 42a1 C3 F4 40    JP 40F4h         AF=C900 BC=0002 DE=41B0 HL=0002 IX=A0A2 IY=DECD AF'=ECA9   P0=00000 P1=20000 P2=00000 [SRAM]
+
+
+[0201F3] 41f3 FE DA       CP DAh           AF=DA02 BC=0702 DE=41B0 HL=0006 IX=A0A2 IY=DEBD AF'=2225   P0=00000 P1=20000 P2=00000 [SRAM]
+[0201F5] 41f5 CA 1E 42    JP Z,421Eh       AF=DA42 BC=0702 DE=41B0 HL=0006 IX=A0A2 IY=DEBD AF'=2225   P0=00000 P1=20000 P2=00000 [SRAM]
+[02021E] 421e CD 11 34    CALL 3411h       AF=DA42 BC=0702 DE=41B0 HL=0006 IX=A0A2 IY=DEBD AF'=2225   P0=00000 P1=20000 P2=00000 [SRAM]
+[020221] 4221 57          LD D,A           AF=1142 BC=0702 DE=41B0 HL=0006 IX=A0A2 IY=DEBD AF'=4400   P0=00000 P1=20000 P2=00000 [SRAM]
+[020222] 4222 18 05       JR 4229h         AF=1142 BC=0702 DE=11B0 HL=0006 IX=A0A2 IY=DEBD AF'=4400   P0=00000 P1=20000 P2=00000 [SRAM]
+[020229] 4229 DF          RST 18           AF=1142 BC=0702 DE=11B0 HL=0006 IX=A0A2 IY=DEBD AF'=4400   P0=00000 P1=20000 P2=00000 [SRAM]
+[02022C] 422c 22 9B A0    LD (A09Bh),HL    AF=1142 BC=0702 DE=1103 HL=82A8 IX=A0A2 IY=DEBD AF'=4400   P0=00000 P1=20000 P2=00000 [SRAM]
+[02022F] 422f 7B          LD A,E           AF=1142 BC=0702 DE=1103 HL=82A8 IX=A0A2 IY=DEBD AF'=4400   P0=00000 P1=20000 P2=00000 [SRAM]
+[020230] 4230 32 9A A0    LD (A09Ah),A     AF=0342 BC=0702 DE=1103 HL=82A8 IX=A0A2 IY=DEBD AF'=4400   P0=00000 P1=20000 P2=00000 [SRAM]
+[020233] 4233 C3 F4 40    JP 40F4h         AF=0342 BC=0702 DE=1103 HL=82A8 IX=A0A2 IY=DEBD AF'=4400   P0=00000 P1=20000 P2=00000 [SRAM]

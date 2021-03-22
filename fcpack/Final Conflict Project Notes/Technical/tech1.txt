@@ -1,0 +1,166 @@
+1. 2-line names
+
+
+The first notable problem is the lack of SRAM space to fit in all the naming lists.
+More importantly, we tend to have a 8-character limit on-screen for many windows.
+
+Surprisingly everything fits in one line of 8-tiles.
+It's hard for us to do that and look acceptable. 
+
+Here's two examples of formats:
+
+Brass             Brass
+Knuckles           Knuckle(s)
+Medical           Medical
+Herb               Herb
+Dark              Dark
+Shruiken    vs.    Shruike(n)
+Hobgobl-          Hobgobl-
+in                 in
+Pyro-             Pyro-
+hydra              hydra
+Pyrohyd-          Pyrohydr(a)
+ra
+
+The right one is easier to read. Text will get clipped but it suffices.
+
+So let's examine the code that does this part below.
+
+__________________________________________________________
+
+
+[001025] 1025 D5          PUSH DE          AF=0543 BC=9530 DE=8705 HL=9530 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001026] 1026 E5          PUSH HL          AF=0543 BC=9530 DE=8705 HL=9530 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001027] 1027 2A 90 A0    LD HL,(A090h)    AF=0543 BC=9530 DE=8705 HL=9530 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00102A] 102a 5E          LD E,(HL)        AF=0543 BC=9530 DE=8705 HL=A71D IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00102B] 102b 23          INC HL           AF=0543 BC=9530 DE=8705 HL=A71D IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00102C] 102c 56          LD D,(HL)        AF=0543 BC=9530 DE=8705 HL=A71E IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00102D] 102d 23          INC HL           AF=0543 BC=9530 DE=C005 HL=A71E IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00102E] 102e D5          PUSH DE          AF=0543 BC=9530 DE=C005 HL=A71F IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; load drawing cursor $DE = x-pos, y-pos [$A090 + 2 = $A71F]
+
+[00102F] 102f 5E          LD E,(HL)        AF=0543 BC=9530 DE=C005 HL=A71F IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001030] 1030 23          INC HL           AF=0543 BC=9530 DE=C000 HL=A71F IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001031] 1031 56          LD D,(HL)        AF=0543 BC=9530 DE=C000 HL=A720 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001032] 1032 E1          POP HL           AF=0543 BC=9530 DE=0000 HL=A720 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; render text
+
+[001033] 1033 CD 41 10    CALL 1041h       AF=0543 BC=9530 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; save current drawing position ($DE = x-pos, y-pos)
+
+[001036] 1036 2A 90 A0    LD HL,(A090h)    AF=0543 BC=9535 DE=0400 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001039] 1039 23          INC HL           AF=0543 BC=9535 DE=0400 HL=A71D IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00103A] 103a 23          INC HL           AF=0543 BC=9535 DE=0400 HL=A71E IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00103B] 103b 73          LD (HL),E        AF=0543 BC=9535 DE=0400 HL=A71F IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00103C] 103c 23          INC HL           AF=0543 BC=9535 DE=0400 HL=A71F IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00103D] 103d 72          LD (HL),D        AF=0543 BC=9535 DE=0400 HL=A720 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00103E] 103e E1          POP HL           AF=0543 BC=9535 DE=0400 HL=A720 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00103F] 103f D1          POP DE           AF=0543 BC=9535 DE=0400 HL=9530 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001040] 1040 C9          RET              AF=0543 BC=9535 DE=8705 HL=9530 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; __________________________________________________________
+
+
+; remember length of script
+
+[001041] 1041 F5          PUSH AF          AF=0543 BC=9530 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; grab next text character
+
+[001042] 1042 F5          PUSH AF          AF=0543 BC=9530 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001043] 1043 0A          LD A,(BC)        AF=0543 BC=9530 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; check for abort code ($00)
+
+[001044] 1044 A7          AND A            AF=7A43 BC=9530 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001045] 1045 28 0A       JR Z,1051h       AF=7A38 BC=9530 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; draw character tile
+
+[001047] 1047 CD 72 11    CALL 1172h       AF=7A38 BC=9530 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; bump string pointer
+
+[00104A] 104a 03          INC BC           AF=7A38 BC=9530 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; check item length
+
+[00104B] 104b F1          POP AF           AF=7A38 BC=9531 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00104C] 104c 3D          DEC A            AF=0543 BC=9531 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[00104D] 104d 20 F3       JR NZ,1042h      AF=0403 BC=9531 DE=0000 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; done
+
+[00104F] 104f F1          POP AF           AF=0043 BC=9535 DE=0400 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+[001050] 1050 C9          RET              AF=0543 BC=9535 DE=0400 HL=C005 IX=5811 IY=FF07 AF'=0000   P0=00000 P1=08000 P2=00000 [SRAM]
+
+; fail-safe
+
+[001051] 1051 F1          POP AF
+[001052] 1052 F1          POP AF
+[001053] 1053 C9          RET
+
+__________________________________________________________
+
+
+You'll notice that it has no special codes to mention other than $00 abort.
+The physical drawing routine at $1172 only checks for overflow.
+
+
+We want a 'newline' character so we can employ better formatting.
+We'll use $DC as the scripting engine uses $00-$DB.
+
+So instead of using "Medical Herb", our script will use "Medical@ Herb".
+We'll translate the '@' to a $DC during the table conversion.
+
+
+Some names are more than 8-letters like "Hobgoblin". We'll need another
+code to format it like 
+
+Hob-
+ goblin
+
+where the menu will draw the '-' and we can take it out elsewhere.
+
+Arbitrarily "Hob%@goblin" is used. '%' = word break, $DB. The engine
+will not see the $DB as it resides in a different flow protocol. Mainly
+we want to save up on codes if we need them later.
+
+
+And there's the case of
+
+Brass
+ Knuckle(s)
+
+Again, we use another code. "Brass@ Knuckle#s" where
+'#' = soft-abort, $DA. We drop the final 's' only during menus.
+
+
+Somewhat ideally, we'd like this right at $001041.
+The speed hit should hopefully be non-noticeable.
+
+
+The compiler TASM 3.0.1 is used to build the Z80 ASM.
+Do take heed of the 90-day Shareware license, unless you already purchased it.
+
+tasm -80 -b t1.asm
+
+[See t1.asm for the source code]
+[See t1.obj for the binary code]
+
+__________________________________________________________
+
+
+But first we need to find some space to add our new code within the same page.
+$3DFC-$3FFF = $204 bytes. $1041-$1053 is now open = $13 bytes.
+
+Remap the call as well:
+
+[001033] 1033 CD 41 10    CALL 1041h
+-->
+CD FC 3D    CALL $3DFC
+
+[See t1_1.obj for the binary code]

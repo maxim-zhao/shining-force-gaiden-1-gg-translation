@@ -1,0 +1,16 @@
+Trees end at: 02ABF8
+$BA0 free bytes
+
+Text entry locations:
+1: 43DE
+2: 5536
+3: 6B06
+Inserting new page at entry C2, 10BB
+
+4: 401E
+5: 53A2
+6: 6957
+Inserting new page at entry 5A, 06DD
+
+Total size: 28.67 KB
+WARNING: Overage of 2.67 KB

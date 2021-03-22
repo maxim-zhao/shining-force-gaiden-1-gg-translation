@@ -1,0 +1,109 @@
+9c. A summary of the project
+
+
+This will be a short briefing on what to change for other languages.
+
+An effort was made to make this friendly to modify, considering the nature of the
+game itself.
+
+
++ Compile all the programs in the 'Tools' folder. 'Tools\Tracer' is optional.
+
+  Copy 'file_splitter.exe' to the 'Technical\Z80' folder so that several batch files
+  will work.
+
+  Remark: Now done.
+
+
++ First comes the font. Do note that you are restricted to the visible tiles
+  and a few extra. A total of $00-$56.
+
+  Find 'sf3_font.bin' for the data. When done, copy it to 'Tools\rom_insert'.
+
+  If you need more than $57 tiles, a modification of the script6-1 overage check
+  in 'script_inserter', 'huffman.cpp' is needed. You will have to manually update
+  the starting locations of the empty space in the font table.
+
+  Edit: Because the script compresses better, the limit is now redirected to $60.
+        So this step is not required. If you need more space, then you can lower
+        the # tiles used.
+
+  If you need more than $60 tiles, then this will take some more work. You
+  will have to delve into Chapter 3 and modify any substring ranges. There's
+  plenty of code here to change (t7a.asm, t3d_2.asm, substring_formatter, and others).
+
+
++ The list_creater will be an easy second (see Chapter 1). Mainly, just modify
+  the lists.txt file up to the substrings. It's alright to translate the class names
+  at the very end though. Pay attention to the code legend at the top.
+
+  There's a good chance that you may run out of room. You'll need to find another
+  small pocket of space (see tech3d.txt for samples) and modify 't1f.asm' to add
+  another page of data.
+
+  The game loads this at boot. So remember that save states won't work here.
+
+  Copy 'final*.bin', 'dte_table.bin' to the 'rom_insert' folder.
+
+
++ Translating the script (Chapter 3) will be your next step. Go to 'word_count'
+  and chuck all the data from English to (*). Please pay attention to the codes
+  used as it can get somewhat complicated but only those in the [**] text lines
+  themselves.
+
+  Be sure to read tech9d about the 'indefinite articles' of grammar.
+
+
++ Toss all 6 script files into 'word_count' but please note that it does not
+  accept UTF-8 format. Only regular ASCII data, and mainly geared towards English.
+
+  You just need to take the 'words.txt' output to 'substring_formatter' which will
+  auto-generate the codes needed but is hard-wired to go from $60-$BF, $E0-$FF.
+
+  Take 'words_final.txt' and paste it into the 'lists.txt' file from 'list_creater'
+  and the Thingy table in the 'script_inserter'.
+
+
++ Copy all the script files to 'script_inserter' and run the program.
+
+  You will have to monitor the output log files for key offsets which are marked
+  with hints.
+
+  A full test run would be a good idea right now.
+
+  Copy 'script*.bin', 't3d_*.bin', 'script_trees.bin' to the 'rom_insert' folder.
+
+
++ Chapter 2 has all the menu strings. This is hard work and will require careful
+  management on your part. Finding enough space could prove to be a crafty art.
+
+  Remember to take your time here. It's easy to make a mistake. Use the
+  ';' and '#'..'#' commenting options in the rom_insert 'list' file to your
+  advantage when debugging is needed.
+
+
++ The scrolling intro is pretty straightforward if you got the script working.
+
+  The entro text is limited to on-screen. Not much to say here either other than
+  the main player's name does spill detection if you ask it.
+
+  Copy 't4_intro.bin' to the 'rom_insert' folder.
+
+
++ Bitmaps are straightforward. Just dump and modify them in GG format. Re-encode
+  them and check that the size roughly fits.
+
+  Note: the chapter bitmaps compressed very well in the English version.
+
+  See Chapter 5 for more information.
+
+
++ Not much else to say. Much of the other data is engine-related and won't really
+  effect you.
+
+  If you run of out script space, then you'll need to expand the # pages from 12 to (*).
+  Again, finding the space may prove difficult as the ROM doesn't allow much more
+  without a serious recompression of the graphics.
+
+  Should your project make it this far and come to public, then congratulations!
+  This coder will be glad to see the announcement.

@@ -1,0 +1,470 @@
+; Font
+
+2891f sf3_font.bin	; 8x8 font
+
+
+; Window generation
+
+106b hex_40.bin		; Corners
+1079 hex_40.bin
+
+1098 hex_40.bin
+10a8 hex_40.bin
+
+1071 hex_41.bin		; Horizontal
+10a0 hex_41.bin
+1113 hex_41.bin
+
+1080 hex_42.bin		; Vertical
+108e hex_42.bin
+
+a500 t0a_window.bin	; Hard-coded menu window
+
+
+; 2-line names
+
+63f3f t1.obj		; Scripting code
+1034 hex_b596.obj	; - remap call
+18fe6 hex_b596.obj	; - remap call
+19147 hex_b596.obj	; - remap call
+a052 hex_b596.obj	; - remap call
+
+7dfb5 t1b.obj		; SRAM copy 1
+1041 t1b_1.obj		; - copy part 2
+
+77f00 dte_table.bin	; DTE table
+7ea92 final1.bin	; DTE lists
+73ec0 final2.bin
+6bf58 final3.bin
+7ff75 final4.bin
+6ff89 final5.bin
+
+1bf1d t1f.obj		; DT decoder
+4ffb1 t1f_2.obj		; - extra SRAM defragger
+7fff3 t1f_1.obj		; - Support page remapper
+
+105c3 t1e.obj		; Table remap
+13f4f t1e_1.obj		; - Post-table support
+10066 t1e_2.obj		; Vector table
+103ae t1e_3.obj		; Monster vector
+
+
+; Window strings
+
+ab4d t2a_str.bin	; Stats - Attributes
+
+4e4f t2a_str3.bin	; L.E.
+4e45 hex_44.bin		; (L.E. = 0)%
+
+b501 t2a_str4.bin	; HP__/ + MP__/
+
+4d92 hex_17.bin		; L(**)
+aa93 hex_17.bin		; L(**)
+b4cc hex_17.bin		; L(**)
+b156 hex_17.bin		; L(**)
+
+4d2f hex_13.bin		; H (overworld)
+4d3e hex_1b.bin		; P
+4d4d hex_45.bin		; /
+
+19052 hex_13.bin	; H (in-battle attacker)
+19068 hex_1b.bin	; P
+190b2 hex_45.bin	; /
+
+19171 hex_13.bin	; H (in-battle defender)
+19187 hex_1b.bin	; P
+191d1 hex_45.bin	; /
+
+4dcf hex_18.bin		; M (overworld)
+4dde hex_1b.bin		; P
+4ded hex_45.bin		; /
+
+b55d t2a_str5.bin	; Gold
+
+b234 t2a_str9.bin	; Camp - Stats
+b2b2 t2a_str10.bin	; Camp - Sell
+
+2814e hex_4b.bin	; ?? stat
+28150 hex_4b.bin	; ?? stat
+18f88 hex_4b.bin	; ?? stat
+18f8c hex_4b.bin	; ?? stat
+
+ac2f t2a_str11.bin	; Stats - Magic
+a803 t2a_str12.bin	; Party - Class, Lv
+
+a740 hex_1268.bin	; Party - NAME (ptr remap)
+a9ac hex_7e6b.bin	; - EQUIPPED (ptr remap)
+a920 t2a_str7.bin	; - AT / DF / AG label
+a89a t2a_str8.bin	; - HP / MP / EX label
+
+ab0b hex_786b.bin	; Stats - EXP (ptr remap)
+
+4faf t2_str.bin		; Menu - Stats/Speed/Text/Save
+
+4b66 t2_str1.bin	; Menu - Batl/Cast/Item/*
+4475 hex_834b.bin	; - pointer remap
+
+b33f t2_str2.bin	; BATTLE MESSAGE - Enable / Disable
+
+b3cd t2_str3.bin	; MESSAGE SPEED - FAST / SLOW
+
+b597 t2_str4.bin	; Camp / Shop / Exit
+
+91ec t2_str5.bin	; Camp - Help/Swap/Item/Save + Raise/Cure/Promote/Stats
+87c5 hex_09.bin		; - pointer remap
+
+abe8 t2a_str2.bin	; Stats - ITEMS
+
+abdd hex_6176.bin	; Stats - (Magic) Nothing (pointer remap)
+b661 t2_str8.bin	; Stats - (Magic) Nothing
+
+aa9d hex_0c68.bin	; Stats - Poison remap
+aaa8 hex_0e68.bin	; Stats - Curse remap
+
+b610 hex_2952.bin	; Main menu (ptr remap)
+b628 hex_2f52.bin	; - ptr remap
+b63d hex_3452.bin	; - ptr remap
+b656 hex_3a52.bin	; - ptr remap
+
+7dc0 t2_str9.bin	; Menu - Use/Give/Equip/Drop
+45f6 hex_c07d.bin	; - pointer remap
+
+bfa3 t2_str6.bin	; Camp - Buy/Sell/Deals/Fix
+8073 hex_a37f.bin	; - pointer remap
+
+bfbf t2_str7.bin	; Camp - Use/Give/Equip/Drop
+8d2d hex_bf7f.bin	; - pointer remap
+
+4524 t2_str11.bin	; Battle - Not in range
+44bc hex_2445.bin	; - Pointer remap
+457c hex_2445.bin	; - Pointer remap
+478e hex_2445.bin	; - Pointer remap
+4554 hex_a14b.bin	; Cast - Spell - Not enough MP
+44c4 t2_str10.bin	; Cast - No spells
+451c hex_c444.bin	; - Pointer remap
+45e9 t2_str12.bin	; Item - No items
+4632 t2_str13.bin	; Item - Use - No effect
+a0d9 t2_str14.bin	; Cast - Cost
+a5d8 t2_str15.bin	; Yes / No
+
+a23f t2a_str13.bin	; Equip menu
+
+
+; Cursor shifting
+
+; bc7b t2b.obj		; 1-pixel font space (left) (not needed)
+bc6c t2b_2.obj		; 2-pixel font space (right)
+
+b67b hex_05.bin		; Main menu - Erase width
+b681 hex_04.bin		; - Copy width
+
+b686 hex_18e1.bin	; Main menu - Start/Continue width JR remap below
+b669 t2b_1.obj		; - actual width loading
+
+a5ef hex_1c.bin		; 'yes' width
+a5f1 hex_63.bin		; 'yes' x-pos
+
+a5f7 hex_15.bin		; 'no' width
+a5f9 hex_8a.bin		; 'no' x-pos
+
+b370 hex_35.bin		; battle message - enable width
+b378 hex_3d.bin		; - disable width
+
+b406 hex_0d.bin		; message speed - numbers width
+b408 hex_87.bin		; - numbers y-pos
+
+b405 hex_c3d346.bin	; JP remap for message speed 1
+86d3 t2b_3.obj		; - width changes
+b413 hex_0000.bin	; - NOP * 2
+
+			; x-pos selection
+a3a2 hex_09.bin		; - use item
+a124 hex_09.bin		; - spells list
+
+			; y-pos selection
+ac92 hex_06.bin		; - individual stats - items
+a3a4 hex_06.bin		; - use item
+b2e5 hex_0c.bin		; - camp stats - party items row 1
+b2f1 hex_0e.bin		; - camp stats - party items row 2
+
+57f5d t2d-1.obj		; Cursor horizontal shifting code
+5bf62 t2d-2.obj		; - (continual)
+ac8b hex_cd7293.bin	; - support call (individual stats - items)
+b2dc hex_cd7293.bin	; - support call (camp stats - party items)
+a39d hex_cd7293.bin	; - support call (use item)
+ad42 hex_cd7293.bin	; - support call (shop - buy)
+a11f hex_cd7293.bin	; - support call (cast - spells)
+5bfed t2d_1.obj		; - vertical code
+bc8d hex_a094.bin	;   - support call
+
+
+; Naming screen
+
+b886 t2c_name1.bin	; Name entry table #1/2
+b86d hex_01.bin		; - remove sound mark
+b87c hex_01.bin		;   - remove other sound mark
+b9e5 hex_0000.bin	;   - disable first sound mark
+b9eb hex_0000.bin	;   - disable second sound mark
+b817 hex_513e.bin	; - 8-hyphen string pointer remap
+b804 hex_0414.bin	;   - scroll in adjust
+b807 hex_040a.bin	;   - xy pos adjust
+b80a hex_0414.bin	;   - scroll out adjust
+b810 hex_030a.bin	;   - xy size adjust
+3e6a t2c.obj		;   - name initialiser
+b7f4 hex_cd6a3e.bin	;     - CALL support
+b827 hex_0da3.bin	;     - initial draw support (name location)
+ba71 hex_11.bin		; - name cursor x-pos
+ba6d hex_08.bin		;   - name cursor limit
+b981 hex_08.bin		;   - name limit
+3ffe8 t2c_1.obj		; - enforce 8-limit entry
+9f12 hex_9d96.bin	;   - ptr remap
+9f97 hex_0da3.bin	; - name location
+
+b74f t2c_str.bin	; - BTL text
+b6ac hex_12.bin		;   - size remap
+b6b6 hex_0401.bin	;   - xy pos
+b721 hex_0b.bin		;   - text x-pos
+b73a hex_0e.bin		;   - BTL # x-pos
+3e5a t2c_str2.bin	; - new slot text
+b7b6 hex_5a3e.bin	;   - ptr remap
+b780 hex_12.bin		;   - size remap
+b787 hex_0417.bin	;   - scroll in factor
+b78a hex_0401.bin	;   - xy pos
+b78d hex_0417.bin	;   - scroll out factor
+b758 hex_01.bin		;   - cursor x-pos
+b75c hex_10.bin		;   - cursor width
+
+
+; Script expansion
+
+200d2 hex_ec7f.bin	; Support call to remap
+23fec t3d_1.obj		; - page change code
+1bed4 t3d_2.obj		; Actual pointer remap
+20014 t3d_3.obj		; Page table lookup
+33f2 t3d_4.obj		; Offset table lookup
+
+203d2 t3d_5.bin		; Script page table
+3fe8 t3d_6.bin		; Script offset table
+
+
+; English script
+
+29c3f tree_vector.bin	; Vectors to tree data
+29e3f script_trees.bin	; Script data
+
+
+; Scrolling introduction
+
+77ce2 t4_cgram.bin	; Color data
+77bb2 hex_e27c.bin	; - Pointer to above table
+77d02 t4_intro.bin	; Intro text
+77bd4 t4_ivec.bin	; - Pointer to intro text
+
+77ee0 t4a.obj		; Pad response
+77c98 hex_e07e.bin	; - pointer remap
+
+
+; Entro
+
+2bf60 t4b_str.bin	; Text data
+2bb20 hex_40.bin	; - 1-line wrap
+29b28 t4b.obj		; - name spill detecter
+2bb1b hex_285b.bin	;   - tile draw remap
+
+
+; Window adjustments
+
+abae hex_01.bin		; Individual status - Items
+aa8c hex_02.bin		; - Player Level
+aa75 hex_02.bin		; - Player level
+ac3d t6.obj		; - Magic spells
+ac17 hex_00.bin		;   - text relocation
+ac5d t6_1.obj		;   - list relocation
+
+a186 hex_0a.bin		; Use item (expansion)
+a17d hex_0609.bin	; - xy-pos
+a17a hex_0614.bin	; - scroll in
+a180 hex_0614.bin	; - scroll out
+a186 hex_0a0b.bin	; - xy-size
+
+a79b hex_0a.bin		; Party Stats
+a7ef hex_0a.bin		; - text relocation
+a9a5 hex_0a.bin		; - text relocation
+a731 hex_0c.bin		; - expansion
+a725 hex_f4.bin		; - scroll in expansion
+a72b hex_f4.bin		; - scroll out expansion
+a983 hex_0a.bin		; - equipment relocation
+a885 hex_000a.bin	; - HP, MP, EXP label xy-pos
+a852 hex_0a.bin		; - HP attr x-pos
+a85d hex_0d.bin		; - MP attr x-pos
+a868 hex_10.bin		; - EXP attr x-pos
+a862 hex_3804.bin	;   - EXP lookup
+a86c hex_000000.bin	; - NOP * 3
+a874 hex_000000.bin	; - NOP * 3
+a90b hex_000a.bin	; - AT, DF, AG label xy-pos
+a8dd hex_4604.bin	; - AT attr lookup
+a8e3 hex_0a.bin		;   - AT x-pos
+a8e8 hex_4804.bin	; - DF attr lookup
+a8ee hex_0d.bin		;   - DF x-pos
+a8f3 hex_4a04.bin	; - AG attr lookup
+a8f9 hex_10.bin		;   - AG x-pos
+
+b121 hex_09.bin		; Camp - Stats
+b21a hex_04.bin		; - text relocation
+
+b281 hex_02.bin		; Camp - Items
+b28d hex_04.bin		; - text relocation
+
+acbb hex_f4.bin		; Shop - Buy
+acc1 hex_f4.bin		; - scroll expansion
+acc7 hex_0c.bin		; - expansion
+
+b579 hex_0306.bin	; Camp menu
+
+abd5 hex_01.bin		; Stats - Nothing
+a5c6 hex_0309.bin	; yes / no size
+
+b459 hex_00a8.bin	; overworld defender window nametable
+b461 hex_06.bin		; - vertical size
+b42c hex_0c0a.bin	; - xy pos
+b429 hex_0c14.bin	; - scroll in
+b42f hex_0c14.bin	; - scroll out
+51fb hex_0a.bin		; - x-pos player window
+51fd hex_0c.bin		; - y-pos player window
+b46d hex_0200.bin	; - xy HP pos
+b47d hex_0300.bin	; - xy MP pos
+b4d6 hex_0203.bin	; - HP value xy-pos
+b4df hex_0206.bin	; - HP max value xy-pos
+b4eb hex_0306.bin	; - MP value xy-pos
+b4f7 hex_0303.bin	; - MP max value xy-pos
+b4ad t6b_1.obj		; - L(**) full BCD output + status symbol + class
+
+4d08 hex_00a9.bin	; overworld attacker window nametable
+4d10 hex_06.bin		; - vertical size
+4d27 hex_0200.bin	; - xy (H)P/ pos
+4dc7 hex_0300.bin	; - xy (M)P/ pos
+4d36 hex_0201.bin	; - xy H(P)/ pos
+4dd6 hex_0301.bin	; - xy M(P)/ pos
+4d45 hex_0205.bin	; - xy HP(/) pos
+4de5 hex_0305.bin	; - xy MP(/) pos
+4d9f hex_0203.bin	; - HP value xy-pos
+4da8 hex_0206.bin	; - HP max value xy-pos
+4db4 hex_0306.bin	; - MP value xy-pos
+4dc0 hex_0303.bin	; - MP max value xy-pos
+4d70 t6b.obj		; - L(**) full BCD output + status symbol + class
+19022 hex_01.bin	; Player battle window - Level (hide)
+
+1911d hex_00a8.bin	; Monster battle window nametable
+19125 hex_05.bin	; - vertical size
+19160 hex_0200.bin	; - HP xy-pos
+19194 hex_0203.bin	; - HP(/) xy-pos
+
+a1bf hex_06f7.bin	; Equip menu - scroll in
+a1c2 hex_0600.bin	; - xy-pos
+a1c5 hex_06f7.bin	; - scroll out
+a1cb hex_0909.bin	; - xy-size
+a20a hex_05.bin		; - numbers x-pos
+
+a006 hex_0515.bin	; Cast - scroll in
+a009 hex_0509.bin	; - xy-pos
+a00c hex_0515.bin	; - scroll out
+a012 hex_0a0b.bin	; - xy size
+
+a098 hex_0f14.bin	; MP Cost - scroll in
+a09b hex_0f09.bin	; - xy-pos
+a09e hex_0f14.bin	; - scroll out
+a0a4 hex_030b.bin	; - xy size
+a067 hex_08.bin		; - level number x-pos
+a0cd hex_0007.bin	; - cost value x-pos
+
+
+; Narrative Formatting
+
+1ff45 t7-s1.obj		; Dictionary lookup processing
+3ff63 t7-s2.obj
+200f4 t7_1.obj		; Go to expansion space
+20196 t7_2.obj		; - Actual call plus script code checker
+
+67f33 t7a-s1.obj	; Extra scripting codes
+5ff5b t7a-s2.obj
+
+23fcf t7a_1.obj		; Init code
+200dc hex_cf7f.bin	; - support
+200de t7b.obj		; - remap initial post-decode to our script handler
+
+1be99 t7a_3.obj		; Substring lookup
+
+
+; Status symbols
+
+aa98 t8a_4.obj		; Party stats - symbol renderer
+; a7bd t8a_2.obj	; - symbol renderer (OBSOLETE)
+a77a hex_cd986a.bin	; - page 1 remap
+a831 hex_cd986a.bin	; - page 2 remap
+a8c0 hex_cd986a.bin	; - page 3 remap
+a946 hex_cd986a.bin	; - page 4 remap
+b15b t8a_3.obj		; Camp stats - symbol renderer
+
+
+; Full class names
+
+aa55 t8f_1.obj		; Individual stats
+3f81 t8f.obj		; - post-support
+aa71 t8f_2.obj		; - level adjuster + status again
+
+
+; Generic routines
+
+3e00 t6b_2.obj		; Left-aligned BCD renderer
+3fad t8a.obj		; Status symbol renderer
+3f9c t8d.obj		; Class abbreviation renderer
+; 3f9c hex_c9.bin	; - only if we want to turn it off (DISABLED)
+
+3e51 t8e_1.bin		; 8-hyphen string
+7ddd t8e_2.obj		; - Overworld attacker formatter
+4d64 hex_dd7d.bin	;   - Name call remap
+bfdc t8e.obj		; - Overworld defender formatter
+b49e hex_dc7f.bin	;   - Name call remap
+1bfed t8e_3.obj		; - Battle monster formatter
+19147 hex_ed7f.bin	;   - Name call remap
+
+
+; Scroll triggers
+
+1b2c hex_05.bin		; down trigger
+1b7a hex_03.bin		; up trigger
+
+#
+1adf hex_03.bin		; left trigger
+1a91 hex_06.bin		; right trigger (note: causes Sonette to appear at very end of intro)
+#
+
+
+; Credits
+
+2bba9 hex_e03e.bin	; Staff pointer
+3ee0 t9f.bin		; - Text
+2b881 hex_903e.bin	; The End pointer
+3e90 t9f_1.bin		; - text
+
+
+; Shop dialogue
+
+5bfb0 t8h.obj		; Actual code strings
+822d hex_6394.bin	; - Buy pointer
+8345 hex_6D94.bin	; - Sell pointer
+8458 hex_7794.bin	; - Repair pointer
+85fd hex_8194.bin	; - Deals pointer
+
+
+; Bitmaps
+
+46fd1 chapter_e.bin	; Chapter titles
+47a16 chap1-nt.bin	; - chapter 1 nametable
+47afa chap2-nt.bin	; - chapter 2 nametable
+47bde chap3-nt.bin	; - chapter 3 nametable
+47cc2 chap4-nt.bin	; - chapter 4 nametable
+47da6 chap_end-nt.bin	; - chapter 'end' nametable
+46f6e hex_0b06.bin	;   - y, x
+46f71 hex_0106.bin	;   - height, width
+46f40 hex_0018.bin	; - amount to transfer to VRAM

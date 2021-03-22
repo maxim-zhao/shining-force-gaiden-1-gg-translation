@@ -1,0 +1,90 @@
+7b. Extra coding bugs
+
+
+This problem is somewhat interesting: the first word can sometimes display garbage
+or drop out completely.
+
+
+; Init then start decoder
+
+[0200D4] 40d4 CD C2 43    CALL 43C2h       AF=0000 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200D7] 40d7 AF          XOR A            AF=0000 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200D8] 40d8 32 9A A0    LD (A09Ah),A     AF=0044 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Regular decoder call
+
+[0200DB] 40db CD 11 34    CALL 3411h       AF=0044 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; _______________________________________________________________
+
+
+; (Note that we aren't checking for our substring codes or other special scripting)
+; (If we just went directly to our code, then we would bypass the auto-wrap below)
+; (It should also be noted that we INIT'd our line counter to zero)
+; (So we can just remap the $40FE pointers to our script handler region instead)
+
+; _______________________________________________________________
+
+
+; Check for immediate dictionary lookup (one-time)
+
+[0200DE] 40de FE C8       CP C8h           AF=2644 BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200E0] 40e0 CA F4 40    JP Z,40F4h       AF=261B BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+
+; Look at x-cursor (one-time)
+
+[0200E3] 40e3 2A 94 A0    LD HL,(A094h)    AF=261B BC=0000 DE=0005 HL=4F14 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200E6] 40e6 24          INC H            AF=261B BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200E7] 40e7 25          DEC H            AF=2601 BC=0000 DE=0005 HL=0100 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+[0200E8] 40e8 28 14       JR Z,40FEh       AF=2643 BC=0000 DE=0005 HL=0000 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+
+; Auto-wrap line
+
+[0200EA] 40ea 2C          INC L            AF=AE0B BC=0702 DE=41B0 HL=0804 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+[0200EB] 40eb 2C          INC L            AF=AE01 BC=0702 DE=41B0 HL=0805 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+[0200EC] 40ec 26 00       LD H,00h         AF=AE01 BC=0702 DE=41B0 HL=0806 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+[0200EE] 40ee 22 94 A0    LD (A094h),HL    AF=AE01 BC=0702 DE=41B0 HL=0006 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+[0200F1] 40f1 C3 FE 40    JP 40FEh         AF=AE01 BC=0702 DE=41B0 HL=0006 SP=DEB5 IX=A0A2 IY=DEBD    P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Check for dictionary lookup (loop point)
+
+[0200F4] 40f4 CD 96 41    CALL 4196h       AF=0044 BC=0000 DE=0005 HL=0002 IX=A0A2 IY=DECF AF'=8084   P0=00000 P1=20000 P2=00000 [SRAM]
+
+
+We'll JP to our script handler at both JR/JP points.
+But we have to JR optimise the $200E0 to squeeze out 1 byte first.
+
+[see t7b.asm]
+
+___________________________________________________________________
+
+
+Our next situation is that we scan "@ Dragon". We scan the '@', skip it
+and incorrectly treat the post-length values.
+
+So we have to modify the t7.asm file to ignore initial special codes.
+We'll also clean up this file and optimise the opcodes.
+
+___________________________________________________________________
+
+
+Another hard one to find.
+
+'Critical Hit!<delay 01><line>Dark Dragon's Left' + <(line)> + 'Hand' + <(line> + 'takes 53 damage.'
+
+Note the extra <line> after 'Hand'. Through a full, hard trace log, this is the scenario:
+
+The 2nd <line> causes an auto-wait, in this case another <delay 01>.
+
+It --does not-- generate a newline but hits text spillage because we are still in
+our dictionary processer.
+
+
+What we need is to lower the auto-wait flag before we enter the substring lookup.
+t7_1.asm goes to expansion space at $4196. But we don't have enough space there.
+We'll have to add it to the start of t7.asm so that we can check the flag first.
+
+
+A cleanup of t7a.asm is in-order too.

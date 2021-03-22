@@ -1,0 +1,147 @@
+1e. Troubleshooting
+
+
+The first problem is that the intro doesn't load.
+
+; Generates player stats in SRAM
+
+[00766D] 766d CD 7F 76    CALL 767Fh       AF=0042 BC=1300 DE=FF44 HL=3699 IX=C070 IY=FF07 AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+...
+
+; This is the start of the character dictionary table in SRAM
+
+[0076A5] 76a5 21 CA 94    LD HL,94CAh      AF=0040 BC=1300 DE=8000 HL=8000 IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+[0076A8] 76a8 B7          OR A             AF=0040 BC=1300 DE=8000 HL=94CA IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+[0076A9] 76a9 28 0A       JR Z,76B5h       AF=0044 BC=1300 DE=8000 HL=94CA IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+
+; Hard crash - writes to paging registers since uninitialised space
+
+[0076B5] 76b5 4E          LD C,(HL)        AF=0044 BC=1300 DE=8000 HL=94CA IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+[0076B6] 76b6 41          LD B,C           AF=0044 BC=1300 DE=8000 HL=94CA IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+[0076B7] 76b7 23          INC HL           AF=0044 BC=0000 DE=8000 HL=94CA IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+[0076B8] 76b8 C5          PUSH BC          AF=0044 BC=0000 DE=8000 HL=94CB IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+[0076B9] 76b9 06 00       LD B,00h         AF=0044 BC=0000 DE=8000 HL=94CB IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+[0076BB] 76bb ED B0       LDIR             AF=0044 BC=0000 DE=8000 HL=94CB IX=C070 IY=DEED AF'=8084   P0=00000 P1=04000 P2=00000 [SRAM]
+
+The best solution would be to copy the names from upper to lower SRAM after they are
+decompressed in the tech1a.asm code. Additional ASM is added to said spot.
+
+__________________________________________________________
+
+
+Our next interesting problem is that we need to remap the pointers to each table.
+
+; Hard-wired pointer below, also need to hack jump location to $45DC-2
+
+[0103A4] 43a4 CD AC 43    CALL 43ACh       AF=8590 BC=0000 DE=8500 HL=83E8 IX=437A IY=FF07 AF'=1010   P0=00000 P1=10000 P2=00000 [SRAM]
+
+; Monsters
+
+[0103AC] 43ac F5          PUSH AF          AF=8590 BC=0000 DE=8500 HL=83E8 IX=437A IY=FF07 AF'=1010   P0=00000 P1=10000 P2=00000 [SRAM]
+[0103AD] 43ad 7E          LD A,(HL)        AF=8590 BC=0000 DE=8500 HL=83E8 IX=437A IY=FF07 AF'=1010   P0=00000 P1=10000 P2=00000 [SRAM]
+[0103AE] 43ae 21 2F 95    LD HL,952Fh      AF=0090 BC=0000 DE=8500 HL=83E8 IX=437A IY=FF07 AF'=1010   P0=00000 P1=10000 P2=00000 [SRAM]
+[0103B1] 43b1 C3 DC 45    JP 45DCh         AF=0090 BC=0000 DE=8500 HL=952F IX=437A IY=FF07 AF'=1010   P0=00000 P1=10000 P2=00000 [SRAM]
+
+; Next 3 vectors at $10066 table
+
+; Class abbreviations
+
+[0105C3] 45c3 F5          PUSH AF          AF=0155 BC=0A12 DE=0204 HL=8028 IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105C4] 45c4 21 8C 91    LD HL,918Ch      AF=0155 BC=0A12 DE=0204 HL=8028 IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105C7] 45c7 7A          LD A,D           AF=0155 BC=0A12 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105C8] 45c8 C3 DC 45    JP 45DCh         AF=0255 BC=0A12 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+
+; Items
+
+[0105CB] 45cb F5          PUSH AF          AF=0200 BC=000B DE=B807 HL=1407 IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105CC] 45cc 21 16 92    LD HL,9216h      AF=0200 BC=000B DE=B807 HL=1407 IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105CF] 45cf 7A          LD A,D           AF=0200 BC=000B DE=B807 HL=9216 IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105D0] 45d0 E6 3F       AND 3Fh          AF=B800 BC=000B DE=B807 HL=9216 IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105D2] 45d2 C3 DC 45    JP 45DCh         AF=3838 BC=000B DE=B807 HL=9216 IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+
+; Spells
+
+[0105D5] 45cb F5          PUSH AF
+[0105D6] 45cb 21 35 94    LD HL,9435h
+[0105D9] 45cb 7A          LD A,D
+[0105DA] 45cb E6 1F       AND 1Fh
+
+; Go through sequential list
+
+[0105DC] 45dc C5          PUSH BC          AF=0255 BC=0A12 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105DD] 45dd 06 00       LD B,00h         AF=0255 BC=0A12 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105DF] 45df 4E          LD C,(HL)        AF=0255 BC=0012 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105E0] 45e0 B7          OR A             AF=0255 BC=0000 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105E1] 45e1 28 06       JR Z,45E9h       AF=0200 BC=0000 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105E3] 45e3 0C          INC C            AF=0200 BC=0000 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105E4] 45e4 09          ADD HL,BC        AF=0200 BC=0001 DE=0204 HL=918C IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105E5] 45e5 3D          DEC A            AF=0200 BC=0001 DE=0204 HL=918D IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105E6] 45e6 C3 DF 45    JP 45DFh         AF=0102 BC=0001 DE=0204 HL=918D IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+
+; E = length, HL = ptr
+
+[0105E9] 45e9 59          LD E,C           AF=0044 BC=0000 DE=0204 HL=918E IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105EA] 45ea 23          INC HL           AF=0044 BC=0000 DE=0200 HL=918E IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105EB] 45eb C1          POP BC           AF=0044 BC=0000 DE=0200 HL=918F IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105EC] 45ec F1          POP AF           AF=0044 BC=0A12 DE=0200 HL=918F IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+[0105ED] 45ed C9          RET              AF=0155 BC=0A12 DE=0200 HL=918F IX=5811 IY=FF07 AF'=8084   P0=00000 P1=10000 P2=00000 [SRAM]
+
+
+We'll map the areas to high SRAM, find the final spot, and then copy it over to a fixed
+spot in low SRAM. Will be slower but we can only access one SRAM page at a time.
+
+$13F4F has $B1 bytes left. The above code is 43 bytes, 43 bytes now taken.
+
+See
+[- t1e.asm for the source code]
+[- t1e_1.asm for the post-source]
+[- t1e_2.obj for the vector table]
+[- t1e_3.obj for the monster vector]
+
+__________________________________________________________
+
+
+Next we need to remap the mini-window draw calls during battles:
+
+[018FE5] 4fe5 CD 41 10    CALL 1041h       AF=0A00 BC=8050 DE=0000 HL=C498 IX=4E4B IY=DEE5 AF'=0000   P0=00000 P1=18000 P2=00000 [SRAM]
+[019146] 5146 CD 41 10    CALL 1041h       AF=0480 BC=918C DE=0000 HL=C4ED IX=4E4B IY=DEE5 AF'=1010   P0=00000 P1=18000 P2=00000 [SRAM]
+[00A051] 6051 CD 41 10    CALL 1041h       AF=0544 BC=918C DE=0000 HL=C005 IX=535F IY=FF07 AF'=4000   P0=00000 P1=08000 P2=00000 [SRAM]
+-->
+CD FC 3D    CALL $3DFC
+
+[See tech1_1.obj for the binary code]
+
+
+We get some sharing violations in SRAM $7400-$748F
+
+[S-54A4] 94a4 30 05       JR NC,94ABh      AF=0CAB BC=000C DE=9D32 HL=7552 IX=867E IY=DEF6 AF'=070C   P0=00000 P1=1C000 P2=04000 [SRAM]
+[S-54A6] 94a6 11 00 B4    LD DE,B400h      AF=0CAB BC=000C DE=9D32 HL=7552 IX=867E IY=DEF6 AF'=070C   P0=00000 P1=1C000 P2=04000 [SRAM]
+[S-54A9] 94a9 18 08       JR 94B3h         AF=0CAB BC=000C DE=B400 HL=7552 IX=867E IY=DEF6 AF'=070C   P0=00000 P1=1C000 P2=04000 [SRAM]
+[S-54B3] 94b3 3E FF       LD A,FFh         AF=0CAB BC=000C DE=B400 HL=7552 IX=867E IY=DEF6 AF'=070C   P0=00000 P1=1C000 P2=04000 [SRAM]
+[S-54B5] 94b5 32 4C 9F    LD (9F4Ch),A     AF=FFAB BC=000C DE=B400 HL=7552 IX=867E IY=DEF6 AF'=070C   P0=00000 P1=1C000 P2=04000 [SRAM]
+[S-54B8] 94b8 D5          PUSH DE          AF=FFAB BC=000C DE=B400 HL=7552 IX=867E IY=DEF6 AF'=070C   P0=00000 P1=1C000 P2=04000 [SRAM]
+[S-54B9] 94b9 CD B6 0C    CALL 0CB6h       AF=FFAB BC=000C DE=B400 HL=7552 IX=867E IY=DEF6 AF'=070C   P0=00000 P1=1C000 P2=04000 [SRAM]
+
+We'll shift over to "LD DE,AE00h" at $1C172.
+
+_____________________________________________________________________
+
+
+But there's more.
+
+[000CDE] 0cde ED A0       LDI              AF=7F29 BC=000B DE=AE01 HL=7556 SP=DEA5 IX=0001 IY=DEF6    P0=00000 P1=1C000 P2=04000 [SRAM]
+
+(...)
+
+[S-56AF] 96af DD 56 01    LD D,(IX+01h)    AF=0044 BC=9C1D DE=0000 HL=9D01 SP=DE87 IX=9EC0 IY=9F42    P0=00000 P1=1C000 P2=04000 [SRAM]
+[S-56B2] 96b2 DD 5E 00    LD E,(IX+00h)    AF=0044 BC=9C1D DE=B400 HL=9D01 SP=DE87 IX=9EC0 IY=9F42    P0=00000 P1=1C000 P2=04000 [SRAM]
+[S-56B5] 96b5 1A          LD A,(DE)        AF=0044 BC=9C1D DE=B46A HL=9D01 SP=DE87 IX=9EC0 IY=9F42    P0=00000 P1=1C000 P2=04000 [SRAM]
+
+
+Actually, it tosses in the $7400-$748F+ region a lot of times as parameters.
+We can't practically go through and modify each occurrence because there's lots of them.
+
+A work-around is needed for the $74xx SRAM band. Splitting the lists into two large chunks
+would be a faster, safer solution.
+
+Otherwise it will cause potential flicker when party members join the Force.

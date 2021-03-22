@@ -1,0 +1,10 @@
+Table location data
+(line 56) Table 01: Start $0000, Length $0078  [t1e.asm = CLASS]
+(line 138) Table 02: Start $0078, Length $0388  [t1e.asm = ITEMS]
+Warning: SRAM is split here
+(line 175) Table 03: Start $0000, Length $00E9  [t1e.asm = SPELL]
+(line 199) Table 04: Start $00E9, Length $007D  [t1f.asm = NAME_PTR, NAME_LEN]
+(line 278) Table 05: Start $0166, Length $031E  [t1e_3.asm = MONSTER]
+(line 410) Table 06: Start $0484, Length $0299  [t7a_3.asm = DICT]
+
+WARNING: Lists.bin split into 5 files

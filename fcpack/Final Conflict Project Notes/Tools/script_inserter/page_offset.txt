@@ -1,0 +1,9 @@
+; Text splinter points:
+
+#define SCR3_1 $c2
+#define SCR3_2 $00
+#define SCR3_3 $00
+
+#define SCR6_1 $5a
+#define SCR6_2 $00
+#define SCR6_3 $00

@@ -1,0 +1,117 @@
+3c. Space woes
+
+
+Given that English uses considerably longer words than Japanese, the script didn't
+fit by ~7.1 KB at its best. The original space is ~26.0 KB.
+
+DTE (Dual-Tile Encoding) can work decently with semi-adaptive Huffman but definitely
+not when we're space-constrained like now. The trees grow out-of-control in size and
+we can't afford it.
+
+Rather than use brute force at the moment, let's try coming up with a solution.
+We have roughly $D00 bytes ~ 3.25 KB of unused tree space. This means that we
+can try using substring lookup.
+
+__________________________________________________________________
+
+
+The unused font numbers will be assigned to the most common words. So let's say
+
+$C0 = "to". $C1 = "you". $C2 = "the".
+
+That also means that
+
+$B0 = " to", $C1 = " you", $C2 = " the"
+
+are very likely to occur. But we have to be considerate of how Huffman works.
+Going from [A-Z,a-z] -> [A-Z,a-z,{codes}] will cause our tree sizes to expand
+sharply. But if we do
+
+$D0B0 = " to", $D0C1 = " you", $C2 = " the"
+
+then we only go [A-Z,a-z] -> [A-Z,a-z,$D0] which will curb the symbol population.
+[$D0] -> [{codes}] which will result in decently sized codewords.
+
+
+While the first approach will generate a smaller file, our tree space will be
+absorbed. The second method uses the clean memory more efficiently. Why should
+we do this?
+
+Admittedly the first one would suit us fine if we had large volumes of space.
+We're tight on it. But we can defrag the unused tree area and copy over some
+of our binary data.
+
+
+Based on the 16 most common substrings:
+
+(1)
+$48B free bytes
+
+Total size: 26.64 KB
+WARNING: Overage of 0.64 KB
+
+$1FF free bytes after defrag
+
+
+(2)
+$6F2 free bytes [tree area]
+
+Total size: 27.05 KB
+WARNING: Overage of 1.05 KB
+
+$2BA free bytes after defrag
+
+___________________________________________________________
+
+
+Then the next area would be to compress the dictionary entries. In the long
+run, we do better with this approach.
+
+For the extra lookup strings, we'll recycle half of them by having $D0 emit
+a whitespace ' ' character automatically and then copy over the regular word.
+
+So "to" + " to" would only be written once in our table as "to".
+
+____________________________________________________________
+
+
+We'll create a word frequency tool that will emit the popular ASCII
+word combinations, minus punctuation and control codes. It will be ranked
+by the length of the word * # occurrences to reduce the longest characters.
+
+[see word_count]
+
+
+(Taken from after narrative formatting)
+
+This trick yields an extra
+
+WARNING: Defrag overage of $4FA bytes -->
+WARNING: Defrag overage of $2BE bytes
+
+Note that strategic placement of apostrophes can edge out more savings.
+
+____________________________________________________________
+
+
+We've got lots of unused font character numbers ($60-$C7). $C8-$DB are reserved
+for control codes. $DC-$FF is unused, actually non-existent.
+
+$CA,$CE,$D0,$D5 appear possibly unused.
+
+
+Because we are using range $60-$BF, $E0-$FF as substrings + $D0 prefix,
+we can use another tool to attach the necessary conversion table codes.
+This will automate the process faster and allow for easier minor changes.
+
+____________________________________________________________
+
+
+Because the game allows full renaming of the playable characters, we have to
+convert all of the names to full lookup ones.
+
+On top, we have to make sure that no names are used in our substring lookups.
+
+ex. Max
+
+[see substring_formatter]

@@ -1,0 +1,33 @@
+1c. Custom inserter tool
+
+
+At this point, the number of small hacks are growing. To make this
+more manageable, a simple program is written which will make maintenance
+easier. It's written in regular C.
+
+It will not create a backup file before writing in all the new changes.
+
+Usage: rom_insert.exe <image name> <list name>
+
+[See t1c_rom_insert.c for the source code]
+[See rom_insert.exe for the binary executable]
+
+To compile your own version, you can use the free gcc or vc compiler.
+
+
+ex.
+
+rom_insert.exe fc.gg list.txt
+
+(list.txt)
+; Menu 2-line names
+
+3dfc t1.obj	; Scripting code
+1033 t1_1.obj	; Support hack
+
+
+The program only cares about the (address, file) pair.
+Anything else is considered to be a comment and is ignored.
+
+';' = forced comment
+'#' = will skip any files below this marker until the next '#'

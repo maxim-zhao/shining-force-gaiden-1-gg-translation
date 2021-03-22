@@ -1,0 +1,104 @@
+3d. Making more room
+
+
+Next, we need to add the ability to splinter part of the text page data. Essentially it
+will be more ROM defragmentation: empty padding at the end of pages, leftover tree data,
+and the unused font tiles.
+
+; Search for text data
+
+[0200D1] 40d1 CD 14 40    CALL 4014h       AF=0000 BC=0000 DE=0005 HL=00D2 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+
+We'll re-route this call for our own segments. Expansion space will be at $1BED4+.
+
+Reminder that $203D2 has the 12-byte vector table. This will be changed to hold 12
+page #s instead. Extra 6 text pages added.
+
+__________________________________________________________
+
+
+To make this work though, we need to adjust the entry # too. We can cache the offset
+pointers into SRAM or store the 12*2 byte data at the end of page 0. Latter takes less code.
+
+So ranges of script pages 3 & 6 will be dynamically relocated to other smaller banks.
+
+In theory, we take say [96]-[FF] of page 3 and map it to the font area ($28000+).
+[00]-[95] will remain at page 3.
+
+
+; H = page # to look up
+; L = index # to vector
+; B = entry #
+
+[0033F2] 33f2 3A FE FF    LD A,(FFFEh)     AF=0944 BC=D200 DE=0000 HL=0900 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+[0033F5] 33f5 F5          PUSH AF          AF=0844 BC=D200 DE=0000 HL=0900 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+[0033F6] 33f6 7C          LD A,H           AF=0844 BC=D200 DE=0000 HL=0900 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+[0033F7] 33f7 32 FE FF    LD (FFFEh),A     AF=0944 BC=D200 DE=0000 HL=0900 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+
+; another vector table lookup
+
+[0033FA] 33fa 26 20       LD H,20h         AF=0944 BC=D200 DE=0000 HL=0900 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[0033FC] 33fc 29          ADD HL,HL        AF=0944 BC=D200 DE=0000 HL=2000 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+
+[0033FD] 33fd 7E          LD A,(HL)        AF=0944 BC=D200 DE=0000 HL=4000 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[0033FE] 33fe 23          INC HL           AF=1E44 BC=D200 DE=0000 HL=4000 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[0033FF] 33ff 66          LD H,(HL)        AF=1E44 BC=D200 DE=0000 HL=4001 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[003400] 3400 6F          LD L,A           AF=1E44 BC=D200 DE=0000 HL=4001 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+
+; init
+
+[003401] 3401 16 00       LD D,00h         AF=1E44 BC=D200 DE=0000 HL=401E IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[003403] 3403 04          INC B            AF=1E44 BC=D200 DE=0000 HL=401E IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[003404] 3404 18 03       JR 3409h         AF=1E80 BC=D300 DE=0000 HL=401E IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+
+; index lookup
+
+[003406] 3406 5E          LD E,(HL)        AF=1E80 BC=D200 DE=0000 HL=401E IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[003407] 3407 23          INC HL           AF=1E80 BC=D200 DE=0010 HL=401E IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[003408] 3408 19          ADD HL,DE        AF=1E80 BC=D200 DE=0010 HL=401F IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[003409] 3409 10 FB       DJNZ 3406h       AF=1E80 BC=D300 DE=0000 HL=401E IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+
+; return offset only
+
+[00340B] 340b 23          INC HL           AF=1E80 BC=0000 DE=0009 HL=4F13 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[00340C] 340c F1          POP AF           AF=1E80 BC=0000 DE=0009 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[00340D] 340d 32 FE FF    LD (FFFEh),A     AF=0844 BC=0000 DE=0009 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=24000 P2=00000 [SRAM]
+[003410] 3410 C9          RET              AF=0844 BC=0000 DE=0009 HL=4F14 IX=A0A2 IY=DECF AF'=0044   P0=00000 P1=20000 P2=00000 [SRAM]
+
+_____________________________________________________________________
+
+
+Now we can start using more of the floating empty space for our text.
+
+(1) post-Huffman tree data (~$2B0F6 - $2B798)
+(2) post-font data ($293FF - $29B3E) --> $29B27 [entro changes]
+
+(3) $7DE0-$7FEF
+(4) $53EDC-$53FFF
+
+(5) $47DDA-$47FFF
+(6) $4BEA8-$4BFFF
+
+-----------------
+
+(7) $63F3F-$63FFF --> used by t1.asm
+
+(8) $67F33-$67FFF --> used by t7a.asm
+(9) $5FF5B-$5FFFF --> (extra continual space)
+
+(10) $57F5D-$57FFF --> used by t2d.asm
+(11) $5BF62-$5BFFF --> (extra continual space)
+
+(12) $1FF45-$1FFFF --> used by t7.asm
+(13) $3FF63-$3FFFF --> (extra continual space)
+
+(14) $4FFB1-$4FFFF --> used by t1f_2.asm
+
+
+These are generally the large pockets of space. Not much but should be enough
+to fit the whole translation, uncut.
+
+
+The script_inserter will bust up the files when needed and auto-generate the
+offsets and list rom_insert data. Making it much easier. Too bad it was added at
+the end of the project. Would have made it easier.

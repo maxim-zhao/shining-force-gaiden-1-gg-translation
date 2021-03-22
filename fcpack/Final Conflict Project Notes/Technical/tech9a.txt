@@ -1,0 +1,78 @@
+9a. Summary of tools
+
+
+word_count - Used to quickly isolate the 256 common substrings for the new
+             layer of text compression added below the semi-adaptive Huffman.
+
+substring_formatter - Creates a table form out of the 'words.txt' file from the
+                      above statistics generator.
+
+intro_inserter - Uses higher-level scripting code to center text and
+                 translate the engine codes. Scrolling intro only.
+
+rom_insert - Reads in a text file with hex offsets on where to place the data.
+
+list_creater - Attempts to produce DTE data with hints on where to map the pointers.
+
+script_dumper - Creates UTF-8 text of mostly all Japanese data
+
+script_inserter - Semi-adaptive Huffman with additional substring compression.
+                  Complex, high-level code that will provide narrative formatting
+                  hints and line breakage when predictable.
+
+______________________________________________________
+
+
+sms_sdl (tracer)
+
+
+You'll notice all the trace logs scattered throughout the notes.
+It's worked off of SMS SDL 0.94a.
+
+This will take some explanation. But if you need to start with tracing
+on, then "sms_sdl --trace <rom name>" will do it.
+
+
+When the executable is started, '/' will turn on and off tracing.
+It will emit a message when its stopped. But it only does unique
+tracing and not a full-blown log.
+
+'.' will dump VRAM,RAM,BG-NT,SRAM.
+
+'TAB' will toggle turbo mode.
+
+'V' = B
+'C' = A
+'START' = START
+
+
+',' will do memory logging.
+
+You need a file called hook_*.txt
+Creates a file called hook.txt
+
+(1) hook_wr.txt
+
+Will monitor writes to a memory range. Only 1 line allowed.
+'<memory> <low address> <high address>'
+
+ex.
+2 24000 28000 - Writes out to file any memory writes to ROM $24000-$28000
+1 c00 1e00    - Logs any writes to RAM $CC00-$DE00
+0 7000 7040   - Logs any writes to SRAM $7000-$7040
+
+(2) hook_rd.txt
+
+Monitors any reads to above ranges. Same rules apply.
+
+(3) hook_pc.txt
+
+Monitors one-time PC reads to above locations.
+<low address> will turn on PC logging.
+<high address> will turn off PC logging when it executes it.
+
+(4) hook_ppu.txt
+
+Monitors VRAM writes. First byte is meaningless. So
+
+1 2000 2030 will monitor VRAM $2000-$2030.

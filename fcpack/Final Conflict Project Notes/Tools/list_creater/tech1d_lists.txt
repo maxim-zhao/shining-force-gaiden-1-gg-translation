@@ -1,0 +1,278 @@
+; Comments
+;
+; # itself signals a new table
+
+; { = $C8 --> only draw for 4-line height
+; } = $C9 --> stop code for $C8
+; [ = $CA --> only draw for non-8, non-16 width
+; ] = $CB --> only draw for non-8, non-16 width
+; $ = $D0 --> article 'a'
+; ~ = $D1 --> article 'an'
+; % = $DA --> insert hyphen (menu only)
+; # = $DB --> custom stop (menu only)
+; @ = $DC --> newline (menu only)
+; < = $DD --> move cursor one back
+; > = $DE --> move cursor one forward
+; ^ = $DF = reserved, end-of-list
+
+; Class abbreviations
+
+SDMN
+HERO
+
+KNTE
+PLDN
+
+WARR
+GLDT
+
+MAGE
+WIZD
+
+ACHR
+SNIP
+
+MONK
+MMNK
+
+HEAL
+PRST
+
+THIF
+NINJ
+
+BDMN
+BTLR
+
+DGSD
+DGSD
+
+SMRI
+SMRI
+
+GDVL
+GDVL
+
+#
+
+; Items
+
+$Medical@ Herb
+$Healing@ Seed
+~Antidote
+$Healing@ Rain
+~Angel@ Wing
+
+$Power@ Wine
+$Protect@ Milk
+$Quick@ Chicken
+$Running@ Pimento
+$Cheerful@ Bread
+$Brave@ Apple
+
+$Power@ Ring
+$Shield@ Ring
+$Quick@ Ring
+$Running@ Ring
+$White@ Ring
+$Black@ Ring
+~Evil@ Ring
+
+$Middle@ Sword
+$Long@ Sword
+$Steel@ Sword
+$Broad@ Sword
+$Counter@ Sword
+$Critical@ Sword
+$Chaos@ Breaker
+$Kojirou['s]@ Katana
+$Sword of@ Darknes[s]
+
+$Bronze@ Rod
+~Iron Rod
+$Power@ Stick
+$Protect@ Staff
+$Mystery@ Staff
+$Demon@ Rod
+
+$Leather@ Glove
+$Power@ Glove
+$Brass@ Knuckle[s]
+$Battle@ Knuckle[s]
+$Kaiser@ Knuckle[s]
+
+$Wooden@ Arrow
+~Iron@ Arrow
+$Steel@ Arrow
+$Robin@ Arrow
+~Assault@ Shell
+$Great@ Shot
+$Hyper@ Cannon
+
+$Throwing@ Knife
+$Dagger
+$Shuriken
+$Dark@ Shurike[n]
+
+$Short@ Axe
+$Hand@ Axe
+$Middle@ Axe
+$Battle@ Axe
+$Heat@ Axe
+$Great@ Axe
+$Ground@ Axe
+
+$Spear
+$Bronze@ Lance
+$Steel@ Lance
+$Power@ Spear
+$Chrome@ Lance
+$Valkyrie
+$Halberd
+
+Nothing
+
+; Split SRAM into two parts after here
+^
+
+#
+
+; Spells
+
+Heal
+Aura
+Detox
+Quick
+Slow
+Dispel
+Attack
+Muddle
+Desoul
+Sleep
+Egress
+Blaze
+Freeze
+Bolt
+Blast
+MP@ Damage
+Heal
+Fire@ Breath
+Ice@ Breath
+Demon@ Breath
+ATT Up
+DEF Up
+AGI Up
+MOV Up
+HP Up
+Laser@ Eye
+???
+Katon
+Raijin
+Sand%storm
+LVL Up
+Empty
+
+#
+
+; Characters
+
+Ian
+Mead
+Paige
+Hawel
+Knuckles
+Sonette
+Cynthia
+Ruburan
+Kiddo
+Sylvia
+Julia
+Eric
+Minto
+Morton
+Sasuke
+Ridion
+Kojirou
+Max
+Odd Eye
+
+#
+
+; Monsters
+
+Ooze
+Goblin
+Orc
+Kraken@ Leg
+Dark@ Dwarf
+Green@ Ooze
+Worm
+Orc Lord
+Dark@ Knight
+Hob%goblin
+Hell@ Soldier
+Golem
+Skeleton
+Tentacle@ Leg
+Hydra
+Executor
+Stone@ Golem
+Sandworm
+Arch@ Knight
+Skull@ Warrior
+Pyro%hydra
+Dark@ General
+Reaper
+Hunter@ Goblin
+Kraken@ Arm
+Brass@ Loader
+Dark@ Sniper
+Bowrider
+Tentacle@ Arm
+Brass@ Gunner
+Cannon@ Knight
+Giant@ Bat
+Dark@ Smoke
+Vampire@ Bat
+Harpy
+Mist@ Demon
+Gargoyle
+Harpy@ Queen
+Lesser@ Demon
+Demon
+Red@ Dragon
+Dark@ Mage
+Witch
+Master@ Mage
+High@ Witch
+Mishaela@ Doll
+Priest
+Shaman
+High@ Priest
+Dark@ Shaman
+Magus
+Eiku
+Mishaela
+Lynx
+Max
+Evil@ Statue
+Mishaela
+{Darksol['s]@ }Right@ Hand
+{Darksol['s]@ }Left@ Hand
+Darksol
+
+Brass@ Loader
+Dark@ Mage
+Orc Lord
+Bowrider
+Master@ Mage
+Shaman
+Bowrider
+Shaman
+Harpy@ Queen
+High@ Priest
+High@ Witch
+Cannon@ Knight
+Dark@ Shaman
+
+#

@@ -1,0 +1,57 @@
+2d. Getting the sprite cursor to properly move
+
+
+; Individual stats screen -- equiped items (E = starting y-pos)
+
+; Grab item and length (copy)
+[00AC88] 6c88 DF          RST 18           AF=9C91 BC=0003 DE=9B01 HL=0100 SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+; Finalise length (sound marks)
+[00AC8B] 6c8b DF          RST 18           AF=9C91 BC=0003 DE=9B0B HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+
+2-line items need to have the vertical value corrected by 4 pixels down.
+The width will take a full, hard scan of each line's width, dynamically calculated.
+
+
+(10) $57F5D-$57FFF ($A3) --> used by t2d.asm
+(11) $5BF62-$5BFFF ($9E) --> (extra continual space)
+
+Total: $141
+
+It's really a matter of re-using the t1.asm formatter and not drawing any tiles.
+The name in question will be loaded into our fixed SRAM space so that's not a problem.
+
+We can recycle the sound mark length counter RST 18H code.
+
+[see t2d.asm]
+
+
+We'll have to replace that RST 18H for each instance in tech2b.
+Not many fortunately.
+
+________________________________________________________________
+
+
+[00BC8C] 7c8c CD 93 7C    CALL 7C93h       AF=0044 BC=9145 DE=824F HL=918C SP=DECD IX=5464 IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+; exit code
+
+[00BC8F] 7c8f D1          POP DE           AF=0044 BC=912D DE=7A47 HL=918C SP=DECD IX=535F IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+[00BC90] 7c90 C1          POP BC           AF=0044 BC=912D DE=0905 HL=918C SP=DECF IX=535F IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+[00BC91] 7c91 F1          POP AF           AF=0044 BC=0005 DE=0905 HL=918C SP=DED1 IX=535F IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+[00BC92] 7c92 C9          RET              AF=0044 BC=0005 DE=0905 HL=918C SP=DED3 IX=535F IY=FF07    P0=00000 P1=08000 P2=00000 [SRAM]
+
+
+B = OBJ #
+C = text width
+D = x-pos1
+E = y-pos
+
+
+Next, we have to enforce the 4-pixel shifter. $7C93 is a common route that
+we can remap to change the final y-output value.
+
+We'll use the tail-end of the t2d SRAM/ROM space.
+
+[see t2d_1.asm]

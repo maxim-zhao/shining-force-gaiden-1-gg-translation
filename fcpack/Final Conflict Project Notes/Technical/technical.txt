@@ -1,0 +1,143 @@
+Shining Force Gaiden: Final Conflict
+ for the Game Gear
+
+Original © 1995 Sonic Team, Sega Japan
+
+Shining Force Central (SFC) © 2000-2005
+- Mariska 'Moogie' Nielsen
+
+Translation © 2005 Shining Force Central
+- http://www.shiningforcecentral.com
+
+Moogie's Final Conflict Guide © 2001-2005
+- http://finalconflict.shiningforcecentral.com
+
+__________________________________________________________
+
+23 August 2005   Full Patch Released
+
+Full patch released at SFC by Moogie. 
+
+Thanks go out to:
+z80 gaiden 
+ - what can I say, dude you're a star! Thanks for your patience :)
+Heliophobe
+ChrisRPG    
+XeroBourne
+ - thanks for offering to help in a time of need.
+Aspartate  
+Landius    
+Lineage
+ - without the three of you, this translation wouldn't be
+   nearly so accurate.
+
+Without these people, this patch would not have been possible.
+Thanks also to the entire Shining Community for their patience
+and support.
+
+Finally, thanks to all the staff at Camelot, without whom we 
+would never have had the oppportunity to play this game at all.
+The series may not be what it used to be, but we'll keep its
+spirit alive for its creators and its fans.
+
+Keep on Shining
+- Moogie
+__________________________________________________________
+
+
+May 2005   Version 'WIP' Released
+
+
+These files are the technical notes left for others' perusal.
+
+They will document important routines changed in the Zilog Z80 ASM and
+their updated modifications.
+
+It's a slow textual progression of the improvements made. The files
+may not be in exact order timewise as different parts come online.
+
+Tools and their source code are made publicly available as well for
+anyone to have a basis for their own translation.
+
+Be sure to ask for permission though first.
+
+__________________________________________________________
+
+
+Overview:
+
+0. Modifying the font table
+  0a. Reworking the window codes
+
+1. Expansion to 2-line items
+  1a. Adding compression to fit more data
+  1b. Finding space for the routine
+  1c. Writing a custom ROM-image insertion tool
+  1d. Converting symbols via tables and Huffman encoding
+  1e. Troubleshooting critical problems
+  1f. Finding a faster implementation
+
+2. Hacking the menu strings
+  2a. Window strings
+  2b. Cursor positions
+  2c. The naming screen
+  2d. Correct selection alignment
+
+3. Replacing the script
+  3a. Dumping volumes of text in UTF-8
+  3b. Testing the original script
+  3c. The script doesn't fit at all
+  3d. Preparing for the expansion
+
+4. Taking apart the scrolling introduction
+  4a. Improving controller pad response
+  4b. The short entro
+
+5. A glance at the graphic bitmaps
+
+6. Modifying the windows
+  6a. Shifting around text
+  6b. Memory management
+
+7. Auto-formatting the battle narratives
+  7a. More spillage corrections
+  7b. Extra coding bugs
+
+8. Adding small details: START
+  8a. Putting up status symbols
+  8b. Name fixer for old SRAM files
+  8c. Overworld scroll triggers
+  8d. Adding in class abbreviations to overworld windows
+  8e. Touching up the 1-line monster windows
+  8f. Using full class names, gender-correct
+  8g. Number suffixes
+  8h. New shopkeeper lines
+
+9. Other notes: RST 18H explained
+  9a. Brief overview of the main tools used in the project
+  9b. Read-only memory defragmentation
+  9c. Translating to other languages overview
+  9d. Indefinite articles of grammar
+  9e. 8x8 VWF teaser
+  9f. Extra recognition
+  9g. Extending VBlank time
+
+__________________________________________________________
+
+
+. Disclaimer
+
+This package is unofficial and not supported by Sonic Team or Sega Japan.
+
+It is provided "as-is" with no warranty.
+
+Any enclosed files are offered at no charge and must be distributed together in
+original condition.
+
+These files -may not- be released for commercial sales without explicit
+authorisation from all parties who own copyright ownership.
+
+Sega Japan, Sonic Team and Shining Force Gaiden: Final Conflict are
+registered trademarks of their respective companies.
+
+No breach of copyright is intended with the release of this translation.

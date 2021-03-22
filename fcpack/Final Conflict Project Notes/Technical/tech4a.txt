@@ -1,0 +1,34 @@
+4a. Unresponsive controller pad
+
+
+When <$01><# lines> is read, it gets stored into HX.
+It then goes through a lengthy timer procedure, and the pad goes dead.
+
+We'll fix it.
+
+[077C97] 7c97 CD CE 37    CALL 37CEh       AF=0423 BC=0828 DE=788C HL=C300 SP=DEDB IX=0204 IY=C01A    P0=00000 P1=74000 P2=00000 [SRAM]
+
+; Timer
+
+[077C9A] 7c9a 3D          DEC A            AF=0423 BC=0828 DE=788C HL=C300 SP=DEDB IX=0204 IY=C01A    P0=00000 P1=74000 P2=00000 [SRAM]
+[077C9B] 7c9b 20 FA       JR NZ,7C97h      AF=0303 BC=0828 DE=788C HL=C300 SP=DEDB IX=0204 IY=C01A    P0=00000 P1=74000 P2=00000 [SRAM]
+[077C9D] 7c9d 10 EA       DJNZ 7C89h       AF=0043 BC=0828 DE=788C HL=C300 SP=DEDB IX=0204 IY=C01A    P0=00000 P1=74000 P2=00000 [SRAM]
+
+; Line counter
+
+[077C9F] 7c9f DD 25       DEC HX           AF=0043 BC=0028 DE=788C HL=C300 SP=DEDB IX=0204 IY=C01A    P0=00000 P1=74000 P2=00000 [SRAM]
+[077CA1] 7ca1 C2 53 7C    JP NZ,7C53h      AF=0003 BC=0028 DE=788C HL=C300 SP=DEDB IX=0104 IY=C01A    P0=00000 P1=74000 P2=00000 [SRAM]
+
+; Go to next code loop
+
+[077CA4] 7ca4 FD 21 00 C0 LD IY,C000h      AF=0043 BC=0028 DE=78CC HL=C300 SP=DEDB IX=0004 IY=C01A    P0=00000 P1=74000 P2=00000 [SRAM]
+[077CA8] 7ca8 E1          POP HL           AF=0043 BC=0028 DE=78CC HL=C300 SP=DEDB IX=0004 IY=C000    P0=00000 P1=74000 P2=00000 [SRAM]
+[077CA9] 7ca9 C3 D6 7B    JP 7BD6h         AF=0043 BC=0028 DE=78CC HL=7D16 SP=DEDD IX=0004 IY=C000    P0=00000 P1=74000 P2=00000 [SRAM]
+
+
+Our intro data ends at $77E9B. We'll give some more room.
+
+We just need to make a CALL to check the pad state. If START is hit,
+then zero out the loops.
+
+[see t4a.asm]

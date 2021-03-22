@@ -1,0 +1,81 @@
+9b. Shuffling around the data
+
+
+This part is left for informational purposes, mainly if one needs to find more
+room. More as a post-thought now that the project is nearing completion.
+
+Many pages have small pockets of $100 bytes room at the end. We put much of it
+into 'page 0' although some remapping code was done when appropriate (see DTE).
+
+The boot-strap code to remap the pages is small and allows one to move data off
+of 'page 0', which will give more accessibility.
+
+Furthermore, we can cache data like the 'page 0' menu strings and code into SRAM
+at startup. The LDIR is fast and we have pockets of space where the old lists
+used to reside at lower SRAM ($11C0-14BF, 1550-177F).
+
+Enough space to hold more routines that will last throughout the entire game.
+
+_____________________________________________________________________
+
+
+We'll start using it. Permanent resident-memory code in SRAM.
+
+The dual-tile decoder code will be used to offload code to SRAM.
+
+The t1.asm scripter will be moved and executed off of SRAM $16B5-1781.
+$63F3F-$63FFF will be the host.
+
+Now we can expand our scripter to include more formatting codes.
+And handle 9-letter names.
+
+Had to change the $1033 --> $3DFC remap calls and the internal t8e_3.asm call.
+
+_____________________________________________________________________
+
+
+(12) $1FF45-$1FFFF ($BB) --> used by t7.asm
+(13) $3FF63-$3FFFF ($9D) --> (extra continual space)
+
+Total: $158
+
+We'll combine the two spaces to ensure that we have enough space to
+do what we need with future additions.
+
+SRAM $155D-$16B4.
+
+Remember that $14CA-1545 is reserved for the name lookups.
+
+Change t7.asm, t7a.asm, t7_2.asm
+
+______________________________________________________________________
+
+
+(8) $67F33-$67FFF ($CD) --> used by t7a.asm
+(9) $5FF5B-$5FFFF ($A5) --> (extra continual space)
+
+Total: $172
+
+More than enough room for scripting code additions.
+
+SRAM $1200-$1371
+
+Change t7a.asm, t7_2.asm, t7b.asm, t7_1.asm
+
+_______________________________________________________________________
+
+
+(14) $4FFB1-$4FFFF ($4F) --> used by t1f_2.asm
+
+We need some more room to offload the data to SRAM.
+This will reach the maximum limit.
+
+_______________________________________________________________________
+
+
+(10) $57F5D-$57FFF ($A3) --> used by t2d.asm
+(11) $5BF62-$5BFFF ($9E) --> (extra continual space)
+
+Total: $141
+
+SRAM $1372-14B2

@@ -1,0 +1,73 @@
+1d. Symbol translation
+
+
+The dictionaries are compiled into 't1d_lists.txt' but we
+need to massage it via a symbol table, often dubbed 'Thingy' tables
+for its widespread acceptance years ago.
+
+[See t1d_table.txt for the conversions and template]
+
+__________________________________________________________
+
+
+Our next problem is that the items are stored in sequential order:
+
+[Length][Name][Length][...]
+
+($04)Pest($06)Goblin($03)Orc
+
+So we need to tack on the string lengths. Another in-house tool
+is useful to automate the task.
+
+
+This one will take regular Thingy tables with comments. It
+allows multi-byte codes and multi-character symbols.
+
+002030=Ring is possible. We don't need this much though.
+
+
+Then, we have to read in our list of translated names and shift
+them into our new font numbers.
+
+
+A character distribution check is done with Hex Workshop on our
+new interim file. It shows
+
+$2A = 'e'
+$37 = 'r'
+$01 = ' '
+$26 = 'a'
+$DC = <newline> or '@'
+$34 = 'o'
+
+as the top 6 symbols.
+
+
+Next comes the Huffman crunching which hopefully will squash the
+data into $5F5 bytes.
+
+
+The details of how the algorithm works:
+
+Hacking Data Compression by Andy McFadden
+GEnie A2Pro Apple II University - Copyright (C) 1992 GEnie
+
+
+We get ~$592 w/out the '@ ' savings. Going back and finding some
+of the top pair permutations, we get:
+
+'@ ' = 111
+'er' = 30
+'ar' = 22
+
+~$54B is with the additional '@ ' layer.
+
+It's very important to remember that the tree format is:
+symbols + shape. So $7FF75 is the start of the symbol
+table and $7FF75 + ~$30 = start of branch shapes itself.
+
+
+See for the source code:
+[- t1d_list_creater.cpp]
+[- t1d_huffman.cpp]
+[- t1d_symbols.cpp]

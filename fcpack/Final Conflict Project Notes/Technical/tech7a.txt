@@ -1,0 +1,47 @@
+7a. Additional formatting concerns
+
+
+But we also need to handle in our script
+
+<name> takes <number> damage
+Pest takes 7 damag/e
+
+Note the spilled 'e'. So we'll need to do some auto-formatting within the script itself too.
+
+
+The scripting engine decodes byte-by-byte as they are tossed on-screen so we can't just
+decode the whole line without a serious penalty hit.
+
+We can drop in more length hints as to the size of each word ahead of time. The check
+would be performed right before a tile is drawn as a safety net. The whitespace is
+included to avoid signaling the $00 abort code.
+
+<name>[06]takes[01]<number>[07]damage
+
+__________________________________________________________
+
+
+Thinking about it, if we insert the length hints throughout each string then we don't
+need the auto-wrapping newlines anymore as it's handled via the engine.
+
+A byte is wasted though at the start of each forced <line> so it's a compromise.
+
+[04]Give[04]the[01]<item>[03]to[05]whom?<line>[03]Eh?<end>
+
+And the trees will compress far worse.
+
+
+69 bytes are left at the end of page $20000. We'll start with the post-hint
+lengths. And then tack on the length hints when needed.
+
+__________________________________________________________
+
+
+We will do auto-waiting which will format the text in real-time better. So
+a counter is used to check for the $C9 newlines. Then we won't have over-text
+with drawing 4 lines then <wait more>.
+
+As switching pages around is bothersome for now, we'll have to invade page 0 again.
+
+
+We also need to init our line counter. Remap [0200DB] CALL $3411 to CALL $7FC1.

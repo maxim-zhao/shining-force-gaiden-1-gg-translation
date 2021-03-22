@@ -1,0 +1,38 @@
+1f. Better algorithm
+
+
+The bootup delay is ~4.5 seconds, which is slow. Adding more text would throw
+in another 2 seconds of delay.
+
+We'll switch to 'Dual-Tile Encoding', and you can find a succinct tutorial 
+at KingMike's translation haven.
+
+In short, we assign two-letter codes to one hex code. ex. $60=at, $61=bc
+
+It's much faster during decoding and the space hit isn't unbearable. ~0.25 KB extra.
+
+The original Huffman algorithm is left for archival purposes.
+
+
+$77F00-$77FFF = $100, just enough for our 128 DTE entries.
+
+
+Splitting the DTE files:
+
+$7EA92-$7F087 = $5F6 bytes
+$73EC0-$73FFF = $140 bytes
+$6BF58-$6BFFF = $A8 bytes
+$7FF75-$7FFF2 = $7E bytes
+$6FF89-$6FFFF = $77 bytes (should be enough)
+
+Really speedy now. That was a good trade-off.
+
+_________________________________________________________________
+
+
+It would be convenient to move the DTE code off of page 0.
+
+We can jump to page $1F ($7C000) and do some quick memory mapping
+so we can shift the code to another page ($18000).
+
+Doesn't take much code and allows defragmentation of other pages.

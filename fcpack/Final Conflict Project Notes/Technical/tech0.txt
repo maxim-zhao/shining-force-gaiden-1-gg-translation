@@ -1,0 +1,20 @@
+0. Changing the font
+
+
+At this point, it would be a good idea to replace the main font
+at $2891F, not $28920.
+
+The one from Shining Force II: Sword of Hajya (c) 1994 Sonic, Sega
+keeps the same style but thickens the borders. It's nice enough
+that we'll use it here for consistency.
+
+Additional font characters are added and some are tweaked in this set.
+
+$90+1 tiles = $91 * 4 bpp * 64 pixels = $1220 bytes to copy. ~$740 left.
+
+We've got enough empty tiles leftover that we can defrag the room and
+possibly even compress the existing data to save more space.
+
+Or convert the tiles to 1-bpp format and expand to 4-bpp GG format at
+run-time. Then copy them to VRAM at boot. It will start slower though so
+that's a trade-off factor.

@@ -1,0 +1,72 @@
+1a. Adding compression
+
+
+Next is creating more room for the space at $7EA92 - $7F087 = $5F6.
+
+Well, actually it copies $7E906-$7F405 ROM to $1000-$1AFF SRAM = $B00 bytes.
+
+$118C-1781 is the target space.
+
+__________________________________________________________
+
+
+The built-in text decoder only handles byte-by-byte processing. We
+need bulk, fast decrunching of data since we notice the raw tables
+get directly copied to SRAM before the initial copyright animation.
+
+We have the common options of adding a Huffman or LZ routine for
+our compressed data.
+
+
+Huffman requires the overhead table, but a non-adaptive one could
+do fine here. Guessing around ~$50-$C0 bytes.
+
+Zempel-Liv is also quick and needs no overhead other than scratch-
+RAM, which the bottom $7000-$7FFF SRAM would do fine. But it isn't
+a great algorithm for text. Especially with small window sizes.
+
+
+We're looking at roughly ~$800 characters for the English version.
+Also keep in mind that others may need even more room. Plus the
+insertion of another code function.
+
+Unfortunately, the table space is pretty limited with preciously
+short padding at the end of the page ($8B bytes). As this pattern
+holds throughout the image, we'll try to make it work here first.
+
+
+If necessary, we could add static dictionary codes. For example,
+we can use
+
+ENCODE( "Power" + "@ Ring" ) =
+ENCODE( "Power" + $DD ) -->
+ possibly smaller compression size.
+
+During decompression when $DD is put out, we can manually expand
+it to "@ Ring" from the ROM itself. So the layer is transparent
+and won't affect the code in the t1 file.
+
+One can shrink the common items and the "@ ":
+$DD = Ring
+$DE = Sword
+$DF = Axe
+
+ex.
+ENCODE( "@ Ring" ) ~ 36 bits * 7 = 252 bits
+ENCODE( "$DD" ) ~ 8 bits * 7 = 56 + ROM( "Ring" ) = 88 bits
+Savings ~ 164 bits = 20 bytes.
+
+Not exciting. But just scanning the list, we see that "@ " is
+quite common. This segment could squeeze out some comparable room for us.
+
+We'll investigate this route to help mitigate the problem for future changes.
+
+
+The main script uses a semi-adaptive Huffman compression. We'll
+modify it to a single static one.
+
+
+tasm -80 -b t1a.asm
+
+[See t1a.asm for the source code]
+[See t1a.obj for the binary code]

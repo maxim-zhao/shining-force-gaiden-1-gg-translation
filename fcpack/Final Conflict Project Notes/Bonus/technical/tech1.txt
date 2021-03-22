@@ -1,0 +1,176 @@
+1. Adding battle narrative formatting
+
+
+We note the following data:
+
+$30000 = text bank, ASCII
+$33698 = player names (battle)
+$336EB = battle messages, attack
+$3F298 = monster names
+
+
+If possible, we'd like the engine to predict when a newline needs to be emitted.
+Mainly for battle narratives.
+
+
+; Set temp-RAM ptr
+
+[001ADB] 1adb 11 22 C1    LD DE,C122h      AF=0502 BC=0002 DE=0081 HL=B66D SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001ADE] 1ade D5          PUSH DE          AF=0502 BC=0002 DE=C122 HL=B66D SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+
+; Read font # and bump pointers (ex. HL = 'Mina')
+
+[001ADF] 1adf 7E          LD A,(HL)        AF=0502 BC=0002 DE=C122 HL=B66D SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001AE0] 1ae0 12          LD (DE),A        AF=4D02 BC=0002 DE=C122 HL=B66D SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001AE1] 1ae1 13          INC DE           AF=4D02 BC=0002 DE=C122 HL=B66D SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001AE2] 1ae2 23          INC HL           AF=4D02 BC=0002 DE=C123 HL=B66D SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+
+; Continue copying string
+
+[001AE3] 1ae3 B7          OR A             AF=4D02 BC=0002 DE=C123 HL=B66E SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001AE4] 1ae4 20 F9       JR NZ,1ADFh      AF=4D0C BC=0002 DE=C123 HL=B66E SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+
+; Move to next phase
+
+[001AE6] 1ae6 E1          POP HL           AF=0044 BC=0002 DE=C127 HL=B672 SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+
+; Draw until end-of-string
+
+[001AE7] 1ae7 7E          LD A,(HL)        AF=0044 BC=0002 DE=C127 HL=C122 SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001AE8] 1ae8 B7          OR A             AF=4D44 BC=0002 DE=C127 HL=C122 SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001AE9] 1ae9 28 0B       JR Z,1AF6h       AF=4D0C BC=0002 DE=C127 HL=C122 SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+
+[001AEB] 1aeb E5          PUSH HL          AF=4D0C BC=0002 DE=C127 HL=C122 SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001AEC] 1aec CD FB 1A    CALL 1AFBh       AF=4D0C BC=0002 DE=C127 HL=C122 SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=30000 [ROM]
+[001AEF] 1aef E1          POP HL           AF=01BB BC=00A6 DE=120E HL=3C8C SP=DFC6 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+
+[001AF0] 1af0 23          INC HL           AF=01BB BC=00A6 DE=120E HL=C122 SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001AF1] 1af1 CD 5E 1D    CALL 1D5Eh       AF=01BB BC=00A6 DE=120E HL=C123 SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001AF4] 1af4 18 F1       JR 1AE7h         AF=01BB BC=00A6 DE=120E HL=C123 SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+
+[001AF6] 1af6 F1          POP AF           AF=0080 BC=0002 DE=0381 HL=1BB4 SP=DFCC IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001AF7] 1af7 E1          POP HL           AF=0044 BC=0002 DE=0381 HL=1BB4 SP=DFCE IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001AF8] 1af8 D1          POP DE           AF=0044 BC=0002 DE=0381 HL=000D SP=DFD0 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001AF9] 1af9 C1          POP BC           AF=0044 BC=0002 DE=0081 HL=000D SP=DFD2 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001AFA] 1afa C9          RET              AF=0044 BC=0002 DE=0081 HL=000D SP=DFD4 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+
+
+It's a small, straightforward segment. But note that 'page 2' gets remapped. This explains
+why the string is copied to RAM first.
+
+Our scanning code will be considerably larger and we'd like to use an open page elsewhere.
+Possible solutions are to copy the remap code to RAM or swap out 'page 1' temporarily.
+Using SRAM here is not available.
+
+[see t1.asm] for remap code.
+
+_____________________________________________________________________
+
+
+; $C0E7 = x-cursor
+; $C0E6 = y-cursor
+; $C0E5 = horizontal limit
+; $C0E4 = vertical limit
+; $C0E2-C0E3 = name ptr
+
+
+; Normal auto-wrap
+
+[001C2D] 1c2d 3A E5 C0    LD A,(C0E5h)     AF=0054 BC=0094 DE=010C HL=3C0C SP=DFBE IX=C820 IY=C803    P0=00000 P1=2C000 P2=3C000 [ROM]
+[001C30] 1c30 57          LD D,A           AF=1254 BC=0094 DE=010C HL=3C0C SP=DFBE IX=C820 IY=C803    P0=00000 P1=2C000 P2=3C000 [ROM]
+[001C31] 1c31 3A E7 C0    LD A,(C0E7h)     AF=1254 BC=0094 DE=120C HL=3C0C SP=DFBE IX=C820 IY=C803    P0=00000 P1=2C000 P2=3C000 [ROM]
+[001C34] 1c34 3C          INC A            AF=0054 BC=0094 DE=120C HL=3C0C SP=DFBE IX=C820 IY=C803    P0=00000 P1=2C000 P2=3C000 [ROM]
+
+; Check for auto-spill
+
+[001C35] 1c35 32 E7 C0    LD (C0E7h),A     AF=0100 BC=0094 DE=120C HL=3C0C SP=DFBE IX=C820 IY=C803    P0=00000 P1=2C000 P2=3C000 [ROM]
+[001C38] 1c38 BA          CP D             AF=0100 BC=0094 DE=120C HL=3C0C SP=DFBE IX=C820 IY=C803    P0=00000 P1=2C000 P2=3C000 [ROM]
+[001C39] 1c39 D8          RET C            AF=01BB BC=0094 DE=120C HL=3C0C SP=DFBE IX=C820 IY=C803    P0=00000 P1=2C000 P2=3C000 [ROM]
+
+; Do not reset line if x-cursor is zero-positioned
+
+[001C3A] 1c3a 3A E7 C0    LD A,(C0E7h)     AF=0D80 BC=0002 DE=0081 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C3D] 1c3d B7          OR A             AF=0D80 BC=0002 DE=0081 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C3E] 1c3e C8          RET Z            AF=0D08 BC=0002 DE=0081 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C3F] 1c3f AF          XOR A            AF=0D08 BC=0002 DE=0081 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C40] 1c40 32 E7 C0    LD (C0E7h),A     AF=0044 BC=0002 DE=0081 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C43] 1c43 3A E4 C0    LD A,(C0E4h)     AF=0044 BC=0002 DE=0081 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C46] 1c46 CB 3F       SRL A            AF=0644 BC=0002 DE=0081 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C48] 1c48 57          LD D,A           AF=0304 BC=0002 DE=0081 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C49] 1c49 3A E6 C0    LD A,(C0E6h)     AF=0304 BC=0002 DE=0381 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C4C] 1c4c 3C          INC A            AF=0004 BC=0002 DE=0381 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C4D] 1c4d 32 E6 C0    LD (C0E6h),A     AF=0100 BC=0002 DE=0381 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C50] 1c50 BA          CP D             AF=0100 BC=0002 DE=0381 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C51] 1c51 D8          RET C            AF=01BB BC=0002 DE=0381 HL=1C3A SP=DFC8 IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+
+; Scroll text
+
+[001C52] 1c52 7A          LD A,D           AF=0342 BC=00C1 DE=0310 HL=1C3A SP=DFCA IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C53] 1c53 3D          DEC A            AF=0342 BC=00C1 DE=0310 HL=1C3A SP=DFCA IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C54] 1c54 32 E6 C0    LD (C0E6h),A     AF=0202 BC=00C1 DE=0310 HL=1C3A SP=DFCA IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[001C57] 1c57 CD 77 1C    CALL 1C77h       AF=0202 BC=00C1 DE=0310 HL=1C3A SP=DFCA IX=C52E IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+
+
+This will give us the data needed to complete the addition.
+
+The last page ($3F850-3FFFF) has lots of space. But we don't need that much.
+$2FEE0-2FFFF is plenty.
+
+[see t1_1.asm]
+
+_______________________________________________________________________
+
+
+Other notable problem are plural duplicate monsters.
+
+'BigFly(A) and BigFly(B) drew near.'
+
+[00B130] 7130 3A 3D C8    LD A,(C83Dh)     AF=0184 BC=0000 DE=0006 HL=B29E SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[00B133] 7133 A7          AND A            AF=0184 BC=0000 DE=0006 HL=B29E SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[00B134] 7134 28 12       JR Z,7148h       AF=0110 BC=0000 DE=0006 HL=B29E SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+
+[00B136] 7136 FD E5       PUSH IY          AF=0110 BC=0000 DE=0006 HL=B29E SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[00B138] 7138 E1          POP HL           AF=0110 BC=0000 DE=0006 HL=B29E SP=DFCC IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[00B139] 7139 11 03 C8    LD DE,C803h      AF=0110 BC=0000 DE=0006 HL=C803 SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+
+[00B13C] 713c 3E 41       LD A,41h         AF=0110 BC=0000 DE=C803 HL=C803 SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[00B13E] 713e A7          AND A            AF=4110 BC=0000 DE=C803 HL=C803 SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[00B13F] 713f ED 52       SBC HL,DE        AF=4114 BC=0000 DE=C803 HL=C803 SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+[00B141] 7141 28 02       JR Z,7145h       AF=4142 BC=0000 DE=C803 HL=0000 SP=DFCE IX=C54B IY=C803    P0=00000 P1=08000 P2=3C000 [ROM]
+
+; Load 'B' if 'A' fails
+
+We will use the $C83D variable and check for the Monster page for when to
+predict a suffix character.
+
+[see t1_1.asm]
+
+_______________________________________________________________________
+
+
+One more possible spillage.
+
+'BigFlyA zapped/BigFlyA with.. Heal/.' [33739 = <spell>.]
+'BigFly zapped/BigFly with.. Heal.'
+
+(ellipsis = 1 tile in battle mode)
+
+
+We need another way to tell our scanner that a future '.' is coming up.
+
+$FE will be used to notify us that <spell> + '.' needs wrap-detection
+and not just <spell>. But $FE will include a $20.
+
+
+And we don't want to draw a WS at the start of a line, since we don't have
+to deal with quotation marks. Otherwise
+
+Slime and Scorpius / _drew near.
+
+[see t1_1.asm]
+
+_________________________________________________________________________
+
+
+Admittedly the scanner is larger than originally planned. But we've got enough
+room to keep improving it.

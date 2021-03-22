@@ -1,0 +1,253 @@
+8f. Complete classes used
+
+
+In the narrative, we hit a small nuisance:
+
+'<HEAL> <Cynthia> joins the Force.'
+
+Preferably
+
+'<Cynthia> the <Healer> joins the Force.'
+'<Minto> the <Wizardess> joins the Force.'
+'<Hawel> is promoted to <Wizard>.'
+
+
+The game stores the parameters in a special location in SRAM.
+We need to find and exchange them to avoid having
+
+'<wrong name> the <wrong class> joins the Force.'
+
+
+; Push in parameters
+
+[00C2B2] 42b2 7E          LD A,(HL)        AF=1200 BC=0000 DE=42B2 HL=8BF5 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B3] 42b3 32 A2 A0    LD (A0A2h),A     AF=0C00 BC=0000 DE=42B2 HL=8BF5 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B6] 42b6 23          INC HL           AF=0C00 BC=0000 DE=42B2 HL=8BF5 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B7] 42b7 7E          LD A,(HL)        AF=0C00 BC=0000 DE=42B2 HL=8BF6 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B8] 42b8 23          INC HL           AF=0600 BC=0000 DE=42B2 HL=8BF6 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B9] 42b9 32 A3 A0    LD (A0A3h),A     AF=0600 BC=0000 DE=42B2 HL=8BF7 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+
+
+; Code $D3 = <class abbreviation> (HEAL)
+
+[020236] 4236 DD 56 00    LD D,(IX+00h)    AF=D342 BC=0000 DE=42B2 HL=0000 SP=DEB1 IX=A0A2 IY=DEB9    P0=00000 P1=20000 P2=00000 [SRAM]
+[020239] 4239 DD 23       INC IX           AF=D342 BC=0000 DE=0CB2 HL=0000 SP=DEB1 IX=A0A2 IY=DEB9    P0=00000 P1=20000 P2=00000 [SRAM]
+[02023B] 423b DF 66 04    RST 18           AF=D342 BC=0000 DE=0CB2 HL=0000 SP=DEB1 IX=A0A3 IY=DEB9    P0=00000 P1=20000 P2=00000 [SRAM]
+
+; Code $CD = <any name> (Cynthia)
+
+[020224] 4224 DD 56 00    LD D,(IX+00h)    AF=CD42 BC=0000 DE=0C04 HL=0003 SP=DEB1 IX=A0A3 IY=DEB9    P0=00000 P1=20000 P2=00000 [SRAM]
+[020227] 4227 DD 23       INC IX           AF=CD42 BC=0000 DE=0604 HL=0003 SP=DEB1 IX=A0A3 IY=DEB9    P0=00000 P1=20000 P2=00000 [SRAM]
+[020229] 4229 DF 30 04    RST 18           AF=CD42 BC=0000 DE=0604 HL=0003 SP=DEB1 IX=A0A4 IY=DEB9    P0=00000 P1=20000 P2=00000 [SRAM]
+
+$D5 will swap our parameters.
+
+[see t7a.asm for the addition]
+
+_____________________________________________________________
+
+
+The engine isn't setup to support full class names. Only abbreviations.
+Or is it?
+
+After some thought, we have $80 dictionary substrings. Immediately after
+them are the $26 class names that we wrote in earlier.
+
+We can treat them as more substring lookups, just in the $80-$A5 range.
+
+So $80 + <player number * 2> + <class promoted> = substring.
+As a side-effect, it could fix any class gender naming problems.
+A new code $DC is created to copy over the full class name.
+
+
+; $D599 = player # [fluctuates greatly]
+
+[00355D] 355d 3A 99 D5    LD A,(D599h)     AF=8080 BC=0000 DE=FF00 HL=0880 SP=DEAF IX=A30D IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+
+; Loads up class abbreviation into D (and store parameter)
+
+[008B57] 4b57 DF 32 04    RST 18           AF=0200 BC=0000 DE=FF44 HL=5209 SP=DEEF IX=A35F IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+[008B5A] 4b5a 5A          LD E,D           AF=0200 BC=0000 DE=0444 HL=5209 SP=DEEF IX=A35F IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+[008B5B] 4b5b 14          INC D            AF=0200 BC=0000 DE=0404 HL=5209 SP=DEEF IX=A35F IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+[008B5C] 4b5c 32 A2 A0    LD (A0A2h),A     AF=0200 BC=0000 DE=0504 HL=5209 SP=DEEF IX=A35F IY=DEF7    P0=00000 P1=08000 P2=00000 [SRAM]
+
+The player # will be active at the camp stats menu and such. But not when a new
+character joins the Force.
+
+
+; This passes in the two parameters (name, class abbreviation value)
+
+[00C2B2] 42b2 7E          LD A,(HL)        AF=1200 BC=0000 DE=42B2 HL=8BF5 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B3] 42b3 32 A2 A0    LD (A0A2h),A     AF=0C00 BC=0000 DE=42B2 HL=8BF5 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B6] 42b6 23          INC HL           AF=0C00 BC=0000 DE=42B2 HL=8BF5 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B7] 42b7 7E          LD A,(HL)        AF=0C00 BC=0000 DE=42B2 HL=8BF6 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B8] 42b8 23          INC HL           AF=0600 BC=0000 DE=42B2 HL=8BF6 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C2B9] 42b9 32 A3 A0    LD (A0A3h),A     AF=0600 BC=0000 DE=42B2 HL=8BF7 SP=DEDB IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+
+; This does a LDIR to $8BF5 region
+
+[00C0B5] 40b5 11 00 8B    LD DE,8B00h      AF=1E44 BC=001E DE=C800 HL=40F7 SP=DEDD IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C0B8] 40b8 01 00 04    LD BC,0400h      AF=1E44 BC=001E DE=8B00 HL=40F7 SP=DEDD IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+[00C0BB] 40bb CD 7A 0C    CALL 0C7Ah       AF=1E44 BC=0400 DE=8B00 HL=40F7 SP=DEDD IX=867D IY=DEF6    P0=00000 P1=0C000 P2=00000 [SRAM]
+
+
+Easier is to look up ~$B73 SRAM (varies) and find a match in ROM.
+So it's hard-coded when new characters activate.
+
+To distinguish the two events, we can re-use $D3 for the above scenario and $DC
+for the below one.
+
+Here's a list of when the characters activate:
+- $781EC = HEAL, Cynthia
+- $42050 = THIF, Ruburan
+- $4242F = BDMN, Kiddo
+- Sylvia and Julia (part of script)
+- $F3F9 = DGMN, Eric
+- $F750 = WIZD, Minto
+- $43295 = MMNK, Morton
+- Sasuke (hard-coded?)
+- Kojirou (hard-coded?)
+- $7896B = HERO, Max
+- Oddeye (part of script)
+
+
+Sasuke's name is hard-coded from $CE --> $0E (when check/search)
+
+[006572] 6572 4E          LD C,(HL)        AF=0100 BC=023F DE=0D01 HL=6480 SP=DEE7 IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[006573] 6573 79          LD A,C           AF=0100 BC=02CE DE=0D01 HL=6480 SP=DEE7 IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[006574] 6574 E1          POP HL           AF=CE00 BC=02CE DE=0D01 HL=6480 SP=DEE7 IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[006575] 6575 D1          POP DE           AF=CE00 BC=02CE DE=0D01 HL=4B83 SP=DEE9 IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[006576] 6576 C1          POP BC           AF=CE00 BC=02CE DE=0D04 HL=4B83 SP=DEEB IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[006577] 6577 C9          RET              AF=CE00 BC=1EE8 DE=0D04 HL=4B83 SP=DEED IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004930] 4930 FE 3F       CP 3Fh           AF=CE00 BC=1EE8 DE=0D04 HL=4B83 SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004932] 4932 CA F3 4A    JP Z,4AF3h       AF=CE9A BC=1EE8 DE=0D04 HL=4B83 SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004935] 4935 CB 77       ILLEGAL          AF=CE9A BC=1EE8 DE=0D04 HL=4B83 SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004937] 4937 CA B2 4A    JP Z,4AB2h       AF=CE10 BC=1EE8 DE=0D04 HL=4B83 SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[00493A] 493a E6 1F       AND 1Fh          AF=CE10 BC=1EE8 DE=0D04 HL=4B83 SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[00493C] 493c FE 0E       CP 0Eh           AF=0E18 BC=1EE8 DE=0D04 HL=4B83 SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[00493E] 493e CA FC 49    JP Z,49FCh       AF=0E42 BC=1EE8 DE=0D04 HL=4B83 SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+
+; D has class by end
+
+[004A16] 4a16 3A C1 D5    LD A,(D5C1h)     AF=0C42 BC=1E00 DE=0E04 HL=030E SP=DEED IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A19] 4a19 5F          LD E,A           AF=0242 BC=1E00 DE=0E04 HL=030E SP=DEED IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A1A] 4a1a F1          POP AF           AF=0242 BC=1E00 DE=0E02 HL=030E SP=DEED IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A1B] 4a1b DF          RST 18           AF=0E42 BC=1E00 DE=0E02 HL=030E SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A1E] 4a1e F7          RST 30           AF=0E42 BC=1E00 DE=0F02 HL=030E SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+
+; Special code to pass in parameters
+
+[004A5A] 4a5a 32 A3 A0    LD (A0A3h),A     AF=0E42 BC=1E00 DE=0F02 HL=030E SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A5D] 4a5d F5          PUSH AF          AF=0E42 BC=1E00 DE=0F02 HL=030E SP=DEEF IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A5E] 4a5e 7A          LD A,D           AF=0E42 BC=1E00 DE=0F02 HL=030E SP=DEED IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A5F] 4a5f 32 A2 A0    LD (A0A2h),A     AF=0F42 BC=1E00 DE=0F02 HL=030E SP=DEED IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A62] 4a62 E5          PUSH HL          AF=0F42 BC=1E00 DE=0F02 HL=030E SP=DEED IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A63] 4a63 21 41 01    LD HL,0141h      AF=0F42 BC=1E00 DE=0F02 HL=030E SP=DEEB IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+[004A66] 4a66 DF          RST 18           AF=0F42 BC=1E00 DE=0F02 HL=0141 SP=DEEB IX=4E4B IY=D504    P0=00000 P1=04000 P2=00000 [SRAM]
+
+_______________________________________________________________________
+
+
+After more examination, the player # RAM address is unreliable.
+
+To re-correct the gender issue, we backup a bit.
+
+The class # already has the promoted status and albeit nearly ready to use.
+Hawel (Wizard) vs. Minto (Wizardess)  and  Kiddo (Birdman) vs. Julia (Birdwoman).
+
+Sasuke and Kojirou values are through actual code generation, not stored.
+
+We've got the case of <class name> <name> <class name> in the script during promotion.
+Although we can swap the order to read: "<name> will be promoted from <class name> to <class name>.",
+still exists the problem of having a reliable way to detect the gender without too much
+code hassle.
+
+The only reliable value we have is when we load the <name> as we have the true character's
+slot number. We'll impose the restriction that the <name> is used before the <class name>.
+The value can be cached into SRAM for future retrieval.
+
+And modify the scripting engine.
+
+[see t7a.asm]
+
+_______________________________________________________________________
+
+
+; This code draws the class abbreviation at the individual stats screen
+
+; Load class abbreviation
+
+[00AA55] 6a55 DF          RST 18           AF=0255 BC=0A12 DE=0205 HL=8050 SP=DEDF IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+; Copy over abbreviation
+
+[00AA58] 6a58 DF          RST 18           AF=0255 BC=0A12 DE=0405 HL=8050 SP=DEDF IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+; Now draw it
+
+[00AA5B] 6a5b E5          PUSH HL          AF=0255 BC=0A12 DE=0404 HL=918C SP=DEDF IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA5C] 6a5c 21 02 00    LD HL,0002h      AF=0255 BC=0A12 DE=0404 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA5F] 6a5f 22 1F A7    LD (A71Fh),HL    AF=0255 BC=0A12 DE=0404 HL=0002 SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA62] 6a62 E1          POP HL           AF=0255 BC=0A12 DE=0404 HL=0002 SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA63] 6a63 C5          PUSH BC          AF=0255 BC=0A12 DE=0404 HL=918C SP=DEDF IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA64] 6a64 44          LD B,H           AF=0255 BC=0A12 DE=0404 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA65] 6a65 4D          LD C,L           AF=0255 BC=9112 DE=0404 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA66] 6a66 F5          PUSH AF          AF=0255 BC=918C DE=0404 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA67] 6a67 7B          LD A,E           AF=0255 BC=918C DE=0404 HL=918C SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA68] 6a68 CD 25 10    CALL 1025h       AF=0455 BC=918C DE=0404 HL=918C SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA6B] 6a6b F1          POP AF           AF=0455 BC=9190 DE=0404 HL=918C SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA6C] 6a6c C1          POP BC           AF=0255 BC=9190 DE=0404 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+[see t8f.asm, t8f_1.asm] for the changes
+
+_______________________________________________________________________
+
+
+; We have to shift the location of the player level
+
+; Load level #
+
+[00AA6D] 6a6d F5          PUSH AF          AF=0255 BC=0A12 DE=0404 HL=918C SP=DEDF IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA6E] 6a6e DF          RST 18           AF=0255 BC=0A12 DE=0404 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+; Get ready to draw 'L' and **
+
+[00AA71] 6a71 5A          LD E,D           AF=0255 BC=0A12 DE=2004 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA72] 6a72 16 00       LD D,00h         AF=0255 BC=0A12 DE=2020 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA74] 6a74 01 02 06    LD BC,0602h      AF=0255 BC=0A12 DE=0020 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA77] 6a77 21 1D A7    LD HL,A71Dh      AF=0255 BC=0602 DE=0020 HL=918C SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA7A] 6a7a DF          RST 18           AF=0255 BC=0602 DE=0020 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA7D] 6a7d 16 05       LD D,05h         AF=0255 BC=0602 DE=0020 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA7F] 6a7f 3E 09       LD A,09h         AF=0255 BC=0602 DE=0520 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA81] 6a81 BB          CP E             AF=0955 BC=0602 DE=0520 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA82] 6a82 38 02       JR C,6A86h       AF=09AB BC=0602 DE=0520 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA86] 6a86 F5          PUSH AF          AF=09AB BC=0602 DE=0520 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA87] 6a87 7A          LD A,D           AF=09AB BC=0602 DE=0520 HL=A71D SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA88] 6a88 32 20 A7    LD (A720h),A     AF=05AB BC=0602 DE=0520 HL=A71D SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA8B] 6a8b 3E 02       LD A,02h         AF=05AB BC=0602 DE=0520 HL=A71D SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA8D] 6a8d 32 1F A7    LD (A71Fh),A     AF=02AB BC=0602 DE=0520 HL=A71D SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA90] 6a90 F1          POP AF           AF=02AB BC=0602 DE=0520 HL=A71D SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA91] 6a91 F5          PUSH AF          AF=09AB BC=0602 DE=0520 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA92] 6a92 3E 17       LD A,17h         AF=09AB BC=0602 DE=0520 HL=A71D SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA94] 6a94 CD 56 11    CALL 1156h       AF=17AB BC=0602 DE=0520 HL=A71D SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA97] 6a97 F1          POP AF           AF=17AB BC=0602 DE=0520 HL=A71D SP=DEDB IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+; (New symbol renderer code = t8a_1.asm)
+
+[00AA98] 6a98 11 01 00    LD DE,0001h      AF=09AB BC=0602 DE=0520 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA9B] 6a9b ED 53 1F A7 LD (A71Fh),DE    AF=09AB BC=0602 DE=0001 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AA9F] 6a9f E3          EX HL,(SP)       AF=09AB BC=0602 DE=0001 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AAA0] 6aa0 7C          LD A,H           AF=09AB BC=0602 DE=0001 HL=0255 SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AAA1] 6aa1 E3          EX HL,(SP)       AF=02AB BC=0602 DE=0001 HL=0255 SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AAA2] 6aa2 CD AD 3F    CALL 3FADh       AF=02AB BC=0602 DE=0001 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AAA5] 6aa5 F1          POP AF           AF=5219 BC=0602 DE=0008 HL=A71D SP=DEDD IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+[00AAA6] 6aa6 18 11       JR 6AB9h         AF=0255 BC=0602 DE=0008 HL=A71D SP=DEDF IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+; Normal flow again
+
+[00AAB9] 6ab9 4F          LD C,A           AF=0255 BC=0602 DE=0008 HL=A71D SP=DEDF IX=5811 IY=D508    P0=00000 P1=08000 P2=00000 [SRAM]
+
+Surprisingly, we can remove all of the $AA97-AAB8 code now (t8a_1.asm) for the bottom one.
+Which gives considerable space for other code now.
+
+[see t8f_2.asm]

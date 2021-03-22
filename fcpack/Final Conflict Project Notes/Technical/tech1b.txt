@@ -1,0 +1,101 @@
+1b. Inserting the routine and data
+
+
+Note that we are using the SRAM space $7000-$7FFF for our new dictionary
+location. We'll remap the pointers later.
+
+Spacewise, the pad at the end of P1 is taken by the Huffman overhead.
+And we need to be fast to avoid some bootup delay. The full $B00 can be
+compressed if needed.
+
+The routine takes up at least $60 bytes.
+
+
+The code below fills in the SRAM parts we're studying ($12 bytes).
+
+[0004F8] 04f8 DF          RST 18           AF=C340 BC=0000 DE=A880 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=04000 P2=00000 [SRAM]
+...
+[000426] 0426 EF          RST 28           AF=C340 BC=0000 DE=40A0 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=1C000 P2=00000 [SRAM]
+
+; Notice how this sets up the return address
+
+[000028] 0028 D5          PUSH DE          AF=C340 BC=0000 DE=40A0 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=1C000 P2=00000 [SRAM]
+[000029] 0029 ED 5B 97 D5 LD DE,(D597h)    AF=C340 BC=0000 DE=40A0 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=1C000 P2=00000 [SRAM]
+[00002D] 002d C9          RET              AF=C340 BC=0000 DE=A880 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=1C000 P2=00000 [SRAM]
+
+
+; Function start
+
+[07DFB5] 5fb5 C5          PUSH BC          AF=C340 BC=0000 DE=A880 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+[07DFB6] 5fb6 D5          PUSH DE          AF=C340 BC=0000 DE=A880 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+[07DFB7] 5fb7 E5          PUSH HL          AF=C340 BC=0000 DE=A880 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+
+; Copy out to SRAM via LDIR (block memory copy)
+
+[07DFB8] 5fb8 21 06 69    LD HL,6906h      AF=C340 BC=0000 DE=A880 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+[07DFBB] 5fbb 11 00 90    LD DE,9000h      AF=C340 BC=0000 DE=A880 HL=6906 IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+[07DFBE] 5fbe 01 00 0B    LD BC,0B00h      AF=C340 BC=0000 DE=9000 HL=6906 IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+[07DFC1] 5fc1 ED B0       LDIR             AF=C340 BC=0B00 DE=9000 HL=6906 IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+
+[07DFC3] 5fc3 E1          POP HL           AF=C360 BC=0000 DE=9B00 HL=7406 IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+[07DFC4] 5fc4 D1          POP DE           AF=C360 BC=0000 DE=9B00 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+[07DFC5] 5fc5 C1          POP BC           AF=C360 BC=0000 DE=A880 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+[07DFC6] 5fc6 C9          RET              AF=C360 BC=0000 DE=A880 HL=D7FF IX=FFFF IY=FFFF AF'=0000   P0=00000 P1=7C000 P2=00000 [SRAM]
+
+
+What we want to perform is:
+- Copy $7E906-$7EA91 ($18C) to $9000-$918B ($0B bytes)
+- Copy $7F088-$7F405 ($37E) to $9782-$9AFF ($0B bytes)
+- Decode $7EA92 to $B000 ($03-byte call)
+- Overhead ($07 bytes)
+= $20 bytes
+
+__________________________________________________________
+
+
+At $7DFB5:
+
+C5          PUSH BC
+D5          PUSH DE
+E5          PUSH HL
+
+; Block move 1
+
+21 06 69    LD HL,$6906
+11 00 90    LD DE,$9000
+01 8C 01    LD BC,$018C
+ED B0       LDIR
+
+C3 41 10    JP $1041
+
+= $11 used. $01 left.
+
+[See t1b.obj for the binary code]
+
+
+We have a block of $13 in Page 0 (see t1.txt). Re-using our new
+space at $1041:
+
+; Block move 2
+
+21 88 70    LD HL,$7088
+11 82 97    LD DE,$9782
+01 7E 03    LD BC,$037E
+ED B0       LDIR
+
+; Decode block 3
+
+CD 40 3E    CALL $3E40
+
+E1          POP HL
+D1          POP DE
+C1          POP BC
+C9          RET
+
+= $12 bytes. $01 left.
+
+[See t1b_1.obj for the binary code]
+
+
+We can place the new decoder at $3E40 to allow future expansion room
+for t1.asm if more codes are required.

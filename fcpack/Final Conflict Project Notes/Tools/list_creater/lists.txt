@@ -1,0 +1,7 @@
+#define CLASS $ae00+$0
+#define ITEMS $ae00+$78
+#define SPELL $b500+$0
+#define NAME_PTR $b500+$e9
+#define NAME_LEN $7d
+#define MONSTER $b500+$166
+#define DICT $b500+$484

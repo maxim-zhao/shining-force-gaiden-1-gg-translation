@@ -1,0 +1,15 @@
+8. Minor additions
+
+
+It'd be nice to have a way to short-circuit lengthy dialogues and get to the gameplay
+faster.
+
+; This part loads the cached joypad value from SRAM
+
+[007243] 7243 3A AB A0    LD A,(A0ABh)     AF=01A8 BC=0008 DE=A090 HL=0014 IX=C023 IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+[007246] 7246 B7          OR A             AF=20A8 BC=0008 DE=A090 HL=0014 IX=C023 IY=FF07 AF'=0100   P0=00000 P1=04000 P2=00000 [SRAM]
+
+Because we only want this code to effect the narrative, we'll add this check in our
+expanded script decoder segment at $20196.
+
+[see t7_2.asm]

@@ -1,0 +1,66 @@
+9d. Indefinite articles
+
+
+You may remember them.
+
+English: a, an, the
+French: le, la, les ; un, une, des
+
+
+A few script lines need them:
+
+Found a(n) <item>.
+
+
+The 'gender' words are pretty non-generic for other languages.
+
+We'll have to encode them in the lists themselves and expand them at run-time.
+
+
+$Cheerful Bread --> (a )Cheerful Bread.
+~Evil Ring --> (an )Evil Ring.
+&Pommes --> (some )Apples.
+
+
+The narrative formatter will need to actually insert the words before
+the items / classes themselves.
+
+This will require some padding space and string parameter adjustments.
+But this work can allow the auto-wrapping to work like before.
+
+We have to adjust the scratch-RAM substring cache to 16 characters after.
+Then copy in the 'a' and 'an' before it if we trigger the code. But we'll
+have to insert another special code in the script for when an article is needed.
+
+
+So modify
+- 'lists.txt' = articles headers
+- 't1e_1.asm' = add DICT_STR + $10
+- 't7.asm'    = add article handling (need to manually modify font characters)
+- 't7a.asm'   = TEMP_STR + $10, <use article **> code
+- 't7a_1.asm' = add ARTICLE reset
+- 't7a_3.asm' = TEMP_STR + $10
+- 't8f.asm'   = TEMP_STR + $10
+
+____________________________________________________________
+
+
+For our French example, we also have to encode 'le' and 'la'.
+
+Ian prend 'une baguette'.
+Ian mange 'la baguette'.
+
+Same article of gender (la <--> une, un <--> le) but we have to
+encode two characters? That adds up fast.
+
+Or we can just use
+
+'~Baguette' and do a context switch.
+
+So
+
+Ian prend <use article 01> --> Ian prends 'une' baguette.
+Ian mange <use article 02> --> Ian mange 'la' baguette.
+Ian mange <use article 01> --> Ian mange 'une' baguette.
+
+Recycling the same code for a similar purpose.

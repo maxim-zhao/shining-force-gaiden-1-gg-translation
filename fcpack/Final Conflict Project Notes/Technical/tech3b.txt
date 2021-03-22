@@ -1,0 +1,17 @@
+3b. Creating the inserter
+
+
+To make sure that our semi-adaptive Huffman encoder works properly, we'll
+re-insert the dumped binary script.
+
+We'll adapt our old code to this new project and auto-setup the pointers
+and page pointers.
+
+
+The trees end at: 02ABE5. Normally stops at $2B798. Saved $BB3.
+The compressed script weighs in at ~24 KB vs. ~26 KB.
+
+So we're performing slightly better with the same exact data.
+Re-decompressing via in-game shows nothing different.
+
+[See tech3/script_insert]

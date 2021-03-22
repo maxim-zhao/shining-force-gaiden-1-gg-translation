@@ -1,0 +1,20 @@
+9g. Using overscan time
+
+
+A brief note that didn't readily become apparent.
+
+The game only uses H-INT (firing IRQs or interrupts at a certain scanline - $A7).
+
+V-INT (VBlank = scanline $C0) is turned off. So no automatic code jumping at the
+start of the rendering wait period.
+
+The effective drawing area is roughly between [$18,$A7]. Outside of here is 'dead'
+overscan space. The VDP is still actively drawing but perhaps a solid color?
+
+Regardless, this area could be better utilised. So 'RST 38H' gets a hit at $A7.
+It turns off the screen (forced blanking) which disables VDP to LCD emissions.
+
+A batch of unrolled OUTI's is used to quickly flood the VRAM with updates.
+Screen gets turned back on after the quick modifications.
+
+It buys the developers some more time, but at a small cost of H-INT handling.

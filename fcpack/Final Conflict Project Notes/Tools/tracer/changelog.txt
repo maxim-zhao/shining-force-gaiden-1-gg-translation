@@ -1,0 +1,262 @@
+1. Tracer / SRAM
+
+*** cpu/z80.c ***
+
+extern void z80_Trace(int address);
+extern void Hook_PC(char mode[], uint32 Address);
+extern void Hook_Read(char mode[], uint32 Address);
+extern char hook_trace;
+extern int trace_map;
+#pragma warning(disable:4018)
+
+#if 0
+#define RM(addr) (UINT8)cpu_readmem16(addr)
+#else
+static __inline__ UINT8 RM( UINT32 addr )
+{
+  if(hook_trace) Hook_Read("R08",addr);
+  return cpu_readmem16(addr);
+}
+#endif
+
+int z80_execute(int cycles)
+{
+  ...
+  do
+  {
+    if(trace_map) z80_Trace(_PCD);
+    if(hook_trace) Hook_PC("",_PCD);
+    ...
+  }
+}
+
+
+*** z80Dis.c ***
+(attach to workspace)
+
+
+*** trace.c ***
+(attach to workspace)
+
+
+*** sms.c ***
+
+extern char hook_trace;
+extern void Hook_Write(char mode[], uint32 Address, uint8 Byte);
+
+/* Write to memory */
+void cpu_writemem16(int address, int data)
+{
+  if(hook_trace) Hook_Write("W08",address,data);
+}
+
+
+*** vdp.c ***
+
+extern char hook_trace;
+extern void Hook_PPU(char mode[], uint32 Address, uint8 Byte);
+
+/* Write data to the VDP's data port */
+void vdp_data_w(int data)
+{
+  ...
+            /* Get current address in VRAM */
+            index = (vdp.addr & 0x3FFF);
+
+            if(hook_trace) Hook_PPU("VRAM",index,data);
+}
+
+
+*** render.c ***
+
+extern int sprite_toggle;
+
+void render_obj(int line)
+{
+  // sprite visibility
+  if(!sprite_toggle) return;
+}
+
+
+*** sdl/saves.c ***
+
+void load_sram(const char* game_name)
+
+{
+  sms.save=1;
+}
+
+
+*** sdl/sdlsms.c ***
+
+#include <stdio.h>
+int sprite_toggle=1;
+
+char hook_trace=0;
+int trace_map=0;
+uint32 rd_low=1, rd_high=0;
+uint32 wr_low=1, wr_high=0;
+uint32 ppu_low=1, ppu_high=0;
+uint32 pc_low=1, pc_high=0;
+char rd_mode=1, wr_mode=1, ppu_mode=1, pc_mode=1;
+FILE *fp_hook=0;
+
+extern FILE *trace;
+
+static void sdlsms_video_update()
+{
+  int skip_current_frame = 0;
+
+  if(sdl_video.frame_skip > 1)
+    skip_current_frame = (sdl_video.frames_rendered % sdl_video.frame_skip == 0) ? 0 : 1;
+
+/*
+  if(!skip_current_frame) {
+    sms_frame(0);
+    sdlsms_video_finish_update();
+  }
+  else 
+    sms_frame(1);
+*/
+
+  if(sdl_video.frame_skip > 1)
+  {
+    int lcv;
+    for(lcv=0; lcv<10; lcv++)
+      sms_frame(1);
+  }
+  sms_frame(0);
+  sdlsms_video_finish_update();
+
+  ++sdl_video.frames_rendered;
+}
+
+static int sdlsms_controls_update(SDLKey k, int p)
+{
+  ...
+
+    // ',' = memory hook on/off
+    case SDLK_COMMA:
+      if(fp_hook) hook_trace = !hook_trace;
+      if(!hook_trace && fp_hook)
+        fprintf(fp_hook,"\nTRACE STOPPED\n\n");
+      break;
+
+    // dump RAM + SRAM + VRAM
+    case SDLK_PERIOD:
+      {
+        FILE *fp;
+        int lcv1,lcv2,temp1;
+
+        // dump RAM
+        fp = fopen("ram.bin","wb");
+        fwrite(sms.ram,0x2000,1,fp);
+        fclose(fp);
+
+        // dump CRAM
+        fp = fopen("cram.bin","wb");
+        fwrite(vdp.cram,0x40,1,fp);
+        fclose(fp);
+
+        // dump SRAM
+        fp = fopen("sram.bin","wb");
+        if(sms.sram) fwrite(sms.sram,0x8000,1,fp);
+        fclose(fp);
+
+        // dump VRAM
+        fp = fopen("vram.bin","wb");
+        fwrite(vdp.vram,0x4000,1,fp);
+        fclose(fp);
+
+        fp = fopen("bg.txt","w");
+        fprintf(fp,"BG: %04X\nOAM: %04X\n",vdp.ntab,vdp.satb);
+        fclose(fp);
+
+        // format nametable
+        fp = fopen("bg1-nt.txt","w");
+        fprintf(fp,"%-6s","");
+        for(lcv2=0; lcv2<32; lcv2++)
+        {
+          fprintf(fp,"%03X ",lcv2*2);
+        }
+        fprintf(fp,"\n");
+
+        // dump nametable
+        temp1 = vdp.ntab;
+        for(lcv1=0; lcv1<24; lcv1++)
+        {
+          fprintf(fp,"%04X: ",temp1);
+          for(lcv2=0; lcv2<32; lcv2++)
+          {
+            unsigned short *temp2 = (unsigned short *)vdp.vram;
+            fprintf(fp,"%03X ",temp2[temp1>>1]&0x1ff);
+            temp1 += 2;
+          }
+          fprintf(fp,"\n");
+        }
+        fclose(fp);
+
+        // dump OAM
+        fp = fopen("oam.txt","w");
+        temp1 = vdp.satb;
+        for(lcv1=0; lcv1<64; lcv1++)
+        {
+          fprintf(fp,"OBJ %02d: Y=%02X X=%02X C=%02X\n",
+            lcv1,vdp.vram[vdp.satb+lcv1]+1,vdp.vram[vdp.satb+0x80+(lcv1<<1)],vdp.vram[vdp.satb+0x81+(lcv1<<1)]);
+          temp1++;
+        }
+        fclose(fp);
+      }
+      break;
+
+    // trace
+    case SDLK_SLASH:
+      trace_map = !trace_map;
+      
+      if(trace_map) printf("[INFO] Trace started.\n");
+      else printf("[INFO] Trace ended.\n");
+
+      if(!trace_map) fprintf(trace,"\nTrace stopped.\n\n");
+      break;
+
+    // toggle speed
+    case SDLK_TAB:
+      sdl_video.frame_skip =
+        sdl_video.frame_skip!=0 ? 0:10;
+      break;
+    }
+  }
+}
+
+int sdlsms_init(const t_config* pcfg)
+{
+///////////////////////////////////////////////////
+
+  FILE *fp1,*fp2,*fp3,*fp4;
+  fp1 = fopen("hook_rd.txt","r");
+  fp2 = fopen("hook_wr.txt","r");
+  fp3 = fopen("hook_ppu.txt","r");
+  fp4 = fopen("hook_pc.txt","r");
+  if(fp1)
+    fscanf(fp1,"%01X %08X %08X",&rd_mode,&rd_low,&rd_high);
+  if(fp2)
+    fscanf(fp2,"%01X %08X %08X",&wr_mode,&wr_low,&wr_high);
+  if(fp3)
+    fscanf(fp3,"%01X %08X %08X",&ppu_mode,&ppu_low,&ppu_high);
+  if(fp4)
+    fscanf(fp4,"%01X %08X %08X",&pc_mode,&pc_low,&pc_high);
+  if(fp1 || fp2 || fp3 || fp4)
+    fp_hook = fopen("hook.txt","w");
+  if(fp1) fclose(fp1);
+  if(fp2) fclose(fp2);
+  if(fp3) fclose(fp3);
+  if(fp4) fclose(fp4);
+
+///////////////////////////////////////////////////
+}
+
+extern void DeInitDebug();
+void sdlsms_shutdown() 
+{
+  DeInitDebug();
+}

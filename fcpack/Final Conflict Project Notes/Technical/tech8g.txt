@@ -1,0 +1,30 @@
+8g. x point(s) of damage
+
+
+2 points of damage.
+1 points of damage. -> 1 point of damage.
+
+We need to predict whether to emit a 's'.
+
+But we can't do that without storing in advance a flag.
+
+When we scan the <number>, we look for '1'. If seen, then assert the condition.
+
+The script is modified as such:
+- <name> gained <number><internal hint 01> point<use suffix> of experience.<end>
+
+<use suffix> checks the 's' flag.
+
+<internal hint 01> tells the scripting compiler about the potential 's' and adjusts
+accordingly. Normally, a post-hint flag ' point' = 6. The internal hint adds '1' to 7.
+
+Another example:
+- <name> gained <number><internal hint 02> point<use suffix>.<end>
+
+So a scripting code is created: $DE = use suffix.
+
+
+Files modified:
+- t7.asm	(suffix checker)
+- t7_1.asm	(suffix emitter)
+- t7a_1.asm	(suffix init)

@@ -1,0 +1,79 @@
+#
+
+; Full class names
+
+; Ian
+$Swords%man
+$Hero
+
+; Mead
+$Knight
+$Paladin
+
+; Paige
+$Warrior
+$Gladia%tor
+
+; Hawel
+$Magician
+$Wizard
+
+; Knuckles
+$Monk
+$Master@ Monk
+
+; Sonette
+~Archer
+$Sniper
+
+; Cynthia
+$Healer
+$Priest
+
+; Ruburan
+$Thief
+$Ninja
+
+; Kiddo
+$Birdman
+$Bird@ Battler
+
+; Sylvia
+$Knight
+$Paladin
+
+; Julia
+$Bird%woman
+$Bird@ Battler
+
+; Eric
+$Dragon@ Soldier
+$Dragon@ Soldier
+
+; Minto
+$Magician
+$Wizard%ess
+
+; Morton
+$Monk
+$Master@ Monk
+
+; Sasuke
+$Thief
+$Ninja
+
+; Ridion
+$Warrior
+$Gladia%tor
+
+; Kojirou
+$Samurai
+$Samurai
+
+; Max
+$Swords%man
+$Hero
+
+; Oddeye
+$Greater@ Devil
+$Greater@ Devil
