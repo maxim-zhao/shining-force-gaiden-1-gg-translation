@@ -138,8 +138,7 @@ def dump(rom):
             0xd7: "<wait>",
             0xd8: "<delay 03>",
             0xd9: "<clear screen>",
-            0xda: "<lookup>",
-            0xdb: "<end>"
+            0xda: "<end>"
         }
         f.seek(script_table_table_ptr)
         script_table_ptrs = struct.unpack("<" + "H" * script_table_table_count, f.read(script_table_table_count*2))
