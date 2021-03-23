@@ -1,18 +1,39 @@
+import re
 import sys
 import struct
 import math
 import yaml
 
+codes = {
+    0xc8: "<use dictionary>",
+    0xc9: "<line>",
+    0xcb: "<delay 02>",
+    0xcc: "<number>",
+    0xcd: "<name>",
+    0xcf: "<party leader>",
+    0xd1: "<item>",
+    0xd2: "<spell>",
+    0xd3: "<class name>",
+    0xd4: "<wait more>",
+    0xd6: "<delay 01>",
+    0xd7: "<wait>",
+    0xd8: "<delay 03>",
+    0xd9: "<clear screen>",
+    0xda: "<end>"
+}
+codes_reverse = {v: k for k, v in codes.items()}
+
 
 class BitReader:
     """Lets you read bits one at a time, left to right"""
+
     def __init__(self, file, offset):
         self.f = open(file, "rb")
         self.offset = offset
         self.bit_count = 0
         self.current_byte = 0
         self.bits_read = 0
-    
+
     def read(self):
         if self.bit_count == 0:
             self.f.seek(self.offset)
@@ -34,17 +55,36 @@ class BitReader:
 
 class Node:
     """Node in the tree"""
-    def __init__(self):
-        self.value = -1
-        self.left = None
-        self.right = None
+
+    def __init__(self, value=-1, left=None, right=None, count=0):
+        self.symbol = value
+        self.left = left
+        self.right = right
+        self.count = count
+        self.bits = []
+
+        if left is not None:
+            self.symbol = -1
+            self.count = left.count + right.count
+            # Prepend the "bits" of the children so they can learn their "path"
+            left.prepend_bits(False)
+            right.prepend_bits(True)
+
+    def prepend_bits(self, value):
+        # If we are a leaf, take the bit
+        if self.symbol > -1:
+            self.bits.insert(0, value)
+        else:
+            # propagate to children
+            self.left.prepend_bits(value)
+            self.right.prepend_bits(value)
 
     def parse(self, reader, f, next_data_offset):
         # read a bit to see what soft of nde this is
         if reader.read() == 1:
             # Data node
             f.seek(next_data_offset)
-            self.value = int.from_bytes(f.read(1), byteorder='little')
+            self.symbol = int.from_bytes(f.read(1), byteorder='little')
             next_data_offset -= 1
         else:
             # Structure node
@@ -54,16 +94,79 @@ class Node:
             next_data_offset = self.right.parse(reader, f, next_data_offset)
         return next_data_offset
 
+    def emit_symbols(self, f):
+        if self.symbol > -1:
+            f.write(f" ${self.symbol:02x}")
+            return 1
+        return self.right.emit_symbols(f) + self.left.emit_symbols(f)
+
+    def emit_structure(self, bit_writer):
+        # Stringify each node's type (1 = value, 0 = parent), left to right
+        if self.symbol > -1:
+            bit_writer.add(True)
+            return
+        bit_writer.add(False)
+        self.left.emit_structure(bit_writer)
+        self.right.emit_structure(bit_writer)
+
     def __str__(self):
-        if self.value > -1:
-            return hex(self.value)
+        if self.symbol > -1:
+            return f"{self.symbol:02x} x {self.count}"
         return f"[{self.left},{self.right}]"
 
 
-class Tree:
-    """Decoded tree"""
+class BitWriter:
+    """Deals with writing bits into a buffer"""
     def __init__(self):
-        self.root = None;
+        self.buffer = bytearray()
+        self.bit_count = 0
+        self.current_byte = 0
+
+    def add(self, bit: bool):
+        # Add bit to current_byte, from the right
+        self.current_byte = (self.current_byte << 1) & 0xff
+        if bit:
+            self.current_byte += 1
+        self.bit_count += 1
+
+        # Add to buffer when full
+        if self.bit_count == 8:
+            self.buffer.append(self.current_byte)
+            self.bit_count = 0
+
+    def flush(self):
+        while self.bit_count != 0:
+            self.add(False)
+
+
+class Tree:
+    """Huffman tree"""
+
+    def __init__(self, nodes=None, name=""):
+        self.name = name
+
+        if len(nodes) == 0:
+            # Nothing to do
+            self.root = None
+            return
+
+        self.nodes_by_symbol = {node.symbol: node for node in nodes}
+
+        # Sort the nodes by count descending. This puts the lowest counts at the end. This is also a stable sort.
+        sorted_nodes = []
+        for node in nodes:
+            self.insert(sorted_nodes, node)
+
+        # Then combine them into each other to make a Huffman tree
+        while len(sorted_nodes) > 1:
+            # When we build the tree, we put the smaller node on the left.
+            left = sorted_nodes.pop()
+            right = sorted_nodes.pop()
+            node = Node(left=left, right=right)
+            self.insert(sorted_nodes, node)
+
+        # Then keep the root
+        self.root = sorted_nodes[0]
 
     def read(self, file, offset):
         # Read the tree structure
@@ -77,20 +180,68 @@ class Tree:
     def decode(self, script_data):
         # Walk the tree according to the data, until we find a value node
         node = self.root
-        while node.value == -1:
+        while node.symbol == -1:
             bit = script_data.read()
             node = node.left if bit == 0 else node.right
-        return node.value
+        return node.symbol
+
+    @staticmethod
+    def insert(nodes, node):
+        # Nodes are assumed to be in decreasing order by count.
+        # Insert this node at the first position that is less than it, i.e. the rightmost place for it
+        for index in range(len(nodes)):
+            if nodes[index].count < node.count:
+                nodes.insert(index, node)
+                return
+        # Nowhere found, must go at the end
+        nodes.append(node)
+
+    def empty(self):
+        return self.root is None
+
+    def emit_symbols(self, f):
+        if self.root is None:
+            return 0
+        return self.root.emit_symbols(f)
+
+    def emit_structure(self, f):
+        if self.root is None:
+            return 0
+
+        bit_writer = BitWriter()
+        self.root.emit_structure(bit_writer)
+        bit_writer.flush()
+
+        f.write(".db")
+        for b in bit_writer.buffer:
+            f.write(f" %{b:08b}")
+
+        return len(bit_writer.buffer)
+
+    def emit_bits(self, symbol: int, bit_writer: BitWriter):
+        # Find the node for this symbol
+        node = self.nodes_by_symbol[symbol]
+        # Emit its bits
+        for bit in node.bits:
+            bit_writer.add(bit)
 
 
-def dump(rom):
+def dump(rom, output_file):
     trees_location = 0x299d0
     trees_size = 0x1b6
-    trees_count = trees_size//2
-  
+    trees_count = trees_size // 2
+
+    character_map = " " \
+                    " ０１２３４５６７８９" \
+                    "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへ" \
+                    "ほまみむめもやゆよらりるれろわんをぁぃぅぇぉゃゅょっアイウ" \
+                    "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
+                    "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
+                    "゛゜XXXXX-%/ADFGHLMPTV?・!"
+
     with open(rom, "rb") as f:
         f.seek(trees_location)
-        trees_table = struct.unpack("<" + "H"*trees_count, f.read(trees_size))
+        trees_table = struct.unpack("<" + "H" * trees_count, f.read(trees_size))
         trees = {}
 
         for index in range(trees_count):
@@ -116,36 +267,12 @@ def dump(rom):
         # We start at this table of pointers
         script_table_table_ptr = 0x23b77
         script_table_table_count = 3
-        character_map = " " \
-                        " ０１２３４５６７８９" \
-                        "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへ" \
-                        "ほまみむめもやゆよらりるれろわんをぁぃぅぇぉゃゅょっアイウ" \
-                        "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
-                        "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
-                        "゛゜XXXXX-%/ADFGHLMPTV?・!"
-        codes = {
-            0xc8: "<use dictionary>",
-            0xc9: "<line>",
-            0xcb: "<delay 02>",
-            0xcc: "<number>",
-            0xcd: "<name>",
-            0xcf: "<party leader>",
-            0xd1: "<item>",
-            0xd2: "<spell>",
-            0xd3: "<class name>",
-            0xd4: "<wait more>",
-            0xd6: "<delay 01>",
-            0xd7: "<wait>",
-            0xd8: "<delay 03>",
-            0xd9: "<clear screen>",
-            0xda: "<end>"
-        }
         f.seek(script_table_table_ptr)
-        script_table_ptrs = struct.unpack("<" + "H" * script_table_table_count, f.read(script_table_table_count*2))
+        script_table_ptrs = struct.unpack("<" + "H" * script_table_table_count, f.read(script_table_table_count * 2))
 
         script = []
 
-        entry_index = 0;
+        entry_index = 0
         for ptr in script_table_ptrs:
             # convert to absolute
             ptr += (script_table_table_ptr // 0x4000 - 1) * 0x4000
@@ -187,7 +314,7 @@ def dump(rom):
                             tenten = 0
                 print(s)
 
-                entry_index += 1;
+                entry_index += 1
 
                 script.append({
                     "index": entry_index,
@@ -203,14 +330,179 @@ def dump(rom):
                 # Skip file pointer ahead
                 f.seek(f.tell() + entry_length)
 
-    with open('script.yaml', 'w', encoding="utf-8") as file:
+    with open(output_file, 'w', encoding="utf-8") as file:
         documents = yaml.dump(script, file, sort_keys=False, allow_unicode=True)
+
+
+# Font mapping
+# TODO: use a .tbl?
+en_character_map = "ロ" \
+                   " !\"#$%&'()*+,./" \
+                   "0123456789" \
+                   ":;<=>?@" \
+                   "ABCDEFGHIKLMNOPQRSTUVWXYZ" \
+                   "abcdefghiklmnopqrstuvwxyz"
+
+
+class ScriptEntry:
+    def __init__(self, text, name):
+        self.label = name
+
+        # Remove line breaks
+        s = text.replace("\n", "")
+
+        # Enforce end
+        if not s.endswith("<end>"):
+            s += "<end>"
+
+        # Replace with placeholder if empty (for debugging)
+        if len(s) == 0:
+            s = "Ook<end>"
+
+        self.text = s
+
+        # Encode into a buffer
+        self.buffer = bytearray()
+        while len(s) > 0:
+            # Check for a tag
+            match = re.match("<[^>]+?>", s)
+            if match:
+                # Consume the matched text
+                tag = match.group(0)
+                s = s[len(s):]
+                # Parse the tag
+                if tag in codes_reverse:
+                    self.buffer.append(codes_reverse[tag])
+                else:
+                    print(f"Error: unhandled tag {tag}")
+            else:
+                # Not a tag
+                # Look up in en_character_map
+                value = en_character_map.find(s[0])
+                if value == -1:
+                    print(f"Error: character {s[0]} not in character map")
+                else:
+                    self.buffer.append(value)
+                s = s[1:]
+
+    def __str__(self):
+        return self.text
+
+
+def encode_script(script_file, trees_file, data_file):
+    # Read the file
+    with open(script_file, "r", encoding="utf-8") as f:
+        script_yaml = yaml.load(f, Loader=yaml.Loader)
+
+    # Convert to dictionary
+    script_yaml = {x["index"]: x for x in script_yaml}
+
+    script = []
+    for index in range(1, 768 + 1):
+        if index not in script_yaml:
+            print(f"Error: entry {index} missing")
+            line = "<end>"
+        else:
+            node = script_yaml[index]
+            line = node["en"]
+            if len(line) == 0:
+                line = node["literal"]
+        script.append(ScriptEntry(line, f"Script{index}"))
+
+    # Then we build a table of byte counts
+    script_symbols_count = 0
+    symbol_counts = [0] * 256
+    for entry in script:
+        script_symbols_count += len(entry.buffer)
+        for b in entry.buffer:
+            symbol_counts[b] += 1
+
+    # Now we Huffman compress the data with per-byte trees
+    # First we count the frequencies per preceding byte
+    counts = [[0 for i in range(256)] for j in range(256)]
+    for entry in script:
+        preceding_byte = 0xda
+        for b in entry.buffer:
+            counts[preceding_byte][b] += 1
+            preceding_byte = b
+
+    # Next we build trees for each of them
+    trees = []
+    for preceding_byte in range(0, 256):
+        # Make a tree from this entry
+        # First we make nodes for all the values with non-zero counts
+        nodes = []
+        for symbol in range(0, 256):
+            count = counts[preceding_byte][symbol]
+            if count > 0:
+                nodes.append(Node(value=symbol, count=count))
+
+        trees.append(Tree(nodes, f"HuffmanTree{preceding_byte:02x}"))
+
+    # Remove any trailing "empty trees" (i.e. unused symbols). We can't not add them as gaps need to be filled.
+    while trees[-1].empty():
+        trees.pop()
+
+    # Emit Huffman trees as assembly
+    with open(trees_file, "w", encoding="utf-8") as f:
+        f.write("TreeVector:\n.dw")
+        # Labels
+        for tree in trees:
+            if tree.empty():
+                f.write(" $ffff")
+            else:
+                f.write(f" {tree.name}")
+        f.write("\n")
+        trees_size = len(trees) * 2
+        # Data
+        for preceding_byte in range(0, len(trees)):
+            tree = trees[preceding_byte]
+            if tree.empty():
+                continue
+            f.write(f"; Dictionary elements that can follow element ${preceding_byte:02x}\n.db")
+            trees_size += tree.emit_symbols(f)
+            f.write(f"\n{tree.name}: ; Binary tree structure for the above\n")
+            trees_size += tree.emit_structure(f)
+            f.write("\n")
+
+        print(f"Huffman trees take {trees_size} bytes")
+
+    # Emit the Huffman-encoded script
+    with open(data_file, "w", encoding="utf-8") as f:
+        f.write("; Script entries, Huffman compressed\n")
+
+        script_size = 0
+
+        for entry in script:
+            f.write(f"\n{entry.label}:\n/* {entry.text} */\n")
+
+            # Starting tree number
+            preceding_byte = 0xda
+
+            # Write into a buffer
+            bit_writer = BitWriter()
+            for symbol in entry.buffer:
+                trees[preceding_byte].emit_bits(symbol, bit_writer)
+
+                # Use new symbol as fresh index
+                preceding_byte = symbol
+
+            bit_writer.flush()
+
+            script_size += len(bit_writer.buffer)
+
+            # Emit as assembly
+            f.write(f".db {len(bit_writer.buffer)},")
+            for b in bit_writer.buffer:
+                f.write(f" %{b:08b}")
 
 
 def main():
     verb = sys.argv[1]
     if verb == 'dump':
-        dump(sys.argv[2])
+        dump(sys.argv[2], sys.argv[3])
+    if verb == 'encode_script':
+        encode_script(sys.argv[2], sys.argv[3], sys.argv[4])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 

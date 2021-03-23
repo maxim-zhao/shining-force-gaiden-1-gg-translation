@@ -1,6 +1,8 @@
-/src/.idea/
+.idea
 *.sav
 *.gg
 *.ips
 *.bin
 *.gg_cram
+/src/script.asm
+/src/trees.asm
