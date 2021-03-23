@@ -880,47 +880,52 @@
   literal: ''
   en: ''
 
+
+###########################################################
+# Main menu　girl dialogue
+###########################################################
+
 - index: 109
   character: ''
   ja: アンリじょおうの ねむりを<line>さますために・・・<end>
   literal: ''
-  en: ''
+  en: In order to<line>awaken Queen<line>Anri...<end>
 
 - index: 110
   character: ''
   ja: <wait more>ラグをたいちょうとした<line>えんせいぐんを さしむけた・・・<delay 01><end>
   literal: ''
-  en: ''
+  en: <wait more>An expedition<line>force led by Lug<line>was sent.<delay 01><end>
 
 - index: 111
   character: ''
   ja: わ-! これから どうなるのかな?<wait more><end>
   literal: ''
-  en: ''
+  en: <wait more>Wow! I wonder what<line>happens next.<wait more><end>
 
 - index: 112
   character: ''
   ja: あっ おきゃくさまね!<line>このごほんをよみにきたんでしょ<line>じゃっ いっしょに よみましょう!<end>
   literal: ''
-  en: ''
+  en: Oh, a visitor!<wait><line>Wouldn't you like<line>to read this<line>mysterious story?<wait><line>Well, let's read<line>it together!<end>
 
 - index: 113
   character: ''
   ja: ねえねえ <delay 01>このしゅじんこうは<line>なんていう おなまえなの?<wait more><end>
   literal: ''
-  en: ''
+  en: Hey,<delay 01> what's the<line>protagonist's<line>name?<wait more><end>
 
 - index: 114
   character: ''
   ja: <party leader>さんて いうのね<delay 01><line>かっこいいんだ-っ!<wait more><end>
   literal: ''
-  en: ''
+  en: It's <party leader>,<line>huh?<delay 01>Cool name!<wait more><end>
 
 - index: 115
   character: ''
   ja: それじゃ はやくよんで!<delay 01><line>はやく はやく-っ!<wait><end>
   literal: ''
-  en: ''
+  en: Hurry up and read<line>it!<delay 01><line>Hurry,<delay 01> hurry!<wait><end>
 
 - index: 116
   character: ''
