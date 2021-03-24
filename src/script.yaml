@@ -931,43 +931,52 @@
   character: ''
   ja: このまえの つづきを<line>よんで きかせて くれるのね!<wait more><end>
   literal: ''
-  en: ''
+  en: Reading from where<line>you left off?<wait more><line>Only if you let<line>me listen!<wait more><end>
 
 - index: 117
   character: ''
   ja: どの つづきを よんでくれるの?<end>
   literal: ''
-  en: ''
+  en: Where will you<line>continue reading<line>from?<end>
 
+
+  # Unused? Can't find in the menu
 - index: 118
   character: ''
   ja: わ-! たのしみ-!<delay 01><line>はやく よんできかせて-!<wait><end>
   literal: ''
   en: ''
+  # Unused? ^^^
 
 - index: 119
   character: ''
   ja: え-? そうなんだ・・<delay 01><line>どれを なくしちゃうの?<end>
   literal: ''
-  en: ''
+  en: Ah, I see・・<delay 01><line>Which one should<line>I get rid of?<end>
+
+- index: 135
+  character: ''
+  ja: あら! ほんとに けしちゃうの?<end>
+  literal: ''
+  en: Oh, are you sure<line>you want to<line>delete it?<end>
 
 - index: 120
   character: ''
   ja: うん これでなくなったよ<wait more><end>
   literal: ''
-  en: ''
+  en: Alright, it's<line>gone!<wait more><end>
 
 - index: 121
   character: ''
   ja: どこに うつすの?<end>
   literal: ''
-  en: ''
+  en: Where should it<line>be copied to?<end>
 
 - index: 122
   character: ''
   ja: これで うつしたよ<wait more><end>
   literal: ''
-  en: ''
+  en: It's copied.<wait more><end>
 
 - index: 123
   character: ''
@@ -1039,12 +1048,6 @@
 - index: 134
   character: ''
   ja: あ-っ たいへん<line>きろく<number>がなくなっちゃった-!!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 135
-  character: ''
-  ja: あら! ほんとに けしちゃうの?<end>
   literal: ''
   en: ''
 
@@ -2004,7 +2007,9 @@
 
 
 
-
+###########################################################
+# Prelude
+###########################################################
 
 - index: 326
   character: ''
@@ -2084,6 +2089,7 @@
   ja: <name>は ゆびぶえをふいた<wait><end>
   literal: ''
   en: ''
+  # current translation pause
 
 - index: 339
   character: ''
