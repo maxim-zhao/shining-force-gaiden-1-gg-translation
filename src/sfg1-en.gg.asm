@@ -1,6 +1,5 @@
-; This unifies all the work done for the PS1JERT into a single WLA DX files,
-; using WLA DX to do the assembly and insertion of code and data.
-; We use WLA DX features (and macros) to implement some of the data transformation.
+; This unifies the transalted ROM building into a single WLA DX assembly file.
+; WLA DX does the assembly, insertion of code and data and correction of pointers.
 
 .memorymap
 slotsize $4000
