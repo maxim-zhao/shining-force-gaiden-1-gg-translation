@@ -7,3 +7,7 @@
 /src/script.asm
 /src/trees.asm
 *.sym
+/build_config.cmd
+linkfile
+*.o
+*.bps
