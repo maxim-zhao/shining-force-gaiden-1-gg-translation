@@ -111,7 +111,10 @@ class Node:
 
     def __str__(self):
         if self.symbol > -1:
-            return f"{self.symbol:02x} x {self.count}"
+            if self.count == 0:
+                return f"{self.symbol:02x}"
+            else:
+                return f"{self.symbol:02x} x {self.count}"
         return f"[{self.left},{self.right}]"
 
 
@@ -145,7 +148,7 @@ class Tree:
     def __init__(self, nodes=None, name=""):
         self.name = name
 
-        if len(nodes) == 0:
+        if nodes is None or len(nodes) == 0:
             # Nothing to do
             self.root = None
             return
@@ -175,6 +178,7 @@ class Tree:
         with open(file, "rb") as f:
             self.root = Node()
             self.root.parse(reader, f, next_data_offset)
+        print(f"Tree consumed {reader.bits_read} bits from ${offset:x} to ${offset + math.ceil(reader.bits_read / 8):x} inclusive")
         reader.close()
 
     def decode(self, script_data):
@@ -280,9 +284,10 @@ def dump(rom, output_file):
             # seek to it
             f.seek(ptr)
             for i in range(256):
+                start_offset = f.tell()
                 # read length byte (not actually needed)
                 entry_length = int.from_bytes(f.read(1), byteorder='little')
-                print(f"Entry {hex(i)} at {hex(f.tell() - 1)} says its length is {entry_length} bytes")
+                print(f"Entry {entry_index} at {f.tell() - 1:x} says its length is {entry_length} bytes up to {f.tell() - 1 + entry_length:x} inclusive")
                 # point at data
                 entry_data = BitReader(rom, f.tell())
                 # decode it...
@@ -324,11 +329,14 @@ def dump(rom, output_file):
                     "en": ""
                 })
 
-                # Entries seem to all have an unnecessary trailing byte... off by one error in the original?
-                if bytes_consumed != entry_length and bytes_consumed != entry_length - 1:
-                    print(f"Consumed {bytes_consumed} bytes, expected {entry_length}")
                 # Skip file pointer ahead
                 f.seek(f.tell() + entry_length)
+
+                # Entries seem to all have an unnecessary trailing byte..?
+                if bytes_consumed != entry_length:
+                    f.seek(f.tell() - (entry_length - bytes_consumed))
+                    byte = f.read(1)
+                    print(f"Consumed {bytes_consumed} bytes, expected {entry_length}. First extra byte is {byte}")
 
     with open(output_file, 'w', encoding="utf-8") as file:
         documents = yaml.dump(script, file, sort_keys=False, allow_unicode=True)
@@ -337,11 +345,12 @@ def dump(rom, output_file):
 # Font mapping
 # TODO: use a .tbl?
 en_character_map = "ロ" \
-                   " !\"#$%&'()*+,./" \
+                   " !\"#$%&'()*+,-./" \
                    "0123456789" \
                    ":;<=>?@" \
-                   "ABCDEFGHIKLMNOPQRSTUVWXYZ" \
-                   "abcdefghiklmnopqrstuvwxyz"
+                   "ABCDEFGHIHKLMNOPQRSTUVWXYZ" \
+                   "[\\]^_£" \
+                   "abcdefghijklmnopqrstuvwxyz"
 
 
 class ScriptEntry:
@@ -351,13 +360,13 @@ class ScriptEntry:
         # Remove line breaks
         s = text.replace("\n", "")
 
+        # Replace with placeholder if empty (for debugging)
+        if len(s) == 0:
+            s = f"Missing {name}<end>"
+
         # Enforce end
         if not s.endswith("<end>"):
             s += "<end>"
-
-        # Replace with placeholder if empty (for debugging)
-        if len(s) == 0:
-            s = "Ook<end>"
 
         self.text = s
 
@@ -369,7 +378,7 @@ class ScriptEntry:
             if match:
                 # Consume the matched text
                 tag = match.group(0)
-                s = s[len(s):]
+                s = s[len(tag):]
                 # Parse the tag
                 if tag in codes_reverse:
                     self.buffer.append(codes_reverse[tag])
@@ -386,7 +395,7 @@ class ScriptEntry:
                 s = s[1:]
 
     def __str__(self):
-        return self.text
+        return f"{self.text} ({' '.join('{:02x}'.format(x) for x in self.buffer)})"
 
 
 def encode_script(script_file, trees_file, data_file):
@@ -474,7 +483,7 @@ def encode_script(script_file, trees_file, data_file):
         script_size = 0
 
         for entry in script:
-            f.write(f"\n{entry.label}:\n/* {entry.text} */\n")
+            f.write(f"\n{entry.label}:\n/* {entry} */\n")
 
             # Starting tree number
             preceding_byte = 0xda
@@ -496,12 +505,14 @@ def encode_script(script_file, trees_file, data_file):
             for b in bit_writer.buffer:
                 f.write(f" %{b:08b}")
 
+    print(f"Script is {script_size} bytes")
+
 
 def main():
     verb = sys.argv[1]
     if verb == 'dump':
         dump(sys.argv[2], sys.argv[3])
-    if verb == 'encode_script':
+    elif verb == 'encode_script':
         encode_script(sys.argv[2], sys.argv[3], sys.argv[4])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")

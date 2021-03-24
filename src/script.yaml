@@ -14,7 +14,23 @@
 # ja: original Japanese script
 # literal: literal translation, for reference
 # en: final English translation
-
+#
+# Scripting codes:
+# <class name>
+# <clear screen>
+# <delay 01> = wait 1/3s (skippable)
+# <delay 02> = wait 1s (unskippable)
+# <delay 03> = wait 1s (skippable)
+# <item>
+# <line> = line break
+# <name>
+# <number> = display a number
+# <party leader>
+# <spell>
+# <use dictionary>
+# <wait more>
+# <wait>
+# <end> = end of line - inserted automatically if missing
 
 ###########################################################
 # Opening sequence

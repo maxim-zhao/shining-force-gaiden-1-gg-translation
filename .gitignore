@@ -6,3 +6,4 @@
 *.gg_cram
 /src/script.asm
 /src/trees.asm
+*.sym

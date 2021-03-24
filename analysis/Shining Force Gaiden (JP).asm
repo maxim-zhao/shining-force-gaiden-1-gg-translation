@@ -8650,8 +8650,8 @@ _LABEL_39DF_DecodeHuffman:
     ld a, (_SRAM_21A6_TreeIndex)
     push hl
       ld hl, _RAM_FFFC_
-      res 3, (hl) ; disable SRAM -> which bank is there?
-      ld l, $FF ; change to $ffff
+      res 3, (hl) ; disable SRAM
+      ld l, $FF ; change hl to $ffff
       ld (hl), $0A ; bank 10
     pop hl
     ld l, a ; Convert tree index to $20xx
@@ -53709,7 +53709,7 @@ _LABEL_200A5_DrawScriptEntry:
     ld (_SRAM_21AA_), a
     call _LABEL_39DF_DecodeHuffman
     cp $C8
-    jp z, _LABEL_200EC_
+    jp z, _LABEL_200EC_ScriptDecodeLoop
     
     ld hl, (_SRAM_21A4_)
     inc h
@@ -53721,16 +53721,16 @@ _LABEL_200A5_DrawScriptEntry:
     ld (_SRAM_21A4_), hl
     jp +
 
-_LABEL_200EC_: ; script decoding loop point
+_LABEL_200EC_ScriptDecodeLoop: ; script decoding loop point
     call _LABEL_20165_
     or a
     jp nz, ++
     call _LABEL_39DF_DecodeHuffman
 +:
-    cp $DA
+    cp $DA ; <end>
     jr z, _LABEL_2014E_
     cp $C8
-    jp nc, _LABEL_2017E_ ; extended codes?
+    jp nc, _LABEL_2017E_ScriptingCodes ; extended codes
 ++:
     push af
     push de
@@ -53756,7 +53756,7 @@ _LABEL_200EC_: ; script decoding loop point
     xor a
     ld (_SRAM_26B3_), a
     call _LABEL_3651_WaitForVBlank
-    jr _LABEL_200EC_
+    jr _LABEL_200EC_ScriptDecodeLoop
 
 +:
 	ld hl, (_SRAM_644_)
@@ -53776,7 +53776,7 @@ _LABEL_200EC_: ; script decoding loop point
 	ld (_SRAM_26B3_), a
 	call _LABEL_9CA_wait ; in hl
 ++:
-	jr _LABEL_200EC_
+	jr _LABEL_200EC_ScriptDecodeLoop
 
 _LABEL_2014E_:
 	ld a, $FF
@@ -53814,34 +53814,34 @@ _LABEL_20165_:
 	ld (_SRAM_21AA_), a
 	ret
 
-_LABEL_2017E_:
+_LABEL_2017E_ScriptingCodes:
 	cp $CF
-	jp z, _LABEL_201D4_
+	jp z, _LABEL_201D4_ScriptingCode_CF_PartyLeader
 	cp $CB
-	jp z, _LABEL_20248_
+	jp z, _LABEL_20248_ScriptingCode_CB_Delay02
 	cp $C9
-	jp z, _LABEL_20256_
+	jp z, _LABEL_20256_ScriptingCode_C9_line
 	cp $D4
-	jp z, _LABEL_2029E_
+	jp z, _LABEL_2029E_ScriptingCode_D4_WaitMore
 	cp $CD
-	jp z, _LABEL_201E3_
+	jp z, _LABEL_201E3_ScriptingCode_CD_Name
 	cp $D1
-	jp z, _LABEL_20207_
+	jp z, _LABEL_20207_ScriptingCode_D1_Item
 	cp $CC
-	jp z, _LABEL_20219_
+	jp z, _LABEL_20219_ScriptingCode_CC_Number
 	cp $D3
-	jp z, _LABEL_201F5_
+	jp z, _LABEL_201F5_ScriptingCode_D3_ClassName
 	cp $D7
-	jp z, _LABEL_20269_
+	jp z, _LABEL_20269_ScriptingCode_D7_Wait
 	cp $D6
-	jp z, _LABEL_2027E_
+	jp z, _LABEL_2027E_ScriptingCode_D6_Delay01
 	cp $D8
-	jp z, _LABEL_20282_
+	jp z, _LABEL_20282_ScriptingCode_D8_Delay03
 	cp $D2
 	jp z, +
 	cp $D9
-	jp z, _LABEL_20263_
-	jp _LABEL_200EC_
+	jp z, _LABEL_20263_ScriptingCode_D9_ClearScreen
+	jp _LABEL_200EC_ScriptDecodeLoop
 
 +:
 	ld d, (ix+0)
@@ -53853,9 +53853,9 @@ _LABEL_2017E_:
 	ld (_SRAM_21AB_), hl
 	ld a, e
 	ld (_SRAM_21AA_), a
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_201D4_:
+_LABEL_201D4_ScriptingCode_CF_PartyLeader:
 	ld d, $00
 	rst $18	; _LABEL_18_
 ; Data from 201D7 to 201D8 (2 bytes)
@@ -53864,9 +53864,9 @@ _LABEL_201D4_:
 	ld (_SRAM_21AB_), hl
 	ld a, e
 	ld (_SRAM_21AA_), a
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_201E3_:
+_LABEL_201E3_ScriptingCode_CD_Name:
 	ld d, (ix+0)
 	inc ix
 	rst $18	; _LABEL_18_
@@ -53876,9 +53876,9 @@ _LABEL_201E3_:
 	ld (_SRAM_21AB_), hl
 	ld a, e
 	ld (_SRAM_21AA_), a
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_201F5_:
+_LABEL_201F5_ScriptingCode_D3_ClassName:
 	ld d, (ix+0)
 	inc ix
 	rst $18	; _LABEL_18_
@@ -53888,9 +53888,9 @@ _LABEL_201F5_:
 	ld (_SRAM_21AB_), hl
 	ld a, e
 	ld (_SRAM_21AA_), a
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_20207_:
+_LABEL_20207_ScriptingCode_D1_Item:
 	ld d, (ix+0)
 	inc ix
 	rst $18	; _LABEL_18_
@@ -53900,9 +53900,9 @@ _LABEL_20207_:
 	ld (_SRAM_21AB_), hl
 	ld a, e
 	ld (_SRAM_21AA_), a
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_20219_:
+_LABEL_20219_ScriptingCode_CC_Number:
 	ld hl, (_SRAM_21B6_)
 	push ix
 	push iy
@@ -53925,28 +53925,28 @@ _LABEL_20219_:
 	ld a, $05
 	ld (_SRAM_21AA_), a
 	pop ix
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_20248_:
+_LABEL_20248_ScriptingCode_CB_Delay02:
 	ld a, $FF
 	ld (_SRAM_26B3_), a
 	ld hl, $003C
 	call _LABEL_9CA_wait
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_20256_:
+_LABEL_20256_ScriptingCode_C9_line:
 	ld hl, (_SRAM_21A4_)
 	inc l
 	inc l
 	ld h, $00
 	ld (_SRAM_21A4_), hl
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_20263_:
+_LABEL_20263_ScriptingCode_D9_ClearScreen:
 	call _LABEL_20051_
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
-_LABEL_20269_:
+_LABEL_20269_ScriptingCode_D7_Wait:
 	ld a, $FF
 	ld (_SRAM_26B3_), a
 	call _LABEL_4A8_
@@ -53954,18 +53954,18 @@ _LABEL_20269_:
 	call _LABEL_3651_WaitForVBlank
 	call _LABEL_47A_
 	and $F0
-	jp nz, _LABEL_200EC_
+	jp nz, _LABEL_200EC_ScriptDecodeLoop
 	jr -
 
-_LABEL_2027E_:
-	ld b, $14
+_LABEL_2027E_ScriptingCode_D6_Delay01:
+	ld b, $14 ; 20 frames = 1/3s
 	jr +
 
-_LABEL_20282_:
-	ld b, $3C
+_LABEL_20282_ScriptingCode_D8_Delay03:
+	ld b, $3C ; 60 frames = 1s
 +:
 	call _LABEL_2028A_
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
 _LABEL_2028A_:
 	ld a, $FF
@@ -53979,11 +53979,11 @@ _LABEL_2028A_:
 	djnz -
 	ret
 
-_LABEL_2029E_:
+_LABEL_2029E_ScriptingCode_D4_WaitMore:
 	ld a, $FF
 	ld (_SRAM_26B3_), a
 	call _LABEL_202A9_
-	jp _LABEL_200EC_
+	jp _LABEL_200EC_ScriptDecodeLoop
 
 _LABEL_202A9_:
 	call _LABEL_20304_
