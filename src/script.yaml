@@ -967,7 +967,7 @@
   character: ''
   ja: え-? そうなんだ・・<delay 01><line>どれを なくしちゃうの?<end>
   literal: ''
-  en: Ah, I see・・<delay 01><line>Which one should<line>I get rid of?<end>
+  en: Ah, I see...<delay 01><line>Which one should<line>I get rid of?<end>
 
 - index: 135
   character: ''
