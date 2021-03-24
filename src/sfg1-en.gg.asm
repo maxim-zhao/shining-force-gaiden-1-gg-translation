@@ -21,14 +21,14 @@ banks 32
 
 .emptyfill $ff
 
-; Unbackground ranges are inclusive of the start and exclusive of the end
-.unbackground $20391 $23b77 ; Script data
-.unbackground $23b77 $23b7d ; Script index
-.unbackground $23b7d $24000 ; Unused space
-.unbackground $2800c $2922c ; Font
-.unbackground $299d0 $29b86 ; Trees index
+; Unbackground ranges are inclusive of the start and end
+.unbackground $20391 $23b76 ; Script data
+.unbackground $23b77 $23b7c ; Script index
+.unbackground $23b7d $23fff ; Unused space
+.unbackground $2800c $2922b ; Font
+.unbackground $299d0 $29b85 ; Trees index
 ; Not sure what is in this gap
-.unbackground $29bcd $2a7d3 ; Trees
+.unbackground $29bcd $2a7d2 ; Trees
 
 .bank 8 slot 1
 .org 0

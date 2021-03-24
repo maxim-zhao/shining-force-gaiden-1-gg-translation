@@ -1612,21 +1612,24 @@ _LABEL_39F_:
 ; Data from 3A1 to 3A3 (3 bytes)
 .db $DD $E9 $C9
 
-_LABEL_3A4_:
+; Reads the lth 16-bit pointer from the table at the start of page h
+_LABEL_3A4_ReadPointerFromPageAndIndex:
 	push af
-	ld a, (_RAM_FFFE_)
-	push af
-	ld a, h
-	ld (_RAM_FFFE_), a
-	ld h, $20
-	sla l
-	rl h
-	ld a, (hl)
-	inc l
-	ld h, (hl)
-	ld l, a
-	pop af
-	ld (_RAM_FFFE_), a
+    ld a, (_RAM_FFFE_)
+    push af
+      ; h = page number
+      ld a, h
+      ld (_RAM_FFFE_), a
+      ; hl = $4000 + 2l
+      ld h, $20
+      sla l
+      rl h
+      ld a, (hl)
+      inc l
+      ld h, (hl)
+      ld l, a
+    pop af
+    ld (_RAM_FFFE_), a
 	pop af
 	ret
 
@@ -7005,7 +7008,7 @@ _LABEL_275D_:
 
 +:
 	ld hl, $0A00
-	call _LABEL_3A4_
+	call _LABEL_3A4_ReadPointerFromPageAndIndex
 	push hl
 	ld hl, _RAM_FFFC_
 	res 3, (hl)
@@ -7086,7 +7089,7 @@ _LABEL_2840_:
 	inc hl
 	ld h, a
 	ld l, e
-	call _LABEL_3A4_
+	call _LABEL_3A4_ReadPointerFromPageAndIndex
 	ld a, c
 	add a, a
 	add a, c
@@ -7135,7 +7138,7 @@ _LABEL_2886_:
 	inc hl
 	ld h, a
 	ld l, e
-	call _LABEL_3A4_
+	call _LABEL_3A4_ReadPointerFromPageAndIndex
 	ld e, b
 	ld d, $00
 	add hl, de
@@ -7175,7 +7178,7 @@ _LABEL_28C1_:
 	inc hl
 	ld h, a
 	ld l, e
-	call _LABEL_3A4_
+	call _LABEL_3A4_ReadPointerFromPageAndIndex
 	ld a, c
 	add a, a
 	add a, c
@@ -7224,7 +7227,7 @@ _LABEL_2907_:
 	inc hl
 	ld h, a
 	ld l, e
-	call _LABEL_3A4_
+	call _LABEL_3A4_ReadPointerFromPageAndIndex
 	ld e, b
 	ld d, $00
 	add hl, de
@@ -7263,7 +7266,7 @@ _LABEL_2942_:
 	push hl
 	ld h, a
 	ld l, c
-	call _LABEL_3A4_
+	call _LABEL_3A4_ReadPointerFromPageAndIndex
 	ld (_RAM_FFFE_), a
 	push hl
 	ld de, _SRAM_228C_
@@ -7281,7 +7284,7 @@ _LABEL_2942_:
 	ld h, (hl)
 	ld l, a
 	ld a, h
-	call _LABEL_3A4_
+	call _LABEL_3A4_ReadPointerFromPageAndIndex
 	ld (_RAM_FFFE_), a
 	ld b, h
 	ld c, l
@@ -7688,54 +7691,61 @@ _LABEL_33F6_:
 	pop bc
 	ret
 
-_LABEL_3412_:
+_LABEL_3412_LoadPortrait:
+; a = index
+; de = RAM destination
 	push af
 	push bc
 	push de
 	push hl
 	push ix
-	push de
-	pop ix
-	add a, a
-	add a, a
-	ld c, a
-	ld b, $00
-	ld a, (_RAM_FFFE_)
-	push af
-	ld a, $0B
-	ld (_RAM_FFFE_), a
-	ld hl, (_DATA_2C000_)
-	add hl, bc
-	ld c, (hl)
-	inc hl
-	ld a, (hl)
-	inc hl
-	push hl
-	ld h, a
-	ld l, c
-	call _LABEL_3A4_
-	ld (_RAM_FFFE_), a
-	push hl
-	ld de, _SRAM_229C_
-	ld bc, $0020
-	ldir
-	pop hl
-	pop hl
-	ld a, $0B
-	ld (_RAM_FFFE_), a
-	ld a, (hl)
-	inc hl
-	ld h, (hl)
-	ld l, a
-	ld a, h
-	call _LABEL_3A4_
-	ld (_RAM_FFFE_), a
-	push ix
-	pop de
-	ld bc, $0280
-	ldir
-	pop af
-	ld (_RAM_FFFE_), a
+    ; ld de,ix
+    push de
+    pop ix
+    ; multiply a by 4
+    add a, a
+    add a, a
+    ld c, a
+    ld b, $00
+    ld a, (_RAM_FFFE_)
+    push af
+      ; Look up in table
+      ld a, :_DATA_2C000_PortraitsPtr
+      ld (_RAM_FFFE_), a
+      ld hl, (_DATA_2C000_PortraitsPtr) ; = _DATA_2C062_Portraits
+      add hl, bc
+      ; First is a page/index for the palette
+      ld c, (hl)
+      inc hl
+      ld a, (hl)
+      inc hl
+      push hl
+        ld h, a
+        ld l, c
+        call _LABEL_3A4_ReadPointerFromPageAndIndex
+        ld (_RAM_FFFE_), a
+        push hl
+          ld de, _SRAM_229C_ ; Palette copy in RAM
+          ld bc, $0020
+          ldir
+        pop hl
+      pop hl
+      ; Second is the tiles
+      ld a, :_DATA_2C000_PortraitsPtr
+      ld (_RAM_FFFE_), a
+      ld a, (hl)
+      inc hl
+      ld h, (hl)
+      ld l, a
+      ld a, h
+      call _LABEL_3A4_ReadPointerFromPageAndIndex
+      ld (_RAM_FFFE_), a
+      push ix
+      pop de
+      ld bc, $0280 ; 14 tiles
+      ldir
+    pop af
+    ld (_RAM_FFFE_), a
 	pop ix
 	pop hl
 	pop de
@@ -14488,7 +14498,7 @@ _LABEL_6023_:
 	ld de, $FD80
 	add hl, de
 	ex de, hl
-	call _LABEL_3412_
+	call _LABEL_3412_LoadPortrait
 	ld bc, _SRAM_264F_
 	call _LABEL_5FAD_
 	or a
@@ -54257,21 +54267,61 @@ _DATA_29509_:
 .ORG $0000
 
 ; Pointer Table from 2C000 to 2C001 (1 entries, indexed by unknown)
-_DATA_2C000_:
-.dw _DATA_2C062_
+_DATA_2C000_PortraitsPtr:
+.dw _DATA_2C062_Portraits
 
 ; Data from 2C002 to 2C061 (96 bytes)
-.db $FE $40 $DE $40 $9E $43 $7E $43 $3E $46 $1E $46 $DE $48 $BE $48
-.db $7E $4B $5E $4B $1E $4E $FE $4D $BE $50 $9E $50 $5E $53 $3E $53
-.db $FE $55 $DE $55 $9E $58 $7E $58 $3E $5B $1E $5B $DE $5D $BE $5D
-.db $7E $60 $5E $60 $1E $63 $FE $62 $BE $65 $9E $65 $5E $68 $3E $68
-.db $FE $6A $DE $6A $9E $6D $7E $6D $3E $70 $1E $70 $DE $72 $BE $72
-.db $7E $75 $5E $75 $1E $78 $FE $77 $BE $7A $9E $7A $5E $7D $3E $7D
+.dw $40FE $40DE $439E $437E $463E $461E $48DE $48BE
+.dw $4B7E $4B5E $4E1E $4DFE $50BE $509E $535E $533E
+.dw $55FE $55DE $589E $587E $5B3E $5B1E $5DDE $5DBE
+.dw $607E $605E $631E $62FE $65BE $659E $685E $683E
+.dw $6AFE $6ADE $6D9E $6D7E $703E $701E $72DE $72BE
+.dw $757E $755E $781E $77FE $7ABE $7A9E $7D5E $7D3E
 
 ; 1st entry of Pointer Table from 2C000 (indexed by unknown)
 ; Data from 2C062 to 2FFFF (16286 bytes)
-_DATA_2C062_:
-.incbin "Shining Force Gaiden (JP)_DATA_2C062_.inc"
+_DATA_2C062_Portraits:
+.db $02 $0B $01 $0B
+.db $04 $0B $03 $0B
+.db $06 $0B $05 $0B
+.db $08 $0B $07 $0B
+.db $0A $0B $09 $0B
+.db $0C $0B $0B $0B
+.db $0E $0B $0D $0B
+.db $10 $0B $0F $0B
+.db $12 $0B $11 $0B
+.db $14 $0B $13 $0B
+.db $16 $0B $15 $0B
+.db $18 $0B $17 $0B
+.db $1A $0B $19 $0B
+.db $1C $0B $1B $0B
+.db $1E $0B $1D $0B
+.db $20 $0B $1F $0B
+.db $22 $0B $21 $0B
+.db $24 $0B $23 $0B
+.db $26 $0B $25 $0B
+.db $28 $0B $27 $0B
+.db $2A $0B $29 $0B
+.db $2C $0B $2B $0B
+.db $2E $0B $2D $0B
+.db $30 $0B $2F $0B
+.db $01 $09 $00 $09
+.db $03 $09 $02 $09
+.db $05 $09 $04 $09
+.db $07 $09 $06 $09
+.db $09 $09 $08 $09
+.db $0B $09 $0A $09
+.db $0D $09 $0C $09
+.db $00 $00 $FF $0F
+.db $00 $00 $9B $00
+.db $AE $07 $47 $02
+.db $55 $07 $68 $00
+.db $9B $0C $DF $0C
+.db $6A $0A $BF $09
+.db $0F $00 $8C $05
+.db $BF $00 $62 $0B
+
+;.incbin "Shining Force Gaiden (JP)_DATA_2C062_Portraits.inc"
 
 .BANK 12 SLOT 1
 .ORG $0000
