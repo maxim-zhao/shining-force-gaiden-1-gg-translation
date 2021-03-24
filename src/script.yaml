@@ -27,7 +27,7 @@
 # <number> = display a number
 # <party leader>
 # <spell>
-# <use dictionary>
+# <use dictionary> = do not start a new line if this text is continuing on from something (TODO: rename tag)
 # <wait more>
 # <wait>
 # <end> = end of line - inserted automatically if missing
@@ -40,86 +40,154 @@
   character: Guard
   ja: アンリおうに もうしあげます!<delay 01><delay 01><delay 01><delay 01><end>
   literal: Queen Anri!
-  en: Queen Anri!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Queen Anri!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 296
   character: Guard
   ja: ただいま ル-ンたいりくのみなみ<line>サイプレスこくよりの ししゃが<line>ごあいさつにと まいっております<delay 01><delay
     01><delay 01><delay 01><end>
   literal: Messengers from Cypress, south of Rune, have come to meet with you.
-  en: Messengers from<line>Cypress, south of<line>Rune, have come to<delay 01><delay 01><line>meet with you.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Messengers from<line>
+    Cypress, south of<line>
+    Rune, have come to<line>
+    meet with you.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 297
   character: Lowe
   ja: なんと<delay 01> サイプレスよりのししゃ?<delay 01><delay 01><delay 01><delay 01><end>
   literal: Messengers from Cypress?
-  en: Messengers from<line>Cypress?<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Messengers from<line>
+    Cypress?
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 298
   character: Lowe
   ja: アンリさま どういたしましょうか?<line>サイプレスは みかいたくのばしょ<line>こうせんてきな とちとききますぞ<delay 01><delay
     01><delay 01><delay 01><end>
   literal: Queen Anri, what should we do? I have heard Cypress is a wild and warlike place!
-  en: Queen Anri, what<line>should we do?<delay 01><delay 01><line>I have heard<line>Cypress is a wild<line>and warlike place!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Queen Anri, what<line>
+    should we do?<line>
+    I have heard<line>
+    Cypress is a wild<line>
+    and warlike place!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 299
   character: Narration
   ja: そのとき おもてのほうから<line>あらそう ものおとがした<delay 01><delay 01><delay 01><delay 01><end>
   literal: At that time, there was a noise from the people who were fighting.
-  en: Suddenly, the<line>sounds of battle<line>erupt outside.<delay 01><delay 01><delay 01><delay 01><end> 
+  en: |
+    Suddenly, the<line>
+    sounds of battle<line>
+    erupt outside.
+    <delay 01><delay 01><delay 01><delay 01><end> 
   # Edited to something that sounds a bit less dry and descriptive, and more illustrative of what's happening in the story. Feel free to revert, just my two cents.
 
 - index: 300
   character: Guard
   ja: おまちください! ただいま<line>おとりつぎを しているところです<delay 01><delay 01><delay 01><delay 01><end>
   literal: Please be patient! The queen will meet with you soon!
-  en: Please be patient!<delay 01><line>The queen will<line>meet with you<line>soon!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Please be patient!<line>
+    The queen will<line>
+    meet with you<line>
+    soon!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 301
   character: Woldol
   ja: うるさい! こんなところで<line>おめおめと まっていられるか!<line>おまえらこそ だまるがいい!<delay 01><delay 01><delay
     01><delay 01><end>
   literal: Shut up! How dare you make us wait in a place like this! You should all be silenced!
-  en: Shut up!<delay 01><line>How dare you make<line>us wait in a place<line>like this!<delay 01><delay 01><line>You should all be<line>silenced!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Shut up! How dare<line>
+    you make us wait<line>
+    in a place like<line>
+    this! You should<line>
+    all be silenced!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 302
   character: Woldol
   ja: くらえ! スパ-ク レベル３!<delay 01><delay 01><delay 01><delay 01><end>
   literal: Eat this! Spark level 3!
-  en: Eat this!<line>Spark level 3!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Eat this!<line>
+    Spark level 3!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 303
   character: Woldol
   ja: ばかめ! おとなしくしていれば<line>てあらなまねを せずにすんだものを<line>さて アンリおうにあうとするか<delay 01><delay
     01><delay 01><delay 01><end>
   literal: Fools! If you had stayed quiet, I wouldn't have resorted to violence. Well then, shall we meet Queen Anri?
-  en: Fools!<delay 01><line>If you had stayed<line>quiet, I wouldn't<line>have resorted to<line>violence.<delay 01><delay 01><line>Well then, shall<line>we meet Queen<line>Anri?<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Fools!<line>
+    If you had stayed<line>
+    quiet, I wouldn't<line>
+    have resorted to<line>
+    violence.<line>
+    <delay 01><delay 01>
+    Well then, shall<line>
+    we meet Queen<line>
+    Anri?
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 304
   character: Ken
   ja: ひかえろ! ろうぜきものめ!<line>わが ガ-ディアナおうのまえで<line>かってなふるまいは ゆるさんぞ!<delay 01><delay 01><delay
     01><delay 01><end>
   literal: Stay back, violent scum! I won't let you do as you please in the presence of Guardiana's queen!
-  en: Stay back, violent<line>scum!<delay 01><delay 01><line>I won't let you do<line>as you please in<line>the presence of<delay 01><line>Guardiana's queen!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Stay back, violent<line>
+    scum!<line>
+    <delay 01><delay 01>
+    I won't let you do<line>
+    as you please in<line>
+    the presence of<line>
+    Guardiana's queen!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 305
   character: Narration
   ja: ケンは ヤリをもって みがまえた<delay 01><delay 01><delay 01><delay 01><end>
   literal: Ken stands ready, brandishing his spear.
-  en: Ken stands ready,<line>brandishing his<line>spear.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Ken stands ready,<line>
+    brandishing his<line>
+    spear.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 306
   character: Woldol
   ja: グフッ グフッ グフフフッ<line>うわさでは・・・ガ-ディアナは<line>みな れいせつをわきまえるとか・・・<delay 01><delay 01><delay 01><delay 01><end>
   literal: Heh heh heheheh... I've heard rumors of the courtesy of Guardiana's people...
-  en: Heh heh heheheh...<delay 01><delay 01><line>I've heard rumors<line>of the courtesy of<line>Guardiana's<delay 01><line>people...<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Heh heh heheheh...<line>
+    I've heard rumors<line>
+    of the courtesy of<line>
+    Guardiana's<line>
+    people...
+    <delay 01><delay 01><delay 01><delay 01><end>
   # Gufu Gufu Gufufufu is like a "warlock'y laugh" so-to-speak in japanese, it resembles a "witch laugh" which is fufufufu for good reason. Wily and rough. And evil warlock laughs with heh's typically in English fantasy literature.
 
 - index: 307
   character: Woldol
   ja: しかし うわさは あてにならぬな<line>ダントム! フレ-ベル!<delay 01><delay 01><delay 01><delay 01><end>
   literal: But such rumors must be unreliable! Dantom! Frabell!
-  en: But such rumors<line>must be<line>unreliable!<delay 01><delay 01><line>Dantom!<delay 01> Frabell!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    But such rumors<line>
+    must be<line>
+    unreliable!<line>
+    <delay 01><delay 01>
+    Dantom!<delay 01> Frabell!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 308
   character: Dantom
@@ -132,7 +200,14 @@
   ja: グシュ-・・・ グシュ-・・・<line>われらに はむかうとはバカなやつ!<line>さあ くるがいい えんりょはいらぬ<delay 01><delay
     01><delay 01><delay 01><end>
   literal: Crunch... crunch... You are fools to defy us! Come on, then! Don't hold back!
-  en: Crunch...<delay 01>crunch...<delay 01><delay 01><line>You are fools to<line>defy us!<delay 01><line>Come on, then!<line>Don't hold back!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Crunch...<delay 01>crunch...<line>
+    <delay 01><delay 01>
+    You are fools to<line>
+    defy us!<line>
+    Come on, then!<line>
+    Don't hold back!
+    <delay 01><delay 01><delay 01><delay 01><end>
   # "Gashyuu... Gashyuu..." This is the sound of him softly grinding his jaws. it's likely based on the sound effect "gasha" which is a crunching sound, gapu as well is a biting sound, they are closely related. Scrunch/crunch are good onomatopeia equivalents in English.
 
 - index: 310
@@ -140,106 +215,187 @@
   ja: そのきしは あたしのもんだよ<line>さあ おいでシャイニング・フォ-ス<line>ひかりのちからを みせておくれ<delay 01><delay 01><delay
     01><delay 01><end>
   literal: That knight is mine! Come, Shining Force, show me the power of the Light!
-  en: That knight is<line>mine! Come,<line>Shining Force,<delay 01><delay 01><line>show me the power<line>of the Light!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    That knight is<line>
+    mine! Come,<line>
+    Shining Force,<line>
+    show me the power<line>
+    of the Light!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 311
   character: Anri
   ja: まって! みんな おどきなさい!<delay 01><delay 01><delay 01><delay 01><end>
   literal: Wait! Lowe, Ken, please step aside!
-  en: Wait!<delay 01> Lowe, Ken,<line>please step aside!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Wait!<delay 01> Lowe, Ken,<line>
+    please step aside!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 312
   character: Anri
   ja: わたしが このくにをとうちするもの<line>ガ-ディアナのおう アンリです<delay 01><delay 01><delay 01><delay 01><end>
   literal: I am Anri, the ruler of this kingdom, Guardiana.
-  en: I am Anri, the<line>ruler of this<line>kingdom,<delay 01><line>Guardiana.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    I am Anri, the<line>
+    ruler of this<line>
+    kingdom,<line>
+    Guardiana.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 313
   character: Anri
   ja: なんぽうよりのごししゃにたいしての<line>かずかずのぶれい おゆるしください<delay 01><delay 01><delay 01><delay
     01><end>
   literal: Please forgive our rudeness towards you, messengers from the south.
-  en: Please forgive our<line>rudeness towards<line>you, messengers<delay 01><line>from the south.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Please forgive our<line>
+    rudeness towards<line>
+    you, messengers<line>
+    from the south.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 314
   character: Woldol
   ja: これはこれは ごていねいな・・・<delay 01><delay 01><delay 01><delay 01><end>
   literal: My, my... Such courtesy...
-  en: My, my...<line>Such courtesy...<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    My, my...<line>
+    Such courtesy...
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 315
   character: Woldol
   ja: わたくしは サイプレスこくのししゃ<line>そして だいしんかんのウォルドル<line>ひかえるのは せいえいたちです<delay 01><delay
     01><delay 01><delay 01><end>
   literal: I am Woldol, Cypress's messenger and high priest.
-  en: I am Woldol,<line>Cypress's<line>messenger and<delay 01><delay 01><line>high priest.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    I am Woldol,<line>
+    Cypress's<line>
+    messenger and<line>
+    high priest.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 316
   character: Woldol
   ja: われわれが ほんじつまいったのは<line>アンリおうに サイプレスこくおうの<line>おくりものを おとどけするため<delay 01><delay
     01><delay 01><delay 01><end>
   literal: My companions are elite warriors. We came here today to deliver a gift of goodwill from Cypress's king to Queen Anri.
-  en: My companions are<line>elite warriors.<delay 01><delay 01><line>We came here today<line>to deliver a gift<line>of goodwill from<delay 01><delay 01><line>Cypress's king to<line>Queen Anri.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    My companions are<line>
+    elite warriors.<line>
+    <delay 01><delay 01>
+    We came here today<line>
+    to deliver a gift<line>
+    of goodwill from<line>
+    Cypress's king to<line>
+    Queen Anri.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 317
   character: Woldol
   ja: わがくにの ゆうこうのあかしとして<line>さあ どうか おうけとりください<line>そしてどうか おたしかめください<delay 01><delay
     01><delay 01><delay 01><end>
   literal: Please receive it as a token of our friendship and take a look.
-  en: Please receive it<line>as a token of our<line>friendship and<delay 01><delay 01><line>take a look.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Please receive it<line>
+    as a token of our<line>
+    friendship and<line>
+    take a look.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 318
   character: Narration
   ja: アンリは こばこをひらいた・・・<delay 01><delay 01><delay 01><delay 01><end>
   literal: Anri opened the small box...
-  en: Anri opened the<line>small box...<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Anri opened the<line>
+    small box...
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 319
   character: Narration
   ja: こばこから くろいガスがふきだした<delay 01><delay 01><delay 01><delay 01><end>
   literal: A black gas blew out of the box!
-  en: A black gas blew<line>out of the box!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    A black gas blew<line>
+    out of the box!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 320
   character: Lowe
   ja: あっ! アンリさま-っ!<delay 01><delay 01><delay 01><delay 01><end>
   literal: Queen Anri!
-  en: Queen Anri!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Queen Anri!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 321
   character: Woldol
   ja: グフッ グフッ グフフフッ<line>ガ-ディアナのものども-っ<line>こころして きくがよいぞ!<delay 01><delay 01><delay
     01><delay 01><end>
   literal: Heh heh heheheh... Listen carefully, servants of Guardiana!
-  en: Heh heh heheheh...<delay 01><delay 01><line>Listen carefully,<line>servants of<line>Guardiana!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Heh heh heheheh...<line>
+    Listen carefully,<line>
+    servants of<line>
+    Guardiana!<delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 322
   character: Woldol
   ja: アンリおうは とわのねむりについた<line>しかしながら わがかみのちからで<line>ふたたび めをさますこともできる<delay 01><delay
     01><delay 01><delay 01><end>
   literal: Queen Anri has fallen into eternal sleep. However, by the power of our god, she can be awakened once again.
-  en: Queen Anri has<line>fallen into<line>eternal sleep.<delay 01><delay 01><delay 01><line>However, by the<line>power of our god,<line>she can be<delay 01><delay 01><line>awakened once<line>again.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Queen Anri has<line>
+    fallen into<line>
+    eternal sleep.<line>
+    <delay 01><delay 01><delay 01>
+    However, by the<line>
+    power of our god,<line>
+    she can be<line>
+    awakened once<line>
+    again.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 323
   character: Woldol
   ja: そのためには わが サイプレスに<line>ふくじゅうを ちかわなければならぬ<line>それとも わがくにに せめこむか?<delay 01><delay
     01><delay 01><delay 01><end>
   literal: Will you swear fealty to Cypress? Or will you invade us instead?
-  en: Will you swear<line>fealty to Cypress?<delay 01><delay 01><line>Or will you invade<line>us instead?<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Will you swear<line>
+    fealty to Cypress?<line>
+    Or will you invade<line>
+    us instead?
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 324
   character: Woldol
   ja: いずれにしろ よくかんがえることだ<line>アンリおうを たすけるためには<line>サイプレスまで やってくることだ<delay 01><delay
     01><delay 01><delay 01><end>
   literal: Either way, consider your decision carefully. To save your queen, you must come to Cypress.
-  en: Either way,<line>consider your<line>decision<delay 01><line>carefully.<delay 01><delay 01><line>To save your<line>queen, you must<line>come to Cypress!<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Either way,<line>
+    consider your<line>
+    decision<line>
+    carefully.<line>
+    <delay 01><delay 01>
+    To save your<line>
+    queen, you must<line>
+    come to Cypress!
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 - index: 325
   character: Narration
   ja: かくて ガ-ディアナこくは<line>じゃあくなるものとのたたかいに<line>まきこまれて いくのだった<delay 01><delay 01><delay
     01><delay 01><end>
   literal: Thus was Guardiana dragged into a war against evil.
-  en: Thus was Guardiana<line>dragged into a war<line>against evil.<delay 01><delay 01><delay 01><delay 01><end>
+  en: |
+    Thus was Guardiana<line>
+    dragged into a war<line>
+    against evil.
+    <delay 01><delay 01><delay 01><delay 01><end>
 
 
 
