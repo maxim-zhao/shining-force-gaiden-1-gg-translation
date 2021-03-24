@@ -30,6 +30,43 @@ banks 32
 ; Not sure what is in this gap
 .unbackground $29bcd $2a7d2 ; Trees
 
+; Helpful macros for patching stuff
+.macro ROMPosition args _address, _slot
+.if NARGS == 1
+  .if _address < $4000
+    .bank 0 slot 0                    ; Slot 0 for <$4000
+  .else
+    .if _address < $8000
+      .bank 1 slot 1                  ; Slot 1 for <$8000
+    .else
+      .bank (_address / $4000) slot 2 ; Slot 2 otherwise
+    .endif
+  .endif
+.else
+  .bank (_address / $4000) slot _slot ; Slot is given
+.endif
+.org _address # $4000 ; modulo
+.endm
+
+; Patches a byte at the given ROM address
+.macro PatchB args _address, _value
+  ROMPosition _address
+.section "Auto patch @ \1" overwrite
+PatchAt\1:
+  .db _value
+.ends
+.endm
+
+; Patches a word at the given ROM address
+.macro PatchW args _address, _value
+  ROMPosition _address
+.section "Auto patch @ \1" overwrite
+PatchAt\1:
+  .dw _value
+.ends
+.endm
+
+
 .bank 8 slot 1
 .org 0
 
@@ -44,7 +81,7 @@ ScriptIndex:
 .ends
 
 ; We need to patch the pointer to ScriptIndex
-.org $0014 ; ROM address $20014
+  ROMPosition $20014 1
 .section "Script index pointer patch" overwrite
   ld hl,ScriptIndex
 .ends
@@ -57,13 +94,45 @@ ScriptIndex:
 .ends
 
 ; We need to patch the pointer to the tree vector
-.org $000a ; ROM address $2800a
+  ROMPosition $2800a
 .section "Huffman tree pointer patch" overwrite
 .dw TreeVector
 .ends
 
 ; Font replacement
-.org $000c ; ROM address $2800c
+  ROMPosition $2800c
 .section "Font" force
 .incbin "images\font.bin"
+.ends
+
+
+; Text row count increase
+  PatchB $200e2 0 ; nop out Y increase
+  PatchB $2025a 0 ; nop out Y increase
+
+  ROMPosition $00e12
+.section "Text overflow one line at a time" overwrite
+  ; This code usually implements a scroll up by two rows.
+  ; We want to make it only do one.
+  dec e
+  ;dec e
+  dec hl
+  dec hl
+  dec hl
+  dec hl
+  dec hl
+  ld a, $01
+  call $D56
+  call $FDF
+  ;call $3651
+  ;call $3651
+  ;call $3651
+  ;ld a, $01
+  ;call $D56
+  inc hl
+  inc hl
+  inc hl
+  inc hl
+  inc hl
+  jp $e34
 .ends

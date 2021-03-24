@@ -781,7 +781,7 @@ _SRAM_212C_ db
 _SRAM_219C_ dsb $4
 _SRAM_21A0_ dw
 _SRAM_21A2_ dw
-_SRAM_21A4_ dw
+_SRAM_21A4_DrawingYX dw
 _SRAM_21A6_TreeIndex db
 _SRAM_21A7_HuffmanBarrel db
 _SRAM_21A8_ScriptPtr dw
@@ -1808,7 +1808,7 @@ _LABEL_4B5_:
 	ld hl, $A1A2
 	ld (_SRAM_21A0_), hl
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	ld hl, _SRAM_2469_
 	ld (_SRAM_21A2_), hl
 	ld b, $14
@@ -3152,108 +3152,107 @@ _LABEL_D56_:
 	push bc
 	push de
 	push hl
-	ld b, a
-	ld a, i
-	push af
-	ld a, (hl)
-	ld i, a
-	ld a, b
-	inc hl
-	inc hl
-	inc hl
-	ld c, (hl)
-	inc hl
-	ld b, (hl)
-	inc hl
-	push af
-	push hl
-	ld e, c
-	ld d, $00
+    ld b, a
+    ld a, i ; ?!?
+    push af
+      ld a, (hl)
+      ld i, a ; ?!?
+      ld a, b
+      inc hl
+      inc hl
+      inc hl
+      ld c, (hl)
+      inc hl
+      ld b, (hl)
+      inc hl
+      push af
+        push hl
+          ld e, c
+          ld d, $00
+-:        add hl, de
+          add hl, de
+          dec a
+          jr nz, -
+        pop de
+        push bc
+          ld b, $00
+          dec c
+          dec c
+          inc hl
+          inc hl
+          inc de
+          inc de
 -:
-	add hl, de
-	add hl, de
-	dec a
-	jr nz, -
-	pop de
-	push bc
-	ld b, $00
-	dec c
-	dec c
-	inc hl
-	inc hl
-	inc de
-	inc de
--:
-	ld a, (hl)
-	inc hl
-	cp $7A
-	jr nz, +
-	ld a, $7C
-	jr ++
+          ld a, (hl)
+          inc hl
+          cp $7A
+          jr nz, +
+          ld a, $7C
+          jr ++
 
 +:
-	cp $7B
-	jr nz, +
-	ld a, $7D
-	jr ++
+          cp $7B
+          jr nz, +
+          ld a, $7D
+          jr ++
 
 +:
-	ld a, $7F
+          ld a, $7F
 ++:
-	ld (de), a
-	inc de
-	ldi
-	jp pe, -
-	inc hl
-	inc hl
-	inc de
-	inc de
-	pop bc
-	pop af
-	push af
-	push bc
-	sub b
-	neg
-	sub $02
-	add a, a
-	push hl
-	ld h, $00
-	ld l, c
-	call _LABEL_552_Multiply
-	ld b, h
-	ld c, l
-	pop hl
-	ldir
-	pop bc
-	ld a, i
-	ld h, a
-	pop af
-	ex de, hl
-	ld e, c
-	dec e
-	dec e
-	ld c, $01
+          ld (de), a
+          inc de
+          ldi
+          jp pe, -
+          inc hl
+          inc hl
+          inc de
+          inc de
+        pop bc
+      pop af
+      push af
+        push bc
+          sub b
+          neg
+          sub $02
+          add a, a
+          push hl
+            ld h, $00
+            ld l, c
+            call _LABEL_552_Multiply
+            ld b, h
+            ld c, l
+          pop hl
+          ldir
+        pop bc
+        ld a, i
+        ld h, a
+      pop af
+      ex de, hl
+      ld e, c
+      dec e
+      dec e
+      ld c, $01
 --:
-	inc hl
-	inc hl
-	ld b, e
+      inc hl
+      inc hl
+      ld b, e
 -:
-	ld (hl), c
-	inc hl
-	ld (hl), d
-	inc hl
-	djnz -
-	inc hl
-	inc hl
-	dec a
-	jr nz, --
-	pop af
-	ld i, a
-	pop hl
-	pop de
-	pop bc
-	pop af
-	ret
+      ld (hl), c
+      inc hl
+      ld (hl), d
+      inc hl
+      djnz -
+      inc hl
+      inc hl
+      dec a
+      jr nz, --
+    pop af
+    ld i, a ; ?!?
+  pop hl
+  pop de
+  pop bc
+  pop af
+  ret
 
 _LABEL_DD3_:
 	push de
@@ -3295,102 +3294,103 @@ _LABEL_DEF_:
     ld c, (hl)
     inc hl
     push af
-    ld a, d
-    add a, $02
-    cp b
-    jr c, +
-    inc e
-    inc e
-    ld d, $00
+      ld a, d
+      add a, $02
+      cp b
+      jr c, +
+      inc e
+      inc e
+      ld d, $00
 +:
-    inc d
-    ld a, e
-    add a, $02
-    cp c
-    jr c, +
-    dec e
-    dec e
-    dec hl
-    dec hl
-    dec hl
-    dec hl
-    dec hl
-    ld a, $01
-    call _LABEL_D56_
-    call _LABEL_FDF_
-    call _LABEL_3651_WaitForVBlank
-    call _LABEL_3651_WaitForVBlank
-    call _LABEL_3651_WaitForVBlank
-    ld a, $01
-    call _LABEL_D56_
-    inc hl
-    inc hl
-    inc hl
-    inc hl
-    inc hl
+      inc d
+      ld a, e
+      add a, $02
+      cp c
+      jr c, +
+      ; Reached limit
+      dec e
+      dec e
+      dec hl
+      dec hl
+      dec hl
+      dec hl
+      dec hl
+      ld a, $01
+      call _LABEL_D56_
+      call _LABEL_FDF_
+      call _LABEL_3651_WaitForVBlank
+      call _LABEL_3651_WaitForVBlank
+      call _LABEL_3651_WaitForVBlank
+      ld a, $01
+      call _LABEL_D56_
+      inc hl
+      inc hl
+      inc hl
+      inc hl
+      inc hl
 +:
-	pop af
-	push de
-    ld c, d
-    cp $7A
-    jr nz, +
-    dec c
-    inc e
-    dec e
-    jr nz, ++
-    ld a, $7C
-    jr ++
-
-+:
-    cp $7B
-    jr nz, +
-    dec c
-    inc e
-    dec e
-    jr nz, ++
-    ld a, $7D
-    jr ++
-
-+:
-    inc e
-++:
-    push af
-      push hl
-        ld l, b
-        ld h, $00
-        ld a, e
-        call _LABEL_552_Multiply
-        add hl, hl
-        ld e, d
-        ld d, $00
-        add hl, de
-        add hl, de
-      pop de
-      add hl, de
-      ld a, (hl)
-      cp $7F
+    pop af
+    push de
+      ld c, d
+      cp $7A
+      jr nz, +
+      dec c
+      inc e
+      dec e
       jr nz, ++
-    pop af
-    cp $7A
-    jr nz, +
-    ld a, $7C
-    jr +++
+      ld a, $7C
+      jr ++
+
+  +:
+      cp $7B
+      jr nz, +
+      dec c
+      inc e
+      dec e
+      jr nz, ++
+      ld a, $7D
+      jr ++
 
 +:
-    cp $7B
-    jr nz, +++
-    ld a, $7D
-    jr +++
+      inc e
+++:
+      push af
+        push hl
+          ld l, b
+          ld h, $00
+          ld a, e
+          call _LABEL_552_Multiply
+          add hl, hl
+          ld e, d
+          ld d, $00
+          add hl, de
+          add hl, de
+        pop de
+        add hl, de
+        ld a, (hl)
+        cp $7F
+        jr nz, ++
+      pop af
+      cp $7A
+      jr nz, +
+      ld a, $7C
+      jr +++
+
++:
+      cp $7B
+      jr nz, +++
+      ld a, $7D
+      jr +++
 
 ++:
-    pop af
+      pop af
 +++:
-    ld (hl), a ; emit low tilemap byte to SRAM buffer
-    inc hl
-    ld a, ixl
-    ld (hl), a ; and high byte
-	pop de
-	ld d, c
+      ld (hl), a ; emit low tilemap byte to SRAM buffer
+      inc hl
+      ld a, ixl
+      ld (hl), a ; and high byte
+    pop de
+    ld d, c
 	pop ix
 	pop hl
 	pop bc
@@ -11538,7 +11538,7 @@ _LABEL_514A_:
 	ld hl, $A1A2
 	ld (_SRAM_21A0_), hl
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	ld hl, _SRAM_2469_
 	ld (_SRAM_21A2_), hl
 	ld b, $14
@@ -11917,7 +11917,7 @@ _LABEL_539B_:
 	ld hl, $A1A2
 	ld (_SRAM_21A0_), hl
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	ld hl, _SRAM_2469_
 	ld (_SRAM_21A2_), hl
 	ld b, $14
@@ -18805,7 +18805,7 @@ _LABEL_864C_:
 	ld hl, $A1A2
 	ld (_SRAM_21A0_), hl
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	ld hl, _RAM_C000_
 	ld (_SRAM_21A2_), hl
 	ld b, $14
@@ -18849,7 +18849,7 @@ _LABEL_8691_:
 	ld hl, $A1A2
 	ld (_SRAM_21A0_), hl
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	ld hl, _RAM_C000_
 	ld (_SRAM_21A2_), hl
 	ld b, $14
@@ -18869,7 +18869,7 @@ _LABEL_8691_:
 	pop hl
 	push hl
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	pop hl
 	pop bc
 	pop de
@@ -47051,7 +47051,7 @@ _LABEL_1814A_:
 	ld hl, $A1A2
 	ld (_SRAM_21A0_), hl
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	ld hl, _RAM_C542_
 	ld (_SRAM_21A2_), hl
 	ld b, $14
@@ -47476,7 +47476,7 @@ _LABEL_184AE_:
 	ld hl, $A1A2
 	ld (_SRAM_21A0_), hl
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	ld hl, _RAM_C542_
 	ld (_SRAM_21A2_), hl
 	ld b, $14
@@ -53649,7 +53649,7 @@ _LABEL_20051_:
 	dec hl
 	call _LABEL_CD1_
 	ld hl, $0000
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	pop hl
 	pop de
 	pop bc
@@ -53721,14 +53721,16 @@ _LABEL_200A5_DrawScriptEntry:
     cp $C8
     jp z, _LABEL_200EC_ScriptDecodeLoop
     
-    ld hl, (_SRAM_21A4_)
+    ; Check if x=0
+    ld hl, (_SRAM_21A4_DrawingYX)
     inc h
     dec h
-    jr z, +
+    jr z, + ; If so, carry on
+    ; else move to the next row
     inc l
     inc l
     ld h, $00
-    ld (_SRAM_21A4_), hl
+    ld (_SRAM_21A4_DrawingYX), hl
     jp +
 
 _LABEL_200EC_ScriptDecodeLoop: ; script decoding loop point
@@ -53746,9 +53748,9 @@ _LABEL_200EC_ScriptDecodeLoop: ; script decoding loop point
     push de
     push hl
       ld hl, (_SRAM_21A2_)
-      ld de, (_SRAM_21A4_)
+      ld de, (_SRAM_21A4_DrawingYX)
       call _LABEL_DEF_
-      ld (_SRAM_21A4_), de
+      ld (_SRAM_21A4_DrawingYX), de
     pop hl
     pop de
     pop af
@@ -53945,11 +53947,11 @@ _LABEL_20248_ScriptingCode_CB_Delay02:
 	jp _LABEL_200EC_ScriptDecodeLoop
 
 _LABEL_20256_ScriptingCode_C9_line:
-	ld hl, (_SRAM_21A4_)
+	ld hl, (_SRAM_21A4_DrawingYX)
 	inc l
 	inc l
 	ld h, $00
-	ld (_SRAM_21A4_), hl
+	ld (_SRAM_21A4_DrawingYX), hl
 	jp _LABEL_200EC_ScriptDecodeLoop
 
 _LABEL_20263_ScriptingCode_D9_ClearScreen:
