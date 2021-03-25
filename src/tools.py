@@ -41,6 +41,28 @@ en_character_map = "ロ" \
                    "abcdefghijklmnopqrstuvwxyz"
 
 
+def bytes_to_japanese(data):
+    s = ""
+    # The encoding puts ten-ten indices before the characters they affect.
+    # In Unicode, these conveniently map to the character plus 1 or 2.
+    tenten = 0
+    for index in data:
+        if index in codes:
+            s += codes[index]
+        elif index >= len(character_map):
+            s += f"<{hex(index)}>"
+        else:
+            c = character_map[index]
+            if c == "゛":
+                tenten = 1
+            elif c == "゜":
+                tenten = 2
+            else:
+                s += chr(ord(c) + tenten)
+                tenten = 0
+    return s
+
+
 class BitReader:
     """Lets you read bits one at a time, left to right"""
 
@@ -137,6 +159,7 @@ class Node:
 
 class BitWriter:
     """Deals with writing bits into a buffer"""
+
     def __init__(self):
         self.buffer = bytearray()
         self.bit_count = 0
@@ -195,7 +218,8 @@ class Tree:
         with open(file, "rb") as f:
             self.root = Node()
             self.root.parse(reader, f, next_data_offset)
-        print(f"Tree consumed {reader.bits_read} bits from ${offset:x} to ${offset + math.ceil(reader.bits_read / 8):x} inclusive")
+        print(
+            f"Tree consumed {reader.bits_read} bits from ${offset:x} to ${offset + math.ceil(reader.bits_read / 8):x} inclusive")
         reader.close()
 
     def decode(self, script_data):
@@ -296,7 +320,8 @@ def dump_script(rom, output_file):
                 start_offset = f.tell()
                 # read length byte (not actually needed)
                 entry_length = int.from_bytes(f.read(1), byteorder='little')
-                print(f"Entry {entry_index} at {f.tell() - 1:x} says its length is {entry_length} bytes up to {f.tell() - 1 + entry_length:x} inclusive")
+                print(
+                    f"Entry {entry_index} at {f.tell() - 1:x} says its length is {entry_length} bytes up to {f.tell() - 1 + entry_length:x} inclusive")
                 # point at data
                 entry_data = BitReader(rom, f.tell())
                 # decode it...
@@ -311,21 +336,7 @@ def dump_script(rom, output_file):
                 bytes_consumed = math.ceil(entry_data.bits_read / 8)
                 print(f"{line} was {entry_data.bits_read} bits")
 
-                s = ""
-                for index in line:
-                    if index in codes:
-                        s += codes[index]
-                    elif index >= len(character_map):
-                        s += f"<{hex(index)}>"
-                    else:
-                        c = character_map[index]
-                        if c == "゛":
-                            tenten = 1
-                        elif c == "゜":
-                            tenten = 2
-                        else:
-                            s += chr(ord(c) + tenten)
-                            tenten = 0
+                s = bytes_to_japanese(line)
                 print(s)
 
                 entry_index += 1
@@ -576,14 +587,9 @@ def dump_menus(rom_filename, output_filename):
             # ptr is in CPU space. We convert to ROM space.
             ptr += (location // 0x4000 - 1) * 0x4000  # assuming bank 1 here
             f.seek(ptr)
-            s = ""
-            while True:
-                b = f.read(1)[0]
-                if b == 0:
-                    data_length = f.tell() - ptr
-                    break
-                if b < len(character_map):
-                    s += character_map[b]
+            # Read bytes up to null
+            s = bytes_to_japanese(iter(lambda: f.read(1)[0], 0))
+            data_length = f.tell() - ptr
 
             menus.append({
                 "reference_at": hex(location),
