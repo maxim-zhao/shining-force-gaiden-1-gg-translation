@@ -146,7 +146,7 @@
 - reference_at: '0xb634'
   data_at: '0xb65c'
   data_length: 18
-  ja: おこのみのゲ-ムスピ-ドはI
+  ja: おこのみのゲ-ムスピ-ドは?
   en: ''
 - reference_at: '0xb644'
   data_at: '0xb66e'
@@ -197,11 +197,11 @@
   data_at: '0xb91b'
   data_length: 7
   ja: つづきから
-  en: Cont.
-- reference_at: '0xb8f4'
-  data_at: '0xb9cd'
-  data_length: 27
-  ja: <0xf5>ぉ６らワ<0xc0>ッらロ<0xc0><0xf1><0xc5> <0xfe>ッ<name>ッあ<0xc1>かウ４せフちさ
+  en: ''
+- reference_at: '0xb8f2'
+  data_at: '0xb922'
+  data_length: 3
+  ja: けす
   en: ''
 - reference_at: '0xb90b'
   data_at: '0xb925'

@@ -571,14 +571,14 @@ def dump_menus(rom_filename, output_filename):
         0xb82e,
         0xb8c5,
         0xb8dd,
-        0xb8f4,
+        0xb8f2,
         0xb90b,
         0xb9da,
         0xba7c,
         0xbaf2,
-        # 0xbb02, # This one is pointing at SRAM
+        # 0xbb02,  # This one is pointing at SRAM
         0xbb40,
-        0xbb47,  # sram
+        0xbb47,
         0xcc80,
         0xcc90
     ]
@@ -589,6 +589,8 @@ def dump_menus(rom_filename, output_filename):
         for location in menu_data_locations:
             f.seek(location)
             ptr = int.from_bytes(f.read(2), byteorder="little")
+            if ptr >= 0x8000:
+                print(f"Warning: menu pointer to {ptr:x} is in upper memory")
             # ptr is in CPU space. We convert to ROM space.
             ptr += (location // 0x4000 - 1) * 0x4000  # assuming bank 1 here
             f.seek(ptr)
