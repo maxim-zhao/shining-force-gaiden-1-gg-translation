@@ -62,6 +62,32 @@ def bytes_to_japanese(data):
                 tenten = 0
     return s
 
+def english_to_bytes(s):
+    buffer = bytearray()
+    while len(s) > 0:
+        # Check for a tag
+        match = re.match("<[^>]+?>", s)
+        if match:
+            # Consume the matched text
+            tag = match.group(0)
+            s = s[len(tag):]
+            # Parse the tag
+            if tag in codes_reverse:
+                buffer.append(codes_reverse[tag])
+            else:
+                print(f"Error: unhandled tag {tag}")
+        else:
+            # Not a tag
+            # Look up in en_character_map
+            value = en_character_map.find(s[0])
+            if value == -1:
+                print(f"Error: character {s[0]} not in character map")
+            else:
+                buffer.append(value)
+            s = s[1:]
+
+    return buffer
+
 
 class BitReader:
     """Lets you read bits one at a time, left to right"""
@@ -380,28 +406,7 @@ class ScriptEntry:
         self.text = s
 
         # Encode into a buffer
-        self.buffer = bytearray()
-        while len(s) > 0:
-            # Check for a tag
-            match = re.match("<[^>]+?>", s)
-            if match:
-                # Consume the matched text
-                tag = match.group(0)
-                s = s[len(tag):]
-                # Parse the tag
-                if tag in codes_reverse:
-                    self.buffer.append(codes_reverse[tag])
-                else:
-                    print(f"Error: unhandled tag {tag}")
-            else:
-                # Not a tag
-                # Look up in en_character_map
-                value = en_character_map.find(s[0])
-                if value == -1:
-                    print(f"Error: character {s[0]} not in character map")
-                else:
-                    self.buffer.append(value)
-                s = s[1:]
+        self.buffer = english_to_bytes(s)
 
     def __str__(self):
         return f"{self.text} ({' '.join('{:02x}'.format(x) for x in self.buffer)})"
@@ -587,7 +592,7 @@ def dump_menus(rom_filename, output_filename):
             # ptr is in CPU space. We convert to ROM space.
             ptr += (location // 0x4000 - 1) * 0x4000  # assuming bank 1 here
             f.seek(ptr)
-            # Read bytes up to null
+            # Read bytes up to zero and convert to a string
             s = bytes_to_japanese(iter(lambda: f.read(1)[0], 0))
             data_length = f.tell() - ptr
 
@@ -603,6 +608,37 @@ def dump_menus(rom_filename, output_filename):
         documents = yaml.dump(menus, file, sort_keys=False, allow_unicode=True)
 
 
+def encode_menus(yaml_filename, asm_filename):
+    # Read the file
+    with open(yaml_filename, "r", encoding="utf-8") as f:
+        menus = yaml.load(f, Loader=yaml.Loader)
+    # Write the output
+    with open(asm_filename, "w", encoding="utf-8") as f:
+        for menu in menus:
+            # int(s, 0) means it interprets the 0x prefix
+            ptr_location = int(menu["reference_at"], 0)
+            data_location = int(menu["data_at"], 0)
+            data_end = data_location + menu["data_length"] - 1
+            text = menu["en"]
+            buffer = english_to_bytes(text)
+            # Menus are null-terminated
+            buffer.append(0)
+            # Stringify
+            buffer_as_text = " ".join([f"${b:02x}" for b in buffer])
+            # Make a label
+            label = f"Menu{ptr_location:x}"
+            f.writelines([
+                f" PatchW ${ptr_location:x} {label}\n"
+                f".unbackground ${data_location:x} ${data_end:x}\n",
+                f" ROMPosition ${ptr_location:x} 1\n"
+                f".section \"{label}\" free\n",
+                f"{label}:\n",
+                f"  ; {text}\n",
+                f"  .db {buffer_as_text}\n",
+                f".ends\n\n",
+                ])
+
+
 def main():
     verb = sys.argv[1]
     if verb == 'dump_script':
@@ -611,6 +647,8 @@ def main():
         encode_script(sys.argv[2], sys.argv[3], sys.argv[4])
     elif verb == 'dump_menus':
         dump_menus(sys.argv[2], sys.argv[3])
+    elif verb == 'encode_menus':
+        encode_menus(sys.argv[2], sys.argv[3])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 

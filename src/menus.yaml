@@ -192,12 +192,12 @@
   data_at: '0xb914'
   data_length: 7
   ja: はじめから
-  en: From the beginning
+  en: New
 - reference_at: '0xb8dd'
   data_at: '0xb91b'
   data_length: 7
   ja: つづきから
-  en: Continue
+  en: Cont.
 - reference_at: '0xb8f4'
   data_at: '0xb9cd'
   data_length: 27
@@ -207,7 +207,7 @@
   data_at: '0xb925'
   data_length: 4
   ja: うつす
-  en: Press
+  en: Copy
 - reference_at: '0xb9da'
   data_at: '0xb9fe'
   data_length: 5

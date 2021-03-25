@@ -11,3 +11,4 @@
 linkfile
 *.o
 *.bps
+/src/menus.asm

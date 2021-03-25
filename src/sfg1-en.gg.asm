@@ -136,3 +136,6 @@ ScriptIndex:
   inc hl
   jp $e34
 .ends
+
+; Menus auto-generated code
+.include "menus.asm"
