@@ -2950,45 +2950,49 @@ _LABEL_C73_:
 	pop bc
 	ret
 
-_LABEL_C79_:
+_LABEL_C79_DrawMenuItem:
+  ; bc = parameter
 	push de
 	push hl
-	ld hl, (_SRAM_21A0_)
-	ld e, (hl)
-	inc hl
-	ld d, (hl)
-	inc hl
-	push de
-	ld e, (hl)
-	inc hl
-	ld d, (hl)
-	pop hl
-	call _LABEL_C95_
-	ld hl, (_SRAM_21A0_)
-	inc hl
-	inc hl
-	ld (hl), e
-	inc hl
-	ld (hl), d
+    ld hl, (_SRAM_21A0_) ; Retrieve pointer
+    ; Get first word
+    ld e, (hl)
+    inc hl
+    ld d, (hl)
+    inc hl
+    push de
+      ; Then second word
+      ld e, (hl)
+      inc hl
+      ld d, (hl)
+    pop hl
+    ; hl = first, de = second
+    call _LABEL_C95_DrawMenuItem
+    ld hl, (_SRAM_21A0_)
+    inc hl
+    inc hl
+    ld (hl), e
+    inc hl
+    ld (hl), d
 	pop hl
 	pop de
 	ret
 
-_LABEL_C95_:
-	push af
--:
-	ld a, (bc)
-	and a
-	jr z, +
-	call _LABEL_DEF_
-	inc bc
-	jr -
+_LABEL_C95_DrawMenuItem:
+  push af
+-:  ld a, (bc) ; Get byte
+    and a
+    jr z, +
+    ; non-zero
+    call _LABEL_DEF_DrawCharacter
+    inc bc
+    jr -
 
-+:
++:; zero = end
 	pop af
 	ret
 
-_LABEL_CA2_:
+_LABEL_CA2_DrawMultipleItems: ; Clone of _LABEL_C79_DrawMenuItem that draws a consecutive items
 	push de
 	push hl
 	ld hl, (_SRAM_21A0_)
@@ -3014,21 +3018,20 @@ _LABEL_CA2_:
 
 _LABEL_CBE_:
 	push af
--:
-	push af
-	ld a, (bc)
-	and a
-	jr z, +
-	call _LABEL_DEF_
-	inc bc
-	pop af
-	dec a
-	jr nz, -
+-:  push af
+      ld a, (bc)
+      and a
+      jr z, +
+      call _LABEL_DEF_DrawCharacter
+      inc bc
+    pop af
+    dec a
+    jr nz, -
 	pop af
 	ret
 
 +:
-	pop af
+    pop af
 	pop af
 	ret
 
@@ -3267,7 +3270,7 @@ _LABEL_DD3_:
 	inc hl
 	ld d, (hl)
 	pop hl
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld hl, (_SRAM_21A0_)
 	inc hl
 	inc hl
@@ -3278,7 +3281,7 @@ _LABEL_DD3_:
 	pop de
 	ret
 
-_LABEL_DEF_:
+_LABEL_DEF_DrawCharacter:
 	push af
 	push bc
 	push hl
@@ -3332,7 +3335,7 @@ _LABEL_DEF_:
     pop af
     push de
       ld c, d
-      cp $7A
+      cp $7A ; ten-ten handling. Should remove this.
       jr nz, +
       dec c
       inc e
@@ -10581,7 +10584,7 @@ _LABEL_4AEA_:
 	call _LABEL_CD1_
 	pop bc
 	ld de, $0000
-	call _LABEL_C95_
+	call _LABEL_C95_DrawMenuItem
 	ld e, $08
 	ex af, af'
 	ld d, a
@@ -10742,37 +10745,37 @@ _LABEL_4BD3_:
 .db $32 $04
 
 	push hl
-	ld hl, $0000
-	ld (_SRAM_2463_), hl
+    ld hl, $0000
+    ld (_SRAM_2463_), hl
 	pop hl
 	push bc
-	ld b, h
-	ld c, l
-	push af
-	ld a, e
-	call _LABEL_CA2_
-	pop af
-	pop bc
-	and a
-	jp m, ++
-	push af
-	rst $18	; _LABEL_18_
+    ld b, h
+    ld c, l
+    push af
+      ld a, e
+      call _LABEL_CA2_DrawMultipleItems
+    pop af
+    pop bc
+    and a
+    jp m, ++
+    push af
+      rst $18	; _LABEL_18_
 ; Data from 4C4E to 4C4F (2 bytes)
 .db $38 $04
 
-	ld e, d
-	ld d, $00
-	ld bc, $0600
-	ld hl, $A3F8
-	rst $18	; _LABEL_18_
+      ld e, d
+      ld d, $00
+      ld bc, $0600
+      ld hl, $A3F8
+      rst $18	; _LABEL_18_
 ; Data from 4C5A to 4C5B (2 bytes)
 .db $1A $03
 
-	ld d, $05
-	ld a, $09
-	cp e
-	jr c, +
-	ld d, $06
+      ld d, $05
+      ld a, $09
+      cp e
+      jr c, +
+      ld d, $06
 +:
 	push af
 	ld a, d
@@ -10892,8 +10895,8 @@ _LABEL_4CD7_:
 	ld (_SRAM_2631_), hl
 	pop hl
 	push bc
-	ld bc, $4D2D
-	call _LABEL_C79_
+	ld bc, _DATA_4D2D_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0501
@@ -10974,7 +10977,7 @@ _LABEL_4D34_:
 	push hl
 	ld hl, (_SRAM_262F_)
 	ld de, (_SRAM_2631_)
-	call _LABEL_C95_
+	call _LABEL_C95_DrawMenuItem
 	ld (_SRAM_2631_), de
 	pop hl
 	pop de
@@ -23841,7 +23844,7 @@ _LABEL_A36F_:
 	ld bc, _DATA_E3BB_
 	ld hl, (_RAM_C104_)
 	ld de, (_RAM_C106_)
-	call _LABEL_C95_
+	call _LABEL_C95_DrawMenuItem
 	ld (_RAM_C106_), de
 	pop hl
 	pop de
@@ -23966,7 +23969,7 @@ _LABEL_A443_:
 	push hl
 	ld hl, (_RAM_C100_)
 	ld de, (_RAM_C102_)
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld (_RAM_C102_), de
 	pop hl
 	pop de
@@ -24136,7 +24139,7 @@ _LABEL_A528_:
 	pop hl
 	push bc
 	ld bc, _DATA_A593_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0002
@@ -24144,7 +24147,7 @@ _LABEL_A528_:
 	pop hl
 	push bc
 	ld bc, _DATA_A59A_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0004
@@ -24152,7 +24155,7 @@ _LABEL_A528_:
 	pop hl
 	push bc
 	ld bc, _DATA_A5A2_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, _DATA_7_ - 1
@@ -24160,7 +24163,7 @@ _LABEL_A528_:
 	pop hl
 	push bc
 	ld bc, _DATA_E5A8_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	call _LABEL_BE6C_
 	pop af
@@ -24230,7 +24233,7 @@ _LABEL_A5B0_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	inc b
@@ -24745,52 +24748,52 @@ _LABEL_A863_:
 	push af
 	push bc
 	push hl
-	push af
-	push bc
-	push de
-	push hl
-	ld hl, $C000
-	ld (_SRAM_21A0_), hl
-	ld de, _DATA_A8BA_
-	ld hl, _RAM_C004_
-	ld (_RAM_C000_), hl
-	xor a
-	ld (_RAM_C002_), a
-	ld (_RAM_C003_), a
-	ld a, $80
-	ld b, $0D
-	ld c, $04
-	call _LABEL_D2F_
-	pop hl
-	pop de
-	pop bc
-	pop af
-	push hl
-	ld hl, (_RAM_C000_)
-	inc hl
-	ld (hl), $07
-	inc hl
-	ld (hl), $0E
-	pop hl
-	ld c, $08
-	call _LABEL_A94F_
-	ld c, b
-	sla c
-	ld b, $00
-	add hl, bc
-	ld a, (hl)
-	inc hl
-	ld h, (hl)
-	ld l, a
-	push hl
-	ld hl, $0601
-	ld (_RAM_C002_), hl
-	pop hl
-	push bc
-	ld b, h
-	ld c, l
-	call _LABEL_C79_
-	pop bc
+    push af
+    push bc
+    push de
+    push hl
+      ld hl, $C000
+      ld (_SRAM_21A0_), hl
+      ld de, _DATA_A8BA_
+      ld hl, _RAM_C004_
+      ld (_RAM_C000_), hl
+      xor a
+      ld (_RAM_C002_), a
+      ld (_RAM_C003_), a
+      ld a, $80
+      ld b, $0D
+      ld c, $04
+      call _LABEL_D2F_
+    pop hl
+    pop de
+    pop bc
+    pop af
+    push hl
+      ld hl, (_RAM_C000_)
+      inc hl
+      ld (hl), $07
+      inc hl
+      ld (hl), $0E
+    pop hl
+    ld c, $08
+    call _LABEL_A94F_
+    ld c, b
+    sla c
+    ld b, $00
+    add hl, bc
+    ld a, (hl)
+    inc hl
+    ld h, (hl)
+    ld l, a
+    push hl
+      ld hl, $0601
+      ld (_RAM_C002_), hl
+    pop hl
+    push bc
+      ld b, h
+      ld c, l
+      call _LABEL_C79_DrawMenuItem
+    pop bc
 	pop hl
 	pop bc
 	pop af
@@ -24915,7 +24918,7 @@ _LABEL_A98C_:
 	pop hl
 	push bc
 	ld bc, _DATA_E9C4_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop af
 	ret
@@ -25051,7 +25054,7 @@ _LABEL_AA7B_:
 	ld bc, _DATA_BFEE_
 	push af
 	ld a, $12
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	jr ++
@@ -25077,7 +25080,7 @@ _LABEL_AA7B_:
 	ld bc, _DATA_BFEE_
 	push af
 	ld a, $12
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push hl
@@ -25164,7 +25167,7 @@ _LABEL_AB09_:
 	pop hl
 	push bc
 	ld bc, _DATA_AB5A_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	inc b
 	dec b
@@ -25213,7 +25216,7 @@ _LABEL_AB76_:
 	ld c, l
 	push af
 	ld a, $0A
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	rst $18	; _LABEL_18_
@@ -25235,7 +25238,7 @@ _LABEL_AB76_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push bc
@@ -25263,15 +25266,15 @@ _LABEL_AB76_:
 	ld hl, _DATA_AC11_
 +:
 	push af
-	ld a, $0F
-	ld (_RAM_C003_), a
-	ld a, c
-	ld (_RAM_C002_), a
+    ld a, $0F
+    ld (_RAM_C003_), a
+    ld a, c
+    ld (_RAM_C002_), a
 	pop af
 	push bc
-	ld b, h
-	ld c, l
-	call _LABEL_C79_
+    ld b, h
+    ld c, l
+    call _LABEL_C79_DrawMenuItem
 	pop bc
 ++:
 	pop bc
@@ -25287,7 +25290,7 @@ _LABEL_AB76_:
 	pop hl
 	push bc
 	ld bc, _DATA_AC00_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop ix
 	pop hl
@@ -25339,7 +25342,7 @@ _LABEL_AC2D_:
 	ld c, l
 	push af
 	ld a, $0A
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push bc
@@ -25399,7 +25402,7 @@ _LABEL_AC2D_:
 	pop hl
 	push bc
 	ld bc, _DATA_AC97_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop ix
 	pop hl
@@ -25443,7 +25446,7 @@ _LABEL_ACBB_:
 	ld c, l
 	push af
 	ld a, $0A
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push bc
@@ -25495,7 +25498,7 @@ _LABEL_ACBB_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	ld e, c
@@ -25516,7 +25519,7 @@ _LABEL_ACBB_:
 	pop hl
 	push bc
 	ld bc, _DATA_AD3B_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop ix
 	pop hl
@@ -25562,7 +25565,7 @@ _LABEL_AD45_:
 	pop hl
 	push bc
 	ld bc, _DATA_ADD8_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0005
@@ -25570,7 +25573,7 @@ _LABEL_AD45_:
 	pop hl
 	push bc
 	ld bc, _DATA_ADDF_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0009
@@ -25578,7 +25581,7 @@ _LABEL_AD45_:
 	pop hl
 	push bc
 	ld bc, _DATA_ADE6_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $000B
@@ -25586,7 +25589,7 @@ _LABEL_AD45_:
 	pop hl
 	push bc
 	ld bc, _DATA_ADED_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, _DATA_E_ - 1
@@ -25594,7 +25597,7 @@ _LABEL_AD45_:
 	pop hl
 	push bc
 	ld bc, _DATA_ADF5_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, _DATA_E_ + 1
@@ -25602,7 +25605,7 @@ _LABEL_AD45_:
 	pop hl
 	push bc
 	ld bc, _DATA_EDFB_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	call _LABEL_BE6C_
 	pop af
@@ -25651,7 +25654,7 @@ _LABEL_AE03_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	bit 7, a
@@ -25673,7 +25676,7 @@ _LABEL_AE03_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push af
@@ -25724,7 +25727,7 @@ _LABEL_AE03_:
 	push bc
 	ld b, h
 	ld c, l
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 _LABEL_AE86_:
 	ld hl, _RAM_C008_
@@ -25777,7 +25780,7 @@ _LABEL_AE86_:
 	pop hl
 	push bc
 	ld bc, _DATA_EF0D_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	rst $18	; _LABEL_18_
 ; Data from AEC9 to AECA (2 bytes)
@@ -25885,7 +25888,7 @@ _LABEL_AF13_:
 	pop hl
 	push bc
 	ld bc, _DATA_AF8E_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	ld b, $00
 	jr +
@@ -25907,7 +25910,7 @@ _LABEL_AF13_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	inc b
@@ -25925,7 +25928,7 @@ _LABEL_AF13_:
 	pop hl
 	push bc
 	ld bc, _DATA_AF95_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 +:
 	pop hl
@@ -25974,7 +25977,7 @@ _LABEL_AF9C_:
 	pop hl
 	push bc
 	ld bc, _DATA_AFF5_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	ld b, $01
 	ld hl, _SRAM_230D_
@@ -26025,7 +26028,7 @@ _DATA_AFF5_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	pop hl
@@ -26171,7 +26174,7 @@ _LABEL_B0C3_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push bc
@@ -26198,7 +26201,7 @@ _LABEL_B0C3_:
 	ld bc, _SRAM_230D_
 	push af
 	ld a, $05
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	pop hl
@@ -26314,7 +26317,7 @@ _LABEL_B19B_:
 	ld bc, _DATA_BFEE_
 	push af
 	ld a, $0F
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	jr _LABEL_B1F0_
@@ -26339,7 +26342,7 @@ _LABEL_B19B_:
 	ld bc, _DATA_BFEE_
 	push af
 	ld a, $0F
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 _LABEL_B1F0_:
@@ -26766,7 +26769,7 @@ _LABEL_B418_:
 	ld c, l
 	push af
 	ld a, $0A
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	rst $18	; _LABEL_18_
@@ -26786,7 +26789,7 @@ _LABEL_B418_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push af
@@ -26837,7 +26840,7 @@ _LABEL_B418_:
 	push bc
 	ld b, h
 	ld c, l
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 ++:
 	ld hl, _RAM_C1A6_
@@ -26942,7 +26945,7 @@ _LABEL_B418_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	pop hl
@@ -26955,7 +26958,7 @@ _LABEL_B418_:
 	pop hl
 	push bc
 	ld bc, _DATA_B558_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop ix
 	pop hl
@@ -27006,7 +27009,7 @@ _LABEL_B573_:
 	pop hl
 	push bc
 	ld bc, _DATA_B5BB_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0003
@@ -27014,7 +27017,7 @@ _LABEL_B573_:
 	pop hl
 	push bc
 	ld bc, _DATA_F5CC_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop af
 	ret
@@ -27084,7 +27087,7 @@ _LABEL_B604_:
 	pop hl
 	push bc
 	ld bc, _DATA_B65C_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0202
@@ -27092,7 +27095,7 @@ _LABEL_B604_:
 	pop hl
 	push bc
 	ld bc, _DATA_B66E_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, _DATA_104_
@@ -27100,7 +27103,7 @@ _LABEL_B604_:
 	pop hl
 	push bc
 	ld bc, _DATA_F67B_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop af
 	ret
@@ -27182,7 +27185,7 @@ _LABEL_B6B3_:
 	pop hl
 	push bc
 	ld bc, _DATA_B781_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0002
@@ -27190,7 +27193,7 @@ _LABEL_B6B3_:
 	pop hl
 	push bc
 	ld bc, _DATA_B788_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	ld d, a
 	rst $18	; _LABEL_18_
@@ -27206,7 +27209,7 @@ _LABEL_B6B3_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push af
@@ -27324,7 +27327,7 @@ _LABEL_B78F_:
 	pop af
 	push bc
 	ld bc, _DATA_F7E9_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	rst $18	; _LABEL_18_
 ; Data from B7C4 to B7C5 (2 bytes)
@@ -27343,7 +27346,7 @@ _LABEL_B78F_:
 	ld bc, _SRAM_230D_
 	push af
 	ld a, $07
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	pop ix
@@ -27397,7 +27400,7 @@ _LABEL_B7F1_:
 	push bc
 	ld b, h
 	ld c, l
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop hl
 	pop af
@@ -27489,14 +27492,14 @@ _LABEL_B879_:
 	cp $01
 	jr z, +
 	push af
-	ld a, $00
-	ld (_RAM_C003_), a
-	ld a, b
-	ld (_RAM_C002_), a
+    ld a, $00
+    ld (_RAM_C003_), a
+    ld a, b
+    ld (_RAM_C002_), a
 	pop af
 	push bc
-	ld bc, _DATA_B914_
-	call _LABEL_C79_
+    ld bc, _DATA_B914_NewSaveNameData
+    call _LABEL_C79_DrawMenuItem
 	pop bc
 +:
 	or a
@@ -27510,8 +27513,8 @@ _LABEL_B879_:
 	ld (_RAM_C002_), a
 	pop af
 	push bc
-	ld bc, _DATA_B91B_
-	call _LABEL_C79_
+    ld bc, _DATA_B91B_
+    call _LABEL_C79_DrawMenuItem
 	pop bc
 	inc b
 	inc b
@@ -27523,7 +27526,7 @@ _LABEL_B879_:
 	pop af
 	push bc
 	ld bc, _DATA_B922_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 +:
 	cp $02
@@ -27538,7 +27541,7 @@ _LABEL_B879_:
 	pop af
 	push bc
 	ld bc, _DATA_F925_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 +:
 	pop bc
@@ -27546,12 +27549,16 @@ _LABEL_B879_:
 	ret
 
 ; Data from B914 to B91A (7 bytes)
-_DATA_B914_:
+_DATA_B914_NewSaveNameData:
 .db $25 $7A $17 $2D $11 $32 $00
+;    ``------``------``------`` Tile indices
+;      
 
 ; Data from B91B to B921 (7 bytes)
 _DATA_B91B_:
 .db $1D $7A $1D $12 $11 $32 $00
+;    ``------``--``--``--``---- Tile indices
+;        ``-- ???
 
 ; Data from B922 to B924 (3 bytes)
 _DATA_B922_:
@@ -27665,7 +27672,7 @@ _LABEL_B998_:
 	ld c, l
 	push af
 	ld a, $0A
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	push bc
@@ -27679,7 +27686,7 @@ _LABEL_B998_:
 	pop af
 	push bc
 	ld bc, _DATA_B9FE_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	ld de, $0645
 	add hl, de
@@ -27792,7 +27799,7 @@ _LABEL_BA26_:
 	call _LABEL_DD3_
 	push bc
 	ld bc, _DATA_BA8C_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	inc c
 	inc c
@@ -27866,7 +27873,7 @@ _LABEL_BAC2_:
 	pop hl
 	push bc
 	ld bc, _DATA_BB0A_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0000
@@ -27874,7 +27881,7 @@ _LABEL_BAC2_:
 	pop hl
 	push bc
 	ld bc, _SRAM_2318_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	pop af
 	ret
@@ -27919,7 +27926,7 @@ _LABEL_BB10_:
 	push bc
 	ld b, h
 	ld c, l
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0008
@@ -30880,9 +30887,9 @@ _LABEL_CC07_:
 	pop de
 	pop hl
 	ld a, b
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld a, c
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	pop hl
 	pop de
 	pop bc
@@ -30925,15 +30932,15 @@ _LABEL_CC44_:
 	pop hl
 	push bc
 	ld bc, _DATA_CD0B_
-	call _LABEL_C79_
+	call _LABEL_C79_DrawMenuItem
 	pop bc
 	push hl
 	ld hl, $0002
 	ld (_RAM_C002_), hl
 	pop hl
 	push bc
-	ld bc, _DATA_CD12_
-	call _LABEL_C79_
+    ld bc, _DATA_CD12_
+    call _LABEL_C79_DrawMenuItem
 	pop bc
 	ld d, a
 	rst $18	; _LABEL_18_
@@ -30949,7 +30956,7 @@ _LABEL_CC44_:
 	ld c, l
 	push af
 	ld a, e
-	call _LABEL_CA2_
+	call _LABEL_CA2_DrawMultipleItems
 	pop af
 	pop bc
 	ld hl, _RAM_C004_
@@ -48876,7 +48883,7 @@ _LABEL_18E21_:
 	ld c, l
 	ld hl, (_RAM_C490_)
 	ld de, (_RAM_C492_)
-	call _LABEL_C95_
+	call _LABEL_C95_DrawMenuItem
 	ld (_RAM_C492_), de
 	pop hl
 	pop de
@@ -48892,7 +48899,7 @@ _LABEL_18E21_:
 	ld hl, (_RAM_C490_)
 	ld de, (_RAM_C492_)
 	ld a, $88
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld (_RAM_C492_), de
 	pop hl
 	pop de
@@ -48903,7 +48910,7 @@ _LABEL_18E21_:
 	ld hl, (_RAM_C490_)
 	ld de, (_RAM_C492_)
 	ld a, $8B
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld (_RAM_C492_), de
 	pop hl
 	pop de
@@ -48933,7 +48940,7 @@ _LABEL_18E21_:
 	ld c, l
 	ld hl, (_RAM_C490_)
 	ld de, (_RAM_C492_)
-	call _LABEL_C95_
+	call _LABEL_C95_DrawMenuItem
 	ld (_RAM_C492_), de
 	pop hl
 	pop de
@@ -48945,7 +48952,7 @@ _LABEL_18E21_:
 	ld hl, (_RAM_C490_)
 	ld de, (_RAM_C492_)
 	ld a, $83
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld (_RAM_C492_), de
 	pop hl
 	pop de
@@ -48971,7 +48978,7 @@ _LABEL_18E21_:
 	ld c, l
 	ld hl, (_RAM_C490_)
 	ld de, (_RAM_C492_)
-	call _LABEL_C95_
+	call _LABEL_C95_DrawMenuItem
 	ld (_RAM_C492_), de
 	pop hl
 	pop de
@@ -49053,7 +49060,7 @@ _LABEL_18F7E_:
 	ld hl, (_RAM_C494_)
 	ld de, (_RAM_C496_)
 	ld a, $88
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld (_RAM_C496_), de
 	pop hl
 	pop de
@@ -49064,7 +49071,7 @@ _LABEL_18F7E_:
 	ld hl, (_RAM_C494_)
 	ld de, (_RAM_C496_)
 	ld a, $8B
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld (_RAM_C496_), de
 	pop hl
 	pop de
@@ -49094,7 +49101,7 @@ _LABEL_18F7E_:
 	ld c, l
 	ld hl, (_RAM_C494_)
 	ld de, (_RAM_C496_)
-	call _LABEL_C95_
+	call _LABEL_C95_DrawMenuItem
 	ld (_RAM_C496_), de
 	pop hl
 	pop de
@@ -49106,7 +49113,7 @@ _LABEL_18F7E_:
 	ld hl, (_RAM_C494_)
 	ld de, (_RAM_C496_)
 	ld a, $83
-	call _LABEL_DEF_
+	call _LABEL_DEF_DrawCharacter
 	ld (_RAM_C496_), de
 	pop hl
 	pop de
@@ -49132,7 +49139,7 @@ _LABEL_18F7E_:
 	ld c, l
 	ld hl, (_RAM_C494_)
 	ld de, (_RAM_C496_)
-	call _LABEL_C95_
+	call _LABEL_C95_DrawMenuItem
 	ld (_RAM_C496_), de
 	pop hl
 	pop de
@@ -53749,7 +53756,7 @@ _LABEL_200EC_ScriptDecodeLoop: ; script decoding loop point
     push hl
       ld hl, (_SRAM_21A2_)
       ld de, (_SRAM_21A4_DrawingYX)
-      call _LABEL_DEF_
+      call _LABEL_DEF_DrawCharacter
       ld (_SRAM_21A4_DrawingYX), de
     pop hl
     pop de

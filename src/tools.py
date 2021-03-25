@@ -23,6 +23,23 @@ codes = {
 }
 codes_reverse = {v: k for k, v in codes.items()}
 
+character_map = " " \
+                " ０１２３４５６７８９" \
+                "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへ" \
+                "ほまみむめもやゆよらりるれろわんをぁぃぅぇぉゃゅょっアイウ" \
+                "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
+                "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
+                "゛゜XXXXX-%/ADFGHLMPTV?・!"
+# Font mapping
+# TODO: use a .tbl?
+en_character_map = "ロ" \
+                   " !\"#$%&'()*+,-./" \
+                   "0123456789" \
+                   ":;<=>?@" \
+                   "ABCDEFGHIHKLMNOPQRSTUVWXYZ" \
+                   "[\\]^_£" \
+                   "abcdefghijklmnopqrstuvwxyz"
+
 
 class BitReader:
     """Lets you read bits one at a time, left to right"""
@@ -230,18 +247,10 @@ class Tree:
             bit_writer.add(bit)
 
 
-def dump(rom, output_file):
+def dump_script(rom, output_file):
     trees_location = 0x299d0
     trees_size = 0x1b6
     trees_count = trees_size // 2
-
-    character_map = " " \
-                    " ０１２３４５６７８９" \
-                    "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへ" \
-                    "ほまみむめもやゆよらりるれろわんをぁぃぅぇぉゃゅょっアイウ" \
-                    "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
-                    "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
-                    "゛゜XXXXX-%/ADFGHLMPTV?・!"
 
     with open(rom, "rb") as f:
         f.seek(trees_location)
@@ -340,17 +349,6 @@ def dump(rom, output_file):
 
     with open(output_file, 'w', encoding="utf-8") as file:
         documents = yaml.dump(script, file, sort_keys=False, allow_unicode=True)
-
-
-# Font mapping
-# TODO: use a .tbl?
-en_character_map = "ロ" \
-                   " !\"#$%&'()*+,-./" \
-                   "0123456789" \
-                   ":;<=>?@" \
-                   "ABCDEFGHIHKLMNOPQRSTUVWXYZ" \
-                   "[\\]^_£" \
-                   "abcdefghijklmnopqrstuvwxyz"
 
 
 class ScriptEntry:
@@ -508,12 +506,105 @@ def encode_script(script_file, trees_file, data_file):
     print(f"Script is {script_size} bytes")
 
 
+def dump_menus(rom_filename, output_filename):
+    # The menus are all over the place in the ROM
+    # Code is in this form:
+    # ld bc, _DATA_B914_NewSaveNameData
+    # call _LABEL_C79_DrawMenuItem
+    # The value in bc is a pointer to tile-index-encoded data which is 0-terminated
+    # We collect all the addresses here...
+    menu_data_locations = [
+        0x4d13,
+        0xa558,
+        0xa568,
+        0xa578,
+        0xa588,
+        # Unknown data in bc at 0xa8b2
+        0xa9bc,
+        0xab43,
+        0xabbe,
+        0xabc9,
+        0xabf3,
+        0xac8a,
+        0xad2e,
+        0xad7d,
+        0xad8d,
+        0xad9d,
+        0xadad,
+        0xadbd,
+        0xadcd,
+        0xae6a,
+        0xae75,
+        0xaec2,
+        0xaf46,
+        0xaf83,
+        0xafcf,
+        0xb4aa,
+        0xb4b5,
+        0xb54b,
+        0xb5a3,
+        0xb5b3,
+        0xb634,
+        0xb644,
+        0xb654,
+        0xb6ee,
+        0xb7ee,
+        0xb7bd,
+        0xb822,
+        0xb828,
+        0xb82e,
+        0xb8c5,
+        0xb8dd,
+        0xb8f4,
+        0xb90b,
+        0xb9da,
+        0xba7c,
+        0xbaf2,
+        # 0xbb02, # This one is pointing at SRAM
+        0xbb40,
+        0xbb47,  # sram
+        0xcc80,
+        0xcc90
+    ]
+
+    menus = []
+
+    with open(rom_filename, "rb") as f:
+        for location in menu_data_locations:
+            f.seek(location)
+            ptr = int.from_bytes(f.read(2), byteorder="little")
+            # ptr is in CPU space. We convert to ROM space.
+            ptr += (location // 0x4000 - 1) * 0x4000  # assuming bank 1 here
+            f.seek(ptr)
+            s = ""
+            while True:
+                b = f.read(1)[0]
+                if b == 0:
+                    data_length = f.tell() - ptr
+                    break
+                if b < len(character_map):
+                    s += character_map[b]
+
+            menus.append({
+                "reference_at": hex(location),
+                "data_at": hex(ptr),
+                "data_length": data_length,
+                "ja": s,
+                "en": ""
+            })
+
+    with open(output_filename, 'w', encoding="utf-8") as file:
+        documents = yaml.dump(menus, file, sort_keys=False, allow_unicode=True)
+
+
 def main():
     verb = sys.argv[1]
-    if verb == 'dump':
-        dump(sys.argv[2], sys.argv[3])
+    if verb == 'dump_script':
+        dump_script(sys.argv[2], sys.argv[3])
     elif verb == 'encode_script':
         encode_script(sys.argv[2], sys.argv[3], sys.argv[4])
+    elif verb == 'dump_menus':
+        dump_menus(sys.argv[2], sys.argv[3])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 

@@ -1,0 +1,245 @@
+- reference_at: '0x4d13'
+  data_at: '0x4d2d'
+  data_length: 7
+  ja: ちけいこうか
+  en: ''
+- reference_at: '0xa558'
+  data_at: '0xa593'
+  data_length: 7
+  ja: こう゛けきカ
+  en: ''
+- reference_at: '0xa568'
+  data_at: '0xa59a'
+  data_length: 8
+  ja: ゛ほう゛きょカ
+  en: ''
+- reference_at: '0xa578'
+  data_at: '0xa5a2'
+  data_length: 6
+  ja: す゛はやさ
+  en: ''
+- reference_at: '0xa588'
+  data_at: '0xa5a8'
+  data_length: 8
+  ja: い゛とうきょり
+  en: ''
+- reference_at: '0xa9bc'
+  data_at: '0xa9c4'
+  data_length: 8
+  ja: はい  いいえ
+  en: ''
+- reference_at: '0xab43'
+  data_at: '0xab5a'
+  data_length: 4
+  ja: なまえ
+  en: ''
+- reference_at: '0xabbe'
+  data_at: '0xac0c'
+  data_length: 5
+  ja: ' ゛とく'
+  en: ''
+- reference_at: '0xabc9'
+  data_at: '0xac11'
+  data_length: 4
+  ja: のろい
+  en: ''
+- reference_at: '0xabf3'
+  data_at: '0xac00'
+  data_length: 12
+  ja: クラス      LV
+  en: ''
+- reference_at: '0xac8a'
+  data_at: '0xac97'
+  data_length: 12
+  ja: HP MP AT DF
+  en: ''
+- reference_at: '0xad2e'
+  data_at: '0xad3b'
+  data_length: 10
+  ja: AG そう゛ひひん
+  en: ''
+- reference_at: '0xad7d'
+  data_at: '0xadd8'
+  data_length: 7
+  ja: HP   /
+  en: ''
+- reference_at: '0xad8d'
+  data_at: '0xaddf'
+  data_length: 7
+  ja: MP   /
+  en: ''
+- reference_at: '0xad9d'
+  data_at: '0xade6'
+  data_length: 7
+  ja: こう゛けきカ
+  en: ''
+- reference_at: '0xadad'
+  data_at: '0xaded'
+  data_length: 8
+  ja: ゛ほう゛きょカ
+  en: ''
+- reference_at: '0xadbd'
+  data_at: '0xadf5'
+  data_length: 6
+  ja: す゛はやさ
+  en: ''
+- reference_at: '0xadcd'
+  data_at: '0xadfb'
+  data_length: 8
+  ja: い゛とうきょり
+  en: ''
+- reference_at: '0xae6a'
+  data_at: '0xaf04'
+  data_length: 5
+  ja: ' ゛とく'
+  en: ''
+- reference_at: '0xae75'
+  data_at: '0xaf09'
+  data_length: 4
+  ja: のろい
+  en: ''
+- reference_at: '0xaec2'
+  data_at: '0xaf0d'
+  data_length: 6
+  ja: けいけんち
+  en: ''
+- reference_at: '0xaf46'
+  data_at: '0xaf8e'
+  data_length: 7
+  ja: -アイテム-
+  en: ''
+- reference_at: '0xaf83'
+  data_at: '0xaf95'
+  data_length: 7
+  ja: もっていない
+  en: ''
+- reference_at: '0xafcf'
+  data_at: '0xaff5'
+  data_length: 9
+  ja: -まほう-  L
+  en: ''
+- reference_at: '0xb4aa'
+  data_at: '0xb56a'
+  data_length: 5
+  ja: ' ゛とく'
+  en: ''
+- reference_at: '0xb4b5'
+  data_at: '0xb56f'
+  data_length: 4
+  ja: のろい
+  en: ''
+- reference_at: '0xb54b'
+  data_at: '0xb558'
+  data_length: 18
+  ja: HP MP AT DF AG MV
+  en: ''
+- reference_at: '0xb5a3'
+  data_at: '0xb5bb'
+  data_length: 17
+  ja: せんとう゛しの メッセ-゛シは?
+  en: ''
+- reference_at: '0xb5b3'
+  data_at: '0xb5cc'
+  data_length: 17
+  ja: ひょう゛しする ひょう゛ししない
+  en: ''
+- reference_at: '0xb634'
+  data_at: '0xb65c'
+  data_length: 18
+  ja: おこのみの゛ケ-ムス゜ヒ-゛トは?
+  en: ''
+- reference_at: '0xb644'
+  data_at: '0xb66e'
+  data_length: 13
+  ja: '１  ２  ３  ４  '
+  en: ''
+- reference_at: '0xb654'
+  data_at: '0xb67b'
+  data_length: 13
+  ja: おそい ---- はやい
+  en: ''
+- reference_at: '0xb6ee'
+  data_at: '0xb781'
+  data_length: 7
+  ja: HP   /
+  en: ''
+- reference_at: '0xb7ee'
+  data_at: '0x587a'
+  data_length: 6
+  ja: ぁウFス４
+  en: ''
+- reference_at: '0xb7bd'
+  data_at: '0xb7e9'
+  data_length: 8
+  ja: きんかのか゛す
+  en: ''
+- reference_at: '0xb822'
+  data_at: '0xb83a'
+  data_length: 6
+  ja: ほん゛しん
+  en: ''
+- reference_at: '0xb828'
+  data_at: '0xb840'
+  data_length: 7
+  ja: ' ゛て゛くち'
+  en: ''
+- reference_at: '0xb82e'
+  data_at: '0xb847'
+  data_length: 5
+  ja: ' おみせ'
+  en: ''
+- reference_at: '0xb8c5'
+  data_at: '0xb914'
+  data_length: 7
+  ja: は゛しめから
+  en: ''
+- reference_at: '0xb8dd'
+  data_at: '0xb91b'
+  data_length: 7
+  ja: つ゛つきから
+  en: ''
+- reference_at: '0xb8f4'
+  data_at: '0xb9cd'
+  data_length: 27
+  ja: ぉ６らワッらロ ッッあかウ４せフちさ
+  en: ''
+- reference_at: '0xb90b'
+  data_at: '0xb925'
+  data_length: 4
+  ja: うつす
+  en: ''
+- reference_at: '0xb9da'
+  data_at: '0xb9fe'
+  data_length: 5
+  ja: ゛ハトル
+  en: ''
+- reference_at: '0xba7c'
+  data_at: '0xba8c'
+  data_length: 14
+  ja: ' ????? ゛ハトル ?'
+  en: ''
+- reference_at: '0xbaf2'
+  data_at: '0xbb0a'
+  data_length: 6
+  ja: ''
+  en: ''
+- reference_at: '0xbb40'
+  data_at: '0xbb71'
+  data_length: 92
+  ja: あいうえお なにぬねの ぁぃぅぇぉ かきくけこ はひふへほ やゆよ ・ さしすせそ まみむめも わをん?! たちつてと らりるれろ ゃゅょっ-     カタカナ  も゛とる  おわる
+  en: ''
+- reference_at: '0xbb47'
+  data_at: '0xbbcd'
+  data_length: 93
+  ja: アイウエオ ナニヌネノ ァィゥェォ カキクケコ ハヒフヘホ ヤユヨ ・ サシスセソ マミムメモ ワヲン?! タチツテト ラリルレロ ャュョッ-     ひら゛かな  も゛とる  おわる
+  en: ''
+- reference_at: '0xcc80'
+  data_at: '0xcd0b'
+  data_length: 7
+  ja: HP   /
+  en: ''
+- reference_at: '0xcc90'
+  data_at: '0xcd12'
+  data_length: 7
+  ja: MP   /
+  en: ''
