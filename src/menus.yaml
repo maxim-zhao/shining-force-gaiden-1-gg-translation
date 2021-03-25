@@ -192,17 +192,18 @@
   data_at: '0xb914'
   data_length: 7
   ja: はじめから
-  en: New
+  # "From the beginning"...
+  en: Begin
 - reference_at: '0xb8dd'
   data_at: '0xb91b'
   data_length: 7
   ja: つづきから
-  en: ''
+  en: Load
 - reference_at: '0xb8f2'
   data_at: '0xb922'
   data_length: 3
   ja: けす
-  en: ''
+  en: Erase
 - reference_at: '0xb90b'
   data_at: '0xb925'
   data_length: 4
@@ -227,12 +228,12 @@
   data_at: '0xbb71'
   data_length: 92
   ja: あいうえお なにぬねの ぁぃぅぇぉ かきくけこ はひふへほ やゆよ ・ さしすせそ まみむめも わをん?! たちつてと らりるれろ ゃゅょっ-     カタカナ  もどる  おわる
-  en: ''
+  en: 'ABCDE FGHIJ KLM   NOPQR STUVW XYZ   12345 67890'
 - reference_at: '0xbb47'
   data_at: '0xbbcd'
   data_length: 93
   ja: アイウエオ ナニヌネノ ァィゥェォ カキクケコ ハヒフヘホ ヤユヨ ・ サシスセソ マミムメモ ワヲン?! タチツテト ラリルレロ ャュョッ-     ひらがな  もどる  おわる
-  en: ''
+  en: 'abcde fghij klm   nopqr stuvw xyz   12345 67890'
 - reference_at: '0xcc80'
   data_at: '0xcd0b'
   data_length: 7

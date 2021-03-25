@@ -1090,7 +1090,7 @@
   character: ''
   ja: <party leader>さんて いうのね<delay 01><line>かっこいいんだ-っ!<wait more><end>
   literal: ''
-  en: It's <party leader>,<line>huh?<delay 01>Cool name!<wait more><end>
+  en: It's <party leader>,<line>huh?<delay 01> Cool name!<wait more><end>
 
 - index: 115
   character: ''

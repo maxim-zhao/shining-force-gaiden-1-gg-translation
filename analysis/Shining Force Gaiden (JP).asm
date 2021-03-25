@@ -1947,28 +1947,28 @@ _LABEL_56B_:
 _LABEL_59A_:
 	push af
 	push de
-	ld de, $2710
+	ld de, $2710 ; 10000
 	call _LABEL_641_
 	jr z, +
 	ld b, c
 +:
 	add a, b
 	ld (ix+0), a
-	ld de, $03E8
+	ld de, $03E8 ; 1000
 	call _LABEL_641_
 	jr z, +
 	ld b, c
 +:
 	add a, b
 	ld (ix+1), a
-	ld de, $0064
+	ld de, $0064 ; 100
 	call _LABEL_641_
 	jr z, +
 	ld b, c
 +:
 	add a, b
 	ld (ix+2), a
-	ld de, $000A
+	ld de, $000A ; 10
 	call _LABEL_641_
 	jr z, +
 	ld b, c
@@ -3498,7 +3498,7 @@ _LABEL_E87_:
 	pop af
 	ret
 
-_LABEL_EFA_:
+_LABEL_EFA_ScrollMenuIn:
 	rst $30	; _LABEL_30_
 ; Data from EFB to EFB (1 bytes)
 .db $2A
@@ -9260,7 +9260,7 @@ _LABEL_42D9_:
 	ld e, $00
 	ld hl, (_SRAM_2461_)
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -9278,7 +9278,7 @@ _LABEL_42D9_:
 	ld e, $00
 	ld hl, (_SRAM_262F_)
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -10454,7 +10454,7 @@ _LABEL_49EF_:
 	ld e, $00
 	ld hl, (_SRAM_2461_)
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -10465,7 +10465,7 @@ _LABEL_49EF_:
 	ld e, $00
 	ld hl, (_SRAM_262F_)
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -10589,7 +10589,7 @@ _LABEL_4AEA_:
 	ex af, af'
 	ld d, a
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	call _LABEL_4A8_
 -:
 	call _LABEL_3651_WaitForVBlank
@@ -10598,7 +10598,7 @@ _LABEL_4AEA_:
 	jr z, -
 	ld d, $EC
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop af
 	ex af, af'
 	pop hl
@@ -11254,7 +11254,7 @@ _LABEL_4EA4_:
 	ld e, $00
 	ld hl, (_SRAM_2461_)
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -11272,7 +11272,7 @@ _LABEL_4EA4_:
 	ld e, $00
 	ld hl, (_SRAM_262F_)
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -11437,7 +11437,7 @@ _LABEL_5059_:
 	ld e, $00
 	ld hl, (_SRAM_2461_)
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -11448,7 +11448,7 @@ _LABEL_5059_:
 	ld e, $00
 	ld hl, (_SRAM_262F_)
 	ld a, $05
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -11489,7 +11489,7 @@ _LABEL_50B1_:
 	ld e, $0D
 	ld hl, (_RAM_C000_)
 	ld a, $04
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21174,7 +21174,7 @@ _LABEL_9352_:
 	ld e, $05
 	ld hl, (_RAM_C100_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21185,7 +21185,7 @@ _LABEL_9352_:
 	ld e, $0E
 	ld hl, (_RAM_C104_)
 	ld a, $03
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21249,7 +21249,7 @@ _LABEL_93F0_:
 	ld e, $12
 	ld hl, (_RAM_C104_)
 	ld a, $03
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21260,7 +21260,7 @@ _LABEL_93F0_:
 	ld e, $05
 	ld hl, (_RAM_C100_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21389,7 +21389,7 @@ _LABEL_9492_:
 	ld e, $05
 	ld hl, (_RAM_C104_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21450,7 +21450,7 @@ _LABEL_9510_:
 	ld e, $05
 	ld hl, (_RAM_C104_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21497,7 +21497,7 @@ _LABEL_9530_:
 	ld e, $05
 	ld hl, (_RAM_C100_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21508,7 +21508,7 @@ _LABEL_9530_:
 	ld e, $05
 	ld hl, (_RAM_C104_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21579,7 +21579,7 @@ _LABEL_95D4_:
 	ld e, $05
 	ld hl, (_RAM_C104_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21590,7 +21590,7 @@ _LABEL_95D4_:
 	ld e, $05
 	ld hl, (_RAM_C100_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21639,7 +21639,7 @@ _LABEL_9610_:
 	ld e, $05
 	ld hl, (_RAM_C100_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21650,7 +21650,7 @@ _LABEL_9610_:
 	ld e, $05
 	ld hl, (_RAM_C104_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21721,7 +21721,7 @@ _LABEL_96B4_:
 	ld e, $05
 	ld hl, (_RAM_C104_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21732,7 +21732,7 @@ _LABEL_96B4_:
 	ld e, $05
 	ld hl, (_RAM_C100_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21772,7 +21772,7 @@ _LABEL_96F6_:
 	ld e, $0E
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21837,7 +21837,7 @@ _LABEL_9725_:
 	ld e, $0E
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21862,7 +21862,7 @@ _LABEL_9792_:
 	ld e, $08
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21914,7 +21914,7 @@ _LABEL_9792_:
 	ld e, $08
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -21999,7 +21999,7 @@ _LABEL_9836_:
 	ld e, $00
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22079,7 +22079,7 @@ _LABEL_98D8_:
 	ld e, $F5
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22120,7 +22120,7 @@ _LABEL_98F6_:
 	ld e, $0D
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22164,7 +22164,7 @@ _LABEL_9932_:
 	ld e, $0D
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22190,7 +22190,7 @@ _LABEL_9932_:
 	ld e, $0D
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22220,7 +22220,7 @@ _LABEL_99B6_:
 	ld e, $0D
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22284,7 +22284,7 @@ _LABEL_99D3_:
 	ld e, $00
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22295,7 +22295,7 @@ _LABEL_99D3_:
 	ld e, $07
 	ld hl, (_RAM_C004_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22372,7 +22372,7 @@ _LABEL_9A43_:
 	ld e, $07
 	ld hl, (_RAM_C004_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22383,7 +22383,7 @@ _LABEL_9A43_:
 	ld e, $EE
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22421,7 +22421,7 @@ _LABEL_9AD0_:
 	ld e, $00
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22484,7 +22484,7 @@ _LABEL_9AD0_:
 	ld e, $F5
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22548,7 +22548,7 @@ _LABEL_9B9A_:
 	ld e, $00
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22571,7 +22571,7 @@ _LABEL_9B9A_:
 	ld e, $00
 	ld hl, (_RAM_C004_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22606,7 +22606,7 @@ _LABEL_9B9A_:
 	ld e, $0A
 	ld hl, (_RAM_C008_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22948,7 +22948,7 @@ _LABEL_9E44_:
 	ld e, $00
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22962,7 +22962,7 @@ _LABEL_9E44_:
 	ld e, $00
 	ld hl, (_RAM_C004_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22974,7 +22974,7 @@ _LABEL_9E44_:
 	ld e, $12
 	ld hl, (_RAM_C008_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -22998,7 +22998,7 @@ _LABEL_9E86_:
 	ld e, $0B
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23049,7 +23049,7 @@ _LABEL_9E86_:
 	ld e, $12
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23075,7 +23075,7 @@ _LABEL_9F00_:
 	ld e, $0B
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23126,7 +23126,7 @@ _LABEL_9F00_:
 	ld e, $12
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23145,7 +23145,7 @@ _LABEL_9F7A_:
 	ld e, $00
 	ld hl, (_SRAM_2461_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23160,7 +23160,7 @@ _LABEL_9F92_:
 	ld e, $00
 	ld hl, (_SRAM_2461_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23187,7 +23187,7 @@ _LABEL_9FA5_:
 	ld e, a
 	ld hl, (_RAM_C17F_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23202,7 +23202,7 @@ _LABEL_9FCB_:
 	ld e, $00
 	ld hl, (_RAM_C17F_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23231,7 +23231,7 @@ _LABEL_9FDE_:
 	ld e, $0C
 	ld hl, (_RAM_C0E9_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23291,7 +23291,7 @@ _LABEL_9FDE_:
 	ld e, $0C
 	ld hl, (_RAM_C0E9_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23299,7 +23299,7 @@ _LABEL_9FDE_:
 	pop bc
 	ret
 
-_LABEL_A06B_:
+_LABEL_A06B_ShowMenu:
 	push bc
 	push de
 	push hl
@@ -23324,7 +23324,7 @@ _LABEL_A06B_:
 	ld e, $02
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23373,7 +23373,7 @@ _LABEL_A06B_:
 	ld e, $02
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23402,7 +23402,7 @@ _LABEL_A0EE_:
 	ld e, $04
 	ld hl, (_RAM_C06B_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23458,7 +23458,7 @@ _LABEL_A0EE_:
 	ld e, $04
 	ld hl, (_RAM_C06B_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23489,7 +23489,7 @@ _LABEL_A170_:
 	ld e, $04
 	ld hl, (_RAM_C06B_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23545,7 +23545,7 @@ _LABEL_A170_:
 	ld e, $04
 	ld hl, (_RAM_C06B_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23581,7 +23581,7 @@ _LABEL_A1F5_:
 	ld e, $07
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23612,7 +23612,7 @@ _LABEL_A1F5_:
 	ld e, $04
 	ld hl, (_RAM_C1C1_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23709,7 +23709,7 @@ _LABEL_A259_:
 	ld e, $04
 	ld hl, (_RAM_C1C1_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23720,7 +23720,7 @@ _LABEL_A259_:
 	ld e, $12
 	ld hl, (_RAM_C000_)
 	ld a, $06
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -31071,7 +31071,7 @@ _LABEL_CD19_:
 	ld e, e
 	ld hl, (_SRAM_26AD_)
 	ld a, $08
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -31101,7 +31101,7 @@ _LABEL_CD5D_:
 	ld e, e
 	ld hl, (_SRAM_26AD_)
 	ld a, $08
-	call _LABEL_EFA_
+	call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -53699,7 +53699,7 @@ _LABEL_20095_:
 	ret
 
 _LABEL_200A5_DrawScriptEntry:
-  ; hl = script index?
+  ; hl = script index
 	push af
 	push bc
 	push de

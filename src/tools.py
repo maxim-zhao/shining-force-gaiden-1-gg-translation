@@ -36,7 +36,7 @@ en_character_map = "ロ" \
                    " !\"#$%&'()*+,-./" \
                    "0123456789" \
                    ":;<=>?@" \
-                   "ABCDEFGHIHKLMNOPQRSTUVWXYZ" \
+                   "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
                    "[\\]^_£" \
                    "abcdefghijklmnopqrstuvwxyz"
 
