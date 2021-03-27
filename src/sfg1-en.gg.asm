@@ -165,3 +165,48 @@ ScriptIndex:
 .section "Ten-ten handler removal" overwrite
   jp $e51
 .ends
+
+; Main menu cursor width values
+.unbackground $b929 $b946
+  ROMPosition $b929
+.section "Main menu" force
+  push af
+  push bc
+  push de
+    ; Japanese has
+    ; XXXXX    5
+    ; XX       2
+    ; XXX      3
+    ; XXXXX    5
+    ; English has
+    ; Begin    5
+    ; Load     4
+    ; Erase    5
+    ; Copy     4
+; Original code
+;    ld a, d ; get Y position
+;    ld c, $02 ; set width for index 2
+;    cp $02
+;    jr z, +
+;    ld c, $03 ; or 3
+;    cp $03
+;    jr z, +
+;    ld c, $05 ; else this width
+; My code
+    ld a,d
+    ld c,5
+    and 1
+    jr z,+
+    ld c,4
+; Patch end
++:
+    ld d, $0D
+    ld e, $02
+    xor a
+    call $7F0D
+  pop de
+  pop bc
+  pop af
+  ret
+.ends
+
