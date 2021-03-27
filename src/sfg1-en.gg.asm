@@ -139,3 +139,29 @@ ScriptIndex:
 
 ; Menus auto-generated code
 .include "menus.asm"
+
+
+; The font is relocating the menu borders...
+.enum $8e
+  BorderTL db
+  BorderT  db
+  BorderL  db
+.ende
+
+  PatchB $ce8 BorderTL
+  PatchB $cee BorderT
+  PatchB $cf6 BorderTL
+  PatchB $cfd BorderL
+  PatchB $d0b BorderL
+  PatchB $d15 BorderTL
+  PatchB $d1d BorderT
+  PatchB $d25 BorderTL
+  PatchB $d84 BorderT
+  PatchB $d8c BorderT
+  PatchB $d90 BorderT
+
+; We also disable the ten-ten handlers as we are using those tiles now.
+  ROMPosition $e37
+.section "Ten-ten handler removal" overwrite
+  jp $e51
+.ends

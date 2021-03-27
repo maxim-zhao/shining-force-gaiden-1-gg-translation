@@ -152,7 +152,7 @@
   data_at: '0xb66e'
   data_length: 13
   ja: '１  ２  ３  ４  '
-  en: '1  2  3  4'
+  en: '1  2  3  4  '
 - reference_at: '0xb654'
   data_at: '0xb67b'
   data_length: 13
@@ -218,7 +218,7 @@
   data_at: '0xba8c'
   data_length: 14
   ja: ' ????? バトル ?'
-  en: " ????? Battle ?"
+  en: " ??? Battle ?"
 - reference_at: '0xbaf2'
   data_at: '0xbb0a'
   data_length: 6

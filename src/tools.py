@@ -24,21 +24,35 @@ codes = {
 codes_reverse = {v: k for k, v in codes.items()}
 
 character_map = " " \
-                " ０１２３４５６７８９" \
-                "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへ" \
-                "ほまみむめもやゆよらりるれろわんをぁぃぅぇぉゃゅょっアイウ" \
-                "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
-                "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
-                "゛゜XXXXX-%/ADFGHLMPTV?・!"
+    " ０１２３４５６７８９" \
+    "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへ" \
+    "ほまみむめもやゆよらりるれろわんをぁぃぅぇぉゃゅょっアイウ" \
+    "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
+    "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
+    "゛゜XXXXX-%/ADFGHLMPTV?・!"
+
 # Font mapping
 # TODO: use a .tbl?
-en_character_map = "ロ" \
-                   " !\"#$%&'()*+,-./" \
-                   "0123456789" \
-                   ":;<=>?@" \
-                   "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
-                   "[\\]^_£" \
-                   "abcdefghijklmnopqrstuvwxyz"
+# We map two fonts, using █ to fill unwanted space.
+en_character_map_script = "█ " \
+    "██████████" \
+    "0123456789" \
+    ",.;:!?-" \
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+    "()&" \
+    "abcdefghijklmnopqrstuvwxyz" \
+    "'\"/"
+en_character_map_menus = "█ " \
+    "0123456789" \
+    "██████████" \
+    ",.;:!?-" \
+    "██████████████████████████" \
+    "()&" \
+    "██████████████████████████" \
+    "'\"/" \
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+    "███" \
+    "abcdefghijklmnopqrstuvwxyz"
 
 
 def bytes_to_japanese(data):
@@ -62,7 +76,8 @@ def bytes_to_japanese(data):
                 tenten = 0
     return s
 
-def english_to_bytes(s):
+
+def english_to_bytes(s, is_menu):
     buffer = bytearray()
     while len(s) > 0:
         # Check for a tag
@@ -78,8 +93,8 @@ def english_to_bytes(s):
                 print(f"Error: unhandled tag {tag}")
         else:
             # Not a tag
-            # Look up in en_character_map
-            value = en_character_map.find(s[0])
+            # Look up in en_character_map_menus or en_character_map_script
+            value = (en_character_map_menus if is_menu else en_character_map_script).find(s[0])
             if value == -1:
                 print(f"Error: character {s[0]} not in character map")
             else:
@@ -406,7 +421,7 @@ class ScriptEntry:
         self.text = s
 
         # Encode into a buffer
-        self.buffer = english_to_bytes(s)
+        self.buffer = english_to_bytes(s, False)
 
     def __str__(self):
         return f"{self.text} ({' '.join('{:02x}'.format(x) for x in self.buffer)})"
@@ -622,7 +637,7 @@ def encode_menus(yaml_filename, asm_filename):
             data_location = int(menu["data_at"], 0)
             data_end = data_location + menu["data_length"] - 1
             text = menu["en"]
-            buffer = english_to_bytes(text)
+            buffer = english_to_bytes(text, True)
             # Menus are null-terminated
             buffer.append(0)
             # Stringify

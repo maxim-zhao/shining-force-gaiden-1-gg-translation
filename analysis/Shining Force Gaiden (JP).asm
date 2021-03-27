@@ -1814,7 +1814,7 @@ _LABEL_4B5_:
 	ld b, $14
 	ld c, $07
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -3035,34 +3035,35 @@ _LABEL_CBE_:
 	pop af
 	ret
 
-_LABEL_CD1_:
+_LABEL_CD1_DrawBox:
 	push af
 	push bc
 	push de
 	push hl
-	ld (hl), a
+	ld (hl), a ; ??
 	and $7F
 	inc hl
-	ld (hl), d
+	ld (hl), d ; 00
 	inc hl
-	ld (hl), e
+	ld (hl), e ; 12
 	inc hl
-	ld (hl), b
+	ld (hl), b ; 14
 	inc hl
-	ld (hl), c
+	ld (hl), c ; 07
 	inc hl
+  
 	ld e, b
 	ld d, c
 	dec d
 	dec d
 	dec e
 	dec e
-	ld (hl), $7E
+	ld (hl), $7E ; Top left
 	inc hl
 	ld (hl), a
 	inc hl
 	ld b, e
-	ld c, $7F
+	ld c, $7F ; Top
 -:
 	ld (hl), c
 	inc hl
@@ -3177,6 +3178,7 @@ _LABEL_D56_:
           dec a
           jr nz, -
         pop de
+        ; Handle top row?
         push bc
           ld b, $00
           dec c
@@ -3186,6 +3188,7 @@ _LABEL_D56_:
           inc de
           inc de
 -:
+          ; tenten support while scrolling
           ld a, (hl)
           inc hl
           cp $7A
@@ -10581,7 +10584,7 @@ _LABEL_4AEA_:
 	ld e, $08
 	ld hl, _RAM_C004_
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop bc
 	ld de, $0000
 	call _LABEL_C95_DrawMenuItem
@@ -10703,7 +10706,7 @@ _LABEL_4BD3_:
 	ld b, $0A
 	ld c, $05
 	ld a, $10
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -10878,7 +10881,7 @@ _LABEL_4CD7_:
 	ld b, $08
 	ld c, $04
 	ld a, $10
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -11547,7 +11550,7 @@ _LABEL_514A_:
 	ld b, $14
 	ld c, $07
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -11926,7 +11929,7 @@ _LABEL_539B_:
 	ld b, $14
 	ld c, $07
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -14491,7 +14494,7 @@ _LABEL_6023_:
 	ld b, $06
 	ld c, $07
 	ld a, $08
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -18814,7 +18817,7 @@ _LABEL_864C_:
 	ld b, $14
 	ld c, $07
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -18858,7 +18861,7 @@ _LABEL_8691_:
 	ld b, $14
 	ld c, $07
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -23320,11 +23323,11 @@ _LABEL_A06B_ShowMenu:
 	push af
 	push de
 	push hl
-	ld d, $0D
-	ld e, $02
-	ld hl, (_RAM_C000_)
-	ld a, $06
-	call _LABEL_EFA_ScrollMenuIn
+    ld d, $0D
+    ld e, $02
+    ld hl, (_RAM_C000_)
+    ld a, $06
+    call _LABEL_EFA_ScrollMenuIn
 	pop hl
 	pop de
 	pop af
@@ -23825,7 +23828,7 @@ _LABEL_A36F_:
 	ld b, $0A
 	ld c, $03
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -23875,7 +23878,7 @@ _LABEL_A3C2_:
 	ld b, $0A
 	ld c, $09
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -24125,7 +24128,7 @@ _LABEL_A528_:
 	ld b, $0A
 	ld c, $09
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -24203,7 +24206,7 @@ _LABEL_A5B0_:
 	ld b, $0A
 	ld c, $09
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -24904,7 +24907,7 @@ _LABEL_A98C_:
 	ld b, $09
 	ld c, $03
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -25149,7 +25152,7 @@ _LABEL_AB09_:
 	ld b, $14
 	ld c, $0B
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -25547,7 +25550,7 @@ _LABEL_AD45_:
 	ld b, $0A
 	ld c, $12
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -25874,7 +25877,7 @@ _LABEL_AF13_:
 	ld b, $0A
 	ld c, $0B
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -25963,7 +25966,7 @@ _LABEL_AF9C_:
 	ld b, $0A
 	ld c, $0B
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -26136,7 +26139,7 @@ _LABEL_B07E_:
 	ld b, $11
 	ld c, $0B
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -26412,7 +26415,7 @@ _LABEL_B229_:
 	ld b, $0D
 	ld c, $0A
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -26534,7 +26537,7 @@ _LABEL_B2E6_:
 	ld b, $07
 	ld c, $0A
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -26743,7 +26746,7 @@ _LABEL_B418_:
 	ld b, $13
 	ld c, $08
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -26995,7 +26998,7 @@ _LABEL_B573_:
 	ld b, $10
 	ld c, $07
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27073,7 +27076,7 @@ _LABEL_B604_:
 	ld b, $10
 	ld c, $07
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27167,7 +27170,7 @@ _LABEL_B6B3_:
 	ld b, $0A
 	ld c, $05
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27320,7 +27323,7 @@ _LABEL_B78F_:
 	ld b, $09
 	ld c, $04
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27376,7 +27379,7 @@ _LABEL_B7F1_:
 	ld b, $07
 	ld c, $03
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27475,7 +27478,7 @@ _LABEL_B879_:
 	ld b, $07
 	ld c, a
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27625,7 +27628,7 @@ _LABEL_B956_:
 	ld b, $0F
 	ld c, a
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27766,7 +27769,7 @@ _LABEL_BA26_:
 	ld b, $0F
 	ld c, a
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27859,7 +27862,7 @@ _LABEL_BAC2_:
 	ld b, $07
 	ld c, $03
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -27906,7 +27909,7 @@ _LABEL_BB10_:
 	ld b, $14
 	ld c, $0B
 	xor a
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -30914,7 +30917,7 @@ _LABEL_CC44_:
 	ld b, $0A
 	ld c, $05
 	ld a, $10
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -47064,7 +47067,7 @@ _LABEL_1814A_:
 	ld b, $14
 	ld c, $05
 	ld a, $00
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -47489,7 +47492,7 @@ _LABEL_184AE_:
 	ld b, $14
 	ld c, $05
 	ld a, $00
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -48817,7 +48820,7 @@ _LABEL_18E21_:
 	ld b, $0A
 	ld c, $04
 	ld a, $00
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -49018,7 +49021,7 @@ _LABEL_18F7E_:
 	ld b, $0A
 	ld c, $04
 	ld a, $00
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	pop hl
 	pop de
 	pop bc
@@ -53654,7 +53657,7 @@ _LABEL_20051_:
 	dec hl
 	dec hl
 	dec hl
-	call _LABEL_CD1_
+	call _LABEL_CD1_DrawBox
 	ld hl, $0000
 	ld (_SRAM_21A4_DrawingYX), hl
 	pop hl
