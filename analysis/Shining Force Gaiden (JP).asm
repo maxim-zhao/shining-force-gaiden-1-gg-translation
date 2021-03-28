@@ -1106,8 +1106,8 @@ _LABEL_10_:
 ; Data from 17 to 17 (1 bytes)
 .db $00
 
-_LABEL_18_:
-  jp _LABEL_3E8_
+_LABEL_18_CallBankedFunction:
+  jp _LABEL_3E8_CallBankedFunction
 
 ; 1st entry of Pointer Table from DC57 (indexed by _RAM_D688_)
 ; Data from 1B to 1B (1 bytes)
@@ -1638,7 +1638,12 @@ _LABEL_3A4_ReadPointerFromPageAndIndex:
 .db $14 $7E $2C $66 $6F $F1 $F5 $CD $E0 $03 $E3 $6F $7C $32 $FE $FF
 .db $7D $E1 $C9 $E5 $2A $86 $D6 $3A $88 $D6 $C9
 
-_LABEL_3E8_:
+_LABEL_3E8_CallBankedFunction:
+  ; Reads args from after the call site:
+  ; - Function offset in pointer table at start of bank, e.g. 2
+  ; - Bank number
+  
+  ; Save de, a without the stack (so no re-entrancy)
   ld (_RAM_D686_), de
   ld (_RAM_D688_), a
   ex (sp), hl ; return address
@@ -1679,22 +1684,22 @@ _LABEL_412_:
   ex (sp), hl
   ld a, (_RAM_FFFE_)
   push af
-  ld a, d
-  ld (_RAM_FFFE_), a
-  ex de, hl
-  ld h, $41
-  ld a, (hl)
-  inc hl
-  ld h, (hl)
-  ld l, a
-  ex de, hl
-  ld a, (_RAM_D688_)
-  rst $28 ; _LABEL_28_
-  ex (sp), hl
-  ld l, a
-  ld a, h
-  ld (_RAM_FFFE_), a
-  ld a, l
+    ld a, d
+    ld (_RAM_FFFE_), a
+    ex de, hl
+    ld h, $41 ; only difference to above
+    ld a, (hl)
+    inc hl
+    ld h, (hl)
+    ld l, a
+    ex de, hl
+    ld a, (_RAM_D688_)
+    rst $28 ; _LABEL_28_
+    ex (sp), hl
+    ld l, a
+    ld a, h
+    ld (_RAM_FFFE_), a
+    ld a, l
   pop hl
   ret
 
@@ -1785,7 +1790,7 @@ _LABEL_4B5_:
   ld (_RAM_D683_), hl
   ld hl, _RAM_D7FF_
   ld (_RAM_D6C3_), hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C7 to 4C8 (2 bytes)
 .db $08 $07
 
@@ -4154,7 +4159,7 @@ _LABEL_11E6_:
   ld de, _SRAM_22AC_
   ld bc, $000C
   ldir
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; 1st entry of Pointer Table from 235C (indexed by _RAM_D6E4_)
 ; Data from 1229 to 1229 (1 bytes)
 _DATA_1229_:
@@ -4205,7 +4210,7 @@ _DATA_125E_:
   ld a, (ix+0)
   cp $FF
   jr z, ++
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 128A to 128B (2 bytes)
 .db $50 $04
 
@@ -4213,7 +4218,7 @@ _DATA_125E_:
   jr z, +
   dec d
   ld h, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1292 to 1293 (2 bytes)
 .db $52 $04
 
@@ -6528,7 +6533,7 @@ _LABEL_21CF_:
   and a
   jp m, +
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 21D5 to 21D6 (2 bytes)
 .db $34 $04
 
@@ -6980,7 +6985,7 @@ _LABEL_273D_:
 ; Data from 2744 to 2744 (1 bytes)
 .db $FE
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 2746 to 2747 (2 bytes)
 .db $1A $01
 
@@ -6991,7 +6996,7 @@ _LABEL_273D_:
   call _LABEL_91D_
   call +
   ld a, $01
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 275B to 275C (2 bytes)
 .db $02 $03
 
@@ -6999,7 +7004,7 @@ _LABEL_275D_:
   ld sp, $DEFF
   xor a
   ld (_SRAM_2326_), a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 2765 to 2766 (2 bytes)
 .db $28 $01
 
@@ -7519,7 +7524,7 @@ _DATA_2E50_:
 .db $05 $4F $7B $5C $81 $4A $07 $5F $6B $7A $5E $69 $4F $56
 
 ; Data from 2E7E to 2EE3 (102 bytes)
-_DATA_2E7E_:
+_DATA_2E7E_CharacterNames:
 .db $03 $58 $79 $4A $03 $6B $81 $4F $05 $4E $74 $44 $7A $56 $03 $4E
 .db $7A $4A $06 $45 $46 $6F $7A $55 $72 $04 $43 $7B $5D $4F $03 $4A
 .db $6C $44 $04 $7A $5C $6A $81 $04 $4F $56 $79 $4A $05 $64 $44 $5E
@@ -7530,12 +7535,17 @@ _DATA_2E7E_:
 
 ; Data from 2EE4 to 3091 (430 bytes)
 _DATA_2EE4_:
-.db $06 $7A $4C $7A $5E $6A $6F $06 $4F $4B $44 $7A $5E $6F $0A $7A
-.db $56 $69 $7A $4C $6F $58 $77 $81 $56 $05 $7A $56 $6E $81 $5E $05
-.db $69 $79 $56 $61 $6F $09 $4D $44 $7B $5E $6C $4F $57 $44 $56 $08
-.db $5F $6B $51 $6B $7A $4E $76 $81 $05 $7A $51 $6F $7A $5D $05 $4F
-.db $4B $6B $56 $6F $06 $43 $81 $4A $57 $44 $56 $08 $6A $7A $4D $81
-.db $7A $56 $61 $6F $04 $45 $75 $81 $63 $04 $7A $4A $81 $6B $0B $7A
+.db $06 $7A $4C $7A $5E $6A $6F 
+.db $06 $4F $4B $44 $7A $5E $6F 
+.db $0A $7A $56 $69 $7A $4C $6F $58 $77 $81 $56
+.db $05 $7A $56 $6E $81 $5E
+.db $05 $69 $79 $56 $61 $6F
+.db $09 $4D $44 $7B $5E $6C $4F $57 $44 $56
+.db $08 $5F $6B $51 $6B $7A $4E $76 $81
+.db $05 $7A $51 $6F $7A $5D
+.db $05 $4F $4B $6B $56 $6F
+.db $06 $43 $81 $4A $57 $44 $56
+.db $08 $6A $7A $4D $81 $7A $56 $61 $6F $04 $45 $75 $81 $63 $04 $7A $4A $81 $6B $0B $7A
 .db $55 $79 $7A $56 $6A $81 $7A $60 $81 $6F $06 $62 $5B $52 $45 $6D
 .db $4F $06 $4B $6B $7A $5F $6D $4F $05 $7A $4C $81 $6C $63 $06 $7A
 .db $55 $77 $69 $5C $6F $03 $52 $6D $4F $05 $50 $6F $53 $5A $6B $0A
@@ -9046,12 +9056,12 @@ _LABEL_414C_:
   ret
 
 _LABEL_41BE_:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 41BF to 41C0 (2 bytes)
 .db $52 $04
 
   ld e, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 41C3 to 41C4 (2 bytes)
 .db $50 $04
 
@@ -9171,7 +9181,7 @@ _LABEL_426D_:
   ld a, $03
   ld (_RAM_D6BD_), a
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 427E to 427F (2 bytes)
 .db $5C $04
 
@@ -9182,7 +9192,7 @@ _LABEL_426D_:
 
 +:
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 428B to 428C (2 bytes)
 .db $50 $04
 
@@ -9190,7 +9200,7 @@ _LABEL_426D_:
   ld (_RAM_D6B6_), a
   ld (_RAM_D6B4_), a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4298 to 4299 (2 bytes)
 .db $52 $04
 
@@ -9208,7 +9218,7 @@ _LABEL_426D_:
   ld a, (_RAM_D6AD_)
   call _LABEL_41BE_
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 42BE to 42BF (2 bytes)
 .db $60 $04
 
@@ -9335,7 +9345,7 @@ _LABEL_4399_:
   ld d, a
   ld h, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 43A2 to 43A3 (2 bytes)
 .db $22 $04
 
@@ -9343,7 +9353,7 @@ _LABEL_4399_:
   ld d, a
   ld l, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 43AD to 43AE (2 bytes)
 .db $24 $04
 
@@ -9362,7 +9372,7 @@ _LABEL_4399_:
   ld hl, _DATA_4A62_
 +:
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 43D8 to 43D9 (2 bytes)
 .db $F2 $04
 
@@ -9381,14 +9391,14 @@ _LABEL_4399_:
   ld a, (_RAM_D6B6_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 43F5 to 43F6 (2 bytes)
 .db $22 $04
 
   ld a, (_RAM_D6B7_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 43FF to 4400 (2 bytes)
 .db $24 $04
 
@@ -9398,7 +9408,7 @@ _LABEL_4399_:
   or a
   jp nz, _LABEL_4463_
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 440C to 440D (2 bytes)
 .db $F2 $04
 
@@ -9416,7 +9426,7 @@ _DATA_4421_:
 
 +:
   xor a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 442F to 4430 (2 bytes)
 .db $1A $02
 
@@ -9424,14 +9434,14 @@ _DATA_4421_:
   cp $FF
   jr nz, +
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 443C to 443D (2 bytes)
 .db $50 $04
 
   ld a, d
   ld (_RAM_D6B4_), a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4446 to 4447 (2 bytes)
 .db $52 $04
 
@@ -9456,7 +9466,7 @@ _LABEL_4468_:
   call _LABEL_4B8D_
   ld a, (_RAM_D6AD_)
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4471 to 4472 (2 bytes)
 .db $CE $04
 
@@ -9473,7 +9483,7 @@ _DATA_4481_:
 
 +:
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4493 to 4494 (2 bytes)
 .db $08 $02
 
@@ -9485,14 +9495,14 @@ _DATA_4481_:
   ld (_RAM_D6B9_), a
   push af
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 44A4 to 44A5 (2 bytes)
 .db $46 $04
 
   ld e, d
   pop af
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 44AA to 44AB (2 bytes)
 .db $D0 $04
 
@@ -9511,7 +9521,7 @@ _DATA_44B9_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 44CC to 44CD (2 bytes)
 .db $F4 $04
 
@@ -9525,11 +9535,11 @@ _DATA_44B9_:
 
 +:
   ld a, (_RAM_D6B9_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 44E5 to 44E6 (2 bytes)
 .db $72 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 44E8 to 44E9 (2 bytes)
 .db $1A $02
 
@@ -9539,14 +9549,14 @@ _DATA_44B9_:
   ld a, (_RAM_D6A6_)
   call _LABEL_1828_
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 44FB to 44FC (2 bytes)
 .db $50 $04
 
   ld a, d
   ld (_RAM_D6B4_), a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4505 to 4506 (2 bytes)
 .db $52 $04
 
@@ -9574,7 +9584,7 @@ _LABEL_4529_:
 +:
   ld a, (_RAM_D6AD_)
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4536 to 4537 (2 bytes)
 .db $B4 $04
 
@@ -9602,7 +9612,7 @@ _LABEL_4552_:
 _LABEL_4563_:
   call _LABEL_4B8D_
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 456A to 456B (2 bytes)
 .db $0A $02
 
@@ -9617,7 +9627,7 @@ _LABEL_4563_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4582 to 4583 (2 bytes)
 .db $E6 $04
 
@@ -9638,7 +9648,7 @@ _DATA_458F_:
 ; Data from 45A2 to 45A3 (2 bytes)
 .db $66 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 45A5 to 45A6 (2 bytes)
 .db $F4 $04
 
@@ -9652,11 +9662,11 @@ _DATA_458F_:
 
 +:
   ld a, (_RAM_D6B9_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 45BE to 45BF (2 bytes)
 .db $70 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 45C1 to 45C2 (2 bytes)
 .db $1A $02
 
@@ -9666,14 +9676,14 @@ _DATA_458F_:
   ld a, (_RAM_D6A6_)
   call _LABEL_1828_
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 45D4 to 45D5 (2 bytes)
 .db $50 $04
 
   ld a, d
   ld (_RAM_D6B4_), a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 45DE to 45DF (2 bytes)
 .db $52 $04
 
@@ -9697,7 +9707,7 @@ _LABEL_4602_:
   cp $02
   jp nz, _LABEL_46D5_
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 460B to 460C (2 bytes)
 .db $16 $02
 
@@ -9713,7 +9723,7 @@ _DATA_4618_:
 
 _LABEL_4629_:
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 462D to 462E (2 bytes)
 .db $0C $02
 
@@ -9727,7 +9737,7 @@ _LABEL_4629_:
   ld a, d
   ld (_RAM_D6B9_), a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4642 to 4643 (2 bytes)
 .db $C8 $04
 
@@ -9750,7 +9760,7 @@ _DATA_4651_:
   jr z, ++
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 466A to 466B (2 bytes)
 .db $B6 $04
 
@@ -9763,14 +9773,14 @@ _DATA_4651_:
   call _LABEL_4AEA_
 ++:
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 467A to 467B (2 bytes)
 .db $0E $02
 
   cp $FF
   jr nz, +
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4684 to 4685 (2 bytes)
 .db $48 $02
 
@@ -9790,7 +9800,7 @@ _DATA_468E_:
   ld a, d
   ld (_RAM_D6B9_), a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 46AB to 46AC (2 bytes)
 .db $CA $04
 
@@ -9809,7 +9819,7 @@ _DATA_468E_:
   cp $04
   jr z, ++
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 46C6 to 46C7 (2 bytes)
 .db $B6 $04
 
@@ -9842,7 +9852,7 @@ _LABEL_46D5_:
 
 _LABEL_46F6_:
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 46FA to 46FB (2 bytes)
 .db $0A $02
 
@@ -9860,7 +9870,7 @@ _LABEL_46F6_:
   jr z, _LABEL_4727_
   ld c, $04
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4716 to 4717 (2 bytes)
 .db $64 $04
 
@@ -9876,7 +9886,7 @@ _LABEL_46F6_:
 
 _LABEL_4727_:
   xor a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4729 to 472A (2 bytes)
 .db $1A $02
 
@@ -9894,7 +9904,7 @@ _LABEL_4727_:
 +:
   ld (_RAM_D6BC_), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 474B to 474C (2 bytes)
 .db $B4 $04
 
@@ -9904,13 +9914,13 @@ _LABEL_4727_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 475B to 475C (2 bytes)
 .db $BE $04
 
   ld a, (_RAM_D6BC_)
   res 7, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4763 to 4764 (2 bytes)
 .db $BC $04
 
@@ -9918,7 +9928,7 @@ _LABEL_4727_:
 
 _LABEL_4768_:
   ld a, (_RAM_D6BC_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 476C to 476D (2 bytes)
 .db $1C $03
 
@@ -9934,7 +9944,7 @@ _LABEL_4768_:
   call _LABEL_FDF_
   pop hl
   ld a, (_RAM_D6BC_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4785 to 4786 (2 bytes)
 .db $0A $02
 
@@ -9955,7 +9965,7 @@ _LABEL_4768_:
   jr z, +
   ld d, e
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 47A6 to 47A7 (2 bytes)
 .db $64 $04
 
@@ -9973,14 +9983,14 @@ _LABEL_4768_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 47BF to 47C0 (2 bytes)
 .db $BE $04
 
   ld a, (_RAM_D6B8_)
   ld d, a
   ld a, (_RAM_D6BC_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 47C9 to 47CA (2 bytes)
 .db $BE $04
 
@@ -9988,7 +9998,7 @@ _LABEL_4768_:
   ld d, a
   res 7, d
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 47D5 to 47D6 (2 bytes)
 .db $BC $04
 
@@ -9996,7 +10006,7 @@ _LABEL_4768_:
   ld d, a
   res 7, d
   ld a, (_RAM_D6BC_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 47E1 to 47E2 (2 bytes)
 .db $BC $04
 
@@ -10007,7 +10017,7 @@ _LABEL_47E3_:
 
 _LABEL_47EB_:
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 47EF to 47F0 (2 bytes)
 .db $0A $02
 
@@ -10024,7 +10034,7 @@ _LABEL_47EB_:
   jr z, +
   ld d, e
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4808 to 4809 (2 bytes)
 .db $64 $04
 
@@ -10042,7 +10052,7 @@ _LABEL_47EB_:
   ld a, (_RAM_D6BB_)
   ld d, a
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4820 to 4821 (2 bytes)
 .db $64 $04
 
@@ -10061,17 +10071,17 @@ _DATA_482F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0023
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4848 to 4849 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 484C to 484D (2 bytes)
 .db $14 $02
 
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4850 to 4851 (2 bytes)
 .db $04 $08
 
@@ -10081,7 +10091,7 @@ _DATA_482F_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 485F to 4860 (2 bytes)
 .db $BE $04
 
@@ -10093,12 +10103,12 @@ _DATA_482F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0021
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 486F to 4870 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4873 to 4874 (2 bytes)
 .db $04 $08
 
@@ -10131,7 +10141,7 @@ _LABEL_487F_:
   ld a, (_RAM_D6AD_)
   ld e, a
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48A8 to 48A9 (2 bytes)
 .db $34 $04
 
@@ -10144,13 +10154,13 @@ _LABEL_487F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0116
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48B6 to 48B7 (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48BB to 48BC (2 bytes)
 .db $04 $08
 
@@ -10158,29 +10168,29 @@ _LABEL_487F_:
   ld hl, (_SRAM_262F_)
   call _LABEL_FCB_
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48C6 to 48C7 (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $0117
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48CD to 48CE (2 bytes)
 .db $00 $08
 
   pop hl
   push hl
   ld hl, $0118
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48D5 to 48D6 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48D9 to 48DA (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48DC to 48DD (2 bytes)
 .db $20 $03
 
@@ -10190,7 +10200,7 @@ _LABEL_487F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0115
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48EB to 48EC (2 bytes)
 .db $00 $08
 
@@ -10202,33 +10212,33 @@ _LABEL_487F_:
 
   ld hl, $0178
   call _LABEL_9CA_wait
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48F8 to 48F9 (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 48FB to 48FC (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $0119
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4902 to 4903 (2 bytes)
 .db $00 $08
 
   pop hl
   push hl
   ld hl, $011A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 490A to 490B (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 490E to 490F (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4911 to 4912 (2 bytes)
 .db $20 $03
 
@@ -10247,7 +10257,7 @@ _LABEL_491E_:
   ld a, (_RAM_D6AD_)
   ld e, a
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4928 to 4929 (2 bytes)
 .db $34 $04
 
@@ -10260,13 +10270,13 @@ _LABEL_491E_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $011B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4936 to 4937 (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 493B to 493C (2 bytes)
 .db $04 $08
 
@@ -10274,29 +10284,29 @@ _LABEL_491E_:
   ld hl, (_SRAM_262F_)
   call _LABEL_FCB_
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4946 to 4947 (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $011C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 494D to 494E (2 bytes)
 .db $00 $08
 
   pop hl
   push hl
   ld hl, $011D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4955 to 4956 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4959 to 495A (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 495C to 495D (2 bytes)
 .db $20 $03
 
@@ -10306,7 +10316,7 @@ _LABEL_491E_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0115
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 496B to 496C (2 bytes)
 .db $00 $08
 
@@ -10318,33 +10328,33 @@ _LABEL_491E_:
 
   ld hl, $0178
   call _LABEL_9CA_wait
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4978 to 4979 (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 497B to 497C (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $011E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4982 to 4983 (2 bytes)
 .db $00 $08
 
   pop hl
   push hl
   ld hl, $011F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 498A to 498B (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 498E to 498F (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4991 to 4992 (2 bytes)
 .db $20 $03
 
@@ -10359,14 +10369,14 @@ _LABEL_499E_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $010E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 49A8 to 49A9 (2 bytes)
 .db $00 $08
 
   pop hl
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 49B0 to 49B1 (2 bytes)
 .db $BC $04
 
@@ -10381,7 +10391,7 @@ _LABEL_499E_:
   ld (_SRAM_21B3_), a
   push hl
   ld hl, $010F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 49C3 to 49C4 (2 bytes)
 .db $00 $08
 
@@ -10393,12 +10403,12 @@ _LABEL_499E_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0110
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 49D1 to 49D2 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 49D5 to 49D6 (2 bytes)
 .db $04 $08
 
@@ -10409,13 +10419,13 @@ _LABEL_499E_:
 _LABEL_49DF_:
   push hl
   ld hl, $010D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 49E4 to 49E5 (2 bytes)
 .db $00 $08
 
   pop hl
 _LABEL_49E7_:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 49E8 to 49E9 (2 bytes)
 .db $04 $08
 
@@ -10511,7 +10521,7 @@ _LABEL_4ABE_:
   ld a, c
   cp e
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4AC3 to 4AC4 (2 bytes)
 .db $50 $04
 
@@ -10519,7 +10529,7 @@ _LABEL_4ABE_:
   cp d
   jr nz, +
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4ACB to 4ACC (2 bytes)
 .db $52 $04
 
@@ -10732,7 +10742,7 @@ _LABEL_4BD3_:
   call _LABEL_DD3_DrawOneLetter
   pop af
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C34 to 4C35 (2 bytes)
 .db $32 $04
 
@@ -10751,7 +10761,7 @@ _LABEL_4BD3_:
     and a
     jp m, ++
     push af
-      rst $18 ; _LABEL_18_
+      rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C4E to 4C4F (2 bytes)
 .db $38 $04
 
@@ -10759,7 +10769,7 @@ _LABEL_4BD3_:
       ld d, $00
       ld bc, $0600
       ld hl, $A3F8
-      rst $18 ; _LABEL_18_
+      rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C5A to 4C5B (2 bytes)
 .db $1A $03
 
@@ -10782,43 +10792,43 @@ _LABEL_4BD3_:
   pop af
 ++:
   ld hl, $A3F8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C7C to 4C7D (2 bytes)
 .db $5C $04
 
   ld bc, $0301
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C82 to 4C83 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C85 to 4C86 (2 bytes)
 .db $5A $04
 
   ld bc, $0601
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C8B to 4C8C (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C8E to 4C8F (2 bytes)
 .db $3E $04
 
   ld e, d
   ld d, $00
   ld bc, $0602
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C97 to 4C98 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4C9A to 4C9B (2 bytes)
 .db $46 $04
 
   ld e, d
   ld d, $00
   ld bc, $0302
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4CA3 to 4CA4 (2 bytes)
 .db $1A $03
 
@@ -11012,7 +11022,7 @@ _LABEL_4DAD_:
   ld b, $13
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4DCA to 4DCB (2 bytes)
 .db $50 $04
 
@@ -11020,7 +11030,7 @@ _LABEL_4DAD_:
   cp d
   jr nz, +
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4DD2 to 4DD3 (2 bytes)
 .db $52 $04
 
@@ -11034,7 +11044,7 @@ _LABEL_4DAD_:
   ld b, $14
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4DE1 to 4DE2 (2 bytes)
 .db $50 $04
 
@@ -11042,7 +11052,7 @@ _LABEL_4DAD_:
   cp d
   jr nz, +
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4DE9 to 4DEA (2 bytes)
 .db $52 $04
 
@@ -11061,7 +11071,7 @@ _LABEL_4DAD_:
   call _LABEL_1828_
   pop bc
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4E02 to 4E03 (2 bytes)
 .db $1C $02
 
@@ -11093,13 +11103,13 @@ _LABEL_4DAD_:
   ld hl, _SRAM_2368_
   ld de, _SRAM_234D_
   ldir
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4E36 to 4E37 (2 bytes)
 .db $18 $02
 
   cp $FF
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4E3D to 4E3E (2 bytes)
 .db $1C $02
 
@@ -11111,7 +11121,7 @@ _LABEL_4DAD_:
 ++:
   cp $01
   jr nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4E47 to 4E48 (2 bytes)
 .db $2E $02
 
@@ -11120,7 +11130,7 @@ _LABEL_4DAD_:
 +:
   cp $02
   jr nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4E4F to 4E50 (2 bytes)
 .db $2C $02
 
@@ -11129,17 +11139,17 @@ _LABEL_4DAD_:
 +:
   push hl
   ld hl, $0000
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4E57 to 4E58 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4E5B to 4E5C (2 bytes)
 .db $14 $02
 
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4E5F to 4E60 (2 bytes)
 .db $04 $08
 
@@ -11177,7 +11187,7 @@ _LABEL_4EA4_:
   push hl
   ld (_RAM_D6AD_), a
   call _LABEL_39D0_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4EAE to 4EAF (2 bytes)
 .db $50 $04
 
@@ -11185,7 +11195,7 @@ _LABEL_4EA4_:
   ld (_RAM_D6B6_), a
   ld (_RAM_D6B4_), a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4EBB to 4EBC (2 bytes)
 .db $52 $04
 
@@ -11203,7 +11213,7 @@ _LABEL_4EA4_:
   ld a, (_RAM_D6AD_)
   call _LABEL_41BE_
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4EE1 to 4EE2 (2 bytes)
 .db $60 $04
 
@@ -11300,7 +11310,7 @@ _LABEL_4F4B_:
   ld d, a
   ld h, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4F8F to 4F90 (2 bytes)
 .db $22 $04
 
@@ -11308,7 +11318,7 @@ _LABEL_4F4B_:
   ld d, a
   ld l, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4F9A to 4F9B (2 bytes)
 .db $24 $04
 
@@ -11333,7 +11343,7 @@ _LABEL_4F4B_:
   cp $37
   jr z, +
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4FD2 to 4FD3 (2 bytes)
 .db $F2 $04
 
@@ -11348,7 +11358,7 @@ _LABEL_4F4B_:
 +:
   ld d, $40
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 4FED to 4FEE (2 bytes)
 .db $F4 $04
 
@@ -11367,13 +11377,13 @@ _LABEL_5003_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5013 to 5014 (2 bytes)
 .db $F4 $04
 
   call _LABEL_4B6D_
   ld a, (_RAM_D6B9_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 501C to 501D (2 bytes)
 .db $72 $04
 
@@ -11390,13 +11400,13 @@ _LABEL_5003_:
   ld a, (_RAM_D6BB_)
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 503D to 503E (2 bytes)
 .db $F6 $04
 
   call _LABEL_4B6D_
   ld a, (_RAM_D6BB_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5046 to 5047 (2 bytes)
 .db $70 $04
 
@@ -11470,7 +11480,7 @@ _LABEL_50B1_:
   push af
   call _LABEL_41BE_
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 50BD to 50BE (2 bytes)
 .db $1C $03
 
@@ -11504,7 +11514,7 @@ _LABEL_50DF_:
   ld bc, $0028
   ldir
   ld hl, _SRAM_23BD_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 50EE to 50EF (2 bytes)
 .db $12 $02
 
@@ -11568,7 +11578,7 @@ _LABEL_5193_:
   ld de, _DATA_D1A8_
   add hl, de
   ld a, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 51A2 to 51A3 (2 bytes)
 .db $02 $07
 
@@ -11605,7 +11615,7 @@ _DATA_51A8_:
 ; Data from 51D8 to 51D9 (2 bytes)
 .db $0A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 51DB to 51DC (2 bytes)
 .db $04 $05
 
@@ -11629,7 +11639,7 @@ _DATA_51A8_:
   xor a
   ld (_SRAM_25E8_), a
   ld a, (_SRAM_645_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5211 to 5212 (2 bytes)
 .db $04 $10
 
@@ -11637,15 +11647,15 @@ _DATA_51A8_:
 
 _LABEL_5216_:
   call _LABEL_5193_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 521A to 521B (2 bytes)
 .db $04 $05
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 521D to 521E (2 bytes)
 .db $08 $05
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5220 to 5221 (2 bytes)
 .db $02 $05
 
@@ -11671,7 +11681,7 @@ _LABEL_5216_:
   xor a
   ld (_SRAM_25E8_), a
   ld a, (_SRAM_645_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 525C to 525D (2 bytes)
 .db $04 $10
 
@@ -11690,7 +11700,7 @@ _LABEL_526E_:
   call _LABEL_5607_
   cp $FF
   jr z, -
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 527F to 5280 (2 bytes)
 .db $5C $04
 
@@ -11708,13 +11718,13 @@ _LABEL_526E_:
   pop af
   and a
   jp p, _LABEL_52D4_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 529E to 529F (2 bytes)
 .db $3A $04
 
   ld a, d
   and $0F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 52A4 to 52A5 (2 bytes)
 .db $0A $05
 
@@ -11730,10 +11740,10 @@ _LABEL_526E_:
   jr z, ++
   push hl
     ld hl, $02B6
-    rst $18 ; _LABEL_18_
+    rst $18 ; _LABEL_18_CallBankedFunction
 .db $00 $08
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 .db $04 $08
   jr ++
 
@@ -11741,7 +11751,7 @@ _LABEL_526E_:
   res 4, d
 ++:
   call _LABEL_5607_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 52C9 to 52CA (2 bytes)
 .db $0C $04
 
@@ -11751,7 +11761,7 @@ _LABEL_526E_:
 
 _LABEL_52D4_:
   call _LABEL_5607_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 52D8 to 52D9 (2 bytes)
 .db $02 $01
 
@@ -11768,7 +11778,7 @@ _LABEL_52D4_:
   and $1F
   cp $0A
   jp nz, _LABEL_539B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 52F5 to 52F6 (2 bytes)
 .db $02 $08
 
@@ -11781,7 +11791,7 @@ _LABEL_52D4_:
   ld (_SRAM_21B3_), a
   push hl
   ld hl, $0089
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 530D to 530E (2 bytes)
 .db $00 $08
 
@@ -11823,7 +11833,7 @@ _LABEL_52D4_:
   call _LABEL_9CA_wait
   dec c
   jr nz, --
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 535A to 535B (2 bytes)
 .db $04 $08
 
@@ -11839,11 +11849,11 @@ _LABEL_5361_:
   ld a, (_RAM_D6BB_)
   ld d, a
   call _LABEL_5607_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5374 to 5375 (2 bytes)
 .db $BE $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5377 to 5378 (2 bytes)
 .db $02 $08
 
@@ -11853,7 +11863,7 @@ _LABEL_5361_:
   ld (_SRAM_21B3_), a
   push hl
   ld hl, $00A9
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5387 to 5388 (2 bytes)
 .db $00 $08
 
@@ -11865,7 +11875,7 @@ _LABEL_5361_:
 
   ld hl, $003C
   call _LABEL_9CA_wait
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5394 to 5395 (2 bytes)
 .db $04 $08
 
@@ -11878,7 +11888,7 @@ _LABEL_539B_:
   jr z, _LABEL_540B_
   call _LABEL_5607_
   call _LABEL_585D_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 53A9 to 53AA (2 bytes)
 .db $00 $05
 
@@ -11887,12 +11897,12 @@ _LABEL_539B_:
   ld a, (_SRAM_25C6_)
   ld e, a
   call _LABEL_38FE_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 53B7 to 53B8 (2 bytes)
 .db $00 $06
 
   ld hl, _RAM_CC00_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 53BD to 53BE (2 bytes)
 .db $02 $06
 
@@ -11957,14 +11967,14 @@ _LABEL_540B_:
   call _LABEL_5627_
   jp c, _LABEL_54C5_
   call _LABEL_5607_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5441 to 5442 (2 bytes)
 .db $60 $04
 
   bit 3, e
   jr z, _LABEL_548B_
   ld d, $02
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 544A to 544B (2 bytes)
 .db $B2 $04
 
@@ -11973,7 +11983,7 @@ _LABEL_540B_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00C3
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 545A to 545B (2 bytes)
 .db $00 $08
 
@@ -11982,24 +11992,24 @@ _LABEL_540B_:
   or e
   jr nz, _LABEL_548B_
   call _LABEL_5607_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5465 to 5466 (2 bytes)
 .db $60 $04
 
   res 3, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 546A to 546B (2 bytes)
 .db $30 $04
 
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00C4
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5474 to 5475 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5478 to 5479 (2 bytes)
 .db $04 $08
 
@@ -12023,24 +12033,24 @@ _LABEL_5491_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00C4
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 549E to 549F (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 54A3 to 54A4 (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 54A6 to 54A7 (2 bytes)
 .db $D6 $04
 
   srl c
   rr d
   rr e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 54AF to 54B0 (2 bytes)
 .db $D4 $04
 
@@ -12052,7 +12062,7 @@ _LABEL_5491_:
   ld b, $14
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 54BC to 54BD (2 bytes)
 .db $5C $04
 
@@ -12069,7 +12079,7 @@ _LABEL_54C5_:
 +:
   call _LABEL_5607_
   ld c, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 54D1 to 54D2 (2 bytes)
 .db $60 $04
 
@@ -12089,7 +12099,7 @@ _LABEL_54C5_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00DD
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 54F0 to 54F1 (2 bytes)
 .db $00 $08
 
@@ -12117,7 +12127,7 @@ _LABEL_54C5_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00DB
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5513 to 5514 (2 bytes)
 .db $00 $08
 
@@ -12145,7 +12155,7 @@ _LABEL_54C5_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00DC
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5536 to 5537 (2 bytes)
 .db $00 $08
 
@@ -12171,7 +12181,7 @@ _LABEL_54C5_:
   ld (_SRAM_21B3_), a
   push hl
   ld hl, $00E0
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5559 to 555A (2 bytes)
 .db $00 $08
 
@@ -12195,7 +12205,7 @@ _LABEL_54C5_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00E1
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5577 to 5578 (2 bytes)
 .db $00 $08
 
@@ -12212,7 +12222,7 @@ _LABEL_54C5_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00C2
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 558C to 558D (2 bytes)
 .db $00 $08
 
@@ -12232,7 +12242,7 @@ _LABEL_54C5_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00DE
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 55A8 to 55A9 (2 bytes)
 .db $00 $08
 
@@ -12250,11 +12260,11 @@ _LABEL_54C5_:
 ++:
   ld a, c
   ex de, hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 55B7 to 55B8 (2 bytes)
 .db $30 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 55BA to 55BB (2 bytes)
 .db $EA $04
 
@@ -12265,7 +12275,7 @@ _LABEL_55BC_:
   ld (_RAM_D6D5_), a
   call _LABEL_5607_
   call _LABEL_39D0_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 55CD to 55CE (2 bytes)
 .db $04 $08
 
@@ -12351,7 +12361,7 @@ _LABEL_5627_:
   ld b, $14
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5631 to 5632 (2 bytes)
 .db $5C $04
 
@@ -12384,7 +12394,7 @@ _LABEL_5646_:
   ld a, c
   or a
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5650 to 5651 (2 bytes)
 .db $5C $04
 
@@ -12393,23 +12403,23 @@ _LABEL_5646_:
   jr z, ++
 +:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5658 to 5659 (2 bytes)
 .db $5A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 565B to 565C (2 bytes)
 .db $2C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 565E to 565F (2 bytes)
 .db $3E $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5661 to 5662 (2 bytes)
 .db $18 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5664 to 5665 (2 bytes)
 .db $60 $04
 
@@ -12418,7 +12428,7 @@ _LABEL_5646_:
   ld e, a
   ld d, $00
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 566E to 566F (2 bytes)
 .db $30 $04
 
@@ -12503,7 +12513,7 @@ _LABEL_56C1_:
   push ix
   push iy
   call _LABEL_3B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 56CD to 56CE (2 bytes)
 .db $04 $08
 
@@ -12744,7 +12754,7 @@ _LABEL_589F_:
 -:
   ld a, (hl)
   call _LABEL_3930_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 58C4 to 58C5 (2 bytes)
 .db $50 $04
 
@@ -12755,7 +12765,7 @@ _LABEL_589F_:
   cp $0A
   jr nc, +
   ld a, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 58D5 to 58D6 (2 bytes)
 .db $52 $04
 
@@ -12865,12 +12875,12 @@ _LABEL_595C_:
   push af
   push de
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 597F to 5980 (2 bytes)
 .db $50 $04
 
   ld h, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5983 to 5984 (2 bytes)
 .db $52 $04
 
@@ -12881,7 +12891,7 @@ _LABEL_595C_:
   pop de
   pop af
   ld d, $FF
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5992 to 5993 (2 bytes)
 .db $22 $04
 
@@ -12897,7 +12907,7 @@ _LABEL_599C_:
   push de
   push hl
   ld c, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 59A2 to 59A3 (2 bytes)
 .db $50 $04
 
@@ -12918,7 +12928,7 @@ _LABEL_599C_:
   ld a, h
   ld (_RAM_D69D_), a
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 59BD to 59BE (2 bytes)
 .db $50 $04
 
@@ -12933,7 +12943,7 @@ _LABEL_599C_:
   add a, $30
   ld (_RAM_D6A3_), a
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 59D2 to 59D3 (2 bytes)
 .db $52 $04
 
@@ -12954,7 +12964,7 @@ _LABEL_599C_:
   ld a, h
   ld (_RAM_D69E_), a
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 59ED to 59EE (2 bytes)
 .db $52 $04
 
@@ -13023,7 +13033,7 @@ _LABEL_5A2D_:
 .db $12 $04
 
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5A3A to 5A3B (2 bytes)
 .db $5C $04
 
@@ -13047,7 +13057,7 @@ _LABEL_5A2D_:
   ld c, $80
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5A59 to 5A5A (2 bytes)
 .db $5C $04
 
@@ -13101,7 +13111,7 @@ _LABEL_5A79_:
 .db $12 $04
 
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5AA6 to 5AA7 (2 bytes)
 .db $5C $04
 
@@ -13109,7 +13119,7 @@ _LABEL_5A79_:
   or e
   jr z, +
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5AAE to 5AAF (2 bytes)
 .db $4C $04
 
@@ -13127,7 +13137,7 @@ _LABEL_5A79_:
   ld c, $80
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5AC2 to 5AC3 (2 bytes)
 .db $5C $04
 
@@ -13135,7 +13145,7 @@ _LABEL_5A79_:
   or e
   jr z, +
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5ACA to 5ACB (2 bytes)
 .db $4C $04
 
@@ -13254,7 +13264,7 @@ _LABEL_5B63_:
   add hl, de
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5B76 to 5B77 (2 bytes)
 .db $5C $04
 
@@ -13263,7 +13273,7 @@ _LABEL_5B63_:
   jr z, +
   ld a, c
   ld de, $0000
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5B81 to 5B82 (2 bytes)
 .db $2C $04
 
@@ -13289,7 +13299,7 @@ _LABEL_5B63_:
 ; 1st entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5B9C_:
   ld a, $02
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5B9F to 5BA0 (2 bytes)
 .db $02 $03
 
@@ -13298,7 +13308,7 @@ _LABEL_5B9C_:
 ; 2nd entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BA2_:
   ld a, $05
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BA5 to 5BA6 (2 bytes)
 .db $02 $03
 
@@ -13307,7 +13317,7 @@ _LABEL_5BA2_:
 ; 4th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BA8_:
   ld a, $06
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BAB to 5BAC (2 bytes)
 .db $5C $04
 
@@ -13315,7 +13325,7 @@ _LABEL_5BA8_:
   or e
   jr z, +
   ld a, $0C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BB4 to 5BB5 (2 bytes)
 .db $02 $03
 
@@ -13328,7 +13338,7 @@ _LABEL_5BA8_:
 
 +:
   ld a, $0B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BBF to 5BC0 (2 bytes)
 .db $02 $03
 
@@ -13342,7 +13352,7 @@ _LABEL_5BA8_:
 ; 6th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BC7_:
   ld a, $10
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BCA to 5BCB (2 bytes)
 .db $02 $03
 
@@ -13351,7 +13361,7 @@ _LABEL_5BC7_:
 ; 7th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BCD_:
   ld a, $13
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BD0 to 5BD1 (2 bytes)
 .db $02 $03
 
@@ -13360,7 +13370,7 @@ _LABEL_5BCD_:
 ; 8th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BD3_:
   ld a, $15
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BD6 to 5BD7 (2 bytes)
 .db $02 $03
 
@@ -13369,7 +13379,7 @@ _LABEL_5BD3_:
 ; 9th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BD9_:
   ld a, $17
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BDC to 5BDD (2 bytes)
 .db $02 $03
 
@@ -13378,7 +13388,7 @@ _LABEL_5BD9_:
 ; 11th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BDF_:
   ld a, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BE2 to 5BE3 (2 bytes)
 .db $02 $03
 
@@ -13387,7 +13397,7 @@ _LABEL_5BDF_:
 ; 12th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BE5_:
   ld a, $1E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BE8 to 5BE9 (2 bytes)
 .db $02 $03
 
@@ -13396,7 +13406,7 @@ _LABEL_5BE5_:
 ; 14th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BEB_:
   ld a, $25
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BEE to 5BEF (2 bytes)
 .db $02 $03
 
@@ -13405,7 +13415,7 @@ _LABEL_5BEB_:
 ; 15th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BF1_:
   ld a, $29
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BF4 to 5BF5 (2 bytes)
 .db $02 $03
 
@@ -13414,7 +13424,7 @@ _LABEL_5BF1_:
 ; 17th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BF7_:
   ld a, $2F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5BFA to 5BFB (2 bytes)
 .db $02 $03
 
@@ -13423,7 +13433,7 @@ _LABEL_5BF7_:
 ; 18th entry of Jump Table from 5734 (indexed by unknown)
 _LABEL_5BFD_:
   ld a, $33
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C00 to 5C01 (2 bytes)
 .db $02 $03
 
@@ -13432,7 +13442,7 @@ _LABEL_5BFD_:
 ; 3rd entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C03_:
   ld a, $08
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C06 to 5C07 (2 bytes)
 .db $02 $03
 
@@ -13441,7 +13451,7 @@ _LABEL_5C03_:
 ; 5th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C09_:
   ld a, $0E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C0C to 5C0D (2 bytes)
 .db $02 $03
 
@@ -13450,7 +13460,7 @@ _LABEL_5C09_:
 ; 6th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C0F_:
   ld a, $11
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C12 to 5C13 (2 bytes)
 .db $02 $03
 
@@ -13459,7 +13469,7 @@ _LABEL_5C0F_:
 ; 10th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C15_:
   ld a, $19
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C18 to 5C19 (2 bytes)
 .db $02 $03
 
@@ -13468,7 +13478,7 @@ _LABEL_5C15_:
 ; 12th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C1B_:
   ld a, $1F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C1E to 5C1F (2 bytes)
 .db $02 $03
 
@@ -13477,7 +13487,7 @@ _LABEL_5C1B_:
 ; 13th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C21_:
   ld a, $22
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C24 to 5C25 (2 bytes)
 .db $02 $03
 
@@ -13486,7 +13496,7 @@ _LABEL_5C21_:
 ; 14th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C27_:
   ld a, $26
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C2A to 5C2B (2 bytes)
 .db $02 $03
 
@@ -13500,7 +13510,7 @@ _LABEL_5C2D_:
 .db $08 $04
 
   ld a, $2A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C35 to 5C36 (2 bytes)
 .db $02 $03
 
@@ -13509,7 +13519,7 @@ _LABEL_5C2D_:
 ; 16th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C38_:
   ld a, $2C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C3B to 5C3C (2 bytes)
 .db $02 $03
 
@@ -13518,7 +13528,7 @@ _LABEL_5C38_:
 ; 17th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C3E_:
   ld a, $30
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C41 to 5C42 (2 bytes)
 .db $02 $03
 
@@ -13527,7 +13537,7 @@ _LABEL_5C3E_:
 ; 18th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C44_:
   ld a, $34
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C47 to 5C48 (2 bytes)
 .db $02 $03
 
@@ -13536,7 +13546,7 @@ _LABEL_5C44_:
 ; 19th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C4A_:
   ld a, $37
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C4D to 5C4E (2 bytes)
 .db $02 $03
 
@@ -13545,7 +13555,7 @@ _LABEL_5C4A_:
 ; 20th entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C50_:
   ld a, $3A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C53 to 5C54 (2 bytes)
 .db $02 $03
 
@@ -13554,7 +13564,7 @@ _LABEL_5C50_:
 ; 21st entry of Jump Table from 578D (indexed by unknown)
 _LABEL_5C56_:
   ld a, $3E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C59 to 5C5A (2 bytes)
 .db $02 $03
 
@@ -13570,7 +13580,7 @@ _LABEL_5C5C_:
   or a
   ret z
   ld a, $03
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C6B to 5C6C (2 bytes)
 .db $02 $03
 
@@ -13587,7 +13597,7 @@ _LABEL_5C71_:
   or a
   ret z
   ld a, $06
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C80 to 5C81 (2 bytes)
 .db $02 $03
 
@@ -13604,7 +13614,7 @@ _LABEL_5C86_:
   or a
   ret z
   ld a, $09
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5C95 to 5C96 (2 bytes)
 .db $02 $03
 
@@ -13645,7 +13655,7 @@ _LABEL_5CA1_:
   or a
   ret z
   ld a, $1A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5CB0 to 5CB1 (2 bytes)
 .db $02 $03
 
@@ -13666,7 +13676,7 @@ _LABEL_5CB7_:
   or a
   ret z
   ld a, $20
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5CC6 to 5CC7 (2 bytes)
 .db $02 $03
 
@@ -13683,7 +13693,7 @@ _LABEL_5CCC_:
   or a
   ret z
   ld a, $23
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5CDB to 5CDC (2 bytes)
 .db $02 $03
 
@@ -13700,7 +13710,7 @@ _LABEL_5CE1_:
   or a
   ret z
   ld a, $27
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5CF0 to 5CF1 (2 bytes)
 .db $02 $03
 
@@ -13730,7 +13740,7 @@ _LABEL_5D03_:
   or a
   ret z
   ld a, $2D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D12 to 5D13 (2 bytes)
 .db $02 $03
 
@@ -13747,7 +13757,7 @@ _LABEL_5D18_:
   or a
   ret z
   ld a, $31
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D27 to 5D28 (2 bytes)
 .db $02 $03
 
@@ -13764,7 +13774,7 @@ _LABEL_5D2D_:
   or a
   ret z
   ld a, $35
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D3C to 5D3D (2 bytes)
 .db $02 $03
 
@@ -13781,7 +13791,7 @@ _LABEL_5D42_:
   or a
   ret z
   ld a, $38
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D51 to 5D52 (2 bytes)
 .db $02 $03
 
@@ -13798,7 +13808,7 @@ _LABEL_5D57_:
   or a
   jr z, +
   ld a, $81
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D67 to 5D68 (2 bytes)
 .db $5C $04
 
@@ -13806,7 +13816,7 @@ _LABEL_5D57_:
   or e
   jr nz, +
   ld a, $3B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D70 to 5D71 (2 bytes)
 .db $02 $03
 
@@ -13819,7 +13829,7 @@ _LABEL_5D57_:
   or a
   ret z
   ld a, $80
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D80 to 5D81 (2 bytes)
 .db $5C $04
 
@@ -13827,7 +13837,7 @@ _LABEL_5D57_:
   or e
   ret nz
   ld a, $3C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D88 to 5D89 (2 bytes)
 .db $02 $03
 
@@ -13844,7 +13854,7 @@ _LABEL_5D8E_:
   or a
   jr z, +
   ld a, $43
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5D9E to 5D9F (2 bytes)
 .db $02 $03
 
@@ -13856,7 +13866,7 @@ _LABEL_5D8E_:
   or a
   ret z
   ld a, $42
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5DAF to 5DB0 (2 bytes)
 .db $02 $03
 
@@ -13875,7 +13885,7 @@ _LABEL_5DBA_:
   or a
   ret z
   ld a, $40
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5DC9 to 5DCA (2 bytes)
 .db $02 $03
 
@@ -13885,7 +13895,7 @@ _LABEL_5DBA_:
 ; 1st entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5DCF_:
   ld a, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5DD2 to 5DD3 (2 bytes)
 .db $02 $03
 
@@ -13894,7 +13904,7 @@ _LABEL_5DCF_:
   ld b, $04
 -:
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5DDB to 5DDC (2 bytes)
 .db $BE $04
 
@@ -13906,7 +13916,7 @@ _LABEL_5DCF_:
 ; 2nd entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5DE4_:
   ld a, $07
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5DE7 to 5DE8 (2 bytes)
 .db $02 $03
 
@@ -13920,7 +13930,7 @@ _LABEL_5DE4_:
 ; 3rd entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5DEF_:
   ld a, $0A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5DF2 to 5DF3 (2 bytes)
 .db $02 $03
 
@@ -13929,7 +13939,7 @@ _LABEL_5DEF_:
 ; 4th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5DF5_:
   ld a, $0D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5DF8 to 5DF9 (2 bytes)
 .db $02 $03
 
@@ -13938,7 +13948,7 @@ _LABEL_5DF5_:
 ; 5th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5DFB_:
   ld a, $0F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5DFE to 5DFF (2 bytes)
 .db $02 $03
 
@@ -13952,7 +13962,7 @@ _LABEL_5DFB_:
 ; 6th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E06_:
   ld a, $12
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E09 to 5E0A (2 bytes)
 .db $02 $03
 
@@ -13961,7 +13971,7 @@ _LABEL_5E06_:
 ; 7th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E0C_:
   ld a, $14
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E0F to 5E10 (2 bytes)
 .db $02 $03
 
@@ -13980,7 +13990,7 @@ _LABEL_5E0C_:
 ; 8th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E1C_:
   ld a, $16
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E1F to 5E20 (2 bytes)
 .db $02 $03
 
@@ -13989,7 +13999,7 @@ _LABEL_5E1C_:
 ; 9th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E22_:
   ld a, $18
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E25 to 5E26 (2 bytes)
 .db $02 $03
 
@@ -13998,7 +14008,7 @@ _LABEL_5E22_:
 ; 10th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E28_:
   ld a, $1B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E2B to 5E2C (2 bytes)
 .db $02 $03
 
@@ -14012,7 +14022,7 @@ _LABEL_5E28_:
 ; 11th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E33_:
   ld a, $1D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E36 to 5E37 (2 bytes)
 .db $02 $03
 
@@ -14026,7 +14036,7 @@ _LABEL_5E33_:
 ; 12th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E3E_:
   ld a, $21
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E41 to 5E42 (2 bytes)
 .db $02 $03
 
@@ -14035,7 +14045,7 @@ _LABEL_5E3E_:
 ; 13th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E44_:
   ld a, $24
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E47 to 5E48 (2 bytes)
 .db $02 $03
 
@@ -14049,7 +14059,7 @@ _LABEL_5E44_:
 ; 14th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E4F_:
   ld a, $28
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E52 to 5E53 (2 bytes)
 .db $02 $03
 
@@ -14068,7 +14078,7 @@ _LABEL_5E5A_:
 .db $0A $04
 
   ld a, $2B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E62 to 5E63 (2 bytes)
 .db $02 $03
 
@@ -14077,7 +14087,7 @@ _LABEL_5E5A_:
 ; 16th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E65_:
   ld a, $2E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E68 to 5E69 (2 bytes)
 .db $02 $03
 
@@ -14091,7 +14101,7 @@ _LABEL_5E65_:
 ; 17th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E70_:
   ld a, $32
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E73 to 5E74 (2 bytes)
 .db $02 $03
 
@@ -14105,7 +14115,7 @@ _LABEL_5E70_:
 ; 18th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E7B_:
   ld a, $36
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E7E to 5E7F (2 bytes)
 .db $02 $03
 
@@ -14114,7 +14124,7 @@ _LABEL_5E7B_:
 ; 19th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E81_:
   ld a, $39
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E84 to 5E85 (2 bytes)
 .db $02 $03
 
@@ -14123,7 +14133,7 @@ _LABEL_5E81_:
 ; 20th entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E87_:
   ld a, $3D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E8A to 5E8B (2 bytes)
 .db $02 $03
 
@@ -14132,7 +14142,7 @@ _LABEL_5E87_:
 ; 21st entry of Jump Table from 5831 (indexed by unknown)
 _LABEL_5E8D_:
   ld a, $3F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5E90 to 5E91 (2 bytes)
 .db $02 $03
 
@@ -14158,7 +14168,7 @@ _LABEL_5EA2_:
   ld hl, _SRAM_1B0F_
   set 0, (hl)
   ld a, $41
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5EAA to 5EAB (2 bytes)
 .db $02 $03
 
@@ -14187,7 +14197,7 @@ _LABEL_5EAD_:
 
 +:
   ld c, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5ECC to 5ECD (2 bytes)
 .db $5C $04
 
@@ -14195,7 +14205,7 @@ _LABEL_5EAD_:
   or e
   ret nz
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5ED3 to 5ED4 (2 bytes)
 .db $3A $04
 
@@ -14247,7 +14257,7 @@ _LABEL_5EAD_:
   ld (hl), a
   ld a, d
   and $0F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F16 to 5F17 (2 bytes)
 .db $0A $05
 
@@ -14278,7 +14288,7 @@ _LABEL_5F35_:
   ret nc
 +++:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F3D to 5F3E (2 bytes)
 .db $0C $05
 
@@ -14288,16 +14298,16 @@ _LABEL_5F35_:
   xor a
   ld (_RAM_D6A6_), a
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F48 to 5F49 (2 bytes)
 .db $52 $04
 
   ld e, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F4C to 5F4D (2 bytes)
 .db $50 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F4F to 5F50 (2 bytes)
 .db $10 $01
 
@@ -14325,13 +14335,13 @@ _LABEL_5F35_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0106
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F7A to 5F7B (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F7F to 5F80 (2 bytes)
 .db $04 $08
 
@@ -14343,12 +14353,12 @@ _LABEL_5F35_:
   push de
   push hl
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F88 to 5F89 (2 bytes)
 .db $50 $04
 
   ld h, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5F8C to 5F8D (2 bytes)
 .db $52 $04
 
@@ -14379,7 +14389,7 @@ _LABEL_5FAD_:
   ld l, $92
 -:
   ld a, l
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5FB6 to 5FB7 (2 bytes)
 .db $50 $04
 
@@ -14390,7 +14400,7 @@ _LABEL_5FAD_:
   cp $0A
   jr nc, +
   ld a, l
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5FC7 to 5FC8 (2 bytes)
 .db $52 $04
 
@@ -14416,7 +14426,7 @@ _LABEL_5FAD_:
   cp $1F
   jr z, ++
   ld a, l
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5FED to 5FEE (2 bytes)
 .db $50 $04
 
@@ -14427,7 +14437,7 @@ _LABEL_5FAD_:
   cp $0A
   jr nc, +
   ld a, l
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 5FFE to 5FFF (2 bytes)
 .db $52 $04
 
@@ -14611,7 +14621,7 @@ _LABEL_60EE_:
 -:
   ld a, (bc)
   res 6, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 611C to 611D (2 bytes)
 .db $50 $04
 
@@ -14910,14 +14920,14 @@ _LABEL_620D_:
   ld e, $93
 -:
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 625F to 6260 (2 bytes)
 .db $50 $04
 
   cp b
   jr nz, +
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6266 to 6267 (2 bytes)
 .db $52 $04
 
@@ -14929,14 +14939,14 @@ _LABEL_620D_:
   ld e, $12
 -:
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6273 to 6274 (2 bytes)
 .db $50 $04
 
   cp b
   jr nz, +
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 627A to 627B (2 bytes)
 .db $52 $04
 
@@ -15761,19 +15771,19 @@ _LABEL_682D_:
   jp nz, _LABEL_6958_
   ld a, $12
 -:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6891 to 6892 (2 bytes)
 .db $5A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6894 to 6895 (2 bytes)
 .db $2C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6897 to 6898 (2 bytes)
 .db $3E $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 689A to 689B (2 bytes)
 .db $18 $04
 
@@ -15785,16 +15795,16 @@ _LABEL_682D_:
 
   push hl
   ld hl, $02B7
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 68A7 to 68A8 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 68AB to 68AC (2 bytes)
 .db $14 $02
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 68AE to 68AF (2 bytes)
 .db $04 $08
 
@@ -15833,7 +15843,7 @@ _LABEL_68CC_:
   call _LABEL_69DA_
   call _LABEL_6A2D_
   call _LABEL_3B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 68DD to 68DE (2 bytes)
 .db $20 $02
 
@@ -15861,7 +15871,7 @@ _LABEL_68CC_:
   ld a, (_SRAM_25E9_)
   cp $01
   jp nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6919 to 691A (2 bytes)
 .db $42 $02
 
@@ -15877,17 +15887,17 @@ _LABEL_68CC_:
   ld a, (_SRAM_25E9_)
   cp $FF
   jp nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 692F to 6933 (5 bytes)
 .db $44 $02 $C3 $3D $69
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6935 to 6939 (5 bytes)
 .db $46 $02 $C3 $3D $69
 
 ++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 693B to 693C (2 bytes)
 .db $04 $02
 
@@ -15900,12 +15910,12 @@ _LABEL_693D_:
   jp z, +
   push hl
   ld hl, $0113
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 694A to 694B (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 694E to 694F (2 bytes)
 .db $04 $08
 
@@ -15927,7 +15937,7 @@ _LABEL_6958_:
   call _LABEL_69DA_
   call _LABEL_6A2D_
   call _LABEL_3B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6969 to 696A (2 bytes)
 .db $20 $02
 
@@ -15942,7 +15952,7 @@ _LABEL_6958_:
   ld hl, _DATA_125E_
   ld bc, $0020
   ldir
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6982 to 6983 (2 bytes)
 .db $04 $11
 
@@ -15954,7 +15964,7 @@ _LABEL_6958_:
   ld a, (_SRAM_25E9_)
   cp $01
   jp nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 699A to 699B (2 bytes)
 .db $42 $02
 
@@ -15970,14 +15980,14 @@ _LABEL_6958_:
   ld a, (_SRAM_25E9_)
   cp $FF
   jp nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 69B0 to 69B1 (2 bytes)
 .db $44 $02
 
   jp ++
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 69B6 to 69B7 (2 bytes)
 .db $46 $02
 
@@ -15988,7 +15998,7 @@ _LABEL_6958_:
 ; Data from 69BA to 69BA (1 bytes)
 .db $05
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 69BC to 69BD (2 bytes)
 .db $38 $02
 
@@ -15996,7 +16006,7 @@ _LABEL_6958_:
   jp z, _LABEL_693D_
   or a
   jp nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 69C8 to 69C9 (2 bytes)
 .db $04 $02
 
@@ -16006,7 +16016,7 @@ _LABEL_6958_:
 +:
   dec a
   jp z, _LABEL_693D_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 69D3 to 69D9 (7 bytes)
 .db $02 $02 $3E $02 $C3 $B9 $69
 
@@ -16017,7 +16027,7 @@ _LABEL_69DA_:
   ld a, $93
   ld d, $FF
 -:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 69E1 to 69E2 (2 bytes)
 .db $22 $04
 
@@ -16049,7 +16059,7 @@ _LABEL_69EA_:
   push de
   push hl
   ld c, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A02 to 6A03 (2 bytes)
 .db $5A $04
 
@@ -16058,7 +16068,7 @@ _LABEL_69EA_:
   jr z, ++
   ld a, c
   ld c, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A0C to 6A0D (2 bytes)
 .db $62 $04
 
@@ -16075,7 +16085,7 @@ _LABEL_69EA_:
 
 +:
   ld c, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A20 to 6A21 (2 bytes)
 .db $BE $04
 
@@ -16127,53 +16137,53 @@ _LABEL_6A38_:
 
   ld a, $12
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A55 to 6A56 (2 bytes)
 .db $BE $04
 
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A5A to 6A5B (2 bytes)
 .db $BE $04
 
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A5F to 6A60 (2 bytes)
 .db $BE $04
 
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A64 to 6A65 (2 bytes)
 .db $BE $04
 
   ld d, $32
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A69 to 6A6A (2 bytes)
 .db $BC $04
 
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A6E to 6A6F (2 bytes)
 .db $B6 $04
 
   ld d, $27
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A73 to 6A74 (2 bytes)
 .db $BC $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A76 to 6A77 (2 bytes)
 .db $5A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A79 to 6A7A (2 bytes)
 .db $2C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A7C to 6A7D (2 bytes)
 .db $3E $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A7F to 6A80 (2 bytes)
 .db $2C $04
 
@@ -16183,7 +16193,7 @@ _LABEL_6A38_:
 -:
   ld d, b
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A88 to 6A89 (2 bytes)
 .db $B4 $04
 
@@ -16200,7 +16210,7 @@ _LABEL_6A38_:
 +:
   ld a, c
   ld d, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6A9E to 6A9F (2 bytes)
 .db $BE $04
 
@@ -16226,7 +16236,7 @@ _LABEL_6AA5_:
 ; Data from 6AC1 to 6AC1 (1 bytes)
 .db $02
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6AC3 to 6AC4 (2 bytes)
 .db $06 $11
 
@@ -16246,7 +16256,7 @@ _LABEL_6AA5_:
   xor a
   ld (_SRAM_26B1_), a
 _LABEL_6AEE_:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6AEF to 6AF0 (2 bytes)
 .db $3A $02
 
@@ -16254,7 +16264,7 @@ _LABEL_6AEE_:
   jr z, _LABEL_6AEE_
   or a
   jr nz, _LABEL_6B42_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6AF9 to 6AFA (2 bytes)
 .db $3E $02
 
@@ -16262,7 +16272,7 @@ _LABEL_6AEE_:
   jr nz, +
   push hl
   ld hl, $006F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B04 to 6B05 (2 bytes)
 .db $00 $08
 
@@ -16272,7 +16282,7 @@ _LABEL_6AEE_:
 +:
   push hl
   ld hl, $0070
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B0E to 6B0F (2 bytes)
 .db $00 $08
 
@@ -16281,7 +16291,7 @@ _LABEL_6AEE_:
   call _LABEL_6C48_
   call _LABEL_69DA_
   xor a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B1C to 6B41 (38 bytes)
 .db $40 $02 $3A $BE $A2 $A7 $F2 $2F $6B $3E $01 $DF $40 $02 $3C $FE
 .db $12 $38 $F8 $3E $34 $E7 $08 $04 $CD $D2 $6D $E5 $21 $71 $00 $DF
@@ -16292,19 +16302,19 @@ _LABEL_6B42_:
   jr nz, ++
   push hl
   ld hl, $0073
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B4B to 6B4C (2 bytes)
 .db $00 $08
 
   pop hl
   push hl
   ld hl, $0074
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B53 to 6B54 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B57 to 6B58 (2 bytes)
 .db $3C $02
 
@@ -16312,7 +16322,7 @@ _LABEL_6B42_:
   jr nz, +
   push hl
   ld hl, $006F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B62 to 6B63 (2 bytes)
 .db $00 $08
 
@@ -16328,12 +16338,12 @@ _LABEL_6B42_:
   jr nz, ++
   push hl
   ld hl, $0076
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B76 to 6B77 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B7A to 6B7B (2 bytes)
 .db $3C $02
 
@@ -16341,7 +16351,7 @@ _LABEL_6B42_:
   jr nz, +
   push hl
   ld hl, $006F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B85 to 6B86 (2 bytes)
 .db $00 $08
 
@@ -16352,12 +16362,12 @@ _LABEL_6B42_:
   ld c, a
   push hl
   ld hl, $0086
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B91 to 6B92 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6B95 to 6B96 (2 bytes)
 .db $14 $02
 
@@ -16367,7 +16377,7 @@ _LABEL_6B42_:
   call _LABEL_6E04_
   push hl
   ld hl, $0077
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6BA4 to 6BA5 (2 bytes)
 .db $00 $08
 
@@ -16375,7 +16385,7 @@ _LABEL_6B42_:
   jp _LABEL_6AEE_
 
 ++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6BAB to 6BAC (2 bytes)
 .db $3C $02
 
@@ -16383,7 +16393,7 @@ _LABEL_6B42_:
   jr nz, +
   push hl
   ld hl, $006F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6BB6 to 6BB7 (2 bytes)
 .db $00 $08
 
@@ -16394,12 +16404,12 @@ _LABEL_6B42_:
   call _LABEL_6E18_
   push hl
   ld hl, $0078
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6BC4 to 6BC5 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6BC8 to 6BC9 (2 bytes)
 .db $3E $02
 
@@ -16407,7 +16417,7 @@ _LABEL_6B42_:
   jr nz, +
   push hl
   ld hl, $006F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6BD3 to 6BD4 (2 bytes)
 .db $00 $08
 
@@ -16419,7 +16429,7 @@ _LABEL_6B42_:
   call _LABEL_6DD2_
   push hl
   ld hl, $0079
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6BE4 to 6BE5 (2 bytes)
 .db $00 $08
 
@@ -16435,7 +16445,7 @@ _LABEL_6BEA_:
   jr z, +
   push hl
   ld hl, $02B8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6BF6 to 6BF7 (2 bytes)
 .db $00 $08
 
@@ -16445,7 +16455,7 @@ _LABEL_6BEA_:
 +:
   push hl
   ld hl, $0072
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6C00 to 6C01 (2 bytes)
 .db $00 $08
 
@@ -16461,7 +16471,7 @@ _LABEL_6BEA_:
   ld hl, _LABEL_3468_
   ld (_RAM_D683_), hl
   call _LABEL_3B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6C17 to 6C18 (2 bytes)
 .db $04 $08
 
@@ -16500,7 +16510,7 @@ _LABEL_6C48_:
   ld (_SRAM_644_), a
   ld a, $00
   ld (_SRAM_643_), a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6C67 to 6DD1 (363 bytes)
 .db $20 $01 $AF $E7 $0E $04 $3E $01 $E7 $0E $04 $3E $02 $E7 $0E $04
 .db $3E $03 $E7 $0E $04 $3E $04 $E7 $0E $04 $3E $05 $E7 $0E $04 $3A
@@ -16640,12 +16650,12 @@ _LABEL_6E2F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0085
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6E72 to 6E73 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6E76 to 6E77 (2 bytes)
 .db $04 $08
 
@@ -16699,7 +16709,7 @@ _LABEL_6EA5_:
 _LABEL_6EB4_:
   push hl
   ld hl, $006C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6EB9 to 6EBA (2 bytes)
 .db $00 $08
 
@@ -16709,7 +16719,7 @@ _LABEL_6EB4_:
   ret m
   push hl
   ld hl, $006D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6EC6 to 6EC7 (2 bytes)
 .db $00 $08
 
@@ -16719,7 +16729,7 @@ _LABEL_6EB4_:
   ret m
   push hl
   ld hl, $006E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6ED3 to 6ED4 (2 bytes)
 .db $00 $08
 
@@ -16731,7 +16741,7 @@ _LABEL_6EB4_:
   ld (_SRAM_26B1_), a
   push hl
   ld hl, $006F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6EE4 to 6EE5 (2 bytes)
 .db $00 $08
 
@@ -16873,7 +16883,7 @@ _LABEL_6FA6_:
 ; Data from 6FD1 to 6FD1 (1 bytes)
 .db $02
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6FD3 to 6FD4 (2 bytes)
 .db $06 $11
 
@@ -16893,25 +16903,25 @@ _LABEL_6FA6_:
   ld (_SRAM_644_), a
   push hl
   ld hl, $007A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7000 to 7001 (2 bytes)
 .db $00 $08
 
   pop hl
   push hl
   ld hl, $007B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7008 to 7009 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 700C to 700D (2 bytes)
 .db $04 $08
 
   ld a, $FF
   ld (_SRAM_26B1_), a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7014 to 7015 (2 bytes)
 .db $0A $11
 
@@ -16938,7 +16948,7 @@ _LABEL_702C_:
   call _LABEL_719F_
   ld (_RAM_D6AE_), a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 703F to 7040 (2 bytes)
 .db $38 $04
 
@@ -16983,7 +16993,7 @@ _LABEL_702C_:
   ld h, (hl)
   ld l, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 707F to 7080 (2 bytes)
 .db $38 $04
 
@@ -16994,7 +17004,7 @@ _LABEL_702C_:
   inc hl
   ld c, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 708D to 708E (2 bytes)
 .db $40 $04
 
@@ -17003,7 +17013,7 @@ _LABEL_702C_:
   ld (ix+3), a
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 709D to 709E (2 bytes)
 .db $78 $04
 
@@ -17012,7 +17022,7 @@ _LABEL_702C_:
   inc hl
   ld c, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 70A7 to 70A8 (2 bytes)
 .db $42 $04
 
@@ -17021,7 +17031,7 @@ _LABEL_702C_:
   ld (ix+4), a
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 70B7 to 70B8 (2 bytes)
 .db $7A $04
 
@@ -17030,7 +17040,7 @@ _LABEL_702C_:
   inc hl
   ld c, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 70C1 to 70C2 (2 bytes)
 .db $44 $04
 
@@ -17039,7 +17049,7 @@ _LABEL_702C_:
   ld (ix+5), a
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 70D1 to 70D2 (2 bytes)
 .db $7C $04
 
@@ -17048,7 +17058,7 @@ _LABEL_702C_:
   inc hl
   ld c, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 70DB to 70DC (2 bytes)
 .db $5A $04
 
@@ -17058,7 +17068,7 @@ _LABEL_702C_:
   ld (ix+1), a
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 70EC to 70ED (2 bytes)
 .db $8C $04
 
@@ -17067,7 +17077,7 @@ _LABEL_702C_:
   inc hl
   ld c, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 70F6 to 70F7 (2 bytes)
 .db $3E $04
 
@@ -17076,12 +17086,12 @@ _LABEL_702C_:
   ld (ix+2), a
   ld d, a
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7106 to 7107 (2 bytes)
 .db $76 $04
 
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 710C to 710D (2 bytes)
 .db $92 $04
 
@@ -17101,7 +17111,7 @@ _LABEL_702C_:
   cp $80
   jr nz, +
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 712A to 712B (2 bytes)
 .db $94 $04
 
@@ -17111,13 +17121,13 @@ _LABEL_702C_:
   ld d, e
   ld (ix+6), d
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7136 to 7137 (2 bytes)
 .db $D2 $04
 
 ++:
   ld a, (_RAM_D6AD_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 713C to 713D (2 bytes)
 .db $EA $04
 
@@ -17150,21 +17160,21 @@ _LABEL_7145_:
   inc hl
   ld d, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7160 to 7161 (2 bytes)
 .db $12 $04
 
   inc hl
   ld d, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7166 to 7167 (2 bytes)
 .db $14 $04
 
   inc hl
   ld d, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 716C to 716D (2 bytes)
 .db $16 $04
 
@@ -17172,27 +17182,27 @@ _LABEL_7145_:
   ld d, $00
   ld e, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7174 to 7175 (2 bytes)
 .db $2A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7177 to 7178 (2 bytes)
 .db $2C $04
 
   inc hl
   ld d, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 717D to 717E (2 bytes)
 .db $10 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7180 to 7181 (2 bytes)
 .db $18 $04
 
   ld d, $01
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7185 to 7186 (2 bytes)
 .db $0A $04
 
@@ -17203,12 +17213,12 @@ _LABEL_7145_:
   call _LABEL_702C_
   djnz -
   ld d, $C8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7193 to 7194 (2 bytes)
 .db $90 $04
 
   ld d, $C8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7198 to 7199 (2 bytes)
 .db $8E $04
 
@@ -17221,7 +17231,7 @@ _LABEL_7145_:
 
 _LABEL_719F_:
   ld e, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 71A1 to 71A2 (2 bytes)
 .db $34 $04
 
@@ -17350,7 +17360,7 @@ _LABEL_7259_:
   djnz -
   ld de, _DATA_64_
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 726D to 726E (2 bytes)
 .db $D4 $04
 
@@ -17362,10 +17372,10 @@ _LABEL_7259_:
 
 +:
   push iy
-  ld iy, $FFFF
+  ld iy, -1
   add iy, sp
   ld sp, iy
-  ld iy, $0001
+  ld iy, 1
   add iy, sp
   ld (iy-1), a
   push bc
@@ -17379,12 +17389,12 @@ _LABEL_7259_:
   add hl, hl
   add hl, hl
   add hl, hl
-  ld de, _SRAM_0_
+  ld de, $8000
   add hl, de
   ex de, hl
   push af
   push de
-  ld hl, _DATA_2E7E_
+  ld hl, _DATA_2E7E_CharacterNames
   or a
   jr z, +
   ld b, a
@@ -17443,7 +17453,7 @@ _LABEL_7259_:
   ld d, a
   ld a, (iy-1)
   call _LABEL_7145_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 72EA to 72EB (2 bytes)
 .db $EA $04
 
@@ -17539,7 +17549,7 @@ _LABEL_76C6_:
   ld c, $08
   call _LABEL_73C_
   call _LABEL_3B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 76D2 to 76D3 (2 bytes)
 .db $04 $08
 
@@ -17557,11 +17567,11 @@ _LABEL_76C6_:
   ld a, $FF
   ld (_SRAM_227B_), a
   ld (_SRAM_21BA_), a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 76FB to 76FC (2 bytes)
 .db $02 $11
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 76FE to 76FF (2 bytes)
 .db $00 $11
 
@@ -17631,7 +17641,7 @@ _LABEL_77C8_:
   ld c, $08
   call _LABEL_73C_
   call _LABEL_3B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 77D4 to 77D5 (2 bytes)
 .db $04 $08
 
@@ -17649,7 +17659,7 @@ _LABEL_77C8_:
   ld a, $FF
   ld (_SRAM_227B_), a
   ld (_SRAM_21BA_), a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 77FD to 77FE (2 bytes)
 .db $00 $11
 
@@ -17949,7 +17959,7 @@ _LABEL_7EAE_:
   ld (_SRAM_26B1_), a
   push hl
   ld hl, $02B9
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7ED3 to 7ED4 (2 bytes)
 .db $00 $08
 
@@ -17958,7 +17968,7 @@ _LABEL_7EAE_:
 ---:
   ld hl, $02B9
   add hl, de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7EDE to 7EDF (2 bytes)
 .db $00 $08
 
@@ -17998,7 +18008,7 @@ _LABEL_7EAE_:
   ld hl, $7F1E
   add hl, de
   ld a, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 7F16 to 7F17 (2 bytes)
 .db $02 $07
 
@@ -18042,12 +18052,12 @@ _LABEL_804A_:
   call _LABEL_864C_
   push hl
   ld hl, $004C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8062 to 8063 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8066 to 8067 (2 bytes)
 .db $04 $08
 
@@ -18064,12 +18074,12 @@ _LABEL_8078_:
 +:
   push hl
   ld hl, $004F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8080 to 8081 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8084 to 8085 (2 bytes)
 .db $04 $08
 
@@ -18089,7 +18099,7 @@ _LABEL_8097_:
 +:
   push hl
   ld hl, $0050
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 809F to 80A0 (2 bytes)
 .db $00 $08
 
@@ -18102,7 +18112,7 @@ _LABEL_8097_:
   ld (iy-7), a
   ld c, $00
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 80B6 to 80B7 (2 bytes)
 .db $64 $04
 
@@ -18127,7 +18137,7 @@ _LABEL_8097_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0051
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 80E3 to 80E4 (2 bytes)
 .db $00 $08
 
@@ -18143,7 +18153,7 @@ _LABEL_80F4_:
   call _LABEL_8691_
   push hl
   ld hl, $0052
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 80FC to 80FD (2 bytes)
 .db $00 $08
 
@@ -18151,7 +18161,7 @@ _LABEL_80F4_:
   jp _LABEL_81CD_
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8103 to 8104 (2 bytes)
 .db $D6 $04
 
@@ -18166,7 +18176,7 @@ _LABEL_80F4_:
   call _LABEL_8691_
   push hl
   ld hl, $0053
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 811C to 811D (2 bytes)
 .db $00 $08
 
@@ -18177,12 +18187,12 @@ _LABEL_8122_:
   call _LABEL_8691_
   push hl
   ld hl, $0054
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 812A to 812B (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 812E to 812F (2 bytes)
 .db $04 $08
 
@@ -18192,7 +18202,7 @@ _LABEL_8122_:
   jr z, _LABEL_80F4_
   ld (iy-8), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8140 to 8141 (2 bytes)
 .db $B4 $04
 
@@ -18204,7 +18214,7 @@ _LABEL_8122_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0056
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8153 to 8154 (2 bytes)
 .db $00 $08
 
@@ -18217,7 +18227,7 @@ _LABEL_8122_:
 
 +:
   ld d, (iy-7)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8164 to 8165 (2 bytes)
 .db $6E $04
 
@@ -18225,7 +18235,7 @@ _LABEL_8122_:
   or a
   jr z, _LABEL_81B0_
   ld a, (iy-8)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 816E to 816F (2 bytes)
 .db $34 $04
 
@@ -18259,7 +18269,7 @@ _LABEL_8122_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0055
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 81A5 to 81A6 (2 bytes)
 .db $00 $08
 
@@ -18271,20 +18281,20 @@ _LABEL_8122_:
 _LABEL_81B0_:
   ld d, (iy-4)
   ld e, (iy-5)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 81B7 to 81B8 (2 bytes)
 .db $DA $04
 
   ld a, (iy-8)
   ld d, (iy-7)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 81C0 to 81C1 (2 bytes)
 .db $BC $04
 
   call _LABEL_8691_
   push hl
   ld hl, $0057
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 81CA to 81CB (2 bytes)
 .db $00 $08
 
@@ -18293,7 +18303,7 @@ _LABEL_81CD_:
   call _LABEL_8691_
   push hl
   ld hl, $0058
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 81D5 to 81D6 (2 bytes)
 .db $00 $08
 
@@ -18314,12 +18324,12 @@ _LABEL_81EC_:
 +:
   push hl
   ld hl, $005B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 81F4 to 81F5 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 81F8 to 81F9 (2 bytes)
 .db $04 $08
 
@@ -18329,7 +18339,7 @@ _LABEL_81EC_:
   jp z, _LABEL_857E_
   ld (iy-8), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8208 to 8209 (2 bytes)
 .db $B4 $04
 
@@ -18342,7 +18352,7 @@ _LABEL_81EC_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0063
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 821D to 821E (2 bytes)
 .db $00 $08
 
@@ -18359,7 +18369,7 @@ _LABEL_81EC_:
   ld (iy-6), d
   ld c, $00
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8238 to 8239 (2 bytes)
 .db $64 $04
 
@@ -18396,7 +18406,7 @@ _LABEL_81EC_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $005C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8278 to 8279 (2 bytes)
 .db $00 $08
 
@@ -18410,7 +18420,7 @@ _LABEL_81EC_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0061
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 828A to 828B (2 bytes)
 .db $00 $08
 
@@ -18423,7 +18433,7 @@ _LABEL_81EC_:
   call _LABEL_8691_
   push hl
   ld hl, $005D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 829C to 829D (2 bytes)
 .db $00 $08
 
@@ -18438,7 +18448,7 @@ _LABEL_81EC_:
   call _LABEL_8691_
   push hl
   ld hl, $0062
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 82B6 to 82B7 (2 bytes)
 .db $00 $08
 
@@ -18448,13 +18458,13 @@ _LABEL_81EC_:
 +:
   ld d, (iy-4)
   ld e, (iy-5)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 82C3 to 82C4 (2 bytes)
 .db $D8 $04
 
   ld a, (iy-8)
   ld d, (iy-6)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 82CC to 82CD (2 bytes)
 .db $BE $04
 
@@ -18466,7 +18476,7 @@ _LABEL_81EC_:
   call _LABEL_8691_
   push hl
   ld hl, $005F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 82DC to 82DD (2 bytes)
 .db $00 $08
 
@@ -18475,7 +18485,7 @@ _LABEL_82DF_:
   call _LABEL_8691_
   push hl
   ld hl, $0060
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 82E7 to 82E8 (2 bytes)
 .db $00 $08
 
@@ -18496,12 +18506,12 @@ _LABEL_82FE_:
 +:
   push hl
   ld hl, $0064
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8306 to 8307 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 830A to 830B (2 bytes)
 .db $04 $08
 
@@ -18511,7 +18521,7 @@ _LABEL_82FE_:
   jp z, _LABEL_857E_
   ld (iy-8), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 831A to 831B (2 bytes)
 .db $B4 $04
 
@@ -18524,7 +18534,7 @@ _LABEL_82FE_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0063
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 832F to 8330 (2 bytes)
 .db $00 $08
 
@@ -18541,7 +18551,7 @@ _LABEL_82FE_:
   ld (iy-6), d
   ld c, $00
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 834A to 834B (2 bytes)
 .db $64 $04
 
@@ -18569,7 +18579,7 @@ _LABEL_82FE_:
   call _LABEL_864C_
   push hl
   ld hl, $0066
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 837E to 837F (2 bytes)
 .db $00 $08
 
@@ -18583,7 +18593,7 @@ _LABEL_82FE_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0065
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8393 to 8394 (2 bytes)
 .db $00 $08
 
@@ -18598,7 +18608,7 @@ _LABEL_82FE_:
   call _LABEL_8691_
   push hl
   ld hl, $005D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 83AC to 83AD (2 bytes)
 .db $00 $08
 
@@ -18606,7 +18616,7 @@ _LABEL_82FE_:
   jp _LABEL_8400_
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 83B3 to 83B4 (2 bytes)
 .db $D6 $04
 
@@ -18621,7 +18631,7 @@ _LABEL_82FE_:
   call _LABEL_8691_
   push hl
   ld hl, $0067
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 83CC to 83CD (2 bytes)
 .db $00 $08
 
@@ -18631,20 +18641,20 @@ _LABEL_82FE_:
 +:
   ld d, (iy-4)
   ld e, (iy-5)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 83D9 to 83DA (2 bytes)
 .db $DA $04
 
   ld a, (iy-8)
   ld d, (iy-6)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 83E2 to 83E3 (2 bytes)
 .db $C4 $04
 
   call _LABEL_8691_
   push hl
   ld hl, $0069
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 83EC to 83ED (2 bytes)
 .db $00 $08
 
@@ -18654,7 +18664,7 @@ _LABEL_82FE_:
   call _LABEL_9CA_wait
   push hl
   ld hl, $006A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 83FD to 83FE (2 bytes)
 .db $00 $08
 
@@ -18663,7 +18673,7 @@ _LABEL_8400_:
   call _LABEL_8691_
   push hl
   ld hl, $006B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8408 to 8409 (2 bytes)
 .db $00 $08
 
@@ -18686,7 +18696,7 @@ _LABEL_841A_:
   jr nz, +
   push hl
   ld hl, $005A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 842B to 842C (2 bytes)
 .db $00 $08
 
@@ -18696,7 +18706,7 @@ _LABEL_841A_:
 +:
   push hl
   ld hl, $0059
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8436 to 8437 (2 bytes)
 .db $00 $08
 
@@ -18709,7 +18719,7 @@ _LABEL_841A_:
   ld (iy-7), a
   ld c, $00
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 844D to 844E (2 bytes)
 .db $64 $04
 
@@ -18734,7 +18744,7 @@ _LABEL_841A_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0051
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 847A to 847B (2 bytes)
 .db $00 $08
 
@@ -18750,7 +18760,7 @@ _LABEL_848B_:
   call _LABEL_8691_
   push hl
   ld hl, $0052
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8493 to 8494 (2 bytes)
 .db $00 $08
 
@@ -18758,7 +18768,7 @@ _LABEL_848B_:
   jp _LABEL_8569_
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 849A to 849B (2 bytes)
 .db $D6 $04
 
@@ -18773,7 +18783,7 @@ _LABEL_848B_:
   call _LABEL_8691_
   push hl
   ld hl, $0053
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 84B3 to 84B4 (2 bytes)
 .db $00 $08
 
@@ -18784,12 +18794,12 @@ _LABEL_84B9_:
   call _LABEL_8691_
   push hl
   ld hl, $0054
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 84C1 to 84C2 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 84C5 to 84C6 (2 bytes)
 .db $04 $08
 
@@ -18799,7 +18809,7 @@ _LABEL_84B9_:
   jr z, _LABEL_848B_
   ld (iy-8), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 84D7 to 84D8 (2 bytes)
 .db $B4 $04
 
@@ -18811,7 +18821,7 @@ _LABEL_84B9_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0056
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 84EA to 84EB (2 bytes)
 .db $00 $08
 
@@ -18824,7 +18834,7 @@ _LABEL_84B9_:
 
 +:
   ld d, (iy-7)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 84FB to 84FC (2 bytes)
 .db $6E $04
 
@@ -18832,7 +18842,7 @@ _LABEL_84B9_:
   or a
   jr z, _LABEL_8546_
   ld a, (iy-8)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8505 to 8506 (2 bytes)
 .db $34 $04
 
@@ -18866,7 +18876,7 @@ _LABEL_84B9_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0055
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 853B to 853C (2 bytes)
 .db $00 $08
 
@@ -18878,13 +18888,13 @@ _LABEL_84B9_:
 _LABEL_8546_:
   ld d, (iy-4)
   ld e, (iy-5)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 854D to 854E (2 bytes)
 .db $DA $04
 
   ld a, (iy-8)
   ld d, (iy-7)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8556 to 8557 (2 bytes)
 .db $BC $04
 
@@ -18896,7 +18906,7 @@ _LABEL_8546_:
   call _LABEL_8691_
   push hl
   ld hl, $0057
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8566 to 8567 (2 bytes)
 .db $00 $08
 
@@ -18905,7 +18915,7 @@ _LABEL_8569_:
   call _LABEL_8691_
   push hl
   ld hl, $0058
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8571 to 8572 (2 bytes)
 .db $00 $08
 
@@ -18921,7 +18931,7 @@ _LABEL_8581_:
   call _LABEL_8691_
   push hl
   ld hl, $004D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8589 to 858A (2 bytes)
 .db $00 $08
 
@@ -18932,12 +18942,12 @@ _LABEL_8581_:
   call _LABEL_8691_
   push hl
   ld hl, $004E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 859B to 859C (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 859F to 85A0 (2 bytes)
 .db $04 $08
 
@@ -19070,7 +19080,7 @@ _LABEL_864C_:
   ld (_SRAM_21AE_), hl
   ld hl, $000B
   ld (_SRAM_21B0_), hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 868A to 868B (2 bytes)
 .db $02 $08
 
@@ -19146,13 +19156,13 @@ _LABEL_86FD_:
   add iy, sp
   call _LABEL_864C_
   ld a, $13
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8713 to 8714 (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $0006
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 871A to 871B (2 bytes)
 .db $00 $08
 
@@ -19168,13 +19178,13 @@ _LABEL_871F_:
   add iy, sp
   call _LABEL_864C_
   ld a, $13
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8735 to 8736 (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $0005
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 873C to 873D (2 bytes)
 .db $00 $08
 
@@ -19190,13 +19200,13 @@ _LABEL_8741_:
   add iy, sp
   call _LABEL_864C_
   ld a, $13
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8757 to 8758 (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $0007
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 875E to 875F (2 bytes)
 .db $00 $08
 
@@ -19212,23 +19222,23 @@ _LABEL_8763_:
   add iy, sp
   call _LABEL_864C_
   ld a, $13
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8779 to 877A (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $0001
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8780 to 8781 (2 bytes)
 .db $00 $08
 
   pop hl
 _LABEL_8783_:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8784 to 8785 (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8787 to 8788 (2 bytes)
 .db $20 $03
 
@@ -19247,7 +19257,7 @@ _LABEL_8796_:
   jr z, +
   push hl
   ld hl, $0008
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 87A2 to 87A3 (2 bytes)
 .db $00 $08
 
@@ -19256,7 +19266,7 @@ _LABEL_8796_:
   call _LABEL_8691_
   or a
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 87AF to 87B0 (2 bytes)
 .db $04 $08
 
@@ -19264,22 +19274,22 @@ _LABEL_8796_:
 
 +:
   ld a, $13
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 87B6 to 87B7 (2 bytes)
 .db $1E $03
 
   push hl
   ld hl, $0004
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 87BD to 87BE (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 87C1 to 87C2 (2 bytes)
 .db $04 $08
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 87C4 to 87C5 (2 bytes)
 .db $20 $03
 
@@ -19299,7 +19309,7 @@ _LABEL_8796_:
   call _LABEL_864C_
   push hl
   ld hl, $002F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 87E5 to 87E6 (2 bytes)
 .db $00 $08
 
@@ -19310,7 +19320,7 @@ _LABEL_8796_:
   ld ix, _SRAM_234D_
 _LABEL_87F2_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 87F6 to 87F7 (2 bytes)
 .db $5C $04
 
@@ -19323,18 +19333,18 @@ _LABEL_87F2_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $003A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 880C to 880D (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8810 to 8811 (2 bytes)
 .db $38 $04
 
   ld h, $00
   ld l, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8816 to 8817 (2 bytes)
 .db $34 $04
 
@@ -19353,7 +19363,7 @@ _LABEL_87F2_:
   ld (_SRAM_21B6_), hl
   push hl
   ld hl, $003B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 882F to 8830 (2 bytes)
 _DATA_882F_:
 .db $00 $08
@@ -19365,7 +19375,7 @@ _DATA_882F_:
   call _LABEL_8691_
   push hl
   ld hl, $0035
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8840 to 8841 (2 bytes)
 .db $00 $08
 
@@ -19374,7 +19384,7 @@ _DATA_882F_:
 
 +:
   push bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8848 to 8849 (2 bytes)
 .db $D6 $04
 
@@ -19389,7 +19399,7 @@ _DATA_882F_:
   call _LABEL_8691_
   push hl
   ld hl, $0036
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8860 to 8861 (2 bytes)
 .db $00 $08
 
@@ -19398,19 +19408,19 @@ _DATA_882F_:
 
 +:
   push bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8867 to 8868 (2 bytes)
 .db $DA $04
 
   pop bc
   ld a, (ix+0)
   ld d, $C8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8870 to 8871 (2 bytes)
 .db $90 $04
 
   ld d, $C8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8875 to 8876 (2 bytes)
 .db $8E $04
 
@@ -19423,7 +19433,7 @@ _DATA_882F_:
   call _LABEL_91DE_
   push hl
   ld hl, $003C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8887 to 8888 (2 bytes)
 .db $00 $08
 
@@ -19438,7 +19448,7 @@ _LABEL_888A_:
   call _LABEL_8691_
   push hl
   ld hl, $0039
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 889C to 889D (2 bytes)
 .db $00 $08
 
@@ -19452,7 +19462,7 @@ _LABEL_88A2_:
   call _LABEL_864C_
   push hl
   ld hl, $002F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 88AF to 88B0 (2 bytes)
 .db $00 $08
 
@@ -19463,7 +19473,7 @@ _LABEL_88A2_:
   ld ix, _SRAM_234D_
 _LABEL_88BC_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 88C0 to 88C1 (2 bytes)
 .db $60 $04
 
@@ -19475,7 +19485,7 @@ _LABEL_88BC_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0032
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 88D7 to 88D8 (2 bytes)
 .db $00 $08
 
@@ -19484,7 +19494,7 @@ _LABEL_88BC_:
   ld (_SRAM_21B6_), hl
   push hl
   ld hl, $0034
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 88E5 to 88E6 (2 bytes)
 .db $00 $08
 
@@ -19498,7 +19508,7 @@ _LABEL_88BC_:
   call _LABEL_8691_
   push hl
   ld hl, $0035
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 88FD to 88FE (2 bytes)
 .db $00 $08
 
@@ -19507,7 +19517,7 @@ _LABEL_88BC_:
 
 +:
   push bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8905 to 8906 (2 bytes)
 .db $D6 $04
 
@@ -19522,7 +19532,7 @@ _LABEL_88BC_:
   call _LABEL_8691_
   push hl
   ld hl, $0036
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 891D to 891E (2 bytes)
 .db $00 $08
 
@@ -19531,18 +19541,18 @@ _LABEL_88BC_:
 
 +:
   push bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8924 to 8925 (2 bytes)
 .db $DA $04
 
   pop bc
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 892B to 892C (2 bytes)
 .db $60 $04
 
   res 3, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8930 to 8931 (2 bytes)
 .db $30 $04
 
@@ -19555,14 +19565,14 @@ _LABEL_88BC_:
   call _LABEL_91DE_
   push hl
   ld hl, $0037
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8942 to 8943 (2 bytes)
 .db $00 $08
 
   pop hl
 _LABEL_8945_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8949 to 894A (2 bytes)
 .db $60 $04
 
@@ -19574,7 +19584,7 @@ _LABEL_8945_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0033
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8960 to 8961 (2 bytes)
 .db $00 $08
 
@@ -19583,7 +19593,7 @@ _LABEL_8945_:
   ld a, (ix+0)
   push bc
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 896D to 896E (2 bytes)
 .db $B4 $04
 
@@ -19591,7 +19601,7 @@ _LABEL_8945_:
   jr z, +
   push hl
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8977 to 8978 (2 bytes)
 .db $64 $04
 
@@ -19607,7 +19617,7 @@ _LABEL_8945_:
   add hl, de
 +:
   ld d, $01
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8988 to 8989 (2 bytes)
 .db $B4 $04
 
@@ -19615,7 +19625,7 @@ _LABEL_8945_:
   jr z, +
   push hl
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8992 to 8993 (2 bytes)
 .db $64 $04
 
@@ -19631,7 +19641,7 @@ _LABEL_8945_:
   add hl, de
 +:
   ld d, $02
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 89A3 to 89A4 (2 bytes)
 .db $B4 $04
 
@@ -19639,7 +19649,7 @@ _LABEL_8945_:
   jr z, +
   push hl
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 89AD to 89AE (2 bytes)
 .db $64 $04
 
@@ -19655,7 +19665,7 @@ _LABEL_8945_:
   add hl, de
 +:
   ld d, $03
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 89BE to 89BF (2 bytes)
 .db $B4 $04
 
@@ -19663,7 +19673,7 @@ _LABEL_8945_:
   jr z, +
   push hl
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 89C8 to 89C9 (2 bytes)
 .db $64 $04
 
@@ -19686,7 +19696,7 @@ _LABEL_8945_:
   ld (_SRAM_21B6_), hl
   push hl
   ld hl, $0034
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 89E7 to 89E8 (2 bytes)
 .db $00 $08
 
@@ -19700,7 +19710,7 @@ _LABEL_8945_:
   call _LABEL_8691_
   push hl
   ld hl, $0035
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 89FF to 8A00 (2 bytes)
 .db $00 $08
 
@@ -19709,7 +19719,7 @@ _LABEL_8945_:
 
 +:
   push bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A07 to 8A08 (2 bytes)
 .db $D6 $04
 
@@ -19724,7 +19734,7 @@ _LABEL_8945_:
   call _LABEL_8691_
   push hl
   ld hl, $0036
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A1F to 8A20 (2 bytes)
 .db $00 $08
 
@@ -19733,7 +19743,7 @@ _LABEL_8945_:
 
 +:
   push bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A27 to 8A28 (2 bytes)
 .db $DA $04
 
@@ -19741,74 +19751,74 @@ _LABEL_8945_:
   push bc
   ld a, (ix+0)
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A31 to 8A32 (2 bytes)
 .db $B4 $04
 
   bit 7, d
   jr z, +
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A3A to 8A3B (2 bytes)
 .db $64 $04
 
   bit 6, (hl)
   jr z, +
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A43 to 8A44 (2 bytes)
 .db $BA $04
 
 +:
   ld d, $01
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A48 to 8A49 (2 bytes)
 .db $B4 $04
 
   bit 7, d
   jr z, +
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A51 to 8A52 (2 bytes)
 .db $64 $04
 
   bit 6, (hl)
   jr z, +
   ld d, $01
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A5A to 8A5B (2 bytes)
 .db $BA $04
 
 +:
   ld d, $02
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A5F to 8A60 (2 bytes)
 .db $B4 $04
 
   bit 7, d
   jr z, +
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A68 to 8A69 (2 bytes)
 .db $64 $04
 
   bit 6, (hl)
   jr z, +
   ld d, $02
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A71 to 8A72 (2 bytes)
 .db $BA $04
 
 +:
   ld d, $03
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A76 to 8A77 (2 bytes)
 .db $B4 $04
 
   bit 7, d
   jr z, +
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A7F to 8A80 (2 bytes)
 _DATA_8A7F_:
 .db $64 $04
@@ -19816,7 +19826,7 @@ _DATA_8A7F_:
   bit 6, (hl)
   jr z, +
   ld d, $03
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A88 to 8A89 (2 bytes)
 .db $BA $04
 
@@ -19824,16 +19834,16 @@ _DATA_8A7F_:
   pop bc
   push ix
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A91 to 8A92 (2 bytes)
 .db $60 $04
 
   res 2, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A96 to 8A97 (2 bytes)
 .db $30 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8A99 to 8A9A (2 bytes)
 .db $EA $04
 
@@ -19846,7 +19856,7 @@ _DATA_8A7F_:
   call _LABEL_91DE_
   push hl
   ld hl, $0038
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8AAB to 8AAC (2 bytes)
 .db $00 $08
 
@@ -19861,7 +19871,7 @@ _LABEL_8AB0_:
   call _LABEL_8691_
   push hl
   ld hl, $0030
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8AC2 to 8AC3 (2 bytes)
 .db $00 $08
 
@@ -19872,7 +19882,7 @@ _LABEL_8AB0_:
   call _LABEL_8691_
   push hl
   ld hl, $0031
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8AD1 to 8AD2 (2 bytes)
 .db $00 $08
 
@@ -19901,7 +19911,7 @@ _LABEL_8AD7_:
   jr nz, _LABEL_8B06_
   push hl
   ld hl, $003D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B00 to 8B01 (2 bytes)
 .db $00 $08
 
@@ -19912,12 +19922,12 @@ _LABEL_8B06_:
   call _LABEL_8691_
   push hl
   ld hl, $003E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B0E to 8B0F (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B12 to 8B13 (2 bytes)
 .db $04 $08
 
@@ -19927,7 +19937,7 @@ _LABEL_8B06_:
   jp nz, +
   push hl
   ld hl, $003F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B24 to 8B25 (2 bytes)
 .db $00 $08
 
@@ -19938,7 +19948,7 @@ _LABEL_8B06_:
   call _LABEL_91BE_
   jr nc, ++
   ld b, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B31 to 8B32 (2 bytes)
 .db $34 $04
 
@@ -19952,7 +19962,7 @@ _LABEL_8B06_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0040
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B46 to 8B47 (2 bytes)
 .db $00 $08
 
@@ -19966,7 +19976,7 @@ _LABEL_8B06_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0044
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B57 to 8B58 (2 bytes)
 .db $00 $08
 
@@ -19975,7 +19985,7 @@ _LABEL_8B06_:
   jp _LABEL_8B06_
 
 ++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B5F to 8B60 (2 bytes)
 .db $34 $04
 
@@ -19984,7 +19994,7 @@ _LABEL_8B06_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0041
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B6B to 8B6C (2 bytes)
 .db $00 $08
 
@@ -19996,7 +20006,7 @@ _LABEL_8B06_:
   call _LABEL_8691_
   push hl
   ld hl, $003F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B7D to 8B7E (2 bytes)
 .db $00 $08
 
@@ -20014,13 +20024,13 @@ _LABEL_8B06_:
   ld (_SRAM_21B4_), a
   push hl
   ld hl, $0042
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B98 to 8B99 (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8B9D to 8B9E (2 bytes)
 .db $06 $04
 
@@ -20042,19 +20052,19 @@ _LABEL_8B06_:
   ld (_SRAM_21B3_), a
   push hl
   ld hl, $0043
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8BBE to 8BBF (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
   ld d, $01
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8BC5 to 8BC6 (2 bytes)
 .db $0A $04
 
   dec d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8BC9 to 8BCA (2 bytes)
 .db $0C $04
 
@@ -20064,12 +20074,12 @@ _LABEL_8BCE_:
   call _LABEL_864C_
   push hl
   ld hl, $0024
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8BD6 to 8BD7 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8BDA to 8BDB (2 bytes)
 .db $04 $08
 
@@ -20093,7 +20103,7 @@ _LABEL_8BF0_:
   jr nz, +
   push hl
   ld hl, $000B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8C03 to 8C04 (2 bytes)
 .db $00 $08
 
@@ -20110,12 +20120,12 @@ _LABEL_8BF0_:
 _LABEL_8C19_:
   push hl
   ld hl, $0009
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8C1E to 8C1F (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8C22 to 8C23 (2 bytes)
 .db $04 $08
 
@@ -20141,7 +20151,7 @@ _LABEL_8C19_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $000E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8C48 to 8C49 (2 bytes)
 .db $00 $08
 
@@ -20170,7 +20180,7 @@ _LABEL_8C19_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $000E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8C7D to 8C7E (2 bytes)
 .db $00 $08
 
@@ -20182,7 +20192,7 @@ _LABEL_8C19_:
   call _LABEL_9E44_
   call _LABEL_864C_
   ld a, (iy-1)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8C8F to 8C90 (2 bytes)
 .db $5C $04
 
@@ -20194,7 +20204,7 @@ _LABEL_8C19_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $000C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8CA1 to 8CA2 (2 bytes)
 .db $00 $08
 
@@ -20228,7 +20238,7 @@ _LABEL_8C19_:
   ld (_SRAM_21B3_), a
   push hl
   ld hl, $000A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8CD2 to 8CD3 (2 bytes)
 .db $00 $08
 
@@ -20258,12 +20268,12 @@ _LABEL_8CFD_:
 _LABEL_8D00_:
   push hl
   ld hl, $000F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8D05 to 8D06 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8D09 to 8D0A (2 bytes)
 .db $04 $08
 
@@ -20273,7 +20283,7 @@ _LABEL_8D00_:
   jr z, _LABEL_8CEE_
   ld (iy-8), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8D18 to 8D19 (2 bytes)
 .db $B4 $04
 
@@ -20286,7 +20296,7 @@ _LABEL_8D00_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $001E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8D2D to 8D2E (2 bytes)
 _DATA_8D2D_:
 .db $00 $08
@@ -20311,13 +20321,13 @@ _DATA_8D2D_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0010
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8D5A to 8D5B (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8D5F to 8D60 (2 bytes)
 .db $04 $08
 
@@ -20339,7 +20349,7 @@ _DATA_8D2D_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0011
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8D89 to 8D8A (2 bytes)
 .db $00 $08
 
@@ -20349,7 +20359,7 @@ _LABEL_8D8D_:
   call _LABEL_8691_
   push hl
   ld hl, $0012
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8D95 to 8D96 (2 bytes)
 .db $00 $08
 
@@ -20367,12 +20377,12 @@ _LABEL_8DA5_:
 _LABEL_8DAD_:
   push hl
   ld hl, $0013
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8DB2 to 8DB3 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8DB6 to 8DB7 (2 bytes)
 .db $04 $08
 
@@ -20382,7 +20392,7 @@ _LABEL_8DAD_:
   jp z, _LABEL_8CEE_
   ld (iy-8), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8DC6 to 8DC7 (2 bytes)
 .db $B4 $04
 
@@ -20395,7 +20405,7 @@ _LABEL_8DAD_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $001E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8DDB to 8DDC (2 bytes)
 .db $00 $08
 
@@ -20415,7 +20425,7 @@ _LABEL_8DAD_:
   jr z, _LABEL_8E1E_
   ld c, $04
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8DFD to 8DFE (2 bytes)
 .db $64 $04
 
@@ -20431,7 +20441,7 @@ _LABEL_8DAD_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0015
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8E14 to 8E15 (2 bytes)
 .db $00 $08
 
@@ -20447,13 +20457,13 @@ _LABEL_8E1E_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0014
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8E2D to 8E2E (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8E32 to 8E33 (2 bytes)
 .db $04 $08
 
@@ -20462,7 +20472,7 @@ _LABEL_8E1E_:
   jp z, _LABEL_8CEE_
   ld (iy-5), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8E42 to 8E43 (2 bytes)
 .db $B4 $04
 
@@ -20471,13 +20481,13 @@ _LABEL_8E1E_:
   jr z, +
   ld a, (iy-8)
   ld d, (iy-6)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8E50 to 8E51 (2 bytes)
 .db $BE $04
 
   ld a, (iy-5)
   ld d, (iy-7)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8E59 to 8E5A (2 bytes)
 .db $BC $04
 
@@ -20489,7 +20499,7 @@ _LABEL_8E1E_:
   ld (_SRAM_21B3_), a
   push hl
   ld hl, $001F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8E70 to 8E71 (2 bytes)
 .db $00 $08
 
@@ -20509,7 +20519,7 @@ _LABEL_8E1E_:
   jr z, +
   ld c, $04
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8E93 to 8E94 (2 bytes)
 .db $64 $04
 
@@ -20525,7 +20535,7 @@ _LABEL_8E1E_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0015
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8EAA to 8EAB (2 bytes)
 .db $00 $08
 
@@ -20537,7 +20547,7 @@ _LABEL_8E1E_:
 +:
   ld a, (iy-8)
   ld d, (iy-6)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8EBB to 8EBC (2 bytes)
 .db $BE $04
 
@@ -20547,20 +20557,20 @@ _LABEL_8E1E_:
   jr z, +
   ld a, (iy-5)
   ld d, (iy-3)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8ECB to 8ECC (2 bytes)
 .db $BE $04
 
   ld a, (iy-8)
   ld d, (iy-4)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8ED4 to 8ED5 (2 bytes)
 .db $BC $04
 
 +:
   ld a, (iy-5)
   ld d, (iy-7)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8EDD to 8EDE (2 bytes)
 .db $BC $04
 
@@ -20574,7 +20584,7 @@ _LABEL_8E1E_:
   ld (_SRAM_21B4_), a
   push hl
   ld hl, $0020
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8EFA to 8EFB (2 bytes)
 .db $00 $08
 
@@ -20584,7 +20594,7 @@ _LABEL_8EFE_:
   call _LABEL_8691_
   push hl
   ld hl, $0017
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8F06 to 8F07 (2 bytes)
 .db $00 $08
 
@@ -20602,12 +20612,12 @@ _LABEL_8F16_:
 _LABEL_8F1E_:
   push hl
   ld hl, $0018
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8F23 to 8F24 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8F27 to 8F28 (2 bytes)
 .db $04 $08
 
@@ -20624,7 +20634,7 @@ _LABEL_8F29_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0026
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8F48 to 8F49 (2 bytes)
 .db $00 $08
 
@@ -20646,7 +20656,7 @@ _LABEL_8F29_:
   ld (iy-7), a
   ld (iy-6), d
   ld a, (iy-8)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8F6E to 8F6F (2 bytes)
 .db $C8 $04
 
@@ -20658,12 +20668,12 @@ _LABEL_8F29_:
 
   push hl
   ld hl, $0022
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8F7C to 8F7D (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8F80 to 8F81 (2 bytes)
 .db $04 $08
 
@@ -20675,7 +20685,7 @@ _LABEL_8F29_:
   jr z, ++
   ld d, a
   ld a, (iy-8)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8F91 to 8F92 (2 bytes)
 .db $B6 $04
 
@@ -20690,13 +20700,13 @@ _LABEL_8F29_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0019
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8FA6 to 8FA7 (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8FAB to 8FAC (2 bytes)
 .db $04 $08
 
@@ -20712,7 +20722,7 @@ _LABEL_8F29_:
   ld (iy-7), a
   ld (iy-6), d
   ld a, (iy-8)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8FC7 to 8FC8 (2 bytes)
 .db $CA $04
 
@@ -20724,12 +20734,12 @@ _LABEL_8F29_:
 
   push hl
   ld hl, $0022
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8FD5 to 8FD6 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8FD9 to 8FDA (2 bytes)
 .db $04 $08
 
@@ -20741,7 +20751,7 @@ _LABEL_8F29_:
   jr z, ++
   ld d, a
   ld a, (iy-8)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8FEA to 8FEB (2 bytes)
 .db $B6 $04
 
@@ -20756,13 +20766,13 @@ _LABEL_8F29_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0019
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 8FFF to 9000 (2 bytes)
 .db $00 $08
 
   pop hl
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9004 to 9005 (2 bytes)
 .db $04 $08
 
@@ -20772,7 +20782,7 @@ _LABEL_8F29_:
 _LABEL_900C_:
   push hl
   ld hl, $001A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9011 to 9012 (2 bytes)
 .db $00 $08
 
@@ -20788,12 +20798,12 @@ _LABEL_9021_:
 _LABEL_9024_:
   push hl
   ld hl, $001B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9029 to 902A (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 902D to 902E (2 bytes)
 .db $04 $08
 
@@ -20803,7 +20813,7 @@ _LABEL_9024_:
   jp z, _LABEL_8CEE_
   ld (iy-8), a
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 903D to 903E (2 bytes)
 .db $B4 $04
 
@@ -20816,7 +20826,7 @@ _LABEL_9024_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $001E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9052 to 9053 (2 bytes)
 .db $00 $08
 
@@ -20836,7 +20846,7 @@ _LABEL_9024_:
   jr z, +
   ld c, $04
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9075 to 9076 (2 bytes)
 .db $64 $04
 
@@ -20852,7 +20862,7 @@ _LABEL_9024_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0015
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 908C to 908D (2 bytes)
 .db $00 $08
 
@@ -20869,7 +20879,7 @@ _LABEL_9024_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $001C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 90A6 to 90A7 (2 bytes)
 .db $00 $08
 
@@ -20884,7 +20894,7 @@ _LABEL_9024_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0023
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 90BC to 90BD (2 bytes)
 .db $00 $08
 
@@ -20896,7 +20906,7 @@ _LABEL_9024_:
   jr z, +
   push hl
   ld hl, $0003
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 90CE to 90CF (2 bytes)
 .db $00 $08
 
@@ -20906,7 +20916,7 @@ _LABEL_9024_:
 +:
   ld a, (iy-8)
   ld d, (iy-6)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 90DA to 90DB (2 bytes)
 .db $BE $04
 
@@ -20915,7 +20925,7 @@ _LABEL_9024_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0021
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 90E8 to 90E9 (2 bytes)
 .db $00 $08
 
@@ -20930,7 +20940,7 @@ _LABEL_90F2_:
   call _LABEL_8691_
   push hl
   ld hl, $001D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 90FA to 90FB (2 bytes)
 .db $00 $08
 
@@ -20948,7 +20958,7 @@ _LABEL_9117_:
   call _LABEL_864C_
   push hl
   ld hl, $002B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 911F to 9120 (2 bytes)
 .db $00 $08
 
@@ -20959,7 +20969,7 @@ _LABEL_9117_:
   call _LABEL_8691_
   push hl
   ld hl, $0035
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9130 to 9131 (2 bytes)
 .db $00 $08
 
@@ -20967,7 +20977,7 @@ _LABEL_9117_:
   jr _LABEL_9179_
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9136 to 9137 (2 bytes)
 .db $1E $01
 
@@ -20980,7 +20990,7 @@ _LABEL_9117_:
   call _LABEL_8691_
   push hl
   ld hl, $002C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9148 to 9149 (2 bytes)
 .db $00 $08
 
@@ -20988,7 +20998,7 @@ _LABEL_9117_:
   call _LABEL_8691_
   push hl
   ld hl, $002D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9153 to 9154 (2 bytes)
 .db $00 $08
 
@@ -20999,12 +21009,12 @@ _LABEL_9117_:
   call _LABEL_8691_
   push hl
   ld hl, $002E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9165 to 9166 (2 bytes)
 .db $00 $08
 
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9169 to 916A (2 bytes)
 .db $04 $08
 
@@ -21023,7 +21033,7 @@ _LABEL_9179_:
 _LABEL_917C_:
   push hl
   ld hl, $0002
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9181 to 9182 (2 bytes)
 .db $00 $08
 
@@ -21032,7 +21042,7 @@ _LABEL_917C_:
   call _LABEL_8691_
   or a
   jp nz, _LABEL_8796_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 918F to 9190 (2 bytes)
 .db $04 $08
 
@@ -21073,7 +21083,7 @@ _LABEL_91BE_:
   push af
   push de
   ld e, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 91C2 to 91C3 (2 bytes)
 .db $38 $04
 
@@ -21081,7 +21091,7 @@ _LABEL_91BE_:
   cp $0A
   jr c, +
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 91CB to 91CC (2 bytes)
 .db $34 $04
 
@@ -21142,7 +21152,7 @@ _LABEL_924F_:
   jr nz, +
   push de
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9256 to 9257 (2 bytes)
 .db $60 $04
 
@@ -21150,24 +21160,24 @@ _LABEL_924F_:
   pop de
   jp z, _LABEL_9331_
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9260 to 9261 (2 bytes)
 .db $BE $04
 
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9264 to 9265 (2 bytes)
 .db $60 $04
 
   res 3, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9269 to 926A (2 bytes)
 .db $30 $04
 
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0046
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9273 to 9274 (2 bytes)
 .db $00 $08
 
@@ -21177,7 +21187,7 @@ _LABEL_924F_:
 +:
   ld c, a
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 927A to 927B (2 bytes)
 .db $BE $04
 
@@ -21189,7 +21199,7 @@ _LABEL_924F_:
   cp $08
   jr nz, ++
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 928B to 928C (2 bytes)
 .db $58 $04
 
@@ -21217,12 +21227,12 @@ _LABEL_924F_:
   jr nz, +
   ld a, b
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92B0 to 92B1 (2 bytes)
 .db $78 $04
 
   pop de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92B4 to 92B5 (2 bytes)
 .db $7E $04
 
@@ -21231,7 +21241,7 @@ _LABEL_924F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0047
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92C0 to 92C1 (2 bytes)
 .db $00 $08
 
@@ -21244,12 +21254,12 @@ _LABEL_924F_:
   jr nz, +
   ld a, b
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92CC to 92CD (2 bytes)
 .db $7A $04
 
   pop de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92D0 to 92D1 (2 bytes)
 .db $80 $04
 
@@ -21258,7 +21268,7 @@ _LABEL_924F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0048
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92DC to 92DD (2 bytes)
 .db $00 $08
 
@@ -21271,12 +21281,12 @@ _LABEL_924F_:
   jr nz, +
   ld a, b
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92E8 to 92E9 (2 bytes)
 .db $7C $04
 
   pop de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92EC to 92ED (2 bytes)
 .db $82 $04
 
@@ -21285,7 +21295,7 @@ _LABEL_924F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $0049
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 92F8 to 92F9 (2 bytes)
 .db $00 $08
 
@@ -21298,12 +21308,12 @@ _LABEL_924F_:
   jr nz, +
   ld a, b
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9304 to 9305 (2 bytes)
 .db $88 $04
 
   pop de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9308 to 9309 (2 bytes)
 .db $8A $04
 
@@ -21312,7 +21322,7 @@ _LABEL_924F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $004A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9314 to 9315 (2 bytes)
 .db $00 $08
 
@@ -21323,12 +21333,12 @@ _LABEL_924F_:
 +:
   ld a, b
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 931C to 931D (2 bytes)
 .db $8C $04
 
   pop de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9320 to 9321 (2 bytes)
 .db $90 $04
 
@@ -21337,7 +21347,7 @@ _LABEL_924F_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $004B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 932C to 932D (2 bytes)
 .db $00 $08
 
@@ -21348,7 +21358,7 @@ _LABEL_924F_:
 _LABEL_9331_:
   push hl
   ld hl, $0045
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9336 to 9337 (2 bytes)
 .db $00 $08
 
@@ -21380,19 +21390,19 @@ _LABEL_9352_:
   push ix
   push af
   ld ix, $5352
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 935D to 935E (2 bytes)
 .db $DC $04
 
   bit 6, a
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9364 to 9365 (2 bytes)
 .db $EE $04
 
 +:
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9369 to 936A (2 bytes)
 .db $CE $04
 
@@ -21478,7 +21488,7 @@ _LABEL_93F0_:
   jr +++++
 
 ++++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 93F6 to 93F7 (2 bytes)
 .db $18 $03
 
@@ -21580,7 +21590,7 @@ _LABEL_9436_:
   pop af
   scf
 +++++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 948A to 948B (2 bytes)
 .db $18 $03
 
@@ -21596,19 +21606,19 @@ _LABEL_9492_:
   push de
   push af
   ld ix, $5492
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 949D to 949E (2 bytes)
 .db $DC $04
 
   bit 6, a
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 94A4 to 94A5 (2 bytes)
 .db $EE $04
 
 +:
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 94A9 to 94AA (2 bytes)
 .db $B4 $04
 
@@ -21679,7 +21689,7 @@ _LABEL_9510_:
   jr +++++
 
 ++++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9517 to 9518 (2 bytes)
 .db $18 $03
 
@@ -21707,13 +21717,13 @@ _LABEL_9530_:
   push af
   push de
   ld ix, $5530
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 953B to 953C (2 bytes)
 .db $DC $04
 
   bit 6, a
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9542 to 9543 (2 bytes)
 .db $EE $04
 
@@ -21808,7 +21818,7 @@ _LABEL_95D4_:
   ld a, c
   call _LABEL_A735_
   call _LABEL_A755_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 95E3 to 95E4 (2 bytes)
 .db $18 $03
 
@@ -21849,13 +21859,13 @@ _LABEL_9610_:
   push af
   push de
   ld ix, $5610
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 961B to 961C (2 bytes)
 .db $DC $04
 
   bit 6, a
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9622 to 9623 (2 bytes)
 .db $EE $04
 
@@ -21950,7 +21960,7 @@ _LABEL_96B4_:
   ld a, c
   call _LABEL_A735_
   call _LABEL_A755_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 96C3 to 96C4 (2 bytes)
 .db $18 $03
 
@@ -22066,7 +22076,7 @@ _LABEL_9725_:
   ld de, _SRAM_229C_
   ld bc, $0020
   ldir
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 977A to 977B (2 bytes)
 .db $18 $03
 
@@ -22143,7 +22153,7 @@ _LABEL_9792_:
 ++++:
   pop af
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 97F1 to 97F2 (2 bytes)
 .db $18 $03
 
@@ -22168,7 +22178,7 @@ _LABEL_9808_:
   push hl
   push af
   ld c, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 980F to 9810 (2 bytes)
 .db $62 $04
 
@@ -22180,7 +22190,7 @@ _LABEL_9808_:
   or $C0
   inc a
   jr z, ++
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 981C to 981D (2 bytes)
 .db $6E $04
 
@@ -22188,7 +22198,7 @@ _LABEL_9808_:
   dec c
   jr z, +
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9824 to 9825 (2 bytes)
 .db $E8 $04
 
@@ -22308,7 +22318,7 @@ _LABEL_98D8_:
   jr +
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 98DE to 98DF (2 bytes)
 .db $18 $03
 
@@ -22345,11 +22355,11 @@ _LABEL_98F6_:
   ld b, $00
   ld ix, _SRAM_234D_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9918 to 9919 (2 bytes)
 .db $0A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 991B to 991C (2 bytes)
 .db $1C $03
 
@@ -22415,11 +22425,11 @@ _LABEL_9932_:
   inc hl
   ld (hl), $0D
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 998D to 998E (2 bytes)
 .db $0A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9990 to 9991 (2 bytes)
 .db $1C $03
 
@@ -22449,7 +22459,7 @@ _LABEL_99B6_:
   pop af
   ld a, $FF
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 99BA to 99BB (2 bytes)
 .db $18 $03
 
@@ -22476,13 +22486,13 @@ _LABEL_99D3_:
   push hl
   push ix
   ld ix, $59D3
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 99DE to 99DF (2 bytes)
 .db $DC $04
 
   bit 6, a
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 99E5 to 99E6 (2 bytes)
 .db $EE $04
 
@@ -22491,7 +22501,7 @@ _LABEL_99D3_:
   ld l, b
   ld h, b
   ld d, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 99ED to 99EE (2 bytes)
 .db $CE $04
 
@@ -22584,7 +22594,7 @@ _LABEL_9A43_:
   jp _LABEL_9A43_
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9A8C to 9A8D (2 bytes)
 .db $18 $03
 
@@ -22597,11 +22607,11 @@ _LABEL_9A43_:
   jp _LABEL_9A43_
 
 +++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9AA0 to 9AA1 (2 bytes)
 .db $18 $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9AA3 to 9AA4 (2 bytes)
 .db $20 $03
 
@@ -22713,7 +22723,7 @@ _LABEL_9AD0_:
   jr ++++
 
 ++++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9B55 to 9B56 (2 bytes)
 .db $18 $03
 
@@ -23177,7 +23187,7 @@ _LABEL_9E36_:
 
 _LABEL_9E44_:
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9E46 to 9E47 (2 bytes)
 .db $18 $03
 
@@ -23278,7 +23288,7 @@ _LABEL_9E86_:
   ld a, b
   ld (_SRAM_643_), a
 ++++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9EE8 to 9EE9 (2 bytes)
 .db $18 $03
 
@@ -23355,7 +23365,7 @@ _LABEL_9F00_:
   ld a, b
   ld (_SRAM_644_), a
 ++++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 9F62 to 9F63 (2 bytes)
 .db $18 $03
 
@@ -23520,7 +23530,7 @@ _LABEL_9FDE_:
 +++++:
   pop af
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A054 to A055 (2 bytes)
 .db $18 $03
 
@@ -23602,7 +23612,7 @@ _LABEL_A06B_ShowMenu:
 +++:
   pop af
   ld a, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A0D6 to A0D7 (2 bytes)
 .db $18 $03
 
@@ -23687,7 +23697,7 @@ _LABEL_A0EE_:
 +++++:
   pop af
   ld a, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A158 to A159 (2 bytes)
 .db $18 $03
 
@@ -23774,7 +23784,7 @@ _LABEL_A170_:
 +++++:
   pop af
   ld a, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A1DD to A1DE (2 bytes)
 .db $18 $03
 
@@ -23826,12 +23836,12 @@ _LABEL_A1F5_:
   pop de
   pop af
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A228 to A229 (2 bytes)
 .db $22 $03
 
   jr c, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A22D to A22E (2 bytes)
 .db $1E $03
 
@@ -23934,11 +23944,11 @@ _LABEL_A259_:
   ld a, b
   cp $FD
   jr nz, _LABEL_A259_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A2D7 to A2D8 (2 bytes)
 .db $18 $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A2DA to A2DB (2 bytes)
 .db $20 $03
 
@@ -24040,7 +24050,7 @@ _LABEL_A35F_:
   or a
   jr z, _LABEL_A36C_
   ld a, (_SRAM_2323_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A36A to A36B (2 bytes)
 .db $04 $04
 
@@ -24162,7 +24172,7 @@ _LABEL_A3C2_:
   ld a, b
   ld (_RAM_C102_), a
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A424 to A425 (2 bytes)
 .db $6C $04
 
@@ -24224,7 +24234,7 @@ _LABEL_A478_:
   push de
   push hl
   call _LABEL_BE49_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A47F to A480 (2 bytes)
 .db $D0 $04
 
@@ -24232,7 +24242,7 @@ _LABEL_A478_:
   ld d, $00
   ld bc, $0600
   ld hl, $C1C1
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A48B to A48C (2 bytes)
 .db $1A $03
 
@@ -24247,7 +24257,7 @@ _LABEL_A491_:
   push hl
   push ix
   ld c, $20
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A499 to A49A (2 bytes)
 .db $62 $04
 
@@ -24284,11 +24294,11 @@ _LABEL_A4CA_:
   push de
   push hl
   call _LABEL_BE49_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A4D2 to A4D3 (2 bytes)
 .db $6C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A4D5 to A4D6 (2 bytes)
 .db $16 $03
 
@@ -24464,7 +24474,7 @@ _LABEL_A5B0_:
   ld a, $00
   ld (_RAM_C107_), a
   ld a, (_RAM_C106_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A5F5 to A5F6 (2 bytes)
 .db $6A $04
 
@@ -24494,47 +24504,47 @@ _LABEL_A60E_:
   push hl
   ld b, $06
   ld hl, $C108
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A618 to A619 (2 bytes)
 .db $48 $04
 
   ld e, d
   ld d, $00
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A620 to A621 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A623 to A624 (2 bytes)
 .db $4A $04
 
   ld e, d
   ld d, $00
   ld c, $02
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A62B to A62C (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A62E to A62F (2 bytes)
 .db $4C $04
 
   ld e, d
   ld d, $00
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A636 to A637 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A639 to A63A (2 bytes)
 .db $58 $04
 
   ld e, d
   ld d, $00
   ld c, $06
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A641 to A642 (2 bytes)
 .db $1A $03
 
@@ -24550,7 +24560,7 @@ _LABEL_A648_:
   push de
   push hl
   ld c, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A64F to A650 (2 bytes)
 .db $62 $04
 
@@ -24589,21 +24599,21 @@ _LABEL_A66E_:
   ld e, $00
 -:
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A680 to A681 (2 bytes)
 .db $E0 $04
 
   jr c, +
   push bc
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A687 to A688 (2 bytes)
 .db $6E $04
 
   dec c
   pop bc
   jr nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A68E to A68F (2 bytes)
 .db $E8 $04
 
@@ -24645,21 +24655,21 @@ _LABEL_A6BD_:
   ld e, $00
 -:
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A6CF to A6D0 (2 bytes)
 .db $E0 $04
 
   jr c, +
   push bc
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A6D6 to A6D7 (2 bytes)
 .db $6E $04
 
   inc c
   pop bc
   jr nz, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A6DD to A6DE (2 bytes)
 .db $E8 $04
 
@@ -24694,36 +24704,36 @@ _LABEL_A70C_:
   push de
   push hl
   ld hl, _SRAM_2316_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A713 to A714 (2 bytes)
 .db $48 $04
 
   ld (hl), d
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A718 to A719 (2 bytes)
 .db $4A $04
 
   ld (hl), d
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A71D to A71E (2 bytes)
 .db $4C $04
 
   ld (hl), d
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A722 to A723 (2 bytes)
 .db $58 $04
 
   ld (hl), d
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A727 to A728 (2 bytes)
 .db $4E $04
 
   ld (hl), d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A72B to A72C (2 bytes)
 .db $60 $04
 
@@ -24741,7 +24751,7 @@ _LABEL_A735_:
   ld b, $00
 -:
   call _LABEL_BE5A_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A73F to A740 (2 bytes)
 .db $E0 $04
 
@@ -24769,37 +24779,37 @@ _LABEL_A755_:
   push hl
   ld hl, _SRAM_2316_
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A75D to A75E (2 bytes)
 .db $1A $04
 
   inc hl
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A762 to A763 (2 bytes)
 .db $1C $04
 
   inc hl
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A767 to A768 (2 bytes)
 .db $1E $04
 
   inc hl
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A76C to A76D (2 bytes)
 .db $28 $04
 
   inc hl
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A771 to A772 (2 bytes)
 .db $20 $04
 
   inc hl
   ld de, (_SRAM_231B_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A779 to A77A (2 bytes)
 .db $30 $04
 
@@ -24814,11 +24824,11 @@ _LABEL_A77F_:
   push de
   push hl
   call _LABEL_BE49_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A787 to A788 (2 bytes)
 .db $6A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A78A to A78B (2 bytes)
 .db $16 $03
 
@@ -24883,7 +24893,7 @@ _LABEL_A7C8_:
   ld b, $00
 -:
   call _LABEL_BE5A_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A7D3 to A7D4 (2 bytes)
 .db $E0 $04
 
@@ -24899,7 +24909,7 @@ _LABEL_A7C8_:
   ld e, d
   ld d, $00
   ld c, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A7EC to A7ED (2 bytes)
 .db $62 $04
 
@@ -24907,11 +24917,11 @@ _LABEL_A7C8_:
   set 7, (hl)
 +:
   ld de, (_SRAM_231B_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A7F6 to A7F7 (2 bytes)
 .db $30 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A7F9 to A7FA (2 bytes)
 .db $EA $04
 
@@ -24930,7 +24940,7 @@ _LABEL_A800_:
   ld b, $04
   call _LABEL_BED3_
   ld a, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A80D to A80E (2 bytes)
 .db $04 $0A
 
@@ -25108,7 +25118,7 @@ _LABEL_A94F_:
   inc hl
   inc hl
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A978 to A979 (2 bytes)
 .db $0E $03
 
@@ -25203,11 +25213,11 @@ _LABEL_A9F3_:
   ld b, $00
   add hl, bc
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AA00 to AA01 (2 bytes)
 .db $32 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AA03 to AA04 (2 bytes)
 .db $16 $03
 
@@ -25282,7 +25292,7 @@ _LABEL_AA7B_:
   ld e, $02
   ld bc, $0014
   ld hl, $C004
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AA93 to AA94 (2 bytes)
 .db $12 $03
 
@@ -25307,7 +25317,7 @@ _LABEL_AA7B_:
   ld e, $01
   ld bc, $0014
   ld hl, $C004
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AABA to AABB (2 bytes)
 .db $14 $03
 
@@ -25441,7 +25451,7 @@ _DATA_AB5A_:
   ld c, $02
 _LABEL_AB76_:
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AB78 to AB79 (2 bytes)
 .db $32 $04
 
@@ -25459,11 +25469,11 @@ _LABEL_AB76_:
   call _LABEL_CA2_DrawMultipleItems
   pop af
   pop bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AB91 to AB92 (2 bytes)
 .db $34 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AB94 to AB95 (2 bytes)
 .db $68 $04
 
@@ -25482,7 +25492,7 @@ _LABEL_AB76_:
   pop af
   pop bc
   push bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ABAD to ABAE (2 bytes)
 .db $38 $04
 
@@ -25490,11 +25500,11 @@ _LABEL_AB76_:
   ld d, $00
   ld b, $10
   ld hl, $C004
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ABB8 to ABB9 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ABBB to ABBC (2 bytes)
 .db $60 $04
 
@@ -25567,7 +25577,7 @@ _LABEL_AC15_:
   ld c, $02
 _LABEL_AC2D_:
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC2F to AC30 (2 bytes)
 .db $32 $04
 
@@ -25587,45 +25597,45 @@ _LABEL_AC2D_:
   pop bc
   push bc
   ld hl, _RAM_C004_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC4C to AC4D (2 bytes)
 .db $5C $04
 
   ld b, $07
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC51 to AC52 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC54 to AC55 (2 bytes)
 .db $46 $04
 
   ld e, d
   ld d, $00
   ld b, $0A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC5C to AC5D (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC5F to AC60 (2 bytes)
 .db $48 $04
 
   ld e, d
   ld d, $00
   ld b, $0D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC67 to AC68 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC6A to AC6B (2 bytes)
 .db $4A $04
 
   ld e, d
   ld d, $00
   ld b, $10
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AC72 to AC73 (2 bytes)
 .db $1A $03
 
@@ -25671,7 +25681,7 @@ _LABEL_ACA3_:
   ld c, $02
 _LABEL_ACBB_:
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ACBD to ACBE (2 bytes)
 .db $32 $04
 
@@ -25691,20 +25701,20 @@ _LABEL_ACBB_:
   pop bc
   push bc
   ld hl, _RAM_C004_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ACDA to ACDB (2 bytes)
 .db $4C $04
 
   ld e, d
   ld d, $00
   ld b, $07
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ACE2 to ACE3 (2 bytes)
 .db $1A $03
 
   ld e, c
   ld c, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ACE8 to ACE9 (2 bytes)
 .db $62 $04
 
@@ -25713,7 +25723,7 @@ _LABEL_ACBB_:
   ld d, (hl)
   bit 7, d
   jr z, ++
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ACF2 to ACF3 (2 bytes)
 .db $6E $04
 
@@ -25723,7 +25733,7 @@ _LABEL_ACBB_:
 +:
   push hl
   ld c, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from ACFC to ACFD (2 bytes)
 .db $6A $04
 
@@ -25881,7 +25891,7 @@ _LABEL_AE03_:
   push de
   push hl
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE09 to AE0A (2 bytes)
 .db $32 $04
 
@@ -25899,11 +25909,11 @@ _LABEL_AE03_:
   pop bc
   bit 7, a
   jp nz, _LABEL_AE86_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE23 to AE24 (2 bytes)
 .db $34 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE26 to AE27 (2 bytes)
 .db $68 $04
 
@@ -25920,7 +25930,7 @@ _LABEL_AE03_:
   pop af
   pop bc
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE3C to AE3D (2 bytes)
 .db $38 $04
 
@@ -25928,7 +25938,7 @@ _LABEL_AE03_:
   ld d, $00
   ld bc, $0600
   ld hl, $C008
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE48 to AE49 (2 bytes)
 .db $1A $03
 
@@ -25949,7 +25959,7 @@ _LABEL_AE03_:
   call _LABEL_DD3_DrawOneLetter
   pop af
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE67 to AE68 (2 bytes)
 .db $60 $04
 
@@ -25971,44 +25981,44 @@ _LABEL_AE03_:
   pop bc
 _LABEL_AE86_:
   ld hl, _RAM_C008_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE8A to AE8B (2 bytes)
 .db $5C $04
 
   ld bc, $0304
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE90 to AE91 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE93 to AE94 (2 bytes)
 .db $46 $04
 
   ld e, d
   ld d, $00
   ld bc, $0305
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AE9C to AE9D (2 bytes)
 .db $1A $03
 
   ld b, $06
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEA1 to AEA2 (2 bytes)
 .db $5A $04
 
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEA6 to AEA7 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEA9 to AEAA (2 bytes)
 .db $3E $04
 
   ld e, d
   ld d, $00
   ld c, $05
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEB1 to AEB2 (2 bytes)
 .db $1A $03
 
@@ -26022,59 +26032,59 @@ _LABEL_AE86_:
   ld bc, _DATA_EF0D_
   call _LABEL_C79_DrawMenuItem
   pop bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEC9 to AECA (2 bytes)
 .db $3A $04
 
   ld e, d
   ld d, $00
   ld c, $07
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AED1 to AED2 (2 bytes)
 .db $1A $03
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AED4 to AED5 (2 bytes)
 .db $48 $04
 
   ld e, d
   ld d, $00
   ld c, $09
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEDC to AEDD (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEDF to AEE0 (2 bytes)
 .db $4A $04
 
   ld e, d
   ld d, $00
   ld c, $0B
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEE7 to AEE8 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEEA to AEEB (2 bytes)
 .db $4C $04
 
   ld e, d
   ld d, $00
   ld c, $0D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEF2 to AEF3 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEF5 to AEF6 (2 bytes)
 .db $58 $04
 
   ld e, d
   ld d, $00
   ld c, $0F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AEFD to AEFE (2 bytes)
 .db $1A $03
 
@@ -26141,7 +26151,7 @@ _LABEL_AF13_:
   ld a, $00
   ld (_RAM_C007_), a
   ld a, (_RAM_C006_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from AF61 to AF62 (2 bytes)
 .db $6A $04
 
@@ -26259,7 +26269,7 @@ _DATA_AFF5_:
   ld a, b
   ld (_RAM_C006_), a
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B010 to B011 (2 bytes)
 .db $6C $04
 
@@ -26314,11 +26324,11 @@ _LABEL_B045_:
   jr z, ++
   bit 7, d
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B057 to B058 (2 bytes)
 .db $6A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B05A to B05B (2 bytes)
 .db $16 $03
 
@@ -26343,13 +26353,13 @@ _LABEL_B045_:
 
 _LABEL_B071_:
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B073 to B074 (2 bytes)
 .db $22 $03
 
   jr c, +
   set 7, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B07A to B07B (2 bytes)
 .db $1E $03
 
@@ -26399,7 +26409,7 @@ _LABEL_B07E_:
   ld ix, $A30D
 _LABEL_B0C3_:
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B0C5 to B0C6 (2 bytes)
 .db $6A $04
 
@@ -26419,7 +26429,7 @@ _LABEL_B0C3_:
   pop bc
   push bc
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B0E0 to B0E1 (2 bytes)
 .db $64 $04
 
@@ -26468,11 +26478,11 @@ _LABEL_B115_:
   ld b, $00
   add hl, bc
   ld d, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B122 to B123 (2 bytes)
 .db $6A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B125 to B126 (2 bytes)
 .db $16 $03
 
@@ -26545,7 +26555,7 @@ _LABEL_B19B_:
   ld e, $01
   ld bc, $0011
   ld hl, $C004
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B1B3 to B1B4 (2 bytes)
 .db $12 $03
 
@@ -26570,7 +26580,7 @@ _LABEL_B19B_:
   ld e, $00
   ld bc, $0011
   ld hl, $C004
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B1DA to B1DB (2 bytes)
 .db $14 $03
 
@@ -26933,7 +26943,7 @@ _LABEL_B3EB_:
   push bc
   push de
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B3F0 to B3F1 (2 bytes)
 .db $18 $03
 
@@ -26996,7 +27006,7 @@ _LABEL_B418_:
   ld (hl), $0A
   pop hl
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B44D to B44E (2 bytes)
 .db $32 $04
 
@@ -27012,11 +27022,11 @@ _LABEL_B418_:
   call _LABEL_CA2_DrawMultipleItems
   pop af
   pop bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B463 to B464 (2 bytes)
 .db $34 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B466 to B467 (2 bytes)
 .db $68 $04
 
@@ -27033,7 +27043,7 @@ _LABEL_B418_:
   pop af
   pop bc
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B47C to B47D (2 bytes)
 .db $38 $04
 
@@ -27041,7 +27051,7 @@ _LABEL_B418_:
   ld d, $00
   ld bc, $0F00
   ld hl, $C1A6
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B488 to B489 (2 bytes)
 .db $1A $03
 
@@ -27062,7 +27072,7 @@ _LABEL_B418_:
   call _LABEL_DD3_DrawOneLetter
   pop af
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4A7 to B4A8 (2 bytes)
 .db $60 $04
 
@@ -27085,72 +27095,72 @@ _LABEL_B418_:
 ++:
   ld hl, _RAM_C1A6_
   ld c, $03
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4CC to B4CD (2 bytes)
 .db $5C $04
 
   ld b, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4D1 to B4D2 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4D4 to B4D5 (2 bytes)
 .db $46 $04
 
   ld e, d
   ld d, $00
   ld b, $03
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4DC to B4DD (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4DF to B4E0 (2 bytes)
 .db $48 $04
 
   ld e, d
   ld d, $00
   ld b, $06
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4E7 to B4E8 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4EA to B4EB (2 bytes)
 .db $4A $04
 
   ld e, d
   ld d, $00
   ld b, $09
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4F2 to B4F3 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4F5 to B4F6 (2 bytes)
 .db $4C $04
 
   ld e, d
   ld d, $00
   ld b, $0C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B4FD to B4FE (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B500 to B501 (2 bytes)
 .db $58 $04
 
   ld e, d
   ld d, $00
   ld b, $0F
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B508 to B509 (2 bytes)
 .db $1A $03
 
   ld c, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B50D to B50E (2 bytes)
 .db $62 $04
 
@@ -27159,7 +27169,7 @@ _LABEL_B418_:
   ld d, (hl)
   bit 7, d
   jr z, ++
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B517 to B518 (2 bytes)
 .db $6E $04
 
@@ -27172,7 +27182,7 @@ _LABEL_B418_:
   ld a, $09
 +:
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B526 to B527 (2 bytes)
 .db $6A $04
 
@@ -27436,7 +27446,7 @@ _LABEL_B6B3_:
   call _LABEL_C79_DrawMenuItem
   pop bc
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B706 to B707 (2 bytes)
 .db $32 $04
 
@@ -27453,7 +27463,7 @@ _LABEL_B6B3_:
   pop af
   pop bc
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B71C to B71D (2 bytes)
 .db $38 $04
 
@@ -27461,7 +27471,7 @@ _LABEL_B6B3_:
   ld d, $00
   ld bc, $0600
   ld hl, $A3F8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B728 to B729 (2 bytes)
 .db $1A $03
 
@@ -27482,27 +27492,27 @@ _LABEL_B6B3_:
   call _LABEL_DD3_DrawOneLetter
   pop af
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B747 to B748 (2 bytes)
 .db $5C $04
 
   ld bc, $0301
   ld hl, $A3F8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B750 to B751 (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B753 to B754 (2 bytes)
 .db $5A $04
 
   ld bc, $0601
   ld hl, $A3F8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B75C to B75D (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B75F to B760 (2 bytes)
 .db $3E $04
 
@@ -27510,11 +27520,11 @@ _LABEL_B6B3_:
   ld d, $00
   ld bc, $0602
   ld hl, $A3F8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B76B to B76C (2 bytes)
 .db $1A $03
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B76E to B76F (2 bytes)
 .db $46 $04
 
@@ -27522,7 +27532,7 @@ _LABEL_B6B3_:
   ld d, $00
   ld bc, $0302
   ld hl, $A3F8
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B77A to B77B (2 bytes)
 .db $1A $03
 
@@ -27569,7 +27579,7 @@ _LABEL_B78F_:
   ld bc, _DATA_F7E9_
   call _LABEL_C79_DrawMenuItem
   pop bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B7C4 to B7C5 (2 bytes)
 .db $D6 $04
 
@@ -27945,7 +27955,7 @@ _LABEL_B998_:
   ld d, $00
   ld b, $0B
   ld hl, _RAM_C06F_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from B9EE to B9EF (2 bytes)
 .db $1A $03
 
@@ -28352,7 +28362,7 @@ _LABEL_BCBE_:
   jr z, +
   ld hl, _DATA_BBCD_
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from BCF3 to BCF4 (2 bytes)
 .db $10 $03
 
@@ -28490,7 +28500,7 @@ _LABEL_BD79_:
   push af
   push bc
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from BDAD to BDAE (2 bytes)
 .db $18 $03
 
@@ -28719,7 +28729,7 @@ _LABEL_BED3_:
   push bc
   push de
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from BED8 to BED9 (2 bytes)
 .db $02 $0A
 
@@ -29048,13 +29058,13 @@ _LABEL_C182_:
   call _LABEL_C9ED_
   call _LABEL_C98A_
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C19E to C19F (2 bytes)
 .db $22 $04
 
   ld b, d
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C1A3 to C1A4 (2 bytes)
 .db $24 $04
 
@@ -29099,13 +29109,13 @@ _LABEL_C1B2_:
   call _LABEL_C9ED_
   call _LABEL_C98A_
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C1E6 to C1E7 (2 bytes)
 .db $22 $04
 
   ld b, d
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C1EB to C1EC (2 bytes)
 .db $24 $04
 
@@ -29137,13 +29147,13 @@ _LABEL_C201_:
   call _LABEL_CA77_
   call _LABEL_C98A_
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C21A to C21B (2 bytes)
 .db $22 $04
 
   ld b, d
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C21F to C220 (2 bytes)
 .db $24 $04
 
@@ -29231,12 +29241,12 @@ _LABEL_C24D_:
   pop af
   djnz --
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C29E to C29F (2 bytes)
 .db $22 $04
 
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C2A2 to C2A3 (2 bytes)
 .db $24 $04
 
@@ -29292,12 +29302,12 @@ _LABEL_C2B2_:
   inc h
   djnz -
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C2F7 to C2F8 (2 bytes)
 .db $50 $04
 
   ld h, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C2FB to C2FC (2 bytes)
 .db $52 $04
 
@@ -29317,12 +29327,12 @@ _LABEL_C30A_:
   push de
   ld a, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C30F to C310 (2 bytes)
 .db $52 $04
 
   ld e, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C313 to C314 (2 bytes)
 .db $50 $04
 
@@ -29528,7 +29538,7 @@ _LABEL_C41C_:
   inc hl
   ld h, (hl)
   ld l, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C423 to C424 (2 bytes)
 .db $00 $08
 
@@ -29554,7 +29564,7 @@ _LABEL_C42A_:
   ld (_SRAM_21B3_), a
   ld l, e
   ld h, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C43D to C43E (2 bytes)
 .db $00 $08
 
@@ -29574,7 +29584,7 @@ _LABEL_C447_:
   ld a, (hl)
   inc hl
   ld b, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C44E to C44F (2 bytes)
 .db $02 $07
 
@@ -29705,13 +29715,13 @@ _LABEL_C4BA_:
   pop bc
   call _LABEL_C98A_
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C4EB to C4EC (2 bytes)
 .db $22 $04
 
   ld b, d
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C4F0 to C4F1 (2 bytes)
 .db $24 $04
 
@@ -29755,7 +29765,7 @@ _LABEL_C50C_:
 
 ; 28th entry of Jump Table from C0E0 (indexed by unknown)
 _LABEL_C51D_:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C51E to C51F (2 bytes)
 .db $04 $08
 
@@ -29812,7 +29822,7 @@ _LABEL_C54C_:
   ld b, $14
   ld a, $80
 -:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C560 to C561 (2 bytes)
 .db $50 $04
 
@@ -29839,7 +29849,7 @@ _LABEL_C574_:
   ld a, (hl)
   inc hl
   ld d, $FF
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C57B to C57C (2 bytes)
 .db $22 $04
 
@@ -29886,12 +29896,12 @@ _LABEL_C580_:
   ld (hl), a
 ++:
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C5C0 to C5C1 (2 bytes)
 .db $22 $04
 
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C5C4 to C5C5 (2 bytes)
 .db $24 $04
 
@@ -29977,7 +29987,7 @@ _LABEL_C62A_:
   inc hl
   ld b, (hl)
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C633 to C634 (2 bytes)
 .db $62 $04
 
@@ -30174,12 +30184,12 @@ _LABEL_C727_:
   ld (_SRAM_2327_), a
   ld a, (_SRAM_2324_)
   ld d, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C753 to C754 (2 bytes)
 .db $22 $04
 
   ld d, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C757 to C758 (2 bytes)
 .db $24 $04
 
@@ -30246,12 +30256,12 @@ _LABEL_C76C_:
 
   push de
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C7A5 to C7A6 (2 bytes)
 .db $50 $04
 
   ld h, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C7A9 to C7AA (2 bytes)
 .db $52 $04
 
@@ -30273,7 +30283,7 @@ _LABEL_C76C_:
   call _LABEL_21EF_
   ld (_RAM_D6A0_), a
   ld l, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C7D1 to C7D2 (2 bytes)
 .db $0C $01
 
@@ -30299,13 +30309,13 @@ _LABEL_C76C_:
   ld d, (ix+1)
   ld e, (ix+2)
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C7FB to C7FC (2 bytes)
 .db $22 $04
 
   ld b, d
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C800 to C801 (2 bytes)
 .db $24 $04
 
@@ -30346,7 +30356,7 @@ _LABEL_C817_:
   dec b
 -:
   ld a, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C82F to C830 (2 bytes)
 _DATA_C82F_:
 .db $5C $04
@@ -30389,13 +30399,13 @@ _LABEL_C846_:
   call _LABEL_CA2B_
   call _LABEL_C98A_
   ld a, (_SRAM_2324_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C862 to C863 (2 bytes)
 .db $22 $04
 
   ld b, d
   ld d, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C867 to C868 (2 bytes)
 .db $24 $04
 
@@ -30546,12 +30556,12 @@ _LABEL_C92E_:
   ld a, (ix+0)
   cp $FF
   jr z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C940 to C941 (2 bytes)
 .db $50 $04
 
   ld h, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C944 to C945 (2 bytes)
 .db $52 $04
 
@@ -30581,12 +30591,12 @@ _LABEL_C968_:
   ld a, (hl)
   ld (_SRAM_2324_), a
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C96E to C96F (2 bytes)
 .db $52 $04
 
   ld e, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C972 to C973 (2 bytes)
 .db $50 $04
 
@@ -30892,7 +30902,7 @@ _LABEL_CB3B_:
   push bc
   push de
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CB40 to CB41 (2 bytes)
 .db $10 $01
 
@@ -30907,7 +30917,7 @@ _LABEL_CB47_:
   push bc
   push de
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CB4C to CB4D (2 bytes)
 .db $0C $01
 
@@ -30922,7 +30932,7 @@ _LABEL_CB53_:
   push bc
   push de
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CB58 to CB59 (2 bytes)
 .db $06 $01
 
@@ -30937,7 +30947,7 @@ _LABEL_CB5F_:
   push bc
   push de
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CB64 to CB65 (2 bytes)
 .db $08 $01
 
@@ -30952,7 +30962,7 @@ _LABEL_CB6B_:
   push bc
   push de
   push hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CB70 to CB71 (2 bytes)
 .db $0E $01
 
@@ -31193,7 +31203,7 @@ _LABEL_CC44_:
     call _LABEL_C79_DrawMenuItem
   pop bc
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CC98 to CC99 (2 bytes)
 .db $32 $04
 
@@ -31213,7 +31223,7 @@ _LABEL_CC44_:
   bit 7, a
   jr nz, ++
   push af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CCB5 to CCB6 (2 bytes)
 .db $38 $04
 
@@ -31239,19 +31249,19 @@ _LABEL_CC44_:
   pop af
   pop af
 ++:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CCDD to CCDE (2 bytes)
 .db $5C $04
 
   ld bc, $0301
   call _LABEL_CC07_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CCE6 to CCE7 (2 bytes)
 .db $5A $04
 
   ld bc, $0601
   call _LABEL_CC07_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CCEF to CCF0 (2 bytes)
 .db $3E $04
 
@@ -31259,7 +31269,7 @@ _LABEL_CC44_:
   ld d, $00
   ld bc, $0602
   call _LABEL_CC07_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CCFB to CCFC (2 bytes)
 .db $46 $04
 
@@ -31288,7 +31298,7 @@ _LABEL_CD19_:
   push hl
   ld hl, _SRAM_2325_
   ld (hl), $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CD23 to CD24 (2 bytes)
 .db $14 $01
 
@@ -31355,7 +31365,7 @@ _LABEL_CD5D_:
   pop hl
   pop de
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CD81 to CD82 (2 bytes)
 .db $16 $01
 
@@ -31373,7 +31383,7 @@ _LABEL_CD8A_:
   or a
   jp p, _LABEL_CDD1_
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CD94 to CD95 (2 bytes)
 .db $62 $04
 
@@ -31425,7 +31435,7 @@ _LABEL_CDD6_:
   push de
   or a
   jp m, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from CDDC to CDDD (2 bytes)
 .db $5C $04
 
@@ -31454,7 +31464,7 @@ _LABEL_CDED_:
   ld (_RAM_D683_), hl
   call _LABEL_3B_
   call _LABEL_940_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 
 ; Data from CDFD to CDFE (2 bytes)
 .db $20 $01
@@ -31476,7 +31486,7 @@ _LABEL_CDFF_:
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
   call _LABEL_4E_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 
 ; Data from CE2B to CE2C (2 bytes)
 .db $26 $01
@@ -33370,6 +33380,7 @@ _DATA_FBCD_:
 .ORG $0000
 
 ; Data from 10000 to 10054 (85 bytes)
+; Pointer table
 .db $68 $41 $9C $41 $C1 $41 $EE $41 $EE $41 $FA $41 $06 $42 $AA $42
 .db $12 $42 $1E $42 $2A $42 $36 $42 $42 $42 $4E $42 $5A $42 $66 $42
 .db $72 $42 $7E $42 $8A $42 $AA $42 $D6 $42 $FE $42 $34 $43 $5C $43
@@ -33707,35 +33718,35 @@ _LABEL_1037B_:
   pop af
   ret
 
-_LABEL_1039A_:
+_LABEL_1039A_ScriptingCode_CD_Name:
   push af
   push bc
   push ix
-  ld ix, $439A
-  ld a, d
-  call _LABEL_10D72_
-  bit 6, a
-  call nz, _LABEL_10F89_
-  ld c, $00
-  call _LABEL_10572_
-  and a
-  jp m, ++
-  push hl
-  ld e, $00
-  ld b, $0A
--:
-  ld a, (hl)
-  or a
-  jr z, +
-  inc hl
-  inc e
-  djnz -
-+:
-  pop hl
-  jr +++
+    ld ix, _LABEL_1039A_ScriptingCode_CD_Name ; point at self
+    ld a, d ; name code?
+    ; Check name code
+    call _LABEL_10D72_
+    ; See if it was processed
+    bit 6, a
+    call nz, _LABEL_10F89_
+    ld c, $00
+    call _LABEL_10572_
+    and a
+    jp m, ++
+    push hl
+      ld e, $00
+      ld b, $0A
+-:    ld a, (hl)
+      or a
+      jr z, +
+      inc hl
+      inc e
+      djnz -
++:  pop hl
+    jr +++
 
 ++:
-  call ++++
+    call ++++
 +++:
   pop ix
   pop bc
@@ -34000,41 +34011,46 @@ _LABEL_10553_:
 _LABEL_10572_:
   push af
   push bc
-  add a, a
-  jr nc, +
-  cp $28
-  jp nc, _LABEL_10F86_
-  ld l, a
-  add a, a
-  add a, a
-  add a, l
-  ld l, a
-  ld h, $00
-  ld b, h
-  add hl, hl
-  add hl, hl
-  add hl, bc
-  ld bc, _SRAM_320_
-  add hl, bc
+    ; double
+    add a, a
+    jr nc, +
+    cp $28
+    jp nc, _LABEL_10F86_
+    ; <= $28
+    ; Compute n*10
+    ld l, a
+    add a, a
+    add a, a
+    add a, l
+    ; then extend to 16 bits
+    ld l, a
+    ld h, $00
+    ld b, h
+    add hl, hl
+    add hl, hl
+    add hl, bc ; now hl = n*(30+c)
+    ld bc, $8320 ; Index from here
+    add hl, bc
   pop bc
   pop af
   ret
 
-+:
-  cp $28
-  jp nc, _LABEL_10F86_
-  ld l, a
-  add a, a
-  add a, a
-  add a, l
-  ld l, a
-  ld h, $00
-  ld b, h
-  add hl, hl
-  add hl, hl
-  add hl, bc
-  ld bc, $8000
-  add hl, bc
++:  ; original value < 128
+    ; same as above but offset from $8000
+    cp $28
+    jp nc, _LABEL_10F86_
+    ld l, a
+    add a, a
+    add a, a
+    add a, l
+    ld l, a
+    ld h, $00
+    ld b, h
+    add hl, hl
+    add hl, hl
+    add hl, bc
+    ld bc, $8000
+    add hl, bc
   pop bc
   pop af
   ret
@@ -35228,16 +35244,17 @@ _LABEL_10D45_:
   ret
 
 _LABEL_10D72_:
+  ; Check high bit
   and a
   jp m, +
-  cp $14
+  cp $14 ; do nothing for <20
   ret c
   ld c, a
   ld a, $40
   ret
 
 +:
-  cp $94
+  cp $94 ; same as above but with high bit set
   ret c
   ld c, a
   ld a, $40
@@ -35625,10 +35642,11 @@ _LABEL_10F86_:
   pop bc
   pop af
   ld c, a
+  ; fall through
+
 _LABEL_10F89_:
   ld a, $01
--:
-  jr -
+-:jr - ; Lock up until something breaks us out..?
 
 _LABEL_10F8D_:
   ld c, a
@@ -42121,7 +42139,7 @@ _LABEL_13D10_:
   ld (iy+0), $00
   inc iy
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1414C to 1414D (2 bytes)
 .db $60 $04
 
@@ -42208,7 +42226,7 @@ _LABEL_141E1_:
   or a
   jp p, +
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 141EF to 141F0 (2 bytes)
 .db $62 $04
 
@@ -42265,14 +42283,14 @@ _LABEL_141E1_:
   push de
   or a
   jp m, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14243 to 14244 (2 bytes)
 .db $F8 $04
 
   jr ++
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14248 to 14249 (2 bytes)
 .db $FA $04
 
@@ -42286,7 +42304,7 @@ _LABEL_1424D_:
   or a
   jp p, _LABEL_14299_
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14257 to 14258 (2 bytes)
 .db $62 $04
 
@@ -42506,7 +42524,7 @@ _LABEL_1436C_:
 
 _LABEL_14417_:
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1441B to 1441C (2 bytes)
 .db $60 $04
 
@@ -42555,7 +42573,7 @@ _LABEL_14417_:
 ++:
   ld a, (_RAM_D6B9_)
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14470 to 14471 (2 bytes)
 .db $D0 $04
 
@@ -42563,7 +42581,7 @@ _LABEL_14417_:
   neg
   ld c, a
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1447A to 1447B (2 bytes)
 .db $60 $04
 
@@ -42758,7 +42776,7 @@ _LABEL_14545_:
   inc iy
   ld (iy+0), e
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14602 to 14603 (2 bytes)
 .db $D8 $04
 
@@ -42787,7 +42805,7 @@ _LABEL_14626_:
   or a
   jp p, +
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14630 to 14631 (2 bytes)
 .db $62 $04
 
@@ -42809,7 +42827,7 @@ _LABEL_14626_:
   or a
   jr nz, _LABEL_146A1_
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1465B to 1465C (2 bytes)
 .db $60 $04
 
@@ -42894,7 +42912,7 @@ _LABEL_146F1_:
 _LABEL_146F2_:
   ld h, $02
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 146F8 to 146F9 (2 bytes)
 .db $60 $04
 
@@ -42903,7 +42921,7 @@ _LABEL_146F2_:
   jr nz, ++
   ld h, $20
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14705 to 14706 (2 bytes)
 .db $5E $04
 
@@ -42915,7 +42933,7 @@ _LABEL_146F2_:
   jr nz, ++
 +:
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14716 to 14717 (2 bytes)
 .db $5E $04
 
@@ -42961,7 +42979,7 @@ _LABEL_146F2_:
 +:
   ld a, (ix+0)
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1476C to 1476D (2 bytes)
 .db $62 $04
 
@@ -43013,7 +43031,7 @@ _LABEL_146F2_:
   ld (_RAM_C00A_), a
 _LABEL_147C6_:
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 147CA to 147CB (2 bytes)
 .db $48 $04
 
@@ -43033,7 +43051,7 @@ _LABEL_147C6_:
 +:
   ld e, d
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 147E2 to 147E3 (2 bytes)
 .db $4A $04
 
@@ -43055,12 +43073,12 @@ _LABEL_147C6_:
   pop iy
   pop ix
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14800 to 14801 (2 bytes)
 .db $52 $04
 
   ld h, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14804 to 14805 (2 bytes)
 .db $50 $04
 
@@ -43104,7 +43122,7 @@ _LABEL_147C6_:
   ld c, $00
   push de
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14841 to 14842 (2 bytes)
 .db $5E $04
 
@@ -43116,7 +43134,7 @@ _LABEL_147C6_:
   jr nz, ++
 +:
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14852 to 14853 (2 bytes)
 .db $5E $04
 
@@ -43143,13 +43161,13 @@ _LABEL_147C6_:
 ++:
   pop de
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14877 to 14878 (2 bytes)
 .db $60 $04
 
   push de
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1487E to 1487F (2 bytes)
 .db $4E $04
 
@@ -43240,7 +43258,7 @@ _LABEL_148D8_:
 +:
   push de
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 148FF to 14900 (2 bytes)
 .db $5C $04
 
@@ -43371,7 +43389,7 @@ _LABEL_148D8_:
   jp p, _LABEL_14AB2_
   ld a, (ix+0)
   ld c, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14A02 to 14A03 (2 bytes)
 .db $62 $04
 
@@ -43388,7 +43406,7 @@ _LABEL_148D8_:
 
 +:
   ld c, (hl)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14A16 to 14A17 (2 bytes)
 .db $BE $04
 
@@ -43422,7 +43440,7 @@ _LABEL_148D8_:
   and $3F
   ld d, a
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14A42 to 14A43 (2 bytes)
 .db $BC $04
 
@@ -43546,7 +43564,7 @@ _LABEL_14AB5_:
   ld a, (_RAM_C000_)
   or a
   jp m, _LABEL_14BBE_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14B37 to 14B38 (2 bytes)
 .db $60 $04
 
@@ -43563,7 +43581,7 @@ _LABEL_14AB5_:
   srl b
   inc b
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14B53 to 14B54 (2 bytes)
 .db $5C $04
 
@@ -43572,7 +43590,7 @@ _LABEL_14AB5_:
   cp b
   jr c, _LABEL_14BBA_
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14B5E to 14B5F (2 bytes)
 .db $60 $04
 
@@ -43626,7 +43644,7 @@ _LABEL_14BBE_:
   or a
   jr nz, +++
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14BC8 to 14BC9 (2 bytes)
 .db $4E $04
 
@@ -43743,12 +43761,12 @@ _DATA_14C77_:
 ; 1st entry of Jump Table from 14C77 (indexed by _RAM_C001_)
 _LABEL_14CA9_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14CAD to 14CAE (2 bytes)
 .db $5A $04
 
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14CB1 to 14CB2 (2 bytes)
 .db $5C $04
 
@@ -43759,7 +43777,7 @@ _LABEL_14CA9_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld c, $05
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14CBF to 14CC0 (2 bytes)
 .db $66 $04
 
@@ -43778,7 +43796,7 @@ _LABEL_14CA9_:
 +:
   call _LABEL_15887_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14CD7 to 14CD8 (2 bytes)
 .db $60 $04
 
@@ -43841,14 +43859,14 @@ _LABEL_14CA9_:
 ; 3rd entry of Jump Table from 14C77 (indexed by _RAM_C001_)
 _LABEL_14D56_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14D5A to 14D5B (2 bytes)
 .db $60 $04
 
   bit 3, e
   jp z, _LABEL_153CE_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14D65 to 14D66 (2 bytes)
 .db $60 $04
 
@@ -43886,7 +43904,7 @@ _LABEL_14D56_:
 _LABEL_14DA7_:
   ld a, (ix+0)
   ld c, $24
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14DAD to 14DAE (2 bytes)
 .db $62 $04
 
@@ -43897,7 +43915,7 @@ _LABEL_14DA7_:
   or a
   jp nz, _LABEL_153CE_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14DBE to 14DBF (2 bytes)
 .db $60 $04
 
@@ -43905,7 +43923,7 @@ _LABEL_14DA7_:
   ld h, $00
   ld l, $00
   call _LABEL_1537B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14DCA to 14DCB (2 bytes)
 .db $44 $04
 
@@ -43933,11 +43951,11 @@ _LABEL_14DA7_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14E01 to 14E02 (2 bytes)
 .db $82 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14E04 to 14E05 (2 bytes)
 .db $42 $04
 
@@ -43965,7 +43983,7 @@ _LABEL_14DA7_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14E3B to 14E3C (2 bytes)
 .db $80 $04
 
@@ -43975,7 +43993,7 @@ _LABEL_14DA7_:
 ; 5th entry of Jump Table from 14C77 (indexed by _RAM_C001_)
 _LABEL_14E41_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14E45 to 14E46 (2 bytes)
 .db $5E $04
 
@@ -43993,7 +44011,7 @@ _LABEL_14E41_:
   jp c, _LABEL_153CE_
   ld a, (ix+0)
   ld c, $24
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14E60 to 14E61 (2 bytes)
 .db $62 $04
 
@@ -44004,7 +44022,7 @@ _LABEL_14E41_:
   or a
   jp nz, _LABEL_153CE_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14E71 to 14E72 (2 bytes)
 .db $60 $04
 
@@ -44012,7 +44030,7 @@ _LABEL_14E41_:
   ld h, $00
   ld l, $00
   call _LABEL_1537B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14E7D to 14E7E (2 bytes)
 .db $44 $04
 
@@ -44040,11 +44058,11 @@ _LABEL_14E41_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14EB4 to 14EB5 (2 bytes)
 .db $A4 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14EB7 to 14EB8 (2 bytes)
 .db $42 $04
 
@@ -44072,7 +44090,7 @@ _LABEL_14E41_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14EEE to 14EEF (2 bytes)
 .db $A2 $04
 
@@ -44083,7 +44101,7 @@ _LABEL_14E41_:
 _LABEL_14EF4_:
   ld a, (ix+0)
   ld c, $24
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14EFA to 14EFB (2 bytes)
 .db $62 $04
 
@@ -44094,7 +44112,7 @@ _LABEL_14EF4_:
   or a
   jp nz, _LABEL_153CE_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14F0B to 14F0C (2 bytes)
 .db $60 $04
 
@@ -44102,7 +44120,7 @@ _LABEL_14EF4_:
   ld h, $00
   ld l, $00
   call _LABEL_1537B_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14F17 to 14F18 (2 bytes)
 .db $40 $04
 
@@ -44130,7 +44148,7 @@ _LABEL_14EF4_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14F4E to 14F4F (2 bytes)
 .db $7E $04
 
@@ -44140,7 +44158,7 @@ _LABEL_14EF4_:
 ; 7th entry of Jump Table from 14C77 (indexed by _RAM_C001_)
 _LABEL_14F54_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14F58 to 14F59 (2 bytes)
 .db $5E $04
 
@@ -44153,7 +44171,7 @@ _LABEL_14F54_:
   call _LABEL_15319_
   jp c, _LABEL_153CE_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14F6C to 14F6D (2 bytes)
 .db $60 $04
 
@@ -44194,7 +44212,7 @@ _LABEL_14FB0_:
   ld d, $05
   call _LABEL_15319_
   jp c, _LABEL_153CE_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 14FBC to 14FBD (2 bytes)
 .db $60 $04
 
@@ -44232,7 +44250,7 @@ _LABEL_14FB0_:
 ; 9th entry of Jump Table from 14C77 (indexed by _RAM_C001_)
 _LABEL_15000_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15004 to 15005 (2 bytes)
 .db $5E $04
 
@@ -44245,7 +44263,7 @@ _LABEL_15000_:
   call _LABEL_15319_
   jp c, _LABEL_153CE_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15018 to 15019 (2 bytes)
 .db $60 $04
 
@@ -44312,7 +44330,7 @@ _LABEL_1508F_:
   or a
   jp p, +
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15099 to 1509A (2 bytes)
 .db $62 $04
 
@@ -44321,7 +44339,7 @@ _LABEL_1508F_:
   jr z, ++
 +:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 150A4 to 150A5 (2 bytes)
 .db $5E $04
 
@@ -44335,7 +44353,7 @@ _LABEL_1508F_:
   jp c, _LABEL_153CE_
 ++:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 150B8 to 150B9 (2 bytes)
 .db $60 $04
 
@@ -44373,7 +44391,7 @@ _LABEL_1508F_:
 ; 16th entry of Jump Table from 14C77 (indexed by _RAM_C001_)
 _LABEL_150FC_:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15100 to 15101 (2 bytes)
 .db $46 $04
 
@@ -44390,7 +44408,7 @@ _LABEL_150FC_:
   ld h, $00
   ld c, $01
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15119 to 1511A (2 bytes)
 .db $60 $04
 
@@ -44401,7 +44419,7 @@ _LABEL_150FC_:
   ld h, $00
   ld c, $02
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15129 to 1512A (2 bytes)
 .db $60 $04
 
@@ -44494,11 +44512,11 @@ _LABEL_1519D_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 151E1 to 151E2 (2 bytes)
 .db $78 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 151E4 to 151E5 (2 bytes)
 .db $7E $04
 
@@ -44536,11 +44554,11 @@ _LABEL_151E7_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1522B to 1522C (2 bytes)
 .db $7A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1522E to 1522F (2 bytes)
 .db $80 $04
 
@@ -44578,11 +44596,11 @@ _LABEL_15231_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15275 to 15276 (2 bytes)
 .db $7C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15278 to 15279 (2 bytes)
 .db $82 $04
 
@@ -44594,7 +44612,7 @@ _LABEL_1527B_:
   ld c, $02
   call _LABEL_1532B_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15287 to 15288 (2 bytes)
 .db $56 $04
 
@@ -44630,11 +44648,11 @@ _LABEL_1527B_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 152CC to 152CD (2 bytes)
 .db $88 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 152CF to 152D0 (2 bytes)
 .db $8A $04
 
@@ -44672,7 +44690,7 @@ _LABEL_152D2_:
   inc iy
   ld (iy+0), d
   inc iy
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15316 to 15317 (2 bytes)
 .db $8C $04
 
@@ -44697,7 +44715,7 @@ _LABEL_15319_:
 _LABEL_1532B_:
   push af
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1532E to 1532F (2 bytes)
 .db $60 $04
 
@@ -44819,7 +44837,7 @@ _LABEL_15409_:
   ld c, $20
 -:
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1540F to 15410 (2 bytes)
 .db $5E $04
 
@@ -44839,7 +44857,7 @@ _LABEL_15419_:
 _LABEL_1541D_:
   ld c, $20
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15423 to 15424 (2 bytes)
 .db $5E $04
 
@@ -44856,7 +44874,7 @@ _LABEL_1541D_:
 _LABEL_1542F_:
   ld c, $08
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15435 to 15436 (2 bytes)
 .db $5E $04
 
@@ -44871,7 +44889,7 @@ _LABEL_1542F_:
 _LABEL_1543F_:
   ld c, $20
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15445 to 15446 (2 bytes)
 .db $5E $04
 
@@ -44889,7 +44907,7 @@ _LABEL_1544D_:
   push bc
   ld a, (ix+0)
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15459 to 1545A (2 bytes)
 .db $62 $04
 
@@ -44936,7 +44954,7 @@ _LABEL_1544D_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld c, $05
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 154A9 to 154AA (2 bytes)
 .db $66 $04
 
@@ -45007,7 +45025,7 @@ _LABEL_1544D_:
 +:
   push de
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15505 to 15506 (2 bytes)
 .db $5C $04
 
@@ -45028,7 +45046,7 @@ _LABEL_1544D_:
 ++:
   call _LABEL_158D2_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15522 to 15523 (2 bytes)
 .db $60 $04
 
@@ -45159,7 +45177,7 @@ _LABEL_1560D_:
   ld a, (_RAM_C003_)
   ld d, a
   ld c, $0A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15614 to 15615 (2 bytes)
 .db $64 $04
 
@@ -45182,7 +45200,7 @@ _LABEL_1560D_:
   ld (_RAM_C012_), a
   ld a, (_RAM_C003_)
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1563B to 1563C (2 bytes)
 .db $6E $04
 
@@ -45190,7 +45208,7 @@ _LABEL_1560D_:
   dec c
   jr z, +
   ld c, $04
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15644 to 15645 (2 bytes)
 .db $64 $04
 
@@ -45214,7 +45232,7 @@ _LABEL_1560D_:
   ld a, (_RAM_D6BB_)
   ld d, a
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1566F to 15670 (2 bytes)
 .db $BE $04
 
@@ -45262,7 +45280,7 @@ _LABEL_15679_:
   ld a, (_RAM_D6BB_)
   ld d, a
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 156C4 to 156C5 (2 bytes)
 .db $C2 $04
 
@@ -45307,7 +45325,7 @@ _LABEL_156CA_:
   ld a, (_RAM_D6BB_)
   ld d, a
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15715 to 15716 (2 bytes)
 .db $BE $04
 
@@ -45358,7 +45376,7 @@ _LABEL_1573F_:
   or a
   jp p, +
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15760 to 15761 (2 bytes)
 .db $62 $04
 
@@ -45373,7 +45391,7 @@ _LABEL_1573F_:
   jr z, _LABEL_157CF_
 +:
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15777 to 15778 (2 bytes)
 .db $CC $04
 
@@ -45400,7 +45418,7 @@ _LABEL_1573F_:
 +:
   ld c, d
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 157A3 to 157A4 (2 bytes)
 .db $34 $04
 
@@ -45414,7 +45432,7 @@ _LABEL_157AD_:
   ld a, (_RAM_D6B9_)
   ld d, a
   ld c, $01
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 157B4 to 157B5 (2 bytes)
 .db $66 $04
 
@@ -45428,13 +45446,13 @@ _LABEL_157B9_:
   jr c, _LABEL_157D8_
   ld d, a
   ld c, $0A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 157C6 to 157C7 (2 bytes)
 .db $64 $04
 
   ld d, (hl)
   ld c, $01
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 157CC to 157CD (2 bytes)
 .db $66 $04
 
@@ -45458,7 +45476,7 @@ _LABEL_157E4_:
   push bc
   or a
   jp m, ++
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 157EC to 157ED (2 bytes)
 .db $34 $04
 
@@ -45475,7 +45493,7 @@ _LABEL_157E4_:
 
 ++:
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15801 to 15802 (2 bytes)
 .db $62 $04
 
@@ -45495,7 +45513,7 @@ _LABEL_157E4_:
   push hl
   or a
   jp m, _LABEL_15860_
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15816 to 15817 (2 bytes)
 .db $34 $04
 
@@ -45526,7 +45544,7 @@ _LABEL_157E4_:
   ld d, $2B
   ld a, (_RAM_C000_)
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15848 to 15849 (2 bytes)
 .db $34 $04
 
@@ -45552,7 +45570,7 @@ _LABEL_157E4_:
 
 _LABEL_15860_:
   ld c, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15863 to 15864 (2 bytes)
 .db $62 $04
 
@@ -45590,7 +45608,7 @@ _LABEL_15887_:
   or a
   ret m
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1588E to 1588F (2 bytes)
 .db $34 $04
 
@@ -45616,7 +45634,7 @@ _LABEL_15887_:
   ld hl, $1900
   ld a, (ix+0)
   push bc
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 158B5 to 158B6 (2 bytes)
 .db $5A $04
 
@@ -45649,7 +45667,7 @@ _LABEL_158D2_:
   push bc
   call _LABEL_15935_
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 158E2 to 158E3 (2 bytes)
 .db $5A $04
 
@@ -45710,12 +45728,12 @@ _LABEL_15927_:
 _LABEL_15935_:
   push de
   ld a, (_RAM_C000_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1593A to 1593B (2 bytes)
 .db $38 $04
 
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1593E to 1593F (2 bytes)
 .db $34 $04
 
@@ -45727,7 +45745,7 @@ _LABEL_15935_:
 +:
   ld e, a
   ld a, (ix+0)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1594D to 1594E (2 bytes)
 .db $38 $04
 
@@ -45771,7 +45789,7 @@ _LABEL_1597A_:
   push de
   push hl
   ld c, $1C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 15980 to 15981 (2 bytes)
 .db $62 $04
 
@@ -45783,7 +45801,7 @@ _LABEL_1597A_:
   or a
   jp p, +
   ld d, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1598F to 15990 (2 bytes)
 .db $6E $04
 
@@ -45893,7 +45911,7 @@ _LABEL_16A93_:
   ld c, a
   inc hl
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16AC0 to 16AC1 (2 bytes)
 .db $5C $04
 
@@ -45903,7 +45921,7 @@ _LABEL_16A93_:
   ld a, c
   jr nz, +
   ld d, $FF
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16ACB to 16ACC (2 bytes)
 .db $22 $04
 
@@ -45915,13 +45933,13 @@ _LABEL_16A93_:
   inc ix
   ld d, (ix+0)
   inc ix
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16ADB to 16ADC (2 bytes)
 .db $22 $04
 
   ld d, (ix+0)
   inc ix
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16AE3 to 16AE4 (2 bytes)
 .db $24 $04
 
@@ -45939,7 +45957,7 @@ _LABEL_16A93_:
 ; Data from 16AF1 to 16AF2 (2 bytes)
 .db $16 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16AF4 to 16AF5 (2 bytes)
 .db $22 $04
 
@@ -45955,7 +45973,7 @@ _LABEL_16A93_:
 -:
   ld a, (hl)
   inc hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16B08 to 16B09 (2 bytes)
 .db $22 $04
 
@@ -45973,7 +45991,7 @@ _LABEL_16A93_:
 
   jr nz, +
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16B1B to 16B1C (2 bytes)
 .db $22 $04
 
@@ -46011,13 +46029,13 @@ _LABEL_16A93_:
   inc ix
   ld d, (ix+0)
   inc ix
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16B56 to 16B57 (2 bytes)
 .db $22 $04
 
   ld d, (ix+0)
   inc ix
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16B5E to 16B5F (2 bytes)
 .db $24 $04
 
@@ -46159,7 +46177,7 @@ _LABEL_16BB9_:
   ldir
   push iy
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C2E to 16C2F (2 bytes)
 .db $02 $04
 
@@ -46175,7 +46193,7 @@ _LABEL_16BB9_:
   srl d
   srl d
   srl d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C48 to 16C49 (2 bytes)
 .db $0E $04
 
@@ -46184,38 +46202,38 @@ _LABEL_16BB9_:
   and $0F
   ld d, a
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C53 to 16C54 (2 bytes)
 .db $08 $04
 
   ld d, iyl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C58 to 16C59 (2 bytes)
 .db $0C $04
 
   ld d, (ix+3)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C5E to 16C5F (2 bytes)
 .db $22 $04
 
   ld d, (ix+4)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C64 to 16C65 (2 bytes)
 .db $24 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C67 to 16C68 (2 bytes)
 .db $5A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C6A to 16C6B (2 bytes)
 .db $2C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C6D to 16C6E (2 bytes)
 .db $3E $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C70 to 16C71 (2 bytes)
 .db $18 $04
 
@@ -46227,16 +46245,16 @@ _LABEL_16BB9_:
 _LABEL_16C7B_:
   ld a, b
   ld d, $FF
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C7F to 16C80 (2 bytes)
 .db $22 $04
 
   ld de, $0000
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C85 to 16C86 (2 bytes)
 .db $2C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C88 to 16C89 (2 bytes)
 .db $2A $04
 
@@ -46255,7 +46273,7 @@ _LABEL_16C94_:
   ld c, $93
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16C9A to 16C9B (2 bytes)
 .db $50 $04
 
@@ -46263,7 +46281,7 @@ _LABEL_16C94_:
   cp h
   jr nz, +
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16CA2 to 16CA3 (2 bytes)
 .db $52 $04
 
@@ -46276,7 +46294,7 @@ _LABEL_16C94_:
   ld c, $12
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16CB0 to 16CB1 (2 bytes)
 .db $50 $04
 
@@ -46284,7 +46302,7 @@ _LABEL_16C94_:
   cp h
   jr nz, +
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16CB8 to 16CB9 (2 bytes)
 .db $52 $04
 
@@ -46368,7 +46386,7 @@ _LABEL_16CCB_:
   ldir
   push iy
   pop hl
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D2C to 16D2D (2 bytes)
 .db $02 $04
 
@@ -46385,7 +46403,7 @@ _LABEL_16CCB_:
   srl d
   srl d
   srl d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D48 to 16D49 (2 bytes)
 .db $0E $04
 
@@ -46394,40 +46412,40 @@ _LABEL_16CCB_:
   and $0F
   ld d, a
   pop af
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D53 to 16D54 (2 bytes)
 .db $08 $04
 
   ld d, (ix+5)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D59 to 16D5A (2 bytes)
 .db $0C $04
 
   bit 6, d
   jr nz, +
   ld d, (ix+3)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D63 to 16D64 (2 bytes)
 .db $22 $04
 
   ld d, (ix+4)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D69 to 16D6A (2 bytes)
 .db $24 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D6C to 16D6D (2 bytes)
 .db $5A $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D6F to 16D70 (2 bytes)
 .db $2C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D72 to 16D73 (2 bytes)
 .db $3E $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D75 to 16D76 (2 bytes)
 .db $18 $04
 
@@ -46437,22 +46455,22 @@ _LABEL_16CCB_:
 
 _LABEL_16D7F_:
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D82 to 16D83 (2 bytes)
 .db $0C $04
 
 +:
   ld d, $FF
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D87 to 16D88 (2 bytes)
 .db $22 $04
 
   ld de, $0000
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D8D to 16D8E (2 bytes)
 .db $2C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16D90 to 16D91 (2 bytes)
 .db $2A $04
 
@@ -46501,7 +46519,7 @@ _LABEL_16D99_:
   ld a, c
   ld d, (ix+1)
   set 6, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16DD0 to 16DD1 (2 bytes)
 .db $BC $04
 
@@ -46523,7 +46541,7 @@ _LABEL_16DD7_:
   pop af
   push af
   push de
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16DE3 to 16DE4 (2 bytes)
 .db $40 $04
 
@@ -46537,11 +46555,11 @@ _LABEL_16DD7_:
 +:
   ld d, a
   ld a, e
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16DF3 to 16DF4 (2 bytes)
 .db $12 $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 16DF6 to 16DF7 (2 bytes)
 .db $1A $04
 
@@ -46693,7 +46711,7 @@ _LABEL_17955_:
   ld c, $12
 -:
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 179C4 to 179C5 (2 bytes)
 .db $5C $04
 
@@ -46701,7 +46719,7 @@ _LABEL_17955_:
   or e
   jr z, +
   ld a, c
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 179CC to 179CD (2 bytes)
 .db $50 $04
 
@@ -46709,7 +46727,7 @@ _LABEL_17955_:
   jr z, +
   dec d
   ld b, d
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 179D4 to 179D5 (2 bytes)
 .db $52 $04
 
@@ -47125,7 +47143,7 @@ _DATA_18004_:
   xor a
   ld (_RAM_C48D_), a
   ld a, (_RAM_C48B_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18042 to 18043 (2 bytes)
 .db $0E $05
 
@@ -47146,7 +47164,7 @@ _DATA_18004_:
   xor a
   ld (_RAM_C48E_), a
   ld a, (_RAM_C48C_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18066 to 18067 (2 bytes)
 .db $0E $05
 
@@ -47498,13 +47516,13 @@ _LABEL_182B3_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $009D
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18363 to 18364 (2 bytes)
 .db $00 $08
 
   pop hl
   ld d, l
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18368 to 18369 (2 bytes)
 .db $74 $04
 
@@ -47514,11 +47532,11 @@ _LABEL_182B3_:
   sub $64
   ld d, a
   ld a, (_RAM_C48B_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18377 to 18378 (2 bytes)
 .db $0C $04
 
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1837A to 1837B (2 bytes)
 .db $22 $01
 
@@ -47527,7 +47545,7 @@ _LABEL_182B3_:
   jp z, _LABEL_18432_
   push hl
   ld hl, $009C
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18388 to 18389 (2 bytes)
 .db $00 $08
 
@@ -47558,7 +47576,7 @@ _LABEL_182B3_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $008A
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 183BD to 183BE (2 bytes)
 .db $00 $08
 
@@ -47605,7 +47623,7 @@ _LABEL_182B3_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00A5
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1841B to 1841C (2 bytes)
 .db $00 $08
 
@@ -47620,7 +47638,7 @@ _LABEL_182B3_:
   ld (_SRAM_21B2_), a
   push hl
   ld hl, $00A6
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1842F to 18430 (2 bytes)
 .db $00 $08
 
@@ -47628,7 +47646,7 @@ _LABEL_182B3_:
 _LABEL_18432_:
   push hl
   ld hl, $009E
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18437 to 18438 (2 bytes)
 .db $00 $08
 
@@ -47645,7 +47663,7 @@ _LABEL_1843D_:
   ld (_SRAM_21B7_), a
   ld a, d
   ld (_SRAM_21B6_), a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1844B to 1844C (2 bytes)
 .db $00 $08
 
@@ -47686,7 +47704,7 @@ _LABEL_18471_:
   ld (_SRAM_21B6_), hl
   ld h, (ix+0)
   ld l, (ix+1)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1848D to 1848E (2 bytes)
 .db $00 $08
 
@@ -47701,14 +47719,14 @@ _LABEL_18471_:
   add a, a
   add a, a
   ld b, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 184A1 to 184A2 (2 bytes)
 .db $08 $08
 
   jr ++
 
 +:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 184A6 to 184A7 (2 bytes)
 .db $0A $08
 
@@ -47718,7 +47736,7 @@ _LABEL_18471_:
   ret
 
 _LABEL_184AE_:
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 184AF to 184B0 (2 bytes)
 .db $06 $08
 
@@ -47767,7 +47785,7 @@ _LABEL_184F1_:
   neg
   ld d, a
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18501 to 18502 (2 bytes)
 .db $B2 $04
 
@@ -47776,7 +47794,7 @@ _LABEL_184F1_:
 +:
   ld d, a
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18508 to 18509 (2 bytes)
 .db $90 $04
 
@@ -47787,7 +47805,7 @@ _LABEL_184F1_:
   neg
   ld d, a
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18516 to 18517 (2 bytes)
 .db $A6 $04
 
@@ -47796,7 +47814,7 @@ _LABEL_184F1_:
 +:
   ld d, a
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1851D to 1851E (2 bytes)
 .db $8E $04
 
@@ -47804,7 +47822,7 @@ _LABEL_184F1_:
   ld d, (ix+2)
   ld e, (ix+3)
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18527 to 18528 (2 bytes)
 .db $30 $04
 
@@ -47852,7 +47870,7 @@ _LABEL_184F1_:
 
 ++:
   ld a, (_RAM_C48C_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1857A to 1857B (2 bytes)
 .db $5C $04
 
@@ -48093,7 +48111,7 @@ _LABEL_18712_:
   neg
   ld d, a
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18722 to 18723 (2 bytes)
 .db $B2 $04
 
@@ -48102,7 +48120,7 @@ _LABEL_18712_:
 +:
   ld d, a
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18729 to 1872A (2 bytes)
 .db $90 $04
 
@@ -48113,7 +48131,7 @@ _LABEL_18712_:
   neg
   ld d, a
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18737 to 18738 (2 bytes)
 .db $A6 $04
 
@@ -48122,7 +48140,7 @@ _LABEL_18712_:
 +:
   ld d, a
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1873E to 1873F (2 bytes)
 .db $8E $04
 
@@ -48130,7 +48148,7 @@ _LABEL_18712_:
   ld d, (ix+2)
   ld e, (ix+3)
   ld a, b
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18748 to 18749 (2 bytes)
 .db $30 $04
 
@@ -48178,7 +48196,7 @@ _LABEL_18712_:
 
 ++:
   ld a, (_RAM_C48B_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1879B to 1879C (2 bytes)
 .db $5C $04
 
@@ -48238,7 +48256,7 @@ _LABEL_187A8_:
 
 _LABEL_187FE_:
   ld a, (_RAM_C48B_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18802 to 18803 (2 bytes)
 .db $60 $04
 
@@ -48247,7 +48265,7 @@ _LABEL_187FE_:
   ld e, a
   ld d, $00
   ld a, (_RAM_C48B_)
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 1880E to 1880F (2 bytes)
 .db $30 $04
 
@@ -48358,7 +48376,7 @@ _LABEL_1887A_:
   ld a, (ix+0)
   inc ix
   ld (_RAM_C48B_), a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 188C9 to 188CA (2 bytes)
 .db $0E $05
 
@@ -48463,7 +48481,7 @@ _LABEL_18991_:
   ld a, (ix+0)
   inc ix
   ld (_RAM_C48C_), a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 189A0 to 189A1 (2 bytes)
 .db $0E $05
 
@@ -49070,7 +49088,7 @@ _LABEL_18E21_:
   pop af
   ld d, a
   ld i, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18E5E to 18E5F (2 bytes)
 .db $32 $04
 
@@ -49097,7 +49115,7 @@ _LABEL_18E21_:
   ld c, $02
   ld b, $89
   ld a, i
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18E8E to 18E8F (2 bytes)
 .db $38 $04
 
@@ -49166,7 +49184,7 @@ _LABEL_18E21_:
   ld (_RAM_C492_), hl
   pop hl
   ld a, i
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18F08 to 18F09 (2 bytes)
 .db $5C $04
 
@@ -49204,7 +49222,7 @@ _LABEL_18E21_:
   pop de
   pop af
   ld a, i
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18F4A to 18F4B (2 bytes)
 .db $5A $04
 
@@ -49272,7 +49290,7 @@ _LABEL_18F7E_:
   ld d, a
   ld (_RAM_C6FC_), a
   ld i, a
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 18FBE to 18FBF (2 bytes)
 .db $32 $04
 
@@ -49327,7 +49345,7 @@ _LABEL_18F7E_:
   ld (_RAM_C496_), hl
   pop hl
   ld a, i
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 19025 to 19026 (2 bytes)
 .db $5C $04
 
@@ -49365,7 +49383,7 @@ _LABEL_18F7E_:
   pop de
   pop af
   ld a, i
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 19067 to 19068 (2 bytes)
 .db $5A $04
 
@@ -49782,7 +49800,7 @@ _LABEL_19C04_:
   and $1F
   ld (_RAM_C610_), a
   jp z, +
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 19C38 to 19C39 (2 bytes)
 .db $00 $1F
 
@@ -54111,7 +54129,7 @@ _LABEL_2017E_ScriptingCodes:
 +:
   ld d, (ix+0)
   inc ix
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 201C8 to 201C9 (2 bytes)
 .db $6C $04
 
@@ -54122,7 +54140,7 @@ _LABEL_2017E_ScriptingCodes:
 
 _LABEL_201D4_ScriptingCode_CF_PartyLeader:
   ld d, $00
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 201D7 to 201D8 (2 bytes)
 .db $32 $04
 
@@ -54132,11 +54150,12 @@ _LABEL_201D4_ScriptingCode_CF_PartyLeader:
   jp _LABEL_200EC_ScriptDecodeLoop
 
 _LABEL_201E3_ScriptingCode_CD_Name:
+  ; ix points at the character name
   ld d, (ix+0)
   inc ix
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 201E9 to 201EA (2 bytes)
-.db $32 $04
+.db $32 $04 ; leads to _LABEL_1039A_ScriptingCode_CD_Name
 
   ld (_SRAM_21AB_), hl
   ld a, e
@@ -54146,7 +54165,7 @@ _LABEL_201E3_ScriptingCode_CD_Name:
 _LABEL_201F5_ScriptingCode_D3_ClassName:
   ld d, (ix+0)
   inc ix
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 201FB to 201FC (2 bytes)
 .db $68 $04
 
@@ -54158,7 +54177,7 @@ _LABEL_201F5_ScriptingCode_D3_ClassName:
 _LABEL_20207_ScriptingCode_D1_Item:
   ld d, (ix+0)
   inc ix
-  rst $18 ; _LABEL_18_
+  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 2020D to 2020E (2 bytes)
 .db $6A $04
 

@@ -79,6 +79,8 @@ def bytes_to_japanese(data):
 
 def english_to_bytes(s, is_menu):
     buffer = bytearray()
+    # Replace some "smart" punctuation
+    s = s.replace("“", "\"").replace("”", "\"").replace("’", "'").replace("…", "...")
     while len(s) > 0:
         # Check for a tag
         match = re.match("<[^>]+?>", s)
@@ -656,6 +658,38 @@ def encode_menus(yaml_filename, asm_filename):
                 ])
 
 
+def dump_names(rom_filename, output_filename):
+    # Loading table base
+    name_ptr_locations = [0x103cf, 0x105e5, 0x105ed, 0x105f7]
+    tables = []
+    with open(rom_filename, "rb") as f:
+        # Convert table ptrs to data locations
+        for ptr in name_ptr_locations:
+            f.seek(ptr)
+            table_ptr = int.from_bytes(f.read(2), byteorder="little")
+            tables.append({
+                "ptr": ptr,
+                "table_ptr": table_ptr
+            })
+        # Then we add in the names for each, making sure not to overlap
+        for table in tables:
+            f.seek(table["table_ptr"])
+            words = []
+            while True:
+                # length-prefixed
+                data_length = f.read(1)[0]
+                if data_length > 16:
+                    break
+                data = f.read(data_length)
+                # convert
+                words.append(bytes_to_japanese(data))
+            table["values"] = words
+
+    with open(output_filename, 'w', encoding="utf-8") as file:
+        documents = yaml.dump(names, file, sort_keys=False, allow_unicode=True)
+
+
+
 def main():
     verb = sys.argv[1]
     if verb == 'dump_script':
@@ -666,6 +700,8 @@ def main():
         dump_menus(sys.argv[2], sys.argv[3])
     elif verb == 'encode_menus':
         encode_menus(sys.argv[2], sys.argv[3])
+    elif verb == "dump_names":
+        dump_names(sys.argv[2], sys.argv[3])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 
