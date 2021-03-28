@@ -2248,7 +2248,8 @@
   literal: Too long! They've taken too long!
   en: |
     Too long!<line>
-    .<delay 01>.<delay 01>.<delay 01> They've taken<line>
+    .<delay 01>.<delay 01>.<delay 01><line>
+    They've taken<line>
     too long!<wait><end>
 
 - index: 329
@@ -2286,138 +2287,242 @@
 
 
 - index: 332
-  character: ''
+  character: Ken
   ja: このまま むざむざとサイプレスに<line>ふくじゅうを ちかえといわれるか!<wait more><end>
-  literal: ''
-  en: ''
+  literal: What would you suggest? That we submit to Cypress without resistance?
+  en: |
+    What would you<line>
+    suggest? That we<line>
+    submit to Cypress<line>
+    without<line>
+    resistance?<wait more><end>
 
 - index: 333
-  character: ''
+  character: Ken
   ja: しかし われらは るすをまもるみ<line>おっしゃるとおりかもしれません・・・<line>ほかに はけんできるものもいない<wait><end>
-  literal: ''
-  en: ''
+  literal: However, we were to remain here as guards. Perhaps you are right… Besides, there is no one left to send.
+  en: |
+    However, we were<line>
+    to remain here as<line>
+    guards. Perhaps<line>
+    you are right...<line>
+    Besides, there is<line>
+    no one left to<line>
+    send.<wait><end>
 
 - index: 334
-  character: ''
+  character: Ruce
   ja: まってください!<wait><end>
-  literal: ''
-  en: ''
+  literal: Please wait!
+  en: Please wait!<wait><end>
 
 - index: 335
-  character: ''
+  character: Ruc
   ja: どうか わたしたちにいかせてください<wait><end>
-  literal: ''
-  en: ''
+  literal: Please let us go in your stead.
+  en: |
+    Please let us go<line>
+    in your stead.<wait><end>
 
 - index: 336
-  character: ''
+  character: Ken
   ja: おまえは ラグのひとりむすこの<line>せんしみならいの<name>ではないか<line>わたしたちに とはどういうことだ<wait><end>
-  literal: ''
-  en: ''
+  literal: Aren’t you Lug’s only son, <name>, the apprentice fighter? What do you mean by “us”?
+  # <name> is Ruce
+  en: |
+    Aren’t you Lug's<line>
+    only son, <name>,<line>
+    the apprentice<line>
+    fighter? What do<line>
+    you mean by “us”?<wait><end>
 
 - index: 337
-  character: ''
+  character: Ruce
   ja: はい それは こういうことです<wait><end>
-  literal: ''
-  en: ''
+  literal: Of course, let me show you!
+  en: |
+    Of course, let me<line>
+    show you!<wait><end>
 
 - index: 338
-  character: ''
+  character: Narration
   ja: <name>は ゆびぶえをふいた<wait><end>
-  literal: ''
-  en: ''
+  literal: Ruce whistled with his fingers.
+  # <name> is Ruce
+  en: |
+    <name> put his<line>
+    fingers in his<line>
+    mouth and<line>
+    whistled.<wait><end>
   # current translation pause
 
 - index: 339
-  character: ''
+  character: Ken
   ja: おお なんと おまえたちは・・・<wait><end>
-  literal: ''
-  en: ''
+  literal: Oh, you are...
+  en: |
+    Oh, you are...<wait><end>
 
 - index: 340
-  character: ''
+  character: Ken
   ja: ひさしぶりだな エルフの<name><line>おちちうえのハンスは おげんきか?<wait><end>
-  literal: ''
-  en: ''
+  literal: Long time no see, Shade the elf. How is your father, Hans?
+  # <name> is Shade
+  en: |
+    Long time no see,<line>
+    <name> the elf.<line>
+    How is your<line>
+    father, Hans?<wait><end>
 
 - index: 341
-  character: ''
+  character: Shade
   ja: オフコ-ス エルフのもりにて<line>ちちのめいれいで まいりました<line>ちちからも くれぐれもよろしくと<wait><end>
-  literal: ''
-  en: ''
+  literal: Of course, he is in the elven forest. He ordered me to come. He also sends his regards.
+  en: |
+    He resides in the<line>
+    elven forest, of<line>
+    course. I am here<line>
+    by his orders,<line>
+    along with his<line>
+    regards.<wait><end>
 
 - index: 342
-  character: ''
+  character: Ken
   ja: きみは きょじんぞくのモンクだね<line>ぼくのしっているひかりのせんしに<line>よくにているような きがするが?<wait><end>
-  literal: ''
-  en: ''
+  literal: You are a giantfolk monk, aren’t you? You look very much like a warrior of light I know. Just a hunch maybe?
+  en: |
+    You are a giant-<line>
+    folk monk, aren’t<line>
+    you? You look very<line>
+    much like a<line>
+    warrior of light I<line>
+    know. Just a hunch<line>
+    maybe?<wait><end>
 
 - index: 343
-  character: ''
+  character: Sig
   ja: ゴングおじさんのことですか?<line>あなたのおうわさは きいています<line>とても ゆうかんなかただったと<wait more><line>おじさんのかわりにやくにたとうと<line>このわるだくみにさんかしました<line><name>といいます
     どうぞよろしく<wait><end>
-  literal: ''
-  en: ''
+  literal: You mean Uncle Gong? I’ve heard rumors about you, a very brave person you were. I’ve joined this group as I thought I’d be of use in place of my uncle. My name is Sig, nice to meet you.
+  en: |
+    You mean Uncle<line>
+    Gong? I’ve heard<line>
+    rumors about you,<line>
+    a very brave<line>
+    person you were.<wait more><line>
+    I’ve joined this<line>
+    group as I thought<line>
+    I’d be of use in<line>
+    place of my uncle.<line>
+    My name is <name>,<line>
+    nice to meet you.<wait><end>
 
 - index: 344
-  character: ''
+  character: Ken
   ja: きみたちには いつもおどろかされる<line>びじんしまいの すえっこだったね<line><name> きみまでどうしたんだ?<wait><end>
-  literal: ''
-  en: ''
+  literal: I’m always startled by you, the beautiful sisters. You are the youngest one, Wendy. Why do you want to join as well?
+  en: |
+    I’m always<line>
+    startled by you,<line>
+    the beautiful<line>
+    sisters. You are<line>
+    the youngest one,<line>
+    <name>. Why do you<line>
+    want to join as<line>
+    well?<wait><end>
 
 - index: 345
-  character: ''
+  character: Wendy
   ja: タオたちが いつもじまんするの<line>もちろん ひかりのせんしのことよ<line>こんどのことは いいチャンスよね<wait><end>
-  literal: ''
-  en: ''
+  literal: Tao and the others are always boasting about it, so of course it’s because I want to be a warrior of light! This is my chance!
+  en: |
+    Tao and the others<line>
+    are always<line>
+    boasting about it,<line>
+    so of course it’s<line>
+    because I want to<line>
+    be a warrior of<line>
+    light! This is my<line>
+    chance!<wait><end>
 
 - index: 346
-  character: ''
+  character: Ken
   ja: きし<name>・・・わがむすこよ<line>おまえ・・・ほんとうにいいのだな<line>きけんなえんせいになるぞ<wait><end>
-  literal: ''
-  en: ''
+  literal: Knight Apis… my son. You… are you sure? It’s going to be a very dangerous expedition!
+  en: |
+    Knight <name>...<line>
+    my son. You... are<line>
+    you sure? It’s<line>
+    going to be a very<line>
+    dangerous<line>
+    expedition!<wait><end>
 
 - index: 347
-  character: ''
+  character: Apis
   ja: はい ちちうえ! あっ いえっ<line>ケンきしちょう! かくごのうえです<line>どうか われわれにおまかせください<wait><end>
-  literal: ''
-  en: ''
+  literal: Yes, father! Ah, I mean, Captain Ken! I’ve made up my mind, please leave it to us!
+  en: |
+    Yes, father! Ah, I<line>
+    mean, Captain Ken!<line>
+    I’ve made up my<line>
+    mind, please leave<line>
+    it to us!<wait><end>
 
 - index: 348
-  character: ''
+  character: Ken
   ja: そして きみは・・・ちちおやを<line>えんせいしきかんのラグたいちょうを<line>たすけにいくと そういうわけだな<wait more><end>
-  literal: ''
-  en: ''
+  literal: And you… wish to rescue your father, Lug, the commander of the expedition force, right?
+  en: |
+    And you... wish to<line>
+    rescue your<line>
+    father, Lug, the<line>
+    commander of the<line>
+    expedition force,<line>
+    right?<wait more><end>
 
 - index: 349
-  character: ''
+  character: Ken
   ja: <name>! リ-ダ-は だれなんだ<line>おまえたちだけのわるだくみでは<line>ないことぐらいは おみとおしだ<wait><end>
-  literal: ''
-  en: ''
+  literal: Ruce! Who will be the leader? I don’t think you guys came up with this on your own.
+  en: |
+    <name>! Who will be<line>
+    the leader? I<line>
+    don’t think you<line>
+    guys came up with<line>
+    this on your own.<wait><end>
 
 - index: 350
-  character: ''
+  character: Ruce
   ja: それが<delay 01>・<delay 01>・<delay 01>・<delay 01><end>
-  literal: ''
-  en: ''
+  literal: Well…
+  en: Well<delay 01>.<delay 01>.<delay 01>.<delay 01><end>
 
 - index: 351
-  character: ''
+  character: Ruce
   ja: お-いっ ちょっと たのむよ<line>ばれちまった でてきてくれよ<wait><end>
-  literal: ''
-  en: ''
+  literal: Hey, would you mind coming out? They’ve found it out!
+  en: |
+    Hey, would you<line>
+    mind coming out?<line>
+    They’ve found it<line>
+    out!<wait><end>
 
 - index: 352
-  character: ''
+  character: Ken
   ja: きっ きみは!<delay 01> あなたはマックス?<wait><end>
-  literal: ''
-  en: ''
+  literal: You! Are you Max?
+  en: |
+    You! Are you Max?<wait><end>
 
 - index: 353
-  character: ''
+  character: Ken
   ja: いや<delay 01>・<delay 01>・<delay 01> にているが<delay 01>・<delay 01>・<line>ちがうようだ<wait><end>
-  literal: ''
-  en: ''
+  literal: Nope, you look alike, but… I’m wrong it seems.
+  en: |
+    Nope, you look<line>
+    alike, but<delay 01>.<delay 01>.<delay 01>.<delay 01><line>
+    I’m wrong, it<line>
+    seems.<wait><end>
 
 - index: 354
   character: ''
