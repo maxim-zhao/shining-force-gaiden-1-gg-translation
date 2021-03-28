@@ -1060,56 +1060,85 @@
   character: ''
   ja: アンリじょおうの ねむりを<line>さますために・・・<end>
   literal: ''
-  en: In order to<line>awaken Queen<line>Anri...<end>
+  en: |
+    In order to<line>
+    awaken Queen<line>
+    Anri...<end>
 
 - index: 110
   character: ''
   ja: <wait more>ラグをたいちょうとした<line>えんせいぐんを さしむけた・・・<delay 01><end>
   literal: ''
-  en: <wait more>An expedition<line>force led by Lug<line>was sent.<delay 01><end>
+  en: |
+    <wait more>
+    An expedition<line>
+    force led by Lug<line>
+    was sent.<delay 01><end>
 
 - index: 111
   character: ''
   ja: わ-! これから どうなるのかな?<wait more><end>
   literal: ''
-  en: <wait more>Wow! I wonder what<line>happens next.<wait more><end>
+  en: |
+    <wait more>
+    Wow! I wonder what<line>
+    happens next.<wait more><end>
 
 - index: 112
   character: ''
   ja: あっ おきゃくさまね!<line>このごほんをよみにきたんでしょ<line>じゃっ いっしょに よみましょう!<end>
   literal: ''
-  en: Oh, a visitor!<wait><line>Wouldn't you like<line>to read this<line>mysterious story?<wait><line>Well, let's read<line>it together!<end>
+  en: |
+    Oh, a visitor!<line>
+    You came to read<line>
+    this book, didn't<line>
+    you? Well, let's<line>
+    read it together!<end>
 
 - index: 113
   character: ''
   ja: ねえねえ <delay 01>このしゅじんこうは<line>なんていう おなまえなの?<wait more><end>
   literal: ''
-  en: Hey,<delay 01> what's the<line>protagonist's<line>name?<wait more><end>
+  en: |
+    Hey,<delay 01> what's the<line>
+    protagonist's<line>
+    name?<wait more><end>
 
 - index: 114
   character: ''
   ja: <party leader>さんて いうのね<delay 01><line>かっこいいんだ-っ!<wait more><end>
   literal: ''
-  en: It's <party leader>,<line>huh?<delay 01> Cool name!<wait more><end>
+  en: |
+    It's <party leader>,<line>
+    huh?<delay 01> Cool name!<wait more><end>
 
 - index: 115
   character: ''
   ja: それじゃ はやくよんで!<delay 01><line>はやく はやく-っ!<wait><end>
   literal: ''
-  en: Hurry up and read<line>it!<delay 01><line>Hurry,<delay 01> hurry!<wait><end>
+  en: |
+    Hurry up and read<line>
+    it!<delay 01><line>
+    Hurry,<delay 01> hurry!<wait><end>
 
 - index: 116
   character: ''
   ja: このまえの つづきを<line>よんで きかせて くれるのね!<wait more><end>
   literal: ''
-  en: Reading from where<line>you left off?<wait more><line>Only if you let<line>me listen!<wait more><end>
+  en: |
+    Reading from where<line>
+    you left off?<wait more><line>
+    Only if you let<line>
+    me listen!<wait more><end>
 
 - index: 117
   character: ''
   ja: どの つづきを よんでくれるの?<end>
   literal: ''
-  en: Where will you<line>continue reading<line>from?<end>
-
+  en: |
+    Where will you<line>
+    continue reading<line>
+    from?<end>
 
   # Unused? Can't find in the menu
 - index: 118
@@ -1123,25 +1152,35 @@
   character: ''
   ja: え-? そうなんだ・・<delay 01><line>どれを なくしちゃうの?<end>
   literal: ''
-  en: Ah, I see...<delay 01><line>Which one should<line>I get rid of?<end>
+  en: |
+    Ah, I see...<delay 01><line>
+    Which one should<line>
+    I get rid of?<end>
 
 - index: 135
   character: ''
   ja: あら! ほんとに けしちゃうの?<end>
   literal: ''
-  en: Oh, are you sure<line>you want to<line>delete it?<end>
+  en: |
+    Oh, are you sure<line>
+    you want to<line>
+    delete it?<end>
 
 - index: 120
   character: ''
   ja: うん これでなくなったよ<wait more><end>
   literal: ''
-  en: Alright, it's<line>gone!<wait more><end>
+  en: |
+    Alright, it's<line>
+    gone!<wait more><end>
 
 - index: 121
   character: ''
   ja: どこに うつすの?<end>
   literal: ''
-  en: Where should it<line>be copied to?<end>
+  en: |
+    Where should it<line>
+    be copied to?<end>
 
 - index: 122
   character: ''
@@ -2183,41 +2222,68 @@
 ###########################################################
 
 - index: 326
-  character: ''
+  character: Narration
   ja: アンリじょおうに かけられた<line>とわのねむりをさますため<wait><end>
-  literal: ''
-  en: ''
+  literal: To awaken Queen Anri from the eternal slumber put on her,
+  en: |
+    To awaken Queen<line>
+    Anri from the<line>
+    eternal slumber<line>
+    put on her,<end>
 
 - index: 327
-  character: ''
+  character: Narration
   ja: ガ-ディアナは サイプレスに<line>よりすぐりの せいえいたちを<line>さしむけたのだった・・・が・<delay 01>・<delay 01>・<delay
     01><end>
-  literal: ''
-  en: ''
+  literal: Guardiana sent its finest warriors to Cypress. However…
+  en: |
+    Guardiana sent its<line>
+    finest warriors to<line>
+    Cypress.<line>
+    However<delay 01>.<delay 01>.<delay 01>.<delay 01><end>
 
 - index: 328
-  character: ''
+  character: Ken
   ja: おそい!・<delay 01>・<delay 01>・<delay 01> おそすぎるぞ!<wait><end>
-  literal: ''
-  en: ''
+  literal: Too long! They've taken too long!
+  en: |
+    Too long!<line>
+    .<delay 01>.<delay 01>.<delay 01> They've taken<line>
+    too long!<wait><end>
 
 - index: 329
-  character: ''
+  character: Ken
   ja: ロウどの! そう おもいませんか?<wait><end>
-  literal: ''
-  en: ''
+  literal: Lowe! Don't you think so?
+  en: |
+    Don't you think<line>
+    so, Lowe?<wait><end>
 
 - index: 330
-  character: ''
+  character: Lowe
   ja: ふむ-・・・たしかに・・・<line>あれから ひとつきのあいだ<line>なんのれんらくも ありませんね<wait more><end>
-  literal: ''
-  en: ''
+  literal: Hmm… True… A month has passed, and we haven't heard from them since.
+  en: |
+    Hmm... True...<line>
+    A month has<line>
+    passed, and we<line>
+    haven't heard<line>
+    from them since.<wait more><end>
+
 
 - index: 331
-  character: ''
+  character: Lowe
   ja: せいえいぐんがやぶれたとしたら<line>われらのちからのおよばぬはなしだ<line>ケンどの どうなさるつもりですか?<wait><end>
-  literal: ''
-  en: ''
+  literal: If indeed our expedition force was defeated, we are just not up to the task. Do you have a plan, Ken?
+  en: |
+    If indeed our<line>
+    expedition force<line>
+    was defeated, we<line>
+    are just not up to<line>
+    the task.<wait more><line>
+    Do you have a<line>
+    plan, Ken?<wait><end>
+
 
 - index: 332
   character: ''
