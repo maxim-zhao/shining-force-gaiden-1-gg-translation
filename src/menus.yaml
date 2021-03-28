@@ -218,7 +218,8 @@
   data_at: '0xba8c'
   data_length: 14
   ja: ' ????? バトル ?'
-  en: " ??? Battle ?"
+  en: " Empty slot"
+  # Empty slot selection, ????? becomes your name
 - reference_at: '0xbaf2'
   data_at: '0xbb0a'
   data_length: 6
