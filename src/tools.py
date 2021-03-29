@@ -29,7 +29,7 @@ character_map = " " \
     "ほまみむめもやゆよらりるれろわんをぁぃぅぇぉゃゅょっアイウ" \
     "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
     "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
-    "゛゜XXXXX-%/ADFGHLMPTV?・!"
+    "゛゜XXXXXー%/ADFGHLMPTV?・!"
 
 # Font mapping
 # TODO: use a .tbl?
