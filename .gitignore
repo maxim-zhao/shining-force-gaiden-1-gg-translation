@@ -12,3 +12,4 @@ linkfile
 *.o
 *.bps
 /src/menus.asm
+/src/names.asm

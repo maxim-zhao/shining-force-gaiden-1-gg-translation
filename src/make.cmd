@@ -9,6 +9,7 @@ if exist ..\build_config.cmd ( call ..\build_config.cmd )
 set PYTHONIOENCODING=UTF8
 %CONFIG_PYTHON% tools.py encode_script "script.yaml" "trees.asm" "script.asm" || exit /b
 %CONFIG_PYTHON% tools.py encode_menus "menus.yaml" "menus.asm" || exit /b
+%CONFIG_PYTHON% tools.py encode_names "names.yaml" "names.asm" || exit /b
 
 %CONFIG_WLAZ80% -o "sfg1-en.gg.asm.o" "sfg1-en.gg.asm" || exit /b
 echo [objects]>linkfile
