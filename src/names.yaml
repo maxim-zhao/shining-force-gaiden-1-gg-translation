@@ -2,408 +2,408 @@
   table_ptr: 12004
   # Enemies
   entries:
-  - "ja": ゴブリン
-    "en": Goblin
-  - "ja": スケイブン
-    "en": Skaven
-  - "ja": ドラゴンニュート
-    "en": Dragon Newt
-  - "ja": ドワーフ
-    "en": Dwarf
-  - "ja": ラットマン
-    "en": Ratman
-  - "ja": サイプレスナイト
-    "en": Cypress Knight
-  - "ja": ヘルソルジャー
-    "en": Hell Soldier
-  - "ja": ゾンビ
-    "en": Zombie
-  - "ja": スケルトン
-    "en": Skeleton
-  - "ja": アークナイト
-    "en": Arc Knight
-  - "ja": リザードマン
-    "en": Lizardman
-  - "ja": ウォーム
-    "en": Worms
-  - "ja": グール
-    "en": Ghouls
-  - "ja": デッドリーボーン
-    "en": Deadly Bone
-  - "ja": ミノタウロス
-    "en": Minotaur
-  - "ja": ケルベロス
-    "en": Cerberus
-  - "ja": ゴーレム
-    "en": Golem
-  - "ja": デュラハン
-    "en": Dullahan
-  - "ja": タロス
-    "en": Talos
-  - "ja": センチネル
-    "en": Sentinels
-  - "ja": エグゼキューター
-    "en": Executor
-  - "ja": スカルナイト
-    "en": Skull Knight
-  - "ja": おおこうもり
-    "en": flying fox
-  - "ja": インキュバス
-    "en": Incubus
-  - "ja": ラットフライ
-    "en": Rat Fly
-  - "ja": ペガサスナイト
-    "en": Pegasus Knight
-  - "ja": ガーゴイル
-    "en": Gargoyle
-  - "ja": イビルピクシー
-    "en": Evil Pixie
-  - "ja": ホークマン
-    "en": Hawkman
-  - "ja": ベリアル
-    "en": Belial
-  - "ja": ワイバーン
-    "en": Wyvern
-  - "ja": キメラ
-    "en": Chimera
-  - "ja": デスアーチャー
-    "en": Death Archer
-  - "ja": ブラスローダー
-    "en": Brass Loader
-  - "ja": ヘルスナイパー
-    "en": Health Sniper
-  - "ja": ボウライダー
-    "en": Bow Riders
-  - "ja": ブラスガンナー
-    "en": Brass Gunner
-  - "ja": アサッシン
-    "en": Assassins
-  - "ja": フィズルボール
-    "en": Fizzle Ball
-  - "ja": ダークメイジ
-    "en": Dark Mage
-  - "ja": マスターメイジ
-    "en": Master Mage
-  - "ja": ソーサラー
-    "en": Sorcerer
-  - "ja": デモンマスター
-    "en": Demon Master
-  - "ja": プリースト
-    "en": Priest
-  - "ja": ビショップ
-    "en": Bishop
-  - "ja": クレリック
-    "en": Cleric
-  - "ja": イビルビショップ
-    "en": Evil Bishop
-  - "ja": バズー
-    "en": Bazoo
-  - "ja": ダントム
-    "en": Dantom
-  - "ja": フレーベル
-    "en": Flavor
-  - "ja": ゲッペル
-    "en": Geppel
-  - "ja": まじん
-    "en": Majin
-  - "ja": エドモンド
-    "en": Edmond
-  - "ja": ウォルドル
-    "en": Waldor
-  - "ja": ウォルドル
-    "en": Waldor
-  - "ja": マジカルマッシュ
-    "en": Magical Mash
-  - "ja": バズー
-    "en": Bazoo
-  - "ja": ダークメイジ
-    "en": Dark Mage
-  - "ja": ドワーフ
-    "en": Dwarf
-  - "ja": サイプレスナイト
-    "en": Cypress Knight
-  - "ja": ダークメイジ
-    "en": Dark Mage
-  - "ja": ブラスローダー
-    "en": Brass Loader
-  - "ja": ヘルソルジャー
-    "en": Hell Soldier
-  - "ja": プリースト
-    "en": Priest
-  - "ja": スケルトン
-    "en": Skeleton
-  - "ja": ヘルスナイパー
-    "en": Health sniper
-  - "ja": ソーサラー
-    "en": Sorcerer
-  - "ja": デッドリーボーン
-    "en": Deadly Bone
-  - "ja": グール
-    "en": Ghouls
-  - "ja": ミノタウロス
-    "en": Minotaur
-  - "ja": エグゼキューター
-    "en": Executioner
+  - ja: ゴブリン
+    en: Goblin
+  - ja: スケイブン
+    en: Skaven
+  - ja: ドラゴンニュート
+    en: Dragon Newt
+  - ja: ドワーフ
+    en: Dwarf
+  - ja: ラットマン
+    en: Ratman
+  - ja: サイプレスナイト
+    en: Cypress Knight
+  - ja: ヘルソルジャー
+    en: Hell Soldier
+  - ja: ゾンビ
+    en: Zombie
+  - ja: スケルトン
+    en: Skeleton
+  - ja: アークナイト
+    en: Arc Knight
+  - ja: リザードマン
+    en: Lizardman
+  - ja: ウォーム
+    en: Worms
+  - ja: グール
+    en: Ghouls
+  - ja: デッドリーボーン
+    en: Deadly Bone
+  - ja: ミノタウロス
+    en: Minotaur
+  - ja: ケルベロス
+    en: Cerberus
+  - ja: ゴーレム
+    en: Golem
+  - ja: デュラハン
+    en: Dullahan
+  - ja: タロス
+    en: Talos
+  - ja: センチネル
+    en: Sentinels
+  - ja: エグゼキューター
+    en: Executor
+  - ja: スカルナイト
+    en: Skull Knight
+  - ja: おおこうもり
+    en: flying fox
+  - ja: インキュバス
+    en: Incubus
+  - ja: ラットフライ
+    en: Rat Fly
+  - ja: ペガサスナイト
+    en: Pegasus Knight
+  - ja: ガーゴイル
+    en: Gargoyle
+  - ja: イビルピクシー
+    en: Evil Pixie
+  - ja: ホークマン
+    en: Hawkman
+  - ja: ベリアル
+    en: Belial
+  - ja: ワイバーン
+    en: Wyvern
+  - ja: キメラ
+    en: Chimera
+  - ja: デスアーチャー
+    en: Death Archer
+  - ja: ブラスローダー
+    en: Brass Loader
+  - ja: ヘルスナイパー
+    en: Health Sniper
+  - ja: ボウライダー
+    en: Bow Riders
+  - ja: ブラスガンナー
+    en: Brass Gunner
+  - ja: アサッシン
+    en: Assassins
+  - ja: フィズルボール
+    en: Fizzle Ball
+  - ja: ダークメイジ
+    en: Dark Mage
+  - ja: マスターメイジ
+    en: Master Mage
+  - ja: ソーサラー
+    en: Sorcerer
+  - ja: デモンマスター
+    en: Demon Master
+  - ja: プリースト
+    en: Priest
+  - ja: ビショップ
+    en: Bishop
+  - ja: クレリック
+    en: Cleric
+  - ja: イビルビショップ
+    en: Evil Bishop
+  - ja: バズー
+    en: Bazoo
+  - ja: ダントム
+    en: Dantom
+  - ja: フレーベル
+    en: Flavor
+  - ja: ゲッペル
+    en: Geppel
+  - ja: まじん
+    en: Majin
+  - ja: エドモンド
+    en: Edmond
+  - ja: ウォルドル
+    en: Waldor
+  - ja: ウォルドル
+    en: Waldor
+  - ja: マジカルマッシュ
+    en: Magical Mash
+  - ja: バズー
+    en: Bazoo
+  - ja: ダークメイジ
+    en: Dark Mage
+  - ja: ドワーフ
+    en: Dwarf
+  - ja: サイプレスナイト
+    en: Cypress Knight
+  - ja: ダークメイジ
+    en: Dark Mage
+  - ja: ブラスローダー
+    en: Brass Loader
+  - ja: ヘルソルジャー
+    en: Hell Soldier
+  - ja: プリースト
+    en: Priest
+  - ja: スケルトン
+    en: Skeleton
+  - ja: ヘルスナイパー
+    en: Health sniper
+  - ja: ソーサラー
+    en: Sorcerer
+  - ja: デッドリーボーン
+    en: Deadly Bone
+  - ja: グール
+    en: Ghouls
+  - ja: ミノタウロス
+    en: Minotaur
+  - ja: エグゼキューター
+    en: Executioner
   end: 12563
 
 - ptr: 67045
   table_ptr: 11151
   # Player classes
   entries:
-  - "ja": けんし
-    "en": silk thread
-  - "ja": ゆうしゃ
-    "en": hero
-  - "ja": きし
-    "en": professional killer
-  - "ja": パラディン
-    "en": paladin
-  - "ja": せんし
-    "en": warrior
-  - "ja": ウォリアー
-    "en": warrior
-  - "ja": まじゅつし
-    "en": magician
-  - "ja": ウイザード
-    "en": wizard
-  - "ja": そうりょ
-    "en": warrior
-  - "ja": しさい
-    "en": Scythe
-  - "ja": アーチャー
-    "en": Archer
-  - "ja": スナイパー
-    "en": sniper
-  - "ja": ちょうじん
-    "en": superhero
-  - "ja": バードラー
-    "en": Birdler
-  - "ja": モンク
-    "en": Monk
-  - "ja": マスターモンク
-    "en": Master Monk
-  - "ja": じゅうじん
-    "en": Jounin
-  - "ja": ベルセルク
-    "en": Berserk
-  - "ja": レンジャー
-    "en": Ranger
-  - "ja": ボウナイト
-    "en": Bow Knight
-  - "ja": まほうせいぶつ
-    "en": Magical Creatures
+  - ja: けんし
+    en: silk thread
+  - ja: ゆうしゃ
+    en: hero
+  - ja: きし
+    en: professional killer
+  - ja: パラディン
+    en: paladin
+  - ja: せんし
+    en: warrior
+  - ja: ウォリアー
+    en: warrior
+  - ja: まじゅつし
+    en: magician
+  - ja: ウイザード
+    en: wizard
+  - ja: そうりょ
+    en: warrior
+  - ja: しさい
+    en: Scythe
+  - ja: アーチャー
+    en: Archer
+  - ja: スナイパー
+    en: sniper
+  - ja: ちょうじん
+    en: superhero
+  - ja: バードラー
+    en: Birdler
+  - ja: モンク
+    en: Monk
+  - ja: マスターモンク
+    en: Master Monk
+  - ja: じゅうじん
+    en: Jounin
+  - ja: ベルセルク
+    en: Berserk
+  - ja: レンジャー
+    en: Ranger
+  - ja: ボウナイト
+    en: Bow Knight
+  - ja: まほうせいぶつ
+    en: Magical Creatures
   end: 11283
 
 - ptr: 67053
   table_ptr: 11283
   # Items and weapons
   entries:
-  - "ja": やくそう
-    "en": medicinal plants
-  - "ja": かいふくのみ
-    "en": recovery only
-  - "ja": どくけしそう
-    "en": poisonous fungus
-  - "ja": めぐみのあめ
-    "en": Blessing Rain
-  - "ja": てんしのはね
-    "en": angel's feather
-  - "ja": ちからのワイン
-    "en": wine of strength
-  - "ja": まもりのミルク
-    "en": milk of fortune
-  - "ja": はやてのチキン
-    "en": Hayate's chicken
-  - "ja": いだてんピーマン
-    "en": Idaiten green pepper
-  - "ja": げんきのパン
-    "en": Bread of Cheer
-  - "ja": ちからのリング
-    "en": Ring of Strength
-  - "ja": まもりのリング
-    "en": Ring of Strength
-  - "ja": はやてのリング
-    "en": Hayate's ring
-  - "ja": いだてんリング
-    "en": Idaiten ring
-  - "ja": しろのリング
-    "en": White ring
-  - "ja": くろのリング
-    "en": Black ring
-  - "ja": イビルリング
-    "en": Evil ring
-  - "ja": レザーグラブ
-    "en": Leather grab
-  - "ja": パワーグラブ
-    "en": Power Grab
-  - "ja": ソーングラブ
-    "en": Thorngrab
-  - "ja": アイアンクロウ
-    "en": Ironclaw
-  - "ja": こんぼう
-    "en": Kombat
-  - "ja": イビルアックス
-    "en": Evil Axe
-  - "ja": ショートアックス
-    "en": Short Axe
-  - "ja": ブロンズロッド
-    "en": Bronze Rod
-  - "ja": アイアンロッド
-    "en": Iron Rod
-  - "ja": てつのや
-    "en": Iron Yar
-  - "ja": グレートショット
-    "en": Great Shot
-  - "ja": グレートアックス
-    "en": Great Axe
-  - "ja": ショートソード
-    "en": Short Sword
-  - "ja": ミドルソード
-    "en": Middle Sword
-  - "ja": ロングソード
-    "en": Longsword
-  - "ja": スチールソード
-    "en": Steel Sword
-  - "ja": ブロードソード
-    "en": Broad Sword
-  - "ja": ひっさつのつるぎ
-    "en": Sword of Supernatural Power
-  - "ja": きのぼう
-    "en": Tree of Life
-  - "ja": ロビンのや
-    "en": Robin's Field
-  - "ja": あんこくのつるぎ
-    "en": Sword of Anxiety
-  - "ja": ぼくとう
-    "en": Bokuto
-  - "ja": はじゃのつるぎ
-    "en": Jashira no Tsurugi
-  - "ja": ブロンズランス
-    "en": Bronze Lance
-  - "ja": スチールランス
-    "en": Steel Lance
-  - "ja": クロムランス
-    "en": Chrome Lance
-  - "ja": イビルランス
-    "en": Evil Lance
-  - "ja": ハルバート
-    "en": Halberd
-  - "ja": スピア
-    "en": Spear
-  - "ja": パワースピア
-    "en": Power Spear
-  - "ja": バルキリー
-    "en": Valkyrie
-  - "ja": ハンドアックス
-    "en": Hand Axe
-  - "ja": ミドルアックス
-    "en": Middle Axe
-  - "ja": バトルアックス
-    "en": Battle Axe
-  - "ja": ヒートアックス
-    "en": Heat Axe
-  - "ja": アトラスのおの
-    "en": Axe of Atlas
-  - "ja": きのつえ
-    "en": Staff of Wood
-  - "ja": まもりのつえ
-    "en": Staff of Protection
-  - "ja": せいじゃのつえ
-    "en": Viper's Staff
-  - "ja": パワースティック
-    "en": Power Stick
-  - "ja": デーモンロッド
-    "en": Demon Rod
-  - "ja": フレイル
-    "en": Flail
-  - "ja": きのや
-    "en": Tree house
-  - "ja": はがねのや
-    "en": Leaf Leaf
-  - "ja": アサルトシェル
-    "en": Assault Shell
-  - "ja": バスターショット
-    "en": Buster Shot
-  - "ja": なにももたない
-    "en": Nothing
+  - ja: やくそう
+    en: medicinal plants
+  - ja: かいふくのみ
+    en: recovery only
+  - ja: どくけしそう
+    en: poisonous fungus
+  - ja: めぐみのあめ
+    en: Blessing Rain
+  - ja: てんしのはね
+    en: angel's feather
+  - ja: ちからのワイン
+    en: wine of strength
+  - ja: まもりのミルク
+    en: milk of fortune
+  - ja: はやてのチキン
+    en: Hayate's chicken
+  - ja: いだてんピーマン
+    en: Idaiten green pepper
+  - ja: げんきのパン
+    en: Bread of Cheer
+  - ja: ちからのリング
+    en: Ring of Strength
+  - ja: まもりのリング
+    en: Ring of Strength
+  - ja: はやてのリング
+    en: Hayate's ring
+  - ja: いだてんリング
+    en: Idaiten ring
+  - ja: しろのリング
+    en: White ring
+  - ja: くろのリング
+    en: Black ring
+  - ja: イビルリング
+    en: Evil ring
+  - ja: レザーグラブ
+    en: Leather grab
+  - ja: パワーグラブ
+    en: Power Grab
+  - ja: ソーングラブ
+    en: Thorngrab
+  - ja: アイアンクロウ
+    en: Ironclaw
+  - ja: こんぼう
+    en: Kombat
+  - ja: イビルアックス
+    en: Evil Axe
+  - ja: ショートアックス
+    en: Short Axe
+  - ja: ブロンズロッド
+    en: Bronze Rod
+  - ja: アイアンロッド
+    en: Iron Rod
+  - ja: てつのや
+    en: Iron Yar
+  - ja: グレートショット
+    en: Great Shot
+  - ja: グレートアックス
+    en: Great Axe
+  - ja: ショートソード
+    en: Short Sword
+  - ja: ミドルソード
+    en: Middle Sword
+  - ja: ロングソード
+    en: Longsword
+  - ja: スチールソード
+    en: Steel Sword
+  - ja: ブロードソード
+    en: Broad Sword
+  - ja: ひっさつのつるぎ
+    en: Sword of Supernatural Power
+  - ja: きのぼう
+    en: Tree of Life
+  - ja: ロビンのや
+    en: Robin's Field
+  - ja: あんこくのつるぎ
+    en: Sword of Anxiety
+  - ja: ぼくとう
+    en: Bokuto
+  - ja: はじゃのつるぎ
+    en: Jashira no Tsurugi
+  - ja: ブロンズランス
+    en: Bronze Lance
+  - ja: スチールランス
+    en: Steel Lance
+  - ja: クロムランス
+    en: Chrome Lance
+  - ja: イビルランス
+    en: Evil Lance
+  - ja: ハルバート
+    en: Halberd
+  - ja: スピア
+    en: Spear
+  - ja: パワースピア
+    en: Power Spear
+  - ja: バルキリー
+    en: Valkyrie
+  - ja: ハンドアックス
+    en: Hand Axe
+  - ja: ミドルアックス
+    en: Middle Axe
+  - ja: バトルアックス
+    en: Battle Axe
+  - ja: ヒートアックス
+    en: Heat Axe
+  - ja: アトラスのおの
+    en: Axe of Atlas
+  - ja: きのつえ
+    en: Staff of Wood
+  - ja: まもりのつえ
+    en: Staff of Protection
+  - ja: せいじゃのつえ
+    en: Viper's Staff
+  - ja: パワースティック
+    en: Power Stick
+  - ja: デーモンロッド
+    en: Demon Rod
+  - ja: フレイル
+    en: Flail
+  - ja: きのや
+    en: Tree house
+  - ja: はがねのや
+    en: Leaf Leaf
+  - ja: アサルトシェル
+    en: Assault Shell
+  - ja: バスターショット
+    en: Buster Shot
+  - ja: なにももたない
+    en: Nothing
   end: 11813
 
 - ptr: 67063
   table_ptr: 11813
   entries:
   # Spells
-  - "ja": ヒール
-    "en": Heal
-  - "ja": オーラ
-    "en": Aura
-  - "ja": アンチドウテ
-    "en": Anti-Dote
-  - "ja": クイック
-    "en": Quick
-  - "ja": スロウ
-    "en": Slow
-  - "ja": アタック
-    "en": Attack
-  - "ja": アンチスペル
-    "en": Anti-Spell
-  - "ja": イリュート
-    "en": Ilute
-  - "ja": ソウルスチル
-    "en": Soul Still
-  - "ja": スリープ
-    "en": Sleep
-  - "ja": リターン
-    "en": Return
-  - "ja": ブレイズ
-    "en": Blaze
-  - "ja": フリーズ
-    "en": Freeze
-  - "ja": スパーク
-    "en": Spark
-  - "ja": ヘルブラスト
-    "en": Hell Blast
+  - ja: ヒール
+    en: Heal
+  - ja: オーラ
+    en: Aura
+  - ja: アンチドウテ
+    en: Anti-Dote
+  - ja: クイック
+    en: Quick
+  - ja: スロウ
+    en: Slow
+  - ja: アタック
+    en: Attack
+  - ja: アンチスペル
+    en: Anti-Spell
+  - ja: イリュート
+    en: Ilute
+  - ja: ソウルスチル
+    en: Soul Still
+  - ja: スリープ
+    en: Sleep
+  - ja: リターン
+    en: Return
+  - ja: ブレイズ
+    en: Blaze
+  - ja: フリーズ
+    en: Freeze
+  - ja: スパーク
+    en: Spark
+  - ja: ヘルブラスト
+    en: Hell Blast
   end: 11902
 
 - ptr: 29339
   table_ptr: 11902
   entries:
   # Players/NPCs
-  - "ja": ニック
-    "en": Nick
-  - "ja": ルース
-    "en": Ruth
-  - "ja": シェイド
-    "en": Shade
-  - "ja": シグ
-    "en": Sig
-  - "ja": ウエンディ
-    "en": Wendy
-  - "ja": アピス
-    "en": Apis
-  - "ja": クレイ
-    "en": Clay
-  - "ja": バリー
-    "en": Barry
-  - "ja": ストック
-    "en": Stock
-  - "ja": メイフェア
-    "en": Mayfair
-  - "ja": イーシャ
-    "en": Esha
-  - "ja": テディ
-    "en": Teddy
-  - "ja": ドミンゴ
-    "en": Domingo
-  - "ja": カッシング
-    "en": Cushing
-  - "ja": ゲイツ
-    "en": Gates
-  - "ja": シュリーク
-    "en": Shriek
-  - "ja": ランドルフ
-    "en": Randolph
-  - "ja": アミーゴ
-    "en": Amigo
-  - "ja": ラグ
-    "en": Lug
+  - ja: ニック
+    en: Nick
+  - ja: ルース
+    en: Ruce
+  - ja: シェイド
+    en: Shade
+  - ja: シグ
+    en: Sig
+  - ja: ウエンディ
+    en: Wendy
+  - ja: アピス
+    en: Apis
+  - ja: クレイ
+    en: Clay
+  - ja: バリー
+    en: Barry
+  - ja: ストック
+    en: Stock
+  - ja: メイフェア
+    en: Mayfair
+  - ja: イーシャ
+    en: Isha
+  - ja: テディ
+    en: Teddy
+  - ja: ドミンゴ
+    en: Domingo
+  - ja: カッシング
+    en: Cushing
+  - ja: ゲイツ
+    en: Gates
+  - ja: シュリーク
+    en: Shriek
+  - ja: ランドルフ
+    en: Randolf
+  - ja: アミーゴ
+    en: Amigo
+  - ja: ラグ
+    en: Lug
   end: 12004

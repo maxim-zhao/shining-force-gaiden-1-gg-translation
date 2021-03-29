@@ -726,7 +726,7 @@
   ja: かれは プロンプトの<party leader>!<line>こだいじんのくにから しょこくに<line>しゅぎょうのたびをしているそうです<wait more><end>
   literal: He is Nick from Prompt, he said he was traveling around to train in many countries.
   en: |
-    He is <name><line>
+    He is <party leader><line>
     from Prompt,<wait more><line>
     he said he was<line>
     traveling around<line>
@@ -775,8 +775,9 @@
   character: Narration
   ja: <party leader>たちは みなとから<line>サイプレスにむかってたびだった<wait more><end>
   literal: Nick’s force went on a voyage from the port towards Cypress.
+  # Will need to reformat this if names get longer.
   en: |
-    Nick’s force went<line>
+    <party leader>’s force went<line>
     on a voyage from<line>
     the port towards<line>
     Cypress.<wait more><end>

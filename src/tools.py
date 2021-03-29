@@ -701,6 +701,38 @@ def dump_names(rom_filename, output_filename):
         documents = yaml.dump(tables, file, sort_keys=False, allow_unicode=True)
 
 
+def encode_names(yaml_filename, asm_filename):
+    # Read the file
+    with open(yaml_filename, "r", encoding="utf-8") as f:
+        tables = yaml.load(f, Loader=yaml.Loader)
+    # Write the output
+    with open(asm_filename, "w", encoding="utf-8") as f:
+        for table in tables:
+            ptr_location = table["ptr"]
+            data_location = table["table_ptr"]
+            data_end = table["end"] - 1
+            label = f"Table{data_location:x}"
+
+            f.writelines([
+                f" PatchW ${ptr_location:x} {label}\n"
+                f".unbackground ${data_location:x} ${data_end:x}\n",
+                f" ROMPosition ${data_location:x} 0\n",  # Locations are all in bank 0
+                f".section \"{label}\" free\n",
+                f"{label}:\n"
+                ])
+
+            for text in [x["en"] for x in table["entries"]]:
+                # Encode
+                buffer = english_to_bytes(text, True)
+                # Values are length-prefixed
+                buffer_as_text = f"${len(buffer):02x} " + " ".join([f"${b:02x}" for b in buffer])
+                f.writelines([
+                    f"  ; {text}\n",
+                    f"  .db {buffer_as_text}\n",
+                    ])
+
+            f.write(".ends\n\n")
+
 
 def main():
     verb = sys.argv[1]
@@ -714,6 +746,8 @@ def main():
         encode_menus(sys.argv[2], sys.argv[3])
     elif verb == "dump_names":
         dump_names(sys.argv[2], sys.argv[3])
+    elif verb == "encode_names":
+        encode_names(sys.argv[2], sys.argv[3])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 

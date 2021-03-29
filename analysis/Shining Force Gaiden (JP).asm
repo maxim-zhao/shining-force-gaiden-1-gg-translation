@@ -17420,15 +17420,14 @@ _LABEL_7259_:
   push bc
   push de
   push hl
-  ld b, $13
--:
-  ld a, $13
-  sub b
-  call +
-  djnz -
-  ld de, _DATA_64_
-  ld c, $00
-  rst $18 ; _LABEL_18_CallBankedFunction
+    ld b, $13
+-:  ld a, $13
+    sub b
+    call +
+    djnz -
+    ld de, _DATA_64_
+    ld c, $00
+    rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 726D to 726E (2 bytes)
 .db $D4 $04
 
@@ -17440,93 +17439,89 @@ _LABEL_7259_:
 
 +:
   push iy
-  ld iy, -1
-  add iy, sp
-  ld sp, iy
-  ld iy, 1
-  add iy, sp
-  ld (iy-1), a
-  push bc
-  ld h, $00
-  ld l, a
-  ld d, h
-  ld e, l
-  add hl, hl
-  add hl, hl
-  add hl, de
-  add hl, hl
-  add hl, hl
-  add hl, hl
-  ld de, $8000
-  add hl, de
-  ex de, hl
-  push af
-  push de
-  ld hl, _DATA_2E7E_CharacterNames
-  or a
-  jr z, +
-  ld b, a
-  push de
--:
-  ld e, (hl)
-  inc e
-  ld d, $00
-  add hl, de
-  djnz -
-  pop de
-+:
-  ld c, (hl)
-  ld b, c
-  inc hl
-  push bc
-  ld b, $00
-  ldir
-  pop bc
-  ld a, $0A
-  sub b
-  ld b, a
-  or a
-  jr z, +
-  xor a
--:
-  ld (de), a
-  inc de
-  djnz -
-+:
-  pop de
-  ex de, hl
-  ld bc, $000A
-  add hl, bc
-  ex de, hl
-  pop af
-  ld h, $00
-  ld l, a
-  add hl, hl
-  add hl, hl
-  add hl, hl
-  add hl, hl
-  ld bc, _DATA_7596_
-  add hl, bc
-  ld a, (hl)
-  ld (de), a
-  inc hl
-  ld a, (hl)
-  inc hl
-  ex de, hl
-  ld bc, $000E
-  add hl, bc
-  ex de, hl
-  ld bc, $000E
-  ldir
-  ld d, a
-  ld a, (iy-1)
-  call _LABEL_7145_
-  rst $18 ; _LABEL_18_CallBankedFunction
+    ld iy, -1
+    add iy, sp
+    ld sp, iy
+    ld iy, 1
+    add iy, sp
+    ld (iy-1), a
+    push bc
+      ld h, $00
+      ld l, a
+      ld d, h
+      ld e, l
+      add hl, hl
+      add hl, hl
+      add hl, de
+      add hl, hl
+      add hl, hl
+      add hl, hl
+      ld de, $8000
+      add hl, de
+      ex de, hl
+      push af
+        push de
+          ld hl, _DATA_2E7E_CharacterNames
+          or a
+          jr z, +
+          ld b, a
+          push de
+-:          ld e, (hl)
+            inc e
+            ld d, $00
+            add hl, de
+            djnz -
+          pop de
++:        ld c, (hl) ; Copy from ROM to RAM (!)
+          ld b, c
+          inc hl
+          push bc
+            ld b, $00
+            ldir
+          pop bc
+          ld a, $0A
+          sub b
+          ld b, a
+          or a
+          jr z, +
+          xor a ; fill space with 0s
+-:        ld (de), a
+          inc de
+          djnz -
++:      pop de
+        ex de, hl
+        ld bc, $000A ; move pointer on
+        add hl, bc
+        ex de, hl
+      pop af
+      ld h, $00
+      ld l, a
+      add hl, hl
+      add hl, hl
+      add hl, hl
+      add hl, hl
+      ld bc, _DATA_7596_
+      add hl, bc
+      ld a, (hl)
+      ld (de), a
+      inc hl
+      ld a, (hl)
+      inc hl
+      ex de, hl
+      ld bc, $000E
+      add hl, bc
+      ex de, hl
+      ld bc, $000E
+      ldir
+      ld d, a
+      ld a, (iy-1)
+      call _LABEL_7145_
+      rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 72EA to 72EB (2 bytes)
 .db $EA $04
 
-  pop bc
-  ld sp, iy
+    pop bc
+    ld sp, iy
   pop iy
   ret
 
@@ -33798,7 +33793,7 @@ _LABEL_1039A_ScriptingCode_CD_Name:
     bit 6, a
     call nz, _LABEL_10F89_
     ld c, $00
-    call _LABEL_10572_
+    call _LABEL_10572_ ; x30 offset from _SRAM_320_
     and a
     jp m, ++
     push hl
