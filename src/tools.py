@@ -64,7 +64,7 @@ def bytes_to_japanese(data):
         if index in codes:
             s += codes[index]
         elif index >= len(character_map):
-            s += f"<{hex(index)}>"
+            raise Exception(f"Unhandled byte value <{hex(index)}>")
         else:
             c = character_map[index]
             if c == "゛":
@@ -77,10 +77,10 @@ def bytes_to_japanese(data):
     return s
 
 
-def english_to_bytes(s, is_menu):
+def english_to_bytes(text, is_menu):
     buffer = bytearray()
     # Replace some "smart" punctuation
-    s = s.replace("“", "\"").replace("”", "\"").replace("’", "'").replace("…", "...")
+    s = text.replace("“", "\"").replace("”", "\"").replace("’", "'").replace("…", "...")
     while len(s) > 0:
         # Check for a tag
         match = re.match("<[^>]+?>", s)
@@ -98,7 +98,7 @@ def english_to_bytes(s, is_menu):
             # Look up in en_character_map_menus or en_character_map_script
             value = (en_character_map_menus if is_menu else en_character_map_script).find(s[0])
             if value == -1:
-                print(f"Error: character {s[0]} not in character map")
+                raise Exception(f"Error: character {s[0]} not in character map while processing \"{text}\"")
             else:
                 buffer.append(value)
             s = s[1:]
@@ -669,24 +669,36 @@ def dump_names(rom_filename, output_filename):
             table_ptr = int.from_bytes(f.read(2), byteorder="little")
             tables.append({
                 "ptr": ptr,
-                "table_ptr": table_ptr
+                "table_ptr": table_ptr,
+                "entries": []
             })
+            print(f"Table at {table_ptr:x}")
         # Then we add in the names for each, making sure not to overlap
         for table in tables:
+            table_ptr = table["table_ptr"]
             f.seek(table["table_ptr"])
-            words = []
-            while True:
+            next_tables = [x["table_ptr"] for x in tables if x["table_ptr"] > table_ptr]
+            table["end"] = min(next_tables) if next_tables else 1000000
+            print(f"Table at {table_ptr:x} ends at {table['end']:x}")
+            while f.tell() < table["end"]:
                 # length-prefixed
                 data_length = f.read(1)[0]
                 if data_length > 16:
+                    table["end"] = f.tell() - 1
                     break
                 data = f.read(data_length)
                 # convert
-                words.append(bytes_to_japanese(data))
-            table["values"] = words
+                try:
+                    table["entries"].append({
+                        "ja": bytes_to_japanese(data),
+                        "en": ""
+                    })
+                except Exception:
+                    table["end"] = f.tell() - 1 - data_length
+                    break
 
     with open(output_filename, 'w', encoding="utf-8") as file:
-        documents = yaml.dump(names, file, sort_keys=False, allow_unicode=True)
+        documents = yaml.dump(tables, file, sort_keys=False, allow_unicode=True)
 
 
 
