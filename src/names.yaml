@@ -333,7 +333,7 @@
   entries:
   # Spells
   - "ja": ヒール
-    "en": Heel
+    "en": Heal
   - "ja": オーラ
     "en": Aura
   - "ja": アンチドウテ
@@ -362,6 +362,11 @@
     "en": Spark
   - "ja": ヘルブラスト
     "en": Hell Blast
+  end: 11902
+
+- ptr: 29339
+  table_ptr: 11902
+  entries:
   # Players/NPCs
   - "ja": ニック
     "en": Nick

@@ -7512,16 +7512,21 @@ _DATA_2C92_:
 
 ; Data from 2E25 to 2E4F (43 bytes)
 _DATA_2E25_:
-.db $03 $5D $81 $6B $03 $47 $81 $69 $07 $43 $6F $53 $7A $56 $45 $55
-.db $04 $4A $44 $79 $4A $03 $4F $6D $45 $04 $43 $52 $79 $4A $07 $43
-.db $6F $53 $4F $7B $5F $6B $05 $44 $6A $77 $81
-
-; 1st entry of Pointer Table from D906 (indexed by unknown)
-; Data from 2E50 to 2E7D (46 bytes)
-_DATA_2E50_:
-.db $56 $06 $51 $45 $6B $4F $53 $6B $05 $4F $6A $81 $7B $5E $04 $6A
-.db $52 $81 $6F $06 $7A $5E $6C $44 $7A $4F $05 $5E $6A $81 $7A $4F
-.db $05 $4F $7B $5C $81 $4A $07 $5F $6B $7A $5E $69 $4F $56
+.db $03 $5D $81 $6B 
+.db $03 $47 $81 $69 
+.db $07 $43 $6F $53 $7A $56 $45 $55
+.db $04 $4A $44 $79 $4A 
+.db $03 $4F $6D $45 
+.db $04 $43 $52 $79 $4A 
+.db $07 $43 $6F $53 $4F $7B $5F $6B 
+.db $05 $44 $6A $77 $81 $56 
+.db $06 $51 $45 $6B $4F $53 $6B 
+.db $05 $4F $6A $81 $7B $5E 
+.db $04 $6A $52 $81 $6F 
+.db $06 $7A $5E $6C $44 $7A $4F 
+.db $05 $5E $6A $81 $7A $4F 
+.db $05 $4F $7B $5C $81 $4A 
+.db $07 $5F $6B $7A $5E $69 $4F $56
 
 ; Data from 2E7E to 2EE3 (102 bytes)
 _DATA_2E7E_CharacterNames:

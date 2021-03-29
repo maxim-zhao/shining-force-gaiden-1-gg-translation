@@ -660,7 +660,7 @@ def encode_menus(yaml_filename, asm_filename):
 
 def dump_names(rom_filename, output_filename):
     # Loading table base
-    name_ptr_locations = [0x103cf, 0x105e5, 0x105ed, 0x105f7]
+    name_ptr_locations = [0x103cf, 0x105e5, 0x105ed, 0x105f7, 0x729b]
     tables = []
     with open(rom_filename, "rb") as f:
         # Convert table ptrs to data locations
