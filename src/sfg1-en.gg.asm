@@ -174,6 +174,62 @@ ScriptIndex:
 ; Menus auto-generated code
 .include "menus.asm"
 
+; The name entry screen needs to be rewritten to remove ten-ten support. This is the original code with that part removed...
+.unbackground $bcbe $bcf9
+  ROMPosition $bcbe 1
+.section "Name entry value lookup" force
+_LABEL_BCBE_:
+  push af
+  push de
+  push hl
+    ; compute e*18+d = index into drawing data
+    sla e
+    ld a, e
+    sla e
+    sla e
+    sla e
+    add a, e
+    add a, d
+    ; ten-ten are at 4, 0 = $48, $49
+;    ld b, $7A ; so we have to bodge their return values
+;    cp $48
+;    jr z, ++
+;    ld b, $7B
+;    cp $49
+;    jr z, ++
+    ; these are presumably switch, delete, next
+    ld b, $FF
+    cp $4A
+    jr z, ++
+    dec b
+    cp $4B
+    jr z, ++
+    dec b
+    cp $4C
+    jr z, ++
+    ; then if we get here it's a letter so we look it up
+    ld hl, Menu_bb71
+    bit 0, c
+    jr z, +
+    ld hl, Menu_bbcd
++:  rst $18 ; _LABEL_18_CallBankedFunction
+.db $10 $03 ; Maps to _LABEL_CB8D_AddAToHL
+    ld b, (hl)
+++:
+  pop hl
+  pop de
+  pop af
+  ret
+.ends
+
+.unbackground $bb50 $bb70
+  ROMPosition $bb50
+.section "Name entry screen drawing" force
+  ; We chop off the end of the function to not draw the ten-ten
+  pop hl
+  pop af
+  ret
+.ends
 
 ; The font is relocating the menu borders...
 .enum $8e

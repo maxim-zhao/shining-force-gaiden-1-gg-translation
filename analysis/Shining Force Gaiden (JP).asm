@@ -28241,53 +28241,55 @@ _LABEL_BB10_:
   inc hl
   ld (hl), $07
   pop hl
-  ld hl, _DATA_BB71_
+  ld hl, _DATA_BB71_NameEntryPart1
   bit 0, c
   jr z, +
-  ld hl, _DATA_FBCD_
+  ld hl, _DATA_BBCD_NameEntryPart2
 +:
   push bc
-  ld b, h
-  ld c, l
-  call _LABEL_C79_DrawMenuItem
+    ld b, h
+    ld c, l
+    call _LABEL_C79_DrawMenuItem
   pop bc
+  ; Draw in ten-ten
   push hl
-  ld hl, $0008
-  ld (_RAM_C002_), hl
+    ld hl, $0008
+    ld (_RAM_C002_), hl
   pop hl
   push af
-  ld a, $7A
-  call _LABEL_E87_
+    ld a, $7A
+    call _LABEL_E87_
   pop af
   push hl
-  ld hl, _DATA_108_
-  ld (_RAM_C002_), hl
+    ld hl, $0108
+    ld (_RAM_C002_), hl
   pop hl
   push af
-  ld a, $7B
-  call _LABEL_E87_
+    ld a, $7B
+    call _LABEL_E87_
   pop af
+  ; Return
   pop hl
   pop af
   ret
 
 ; Data from BB71 to BBCC (92 bytes)
-_DATA_BB71_:
-.db $0C $0D $0E $0F $10 $01 $20 $21 $22 $23 $24 $01 $3A $3B $3C $3D
-.db $3E $01 $11 $12 $13 $14 $15 $01 $25 $26 $27 $28 $29 $01 $2F $30
-.db $31 $01 $8F $01 $16 $17 $18 $19 $1A $01 $2A $2B $2C $2D $2E $01
-.db $37 $39 $38 $8E $90 $01 $1B $1C $1D $1E $1F $01 $32 $33 $34 $35
-.db $36 $01 $3F $40 $41 $42 $81 $01 $01 $01 $01 $01 $48 $52 $48 $57
-.db $01 $01 $2E $7A $1F $34 $01 $01 $10 $37 $34 $00
+_DATA_BB71_NameEntryPart1:
+.db $0C $0D $0E $0F $10 $01 $20 $21 $22 $23 $24   $01   $3A $3B $3C $3D $3E $01
+.db $11 $12 $13 $14 $15 $01 $25 $26 $27 $28 $29   $01   $2F $30 $31 $01 $8F $01
+.db $16 $17 $18 $19 $1A $01 $2A $2B $2C $2D $2E   $01   $37 $39 $38 $8E $90 $01
+.db $1B $1C $1D $1E $1F $01 $32 $33 $34 $35 $36   $01   $3F $40 $41 $42 $81 $01
+.db $01 $01 $01 $01 $48 $52 $48 $57 $01 $01 $2E $7A $1F $34 $01 $01 $10 $37 $34
+.db $00
 
 ; Data from BBCD to BC29 (93 bytes)
-_DATA_BBCD_:
-.db $43 $44 $45 $46 $47 $01 $57 $58 $59 $5A $5B $01 $71 $72 $73 $74
-.db $75 $01 $48 $49 $4A $4B $4C $01 $5C $5D $5E $5F $60 $01 $66 $67
-.db $68 $01 $8F $01 $4D $4E $4F $50 $51 $01 $61 $62 $63 $64 $65 $01
-.db $6E $70 $6F $8E $90 $01 $52 $53 $54 $55 $56 $01 $69 $6A $6B $6C
-.db $6D $01 $76 $77 $78 $79 $81 $01 $01 $01 $01 $01 $26 $32 $7A $11
-.db $20 $01 $01 $2E $7A $1F $34 $01 $01 $10 $37 $34 $00
+_DATA_BBCD_NameEntryPart2:
+.db $43 $44 $45 $46 $47 $01   $57   $58 $59 $5A $5B   $01   $71 $72 $73 $74 $75 $01
+.db $48 $49 $4A $4B $4C $01   $5C   $5D $5E $5F $60   $01   $66 $67 $68 $01 $8F $01
+.db $4D $4E $4F $50 $51 $01   $61   $62 $63 $64 $65   $01   $6E $70 $6F $8E $90 $01
+.db $52 $53 $54 $55 $56 $01   $69   $6A $6B $6C $6D   $01   $76 $77 $78 $79 $81 $01
+.db $01 $01 $01 $01 $26 $32 $7A $11 $20 $01 $01 $2E $7A $1F $34 $01 $01 $10 $37 $34
+.db $00
 
 _LABEL_BC2A_:
   push af
@@ -28398,38 +28400,40 @@ _LABEL_BCBE_:
   push af
   push de
   push hl
-  sla e
-  ld a, e
-  sla e
-  sla e
-  sla e
-  add a, e
-  add a, d
-  ld b, $7A
-  cp $48
-  jr z, ++
-  ld b, $7B
-  cp $49
-  jr z, ++
-  ld b, $FF
-  cp $4A
-  jr z, ++
-  dec b
-  cp $4B
-  jr z, ++
-  dec b
-  cp $4C
-  jr z, ++
-  ld hl, _DATA_BB71_
-  bit 0, c
-  jr z, +
-  ld hl, _DATA_BBCD_
-+:
-  rst $18 ; _LABEL_18_CallBankedFunction
+    ; compute e*18+d = index into drawing data
+    sla e
+    ld a, e
+    sla e
+    sla e
+    sla e
+    add a, e
+    add a, d
+    ; ten-ten are at 4, 0 = $48, $49
+    ld b, $7A ; so we have to bodge their return values
+    cp $48
+    jr z, ++
+    ld b, $7B
+    cp $49
+    jr z, ++
+    ; these are presumably switch, delete, next
+    ld b, $FF
+    cp $4A
+    jr z, ++
+    dec b
+    cp $4B
+    jr z, ++
+    dec b
+    cp $4C
+    jr z, ++
+    ; then if we get here it's a letter so we look it up
+    ld hl, _DATA_BB71_NameEntryPart1
+    bit 0, c
+    jr z, +
+    ld hl, _DATA_BBCD_NameEntryPart2
++:  rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from BCF3 to BCF4 (2 bytes)
-.db $10 $03
-
-  ld b, (hl)
+.db $10 $03 ; Maps to _LABEL_CB8D_AddAToHL
+    ld b, (hl)
 ++:
   pop hl
   pop de
@@ -28978,9 +28982,12 @@ _DATA_BFEE_:
 .ORG $0000
 
 ; Data from C000 to C078 (121 bytes)
-.db $24 $40 $79 $40 $3B $4B $47 $4B $5F $4B $53 $4B $6B $4B $77 $4B
-.db $8D $4B $BF $4B $DE $4B $95 $4B $AC $4B $07 $4C $44 $4C $19 $4D
-.db $5D $4D $8A $4D $CD $4E $00 $CD $51 $36 $DF $20 $01 $3E $FF $32
+.dw _LABEL_C024_ _LABEL_C079_ _LABEL_CB3B_ _LABEL_CB47_ _LABEL_CB5F_ _LABEL_CB53_ _LABEL_CB6B_ _LABEL_CB77_
+.dw _LABEL_CB8D_AddAToHL _LABEL_CBBF_ _LABEL_CBDE_ _LABEL_CB95_ _LABEL_CBAC_ _LABEL_CC07_ _LABEL_CC44_ _LABEL_CD19_
+.dw _LABEL_CD5D_ _LABEL_CD8A_ _LABEL_CECD_ 
+
+_LABEL_C024_:
+.db $00 $CD $51 $36 $DF $20 $01 $3E $FF $32
 .db $76 $86 $CD $E6 $11 $3E $00 $32 $60 $86 $3E $03 $32 $44 $86 $3E
 .db $01 $32 $C7 $A5 $3E $05 $32 $C8 $A5 $3E $80 $11 $1E $00 $DF $2C
 .db $04 $DF $50 $04 $62 $DF $52 $04 $6A $C6 $8C $CD $1E $1D $21 $1B
@@ -29682,27 +29689,26 @@ _LABEL_C453_:
 _LABEL_C46D_:
   push af
   ld a, (hl)
-  call _LABEL_CB8D_
-  inc hl
+    call _LABEL_CB8D_AddAToHL
+    inc hl
   pop af
   ret
 
 ; 22nd entry of Jump Table from C0E0 (indexed by unknown)
 _LABEL_C475_:
   push af
-  ld a, (hl)
-  inc hl
-  push hl
-  ld hl, _SRAM_656_
-  call _LABEL_CB8D_
-  ld a, (hl)
-  pop hl
-  or a
-  jr z, +
-  ld a, (hl)
-  call _LABEL_CB8D_
-+:
-  inc hl
+    ld a, (hl)
+    inc hl
+    push hl
+      ld hl, _SRAM_656_
+      call _LABEL_CB8D_AddAToHL
+      ld a, (hl)
+    pop hl
+    or a
+    jr z, +
+    ld a, (hl)
+    call _LABEL_CB8D_AddAToHL
++:  inc hl
   pop af
   ret
 
@@ -29727,7 +29733,7 @@ _LABEL_C48B_:
 +:
   pop hl
   ld a, (hl)
-  call _LABEL_CB8D_
+  call _LABEL_CB8D_AddAToHL
 ++:
   inc hl
   pop bc
@@ -29743,7 +29749,7 @@ _LABEL_C4A9_:
   call _LABEL_CDD6_
   jr nc, +
   ld a, (hl)
-  call _LABEL_CB8D_
+  call _LABEL_CB8D_AddAToHL
 +:
   inc hl
   pop de
@@ -29844,7 +29850,7 @@ _LABEL_C521_:
   ld a, (hl)
   inc (hl)
   ld hl, $A5C8
-  call _LABEL_CB8D_
+  call _LABEL_CB8D_AddAToHL
   pop af
   ld (hl), a
   pop hl
@@ -29859,13 +29865,13 @@ _LABEL_C536_:
   inc hl
   push hl
   ld hl, _SRAM_656_
-  call _LABEL_CB8D_
+  call _LABEL_CB8D_AddAToHL
   ld a, (hl)
   pop hl
   or a
   jr nz, +
   ld a, (hl)
-  call _LABEL_CB8D_
+  call _LABEL_CB8D_AddAToHL
 +:
   inc hl
   pop af
@@ -29881,7 +29887,7 @@ _LABEL_C54C_:
   ld a, (hl)
   ld c, a
   ld hl, $A5C8
-  call _LABEL_CB8D_
+  call _LABEL_CB8D_AddAToHL
   ld b, $14
   ld a, $80
 -:
@@ -29944,7 +29950,7 @@ _LABEL_C580_:
   and a
   jp m, +
   ld hl, $D020
-  call _LABEL_CB8D_
+  call _LABEL_CB8D_AddAToHL
   ld (hl), b
 +:
   ld hl, _SRAM_676_
@@ -30057,7 +30063,7 @@ _LABEL_C62A_:
   ld (hl), b
   ld hl, $A588
   and $7F
-  call _LABEL_CB8D_
+  call _LABEL_CB8D_AddAToHL
   ld (hl), b
   pop hl
   inc hl
@@ -31057,13 +31063,12 @@ _LABEL_CB77_:
   pop af
   ret
 
-_LABEL_CB8D_:
+_LABEL_CB8D_AddAToHL:
   push af
-  add a, l
-  jr nc, +
-  inc h
-+:
-  ld l, a
+    add a, l
+    jr nc, +
+    inc h
++:  ld l, a
   pop af
   ret
 
@@ -33433,10 +33438,7 @@ _DATA_F847_:
 
 ; Data from F925 to FBCC (680 bytes)
 _DATA_F925_:
-.dsb 680, $FF
-
-; Data from FBCD to FFFF (1075 bytes)
-_DATA_FBCD_:
+.dsb 680, $FF:
 .dsb 1075, $FF
 
 .BANK 4 SLOT 1

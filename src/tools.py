@@ -79,8 +79,16 @@ def bytes_to_japanese(data):
 
 def english_to_bytes(text, is_menu):
     buffer = bytearray()
-    # Replace some "smart" punctuation
-    s = text.replace("“", "\"").replace("”", "\"").replace("’", "'").replace("…", "...")
+    s = text
+    # Replace some "smart" punctuation, also allow _ as visible whitespace and remove all line breaks
+    for k, v in {
+        ("“", "\""),
+        ("”", "\""),
+        ("’", "'"),
+        ("…", "..."),
+        ("\n", ""),
+        ("_", " ")}:
+        s = s.replace(k, v)
     while len(s) > 0:
         # Check for a tag
         match = re.match("<[^>]+?>", s)
@@ -638,18 +646,18 @@ def encode_menus(yaml_filename, asm_filename):
             ptr_location = int(menu["reference_at"], 0)
             data_location = int(menu["data_at"], 0)
             data_end = data_location + menu["data_length"] - 1
-            text = menu["en"]
+            text = menu["en"].replace("\n", "")
             buffer = english_to_bytes(text, True)
             # Menus are null-terminated
             buffer.append(0)
             # Stringify
             buffer_as_text = " ".join([f"${b:02x}" for b in buffer])
             # Make a label
-            label = f"Menu{ptr_location:x}"
+            label = f"Menu_{data_location:x}"
             f.writelines([
                 f" PatchW ${ptr_location:x} {label}\n"
                 f".unbackground ${data_location:x} ${data_end:x}\n",
-                f" ROMPosition ${ptr_location:x} 1\n"
+                f" ROMPosition ${data_location:x} 1\n"
                 f".section \"{label}\" free\n",
                 f"{label}:\n",
                 f"  ; {text}\n",
