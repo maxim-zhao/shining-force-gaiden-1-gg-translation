@@ -1131,7 +1131,7 @@ _LABEL_20_:
 _DATA_23_:
 .db $00 $00 $00 $00 $00
 
-_LABEL_28_:
+_LABEL_28_CallDE:
   push de
   ld de, (_RAM_D686_)
   ret
@@ -1140,7 +1140,7 @@ _LABEL_28_:
 .db $00 $00
 
 _LABEL_30_:
-  jp _LABEL_369_
+  jp _LABEL_369_Rst30
 
 ; Data from 33 to 37 (5 bytes)
 .db $00 $00 $00 $00 $00
@@ -1569,7 +1569,7 @@ _DATA_357_:
 .db $FF $82 $FF $83 $FF $84 $FF $85 $FB $86 $00 $87 $00 $88 $00 $89
 .db $A7 $8A
 
-_LABEL_369_:
+_LABEL_369_Rst30:
   ld (_RAM_D686_), de
   ld (_RAM_D688_), a
   ex (sp), hl
@@ -1579,27 +1579,27 @@ _LABEL_369_:
   ex (sp), hl
   ld a, (_RAM_FFFE_)
   push af
-  ld a, $07
-  ld (_RAM_FFFE_), a
-  ex de, hl
-  ld h, $40
-  ld l, $02
-  ld a, (hl)
-  inc hl
-  ld h, (hl)
-  ld l, a
-  ex de, hl
-  ld a, (_SRAM_23F6_)
-  push bc
-  ld b, $00
-  rst $28 ; _LABEL_28_
-  pop bc
-  ld a, (_RAM_D688_)
-  ex (sp), hl
-  ld l, a
-  ld a, h
-  ld (_RAM_FFFE_), a
-  ld a, l
+    ld a, $07
+    ld (_RAM_FFFE_), a
+    ex de, hl
+    ld h, $40
+    ld l, $02
+    ld a, (hl)
+    inc hl
+    ld h, (hl)
+    ld l, a
+    ex de, hl
+    ld a, (_SRAM_23F6_)
+    push bc
+      ld b, $00
+      rst $28 ; _LABEL_28_CallDE
+    pop bc
+    ld a, (_RAM_D688_)
+    ex (sp), hl
+    ld l, a
+    ld a, h
+    ld (_RAM_FFFE_), a
+    ld a, l
   pop hl
   ret
 
@@ -1664,7 +1664,7 @@ _LABEL_3E8_CallBankedFunction:
     ld l, a
     ex de, hl
     ld a, (_RAM_D688_)
-    rst $28 ; _LABEL_28_
+    rst $28 ; _LABEL_28_CallDE
     ex (sp), hl
     ld l, a
     ld a, h
@@ -1694,7 +1694,7 @@ _LABEL_412_:
     ld l, a
     ex de, hl
     ld a, (_RAM_D688_)
-    rst $28 ; _LABEL_28_
+    rst $28 ; _LABEL_28_CallDE
     ex (sp), hl
     ld l, a
     ld a, h
@@ -1746,7 +1746,7 @@ _LABEL_44E_ReadInputs:
   pop af
   ret
 
-_LABEL_47A_:
+_LABEL_47A_GetControllerInputs:
   push bc
     ld a, (_SRAM_22BE_ControllerInputs)
     or a
@@ -8939,7 +8939,7 @@ _LABEL_4061_:
   cp $03
   ld a, (_SRAM_22BE_ControllerInputs)
   jr z, +
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
 +:
   ld ixh, a
   and a
@@ -10663,7 +10663,7 @@ _LABEL_4AEA_:
   call _LABEL_4A8_
 -:
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   and $30
   jr z, -
   ld d, $EC
@@ -18036,7 +18036,7 @@ _LABEL_7EAE_:
 .db $00 $08
 
 --:
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 5, a
   jr nz, +++
   bit 4, a
@@ -21183,7 +21183,7 @@ _LABEL_91DE_:
   ld a, (_SRAM_644_)
   cp $03
   jr nz, +
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   or a
   jp nz, ++
 +:
@@ -21507,7 +21507,7 @@ _LABEL_9352_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, +
   bit 1, a
@@ -21519,7 +21519,7 @@ _LABEL_9352_:
   jr -
 
 +:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_A4CA_
   call _LABEL_A478_
   push hl
@@ -21602,7 +21602,7 @@ _LABEL_9422_:
 _LABEL_9436_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -21711,7 +21711,7 @@ _LABEL_9492_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, +
   bit 1, a
@@ -21723,7 +21723,7 @@ _LABEL_9492_:
   jr -
 
 +:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_A77F_
   rst $30 ; _LABEL_30_
 ; Data from 94FB to 94FB (1 bytes)
@@ -21831,7 +21831,7 @@ _LABEL_9530_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
   ld c, a
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, +
   bit 1, a
@@ -21844,7 +21844,7 @@ _LABEL_9530_:
   jr -
 
 +:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_A77F_
   ld a, c
   call _LABEL_A7C8_
@@ -21973,7 +21973,7 @@ _LABEL_9610_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
   ld c, a
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, +
   bit 1, a
@@ -21986,7 +21986,7 @@ _LABEL_9610_:
   jr -
 
 +:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_A77F_
   ld a, c
   call _LABEL_A7C8_
@@ -22099,7 +22099,7 @@ _LABEL_9725_:
   call _LABEL_FDF_
   pop hl
   ld b, $03
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 1, a
   jp nz, +
   dec b
@@ -22184,7 +22184,7 @@ _LABEL_9792_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -22203,7 +22203,7 @@ _LABEL_9792_:
   rra
   rra
 ++:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_A9CC_
   rst $30 ; _LABEL_30_
 ; Data from 97E8 to 97E8 (1 bytes)
@@ -22322,7 +22322,7 @@ _LABEL_9836_:
 _LABEL_9875_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, +
   bit 1, a
@@ -22348,7 +22348,7 @@ _LABEL_9875_:
   rra
   ld e, h
   ld h, $02
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   ld h, e
 +++:
   call _LABEL_AB09_
@@ -22440,7 +22440,7 @@ _LABEL_98F6_:
   call _LABEL_4A8_
 _LABEL_9932_:
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -22459,7 +22459,7 @@ _LABEL_9932_:
   rra
   rra
 ++:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   ld a, (_SRAM_234C_)
   dec a
   jr z, _LABEL_9932_
@@ -22618,7 +22618,7 @@ _LABEL_99D3_:
 _LABEL_9A43_:
   call _LABEL_3651_WaitForVBlank
   ld c, a
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -22642,7 +22642,7 @@ _LABEL_9A43_:
 ; Data from 9A6E to 9A6E (1 bytes)
 .db $28
 
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   ld a, c
   inc b
   dec b
@@ -22744,7 +22744,7 @@ _LABEL_9AD0_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, +
   bit 1, a
@@ -22956,7 +22956,7 @@ _LABEL_9C2E_:
 _LABEL_9C5B_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, +
   bit 1, a
@@ -22975,10 +22975,10 @@ _LABEL_9C5B_:
   ld e, h
   ld h, $0B
 -:
-  call _LABEL_BE78_
-  call _LABEL_BE78_
-  call _LABEL_BE78_
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
   ld d, a
   ld a, e
   cp b
@@ -22990,7 +22990,7 @@ _LABEL_9C5B_:
 ++:
   rra
   rra
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
 +++:
   ld ix, $A368
   push de
@@ -23063,7 +23063,7 @@ _LABEL_9CDF_:
 _LABEL_9D0C_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, +
   bit 1, a
@@ -23082,8 +23082,8 @@ _LABEL_9D0C_:
   ld e, h
   ld h, $05
 -:
-  call _LABEL_BE78_
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
   ld d, a
   ld a, e
   cp b
@@ -23095,7 +23095,7 @@ _LABEL_9D0C_:
 ++:
   rra
   rra
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
 +++:
   ld ix, $A376
   push de
@@ -23155,7 +23155,7 @@ _LABEL_9D8A_:
 _LABEL_9D9E_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 0, a
   jp nz, _LABEL_9DC5_
   bit 1, a
@@ -23171,12 +23171,12 @@ _LABEL_9D9E_:
   jr _LABEL_9D9E_
 
 _LABEL_9DC5_:
-  call _LABEL_BE78_
-  call _LABEL_BE78_
-  call _LABEL_BE78_
-  call _LABEL_BE78_
-  call _LABEL_BE78_
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
+  call _LABEL_BE78_HandleIncDecWithLimits
   ld ix, _SRAM_230D_
   push de
   ld e, b
@@ -23192,7 +23192,7 @@ _LABEL_9DC5_:
   rra
   rra
 -:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   ld ix, _SRAM_230D_
   push de
   ld e, b
@@ -23320,7 +23320,7 @@ _LABEL_9E86_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -23339,7 +23339,7 @@ _LABEL_9E86_:
   rra
   rra
 ++:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_B5DD_
   rst $30 ; _LABEL_30_
 ; Data from 9EDF to 9EDF (1 bytes)
@@ -23397,7 +23397,7 @@ _LABEL_9F00_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -23416,7 +23416,7 @@ _LABEL_9F00_:
   rra
   rra
 ++:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_B688_
   rst $30 ; _LABEL_30_
 ; Data from 9F59 to 9F59 (1 bytes)
@@ -23553,7 +23553,7 @@ _LABEL_9FDE_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -23572,7 +23572,7 @@ _LABEL_9FDE_:
   rra
   rra
 ++:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   jr ++++
 
 +++:
@@ -23646,7 +23646,7 @@ _LABEL_A06B_ShowMenu:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -23663,7 +23663,7 @@ _LABEL_A06B_ShowMenu:
   rra
   rra
 ++:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_B947_
   call _LABEL_B929_MainMenuCursorWidthSelector
   rst $30 ; _LABEL_30_
@@ -23724,7 +23724,7 @@ _LABEL_A0EE_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -23743,7 +23743,7 @@ _LABEL_A0EE_:
   rra
   rra
 ++:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_BA03_
   rst $30 ; _LABEL_30_
 ; Data from A14A to A14A (1 bytes)
@@ -23811,7 +23811,7 @@ _LABEL_A170_:
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   bit 2, a
   jp nz, +
   bit 3, a
@@ -23830,7 +23830,7 @@ _LABEL_A170_:
   rra
   rra
 ++:
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_BA03_
   rst $30 ; _LABEL_30_
 ; Data from A1CF to A1CF (1 bytes)
@@ -23867,176 +23867,189 @@ _LABEL_A170_:
   pop bc
   ret
 
-_LABEL_A1F5_:
+_LABEL_A1F5_ShowNameEntryScreen:
   push af
   push bc
   push de
   push hl
-  ld (_SRAM_2323_), a
-  ld c, $00
-  ld d, c
-  ld e, c
-  ld l, c
-  ld h, $04
-  call _LABEL_BAAC_
-  call _LABEL_BB10_
-  push hl
-  ld hl, (_RAM_C000_)
-  inc hl
-  ld (hl), $00
-  inc hl
-  ld (hl), $12
-  pop hl
-  push af
-  push de
-  push hl
-  ld d, $00
-  ld e, $07
-  ld hl, (_RAM_C000_)
-  ld a, $06
-  call _LABEL_EFA_ScrollMenuIn
-  pop hl
-  pop de
-  pop af
-  push af
-  rst $18 ; _LABEL_18_CallBankedFunction
+    ld (_SRAM_2323_), a
+    ; Init variables:
+    ; c = ??
+    ; de = x, y cursor position
+    ; hl = $0400 for limiting cursor to rows 0..4
+    ld c, $00
+    ld d, c
+    ld e, c
+    ld l, c
+    ld h, $04
+    call _LABEL_BAAC_
+    call _LABEL_BB10_
+    push hl
+      ld hl, (_RAM_C000_)
+      inc hl
+      ld (hl), $00
+      inc hl
+      ld (hl), $12
+    pop hl
+    push af
+    push de
+    push hl
+      ld d, $00
+      ld e, $07
+      ld hl, (_RAM_C000_)
+      ld a, $06
+      call _LABEL_EFA_ScrollMenuIn
+    pop hl
+    pop de
+    pop af
+    push af
+      rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A228 to A229 (2 bytes)
 .db $22 $03
 
-  jr c, +
-  rst $18 ; _LABEL_18_CallBankedFunction
+      jr c, +
+      rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A22D to A22E (2 bytes)
 .db $1E $03
 
 +:
-  pop af
-  call _LABEL_BAC2_
-  push hl
-  ld hl, (_RAM_C1C1_)
-  inc hl
-  ld (hl), $14
-  inc hl
-  ld (hl), $04
-  pop hl
-  push af
-  push de
-  push hl
-  ld d, $0D
-  ld e, $04
-  ld hl, (_RAM_C1C1_)
-  ld a, $06
-  call _LABEL_EFA_ScrollMenuIn
-  pop hl
-  pop de
-  pop af
-  call _LABEL_BD79_
-  call _LABEL_BD3B_
-  call _LABEL_4A8_
-_LABEL_A259_:
-  call _LABEL_3651_WaitForVBlank
-  call _LABEL_BF96_
-  call _LABEL_47A_
-  bit 2, a
-  jp nz, +
-  bit 3, a
-  jp nz, +
-  bit 0, a
-  jp nz, ++
-  bit 1, a
-  jp nz, ++
-  bit 4, a
-  jr nz, +++++
-  bit 5, a
-  jr nz, ++++++
-  bit 7, a
-  jr nz, ++++
-  jr _LABEL_A259_
+    pop af
+    call _LABEL_BAC2_
+    push hl
+      ld hl, (_RAM_C1C1_)
+      inc hl
+      ld (hl), $14
+      inc hl
+      ld (hl), $04
+    pop hl
+    push af
+    push de
+    push hl
+      ld d, $0D
+      ld e, $04
+      ld hl, (_RAM_C1C1_)
+      ld a, $06
+      call _LABEL_EFA_ScrollMenuIn
+    pop hl
+    pop de
+    pop af
+    call _LABEL_BD79_DrawCursor
+    call _LABEL_BD3B_
+    call _LABEL_4A8_
+_LABEL_A259_NameEntryScreenLoop:
+    call _LABEL_3651_WaitForVBlank
+    call _LABEL_BF96_
+    call _LABEL_47A_GetControllerInputs
+    ; S-21RLDU
+    ; 76543210
+    bit 2, a
+    jp nz, _LR
+    bit 3, a
+    jp nz, _LR
+    bit 0, a
+    jp nz, _UD
+    bit 1, a
+    jp nz, _UD
+    bit 4, a
+    jr nz, _Button1
+    bit 5, a
+    jr nz, _Button2
+    bit 7, a
+    jr nz, _Start
+    jr _LABEL_A259_NameEntryScreenLoop
 
-+:
-  rra
-  rra
-  call _LABEL_BCFA_
-  jr +++
+_LR:
+    ; Shift to ------RL
+    rra
+    rra
+    call _LABEL_BCFA_NameEntryHandleLeftRight
+    jr +++
 
-++:
-  ld b, a
-  ld a, (_SRAM_2324_)
-  or a
-  jr nz, +++
-  ld a, b
-  ld b, e
-  call _LABEL_BE78_
-  bit 2, e
-  ld e, b
-  call nz, _LABEL_BC2A_
-  bit 2, e
-  call nz, _LABEL_BC2A_
+_UD:
+    ld b, a
+      ld a, (_SRAM_2324_) ; zero -> disallow vertical movement
+      or a
+      jr nz, +++
+    ld a, b
+    ld b, e ; Y position
+      call _LABEL_BE78_HandleIncDecWithLimits ; hl is $0400 here
+      bit 2, e ; check for 4
+    ld e, b
+    call nz, _LABEL_BC2A_NameEntryHandleLastRow
+    bit 2, e ; same for previous Y
+    call nz, _LABEL_BC2A_NameEntryHandleLastRow
+    ; fall through
+    
+    ; Update stuff related to the cursor?
 +++:
-  call _LABEL_BD79_
-  call _LABEL_BD3B_
-  rst $30 ; _LABEL_30_
+    call _LABEL_BD79_DrawCursor
+    call _LABEL_BD3B_
+    rst $30 ; _LABEL_30_
 ; Data from A2A9 to A2A9 (1 bytes)
 .db $28
 
-  jp _LABEL_A259_
+    ; And loop
+    jp _LABEL_A259_NameEntryScreenLoop
 
-++++:
-  ld b, $FF
-  jr +++++++
+_Start:
+    ld b, $FF
+    jr +
 
-+++++:
-  ld b, $FE
-  jr +++++++
+_Button1:
+    ld b, $FE
+    jr +
 
-++++++:
-  call _LABEL_BCBE_
-+++++++:
-  rst $30 ; _LABEL_30_
+_Button2:
+    call _LABEL_BCBE_LookUpPointedCharacter
+    ; fall through
+
++:
+    rst $30 ; _LABEL_30_
 ; Data from A2B9 to A2B9 (1 bytes)
 .db $29
 
-  call _LABEL_A305_
-  call _LABEL_BC90_
-  call _LABEL_BAC2_
-  push hl
-  ld hl, (_RAM_C1C1_)
-  call _LABEL_FDF_
-  pop hl
-  call _LABEL_BD3B_
-  call _LABEL_BC64_
-  ld a, b
-  cp $FD
-  jr nz, _LABEL_A259_
-  rst $18 ; _LABEL_18_CallBankedFunction
+    call _LABEL_A305_
+    call _LABEL_BC90_
+    call _LABEL_BAC2_
+    push hl
+      ld hl, (_RAM_C1C1_)
+      call _LABEL_FDF_
+    pop hl
+    call _LABEL_BD3B_
+    call _LABEL_BC64_
+    ld a, b
+    cp $FD
+    jr nz, _LABEL_A259_NameEntryScreenLoop
+    rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A2D7 to A2D8 (2 bytes)
 .db $18 $03
 
-  rst $18 ; _LABEL_18_CallBankedFunction
+    rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A2DA to A2DB (2 bytes)
 .db $20 $03
 
-  push af
-  push de
-  push hl
-  ld d, $14
-  ld e, $04
-  ld hl, (_RAM_C1C1_)
-  ld a, $06
-  call _LABEL_EFA_ScrollMenuIn
-  pop hl
-  pop de
-  pop af
-  push af
-  push de
-  push hl
-  ld d, $00
-  ld e, $12
-  ld hl, (_RAM_C000_)
-  ld a, $06
-  call _LABEL_EFA_ScrollMenuIn
-  pop hl
-  pop de
-  pop af
+    push af
+    push de
+    push hl
+      ld d, $14
+      ld e, $04
+      ld hl, (_RAM_C1C1_)
+      ld a, $06
+      call _LABEL_EFA_ScrollMenuIn
+    pop hl
+    pop de
+    pop af
+    push af
+    push de
+    push hl
+      ld d, $00
+      ld e, $12
+      ld hl, (_RAM_C000_)
+      ld a, $06
+      call _LABEL_EFA_ScrollMenuIn
+    pop hl
+    pop de
+    pop af
   pop hl
   pop bc
   pop de
@@ -24403,7 +24416,7 @@ _LABEL_A4FA_:
   srl b
   srl b
   srl b
-  call _LABEL_BE78_
+  call _LABEL_BE78_HandleIncDecWithLimits
   sla b
   sla b
   sla b
@@ -28169,43 +28182,44 @@ _LABEL_BAAC_:
 
 _LABEL_BAC2_:
   push af
-  push af
-  push bc
-  push de
-  push hl
-  ld hl, $C1C1
-  ld (_SRAM_21A0_), hl
-  ld hl, $0000
-  ld (_RAM_C1C3_), hl
-  ld hl, _RAM_C1C5_
-  ld (_RAM_C1C1_), hl
-  ld b, $07
-  ld c, $03
-  xor a
-  call _LABEL_CD1_DrawBox
-  pop hl
-  pop de
-  pop bc
-  pop af
-  push hl
-  ld hl, (_RAM_C1C1_)
-  inc hl
-  ld (hl), $0D
-  inc hl
-  ld (hl), $04
-  pop hl
-  push bc
-  ld bc, _DATA_BB0A_
-  call _LABEL_C79_DrawMenuItem
-  pop bc
-  push hl
-  ld hl, $0000
-  ld (_RAM_C1C3_), hl
-  pop hl
-  push bc
-  ld bc, _SRAM_2318_
-  call _LABEL_C79_DrawMenuItem
-  pop bc
+    push af
+    push bc
+    push de
+    push hl
+      ld hl, $C1C1
+      ld (_SRAM_21A0_), hl
+      ld hl, $0000
+      ld (_RAM_C1C3_), hl
+      ld hl, _RAM_C1C5_
+      ld (_RAM_C1C1_), hl
+      ld b, $07
+      ld c, $03
+      xor a
+      call _LABEL_CD1_DrawBox
+    pop hl
+    pop de
+    pop bc
+    pop af
+
+    push hl
+      ld hl, (_RAM_C1C1_)
+      inc hl
+      ld (hl), $0D
+      inc hl
+      ld (hl), $04
+    pop hl
+    push bc
+      ld bc, _DATA_BB0A_
+      call _LABEL_C79_DrawMenuItem
+    pop bc
+    push hl
+      ld hl, $0000
+      ld (_RAM_C1C3_), hl
+    pop hl
+    push bc
+      ld bc, _SRAM_2318_
+      call _LABEL_C79_DrawMenuItem
+    pop bc
   pop af
   ret
 
@@ -28216,65 +28230,69 @@ _DATA_BB0A_:
 _LABEL_BB10_:
   push af
   push hl
-  push af
-  push bc
-  push de
-  push hl
-  ld hl, $C000
-  ld (_SRAM_21A0_), hl
-  ld hl, $0000
-  ld (_RAM_C002_), hl
-  ld hl, _RAM_C004_
-  ld (_RAM_C000_), hl
-  ld b, $14
-  ld c, $0B
-  xor a
-  call _LABEL_CD1_DrawBox
-  pop hl
-  pop de
-  pop bc
-  pop af
-  push hl
-  ld hl, (_RAM_C000_)
-  inc hl
-  ld (hl), $00
-  inc hl
-  ld (hl), $07
-  pop hl
-  ld hl, _DATA_BB71_NameEntryPart1
-  bit 0, c
-  jr z, +
-  ld hl, _DATA_BBCD_NameEntryPart2
-+:
-  push bc
-    ld b, h
-    ld c, l
-    call _LABEL_C79_DrawMenuItem
-  pop bc
-  ; Draw in ten-ten
-  push hl
-    ld hl, $0008
-    ld (_RAM_C002_), hl
-  pop hl
-  push af
-    ld a, $7A
-    call _LABEL_E87_
-  pop af
-  push hl
-    ld hl, $0108
-    ld (_RAM_C002_), hl
-  pop hl
-  push af
-    ld a, $7B
-    call _LABEL_E87_
-  pop af
-  ; Return
+    push af
+    push bc
+    push de
+    push hl
+      ld hl, $C000
+      ld (_SRAM_21A0_), hl
+      ld hl, $0000
+      ld (_RAM_C002_), hl
+      ld hl, _RAM_C004_
+      ld (_RAM_C000_), hl
+      ld b, $14
+      ld c, $0B
+      xor a
+      call _LABEL_CD1_DrawBox
+    pop hl
+    pop de
+    pop bc
+    pop af
+    push hl
+      ld hl, (_RAM_C000_)
+      inc hl
+      ld (hl), $00
+      inc hl
+      ld (hl), $07
+    pop hl
+    ld hl, _DATA_BB71_NameEntryPart1
+    bit 0, c
+    jr z, +
+    ld hl, _DATA_BBCD_NameEntryPart2
++:  push bc
+      ld b, h
+      ld c, l
+      call _LABEL_C79_DrawMenuItem
+    pop bc
+    ; Draw in ten-ten
+    push hl
+      ld hl, $0008
+      ld (_RAM_C002_), hl
+    pop hl
+    push af
+      ld a, $7A
+      call _LABEL_E87_
+    pop af
+    push hl
+      ld hl, $0108
+      ld (_RAM_C002_), hl
+    pop hl
+    push af
+      ld a, $7B
+      call _LABEL_E87_
+    pop af
+    ; Return
   pop hl
   pop af
   ret
 
 ; Data from BB71 to BBCC (92 bytes)
 _DATA_BB71_NameEntryPart1:
+; あいうえお なにぬねの ぁぃぅぇぉ 
+; かきくけこ はひふへほ やゆよ ・ 
+; さしすせそ まみむめも わをん?! 
+; たちつてと らりるれろ ゃゅょっ- 
+;     カタカナ  もどる  おわる
 .db $0C $0D $0E $0F $10 $01 $20 $21 $22 $23 $24   $01   $3A $3B $3C $3D $3E $01
 .db $11 $12 $13 $14 $15 $01 $25 $26 $27 $28 $29   $01   $2F $30 $31 $01 $8F $01
 .db $16 $17 $18 $19 $1A $01 $2A $2B $2C $2D $2E   $01   $37 $39 $38 $8E $90 $01
@@ -28284,6 +28302,11 @@ _DATA_BB71_NameEntryPart1:
 
 ; Data from BBCD to BC29 (93 bytes)
 _DATA_BBCD_NameEntryPart2:
+; アイウエオ ナニヌネノ ァィゥェォ 
+; カキクケコ ハヒフヘホ ヤユヨ ・ 
+; サシスセソ マミムメモ ワヲン?! 
+; タチツテト ラリルレロ ャュョッ- 
+;     ひらがな  もどる  おわる
 .db $43 $44 $45 $46 $47 $01   $57   $58 $59 $5A $5B   $01   $71 $72 $73 $74 $75 $01
 .db $48 $49 $4A $4B $4C $01   $5C   $5D $5E $5F $60   $01   $66 $67 $68 $01 $8F $01
 .db $4D $4E $4F $50 $51 $01   $61   $62 $63 $64 $65   $01   $6E $70 $6F $8E $90 $01
@@ -28291,39 +28314,42 @@ _DATA_BBCD_NameEntryPart2:
 .db $01 $01 $01 $01 $26 $32 $7A $11 $20 $01 $01 $2E $7A $1F $34 $01 $01 $10 $37 $34
 .db $00
 
-_LABEL_BC2A_:
+_LABEL_BC2A_NameEntryHandleLastRow:
   push af
-  ld a, d
-  ld d, $00
-  bit 2, e
-  jr z, +
-  or a
-  jr z, ++
-  ld d, $01
-  cp $03
-  jr c, ++
-  ld d, $02
-  cp $09
-  jr c, ++
-  ld d, $03
-  cp $0E
-  jr c, ++
-  ld d, $04
-  jr ++
+    ; We are moving in or out of the bottom row.
+    ; We want to adjust the X position accordingly.
+    ld a, d ; Get X
+    ld d, $00 ; Start at 0
+    bit 2, e ; check if we are entering or leaving
+    jr z, +
+    ; Entering
+    or a
+    jr z, ++ ; 0 -> 0
+    ld d, $01
+    cp $03
+    jr c, ++ ; 1..2 -> 1
+    ld d, $02 
+    cp $09
+    jr c, ++ ; 3..8 -> 2
+    ld d, $03
+    cp $0E
+    jr c, ++ ; 9..13 -> 3
+    ld d, $04
+    jr ++    ; 14+ -> 4
 
-+:
-  or a
-  jr z, ++
-  ld d, $01
-  cp $01
-  jr z, ++
-  ld d, $06
-  cp $02
-  jr z, ++
-  ld d, $0A
-  cp $03
-  jr z, ++
-  ld d, $10
++:  ; Leaving
+    or a
+    jr z, ++ ; 0 -> 0
+    ld d, $01
+    cp $01
+    jr z, ++ ; 1 -> 1
+    ld d, $06
+    cp $02   ; 2 -> 6
+    jr z, ++
+    ld d, $0A
+    cp $03
+    jr z, ++ ; 3 -> 10
+    ld d, $10 ; 4 -> 16
 ++:
   pop af
   ret
@@ -28351,7 +28377,7 @@ _LABEL_BC64_:
   ld (_SRAM_2324_), a
   ld d, $04
   ld e, $04
-  call _LABEL_BD79_
+  call _LABEL_BD79_DrawCursor
 +:
   pop hl
   pop bc
@@ -28396,7 +28422,10 @@ _LABEL_BC90_:
   inc hl
   jp -
 
-_LABEL_BCBE_:
+_LABEL_BCBE_LookUpPointedCharacter:
+; Looks up character at position d, e
+; c bit 0 = which character set is active
+; returns character tile index in b
   push af
   push de
   push hl
@@ -28440,53 +28469,56 @@ _LABEL_BCBE_:
   pop af
   ret
 
-_LABEL_BCFA_:
+_LABEL_BCFA_NameEntryHandleLeftRight:
   push af
   push bc
   push hl
-  bit 2, e
-  jr nz, +++
-  bit 0, a
-  jr z, ++
-  ld a, d
-  dec a
-  dec a
-  cp $04
-  jr z, +
-  cp $0A
-  jr z, +
-  inc a
+    bit 2, e
+    jr nz, +++ ; Bottom row?
+    
+    bit 0, a ; L
+    jr z, ++
+    ; Left
+    ld a, d ; X position
+    ; Subtract 2
+    dec a
+    dec a
+    cp $04
+    jr z, +
+    cp $0A
+    jr z, +
+    inc a ; Add one back on except at 4 and 10
 +:
-  cp $FF
-  jr nz, +
-  ld a, $10
+    cp $FF ; If it got to -1 then wrap around
+    jr nz, +
+    ld a, $10
 +:
-  ld d, a
-  jr ++++
+    ld d, a
+    jr ++++
 
-++:
-  ld a, d
-  inc a
-  inc a
-  cp $06
-  jr z, +
-  cp $0C
-  jr z, +
-  dec a
+++: ; Right
+    ld a, d ; X position
+    inc a ; Add 2
+    inc a
+    cp $06
+    jr z, +
+    cp $0C
+    jr z, +
+    dec a ; Subtract one if we got to 6 or 12
 +:
-  cp $11
-  jr nz, +
-  xor a
+    cp $11 ; If we got to 17, wrap around
+    jr nz, +
+    xor a
 +:
-  ld d, a
-  jr ++++
+    ld d, a
+    jr ++++
 
 +++:
-  ld l, $00
-  ld h, $04
-  ld b, d
-  call _LABEL_BE78_
-  ld d, b
+    ld l, $00 ; Limit d to 0..4
+    ld h, $04
+    ld b, d
+    call _LABEL_BE78_HandleIncDecWithLimits
+    ld d, b
 ++++:
   pop hl
   pop bc
@@ -28532,32 +28564,40 @@ _LABEL_BD3B_:
   pop af
   ret
 
-_LABEL_BD79_:
+_LABEL_BD79_DrawCursor:
   push af
   push bc
   push de
-  ld c, $01
-  bit 2, e
-  jr z, +
-  ld a, d
-  ld c, $01
-  ld d, $00
-  or a
-  jr z, +
-  ld d, $01
-  cp $01
-  jr z, +
-  ld c, $04
-  ld d, $04
-  cp $02
-  jr z, +
-  ld c, $03
-  ld d, $0A
-  cp $03
-  jr z, +
-  ld d, $0F
-+:
-  call +
+    ld c, $01
+    bit 2, e ; row <4
+    jr z, +
+    
+    ; Set cursor position/width for row 4
+    ; X  c  d
+    ; 0  1  0
+    ; 1  1  1
+    ; 2  4  4
+    ; 3  3  a
+    ; 4  3  f
+    
+    ld a, d ; X
+    ld c, $01
+    ld d, $00
+    or a
+    jr z, +
+    ld d, $01
+    cp $01
+    jr z, +
+    ld c, $04
+    ld d, $04
+    cp $02
+    jr z, +
+    ld c, $03
+    ld d, $0A
+    cp $03
+    jr z, +
+    ld d, $0F
++:  call +
   pop de
   pop bc
   pop af
@@ -28706,30 +28746,30 @@ _LABEL_BE6C_:
   pop af
   ret
 
-_LABEL_BE78_:
+_LABEL_BE78_HandleIncDecWithLimits:
+  ; d = index in range l..h inclusive
+  ; we increment or decrement it according to a
+  ; a = %-------1 for decrement, $-------0 for increment
+  ; wrapping at the limits
   push af
   push hl
-  bit 0, a
-  jr z, ++
-  ld a, l
-  cp b
-  jr z, +
-  dec b
-  jr +++
-
-+:
-  ld b, h
-  jr +++
-
-++:
-  ld a, h
-  cp b
-  jr z, +
-  inc b
-  jr +++
-
-+:
-  ld b, l
+    bit 0, a
+    jr z, ++
+    ; Left
+    ld a, l
+    cp b
+    jr z, +
+    dec b
+    jr +++
++:  ld b, h
+    jr +++
+++: ; Right
+    ld a, h
+    cp b
+    jr z, +
+    inc b
+    jr +++
++:  ld b, l
 +++:
   pop hl
   pop af
@@ -54301,7 +54341,7 @@ _LABEL_20269_ScriptingCode_D7_Wait:
   call _LABEL_4A8_
 -:
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   and $F0
   jp nz, _LABEL_200EC_ScriptDecodeLoop
   jr -
@@ -54322,7 +54362,7 @@ _LABEL_2028A_:
 -:
   call _LABEL_33D4_
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   and $F0
   ret nz
   djnz -
@@ -54362,7 +54402,7 @@ _LABEL_202A9_:
 -:
   call _LABEL_33D4_
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_47A_
+  call _LABEL_47A_GetControllerInputs
   and $F0
   jp nz, ++
   djnz +

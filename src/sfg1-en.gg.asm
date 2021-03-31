@@ -100,6 +100,11 @@ PatchAt\1:
 .ends
 .endm
 
+.macro RemoveChunkAndReplace args _start, _end, _bank
+.unbackground _start _end
+  ROMPosition _start _bank
+.endm
+
 
 .bank 8 slot 1
 .org 0
@@ -174,9 +179,8 @@ ScriptIndex:
 ; Menus auto-generated code
 .include "menus.asm"
 
-; The name entry screen needs to be rewritten to remove ten-ten support. This is the original code with that part removed...
-.unbackground $bcbe $bcf9
-  ROMPosition $bcbe 1
+; The name entry screen needs to be rewritten to remove ten-ten support. This is the original code with that part removed, and the last row part rewritten.
+  RemoveChunkAndReplace $bcbe $bcf9 1
 .section "Name entry value lookup" force
 _LABEL_BCBE_:
   push af
@@ -190,22 +194,19 @@ _LABEL_BCBE_:
     sla e
     add a, e
     add a, d
-    ; ten-ten are at 4, 0 = $48, $49
-;    ld b, $7A ; so we have to bodge their return values
-;    cp $48
-;    jr z, ++
-;    ld b, $7B
-;    cp $49
-;    jr z, ++
-    ; these are presumably switch, delete, next
+    ; Check for last row. These are values:
+    ; X Y X+18Y Meaning Code
+    ; 0 4  72   Switch   $ff
+    ; 1 4  73   Back     $fe
+    ; 3 4  74   Done     $fd
     ld b, $FF
-    cp $4A
+    cp 72
     jr z, ++
     dec b
-    cp $4B
+    cp 73
     jr z, ++
     dec b
-    cp $4C
+    cp 74
     jr z, ++
     ; then if we get here it's a letter so we look it up
     ld hl, Menu_bb71
@@ -222,14 +223,127 @@ _LABEL_BCBE_:
   ret
 .ends
 
-.unbackground $bb50 $bb70
-  ROMPosition $bb50
+  RemoveChunkAndReplace $bb50 $bb70 1
 .section "Name entry screen drawing" force
   ; We chop off the end of the function to not draw the ten-ten
   pop hl
   pop af
   ret
 .ends
+
+; The bottom row is rearranged so we need to mod the code to set the cursor position
+  RemoveChunkAndReplace $bd79 $bda8 1
+.section "Name entry screen cursor size handler" force
+_LABEL_BD79_:
+  push af
+  push bc
+  push de
+    ; Input: de = x,y position of cursor
+    ; Set c = width, de = x,y for cursor drawing and call $7da9
+    ld c, 1
+    bit 2, e ; row <4
+    jr z, +
+    ; Set cursor position/width for row 4
+    ld c, 4 ; all are now width 4
+    ; x position is 2, 7, 12 for d = 0, 1, 2 respectively
+    ld a, d
+    ld d, 2
+    or a
+    jr z, +
+    ld d, 7
+    dec a
+    jr z, +
+    ld d, 12
++:  call $7da9
+  pop de
+  pop bc
+  pop af
+  ret
+.ends
+
+  RemoveChunkAndReplace $bcfa $bd3a 1
+.section "Name entry screen cursor horizontal movement handler" force
+_LABEL_BCFA_NameEntryHandleLeftRight:
+  push af
+  push bc
+  push hl
+    ld c, a ; save value
+    ; e = row index
+    ; We make it simple by letting all the blanks be selectable.
+    ; e      min  max
+    ; 0..3    2   15
+    ; 4       0    2 ; handled differently...
+    ld hl, $0f02
+    bit 2, e ; zero for 0..3
+    jr z,+
+    ld hl, $0200
++:  ld b, d
+    call $7E78 ; HandleIncDecWithLimits
+    ld d, b
+  pop hl
+  pop bc
+  pop af
+  ret
+.ends
+
+  RemoveChunkAndReplace $bc2a $bc63 1
+.section "Name entry screen cursor to/from last row handler" force
+_LABEL_BC2A_NameEntryHandleLastRow:
+  push af
+    ; We are moving in or out of the bottom row.
+    ld a, d ; Get X
+    bit 2, e ; check if we are entering or leaving
+    jr z, +
+    ; Entering
+    ; We want to map X positions as so:
+    ;   23456789abcdef
+    ; __.,;:-!?()&'"/♥
+    ;   ||||\||||\||||
+    ; __ABCD_Back_Done
+    ;   0000 1111 2222
+    ld d, 0
+    cp $6
+    jr c, ++ ; 0..5 -> 0
+    ld d, 1
+    cp $b
+    jr c, ++ ; 9..a -> 1
+    ld d, 2
+    jr ++    ; b+ -> 2
+
++:  ; Leaving. We maintain the apparent X position:
+    ; We want to map X positions as so:
+    ;   23456789abcdef
+    ; __.,;:-!?()&'"/♥
+    ;   ^--- ^--- ^---
+    ; __ABCD_Back_Done
+    ;   0000 1111 2222
+    ld d, $2
+    or a
+    jr z, ++ ; 0 -> 2
+    ld d, $7
+    dec a
+    jr z, ++ ; 1 -> 7
+    ld d, $c ; 2 -> c
+++:
+  pop af
+  ret
+.ends
+
+  RemoveChunkAndReplace $a1fe $a200 1
+.section "Name entry init hook" force
+  call NameEntryInit
+.ends
+
+.section "Name entry init" free
+NameEntryInit:
+  ; We replaced code setting d,e,l to c (which is 0). We want to set d to 2 instead.
+  ld l, c
+  ld de, $0200
+  ret
+.ends
+
+
+
 
 ; The font is relocating the menu borders...
 .enum $8e
@@ -257,17 +371,16 @@ _LABEL_BCBE_:
 .ends
 
 ; Main menu cursor width values
-.unbackground $b929 $b946
-  ROMPosition $b929
-.section "Main menu" force
+  RemoveChunkAndReplace $b929 $b946 1
+.section "Main menu cursor drawing" force
   push af
   push bc
   push de
     ; Japanese has
-    ; XXXXX    5
-    ; XX       2
-    ; XXX      3
-    ; XXXXX    5
+    ; はじめから    5
+    ; つづきから    5
+    ; けす       2
+    ; うつす      3
     ; English has
     ; Begin    5
     ; Load     4
@@ -283,11 +396,11 @@ _LABEL_BCBE_:
 ;    jr z, +
 ;    ld c, $05 ; else this width
 ; My code
-    ld a,d
-    ld c,5
+    ld a, d
+    ld c, 5
     and 1
-    jr z,+
-    ld c,4
+    jr z, +
+    ld c, 4
 ; Patch end
 +:
     ld d, $0D

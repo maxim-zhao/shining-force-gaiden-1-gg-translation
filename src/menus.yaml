@@ -42,11 +42,11 @@
   # ten-ten are drawn in separately
   # spaces are important in the below
   en: |
-    ABCDE_FGHIJ_KLM___
-    NOPQR_STUVW_XYZ___
-    12345_67890_______
-    .,;:-_!?()& '"/___
-    ____abcd__Del_Done
+    __ABCDEFGHIJKLM___
+    __NOPQRSTUVWXYZ___
+    __1234567890______
+    __.,;:-!?()&'"/♥__
+    __abcd_Back_Done
 - reference_at: '0xbb47'
   data_at: '0xbbcd'
   data_length: 93
@@ -57,11 +57,11 @@
     タチツテト ラリルレロ ャュョッ- 
         ひらがな  もどる  おわる
   en: |
-    abcde_fghij_klm___
-    nopqr_stuvw_xyz___
-    12345_67890_______
-    .,;:-_!?()&_'"/___
-    ____ABCD__Del_Done
+    __abcdefghijklm___
+    __nopqrstuvwxyz___
+    __1234567890______
+    __.,;:-!?()&'"/♥__
+    __ABCD_Back_Done
 
 
 
@@ -104,12 +104,12 @@
   data_at: '0xac0c'
   data_length: 5
   ja: ' どく'
-  en: Poison
+  en: Poisoned
 - reference_at: '0xabc9'
   data_at: '0xac11'
   data_length: 4
   ja: のろい
-  en: Curse
+  en: Cursed
 - reference_at: '0xabf3'
   data_at: '0xac00'
   data_length: 12
@@ -159,12 +159,12 @@
   data_at: '0xaf04'
   data_length: 5
   ja: ' どく'
-  en: Poison
+  en: Poisoned
 - reference_at: '0xae75'
   data_at: '0xaf09'
   data_length: 4
   ja: のろい
-  en: Curse
+  en: Cursed
 - reference_at: '0xaec2'
   data_at: '0xaf0d'
   data_length: 6
@@ -189,12 +189,12 @@
   data_at: '0xb56a'
   data_length: 5
   ja: ' どく'
-  en: Poison
+  en: Poisoned
 - reference_at: '0xb4b5'
   data_at: '0xb56f'
   data_length: 4
   ja: のろい
-  en: Curse
+  en: Cursed
 - reference_at: '0xb54b'
   data_at: '0xb558'
   data_length: 18
@@ -204,22 +204,22 @@
   data_at: '0xb5bb'
   data_length: 17
   ja: せんとうじの メッセ-ジは?
-  en: ''
+  en: Battle messages
 - reference_at: '0xb5b3'
   data_at: '0xb5cc'
   data_length: 17
   ja: ひょうじする ひょうじしない
-  en: ''
+  en: Show    Hide
 - reference_at: '0xb634'
   data_at: '0xb65c'
   data_length: 18
   ja: おこのみのゲ-ムスピ-ドは?
-  en: ''
+  en: Game speed
 - reference_at: '0xb644'
   data_at: '0xb66e'
   data_length: 13
   ja: '１  ２  ３  ４  '
-  en: '1  2  3  4  '
+  en: '1  2  3  4'
 - reference_at: '0xb654'
   data_at: '0xb67b'
   data_length: 13

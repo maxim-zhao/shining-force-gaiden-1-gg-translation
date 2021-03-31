@@ -35,24 +35,28 @@ character_map = " " \
 # TODO: use a .tbl?
 # We map two fonts, using █ to fill unwanted space.
 en_character_map_script = "█ " \
-    "██████████" \
-    "0123456789" \
-    ",.;:!?-" \
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
-    "()&" \
-    "abcdefghijklmnopqrstuvwxyz" \
-    "'\"/"
+                          "██████████" \
+                          "0123456789" \
+                          ",.;:!?-" \
+                          "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+                          "()&" \
+                          "abcdefghijklmnopqrstuvwxyz" \
+                          "'\"/" \
+                          "██████████████████████████" \
+                          "♥██" \
+                          "██████████████████████████"
+
 en_character_map_menus = "█ " \
-    "0123456789" \
-    "██████████" \
-    ",.;:!?-" \
-    "██████████████████████████" \
-    "()&" \
-    "██████████████████████████" \
-    "'\"/" \
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
-    "███" \
-    "abcdefghijklmnopqrstuvwxyz"
+                         "0123456789" \
+                         "██████████" \
+                         ",.;:!?-" \
+                         "██████████████████████████" \
+                         "()&" \
+                         "██████████████████████████" \
+                         "'\"/" \
+                         "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+                         "♥██" \
+                         "abcdefghijklmnopqrstuvwxyz"
 
 
 def bytes_to_japanese(data):
