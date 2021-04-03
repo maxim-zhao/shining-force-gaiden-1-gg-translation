@@ -63,6 +63,12 @@
     __.,;:-!?()&'"/♥__
     __ABCD_Back_Done
 
+# This is the "_" tiles on the name entry screen
+# - reference_at: '0xbaf2'
+#   data_at: '0xbb0a'
+#   data_length: 6
+#   ja: <0x97><0x97><0x97><0x97><0x97>
+#   en: ''
 
 
 - reference_at: '0x4d13'
@@ -270,12 +276,6 @@
 
 
 
-
-- reference_at: '0xbaf2'
-  data_at: '0xbb0a'
-  data_length: 6
-  ja: <0x97><0x97><0x97><0x97><0x97>
-  en: ''
   
   
 - reference_at: '0xcc80'

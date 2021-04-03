@@ -14,7 +14,7 @@ set PYTHONIOENCODING=UTF8
 %CONFIG_WLAZ80% -o "sfg1-en.gg.asm.o" "sfg1-en.gg.asm" || exit /b
 echo [objects]>linkfile
 echo "sfg1-en.gg.asm.o">>linkfile
-%CONFIG_WLALINK% -d -r -v -S -A linkfile "sfg1-en.gg" || exit /b
+%CONFIG_WLALINK% -d -r -v -s linkfile "sfg1-en.gg" || exit /b
 
 %CONFIG_FLIPS% --create "Shining Force Gaiden (J) [!].gg" "sfg1-en.gg" ..\sfg1-en.gg.ips
 %CONFIG_FLIPS% --create "Shining Force Gaiden (J) [!].gg" "sfg1-en.gg" ..\sfg1-en.gg.bps

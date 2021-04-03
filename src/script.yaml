@@ -398,8 +398,6 @@
     <delay 01><delay 01><delay 01><delay 01><end>
 
 
-
-
 ###########################################################
 # Prelude
 ###########################################################
@@ -792,6 +790,115 @@
     tough and long<line>
     trip.<wait><end>
 
+
+###########################################################
+# Chapter 1: The second expedition force
+###########################################################
+
+- index: 362
+  character: Narration
+  ja: <party leader>たちが たびだってから<line>すでに １しゅうかんがすぎていた<wait more><end>
+  literal: It has already been one week since Nick and his friends had started their journey.
+  en: |
+    <party leader>’s force<line>
+    had been traveling<line>
+    for a week.<wait more><end>
+
+- index: 363
+  character: Narration
+  ja: このまま あとすうじつのあいだ<line>ぶじなたびが つづくのならば<line>サイプレスに じょうりくできるはず<wait more><end>
+  literal: If we can keep this up for the next few days, we should be able to make it to Cypress.
+  en: |
+    If all goes well,<line>
+    they should be<line>
+    hitting shore on<line>
+    Cypress in a<line>
+    couple of days.<wait more><end>
+
+- index: 364
+  character: Narration
+  ja: しかし かれらのあわいきたいは<line>うらぎられることに なるのだった<wait><end>
+  literal: ''
+  en: |
+    Little did they<line>
+    know that their<line>
+    faint hopes would<line>
+    be crushed by<line>
+    treachery.<wait><end>
+
+- index: 365
+  character: Ruce
+  ja: あ-あ なんてたいくつなんだろう<line>からだが なまってしかたないな-<wait><end>
+  literal: ''
+  en: |
+    So boring, my body<line>
+    is starting to<line>
+    grow dull.<wait><end>
+
+- index: 366
+  character: Apis
+  ja: まったくだ! ふねのたびなんて<line>こんりんざい おことわりだよ・・・<wait more><end>
+  literal: ''
+  en: |
+    Exactly! I hate<line>
+    voyages from the<line>
+    bottom of my<line>
+    heart...<wait more><end>
+
+- index: 367
+  character: Apis
+  ja: ちょっとみんな あそこをみてみろ!<line>ひかりのたまが ちかづいてくるぞ!<wait><end>
+  literal: ''
+  en: |
+    Everyone, look<line>
+    over there! A<line>
+    sphere of light is<line>
+    getting closer!<wait><end>
+
+- index: 368
+  character: Dark Mage
+  ja: ムヒョヒョヒョ・・・どうした?<line>なにを びっくりしているんだ!<line>はは- おれさまにおどろいたのか?<wait more><end>
+  literal: ''
+  en: |
+    Ha ha ha! What?<line>
+    Why are you<line>
+    surprised? Haha,<line>
+    did I scare you?<wait more><end>
+
+- index: 369
+  character: Dark Mage
+  ja: ガ-ディアナぐんが くるというんで<line>そのマヌケづらをおがみにきてみたが<line>ケッ ガキばかりとは なさけねえ!<wait more><end>
+  literal: ''
+  en: |
+    I was told that an<line>
+    army from<line>
+    Guardiana is<line>
+    coming, so I came<line>
+    to take a look,<line>
+    but... You are<line>
+    just a bunch of<line>
+    brats, how<line>
+    pathetic!<wait><end>
+
+- index: 370
+  character: Dark Mage
+  ja: おれたちだけで みなごろしだ!<line>さあ しんでもらおうじゃねえか!<wait><end>
+  literal: ''
+  en: |
+    We are more than<line>
+    enough to massacre<line>
+    you all! Die!<wait><end>
+
+- index: 371
+  character: Lowe
+  ja: やつらは われわれをあまくみてます<line>このスキに かえりうちましょうぞ!<wait><end>
+  literal: ''
+  en: |
+    They are<line>
+    underestimating<line>
+    us. Let’s use this<line>
+    to turn the tables<line>
+    on them!<wait><end>
 
 
 
@@ -2615,65 +2722,6 @@
 
 
 
-- index: 362
-  character: ''
-  ja: <party leader>たちが たびだってから<line>すでに １しゅうかんがすぎていた<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 363
-  character: ''
-  ja: このまま あとすうじつのあいだ<line>ぶじなたびが つづくのならば<line>サイプレスに じょうりくできるはず<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 364
-  character: ''
-  ja: しかし かれらのあわいきたいは<line>うらぎられることに なるのだった<wait><end>
-  literal: ''
-  en: ''
-
-- index: 365
-  character: ''
-  ja: あ-あ なんてたいくつなんだろう<line>からだが なまってしかたないな-<wait><end>
-  literal: ''
-  en: ''
-
-- index: 366
-  character: ''
-  ja: まったくだ! ふねのたびなんて<line>こんりんざい おことわりだよ・・・<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 367
-  character: ''
-  ja: ちょっとみんな あそこをみてみろ!<line>ひかりのたまが ちかづいてくるぞ!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 368
-  character: ''
-  ja: ムヒョヒョヒョ・・・どうした?<line>なにを びっくりしているんだ!<line>はは- おれさまにおどろいたのか?<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 369
-  character: ''
-  ja: ガ-ディアナぐんが くるというんで<line>そのマヌケづらをおがみにきてみたが<line>ケッ ガキばかりとは なさけねえ!<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 370
-  character: ''
-  ja: おれたちだけで みなごろしだ!<line>さあ しんでもらおうじゃねえか!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 371
-  character: ''
-  ja: やつらは われわれをあまくみてます<line>このスキに かえりうちましょうぞ!<wait><end>
-  literal: ''
-  en: ''
 
 - index: 372
   character: ''

@@ -19,7 +19,7 @@ banks 32
 
 .background ORIGINAL_ROM
 
-.emptyfill $ff
+.emptyfill $00
 
 ; Unbackground ranges are inclusive of the start and end
 .unbackground $03a83 $03fff ; Unused
@@ -234,7 +234,7 @@ _LABEL_BCBE_:
 ; The bottom row is rearranged so we need to mod the code to set the cursor position
   RemoveChunkAndReplace $bd79 $bda8 1
 .section "Name entry screen cursor size handler" force
-_LABEL_BD79_:
+DrawCursor:
   push af
   push bc
   push de
@@ -336,11 +336,98 @@ _LABEL_BC2A_NameEntryHandleLastRow:
 
 .section "Name entry init" free
 NameEntryInit:
-  ; We replaced code setting d,e,l to c (which is 0). We want to set d to 2 instead.
+  ; We replaced code setting d,e,l to c (which is 0). We want to set d to 2 instead to start with the cursor at 0,2.
   ld l, c
   ld de, $0200
   ret
 .ends
+
+.define MAX_NAME_LENGTH 5
+
+  ; We patch a small area in the code that deals with drawing the name into the box, to enable a longer length and remove the ten-ten handling.
+  RemoveChunkAndReplace $bd3b $bd78 1
+.section "Name entry length check" force
+_LABEL_BD3B_CalculateNextCharPosition:
+  push af
+  push de
+  push hl
+    ld e, 0 ; counter
+    ld hl, $a30d ; name entry area
+-:  ld a, (hl)
+    inc hl
+    inc e ; count letters
+    or a
+    jr nz, -
+    dec e
+    ; e is now the character count
+    ld d, 1
+    ld a, e
+    cp MAX_NAME_LENGTH ; Check for max length
+    jr z, +
+    ; Below max length -> compute info for next character
+    ld a, $14
+    add a, e
+    add a, a
+    add a, a
+    add a, a
+    ld d, a
++:  push ix
+      ld ix, $a1fb
+      ld (ix-64), $41
+      ld (ix+0), d
+      ld (ix+1), $96
+    pop ix
+  pop hl
+  pop de
+  pop af
+  ret
+.ends
+
+; The code processing ten-ten needs on character entry to be removed
+  RemoveChunkAndReplace $a31a $a333 1
+.section "Ten-ten handler removal on character entry" force
+  jp $6334
+.ends
+
+; Yet more ten-ten... when you enter your name it is treated as a suffix, but the
+; internal drawing format wants prefixes, so it reorders as you type. We remove that.
+  RemoveChunkAndReplace $bc9b $bca4 1
+.section "Ten-ten reordering on character entry" force
+  jp $7ca5
+.ends
+
+; And more... when checking if we have filled the space
+  RemoveChunkAndReplace $bc64 $bc8f 1
+.section "Name entry check for max length" force
+_LABEL_BC64_CheckForNameFull:
+  push af
+  push bc
+  push hl
+    xor a
+    ld ($a324), a ; _SRAM_2324_NameEntryFull
+    ld c, MAX_NAME_LENGTH
+    ld hl, $a30d ; _SRAM_230D_NameEntryBuffer
+-:  ld a, (hl)
+    inc hl
+    or a
+    jr z, +
+    dec c ; c will become the number of characters left
+    jr nz, -
+    ; We only get here if c reaches 0...
+    ld a, 1
+    ld ($a324), a ; _SRAM_2324_NameEntryFull
+    ; move cursor to "done"
+    ld d, 2
+    ld e, 4
+    call DrawCursor
++:pop hl
+  pop bc
+  pop af
+  ret
+.ends
+
+; Name widening experiments
+;  PatchB $bada 10
 
 
 

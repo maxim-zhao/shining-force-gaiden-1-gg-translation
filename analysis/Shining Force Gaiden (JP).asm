@@ -849,7 +849,7 @@ _SRAM_22C8_CheatEnabled db
 _SRAM_2300_ db
 _SRAM_2301_ db
 _SRAM_2302_ dsb $b
-_SRAM_230D_ dsb $4
+_SRAM_230D_NameEntryBuffer dsb $4
 _SRAM_2311_ db
 .ende
 
@@ -858,7 +858,7 @@ _SRAM_2316_ db
 .ende
 
 .enum $A318 export
-_SRAM_2318_ db
+_SRAM_2318_NameAsMenuData db
 .ende
 
 .enum $A31B export
@@ -867,7 +867,7 @@ _SRAM_231B_ dw
 
 .enum $A323 export
 _SRAM_2323_ db
-_SRAM_2324_ db
+_SRAM_2324_NameEntryFull db
 _SRAM_2325_ db
 _SRAM_2326_ db
 _SRAM_2327_ db
@@ -1603,10 +1603,10 @@ _LABEL_369_Rst30:
   pop hl
   ret
 
-_LABEL_39E_:
+_LABEL_39E_CallHL:
   jp (hl)
 
-_LABEL_39F_:
+_LABEL_39F_CallIY:
   jp (iy)
 
 ; Data from 3A1 to 3A3 (3 bytes)
@@ -1774,12 +1774,12 @@ _LABEL_47A_GetControllerInputs:
   pop bc
   ret
 
-_LABEL_4A8_:
+_LABEL_4A8_ButtonsHeldCountdownThing:
   push af
-  ld a, $FF
-  ld (_SRAM_22BF_ControllerInputsHeld), a
-  ld a, $14
-  ld (_SRAM_22C0_ButtonsHeldCountdown), a
+    ld a, $FF
+    ld (_SRAM_22BF_ControllerInputsHeld), a
+    ld a, $14
+    ld (_SRAM_22C0_ButtonsHeldCountdown), a
   pop af
   ret
 
@@ -3689,23 +3689,21 @@ _LABEL_FDF_:
   push bc
   push de
   push hl
-  ld a, (hl)
-  inc hl
-  ld d, (hl)
-  inc hl
-  ld e, (hl)
-  inc hl
-  ld b, (hl)
-  inc hl
-  ld c, (hl)
-  inc hl
-  add a, a
-  jr nc, +
-  call _LABEL_FFD_
-  jr ++
-
-+:
-  call _LABEL_10C1_
+    ld a, (hl)
+    inc hl
+    ld d, (hl)
+    inc hl
+    ld e, (hl)
+    inc hl
+    ld b, (hl)
+    inc hl
+    ld c, (hl)
+    inc hl
+    add a, a
+    jr nc, +
+    call _LABEL_FFD_
+    jr ++
++:  call _LABEL_10C1_
 ++:
   pop hl
   pop de
@@ -3720,7 +3718,7 @@ _LABEL_FFD_:
   push hl
   ex af, af'
   push af
-  call +
+    call +
   pop af
   ex af, af'
   pop hl
@@ -4296,7 +4294,7 @@ _LABEL_12C5_:
   inc hl
   ld h, (hl)
   ld l, a
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   ld a, (_RAM_D68A_)
   add a, a
   call z, _LABEL_154A_
@@ -4678,7 +4676,7 @@ _LABEL_156A_:
   inc hl
   ld h, (hl)
   ld l, a
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   pop iy
   pop hl
   pop de
@@ -5213,7 +5211,7 @@ _LABEL_19E5_:
   call _LABEL_176D_
   call _LABEL_3651_WaitForVBlank
   call _LABEL_176D_
-  call _LABEL_39F_
+  call _LABEL_39F_CallIY
   call _LABEL_3651_WaitForVBlank
   call _LABEL_176D_
   ld a, (_RAM_D68A_)
@@ -7316,7 +7314,7 @@ _LABEL_2999_:
   ld a, $06
   ld (_RAM_FFFE_), a
   ld hl, (_DATA_18004_)
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   pop af
   ld (_RAM_FFFE_), a
   pop hl
@@ -7929,7 +7927,7 @@ _LABEL_34FA_:
   ld a, $07
   ld (_RAM_FFFE_), a
   ld hl, (_DATA_1C002_ - 2)
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   ex af, af'
   ld (_RAM_FFFE_), a
   ld hl, (_SRAM_22BC_)
@@ -8026,7 +8024,7 @@ _LABEL_3593_:
   inc hl
   ld h, (hl)
   ld l, a
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   pop af
   ld (_RAM_FFFC_), a
   pop iy
@@ -8845,7 +8843,7 @@ _LABEL_3A6B_:
         ld a, $01
         ld (_RAM_FFFE_), a
         ld hl, (_DATA_402E_ - 2)
-        call _LABEL_39E_
+        call _LABEL_39E_CallHL
       pop af
       ld (_RAM_FFFE_), a
     pop hl
@@ -10660,7 +10658,7 @@ _LABEL_4AEA_:
   ld d, a
   ld a, $05
   call _LABEL_EFA_ScrollMenuIn
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_47A_GetControllerInputs
@@ -11073,7 +11071,7 @@ _DATA_4DA7_:
 .db $05 $02 $00
 
 _LABEL_4DAA_:
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_4DAD_:
   xor a
   ld (_RAM_D6A6_), a
@@ -12614,7 +12612,7 @@ _LABEL_56C1_:
   ld l, a
   or h
   jr z, ++
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   ld a, $35
   rst $20 ; _LABEL_20_
 ; Data from 5715 to 5716 (2 bytes)
@@ -12677,7 +12675,7 @@ _LABEL_5760_:
   ld l, a
   or h
   jr z, +
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
 +:
   pop iy
   pop ix
@@ -12715,7 +12713,7 @@ _LABEL_57B9_:
   ld l, a
   or h
   jr z, +
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
 +:
   pop iy
   pop ix
@@ -12750,7 +12748,7 @@ _LABEL_580B_:
   ld l, a
   or h
   jr z, +
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
 +:
   pop iy
   pop ix
@@ -15335,7 +15333,7 @@ _LABEL_6475_:
   inc hl
   ld h, (hl)
   ld l, a
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   ld a, iyl
   cp $04
   jr nc, +
@@ -21503,7 +21501,7 @@ _LABEL_9352_:
   pop de
   pop af
   call _LABEL_A4CA_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -21707,7 +21705,7 @@ _LABEL_9492_:
   pop de
   pop af
   call _LABEL_A77F_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -21826,7 +21824,7 @@ _LABEL_9530_:
   pop de
   pop af
   call _LABEL_A77F_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -21968,7 +21966,7 @@ _LABEL_9610_:
   pop de
   pop af
   call _LABEL_A77F_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -22090,7 +22088,7 @@ _LABEL_96F6_:
   pop de
   pop af
   call _LABEL_A831_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_9725_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_A922_
@@ -22180,7 +22178,7 @@ _LABEL_9792_:
   pop de
   pop af
   call _LABEL_A9CC_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -22318,7 +22316,7 @@ _LABEL_9836_:
   pop af
   call _LABEL_AA1C_
   call _LABEL_A9F3_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_9875_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -22437,7 +22435,7 @@ _LABEL_98F6_:
   pop hl
   pop de
   pop af
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_9932_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_47A_GetControllerInputs
@@ -22614,7 +22612,7 @@ _LABEL_99D3_:
   pop af
   call _LABEL_B071_
   call _LABEL_B045_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_9A43_:
   call _LABEL_3651_WaitForVBlank
   ld c, a
@@ -22740,7 +22738,7 @@ _LABEL_9AD0_:
   pop af
   call _LABEL_B13C_
   call _LABEL_B115_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -22897,7 +22895,7 @@ _LABEL_9B9A_:
   ld b, a
 +:
   call _LABEL_B3EB_
-  ld ix, _SRAM_230D_
+  ld ix, _SRAM_230D_NameEntryBuffer
   push de
   ld e, b
   ld d, $00
@@ -22952,7 +22950,7 @@ _LABEL_9C2E_:
   call _LABEL_FDF_
   pop hl
   call _LABEL_B2A5_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_9C5B_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23059,7 +23057,7 @@ _LABEL_9CDF_:
   call _LABEL_FDF_
   pop hl
   call _LABEL_B360_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_9D0C_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23151,7 +23149,7 @@ _LABEL_9D8A_:
   ld h, $11
   ld l, $00
   call _LABEL_B3EB_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_9D9E_:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23177,7 +23175,7 @@ _LABEL_9DC5_:
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_BE78_HandleIncDecWithLimits
-  ld ix, _SRAM_230D_
+  ld ix, _SRAM_230D_NameEntryBuffer
   push de
   ld e, b
   ld d, $00
@@ -23193,7 +23191,7 @@ _LABEL_9DC5_:
   rra
 -:
   call _LABEL_BE78_HandleIncDecWithLimits
-  ld ix, _SRAM_230D_
+  ld ix, _SRAM_230D_NameEntryBuffer
   push de
   ld e, b
   ld d, $00
@@ -23203,7 +23201,7 @@ _LABEL_9DC5_:
   inc c
   jr z, -
 ++:
-  ld ix, _SRAM_230D_
+  ld ix, _SRAM_230D_NameEntryBuffer
   push de
   ld e, b
   ld d, $00
@@ -23226,7 +23224,7 @@ _LABEL_9E21_:
   ld a, b
   ld (_SRAM_2366_), a
   pop af
-  ld ix, _SRAM_230D_
+  ld ix, _SRAM_230D_NameEntryBuffer
   push de
   ld e, b
   ld d, $00
@@ -23316,7 +23314,7 @@ _LABEL_9E86_:
   pop de
   pop af
   call _LABEL_B5DD_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23393,7 +23391,7 @@ _LABEL_9F00_:
   pop de
   pop af
   call _LABEL_B688_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23549,7 +23547,7 @@ _LABEL_9FDE_:
   pop de
   pop af
   call _LABEL_B84C_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23642,7 +23640,7 @@ _LABEL_A06B_ShowMenu:
   pop de
   pop af
   call _LABEL_B929_MainMenuCursorWidthSelector
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23720,7 +23718,7 @@ _LABEL_A0EE_:
   pop de
   pop af
   call _LABEL_BA03_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23807,7 +23805,7 @@ _LABEL_A170_:
   pop de
   pop af
   call _LABEL_BA03_
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_BF96_
@@ -23914,7 +23912,7 @@ _LABEL_A1F5_ShowNameEntryScreen:
 
 +:
     pop af
-    call _LABEL_BAC2_
+    call _LABEL_BAC2_DrawNameBox
     push hl
       ld hl, (_RAM_C1C1_)
       inc hl
@@ -23934,8 +23932,8 @@ _LABEL_A1F5_ShowNameEntryScreen:
     pop de
     pop af
     call _LABEL_BD79_DrawCursor
-    call _LABEL_BD3B_
-    call _LABEL_4A8_
+    call _LABEL_BD3B_CalculateNextCharPosition
+    call _LABEL_4A8_ButtonsHeldCountdownThing
 _LABEL_A259_NameEntryScreenLoop:
     call _LABEL_3651_WaitForVBlank
     call _LABEL_BF96_
@@ -23967,7 +23965,7 @@ _LR:
 
 _UD:
     ld b, a
-      ld a, (_SRAM_2324_) ; zero -> disallow vertical movement
+      ld a, (_SRAM_2324_NameEntryFull) ; zero -> disallow vertical movement
       or a
       jr nz, +++
     ld a, b
@@ -23983,7 +23981,7 @@ _UD:
     ; Update stuff related to the cursor?
 +++:
     call _LABEL_BD79_DrawCursor
-    call _LABEL_BD3B_
+    call _LABEL_BD3B_CalculateNextCharPosition
     rst $30 ; _LABEL_30_
 ; Data from A2A9 to A2A9 (1 bytes)
 .db $28
@@ -23992,11 +23990,11 @@ _UD:
     jp _LABEL_A259_NameEntryScreenLoop
 
 _Start:
-    ld b, $FF
+    ld b, $FF ; swap
     jr +
 
 _Button1:
-    ld b, $FE
+    ld b, $FE ; back
     jr +
 
 _Button2:
@@ -24008,25 +24006,25 @@ _Button2:
 ; Data from A2B9 to A2B9 (1 bytes)
 .db $29
 
-    call _LABEL_A305_
-    call _LABEL_BC90_
-    call _LABEL_BAC2_
+    call _LABEL_A305_ProcessEnteredValue
+    call _LABEL_BC90_NameEntryToMenuData
+    call _LABEL_BAC2_DrawNameBox
     push hl
       ld hl, (_RAM_C1C1_)
       call _LABEL_FDF_
     pop hl
-    call _LABEL_BD3B_
-    call _LABEL_BC64_
+    call _LABEL_BD3B_CalculateNextCharPosition
+    call _LABEL_BC64_CheckForNameFull
     ld a, b
-    cp $FD
-    jr nz, _LABEL_A259_NameEntryScreenLoop
+    cp $FD ; Done
+    jr nz, _LABEL_A259_NameEntryScreenLoop ; Loop until done
     rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A2D7 to A2D8 (2 bytes)
-.db $18 $03
+.db $18 $03 ; _LABEL_CC07_
 
     rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A2DA to A2DB (2 bytes)
-.db $20 $03
+.db $20 $03 ; _LABEL_CECD_
 
     push af
     push de
@@ -24056,81 +24054,83 @@ _Button2:
   pop af
   ret
 
-_LABEL_A305_:
+_LABEL_A305_ProcessEnteredValue:
   push af
   push hl
-  ld hl, _SRAM_230D_
--:
-  ld a, (hl)
-  inc hl
-  or a
-  jr nz, -
-  dec hl
-  ld a, b
-  inc a
-  jr z, +++
-  inc a
-  jr z, ++++
-  inc a
-  jr z, _LABEL_A35F_
-  ld a, b
-  cp $7A
-  jr z, +
-  cp $7B
-  jr nz, ++
-+:
-  ld a, (_SRAM_230D_)
-  or a
-  jr z, _LABEL_A36C_
-  dec hl
-  ld a, (hl)
-  inc hl
-  cp $7A
-  jr z, _LABEL_A36C_
-  cp $7B
-  jr z, _LABEL_A36C_
-++:
-  ld (hl), b
-  inc hl
-  ld (hl), $00
-  jr _LABEL_A36C_
+    ld hl, _SRAM_230D_NameEntryBuffer
+    ; Find last non-zero byte in buffer
+-:  ld a, (hl)
+    inc hl
+    or a
+    jr nz, -
+    dec hl
+    ; check the value in b for $fd..$ff
+    ld a, b
+    inc a
+    jr z, _swap
+    inc a
+    jr z, _back
+    inc a
+    jr z, _done
+    ; Then check for ten-ten
+    ld a, b
+    cp $7A
+    jr z, +
+    cp $7B
+    jr nz, ++
++:  ; ten-ten byte
+    ld a, (_SRAM_230D_NameEntryBuffer)
+    or a
+    jr z, _LABEL_A36C_End ; If at the start, it is OK
+    dec hl
+    ld a, (hl)
+    inc hl
+    cp $7A
+    jr z, _LABEL_A36C_End ; If after another ten-ten, ignore it
+    cp $7B
+    jr z, _LABEL_A36C_End
+++: ; anything else: store it (and stick a zero after it)
+    ld (hl), b
+    inc hl
+    ld (hl), $00
+    jr _LABEL_A36C_End
 
-+++:
+_swap:
   inc c
   call _LABEL_BB10_
   push hl
   ld hl, (_RAM_C000_)
   call _LABEL_FDF_
   pop hl
-  jr _LABEL_A36C_
+  jr _LABEL_A36C_End
 
-++++:
-  ld a, (_SRAM_230D_)
+_back:
+  ld a, (_SRAM_230D_NameEntryBuffer)
   or a
-  jr z, _LABEL_A36C_
+  jr z, _LABEL_A36C_End
   dec hl
   ld a, (hl)
   ld (hl), $00
   cp $7A
   jr z, +
   cp $7B
-  jr nz, _LABEL_A36C_
+  jr nz, _LABEL_A36C_End
 +:
   dec hl
   ld (hl), $00
-  jr _LABEL_A36C_
+  jr _LABEL_A36C_End
 
-_LABEL_A35F_:
-  ld hl, _SRAM_2318_
+_done:
+  ld hl, _SRAM_2318_NameAsMenuData
   ld a, (hl)
   or a
-  jr z, _LABEL_A36C_
+  jr z, _LABEL_A36C_End
   ld a, (_SRAM_2323_)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from A36A to A36B (2 bytes)
-.db $04 $04
+.db $04 $04 ; Load default name? TODO
 
-_LABEL_A36C_:
+_LABEL_A36C_End:
   pop hl
   pop af
   ret
@@ -24214,7 +24214,7 @@ _LABEL_A3C2_:
   ld (hl), $05
   pop hl
   ld b, $00
-  ld hl, _SRAM_230D_
+  ld hl, _SRAM_230D_NameEntryBuffer
   ld d, (hl)
 -:
   ld a, d
@@ -24338,7 +24338,7 @@ _LABEL_A491_:
 .db $62 $04
 
   ld b, $04
-  ld ix, _SRAM_230D_
+  ld ix, _SRAM_230D_NameEntryBuffer
 -:
   ld c, (hl)
   ld a, $E0
@@ -24641,7 +24641,7 @@ _LABEL_A648_:
 .db $62 $04
 
   ex de, hl
-  ld hl, _SRAM_230D_
+  ld hl, _SRAM_230D_NameEntryBuffer
   ld b, $04
 -:
   ld a, (de)
@@ -24669,7 +24669,7 @@ _LABEL_A66E_:
   push de
   push hl
   push ix
-  ld ix, _SRAM_230D_
+  ld ix, _SRAM_230D_NameEntryBuffer
   ld b, $04
   ld c, $00
   ld e, $00
@@ -24725,7 +24725,7 @@ _LABEL_A6BD_:
   push de
   push hl
   push ix
-  ld ix, _SRAM_230D_
+  ld ix, _SRAM_230D_NameEntryBuffer
   ld b, $04
   ld c, $00
   ld e, $00
@@ -24923,7 +24923,7 @@ _LABEL_A79A_:
   push af
   push de
   push hl
-  ld hl, _SRAM_230D_
+  ld hl, _SRAM_230D_NameEntryBuffer
   ld a, (hl)
   ld b, $FF
   ld d, $00
@@ -26306,7 +26306,7 @@ _LABEL_AF9C_:
   call _LABEL_C79_DrawMenuItem
   pop bc
   ld b, $01
-  ld hl, _SRAM_230D_
+  ld hl, _SRAM_230D_NameEntryBuffer
   ld d, (hl)
 -:
   ld a, d
@@ -26524,7 +26524,7 @@ _LABEL_B0C3_:
   ld (_RAM_C002_), a
   pop af
   push bc
-  ld bc, _SRAM_230D_
+  ld bc, _SRAM_230D_NameEntryBuffer
   push af
   ld a, $05
   call _LABEL_CA2_DrawMultipleItems
@@ -26968,9 +26968,9 @@ _LABEL_B3A0_:
   push de
   push hl
   ld bc, $0011
-  ld hl, _SRAM_230D_ + 1
+  ld hl, _SRAM_230D_NameEntryBuffer + 1
   ex de, hl
-  ld hl, _SRAM_230D_
+  ld hl, _SRAM_230D_NameEntryBuffer
   ld (hl), $FF
   ldir
   ld a, (_SRAM_2367_)
@@ -27669,7 +27669,7 @@ _LABEL_B78F_:
   ld (_RAM_C181_), hl
   pop hl
   push bc
-  ld bc, _SRAM_230D_
+  ld bc, _SRAM_230D_NameEntryBuffer
   push af
   ld a, $07
   call _LABEL_CA2_DrawMultipleItems
@@ -28173,14 +28173,14 @@ _LABEL_BAAC_:
   ld b, $07
   call _LABEL_BED3_
   xor a
-  ld (_SRAM_2324_), a
-  ld (_SRAM_230D_), a
-  ld (_SRAM_2318_), a
+  ld (_SRAM_2324_NameEntryFull), a
+  ld (_SRAM_230D_NameEntryBuffer), a
+  ld (_SRAM_2318_NameAsMenuData), a
   pop bc
   pop af
   ret
 
-_LABEL_BAC2_:
+_LABEL_BAC2_DrawNameBox:
   push af
     push af
     push bc
@@ -28209,7 +28209,7 @@ _LABEL_BAC2_:
       ld (hl), $04
     pop hl
     push bc
-      ld bc, _DATA_BB0A_
+      ld bc, _DATA_BB0A_Underscores
       call _LABEL_C79_DrawMenuItem
     pop bc
     push hl
@@ -28217,14 +28217,14 @@ _LABEL_BAC2_:
       ld (_RAM_C1C3_), hl
     pop hl
     push bc
-      ld bc, _SRAM_2318_
+      ld bc, _SRAM_2318_NameAsMenuData
       call _LABEL_C79_DrawMenuItem
     pop bc
   pop af
   ret
 
 ; Data from BB0A to BB0F (6 bytes)
-_DATA_BB0A_:
+_DATA_BB0A_Underscores:
 .db $97 $97 $97 $97 $97 $00
 
 _LABEL_BB10_:
@@ -28354,68 +28354,69 @@ _LABEL_BC2A_NameEntryHandleLastRow:
   pop af
   ret
 
-_LABEL_BC64_:
+_LABEL_BC64_CheckForNameFull:
   push af
   push bc
   push hl
-  xor a
-  ld (_SRAM_2324_), a
-  ld c, $05
-  ld hl, _SRAM_230D_
+    xor a
+    ld (_SRAM_2324_NameEntryFull), a
+    ld c, $05 ; max length
+    ld hl, _SRAM_230D_NameEntryBuffer
 -:
-  ld a, (hl)
-  inc hl
-  or a
-  jr z, +
-  cp $7A
-  jr z, -
-  cp $7B
-  jr z, -
-  dec c
-  jr nz, -
-  ld a, $01
-  ld (_SRAM_2324_), a
-  ld d, $04
-  ld e, $04
-  call _LABEL_BD79_DrawCursor
+    ld a, (hl)
+    inc hl
+    or a
+    jr z, +
+    cp $7A ; don't count ten-ten
+    jr z, -
+    cp $7B
+    jr z, -
+    dec c ; c will become the number of characters left
+    jr nz, -
+    ; We only get here if c reaches 0...
+    ld a, $01
+    ld (_SRAM_2324_NameEntryFull), a
+    ; move cursor to "done"
+    ld d, $04
+    ld e, $04
+    call _LABEL_BD79_DrawCursor
 +:
   pop hl
   pop bc
   pop af
   ret
 
-_LABEL_BC90_:
+_LABEL_BC90_NameEntryToMenuData:
   push af
   push bc
   push de
   push hl
-  ld hl, _SRAM_230D_
-  ld de, _SRAM_2318_
--:
-  ld a, (hl)
-  cp $7A
-  jp z, +
-  cp $7B
-  jp z, +
-  ld (de), a
-  inc hl
-  inc de
-  or a
-  jr nz, -
+    ld hl, _SRAM_230D_NameEntryBuffer
+    ld de, _SRAM_2318_NameAsMenuData
+-:  ld a, (hl) ; get char
+    cp $7A
+    jp z, +
+    cp $7B
+    jp z, +
+    ld (de), a ; not ten-ten -> copy
+    inc hl
+    inc de
+    or a ; loop until zero
+    jr nz, -
   pop hl
   pop de
   pop bc
   pop af
   ret
 
-+:
++:; if ten-ten, copy previous byte from dest buffer and write ten-ten in as a prefix
   push af
-  dec de
-  ld a, (de)
-  inc de
-  ld (de), a
+    dec de
+    ld a, (de)
+    inc de
+    ld (de), a
   pop af
-  dec de
+  dec de ; and write ten-ten before it
   ld (de), a
   inc de
   inc de
@@ -28525,40 +28526,41 @@ _LABEL_BCFA_NameEntryHandleLeftRight:
   pop af
   ret
 
-_LABEL_BD3B_:
+_LABEL_BD3B_CalculateNextCharPosition:
   push af
   push de
   push hl
-  ld e, $00
-  ld hl, _SRAM_230D_
+    ld e, $00 ; counter
+    ld hl, _SRAM_230D_NameEntryBuffer ; name entry area
 -:
-  ld a, (hl)
-  inc hl
-  cp $7A
-  jp z, -
-  cp $7B
-  jp z, -
-  inc e
-  or a
-  jr nz, -
-  dec e
-  ld d, $01
-  ld a, e
-  cp $05
-  jr z, +
-  ld a, $14
-  add a, e
-  add a, a
-  add a, a
-  add a, a
-  ld d, a
+    ld a, (hl)
+    inc hl
+    cp $7A ; Don't count ten-ten
+    jp z, -
+    cp $7B
+    jp z, -
+    inc e ; count other letters
+    or a
+    jr nz, -
+    dec e
+    ld d, $01
+    ld a, e
+    cp $05 ; 5 -> nothing to do
+    jr z, +
+    ; else compute d = ???
+    ld a, $14
+    add a, e
+    add a, a
+    add a, a
+    add a, a
+    ld d, a
 +:
-  push ix
-  ld ix, _SRAM_21FB_
-  ld (ix-64), $41
-  ld (ix+0), d
-  ld (ix+1), $96
-  pop ix
+    push ix
+      ld ix, _SRAM_21FB_
+      ld (ix-64), $41
+      ld (ix+0), d
+      ld (ix+1), $96
+    pop ix
   pop hl
   pop de
   pop af
@@ -28709,7 +28711,7 @@ _LABEL_BE49_:
   push af
   push bc
   push hl
-  ld hl, _SRAM_230D_
+  ld hl, _SRAM_230D_NameEntryBuffer
   sla b
   ld c, b
   ld b, $00
@@ -28724,7 +28726,7 @@ _LABEL_BE5A_:
   push af
   push bc
   push hl
-  ld hl, _SRAM_230D_
+  ld hl, _SRAM_230D_NameEntryBuffer
   sla b
   ld c, b
   inc c
@@ -28966,44 +28968,44 @@ _LABEL_BF96_:
   push bc
   push de
   push hl
-  ld hl, (_SRAM_22BC_)
-  ld de, $000A
-  call _LABEL_56B_
-  inc l
-  dec l
-  jr nz, ++
-  ld a, (_SRAM_2300_)
-  ld hl, _SRAM_21BB_
-  ld d, $00
-  ld e, a
-  add hl, de
-  ld a, (_SRAM_2301_)
-  ld b, $00
-  ld c, a
-  ld a, (_SRAM_2302_)
-  or a
-  jr z, +
-  ex de, hl
-  ld hl, _SRAM_2302_
-  ldir
-  xor a
-  ld (_SRAM_2302_), a
-  jr ++
+    ld hl, (_SRAM_22BC_)
+    ld de, $000A ; max name length?
+    call _LABEL_56B_
+    inc l
+    dec l
+    jr nz, ++
+    ld a, (_SRAM_2300_)
+    ld hl, _SRAM_21BB_
+    ld d, $00
+    ld e, a
+    add hl, de
+    ld a, (_SRAM_2301_)
+    ld b, $00
+    ld c, a
+    ld a, (_SRAM_2302_)
+    or a
+    jr z, +
+    ex de, hl
+    ld hl, _SRAM_2302_
+    ldir
+    xor a
+    ld (_SRAM_2302_), a
+    jr ++
 
 +:
-  push bc
-  push hl
-  ld de, _SRAM_2302_
-  ldir
-  pop hl
-  pop bc
-  ld (hl), $E0
-  ld d, h
-  ld e, l
-  inc de
-  dec c
-  jr z, ++
-  ldir
+    push bc
+    push hl
+      ld de, _SRAM_2302_
+      ldir
+    pop hl
+    pop bc
+    ld (hl), $E0
+    ld d, h
+    ld e, l
+    inc de
+    dec c
+    jr z, ++
+    ldir
 ++:
   pop hl
   pop de
@@ -29022,9 +29024,25 @@ _DATA_BFEE_:
 .ORG $0000
 
 ; Data from C000 to C078 (121 bytes)
-.dw _LABEL_C024_ _LABEL_C079_ _LABEL_CB3B_ _LABEL_CB47_ _LABEL_CB5F_ _LABEL_CB53_ _LABEL_CB6B_ _LABEL_CB77_
-.dw _LABEL_CB8D_AddAToHL _LABEL_CBBF_ _LABEL_CBDE_ _LABEL_CB95_ _LABEL_CBAC_ _LABEL_CC07_ _LABEL_CC44_ _LABEL_CD19_
-.dw _LABEL_CD5D_ _LABEL_CD8A_ _LABEL_CECD_ 
+.dw _LABEL_C024_ ; 0
+.dw _LABEL_C079_ ; 2
+.dw _LABEL_CB3B_ ; 4
+.dw _LABEL_CB47_ ; 6
+.dw _LABEL_CB5F_ ; 8
+.dw _LABEL_CB53_ ; a
+.dw _LABEL_CB6B_ ; b
+.dw _LABEL_CB77_ ; c
+.dw _LABEL_CB8D_AddAToHL; e
+.dw _LABEL_CBBF_ ; 10
+.dw _LABEL_CBDE_ ; 12
+.dw _LABEL_CB95_ ; 14
+.dw _LABEL_CBAC_ ; 16
+.dw _LABEL_CC07_ ; 18
+.dw _LABEL_CC44_ ; 1a
+.dw _LABEL_CD19_ ; 1b
+.dw _LABEL_CD5D_ ; 1c
+.dw _LABEL_CD8A_ ; 1e
+.dw _LABEL_CECD_ ; 20
 
 _LABEL_C024_:
 .db $00 $CD $51 $36 $DF $20 $01 $3E $FF $32
@@ -29167,7 +29185,7 @@ _LABEL_C182_:
   ld a, $01
   call _LABEL_C9ED_
   call _LABEL_C98A_
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C19E to C19F (2 bytes)
 .db $22 $04
@@ -29199,7 +29217,7 @@ _LABEL_C1B2_:
   call _LABEL_C968_
   push af
   push hl
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_3930_
   call _LABEL_39A6_
   ld a, h
@@ -29218,7 +29236,7 @@ _LABEL_C1B2_:
   xor a
   call _LABEL_C9ED_
   call _LABEL_C98A_
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C1E6 to C1E7 (2 bytes)
 .db $22 $04
@@ -29256,7 +29274,7 @@ _LABEL_C201_:
   ld a, $01
   call _LABEL_CA77_
   call _LABEL_C98A_
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C21A to C21B (2 bytes)
 .db $22 $04
@@ -29309,14 +29327,14 @@ _LABEL_C24D_:
   push de
   push hl
   call _LABEL_C968_
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_3930_
   ld a, b
   ld b, c
   ld c, a
   push bc
   ld a, $0D
-  ld (_SRAM_230D_), a
+  ld (_SRAM_230D_NameEntryBuffer), a
   ld c, $00
   ld a, (_SRAM_2327_)
   ld b, a
@@ -29337,12 +29355,12 @@ _LABEL_C24D_:
   ex de, hl
   call _LABEL_1E12_
   push af
-  ld a, (_SRAM_230D_)
+  ld a, (_SRAM_230D_NameEntryBuffer)
   dec a
   jr nz, +
   inc a
 +:
-  ld (_SRAM_230D_), a
+  ld (_SRAM_230D_NameEntryBuffer), a
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_3651_WaitForVBlank
@@ -29350,7 +29368,7 @@ _LABEL_C24D_:
   jr nz, -
   pop af
   djnz --
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C29E to C29F (2 bytes)
 .db $22 $04
@@ -29378,11 +29396,11 @@ _LABEL_C2B2_:
   push de
   push hl
   ld a, (hl)
-  ld (_SRAM_2324_), a
+  ld (_SRAM_2324_NameEntryFull), a
   call _LABEL_3930_
   call _LABEL_21EF_
   ld l, a
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_11D2_
   ld c, $00
   ld h, $00
@@ -29411,7 +29429,7 @@ _LABEL_C2B2_:
   pop hl
   inc h
   djnz -
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C2F7 to C2F8 (2 bytes)
 .db $50 $04
@@ -29714,7 +29732,7 @@ _LABEL_C453_:
   inc hl
   ld h, (hl)
   ld l, a
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   pop iy
   pop ix
   pop hl
@@ -29806,7 +29824,7 @@ _LABEL_C4BA_:
   push af
   ld a, $04
   ld (_RAM_D6A6_), a
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_CB53_
   pop af
   call _LABEL_C9A5_
@@ -29823,7 +29841,7 @@ _LABEL_C4BA_:
   pop hl
   pop bc
   call _LABEL_C98A_
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C4EB to C4EC (2 bytes)
 .db $22 $04
@@ -29973,7 +29991,7 @@ _LABEL_C580_:
   push de
   push hl
   ld a, (hl)
-  ld (_SRAM_2324_), a
+  ld (_SRAM_2324_NameEntryFull), a
   call _LABEL_CDD6_
   jr c, ++
   inc hl
@@ -29982,11 +30000,11 @@ _LABEL_C580_:
   ld e, (hl)
   inc hl
   ld b, (hl)
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_390D_
   ld h, $03
   call _LABEL_3976_
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   and a
   jp m, +
   ld hl, $D020
@@ -30001,10 +30019,10 @@ _LABEL_C580_:
   jr nz, -
   ld (hl), $FF
   dec hl
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   ld (hl), a
 ++:
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C5C0 to C5C1 (2 bytes)
 .db $22 $04
@@ -30283,7 +30301,7 @@ _LABEL_C727_:
   call _LABEL_1D1E_
   ld c, a
   pop hl
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_39A6_
   ld a, c
   ld c, $00
@@ -30291,7 +30309,7 @@ _LABEL_C727_:
   pop bc
   ld a, h
   ld (_SRAM_2327_), a
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   ld d, c
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C753 to C754 (2 bytes)
@@ -30329,7 +30347,7 @@ _LABEL_C76C_:
   push hl
   ex de, hl
   ld a, (de)
-  ld (_SRAM_2324_), a
+  ld (_SRAM_2324_NameEntryFull), a
   inc de
   rst $20 ; _LABEL_20_
 ; Data from C779 to C77A (2 bytes)
@@ -30364,7 +30382,7 @@ _LABEL_C76C_:
 .db $00 $04
 
   push de
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C7A5 to C7A6 (2 bytes)
 .db $50 $04
@@ -30388,7 +30406,7 @@ _LABEL_C76C_:
   ex de, hl
   call _LABEL_1D5B_
   ex de, hl
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_21EF_
   ld (_RAM_D6A0_), a
   ld l, a
@@ -30396,10 +30414,10 @@ _LABEL_C76C_:
 ; Data from C7D1 to C7D2 (2 bytes)
 .db $0C $01
 
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_11D2_
   ld h, a
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   push hl
   call _LABEL_39A6_
   ld c, h
@@ -30417,7 +30435,7 @@ _LABEL_C76C_:
   pop ix
   ld d, (ix+1)
   ld e, (ix+2)
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C7FB to C7FC (2 bytes)
 .db $22 $04
@@ -30507,7 +30525,7 @@ _LABEL_C846_:
   ld a, $01
   call _LABEL_CA2B_
   call _LABEL_C98A_
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C862 to C863 (2 bytes)
 .db $22 $04
@@ -30698,7 +30716,7 @@ _LABEL_C92E_:
 
 _LABEL_C968_:
   ld a, (hl)
-  ld (_SRAM_2324_), a
+  ld (_SRAM_2324_NameEntryFull), a
   inc hl
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from C96E to C96F (2 bytes)
@@ -30715,10 +30733,10 @@ _LABEL_C968_:
   inc hl
   ld a, (hl)
   push af
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_21EF_
   ld l, a
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   call _LABEL_11D2_
   ld h, a
   pop af
@@ -30780,7 +30798,7 @@ _LABEL_C9BF_:
   ld l, e
   call _LABEL_1D1E_
   pop hl
-  ld a, (_SRAM_2324_)
+  ld a, (_SRAM_2324_NameEntryFull)
   push hl
   ld h, c
   call _LABEL_3976_
@@ -31226,27 +31244,27 @@ _LABEL_CC07_:
   push hl
   push hl
   push bc
-  ld a, d
-  or a
-  jp nz, ++
-  ld a, $63
-  cp e
-  jp c, ++
-  ex de, hl
-  ld de, $000A
-  call _LABEL_56B_
-  ld b, $01
-  inc c
-  dec c
-  jp z, +
-  ld a, $02
-  add a, c
-  ld b, a
+    ld a, d
+    or a
+    jp nz, ++
+    ld a, $63
+    cp e
+    jp c, ++
+    ex de, hl
+    ld de, $000A
+    call _LABEL_56B_
+    ld b, $01
+    inc c
+    dec c
+    jp z, +
+    ld a, $02
+    add a, c
+    ld b, a
 +:
-  ld a, $02
-  add a, l
-  ld c, a
-  jp +++
+    ld a, $02
+    add a, l
+    ld c, a
+    jp +++
 
 ++:
   ld b, $8E
@@ -49920,7 +49938,7 @@ _LABEL_19C04_:
   inc hl
   ld h, (hl)
   ld l, a
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   ld hl, _LABEL_2999_
   ld (_RAM_D683_), hl
   xor a
@@ -50006,7 +50024,7 @@ _LABEL_19C96_:
   inc hl
   ld h, (hl)
   ld l, a
-  call _LABEL_39E_
+  call _LABEL_39E_CallHL
   ld a, $FF
   ld (_RAM_C6F9_), a
 +:
@@ -54338,7 +54356,7 @@ _LABEL_20263_ScriptingCode_D9_ClearScreen:
 _LABEL_20269_ScriptingCode_D7_Wait:
   ld a, $FF
   ld (_SRAM_26B3_), a
-  call _LABEL_4A8_
+  call \
 -:
   call _LABEL_3651_WaitForVBlank
   call _LABEL_47A_GetControllerInputs
@@ -54397,7 +54415,7 @@ _LABEL_202A9_:
   add a, a
   ld e, a
   ld hl, (_SRAM_21B8_)
-  call _LABEL_4A8_
+  call _LABEL_4A8_ButtonsHeldCountdownThing
   ld b, $14
 -:
   call _LABEL_33D4_
