@@ -306,7 +306,7 @@ _RAM_D6C1_ db
 _RAM_D6C2_ db
 _RAM_D6C3_ db
 _RAM_D6C4_ db
-_RAM_D6C5_ db
+_RAM_D6C5_VDPRegister1 db
 _RAM_D6C6_ db
 .ende
 
@@ -1082,9 +1082,9 @@ _LABEL_0_:
 _DATA_7_:
 .db $00
 
-_LABEL_8_:
+_LABEL_8_SetVDPAddress:
   di
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ei
   ret
 
@@ -1096,7 +1096,7 @@ _LABEL_8_:
 _DATA_E_:
 .db $00 $00
 
-_LABEL_10_:
+_LABEL_10_SetVDPAddress:
   ld a, e
   out (Port_VDPAddress), a
   ld a, d
@@ -1148,29 +1148,29 @@ _LABEL_30_:
 _LABEL_38_:
   jp $D682  ; Possibly invalid
 
-_LABEL_3B_:
+_LABEL_3B_ScreenOff:
   push af
-  ld a, (_RAM_D6C5_)
-  and $BF
-  ld (_RAM_D6C5_), a
-  di
-  out (Port_VDPAddress), a
-  ld a, $81
-  out (Port_VDPAddress), a
-  ei
+    ld a, (_RAM_D6C5_VDPRegister1)
+    and $BF ; Screen off
+    ld (_RAM_D6C5_VDPRegister1), a
+    di
+      out (Port_VDPAddress), a
+      ld a, $81
+      out (Port_VDPAddress), a
+    ei
   pop af
   ret
 
-_LABEL_4E_:
+_LABEL_4E_ScreenOn:
   push af
-  ld a, (_RAM_D6C5_)
-  or $40
-  ld (_RAM_D6C5_), a
-  di
-  out (Port_VDPAddress), a
-  ld a, $81
-  out (Port_VDPAddress), a
-  ei
+    ld a, (_RAM_D6C5_VDPRegister1)
+    or $40 ; Screen on
+    ld (_RAM_D6C5_VDPRegister1), a
+    di
+      out (Port_VDPAddress), a
+      ld a, $81
+      out (Port_VDPAddress), a
+    ei
   pop af
   ret
 
@@ -1503,7 +1503,10 @@ _LABEL_2D4_Outi22:
   jp nz, _LABEL_200_Outi128a
   ret
 
-_LABEL_305_:
+_LABEL_305_CopyToVRAM:
+  ; de = VRAM address
+  ; hl = source
+  ; bc = count
   xor a
   ld (_RAM_D6C1_), a
   call +
@@ -1515,20 +1518,24 @@ _LABEL_305_:
   ld a, c
   ld c, Port_VDPAddress
   di
-  out (c), e
-  out (c), d
+    out (c), e
+    out (c), d
   ei
   dec c
+  ; fall through
+
 _LABEL_31C_:
+  ; check high bit of a (original c parameter)
   add a, a
   jr z, +
+
   rl b
   inc b
   neg
   push hl
-  ld h, $02
-  ld l, a
-  ld a, b
+    ld h, $02 ; Compute hl = $200+a
+    ld l, a
+    ld a, b
   ex (sp), hl
   ret
 
@@ -1536,10 +1543,10 @@ _LABEL_31C_:
   rl b
   neg
   push hl
-  ld h, $02
-  ld l, a
-  ld a, b
-  ex (sp), hl
+    ld h, $02
+    ld l, a
+    ld a, b
+    ex (sp), hl
   ret
 
 _LABEL_336_:
@@ -1551,7 +1558,7 @@ _LABEL_336_:
   ld a, $01
   call _LABEL_2D4_Outi22
   ld a, (_DATA_357_ - 2)
-  ld (_RAM_D6C5_), a
+  ld (_RAM_D6C5_VDPRegister1), a
   ld a, (_DATA_357_)
   ld (_RAM_D6C6_), a
   ret
@@ -2162,7 +2169,7 @@ _DATA_710_:
 .db $74 $01 $E1 $D1 $C1 $DD $23 $DD $23 $FD $23 $FD $23 $08 $3D $20
 .db $A3 $F1 $08 $FD $E1 $DD $E1 $E1 $D1 $C1 $F1 $C9
 
-_LABEL_73C_:
+_LABEL_73C_FadeOut:
   push af
   push bc
   push de
@@ -2192,7 +2199,7 @@ _LABEL_73C_:
   ld a, $FF
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   pop af
   sub c
   jr nc, -
@@ -2212,7 +2219,7 @@ _LABEL_73C_:
   pop af
   ret
 
-_LABEL_79B_:
+_LABEL_79B_FadeIn:
   push af
   push bc
   push de
@@ -2242,7 +2249,7 @@ _LABEL_79B_:
   ld a, $FF
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   pop af
   add a, c
   jp p, -
@@ -2321,12 +2328,12 @@ _DATA_901_:
 _LABEL_905_:
   ld hl, _SRAM_21BB_
   ld de, $7F00
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld c, Port_VDPData
   ld a, $01
   call _LABEL_280_
   ld de, $7F80
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld a, $01
   call _LABEL_200_Outi128a
   ret
@@ -2347,19 +2354,19 @@ _LABEL_91D_:
   ld (_RAM_D6C1_), a
   ret
 
-_LABEL_940_:
+_LABEL_940_ClearTilemap:
   xor a
   ld (_RAM_D6C1_), a
-  ld hl, $0000
-  ld de, $7800
-  ld bc, $0380
+  ld hl, $0000 ; Fill value
+  ld de, $7800 ; Start of tilemap
+  ld bc, $0380 ; Tilemap size
   call +
   ld a, $FF
   ld (_RAM_D6C1_), a
   ret
 
 +:
-  rst $08 ; _LABEL_8_
+  rst $08 ; _LABEL_8_SetVDPAddress
   ld a, h
   inc b
   dec b
@@ -2404,13 +2411,13 @@ _LABEL_940_:
 
 _LABEL_995_:
   push af
-  ld a, (_RAM_D6C5_)
+  ld a, (_RAM_D6C5_VDPRegister1)
   and $40
   jr nz, +
   push bc
   push de
   push hl
-  call _LABEL_305_
+  call _LABEL_305_CopyToVRAM
   pop hl
   pop de
   pop bc
@@ -2795,77 +2802,93 @@ _LABEL_B08_:
   pop de
   ret
 
-_LABEL_B48_DecompressTiles:
+_LABEL_B48_Decompress:
   push bc
   push de
   push hl
   push ix
   push de
-  ld a, (bc)
-  cp $01
-  jp nz, _LABEL_C73_
-  inc bc
-  ld ixl, a
-  ld a, (bc)
-  or a
-  jp nz, _LABEL_C73_
-  inc bc
-  ld ixh, a
-----:
-  ld a, (bc)
-  inc bc
-  ld h, a
-  scf
-  rr h
-  jr nc, +
----:
-  ld a, (bc)
-  inc bc
-  ld (de), a
-  inc de
+    ; Check for $01 $00
+    ld a, (bc)
+    cp $01
+    jp nz, _LABEL_C73_DecompressionDone
+    inc bc
+    ld ixl, a ; Store byte
+    ld a, (bc)
+    or a
+    jp nz, _LABEL_C73_DecompressionDone
+    ; $01 $00 found
+    inc bc
+    ld ixh, a ; ix is now $0001
+_getFlagsByte:
+    ld a, (bc) ; Get flags byte
+    inc bc
+    ld h, a
+    scf
+    rr h
+    jr nc, +
+    ; Low bit was 1
+_copyLiteralByte:
+    ld a, (bc)
+    inc bc
+    ld (de), a
+    inc de
+    ; fall through
 --:
-  srl h
-  jr z, ----
-  jp c, ---
+_nextFlagBit:
+    srl h ; check next bit
+    jr z, _getFlagsByte
+    jp c, _copyLiteralByte
+    ; else fall through
 +:
-  push hl
-  ld a, (bc)
-  inc bc
-  ld l, a
-  ld a, (bc)
-  inc bc
-  ld h, a
-  or l
-  jr z, +
--:
-  push bc
-  ld b, $00
-  ld a, h
-  and $1F
-  ld c, a
-  inc c
-  ld a, h
-  rlca
-  rlca
-  rlca
-  or $F8
-  ld h, a
-  add hl, de
-  ldir
-  ldi
-  ldi
-  pop bc
-  pop hl
-  jp --
+    push hl
+      ; Get word to hl
+      ld a, (bc)
+      inc bc
+      ld l, a
+      ld a, (bc)
+      inc bc
+      ld h, a
+      or l
+      jr z, + ; Check if word is 0, which is the end
+-:    ; non-zero hl
+      push bc
+        ld b, $00 ; high byte for ldir later
+        ; LZ match
+        ; Length = low 5 bits of h plus 3. Length is up to 258.
+        ; Offset = hl with those bits removed
+        ; e.g. value $1234
+        ; = %000 10010 00110100
+        ; length = 19
+        ; offset = %11111 000 00110100 = -1996
+        ld a, h
+        and $1F
+        ld c, a
+        inc c ; c = X + 1
+        ld a, h
+        rlca
+        rlca
+        rlca
+        or $F8
+        ld h, a
+        add hl, de
+        ldir
+        ldi
+        ldi
+      pop bc
+    pop hl
+    jp _nextFlagBit
 
 +:
-  dec ix
-  ld a, ixh
-  or ixl
-  jr nz, -
+    dec ix
+    ld a, ixh
+    or ixl
+    jr nz, -
   pop hl
   ex de, hl
   pop de
+  ; Then interleave in place
+  ; Data is bitplane-separated per tile. That means that 
   or a
   sbc hl, de
   sla l
@@ -2877,8 +2900,19 @@ _LABEL_B48_DecompressTiles:
   ld a, h
   ld ixh, d
   ld ixl, e
-  ld de, _DATA_23_ - 3
-_LABEL_BB9_:
+  ld de, $20 ; size of a tile
+-:; for each tile...
+
+
+
+
+
+
+
+
+
+
+
   ld c, (ix+4)
   ld b, (ix+1)
   ld (ix+4), b
@@ -2941,8 +2975,8 @@ _LABEL_BB9_:
   ld (ix+15), b
   add ix, de
   dec h
-  jp nz, _LABEL_BB9_
-_LABEL_C73_:
+  jp nz, -
+_LABEL_C73_DecompressionDone:
   pop ix
   pop hl
   pop de
@@ -3716,11 +3750,11 @@ _LABEL_FFD_:
   push bc
   push de
   push hl
-  ex af, af'
-  push af
-    call +
-  pop af
-  ex af, af'
+    ex af, af'
+    push af
+      call +
+    pop af
+    ex af, af'
   pop hl
   pop de
   pop bc
@@ -4135,13 +4169,13 @@ _LABEL_11E6_:
   push bc
   push de
   push hl
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   ld a, (_RAM_D69F_)
   call _LABEL_2568_
   ld hl, $AC00
   ld de, $5400
   ld bc, $1400
-  call _LABEL_305_
+  call _LABEL_305_CopyToVRAM
   ld hl, _DATA_125E_
   ld de, _SRAM_227C_
   ld bc, $0020
@@ -4190,7 +4224,7 @@ _DATA_122A_:
   call _LABEL_12B0_
   call +
   ld c, $08
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   pop hl
   pop de
   pop bc
@@ -6116,7 +6150,7 @@ _LABEL_1F53_:
   ex de, hl
   ld bc, $0080
   call _LABEL_995_
-  ld a, (_RAM_D6C5_)
+  ld a, (_RAM_D6C5_VDPRegister1)
   and $40
   jr z, +
   call _LABEL_3651_WaitForVBlank
@@ -6628,7 +6662,7 @@ _LABEL_2283_:
   ld a, (bc)
   ld b, a
   ld c, l
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   ld hl, $0100
   add hl, de
   ex de, hl
@@ -6856,7 +6890,7 @@ _LABEL_25D8_:
   inc l
   ld b, (hl)
   ld de, _SRAM_2C00_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   pop af
   ld (_RAM_FFFE_), a
   ret
@@ -6977,7 +7011,7 @@ _DATA_2685_:
 .db $00 $0C $00 $0D $01 $0D $01 $0C
 
 _LABEL_273D_:
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   call _LABEL_91D_
   rst $30 ; _LABEL_30_
 ; Data from 2744 to 2744 (1 bytes)
@@ -6989,8 +7023,8 @@ _LABEL_273D_:
 
   jr nz, _LABEL_275D_
   ld c, $14
-  call _LABEL_73C_
-  call _LABEL_3B_
+  call _LABEL_73C_FadeOut
+  call _LABEL_3B_ScreenOff
   call _LABEL_91D_
   call +
   ld a, $01
@@ -7007,7 +7041,7 @@ _LABEL_275D_:
 .db $28 $01
 
   jp z, _LABEL_273D_
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   call +
   push hl
   ld hl, $010E
@@ -7154,7 +7188,7 @@ _LABEL_2886_:
   inc hl
   ld b, (hl)
   ld de, _RAM_C000_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   pop af
   ld (_RAM_FFFE_), a
   pop hl
@@ -7243,7 +7277,7 @@ _LABEL_2907_:
   inc hl
   ld b, (hl)
   ld de, _RAM_C000_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   pop af
   ld (_RAM_FFFE_), a
   pop hl
@@ -7296,7 +7330,7 @@ _LABEL_2942_:
   ld b, h
   ld c, l
   ld de, _SRAM_2C00_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   ld h, a
   pop af
   ld (_RAM_FFFE_), a
@@ -7350,7 +7384,7 @@ _LABEL_29D6_:
   or a
   jr nz, +
   ld de, $8A1B
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld a, (_SRAM_23ED_)
   ld (_SRAM_23EE_), a
   ld de, ++
@@ -7364,7 +7398,7 @@ _LABEL_29D6_:
 
 +:
   ld de, $8AA7
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   pop de
   pop af
   push hl
@@ -7381,7 +7415,7 @@ _LABEL_29D6_:
   push de
   in a, (Port_VDPStatus)
   ld de, $8A40
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld de, +
   ld (_RAM_D683_), de
   pop de
@@ -7396,7 +7430,7 @@ _LABEL_29D6_:
   ld d, $88
   ld a, (_SRAM_23EE_)
   ld e, a
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld de, +
   ld (_RAM_D683_), de
   pop de
@@ -7409,7 +7443,7 @@ _LABEL_29D6_:
   push de
   in a, (Port_VDPStatus)
   ld de, $8800
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld de, _LABEL_29D6_
   ld (_RAM_D683_), de
   pop de
@@ -7855,21 +7889,21 @@ _LABEL_3476_:
   ld a, (_RAM_D6C1_)
   or a
   jp z, _LABEL_34FA_
-  ld a, (_RAM_D6C5_)
+  ld a, (_RAM_D6C5_VDPRegister1)
   res 6, a
   ld e, a
   ld d, $81
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld a, (_SRAM_21BA_)
   or a
   call nz, _LABEL_905_
   ld hl, (_SRAM_22C3_)
   ld e, h
   ld d, $89
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld e, l
   dec d
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
   ld a, (_RAM_D6C2_)
   or a
   jr z, +++
@@ -7915,10 +7949,10 @@ _LABEL_3476_:
   call nz, _LABEL_51C_
   xor a
   ld (_SRAM_227B_), a
-  ld a, (_RAM_D6C5_)
+  ld a, (_RAM_D6C5_VDPRegister1)
   ld e, a
   ld d, $81
-  rst $10 ; _LABEL_10_
+  rst $10 ; _LABEL_10_SetVDPAddress
 _LABEL_34FA_:
   call _LABEL_44E_ReadInputs
   call _LABEL_19A7_
@@ -11233,7 +11267,7 @@ _LABEL_4DAD_:
 .db $FD
 
   ld c, $02
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   push hl
   ld hl, $0117
   jp _LABEL_43C_
@@ -12578,12 +12612,12 @@ _LABEL_56C1_:
   push hl
   push ix
   push iy
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 56CD to 56CE (2 bytes)
 .db $04 $08
 
-  call _LABEL_940_
+  call _LABEL_940_ClearTilemap
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
   ld (hl), $00
@@ -12599,7 +12633,7 @@ _LABEL_56C1_:
   ld a, $FF
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   ld a, (_SRAM_645_)
   add a, a
   ld c, a
@@ -12631,7 +12665,7 @@ _LABEL_56C1_:
 
 +:
   ld c, $08
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
 ++:
   pop iy
   pop ix
@@ -15256,8 +15290,8 @@ _LABEL_637A_:
 
 _LABEL_63B8_:
   call _LABEL_38FE_
-  call _LABEL_3B_
-  call _LABEL_940_
+  call _LABEL_3B_ScreenOff
+  call _LABEL_940_ClearTilemap
   ld hl, _DATA_67A0_
   ld de, _SRAM_227C_
   ld bc, $0020
@@ -15284,7 +15318,7 @@ _LABEL_63B8_:
   ld hl, _RAM_FFFC_
   set 3, (hl)
   pop hl
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   ld ix, _RAM_C000_
   ld (ix+0), $01
   ld (ix+1), $00
@@ -15381,7 +15415,7 @@ _LABEL_6475_:
   call _LABEL_9D9_
   ld hl, $0014
   call _LABEL_9CA_wait
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   call _LABEL_91D_
   pop af
   ret
@@ -15392,220 +15426,220 @@ _DATA_6507_:
 
 ; 1st entry of Jump Table from 6507 (indexed by _RAM_C010_)
 _LABEL_6515_:
-	dec (ix+4)
-	ret nz
-	ld (ix+4), $01
-	ld a, (ix+2)
-	sub (ix+5)
-	jr nz, +
-	ld (ix+0), $00
-	ret
+  dec (ix+4)
+  ret nz
+  ld (ix+4), $01
+  ld a, (ix+2)
+  sub (ix+5)
+  jr nz, +
+  ld (ix+0), $00
+  ret
 
 +:
-	cp (ix+3)
-	jr c, +
-	ld a, (ix+3)
+  cp (ix+3)
+  jr c, +
+  ld a, (ix+3)
 +:
-	ld d, a
-	ld a, (ix+2)
-	sub d
-	ld (ix+2), a
-	sub (ix+5)
-	cp $28
-	jr c, +
-	ld (ix+3), $04
-	jr ++
+  ld d, a
+  ld a, (ix+2)
+  sub d
+  ld (ix+2), a
+  sub (ix+5)
+  cp $28
+  jr c, +
+  ld (ix+3), $04
+  jr ++
 
 +:
-	cp $14
-	jr c, +
-	ld (ix+3), $03
-	jr ++
+  cp $14
+  jr c, +
+  ld (ix+3), $03
+  jr ++
 
 +:
-	cp $05
-	jr c, +
-	ld (ix+3), $02
-	jr ++
+  cp $05
+  jr c, +
+  ld (ix+3), $02
+  jr ++
 
 +:
-	ld (ix+3), $01
+  ld (ix+3), $01
 ++:
-	call _LABEL_6738_
-	ld d, (ix+2)
-	ld e, $58
-	ld a, iyl
-	add a, a
-	add a, iyl
-	add a, a
-	call _LABEL_9D9_
-	ret
+  call _LABEL_6738_
+  ld d, (ix+2)
+  ld e, $58
+  ld a, iyl
+  add a, a
+  add a, iyl
+  add a, a
+  call _LABEL_9D9_
+  ret
 
 ; 2nd entry of Jump Table from 6507 (indexed by _RAM_C010_)
 _LABEL_6571_:
-	dec (ix+4)
-	ret nz
-	ld (ix+4), $01
-	ld a, (ix+2)
-	sub (ix+5)
-	jr nz, _LABEL_65C8_
-	ld (ix+0), $00
-	push ix
-	ld ix, _RAM_C000_
-	ld (ix+0), $03
-	ld (ix+2), $60
-	ld (ix+3), $04
-	ld (ix+4), <_DATA_801_
-	ld (ix+5), >_DATA_801_
-	ld ix, _RAM_C010_
-	ld (ix+0), $05
-	ld (ix+2), $70
-	ld (ix+3), $04
-	ld (ix+4), $01
-	ld (ix+5), $60
-	ld a, (_SRAM_22C8_CheatEnabled)
-	or a
-	jr nz, +
-	ld a, (_SRAM_22C7_)
-	or a
-	jr nz, +
-	rst $30	; _LABEL_30_
+  dec (ix+4)
+  ret nz
+  ld (ix+4), $01
+  ld a, (ix+2)
+  sub (ix+5)
+  jr nz, _LABEL_65C8_
+  ld (ix+0), $00
+  push ix
+  ld ix, _RAM_C000_
+  ld (ix+0), $03
+  ld (ix+2), $60
+  ld (ix+3), $04
+  ld (ix+4), <_DATA_801_
+  ld (ix+5), >_DATA_801_
+  ld ix, _RAM_C010_
+  ld (ix+0), $05
+  ld (ix+2), $70
+  ld (ix+3), $04
+  ld (ix+4), $01
+  ld (ix+5), $60
+  ld a, (_SRAM_22C8_CheatEnabled)
+  or a
+  jr nz, +
+  ld a, (_SRAM_22C7_)
+  or a
+  jr nz, +
+  rst $30 ; _LABEL_30_
 ; Data from 65C4 to 65C4 (1 bytes)
 .db $44
 
 +:
-	pop ix
-	ret
+  pop ix
+  ret
 
 _LABEL_65C8_:
-	cp (ix+3)
-	jr c, +
-	ld a, (ix+3)
+  cp (ix+3)
+  jr c, +
+  ld a, (ix+3)
 +:
-	ld d, a
-	ld a, (ix+2)
-	sub d
-	ld (ix+2), a
-	sub (ix+5)
-	cp $28
-	jr c, +
-	ld (ix+3), $0C
-	jr ++
+  ld d, a
+  ld a, (ix+2)
+  sub d
+  ld (ix+2), a
+  sub (ix+5)
+  cp $28
+  jr c, +
+  ld (ix+3), $0C
+  jr ++
 
 +:
-	cp $14
-	jr c, +
-	ld (ix+3), $08
-	jr ++
+  cp $14
+  jr c, +
+  ld (ix+3), $08
+  jr ++
 
 +:
-	cp $05
-	jr c, +
-	ld (ix+3), $07
-	jr ++
+  cp $05
+  jr c, +
+  ld (ix+3), $07
+  jr ++
 
 +:
-	ld (ix+3), $05
+  ld (ix+3), $05
 ++:
-	call _LABEL_6738_
-	ld d, (ix+2)
-	ld e, $58
-	ld a, iyl
-	add a, a
-	add a, iyl
-	add a, a
-	call _LABEL_9D9_
-	ret
+  call _LABEL_6738_
+  ld d, (ix+2)
+  ld e, $58
+  ld a, iyl
+  add a, a
+  add a, iyl
+  add a, a
+  call _LABEL_9D9_
+  ret
 
 ; 3rd entry of Jump Table from 6507 (indexed by _RAM_C010_)
 _LABEL_660F_:
-	call _LABEL_6515_
-	ld a, (ix+0)
-	or a
-	ret nz
-	ld (ix+0), $04
-	ld (ix+2), $20
-	ld (ix+3), $18
-	ld (ix+4), $1E
-	ld (ix+5), $60
-	ld (ix+6), $00
-	ret
+  call _LABEL_6515_
+  ld a, (ix+0)
+  or a
+  ret nz
+  ld (ix+0), $04
+  ld (ix+2), $20
+  ld (ix+3), $18
+  ld (ix+4), $1E
+  ld (ix+5), $60
+  ld (ix+6), $00
+  ret
 
 ; 5th entry of Jump Table from 6507 (indexed by _RAM_C010_)
 _LABEL_6630_:
-	call _LABEL_6515_
-	ld a, (ix+0)
-	or a
-	ret nz
-	ld (ix+0), $04
-	ld (ix+2), $60
-	ld (ix+3), $08
-	ld (ix+4), $28
-	ld (ix+5), $70
-	ld (ix+6), $00
-	ret
+  call _LABEL_6515_
+  ld a, (ix+0)
+  or a
+  ret nz
+  ld (ix+0), $04
+  ld (ix+2), $60
+  ld (ix+3), $08
+  ld (ix+4), $28
+  ld (ix+5), $70
+  ld (ix+6), $00
+  ret
 
 ; 4th entry of Jump Table from 6507 (indexed by _RAM_C010_)
 _LABEL_6651_:
-	dec (ix+4)
-	ret nz
-	ld (ix+4), $01
-	ld a, (ix+5)
-	sub (ix+2)
-	cp (ix+3)
-	jr c, +
-	ld a, (ix+3)
+  dec (ix+4)
+  ret nz
+  ld (ix+4), $01
+  ld a, (ix+5)
+  sub (ix+2)
+  cp (ix+3)
+  jr c, +
+  ld a, (ix+3)
 +:
-	ld d, a
-	ld a, (ix+6)
-	inc (ix+6)
-	add a, a
-	ld c, a
-	ld b, $00
-	ld hl, _DATA_66C0_
-	add hl, bc
-	ld a, (hl)
-	inc hl
-	ld e, (hl)
-	ld l, d
-	ld h, $00
-	call _LABEL_552_
-	add hl, hl
-	ld a, h
-	add a, (ix+2)
-	ld d, a
-	ld a, (ix+6)
-	cp $10
-	jr c, ++
-	ld a, d
-	cp (ix+5)
-	jr c, +
-	ld (ix+0), $00
+  ld d, a
+  ld a, (ix+6)
+  inc (ix+6)
+  add a, a
+  ld c, a
+  ld b, $00
+  ld hl, _DATA_66C0_
+  add hl, bc
+  ld a, (hl)
+  inc hl
+  ld e, (hl)
+  ld l, d
+  ld h, $00
+  call _LABEL_552_
+  add hl, hl
+  ld a, h
+  add a, (ix+2)
+  ld d, a
+  ld a, (ix+6)
+  cp $10
+  jr c, ++
+  ld a, d
+  cp (ix+5)
+  jr c, +
+  ld (ix+0), $00
 +:
-	ld (ix+6), $00
-	ld (ix+2), d
-	ld (ix+4), $08
-	ld a, (_SRAM_22C8_CheatEnabled)
-	or a
-	jr nz, ++
-	ld a, (_SRAM_22C7_)
-	or a
-	jr nz, ++
-	rst $30	; _LABEL_30_
+  ld (ix+6), $00
+  ld (ix+2), d
+  ld (ix+4), $08
+  ld a, (_SRAM_22C8_CheatEnabled)
+  or a
+  jr nz, ++
+  ld a, (_SRAM_22C7_)
+  or a
+  jr nz, ++
+  rst $30 ; _LABEL_30_
 ; Data from 66AE to 66AE (1 bytes)
 .db $47
 
 ++:
-	ld a, $58
-	sub e
-	ld e, a
-	call _LABEL_6738_
-	ld a, iyl
-	add a, a
-	add a, iyl
-	add a, a
-	call _LABEL_9D9_
-	ret
+  ld a, $58
+  sub e
+  ld e, a
+  call _LABEL_6738_
+  ld a, iyl
+  add a, a
+  add a, iyl
+  add a, a
+  call _LABEL_9D9_
+  ret
 
 ; Data from 66C0 to 66DF (32 bytes)
 _DATA_66C0_:
@@ -15614,51 +15648,51 @@ _DATA_66C0_:
 
 ; 6th entry of Jump Table from 6507 (indexed by _RAM_C010_)
 _LABEL_66E0_:
-	ld a, (_SRAM_1B0F_)
-	and $01
-	ret z
-	ld e, (ix+1)
-	ld d, $00
-	ld hl, $6705
-	add hl, de
-	ld a, (_SRAM_22BE_)
-	cp (hl)
-	ret nz
-	inc (ix+1)
-	ld a, (ix+1)
-	cp $0A
-	ret c
-	rst $30	; _LABEL_30_
+  ld a, (_SRAM_1B0F_)
+  and $01
+  ret z
+  ld e, (ix+1)
+  ld d, $00
+  ld hl, $6705
+  add hl, de
+  ld a, (_SRAM_22BE_)
+  cp (hl)
+  ret nz
+  inc (ix+1)
+  ld a, (ix+1)
+  cp $0A
+  ret c
+  rst $30 ; _LABEL_30_
 ; Data from 66FE to 66FE (1 bytes)
 .db $2B
 
-	ld a, $FF
-	ld (_SRAM_22C7_), a
-	ret
+  ld a, $FF
+  ld (_SRAM_22C7_), a
+  ret
 
 ; Data from 6705 to 670E (10 bytes)
 .db $02 $00 $02 $00 $02 $00 $02 $00 $02 $00
 
 ; 7th entry of Jump Table from 6507 (indexed by _RAM_C010_)
 _LABEL_670F_:
-	ld e, (ix+1) ; button press counter
-	ld d, $00
-	ld hl, _cheatButtons
-	add hl, de
-	ld a, (_SRAM_22BE_ControllerInputs)
-	cp (hl)
-	ret nz
-	inc (ix+1)
-	ld a, (ix+1)
-	cp $0A
-	ret c
-	rst $30	; _LABEL_30_
+  ld e, (ix+1) ; button press counter
+  ld d, $00
+  ld hl, _cheatButtons
+  add hl, de
+  ld a, (_SRAM_22BE_ControllerInputs)
+  cp (hl)
+  ret nz
+  inc (ix+1)
+  ld a, (ix+1)
+  cp $0A
+  ret c
+  rst $30 ; _LABEL_30_
 ; Data from 6727 to 6727 (1 bytes)
 .db $2B
 
-	ld a, $FF
-	ld (_SRAM_22C8_CheatEnabled), a
-	ret
+  ld a, $FF
+  ld (_SRAM_22C8_CheatEnabled), a
+  ret
 
 ; Data from 672E to 6737 (10 bytes)
 _cheatButtons:
@@ -15666,21 +15700,21 @@ _cheatButtons:
 ; U U D U 2 1 R L
 
 _LABEL_6738_:
-	push af
-	push bc
-	ld a, (ix+1)
-	add a, a
-	ld c, a
-	ld b, $00
-	ld hl, _DATA_674C_
-	add hl, bc
-	ld a, (hl)
-	inc hl
-	ld h, (hl)
-	ld l, a
-	pop bc
-	pop af
-	ret
+  push af
+  push bc
+  ld a, (ix+1)
+  add a, a
+  ld c, a
+  ld b, $00
+  ld hl, _DATA_674C_
+  add hl, bc
+  ld a, (hl)
+  inc hl
+  ld h, (hl)
+  ld l, a
+  pop bc
+  pop af
+  ret
 
 ; Pointer Table from 674C to 6753 (4 entries, indexed by _RAM_C011_)
 _DATA_674C_:
@@ -15908,7 +15942,7 @@ _LABEL_68CC_:
 
   call _LABEL_69DA_
   call _LABEL_6A2D_
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 68DD to 68DE (2 bytes)
 .db $20 $02
@@ -15917,7 +15951,7 @@ _LABEL_68CC_:
 ; Data from 68E0 to 68E1 (2 bytes)
 .db $0C $04
 
-  call _LABEL_940_
+  call _LABEL_940_ClearTilemap
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
   ld (hl), $00
@@ -15933,7 +15967,7 @@ _LABEL_68CC_:
   ld a, $FF
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   ld a, (_SRAM_25E9_)
   cp $01
   jp nz, +
@@ -15987,7 +16021,7 @@ _LABEL_693D_:
 
 +:
   ld c, $08
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   jp _LABEL_67E0_
 
 _LABEL_6958_:
@@ -16002,7 +16036,7 @@ _LABEL_6958_:
 
   call _LABEL_69DA_
   call _LABEL_6A2D_
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6969 to 696A (2 bytes)
 .db $20 $02
@@ -16026,7 +16060,7 @@ _LABEL_6958_:
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
   ld c, $08
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   ld a, (_SRAM_25E9_)
   cp $01
   jp nz, +
@@ -16174,7 +16208,7 @@ _LABEL_6A2D_:
   or l
   ret z
   ld c, $08
-  jp _LABEL_73C_
+  jp _LABEL_73C_FadeOut
 
 _LABEL_6A38_:
   push af
@@ -16291,8 +16325,8 @@ _LABEL_6AA5_:
   ld a, $01
   ld (_SRAM_644_), a
   call _LABEL_69DA_
-  call _LABEL_3B_
-  call _LABEL_940_
+  call _LABEL_3B_ScreenOff
+  call _LABEL_940_ClearTilemap
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
   ld (hl), $00
@@ -16314,7 +16348,7 @@ _LABEL_6AA5_:
   ld hl, _LABEL_3A6B_
   ld (_RAM_D683_), hl
   ld c, $08
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   ld hl, $0014
   call _LABEL_9CA_wait
   call _LABEL_6E2F_
@@ -16532,16 +16566,16 @@ _LABEL_6BEA_:
 .db $FD
 
   ld c, $04
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   call _LABEL_7EAE_
   ld hl, _LABEL_3468_
   ld (_RAM_D683_), hl
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 6C17 to 6C18 (2 bytes)
 .db $04 $08
 
-  call _LABEL_940_
+  call _LABEL_940_ClearTilemap
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
   ld (hl), $00
@@ -16557,7 +16591,7 @@ _LABEL_6BEA_:
   ld a, $FF
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   ret
 
 _LABEL_6C48_:
@@ -16932,8 +16966,8 @@ _LABEL_6F5D_:
 _LABEL_6FA6_:
   call _LABEL_38FE_
   call _LABEL_69DA_
-  call _LABEL_3B_
-  call _LABEL_940_
+  call _LABEL_3B_ScreenOff
+  call _LABEL_940_ClearTilemap
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
   ld (hl), $00
@@ -16961,7 +16995,7 @@ _LABEL_6FA6_:
   ld hl, _LABEL_3A6B_
   ld (_RAM_D683_), hl
   ld c, $01
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   ld hl, $001E
   call _LABEL_9CA_wait
   xor a
@@ -16998,7 +17032,7 @@ _LABEL_6FA6_:
 .db $FD
 
   ld c, $04
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   ld hl, $0078
   call _LABEL_9CA_wait
   jp _LABEL_0_
@@ -17608,13 +17642,13 @@ _DATA_7596_:
 _LABEL_76C6_:
   call _LABEL_38FE_
   ld c, $08
-  call _LABEL_73C_
-  call _LABEL_3B_
+  call _LABEL_73C_FadeOut
+  call _LABEL_3B_ScreenOff
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 76D2 to 76D3 (2 bytes)
 .db $04 $08
 
-  call _LABEL_940_
+  call _LABEL_940_ClearTilemap
   call _LABEL_91D_
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
@@ -17650,7 +17684,7 @@ _LABEL_76C6_:
 .db $0A
 
   ld c, $08
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   ld ixl, $1E
 --:
   ld hl, $7764
@@ -17680,7 +17714,7 @@ _LABEL_76C6_:
   and $80
   push af
   ld c, $04
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   pop af
   ret
 
@@ -17700,13 +17734,13 @@ _DATA_77A8_:
 _LABEL_77C8_:
   call _LABEL_38FE_
   ld c, $08
-  call _LABEL_73C_
-  call _LABEL_3B_
+  call _LABEL_73C_FadeOut
+  call _LABEL_3B_ScreenOff
   rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 77D4 to 77D5 (2 bytes)
 .db $04 $08
 
-  call _LABEL_940_
+  call _LABEL_940_ClearTilemap
   call _LABEL_91D_
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
@@ -17725,7 +17759,7 @@ _LABEL_77C8_:
 .db $00 $11
 
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   ld iy, _RAM_C000_
   jp _LABEL_7859_
 
@@ -17832,7 +17866,7 @@ _LABEL_7866_:
   ld hl, $4650
   call _LABEL_9CA_wait
   ld c, $04
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   ld hl, $003C
   call _LABEL_9CA_wait
   jp _LABEL_0_
@@ -18015,7 +18049,7 @@ _LABEL_7EAE_:
   ld bc, $0020
   ldir
   ld c, $08
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   xor a
   ld (_SRAM_26B1_), a
   push hl
@@ -21084,7 +21118,7 @@ _LABEL_9117_:
 .db $FD
 
   ld c, $08
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   push hl
   ld hl, $0117
   jp _LABEL_43C_
@@ -29605,7 +29639,7 @@ _LABEL_C3C1_:
   push af
   push bc
   ld c, $02
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   pop bc
   pop af
   ret
@@ -29615,7 +29649,7 @@ _LABEL_C3CB_:
   push af
   push bc
   ld c, $02
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   pop bc
   pop af
   ret
@@ -30058,13 +30092,13 @@ _LABEL_C5CF_:
   ld (_RAM_D69E_), a
   inc hl
   call _LABEL_38FE_
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   ld a, (_RAM_D69F_)
   call _LABEL_2568_
   ld hl, _SRAM_2C00_
   ld de, $5400
   ld bc, $1400
-  call _LABEL_305_
+  call _LABEL_305_CopyToVRAM
   call _LABEL_CAF4_
   call _LABEL_1A47_
   call _LABEL_12B0_
@@ -30083,7 +30117,7 @@ _LABEL_C5CF_:
 ; 35th entry of Jump Table from C0E0 (indexed by unknown)
 _LABEL_C614_:
   push af
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   pop af
   ret
 
@@ -30193,8 +30227,8 @@ _LABEL_C693_:
   push bc
   push de
   push hl
-  call _LABEL_3B_
-  call _LABEL_940_
+  call _LABEL_3B_ScreenOff
+  call _LABEL_940_ClearTilemap
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
   ld (hl), $00
@@ -30218,7 +30252,7 @@ _LABEL_C693_:
   ld a, $FF
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   pop hl
   pop de
   pop bc
@@ -30596,7 +30630,7 @@ _LABEL_C8B8_:
   push af
   push bc
   ld c, $08
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   pop bc
   pop af
   ret
@@ -30606,7 +30640,7 @@ _LABEL_C8C2_:
   push af
   push bc
   ld c, $08
-  call _LABEL_73C_
+  call _LABEL_73C_FadeOut
   pop bc
   pop af
   ret
@@ -31588,8 +31622,8 @@ _LABEL_CDED_:
   call _LABEL_38FE_
   ld hl, _LABEL_3532_
   ld (_RAM_D683_), hl
-  call _LABEL_3B_
-  call _LABEL_940_
+  call _LABEL_3B_ScreenOff
+  call _LABEL_940_ClearTilemap
   rst $18 ; _LABEL_18_CallBankedFunction
 
 ; Data from CDFD to CDFE (2 bytes)
@@ -31611,7 +31645,7 @@ _LABEL_CDFF_:
   ld a, $FF
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
-  call _LABEL_4E_
+  call _LABEL_4E_ScreenOn
   rst $18 ; _LABEL_18_CallBankedFunction
 
 ; Data from CE2B to CE2C (2 bytes)
@@ -47243,8 +47277,8 @@ _DATA_18004_:
 +:
   push de
   ld c, $08
-  call _LABEL_73C_
-  call _LABEL_3B_
+  call _LABEL_73C_FadeOut
+  call _LABEL_3B_ScreenOff
   ld hl, _DATA_125E_
   ld de, _SRAM_227C_
   ld bc, $0020
@@ -47402,7 +47436,7 @@ _LABEL_1814A_:
   ld bc, $00E0
   call _LABEL_995_
   ld de, _SRAM_6FF_
-  rst $08 ; _LABEL_8_
+  rst $08 ; _LABEL_8_SetVDPAddress
   ld hl, _DATA_18246_
   ld a, $01
   call _LABEL_A0C_
@@ -47437,7 +47471,7 @@ _LABEL_1814A_:
 
 ++:
   ld c, $08
-  call _LABEL_79B_
+  call _LABEL_79B_FadeIn
   push af
   push bc
   push de
@@ -47569,10 +47603,10 @@ _LABEL_182B3_:
 .db $FD
 
   ld c, $08
-  call _LABEL_73C_
-  call _LABEL_3B_
+  call _LABEL_73C_FadeOut
+  call _LABEL_3B_ScreenOff
   ld de, $86FB
-  rst $08 ; _LABEL_8_
+  rst $08 ; _LABEL_8_SetVDPAddress
   ld hl, _DATA_18246_
   ld a, $01
   call _LABEL_A0C_
@@ -54557,7 +54591,7 @@ _LABEL_2922C_:
   push hl
   ld bc, _DATA_2923E_
   ld de, _RAM_C220_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   pop hl
   pop de
   pop bc
@@ -54592,7 +54626,7 @@ _LABEL_292E1_:
   inc hl
   ld b, (hl)
   ld de, _RAM_C071_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   pop hl
   pop de
   pop bc
@@ -55580,22 +55614,21 @@ _LABEL_42A82_:
 .BANK 17 SLOT 1
 .ORG $0000
 
-; Data from 44000 to 4400B (12 bytes)
-.db $0C $40 $22 $42 $9D $4F $15 $60 $B8 $6E $35 $6D
+.dw _LABEL_4400C_ _LABEL_44222_ _LABEL_44F9D_ _LABEL_46015_ _LABEL_46EB8_ _LABEL_46D35_
 
-+:
+_LABEL_4400C_:
   push af
   push bc
   push de
   push hl
-  call _LABEL_3B_
-  ld bc, _DATA_4402D_
-  ld de, _RAM_C000_
-  call _LABEL_B48_DecompressTiles
-  ld hl, $C000
-  ld de, $4400
-  ld bc, $0780
-  call _LABEL_305_
+    call _LABEL_3B_ScreenOff
+    ld bc, _DATA_4402D_
+    ld de, _RAM_C000_
+    call _LABEL_B48_Decompress
+    ld hl, _RAM_C000_
+    ld de, $4400
+    ld bc, $0780
+    call _LABEL_305_CopyToVRAM
   pop hl
   pop de
   pop bc
@@ -55642,14 +55675,14 @@ _LABEL_44222_:
   push bc
   push de
   push hl
-  call _LABEL_3B_
+  call _LABEL_3B_ScreenOff
   ld bc, _DATA_44261_
   ld de, _RAM_C000_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   ld hl, $C000
   ld de, $6000
   ld bc, $1400
-  call _LABEL_305_
+  call _LABEL_305_CopyToVRAM
   ld hl, $4E53
   ld de, $0001
   ld bc, $1408
@@ -55677,15 +55710,15 @@ _LABEL_44F9D_:
   push bc
   push de
   push hl
-  call _LABEL_3B_
-  call _LABEL_940_
+  call _LABEL_3B_ScreenOff
+  call _LABEL_940_ClearTilemap
   ld bc, _DATA_45005_
   ld de, _SRAM_2C00_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   ld hl, $AC00
   ld de, $5400
   ld bc, $1400
-  call _LABEL_305_
+  call _LABEL_305_CopyToVRAM
   ld hl, $5E55
   ld de, $0002
   ld bc, $1408
@@ -55765,15 +55798,15 @@ _LABEL_46015_:
   push bc
   push de
   push hl
-  call _LABEL_3B_
-  call _LABEL_940_
+  call _LABEL_3B_ScreenOff
+  call _LABEL_940_ClearTilemap
   ld bc, _DATA_4607D_
   ld de, _SRAM_2C00_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   ld hl, $AC00
   ld de, $5400
   ld bc, $1400
-  call _LABEL_305_
+  call _LABEL_305_CopyToVRAM
   ld hl, $6B1D
   ld de, $0400
   ld bc, $0C11
@@ -55813,6 +55846,7 @@ _LABEL_46015_:
 ; Data from 4607D to 46B1C (2720 bytes)
 _DATA_4607D_:
 .incbin "Shining Force Gaiden (JP)_DATA_4607D_.inc"
+
 
 ; Data from 46B1D to 46CB4 (408 bytes)
 _DATA_46B1D_:
@@ -55863,7 +55897,7 @@ _LABEL_46D35_:
   push iy
   ld bc, _DATA_46D92_
   ld de, _RAM_C000_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   ld hl, $C000
   ld de, $6800
   ld bc, $01C0
@@ -55925,6 +55959,95 @@ _DATA_46E7C_:
 ; Data from 46E98 to 47FFF (4456 bytes)
 _DATA_46E98_:
 .incbin "Shining Force Gaiden (JP)_DATA_46E98_.inc"
+
+_LABEL_46EB8_:
+  push af
+  push bc
+  push de
+  push hl
+  push af
+    rst $30 ; _LABEL_30_
+.db $FD
+
+    call _LABEL_3B_ScreenOff
+    call _LABEL_940_ClearTilemap
+    ; Decompress to buffer
+    ld bc, _DATA_46F61_Tiles
+    ld de, _SRAM_2C00_
+    call _LABEL_B48_Decompress
+    ; Copy to VRAM
+    ld hl, _SRAM_2C00_
+    ld de, $5400 ; VRAM address
+    ld bc, $1220 ; Size
+    call _LABEL_305_CopyToVRAM
+    
+    ld hl, $003C
+    call _LABEL_9CA_wait
+  pop af
+  push af
+    ; Look up tilemap?
+    and $07
+    ld hl, $00E4
+    call _LABEL_552_Multiply
+    ld de, $7A05
+    add hl, de
+    ld de, $0004
+    ld bc, $1306
+    call _LABEL_FFD_
+  pop af
+  bit 7, a
+    jr z, +
+    ld hl, $7D95
+    ld de, _DATA_70B_
+    ld bc, $0502
+    call _LABEL_FFD_
+    rst $30 ; _LABEL_30_
+  
+  ; Data from 46F09 to 46F09 (1 bytes)
+  .db $FE
+  
+_LABEL_46F0A_:  
+    rst $30 ; _LABEL_30_
+  
+  ; Data from 46F0B to 46F0B (1 bytes)
+  .db $0F
+  
++:  
+    ld hl, _DATA_47DA9_
+    ld de, _SRAM_227C_
+    ld bc, $0020
+    ldir
+    ld a, $FF
+    ld (_SRAM_227B_), a
+    ld a, $04
+    ld (_SRAM_22C3_), a
+    call _LABEL_3651_
+    ld c, $04
+    call _LABEL_79B_FadeIn
+    ld hl, $012C
+    call _LABEL_9CA_
+    ld c, $04
+    call _LABEL_73C_FadeOut
+    call _LABEL_3B_ScreenOff
+    call _LABEL_940_ClearTilemap
+    ld hl, _DATA_125E_
+    ld de, _SRAM_227C_
+    ld bc, $0020
+    ldir
+    ld hl, _DATA_125E_
+    ld bc, $0020
+    ldir
+    xor a
+    ld (_SRAM_22C3_), a
+    ld a, $FF
+    ld (_SRAM_227B_), a
+    call _LABEL_3651_
+    call _LABEL_4E_
+    pop hl
+    pop de
+    pop bc
+    pop af
+    ret
 
 .BANK 18
 .ORG $0000
@@ -56078,7 +56201,7 @@ _DATA_59400_:
   inc hl
   push hl
   ld de, _RAM_C000_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   ld hl, $C000
   ld de, $7000
   ld b, a
@@ -56106,7 +56229,7 @@ _DATA_59400_:
   push hl
   push de
   ld de, _RAM_C000_
-  call _LABEL_B48_DecompressTiles
+  call _LABEL_B48_Decompress
   ld hl, $C000
   pop de
   ld b, a

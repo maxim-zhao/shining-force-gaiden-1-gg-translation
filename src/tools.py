@@ -746,6 +746,77 @@ def encode_names(yaml_filename, asm_filename):
             f.write(".ends\n\n")
 
 
+def decompress(filename, data_offset):
+    with open(filename, "rb") as f:
+        f.seek(data_offset)
+        # Check for marker
+        marker = int.from_bytes(f.read(2), byteorder="little")
+        if marker != 1:
+            raise Exception(f"Marker not found at offset {data_offset:x}")
+        # Then loop
+        flag_bit_count = 0
+        buffer = bytearray()
+        while True:
+            if flag_bit_count == 0:
+                # Read flag bits
+                flag_bits = f.read(1)[0]
+                flag_bit_count = 8
+            # Get next flag bit
+            is_literal = (flag_bits & 1) == 1
+            flag_bits >>= 1
+            flag_bit_count -= 1
+            # Act on it
+            if is_literal:
+                buffer.append(f.read(1)[0])
+            else:
+                # Next word is the length + offset
+                lz_data = int.from_bytes(f.read(2), byteorder="little")
+                if lz_data == 0:
+                    # End of stream
+                    break
+                # Length is encoded as n-3
+                length = ((lz_data >> 8) & 0x1f) + 3
+                # Offset is encoded as a signed offset with the length embedded
+                # First we extract the bits as unsigned...
+                offset = ((lz_data >> 5) & 0x0700) + (lz_data & 0xff)
+                # This is actually a 2's complement negative number with the sign missing.
+                # For example, -10 will be %111_1111_0110 = 2038
+                #            -2000 will be %000_0011_0000 = 48
+                # So subtracting from 2048 gets tha absolute offset.
+                offset = 2048 - offset
+                # It may be an overlapping copy so I think Python won't like that, so we copy one at a time
+                start = len(buffer) - offset
+                end = start + length
+                for i in range(start, end):
+                    buffer.append(buffer[i])
+        compressed_size = f.tell() - data_offset
+        compression_level = (len(buffer) - compressed_size) / len(buffer)
+
+    # The data is deinterleaved per tile, so we re-interleave it
+    for tile_offset in range(0, len(buffer), 32):
+        # We want to convert this:
+        # 01234567
+        # 89abcdef
+        # ghijklmn
+        # opqrstuv
+        # to this:
+        # 08go 19hp 2aiq 3bjr ...
+        # i.e. take every eight byte
+        # We take a slice copy...
+        tile = buffer[tile_offset:tile_offset + 32]
+        for column in range(0, 8):
+            for row in range(0, 4):
+                source = column + row * 8
+                dest = tile_offset + row + column * 4
+                # copy
+                buffer[dest] = tile[source]
+
+    output_filename = f"{filename}.{data_offset:x}.bin"
+    with open(output_filename, "wb") as f:
+        f.write(buffer)
+    print(f"Wrote {len(buffer)} bytes to {output_filename}, compression level was {compression_level:.2%}")
+
+
 def main():
     verb = sys.argv[1]
     if verb == 'dump_script':
@@ -760,6 +831,8 @@ def main():
         dump_names(sys.argv[2], sys.argv[3])
     elif verb == "encode_names":
         encode_names(sys.argv[2], sys.argv[3])
+    elif verb == "decompress":
+        decompress(sys.argv[2], int(sys.argv[3], 0))
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 
