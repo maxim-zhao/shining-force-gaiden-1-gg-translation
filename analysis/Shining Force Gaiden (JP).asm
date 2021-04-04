@@ -2802,7 +2802,7 @@ _LABEL_B08_:
   pop de
   ret
 
-_LABEL_B48_Decompress:
+_LABEL_B48_DecompressTiles:
   push bc
   push de
   push hl
@@ -6662,7 +6662,7 @@ _LABEL_2283_:
   ld a, (bc)
   ld b, a
   ld c, l
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   ld hl, $0100
   add hl, de
   ex de, hl
@@ -6890,7 +6890,7 @@ _LABEL_25D8_:
   inc l
   ld b, (hl)
   ld de, _SRAM_2C00_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   pop af
   ld (_RAM_FFFE_), a
   ret
@@ -7188,7 +7188,7 @@ _LABEL_2886_:
   inc hl
   ld b, (hl)
   ld de, _RAM_C000_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   pop af
   ld (_RAM_FFFE_), a
   pop hl
@@ -7277,7 +7277,7 @@ _LABEL_2907_:
   inc hl
   ld b, (hl)
   ld de, _RAM_C000_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   pop af
   ld (_RAM_FFFE_), a
   pop hl
@@ -7330,7 +7330,7 @@ _LABEL_2942_:
   ld b, h
   ld c, l
   ld de, _SRAM_2C00_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   ld h, a
   pop af
   ld (_RAM_FFFE_), a
@@ -54591,7 +54591,7 @@ _LABEL_2922C_:
   push hl
   ld bc, _DATA_2923E_
   ld de, _RAM_C220_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   pop hl
   pop de
   pop bc
@@ -54626,7 +54626,7 @@ _LABEL_292E1_:
   inc hl
   ld b, (hl)
   ld de, _RAM_C071_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   pop hl
   pop de
   pop bc
@@ -55624,7 +55624,7 @@ _LABEL_4400C_:
     call _LABEL_3B_ScreenOff
     ld bc, _DATA_4402D_
     ld de, _RAM_C000_
-    call _LABEL_B48_Decompress
+    call _LABEL_B48_DecompressTiles
     ld hl, _RAM_C000_
     ld de, $4400
     ld bc, $0780
@@ -55678,7 +55678,7 @@ _LABEL_44222_:
   call _LABEL_3B_ScreenOff
   ld bc, _DATA_44261_
   ld de, _RAM_C000_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   ld hl, $C000
   ld de, $6000
   ld bc, $1400
@@ -55714,7 +55714,7 @@ _LABEL_44F9D_:
   call _LABEL_940_ClearTilemap
   ld bc, _DATA_45005_
   ld de, _SRAM_2C00_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   ld hl, $AC00
   ld de, $5400
   ld bc, $1400
@@ -55802,7 +55802,7 @@ _LABEL_46015_:
   call _LABEL_940_ClearTilemap
   ld bc, _DATA_4607D_
   ld de, _SRAM_2C00_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   ld hl, $AC00
   ld de, $5400
   ld bc, $1400
@@ -55897,7 +55897,7 @@ _LABEL_46D35_:
   push iy
   ld bc, _DATA_46D92_
   ld de, _RAM_C000_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   ld hl, $C000
   ld de, $6800
   ld bc, $01C0
@@ -55965,52 +55965,46 @@ _LABEL_46EB8_:
   push bc
   push de
   push hl
-  push af
-    rst $30 ; _LABEL_30_
+    push af
+      rst $30 ; _LABEL_30_
 .db $FD
 
-    call _LABEL_3B_ScreenOff
-    call _LABEL_940_ClearTilemap
-    ; Decompress to buffer
-    ld bc, _DATA_46F61_Tiles
-    ld de, _SRAM_2C00_
-    call _LABEL_B48_Decompress
-    ; Copy to VRAM
-    ld hl, _SRAM_2C00_
-    ld de, $5400 ; VRAM address
-    ld bc, $1220 ; Size
-    call _LABEL_305_CopyToVRAM
-    
-    ld hl, $003C
-    call _LABEL_9CA_wait
-  pop af
-  push af
-    ; Look up tilemap?
-    and $07
-    ld hl, $00E4
-    call _LABEL_552_Multiply
-    ld de, $7A05
-    add hl, de
-    ld de, $0004
-    ld bc, $1306
-    call _LABEL_FFD_
-  pop af
-  bit 7, a
+      call _LABEL_3B_ScreenOff
+      call _LABEL_940_ClearTilemap
+      ; Decompress to buffer
+      ld bc, _DATA_46F61_Tiles
+      ld de, _SRAM_2C00_
+      call _LABEL_B48_DecompressTiles
+      ; Copy to VRAM
+      ld hl, _SRAM_2C00_
+      ld de, $5400 ; VRAM address
+      ld bc, $1220 ; Size
+      call _LABEL_305_CopyToVRAM
+      
+      ld hl, $003C
+      call _LABEL_9CA_wait
+    pop af
+    push af
+      ; Look up tilemap?
+      and $07
+      ld hl, $00E4 ; 228 bytes = 19x6x2 tilemap area
+      call _LABEL_552_Multiply
+      ld de, _DATA_47A05_ ; data
+      add hl, de
+      ld de, $0004
+      ld bc, $1306
+      call _LABEL_FFD_
+    pop af
+    bit 7, a
     jr z, +
-    ld hl, $7D95
-    ld de, _DATA_70B_
+    ld hl, _DATA_47D95_ ; Top row?
+    ld de, $070B
     ld bc, $0502
     call _LABEL_FFD_
     rst $30 ; _LABEL_30_
-  
-  ; Data from 46F09 to 46F09 (1 bytes)
-  .db $FE
-  
-_LABEL_46F0A_:  
+.db $FE
     rst $30 ; _LABEL_30_
-  
-  ; Data from 46F0B to 46F0B (1 bytes)
-  .db $0F
+.db $0F
   
 +:  
     ld hl, _DATA_47DA9_
@@ -56201,7 +56195,7 @@ _DATA_59400_:
   inc hl
   push hl
   ld de, _RAM_C000_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   ld hl, $C000
   ld de, $7000
   ld b, a
@@ -56229,7 +56223,7 @@ _DATA_59400_:
   push hl
   push de
   ld de, _RAM_C000_
-  call _LABEL_B48_Decompress
+  call _LABEL_B48_DecompressTiles
   ld hl, $C000
   pop de
   ld b, a
