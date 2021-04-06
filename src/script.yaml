@@ -900,7 +900,348 @@
     to turn the tables<line>
     on them!<wait><end>
 
+######################
+# Battle 1
+######################
 
+- index: 372
+  character: Dark Mage
+  ja: ガ-ディアナの みならいぶたいを<line>あまくみすぎて いたようだぜ・・・<wait more><end>
+  literal: ''
+  en: |
+    Seems like I have<line>
+    underestimated the<line>
+    apprentice force<line>
+    of Guardiana...<wait more><end>
+
+- index: 373
+  character: Dark Mage
+  ja: しかし おれさまもタダではしなねえ<line>このふねも みちずれだ! あばよ<wait><end>
+  literal: ''
+  en: |
+    But I’m not going<line>
+    out just like<line>
+    that, I’ll take<line>
+    this ship down<line>
+    with me! See ya!<wait><end>
+
+- index: 374
+  character: Lowe
+  ja: おおっ なんということでしょう!<line>やつは じばくするちからをつかい<line>ふねに あなをあけていきましたぞ<wait more><end>
+  literal: ''
+  en: |
+    Unbelievable, he<line>
+    self-destructed<line>
+    and made a hole in<line>
+    the ship!<wait more><end>
+
+- index: 375
+  character: Lowe
+  ja: こうなったら あそこにみえるしまに<line>どうにか およぎつくしかありません<line>さあ はやく とびこむのです・・・<wait><end>
+  literal: ''
+  en: |
+    We have no other<line>
+    choice but to<line>
+    somehow make it<line>
+    swimming to that<line>
+    island over there.<wait more><line>
+    Quickly, jump<line>
+    overboard...<wait><end>
+
+- index: 376
+  character: Voice
+  ja: <party leader>! しっかりして!<line><party leader>! めをさまして・・・<wait more><end>
+  literal: ''
+  en: |
+    <party leader>, come to<line>
+    your senses!<line>
+    <party leader>, open<line>
+    your eyes...<wait more><end>
+
+- index: 377
+  character: Lowe
+  ja: よかった! きがつきましたね<wait more><end>
+  literal: ''
+  en: |
+    Okay, good! You’re<line>
+    conscious.<wait more><end>
+
+- index: 378
+  character: Lowe
+  ja: しかし ふねからとびこんだときに<line>みんな そうびひんをなくしました<line>いま てきとあったらたいへんですよ<wait><end>
+  literal: ''
+  en: |
+    However, everyone<line>
+    lost their<line>
+    equipment when<line>
+    they jumped off<line>
+    the ship.<wait more><line>
+    If we encounter<line>
+    enemies now we<line>
+    will be in a<line>
+    pickle.<wait><end>
+
+- index: 379
+  character: Cray’s sister
+  ja: やめて! どうか おゆるしください<wait><end>
+  literal: ''
+  en: |
+    Stop, please let<line>
+    me go!<wait><end>
+
+- index: 380
+  character: Dwarf
+  ja: だめだ! もう かんねんするんだな<line>おまえのたよりの つよいあにきも<line>ここには いないんだからな ワハハ<wait more><end>
+  literal: ''
+  en: |
+    No, give it up<line>
+    already. And your<line>
+    trusted brother<line>
+    ain’t around<line>
+    either anyway.<wait more><line>
+    Hahaha!<wait more><end>
+
+- index: 381
+  character: Dwarf
+  ja: こんなたいくつなミニヨムじまで<line>おまえのようなうつくしいむすめに<line>あえるとは おもわなかったぞ!<wait><end>
+  literal: ''
+  en: |
+    I didn’t think I’d<line>
+    meet such a<line>
+    beautiful lady on<line>
+    such a boring<line>
+    island like Miniyom!<wait><end>
+
+- index: 382
+  character: Cray’s sister
+  ja: いや-っ! いや-っ!<wait><end>
+  literal: ''
+  en: |
+    No! No!<wait><end>
+
+- index: 383
+  character: Lowe
+  ja: やめんか! サイプレスのうじむしめ!<wait><end>
+  literal: ''
+  en: |
+    Stop it, Cypress<line>
+    maggots!<wait><end>
+
+- index: 384
+  character: Dwarf
+  ja: なんだ! きっ きさまらはだれだ!<line>じゃまするやつらは ようしゃしねえぞ<line>やろうども! みなごろしだ!<wait><end>
+  literal: ''
+  en: |
+    What!? Who are<line>
+    you? I won’t<line>
+    forgive you for<line>
+    interfering. Guys,<line>
+    kill them all!<wait><end>
+
+- index: 385
+  character: Lowe
+  ja: みんな! てぢかなものをぶきにして<line>やつらをむかえうたなければなりません<line>さぁ あたりをしらべるのです<wait><end>
+  literal: ''
+  en: |
+    Everyone,<line>
+    weaponize whatever<line>
+    you can find<line>
+    around you and<line>
+    engage them.<wait more><line>
+    Investigate your<line>
+    surroundings!<wait><end>
+
+######################
+# Battle 2
+######################
+
+- index: 386
+  character: Dwarf
+  ja: そっ そうか・・・わかったぞ・・・<line>おまえらは ガ-ディアナぐんだな<wait more><end>
+  literal: ''
+  en: |
+    I see... you must<line>
+    be the Guardiana<line>
+    force.<wait more><end>
+
+- index: 387
+  character: Dwarf
+  ja: サイプレスの しゅりょくのいない<line>このしまにじょうりくするとは・・・<line>おもっても いなかった・・・グフッ<wait><end>
+  literal: ''
+  en: |
+    We didn’t think<line>
+    that... you’d come<line>
+    to this island,<line>
+    the main Cypress<line>
+    army isn’t<line>
+    stationed here...<wait><end>
+
+- index: 388
+  character: Cray
+  ja: だいじょうぶか!けがはないか?<line>サイプレスのやつらが いもうとを<line>つれていったときいて あわてたぞ<wait><end>
+  literal: ''
+  en: |
+    Are you okay? Are<line>
+    you hurt?<wait more><line>
+    I panicked when I<line>
+    learned that those<line>
+    Cypress scum took<line>
+    my sister.<wait><end>
+
+- index: 389
+  character: Cray’s sister
+  ja: もう! ほんとにあぶなかったのよ<line>でも ガ-ディアナのみなさんに<line>たすけていただけて よかった<wait more><end>
+  literal: ''
+  en: |
+    It was close, but<line>
+    I was lucky to<line>
+    have been saved by<line>
+    Guardiana folks.<wait more><end>
+
+- index: 390
+  character: Cray’s sister
+  ja: さもなけりゃ・・・いまごろ・・・<line>ああ かんがえただけでゾッとする<wait><end>
+  literal: ''
+  en: |
+    Otherwise, now...<line>
+    I’d be... oh, just<line>
+    thinking about it<line>
+    makes me shudder.<wait><end>
+
+- index: 391
+  character: Cray
+  ja: なに! ガ-ディアナぐんだと!<wait><end>
+  literal: ''
+  en: |
+    What!? The<line>
+    Guardiana force?<wait><end>
+
+- index: 392
+  character: Cray
+  ja: おまちしてました あなたがたを!<wait more><end>
+  literal: ''
+  en: |
+    I’ve been waiting<line>
+    for you.<wait more><end>
+
+- index: 393
+  character: Cray
+  ja: サイプレスぐんは ガ-ディアナが<line>せめてくると けいかいしていました<line>しかし まさかこのしまにくるとは<wait more><end>
+  literal: ''
+  en: |
+    The Cypress army<line>
+    has been on alert<line>
+    due to the<line>
+    Guardiana forces’<line>
+    assault.<wait more><line>
+    However, they did<line>
+    not expect that<line>
+    you’d come to this<line>
+    island.<wait more><end>
+
+- index: 394
+  character: Cray
+  ja: おねがいです どうかサイプレスを<line>しんかんウォルドルたちをたおし<line>くにのへいわをとりもどしてください<wait more><end>
+  literal: ''
+  en: |
+    I beg of you,<line>
+    please save<line>
+    Cypress.<wait more><line>
+    Defeat the priest<line>
+    Woldol and his<line>
+    lackeys and retake<line>
+    the country.<wait more><end>
+
+- index: 395
+  character: Cray
+  ja: ガ-ディアナのひかりのぐんだんは<line>われわれにも なりひびいています<line>わたしも おともさせてください<wait><end>
+  literal: ''
+  en: |
+    The fame of<line>
+    Guardiana’s force<line>
+    of light has<line>
+    reached us as<line>
+    well.<wait more><line>
+    I too wish to join<line>
+    you.<wait more><end>
+
+- index: 396
+  character: Cray's sister
+  ja: にいさん・・・きもちはわかったわ<line>もうなにもいわない・・・たおしてね<line>そして へいわをとりもどしてね<wait more><end>
+  literal: ''
+  en: |
+    Brother... I<line>
+    understand your<line>
+    feelings. I’m not<line>
+    gonna say<line>
+    anything...<wait more><line>
+    Defeat them and<line>
+    restore the peace.<wait more><end>
+
+- index: 397
+  character: Cray’s sister
+  ja: みなさん! むらにおいでください<line>このさき ほきゅうできませんから<line>そうびなどを ととのえてください<wait><end>
+  literal: ''
+  en: |
+    Everyone, please<line>
+    come to the<line>
+    village.<wait more><line>
+    You won’t be able<line>
+    to resupply after<line>
+    this, so make your<line>
+    preparations.<wait><end>
+
+# (Miniyom village)
+
+- index: 398
+  character: Cray
+  ja: サイプレスほんどにいくためには<line>まず ふねをてにいれなければ!<line>ミニヨムとりでに まいりましょう!<wait><end>
+  literal: ''
+  en: |
+    In order to reach<line>
+    the mainland of<line>
+    Cypress, we must<line>
+    obtain a ship.<wait more><line>
+    Let’s go to<line>
+    Miniyom fortress.<wait><end>
+
+- index: 399
+  character: Cypress knight
+  ja: さがしたぞ! ガ-ディアナぐん!<wait><end>
+  literal: ''
+  en: |
+    We’ve been looking<line>
+    for you, Guardiana<line>
+    force!<wait><end>
+
+- index: 400
+  character: Cypress knight
+  ja: ゴブリンたちが かえってこないので<line>まさかとはおもったが やはりそうか!<line>きさまらに たおされていたのだな!<wait more><end>
+  literal: ''
+  en: |
+    The goblins have<line>
+    not come back.<wait more><line>
+    I didn’t think it<line>
+    would be possible,<line>
+    but it was you who<line>
+    defeated them<line>
+    after all!<wait more><end>
+
+- index: 401
+  character: Cypress knight
+  ja: しかし やつらをたおしたくらいで<line>いいきになるのも これまでだ!<line>われらの ぐんもんにくだるがいい<wait><end>
+  literal: ''
+  en: |
+    However, don’t be<line>
+    full of yourselves<line>
+    cuz you’ve managed<line>
+    to defeat them.<wait more><line>
+    This is where it<line>
+    ends, surrender.<wait><end>
+
+######################
+# Battle 3
+######################
 
 
 
@@ -2723,185 +3064,7 @@
 
 
 
-- index: 372
-  character: ''
-  ja: ガ-ディアナの みならいぶたいを<line>あまくみすぎて いたようだぜ・・・<wait more><end>
-  literal: ''
-  en: ''
 
-- index: 373
-  character: ''
-  ja: しかし おれさまもタダではしなねえ<line>このふねも みちずれだ! あばよ<wait><end>
-  literal: ''
-  en: ''
-
-- index: 374
-  character: ''
-  ja: おおっ なんということでしょう!<line>やつは じばくするちからをつかい<line>ふねに あなをあけていきましたぞ<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 375
-  character: ''
-  ja: こうなったら あそこにみえるしまに<line>どうにか およぎつくしかありません<line>さあ はやく とびこむのです・・・<wait><end>
-  literal: ''
-  en: ''
-
-- index: 376
-  character: ''
-  ja: <party leader>! しっかりして!<line><party leader>! めをさまして・・・<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 377
-  character: ''
-  ja: よかった! きがつきましたね<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 378
-  character: ''
-  ja: しかし ふねからとびこんだときに<line>みんな そうびひんをなくしました<line>いま てきとあったらたいへんですよ<wait><end>
-  literal: ''
-  en: ''
-
-- index: 379
-  character: ''
-  ja: やめて! どうか おゆるしください<wait><end>
-  literal: ''
-  en: ''
-
-- index: 380
-  character: ''
-  ja: だめだ! もう かんねんするんだな<line>おまえのたよりの つよいあにきも<line>ここには いないんだからな ワハハ<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 381
-  character: ''
-  ja: こんなたいくつなミニヨムじまで<line>おまえのようなうつくしいむすめに<line>あえるとは おもわなかったぞ!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 382
-  character: ''
-  ja: いや-っ! いや-っ!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 383
-  character: ''
-  ja: やめんか! サイプレスのうじむしめ!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 384
-  character: ''
-  ja: なんだ! きっ きさまらはだれだ!<line>じゃまするやつらは ようしゃしねえぞ<line>やろうども! みなごろしだ!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 385
-  character: ''
-  ja: みんな! てぢかなものをぶきにして<line>やつらをむかえうたなければなりません<line>さぁ あたりをしらべるのです<wait><end>
-  literal: ''
-  en: ''
-
-- index: 386
-  character: ''
-  ja: そっ そうか・・・わかったぞ・・・<line>おまえらは ガ-ディアナぐんだな<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 387
-  character: ''
-  ja: サイプレスの しゅりょくのいない<line>このしまにじょうりくするとは・・・<line>おもっても いなかった・・・グフッ<wait><end>
-  literal: ''
-  en: ''
-
-- index: 388
-  character: ''
-  ja: だいじょうぶか!けがはないか?<line>サイプレスのやつらが いもうとを<line>つれていったときいて あわてたぞ<wait><end>
-  literal: ''
-  en: ''
-
-- index: 389
-  character: ''
-  ja: もう! ほんとにあぶなかったのよ<line>でも ガ-ディアナのみなさんに<line>たすけていただけて よかった<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 390
-  character: ''
-  ja: さもなけりゃ・・・いまごろ・・・<line>ああ かんがえただけでゾッとする<wait><end>
-  literal: ''
-  en: ''
-
-- index: 391
-  character: ''
-  ja: なに! ガ-ディアナぐんだと!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 392
-  character: ''
-  ja: おまちしてました あなたがたを!<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 393
-  character: ''
-  ja: サイプレスぐんは ガ-ディアナが<line>せめてくると けいかいしていました<line>しかし まさかこのしまにくるとは<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 394
-  character: ''
-  ja: おねがいです どうかサイプレスを<line>しんかんウォルドルたちをたおし<line>くにのへいわをとりもどしてください<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 395
-  character: ''
-  ja: ガ-ディアナのひかりのぐんだんは<line>われわれにも なりひびいています<line>わたしも おともさせてください<wait><end>
-  literal: ''
-  en: ''
-
-- index: 396
-  character: ''
-  ja: にいさん・・・きもちはわかったわ<line>もうなにもいわない・・・たおしてね<line>そして へいわをとりもどしてね<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 397
-  character: ''
-  ja: みなさん! むらにおいでください<line>このさき ほきゅうできませんから<line>そうびなどを ととのえてください<wait><end>
-  literal: ''
-  en: ''
-
-- index: 398
-  character: ''
-  ja: サイプレスほんどにいくためには<line>まず ふねをてにいれなければ!<line>ミニヨムとりでに まいりましょう!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 399
-  character: ''
-  ja: さがしたぞ! ガ-ディアナぐん!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 400
-  character: ''
-  ja: ゴブリンたちが かえってこないので<line>まさかとはおもったが やはりそうか!<line>きさまらに たおされていたのだな!<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 401
-  character: ''
-  ja: しかし やつらをたおしたくらいで<line>いいきになるのも これまでだ!<line>われらの ぐんもんにくだるがいい<wait><end>
-  literal: ''
-  en: ''
 
 - index: 402
   character: ''
