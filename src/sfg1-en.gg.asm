@@ -29,6 +29,8 @@ banks 32
 .unbackground $1b7e3 $1bfff ; Unused
 .unbackground $1fe9f $1ffff ; Unused
 
+; Scripting engine lives in the first part of this bank, thus it's somewhat dependent on the script fitting in after it...
+; Total space for script = 15571 bytes
 .unbackground $20391 $23b76 ; Script data
 .unbackground $23b77 $23b7c ; Script index
 .unbackground $23b7d $23fff ; Unused space
@@ -36,7 +38,8 @@ banks 32
 .unbackground $299d0 $29b85 ; Trees index
 ; Not sure what is in this gap
 .unbackground $29bcd $2a7d2 ; Trees
-.unbackground $23b7d $23fff ; Unused
+.unbackground $2a7d3 $2bfff ; Unused space
+; Total space for trees = 6189 bytes
 
 .unbackground $2527c $27fff ; Unused
 .unbackground $2a72d $2bfff ; Unused
