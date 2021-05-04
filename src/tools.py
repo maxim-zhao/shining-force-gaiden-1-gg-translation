@@ -43,7 +43,7 @@ en_character_map_script = "█ " \
                           "abcdefghijklmnopqrstuvwxyz" \
                           "'\"/" \
                           "██████████████████████████" \
-                          "♥██" \
+                          "♥*█" \
                           "██████████████████████████"
 
 en_character_map_menus = "█ " \
@@ -55,7 +55,7 @@ en_character_map_menus = "█ " \
                          "██████████████████████████" \
                          "'\"/" \
                          "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
-                         "♥██" \
+                         "♥*█" \
                          "abcdefghijklmnopqrstuvwxyz"
 
 
@@ -84,14 +84,18 @@ def bytes_to_japanese(data):
 def english_to_bytes(text, is_menu):
     buffer = bytearray()
     s = text
-    # Replace some "smart" punctuation, also allow _ as visible whitespace and remove all line breaks
+    # Replace some "smart" punctuation
+    # Also allow _ as visible whitespace
+    # Replace line breaks with <line>
+    # Finally remove any <line> before another tag
     for k, v in {
         ("“", "\""),
         ("”", "\""),
         ("’", "'"),
         ("…", "..."),
-        ("\n", ""),
-        ("_", " ")}:
+        ("_", " "),
+        ("\n", "<line>"),
+        ("<line><", "<")}:
         s = s.replace(k, v)
     while len(s) > 0:
         # Check for a tag
@@ -421,8 +425,7 @@ class ScriptEntry:
     def __init__(self, text, name):
         self.label = name
 
-        # Remove line breaks
-        s = text.replace("\n", "")
+        s = text
 
         # Replace with placeholder if empty (for debugging)
         if len(s) == 0:
@@ -457,6 +460,8 @@ def encode_script(script_file, trees_file, data_file):
         else:
             node = script_yaml[index]
             line = node["en"]
+            if line is None:
+                raise Exception(f"No text for {node}")
             if len(line) == 0:
                 line = node["literal"]
         script.append(ScriptEntry(line, f"Script{index}"))
