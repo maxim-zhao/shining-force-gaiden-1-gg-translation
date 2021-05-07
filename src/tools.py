@@ -5,6 +5,7 @@ import math
 import yaml
 import os
 import ruamel.yaml
+import html
 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -890,6 +891,25 @@ def doctoyaml(output_file):
     print("done")
 
 
+def yamltodoc(script_file, html_file):
+    # Read the file
+    with open(script_file, "r", encoding="utf-8") as f:
+        script_yaml = yaml.load(f, Loader=yaml.Loader)
+    # Convert to HTML
+    with open(html_file, "w", encoding="utf-8") as f:
+        f.write("<html><body><style>.mono{font-family:monospace}</style><table border=1>")
+        for x in script_yaml:
+            f.write("<tr>")
+            f.write(f"<td>{x['index']}</td>")
+            f.write(f"<td>{x['character']}</td>")
+            f.write("<td>" + html.escape(x['ja']).replace('\n', '<br>') + "</td>")
+            f.write("<td></td>")
+            f.write("<td>" + html.escape(x['literal']).replace('\n', ' ') + "</td>")
+            f.write("<td class=mono>" + html.escape(x['en']).replace('\n', '<br>') + "</td>")
+            f.write("</tr>")
+        f.write("</table></body></html>")
+    
+
 def main():
     verb = sys.argv[1]
     if verb == 'dump_script':
@@ -908,6 +928,8 @@ def main():
         decompress(sys.argv[2], int(sys.argv[3], 0))
     elif verb == "doctoyaml":
         doctoyaml(sys.argv[2])
+    elif verb == "yamltodoc":
+        yamltodoc(sys.argv[2], sys.argv[3])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 
