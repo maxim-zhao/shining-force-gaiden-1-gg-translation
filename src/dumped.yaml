@@ -1,0 +1,65 @@
+- index: 295
+  character: Guard
+  ja: |-
+    アンリおうに もうしあげます!
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |-
+    アンリ王に　申し上げます！
+  literal: |-
+    Queen Anri!
+  en: |-
+    Queen Anri!
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 296
+  character: Guard
+  ja: |-
+    ただいま ルーンたいりくのみなみ
+    サイプレスこくよりの ししゃが
+    ごあいさつにと まいっております
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |-
+    ただいま　ルーン大陸の南
+    サイプレス国よりの　使者が
+    ご挨拶にと　参っております
+  literal: |-
+    Messengers from Cypress, south of Rune, have come to meet with you.
+  en: |-
+    Messengers from
+    Cypress, south of
+    Rune, have come to
+    meet with you.
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 297
+  character: Lowe
+  ja: |-
+    なんと
+    <delay 01> サイプレスよりのししゃ?
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |-
+    何と　サイプレスよりの使者？
+  literal: |-
+    Messengers from Cypress?
+  en: |-
+    Messengers from
+    Cypress?
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 298
+  character: Lowe
+  ja: |-
+    アンリさま どういたしましょうか?
+    サイプレスは みかいたくのばしょ
+    こうせんてきな とちとききますぞ
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |-
+    アンリ様　どういたしましょうか？
+    サイプレスは　未開拓の場所
+    好戦的な　土地と聞きますぞ
+  literal: |-
+    Queen Anri, what should we do? I have heard Cypress is a wild and warlike place!
+  en: |-
+    Queen Anri, what
+    should we do?
+    I have heard
+    Cypress is a wild
+    and warlike place!
+    <delay 01><delay 01><delay 01><delay 01><end>

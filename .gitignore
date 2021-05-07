@@ -13,3 +13,5 @@ linkfile
 *.bps
 /src/menus.asm
 /src/names.asm
+/src/credentials.json
+/src/token.json

@@ -3,6 +3,13 @@ import sys
 import struct
 import math
 import yaml
+import os
+import ruamel.yaml
+
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
 
 codes = {
     0xc8: "<use dictionary>",
@@ -822,6 +829,67 @@ def decompress(filename, data_offset):
     print(f"Wrote {len(buffer)} bytes to {output_filename}, compression level was {compression_level:.2%}")
 
 
+def extract_row(row):
+    result = []
+    for cell in row['tableCells']:
+        s = ""
+        for content in cell['content']:
+            for element in content['paragraph']['elements']:
+                s += element['textRun']['content']
+        result.append(s.strip())
+    return result
+    
+
+def doctoyaml(output_file):
+    print("Converting Google doc to YAML...")
+    creds = None
+    SCOPES = ['https://www.googleapis.com/auth/documents.readonly']
+    DOCUMENT_ID = '1pXDhi2Zx-rGsbxXCYV0qyOLWdyIuJCjuM_-kIDGmjLc'
+    if os.path.exists('token.json'):
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+
+    service = build('docs', 'v1', credentials=creds)
+
+    print("- Getting document")
+    doc = service.documents().get(documentId=DOCUMENT_ID).execute()
+    print("- Getting elements")
+    elements = doc.get('body').get('content')
+    print("- Getting tables")
+    script = []
+    for table in [x['table'] for x in elements if 'table' in x]:
+        if table['columns'] < 6:
+            continue
+        
+        for row in [extract_row(x) for x in table['tableRows']]:
+            try:
+                script.append(
+                    {
+                        "index": int(row[0]), # Will fail for headers
+                        "character": row[1],
+                        "ja": ruamel.yaml.scalarstring.LiteralScalarString(row[2]),
+                        "ja-kanji": ruamel.yaml.scalarstring.LiteralScalarString(row[3]),
+                        "literal": ruamel.yaml.scalarstring.LiteralScalarString(row[4]),
+                        "en": ruamel.yaml.scalarstring.LiteralScalarString(row[5])
+                    })
+            except:
+                continue;
+    print(f"- saving as {output_file}")
+    with open(output_file, 'w', encoding="utf-8") as file:
+        yaml = ruamel.yaml.YAML()
+        yaml.dump(script, file)
+    print("done")
+
+
 def main():
     verb = sys.argv[1]
     if verb == 'dump_script':
@@ -838,6 +906,8 @@ def main():
         encode_names(sys.argv[2], sys.argv[3])
     elif verb == "decompress":
         decompress(sys.argv[2], int(sys.argv[3], 0))
+    elif verb == "doctoyaml":
+        doctoyaml(sys.argv[2])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 
