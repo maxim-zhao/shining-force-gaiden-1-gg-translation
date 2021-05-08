@@ -5227,436 +5227,6 @@
   literal: ''
   en: ''
 
-- index: 719
-  character: ''
-  ja: |-
-    <clear screen>のろわれてしまったっ<end>
-  literal: ''
-  en: ''
-
-- index: 720
-  character: ''
-  ja: |-
-    <wait more><end>
-  literal: ''
-  en: ''
-
-# TODO these seem like bad pointers...
-- index: 721
-  character: ''
-  ja: |-
-    ホイプレスに な
-  literal: ''
-  en: ''
-
-- index: 722
-  character: ''
-  ja: |-
-    ホイプレスに な
-  literal: ''
-  en: ''
-
-- index: 723
-  character: ''
-  ja: |-
-    ホイプレスに な
-  literal: ''
-  en: ''
-
-- index: 724
-  character: ''
-  ja: |-
-    ホイプレスに な
-  literal: ''
-  en: ''
-
-- index: 725
-  character: ''
-  ja: |-
-    しか
-    こくをねには
-    ましょうのことおすくぞんには いには ひと いかた<wait more>ことった・た<wait more><class
-    name>にあった
-    <wait more>すにつにみと<line>ぎ!<wait more><class name>のましょだ<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 726
-  character: ''
-  ja: |-
-    <name>ののやったすきえてはな・・・<delay 01><delay 01><delay 01><delay 01><delay 01><line>つな<wait
-    more><end>
-  literal: ''
-  en: ''
-
-- index: 727
-  character: ''
-  ja: |-
-    なんすいるば こそったっことらをあったんなられ
-    <delay 01><line>そう ひきゃろ<end>
-  literal: ''
-  en: ''
-
-- index: 728
-  character: ''
-  ja: |-
-    が うバが うげききさましまするけびな・わしさいい?<end>
-  literal: ''
-  en: ''
-
-- index: 729
-  character: ''
-  ja: |-
-    ディアンダンリズーオムの
-    おそ!
-    しとこけたそれつ!
-    <number>プレだかいきたおがや おそうれかしてい<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 730
-  character: ''
-  ja: |-
-    これ
-    <delay 01>・ちくとり するのウーグフォルがえ <end>
-  literal: ''
-  en: ''
-
-- index: 731
-  character: ''
-  ja: |-
-    ワハびれたい<wait more><class name>とおしんびか ダメでましたさいまったさましかた<wait more><class name>とりましやった<wait
-    more>
-    <class name>と な<delay 01>・た <number>ぱな! ダ-ってしたしため<wait><end>
-  literal: ''
-  en: ''
-
-- index: 732
-  character: ''
-  ja: |-
-    えるでし こああでい<wait more><class name>ときを い?<delay 01><delay 01><line><name>には<line>うを
-    ダント-っ きまった
-    <wait more><class name>と な<delay 01>・た <number>ぱな! ダ-ってしたしため<wait><end>
-  literal: ''
-  en: ''
-
-- index: 733
-  character: ''
-  ja: |-
-    <clear screen>クは<line>やっためど<wait><clear screen>セ-にきましはダント-ったおまを ダントーさまった<wait
-    more><class name>とりょく<wait><clear screen>びきを いだいまってはな-ぐれるか<line>そ!<line>こまちみて<line>きがきまった<wait
-    more>
-    <class name>とりにい?<delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 734
-  character: ''
-  ja: |-
-    ウーでいきまばれまた
-    <wait more>か まったって やを!<wait><clear screen>ヒョヒョ・<line>すい<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 735
-  character: ''
-  ja: |-
-    インですいいたと!
-    そ する!
-    <wait more><end>
-  literal: ''
-  en: ''
-
-- index: 736
-  character: ''
-  ja: |-
-    ・・・みちゃね ドーしみな!<wait><clear screen>やづもつは<line>してはが まってはなだおまを ぐれ・・・・やつれんを <number>プッときまぞうだ<wait
-    more><end>
-  literal: ''
-  en: ''
-
-- index: 737
-  character: ''
-  ja: |-
-    <name>はるまだなっ ウグ ほきてのせ・<end>
-  literal: ''
-  en: ''
-
-- index: 738
-  character: ''
-  ja: |-
-    な
-    ボイプレスのか どりか こくを そ・・・・・・・・たいまを い?<delay 01><line><name>のつだった<wait more><class
-    name>と
-    ほか こそしは
-    うダンが な!
-    <name>に などに!<line>きあったれはな<line><spell>のろいなのむのはしょうはなまちゃのかよるかいまった<wait
-    more><end>
-  literal: ''
-  en: ''
-
-- index: 739
-  character: ''
-  ja: |-
-    アスのぎまさまを まって
-    すだめにこうし な!
-    われのろ<end>
-  literal: ''
-  en: ''
-
-- index: 740
-  character: ''
-  ja: |-
-    つけてしょだめ!
-    <wait><end>
-  literal: ''
-  en: ''
-
-- index: 741
-  character: ''
-  ja: |-
-    な!
-    ラが おした<wait more>HPが きまた<wait more>HPが な!<line><name>に などに!<line>リを
-    <name>のくドルのろわわれ!<line>おみてぞすえは <name>は こし きと<line>やくそのろうが ダメび なづけつりかきとに こそのいつないHPを
-    まいつかえた<wait more><class name>と ほうつではなぜんいではしょもいだ<wait more>こが なり グワハハハハハ-に<line>やつが
-    エムざ!
-    <wait><end>
-  literal: ''
-  en: ''
-
-- index: 742
-  character: ''
-  ja: |-
-    わくびんは
-    <number>プレクシューでやくさんが おつしょと<line>しょだめ<wait><end>
-  literal: ''
-  en: ''
-
-- index: 743
-  character: ''
-  ja: |-
-    ワッ みて サイプッ よう・
-    <delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 744
-  character: ''
-  ja: |-
-    ないけれ デーッハハーローらことが おかきのば きまったいましゃね!
-    きれゴでは・・みつるだ
-    <wait more>この ないけた<wait more>すかましゅうに!<line>きて<line>や?<delay 01><line>すがくダントーッ いを いかた<wait more>MPガントあダントーっていじめ<line><name>!<line>おうんダントさいったのどりにあなんいだ<wait more>こがが いまった せて エムギだやった!<line><party leader>さが!<line><name>は<line>ケン・・た<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 745
-  character: ''
-  ja: |-
-    ホイプレーにた
-    <wait more><end>
-  literal: ''
-  en: ''
-
-- index: 746
-  character: ''
-  ja: |-
-    <party leader>らを なに・・・・わて<line>その な!<line>どどわれのせんは いえよ・<end>
-  literal: ''
-  en: ''
-
-- index: 747
-  character: ''
-  ja: |-
-    なったサソリおうけむをた
-    <wait more>MPが いらに!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 748
-  character: ''
-  ja: |-
-    ワー
-    <wait><end>
-  literal: ''
-  en: ''
-
-- index: 749
-  character: ''
-  ja: |-
-    <clear screen>はな!<line><name>はい?<delay 01><line><name>に!<line>とでき<line>そう・<line>てしかのがた<line>しょっては
-    なボホホホホホホイプレスト-にあった
-    とりにさんせんのものろわないかた
-    <wait more><end>
-  literal: ''
-  en: ''
-
-- index: 750
-  character: ''
-  ja: |-
-    <item>はなんのは ぎまげつないまってののは<line>ダントのつなどりにおかたいた<wait more><class name>となった<wait
-    more><end>
-  literal: ''
-  en: ''
-
-- index: 751
-  character: ''
-  ja: |-
-    アッ こうを こう!
-    おかいます
-    <wait><end>
-  literal: ''
-  en: ''
-
-- index: 752
-  character: ''
-  ja: |-
-    <party leader> げてはな!<line>のか おかた<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 753
-  character: ''
-  ja: |-
-    ムとりに!
-    <wait more><class name>に こよるな<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 754
-  character: ''
-  ja: |-
-    <name>だね<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 755
-  character: ''
-  ja: |-
-    とろくでどれ
-    おっとは 
-    <number>プレストびげだ<wait more>こえって・・<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 756
-  character: ''
-  ja: |-
-    <name>は むした<wait more>す!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 757
-  character: ''
-  ja: |-
-    ごあ みびかせんせにいるからダンリさのひのろびかんでるかく ワーッ・なにつもの ビョヒカンリおもです! い
-    <delay 01><delay 01><delay 01><delay 01><line>げましましんとか<line>うが しはな<line>かませて げれとりがいまし<line>やつが!<line>うだのなたほか おつズのでは<line>まえさいましはな<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 758
-  character: ''
-  ja: |-
-    おしょだ
-    <wait more>ことではな!<wait><end>
-  literal: ''
-  en: ''
-
-- index: 759
-  character: ''
-  ja: |-
-    ・わけきら がいよるのだもっ!
-    きましたがりが ダメブレ-じんとけれた
-    かりょうのを
-    きなった
-    おそこくのさんダメー<end>
-  literal: ''
-  en: ''
-
-- index: 760
-  character: ''
-  ja: |-
-    あいやめ
-    それぎウォルぐげるは
-    サインスのせん!が まったの しきを は こうしいた<end>
-  literal: ''
-  en: ''
-
-- index: 761
-  character: ''
-  ja: |-
-    なグ・・・・
-    のとをかとおそのちのゆくだとうやすますかしんに
-    <name>に <number>プレスにたろしま なたした<wait
-    more>HPどが その ぐこれて!
-    <wait><clear screen>ガ-がなったこに<line>サインば<line>まった?<wait><end>
-  literal: ''
-  en: ''
-
-- index: 762
-  character: ''
-  ja: |-
-    おりましたつれてあたのはわたとみまった
-    <spell>レス<end>
-  literal: ''
-  en: ''
-
-- index: 763
-  character: ''
-  ja: |-
-    でねえたいしょうのせんがかす
-    <wait><end>
-  literal: ''
-  en: ''
-
-- index: 764
-  character: ''
-  ja: |-
-    オムのこあしてはんというばい いてのとったれは おかせんグのダントモントーにおくれてはした<wait more>HPを<line>きまったいまっ そ ウォルさい!<wait><clear
-    screen>みズの
-    してつぞ・
-    <wait more><end>
-  literal: ''
-  en: ''
-
-- index: 765
-  character: ''
-  ja: |-
-    どかきダンリーですこうこれはしためてはしょくらを たちゃ
-    <delay 01><delay 01><delay 01><delay 01><delay 01>・わた・た<end>
-  literal: ''
-  en: ''
-
-- index: 766
-  character: ''
-  ja: |-
-    ワッ とりままを むーオムとにこかただかきを こそいのはな おりってきう<wait more><class name>と<line>げが づは <party
-    leader>おっそどふった・<end>
-  literal: ''
-  en: ''
-
-- index: 767
-  character: ''
-  ja: |-
-    わに
-    ふふグフッ うそ-ッとが!
-    <name>に!<line>うダント-にさましょダント-に なダントーにおまえった<wait more><class
-    name>とりか こよるかたっ ダント-におまえった<wait more><class name>とりに<line>わたねえったなもいそったい!<wait><clear
-    screen>みんのとりブッ
-    しょげとわれ!
-    げ
-    に おかた
-    <wait more><end>
-  literal: ''
-  en: ''
-
-- index: 768
-  character: ''
-  ja: |-
-    イダント-に なダント-におまえった<wait more><class name>とりか こよるかたっ ダントーにおまえった<wait more><class
-    name>とりか こよるかたっ ダント-に!
-    <wait more><end>
-  literal: ''
-  en: ''
 
 
 
@@ -6534,7 +6104,9 @@
 - index: 110
   character: ''
   ja: |-
-    <wait more>ラグをたいちょうとした<line>えんせいぐんを さしむけた・・・<delay 01><end>
+    <wait more>ラグをたいちょうとした
+    えんせいぐんを さしむけた・・・
+    <delay 01><end>
   literal: ''
   en: |-
     <wait more>
@@ -6560,20 +6132,23 @@
   ja: |-
     あっ おきゃくさまね!
     このごほんをよみにきたんでしょ
-    じゃっ いっしょに よみましょう!<end>
+    じゃっ いっしょに よみましょう!
+    <end>
   literal: ''
   en: |-
     Oh, a visitor!
     You came to read
     this book, didn't
     you? Well, let's
-    read it together!<end>
+    read it together!
+    <end>
 
 - index: 113
   character: ''
   ja: |-
-    ねえねえ 
-    <delay 01>このしゅじんこうは<line>なんていう おなまえなの?<wait more><end>
+    ねえねえ <delay 01>このしゅじんこうは
+    なんていう おなまえなの?
+    <wait more><end>
   literal: ''
   en: |-
     Hey,<delay 01> what's the
@@ -6584,24 +6159,27 @@
 - index: 114
   character: ''
   ja: |-
-    <party leader>さんて いうのね<delay 01><line>かっこいいんだーっ!<wait more><end>
+    <party leader>さんて いうのね<delay 01>
+    かっこいいんだーっ!
+    <wait more><end>
   literal: ''
   en: |-
     It's <party leader>,
-    huh?
-    <delay 01> Cool name!<wait more><end>
+    huh?<delay 01>
+    Cool name!
+    <wait more><end>
 
 - index: 115
   character: ''
   ja: |-
     それじゃ はやくよんで!
-    <delay 01><line>はやく はやくーっ!<wait><end>
+    <delay 01>
+    はやく はやくーっ!<wait><end>
   literal: ''
   en: |-
     Hurry up and read
     it!<delay 01>
-    Hurry,
-    <delay 01> hurry!<wait><end>
+    Hurry, hurry!<wait><end>
 
 - index: 116
   character: ''
@@ -6612,7 +6190,7 @@
   literal: ''
   en: |-
     Reading from where
-    you left off?<wait more>
+    you left off?
     Only if you let
     me listen!
     <wait more><end>
@@ -6625,14 +6203,16 @@
   en: |-
     Where will you
     continue reading
-    from?<end>
+    from?
+    <end>
 
   # Unused? Can't find in the menu
 - index: 118
   character: ''
   ja: |-
     わ-! たのしみ-!
-    <delay 01><line>はやく よんできかせてー!<wait><end>
+    <delay 01>
+    はやく よんできかせてー!<wait><end>
   literal: ''
   en: ''
   # Unused? ^^^
@@ -6641,17 +6221,19 @@
   character: ''
   ja: |-
     えー? そうなんだ・・
-    <delay 01><line>どれを なくしちゃうの?<end>
+    <delay 01>
+    どれを なくしちゃうの?<end>
   literal: ''
   en: |-
     Ah, I see...<delay 01>
     Which one should
-    I get rid of?<end>
+    I get rid of?
+    <end>
 
 - index: 135
   character: ''
   ja: |-
-    あら! ほんとに けしちゃうの?<end>
+    あら！ ほんとに けしちゃうの?<end>
   literal: ''
   en: |-
     Oh, are you sure
@@ -6713,7 +6295,8 @@
   character: ''
   ja: |-
     そして
-    <delay 01> かみがみの いさんも<line>うみの もくずと きえたそうじゃ<end>
+    <delay 01> かみがみの いさんも
+    うみの もくずと きえたそうじゃ<end>
   literal: ''
   en: ''
 
@@ -6721,14 +6304,16 @@
   character: ''
   ja: |-
     ごくろうを かけましたな
-    <delay 01><line>まごは ねむってしまったの<end>
+    <delay 01>
+    まごは ねむってしまったの<end>
   literal: ''
   en: ''
 
 - index: 127
   character: ''
   ja: |-
-    <party leader>の おかげで<line>ガーディアナも すくわれた<end>
+    <party leader>の おかげで
+    ガーディアナも すくわれた<end>
   literal: ''
   en: ''
 
@@ -6751,7 +6336,8 @@
   character: ''
   ja: |-
     また いつか 
-    <party leader>の<line>ちからが ひつようなひが くるまで<end>
+    <party leader>の
+    ちからが ひつようなひが くるまで<end>
   literal: ''
   en: ''
 
@@ -6767,7 +6353,9 @@
   character: ''
   ja: |-
     おおっ もうじかんじゃ
-    <delay 01><line><party leader>が じぶんの せかいに<line>もどらねば ならぬな・・<end>
+    <delay 01>
+    <party leader>が じぶんの せかいに
+    もどらねば ならぬな・・<end>
   literal: ''
   en: ''
 
@@ -6775,7 +6363,8 @@
   character: ''
   ja: |-
     いつか また あえるひまで
-    <delay 01><line>ごきげんよう・・<end>
+    <delay 01>
+    ごきげんよう・・<end>
   literal: ''
   en: ''
 
@@ -6798,14 +6387,16 @@
 - index: 137
   character: ''
   ja: |-
-    <name>に <number>ポイントの<line>ダメージを あたえた<end>
+    <name>に <number>ポイントの
+    ダメージを あたえた<end>
   literal: ''
   en: ''
 
 - index: 138
   character: ''
   ja: |-
-    <name>は<line><spell>レベル<number>をとなえた!<end>
+    <name>は
+    <spell>レベル<number>をとなえた!<end>
   literal: ''
   en: ''
 
@@ -6946,7 +6537,8 @@
 - index: 158
   character: ''
   ja: |-
-    <name>は <number>ポイントの<line>けいけんちを えた<end>
+    <name>は <number>ポイントの
+    けいけんちを えた<end>
   literal: ''
   en: ''
 
@@ -7002,7 +6594,8 @@
 - index: 166
   character: ''
   ja: |-
-    <wait more><name>は<line><spell>のまほうを おぼえた!<end>
+    <wait more><name>は
+    <spell>のまほうを おぼえた!<end>
   literal: ''
   en: ''
 
@@ -7023,70 +6616,80 @@
 - index: 169
   character: ''
   ja: |-
-    <name>は<line><spell>レベル<number>をとなえた!<end>
+    <name>は
+    <spell>レベル<number>をとなえた!<end>
   literal: ''
   en: ''
 
 - index: 170
   character: ''
   ja: |-
-    <name>は<line><item>をつかった!<end>
+    <name>は
+    <item>をつかった!<end>
   literal: ''
   en: ''
 
 - index: 171
   character: ''
   ja: |-
-    <name>は<line>デーモンブレスをとなえた!<end>
+    <name>は
+    デーモンブレスをとなえた!<end>
   literal: ''
   en: ''
 
 - index: 172
   character: ''
   ja: |-
-    <name>は<line>デーモンブレスをはいた!<end>
+    <name>は
+    デーモンブレスをはいた!<end>
   literal: ''
   en: ''
 
 - index: 173
   character: ''
   ja: |-
-    <name>は<line>ほのおをはいた!<end>
+    <name>は
+    ほのおをはいた!<end>
   literal: ''
   en: ''
 
 - index: 174
   character: ''
   ja: |-
-    <name>は<line>ふぶきをはいた!<end>
+    <name>は
+    ふぶきをはいた!<end>
   literal: ''
   en: ''
 
 - index: 175
   character: ''
   ja: |-
-    <name>は<line>ほうしをふりまいた!<end>
+    <name>は
+    ほうしをふりまいた!<end>
   literal: ''
   en: ''
 
 - index: 176
   character: ''
   ja: |-
-    <name>は<line><spell>レベル<number>をとなえた!<delay 01><end>
+    <name>は
+    <spell>レベル<number>をとなえた!<delay 01><end>
   literal: ''
   en: ''
 
 - index: 177
   character: ''
   ja: |-
-    <name>に <number>ポイントの<line>ダメージをあたえた<end>
+    <name>に <number>ポイントの
+    ダメージをあたえた<end>
   literal: ''
   en: ''
 
 - index: 178
   character: ''
   ja: |-
-    <name>は <number>ポイントの<line>ダメージを うけた<end>
+    <name>は <number>ポイントの
+    ダメージを うけた<end>
   literal: ''
   en: ''
 
@@ -7101,7 +6704,9 @@
   character: ''
   ja: |-
     ひっさつのいちげきが きまった!
-    <delay 01><line><name>に <number>ポイントの<line>ダメージをあたえた<end>
+    <delay 01>
+    <name>に <number>ポイントの
+    ダメージをあたえた<end>
   literal: ''
   en: ''
 
@@ -7109,7 +6714,9 @@
   character: ''
   ja: |-
     きょうれつな いちげき!
-    <delay 01><line><name>は <number>ポイントの<line>ダメージを うけた<end>
+    <delay 01>
+    <name>は <number>ポイントの
+    ダメージを うけた<end>
   literal: ''
   en: ''
 
@@ -7117,7 +6724,8 @@
   character: ''
   ja: |-
     しかし 
-    <name>に<line>ダメージを あたえられない<end>
+    <name>に
+    ダメージを あたえられない<end>
   literal: ''
   en: ''
 
@@ -7146,7 +6754,8 @@
   character: ''
   ja: |-
     しかし 
-    <name>には<line>きかなかった<end>
+    <name>には
+    きかなかった<end>
   literal: ''
   en: ''
 
@@ -7154,7 +6763,8 @@
   character: ''
   ja: |-
     しかし 
-    <name>は<line>まほうを ふうじられている<end>
+    <name>は
+    まほうを ふうじられている<end>
   literal: ''
   en: ''
 
@@ -7168,7 +6778,8 @@
 - index: 189
   character: ''
   ja: |-
-    <name>は <number>ポイント<line>HPが かいふくした<end>
+    <name>は <number>ポイント
+    HPが かいふくした<end>
   literal: ''
   en: ''
 
@@ -7183,28 +6794,32 @@
 - index: 191
   character: ''
   ja: |-
-    <name>は<line>からだの どくがきえた<end>
+    <name>は
+    からだの どくがきえた<end>
   literal: ''
   en: ''
 
 - index: 192
   character: ''
   ja: |-
-    <name>は<line>からだの いじょうがなくなった<end>
+    <name>は
+    からだの いじょうがなくなった<end>
   literal: ''
   en: ''
 
 - index: 193
   character: ''
   ja: |-
-    <name>は<line>たましいを ぬきとられた<end>
+    <name>は
+    たましいを ぬきとられた<end>
   literal: ''
   en: ''
 
 - index: 194
   character: ''
   ja: |-
-    <name>の<line>たましいが ぬきとられた<end>
+    <name>の
+    たましいが ぬきとられた<end>
   literal: ''
   en: ''
 
@@ -7218,7 +6833,8 @@
 - index: 196
   character: ''
   ja: |-
-    <name>は どくのため<line><number>ポイントの ダメージをうけた<wait><end>
+    <name>は どくのため
+    <number>ポイントの ダメージをうけた<wait><end>
   literal: ''
   en: ''
 
@@ -7232,14 +6848,16 @@
 - index: 198
   character: ''
   ja: |-
-    <name>は<line>あくまのわらいを うかべた!<end>
+    <name>は
+    あくまのわらいを うかべた!<end>
   literal: ''
   en: ''
 
 - index: 199
   character: ''
   ja: |-
-    <name>は <number>ポイントの<line>MPを すいとられた<end>
+    <name>は <number>ポイントの
+    MPを すいとられた<end>
   literal: ''
   en: ''
 
@@ -7253,98 +6871,112 @@
 - index: 201
   character: ''
   ja: |-
-    <name>は<line>ぶきみなじゅもんを つぶやいた!<end>
+    <name>は
+    ぶきみなじゅもんを つぶやいた!<end>
   literal: ''
   en: ''
 
 - index: 202
   character: ''
   ja: |-
-    <name>は <number>ポイントの<line>HPを すいとられた<end>
+    <name>は <number>ポイントの
+    HPを すいとられた<end>
   literal: ''
   en: ''
 
 - index: 203
   character: ''
   ja: |-
-    <name>は<line>いちげきで いのちをうばわれた<end>
+    <name>は
+    いちげきで いのちをうばわれた<end>
   literal: ''
   en: ''
 
 - index: 204
   character: ''
   ja: |-
-    <item>が<line>ぶきみな うなりをあげた・・・<end>
+    <item>が
+    ぶきみな うなりをあげた・・・<end>
   literal: ''
   en: ''
 
 - index: 205
   character: ''
   ja: |-
-    <name>は <number>ポイントの<line>MPを すいとった<end>
+    <name>は <number>ポイントの
+    MPを すいとった<end>
   literal: ''
   en: ''
 
 - index: 206
   character: ''
   ja: |-
-    <name>は<line>すばやさが <number>ポイントあがった<end>
+    <name>は
+    すばやさが <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 207
   character: ''
   ja: |-
-    <name>は<line>すばやさが <number>ポイントさがった<end>
+    <name>は
+    すばやさが <number>ポイントさがった<end>
   literal: ''
   en: ''
 
 - index: 208
   character: ''
   ja: |-
-    <name>は<line>こうげきが <number>ポイントあがった<end>
+    <name>は
+    こうげきが <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 209
   character: ''
   ja: |-
-    <name>は<line>まほうを ふうじられた<end>
+    <name>は
+    まほうを ふうじられた<end>
   literal: ''
   en: ''
 
 - index: 210
   character: ''
   ja: |-
-    <name>は<line>まほうのまくに つつまれた<end>
+    <name>は
+    まほうのまくに つつまれた<end>
   literal: ''
   en: ''
 
 - index: 211
   character: ''
   ja: |-
-    <name>は<line>ふかいきりに つつまれた<end>
+    <name>は
+    ふかいきりに つつまれた<end>
   literal: ''
   en: ''
 
 - index: 212
   character: ''
   ja: |-
-    <name>は<line>ねむりにおちた<end>
+    <name>は
+    ねむりにおちた<end>
   literal: ''
   en: ''
 
 - index: 213
   character: ''
   ja: |-
-    <name>は<line>どくにおかされた<end>
+    <name>は
+    どくにおかされた<end>
   literal: ''
   en: ''
 
 - index: 214
   character: ''
   ja: |-
-    <name>は<line>のろわれてしまった<end>
+    <name>は
+    のろわれてしまった<end>
   literal: ''
   en: ''
 
@@ -7367,63 +6999,77 @@
 - index: 217
   character: ''
   ja: |-
-    <name>は<line>ぼうぎょが <number>ポイントあがった<end>
+    <name>は
+    ぼうぎょが <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 218
   character: ''
   ja: |-
-    <name>は<line>さいだいHPが <number>ポイントあがった<end>
+    <name>は
+    さいだいHPが <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 219
   character: ''
   ja: |-
-    <name>は<line>いどうカが <number>ポイントあがった<end>
+    <name>は
+    いどうカが <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 220
   character: ''
   ja: |-
-    <spell>の こうかがきえた<line>すばやさが もどった<line>ぼうぎょが もどった<wait><end>
+    <spell>の こうかがきえた
+    すばやさが もどった
+    ぼうぎょが もどった<wait><end>
   literal: ''
   en: ''
 
 - index: 221
   character: ''
   ja: |-
-    <spell>の こうかがきえた<line>すばやさが もどった<line>ぼうぎょが もどった<wait><end>
+    <spell>の こうかがきえた
+    すばやさが もどった
+    ぼうぎょが もどった<wait><end>
   literal: ''
   en: ''
 
 - index: 222
   character: ''
   ja: |-
-    <spell>の こうかがきえた<line>こうげきが もどった<wait><end>
+    <spell>の こうかがきえた
+    こうげきが もどった<wait><end>
   literal: ''
   en: ''
 
 - index: 223
   character: ''
   ja: |-
-    <spell>の こうかがきえた<line>ふたたび まほうが<line>つかえるようになった<wait><end>
+    <spell>の こうかがきえた
+    ふたたび まほうが
+    つかえるようになった<wait><end>
   literal: ''
   en: ''
 
 - index: 224
   character: ''
   ja: |-
-    <spell>の こうかがきえた<line><name>から<line>まほうのまくが きえた<wait><end>
+    <spell>の こうかがきえた
+    <name>から
+    まほうのまくが きえた<wait><end>
   literal: ''
   en: ''
 
 - index: 225
   character: ''
   ja: |-
-    <spell>の こうかがきえた<line><name>から<line>ふかいきりが はれた<wait><end>
+    <spell>の こうかがきえた
+    <name>から
+    ふかいきりが はれた<wait><end>
   literal: ''
   en: ''
 
@@ -7437,14 +7083,18 @@
 - index: 227
   character: ''
   ja: |-
-    <name>は のろわれている!<wait more><line>のろいで からだが とつぜん<line>しびれてしまった<end>
+    <name>は のろわれている!<wait more>
+    のろいで からだが とつぜん
+    しびれてしまった<end>
   literal: ''
   en: ''
 
 - index: 228
   character: ''
   ja: |-
-    <name>は のろわれている!<wait more><line>のろいで <number>ポイントの<line>ダメージが かえってきた<end>
+    <name>は のろわれている!<wait more>
+    のろいで <number>ポイントの
+    ダメージが かえってきた<end>
   literal: ''
   en: ''
 
@@ -7458,7 +7108,8 @@
 - index: 230
   character: ''
   ja: |-
-    <name>のレベルがあがった!<line><name>は レベル<number>になった<wait more><end>
+    <name>のレベルがあがった!
+    <name>は レベル<number>になった<wait more><end>
   literal: ''
   en: ''
 
@@ -7514,7 +7165,8 @@
   character: ''
   ja: |-
     そして 
-    <spell>の<line>レベルが <number>になった<wait more><end>
+    <spell>の
+    レベルが <number>になった<wait more><end>
   literal: ''
   en: ''
 
@@ -7522,7 +7174,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>から<line>ひとすじのけむりが たちのぼった<wait><end>
+    <item>から
+    ひとすじのけむりが たちのぼった<wait><end>
   literal: ''
   en: ''
 
@@ -7530,7 +7183,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>に<line>こまかい ひびがはいった<wait><end>
+    <item>に
+    こまかい ひびがはいった<wait><end>
   literal: ''
   en: ''
 
@@ -7538,7 +7192,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>に<line>おおきな きれつがはしった<end>
+    <item>に
+    おおきな きれつがはしった<end>
   literal: ''
   en: ''
 
@@ -7546,7 +7201,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>は<line>いびつに ゆがんでしまった<end>
+    <item>は
+    いびつに ゆがんでしまった<end>
   literal: ''
   en: ''
 
@@ -7554,7 +7210,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>の<line>ひょうめんに くもりがあらわれた<end>
+    <item>の
+    ひょうめんに くもりがあらわれた<end>
   literal: ''
   en: ''
 
@@ -7562,7 +7219,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>が<line>てのなかで もえだした!<end>
+    <item>が
+    てのなかで もえだした!<end>
   literal: ''
   en: ''
 
@@ -7570,7 +7228,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>は<line>こまかく くだけてしまった<end>
+    <item>は
+    こまかく くだけてしまった<end>
   literal: ''
   en: ''
 
@@ -7578,7 +7237,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>は<line>まっぷたつに われてしまった<end>
+    <item>は
+    まっぷたつに われてしまった<end>
   literal: ''
   en: ''
 
@@ -7586,7 +7246,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>は<line>ばらばらに こわれてしまった<end>
+    <item>は
+    ばらばらに こわれてしまった<end>
   literal: ''
   en: ''
 
@@ -7594,7 +7255,8 @@
   character: ''
   ja: |-
     しかし 
-    <item>は<line>すっかり さびてしまった<end>
+    <item>は
+    すっかり さびてしまった<end>
   literal: ''
   en: ''
 
@@ -7602,7 +7264,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>から<line>ひとすじのけむりが たちのぼった<wait><end>
+    <item>から
+    ひとすじのけむりが たちのぼった<wait><end>
   literal: ''
   en: ''
 
@@ -7610,7 +7273,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>に<line>こまかい ひびがはいった<wait><end>
+    <item>に
+    こまかい ひびがはいった<wait><end>
   literal: ''
   en: ''
 
@@ -7618,7 +7282,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>に<line>おおきな きれつがはしった<end>
+    <item>に
+    おおきな きれつがはしった<end>
   literal: ''
   en: ''
 
@@ -7626,7 +7291,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>は<line>いびつに ゆがんでしまった<end>
+    <item>は
+    いびつに ゆがんでしまった<end>
   literal: ''
   en: ''
 
@@ -7634,7 +7300,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>の<line>ひょうめんに くもりがあらわれた<end>
+    <item>の
+    ひょうめんに くもりがあらわれた<end>
   literal: ''
   en: ''
 
@@ -7642,7 +7309,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>が<line>てのなかで もえだした!<end>
+    <item>が
+    てのなかで もえだした!<end>
   literal: ''
   en: ''
 
@@ -7650,7 +7318,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>は<line>こまかく くだけてしまった<end>
+    <item>は
+    こまかく くだけてしまった<end>
   literal: ''
   en: ''
 
@@ -7658,7 +7327,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>は<line>まっぷたつに われてしまった<end>
+    <item>は
+    まっぷたつに われてしまった<end>
   literal: ''
   en: ''
 
@@ -7666,7 +7336,8 @@
   character: ''
   ja: |-
     さらに 
-    <item>は<line>ばらばらに こわれてしまった<end>
+    <item>は
+    ばらばらに こわれてしまった<end>
   literal: ''
   en: ''
 
@@ -7674,42 +7345,48 @@
   character: ''
   ja: |-
     さらに 
-    <item>は<line>すっかり さびてしまった<end>
+    <item>は
+    すっかり さびてしまった<end>
   literal: ''
   en: ''
 
 - index: 258
   character: ''
   ja: |-
-    <name>は <number>ポイントの<line>けいけんちを えた<end>
+    <name>は <number>ポイントの
+    けいけんちを えた<end>
   literal: ''
   en: ''
 
 - index: 259
   character: ''
   ja: |-
-    <number>まいの<line>きんかを てにいれた<end>
+    <number>まいの
+    きんかを てにいれた<end>
   literal: ''
   en: ''
 
 - index: 260
   character: ''
   ja: |-
-    <name>は<line><item>をみつけた<wait more><end>
+    <name>は
+    <item>をみつけた<wait more><end>
   literal: ''
   en: ''
 
 - index: 261
   character: ''
   ja: |-
-    <name>は<line><item>をてにいれた<end>
+    <name>は
+    <item>をてにいれた<end>
   literal: ''
   en: ''
 
 - index: 262
   character: ''
   ja: |-
-    <name>は<line><item>をおとした<wait more><end>
+    <name>は
+    <item>をおとした<wait more><end>
   literal: ''
   en: ''
 
@@ -7723,35 +7400,40 @@
 - index: 264
   character: ''
   ja: |-
-    <name>のこうげきりょくが<line><number>ポイントあがった<end>
+    <name>のこうげきりょくが
+    <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 265
   character: ''
   ja: |-
-    <name>のぼうぎょりょくが<line><number>ポイントあがった<end>
+    <name>のぼうぎょりょくが
+    <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 266
   character: ''
   ja: |-
-    <name>のすばやさが<line><number>ポイントあがった<end>
+    <name>のすばやさが
+    <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 267
   character: ''
   ja: |-
-    <name>のいどうきょりが<line><number>ポイントあがった<end>
+    <name>のいどうきょりが
+    <number>ポイントあがった<end>
   literal: ''
   en: ''
 
 - index: 268
   character: ''
   ja: |-
-    <name>のさいだいHPが<line><number>ポイントあがった<end>
+    <name>のさいだいHPが
+    <number>ポイントあがった<end>
   literal: ''
   en: ''
 
@@ -7780,7 +7462,8 @@
 - index: 272
   character: ''
   ja: |-
-    <name>は<line><item>をてにいれた<wait><end>
+    <name>は
+    <item>をてにいれた<wait><end>
   literal: ''
   en: ''
 
@@ -7788,14 +7471,16 @@
   character: ''
   ja: |-
     しかし 
-    <name>は<line>もちものが いっぱいだった<wait><end>
+    <name>は
+    もちものが いっぱいだった<wait><end>
   literal: ''
   en: ''
 
 - index: 274
   character: ''
   ja: |-
-    <party leader>は<line><item>をつかった<wait><end>
+    <party leader>は
+    <item>をつかった<wait><end>
   literal: ''
   en: ''
 
@@ -7811,7 +7496,8 @@
   character: ''
   ja: |-
     そして ふたたび
-    <party leader>たちは・・・<line>せんじょうへと むかった<wait><end>
+    <party leader>たちは・・・
+    せんじょうへと むかった<wait><end>
   literal: ''
   en: ''
 
@@ -7826,14 +7512,16 @@
 - index: 278
   character: ''
   ja: |-
-    <class name>の <name>が<line>なかまに なった<end>
+    <class name>の <name>が
+    なかまに なった<end>
   literal: ''
   en: ''
 
 - index: 279
   character: ''
   ja: |-
-    <name>は<line>ドミンゴを みつけた<wait><end>
+    <name>は
+    ドミンゴを みつけた<wait><end>
   literal: ''
   en: ''
 
@@ -7875,7 +7563,8 @@
 - index: 284
   character: ''
   ja: |-
-    <name>は<line>アミーゴを みつけた<wait><end>
+    <name>は
+    アミーゴを みつけた<wait><end>
   literal: ''
   en: ''
 
