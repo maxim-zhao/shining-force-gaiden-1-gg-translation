@@ -471,7 +471,7 @@ def encode_script(script_file, trees_file, data_file):
     script_yaml = {x["index"]: x for x in script_yaml}
 
     script = []
-    for index in range(1, 768 + 1):
+    for index in range(1, 718 + 1):
         if index not in script_yaml:
             print(f"Error: entry {index} missing")
             line = "<end>"
