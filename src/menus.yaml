@@ -44,8 +44,8 @@
   en: |
     __ABCDEFGHIJKLM___
     __NOPQRSTUVWXYZ___
-    __1234567890______
-    __.,;:-!?()&'"/♥__
+    __1234567890_-*♥__
+    __.,;:_!?()_&'"/__
     __abcd_Back_Done
 - reference_at: '0xbb47'
   data_at: '0xbbcd'
@@ -59,8 +59,8 @@
   en: |
     __abcdefghijklm___
     __nopqrstuvwxyz___
-    __1234567890______
-    __.,;:-!?()&'"/♥__
+    __1234567890_-*♥__
+    __.,;:_!?()_&'"/__
     __ABCD_Back_Done
 
 # This is the "_" tiles on the name entry screen
