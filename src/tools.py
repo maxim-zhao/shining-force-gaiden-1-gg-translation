@@ -6,6 +6,7 @@ import yaml
 import os
 import ruamel.yaml
 import html
+import re
 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -31,13 +32,13 @@ codes = {
 }
 codes_reverse = {v: k for k, v in codes.items()}
 
-character_map = " " \
-    " ０１２３４５６７８９" \
+character_map = "█" \
+    "　０１２３４５６７８９" \
     "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへ" \
     "ほまみむめもやゆよらりるれろわんをぁぃぅぇぉゃゅょっアイウ" \
     "エオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミ" \
     "ムメモヤユヨラリルレロワンヲァィゥェォャュョッ" \
-    "゛゜XXXXXー%/ADFGHLMPTV?・!"
+    "゛゜█████ー％／ＡＤＦＧＨＬＭＰＴＶ？・！"
 
 # Font mapping
 # TODO: use a .tbl?
@@ -386,9 +387,9 @@ def dump_script(rom, output_file):
             for i in range(256):
                 start_offset = f.tell()
                 # read length byte (not actually needed)
+                # length includes the length byte itself
                 entry_length = int.from_bytes(f.read(1), byteorder='little')
-                print(
-                    f"Entry {entry_index} at {f.tell() - 1:x} says its length is {entry_length} bytes up to {f.tell() - 1 + entry_length:x} inclusive")
+                print(f"Entry {entry_index} at {f.tell() - 1:x} says its length is {entry_length} bytes up to {f.tell() - 1 + entry_length:x} inclusive")
                 # point at data
                 entry_data = BitReader(rom, f.tell())
                 # decode it...
@@ -404,29 +405,38 @@ def dump_script(rom, output_file):
                 print(f"{line} was {entry_data.bits_read} bits")
 
                 s = bytes_to_japanese(line)
-                print(s)
 
                 entry_index += 1
 
+                # We massage the format a little...
+                # - Change line breaks into newlines
+                s = s.replace("<line>", "\n")
+                # - Add newlines before end tags
+                s = re.sub("(<[^\n]+>)$", "\n\\1", s)                
+                # - Explicit newlines at start of text
+                s = re.sub("^\n", "<line>", s)
+                
                 script.append({
                     "index": entry_index,
                     "character": "",
-                    "ja": s,
+                    "ja": ruamel.yaml.scalarstring.LiteralScalarString(s),
                     "literal": "",
                     "en": ""
                 })
 
                 # Skip file pointer ahead
-                f.seek(f.tell() + entry_length)
+                f.seek(start_offset + entry_length + 1)
 
-                # Entries seem to all have an unnecessary trailing byte..?
-                if bytes_consumed != entry_length:
+                # The original game seems to have an unused byte trailing each entry, perhaps in error.
+                # We only report the cases where it's not only one byte.
+                if entry_length - bytes_consumed != 1:
                     f.seek(f.tell() - (entry_length - bytes_consumed))
                     byte = f.read(1)
-                    print(f"Consumed {bytes_consumed} bytes, expected {entry_length}. First extra byte is {byte}")
+                    print(f"Consumed {bytes_consumed} bytes, expected {entry_length}. First extra byte is 0x{byte.hex()}")
 
     with open(output_file, 'w', encoding="utf-8") as file:
-        documents = yaml.dump(script, file, sort_keys=False, allow_unicode=True)
+        yaml = ruamel.yaml.YAML()
+        yaml.dump(script, file)
 
 
 class ScriptEntry:
