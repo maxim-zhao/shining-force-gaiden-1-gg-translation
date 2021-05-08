@@ -96,7 +96,7 @@ def english_to_bytes(text, is_menu):
     # Replace some "smart" punctuation
     # Also allow _ as visible whitespace
     # Replace line breaks with <line>
-    # Finally remove any <line> before another tag
+    # Finally remove any <line> before another tag on the assumption that it's not for display
     for k, v in {
         ("“", "\""),
         ("”", "\""),
@@ -890,7 +890,7 @@ def doctoyaml(output_file):
                         "ja": ruamel.yaml.scalarstring.LiteralScalarString(row[2]),
                         "ja-kanji": ruamel.yaml.scalarstring.LiteralScalarString(row[3]),
                         "literal": ruamel.yaml.scalarstring.LiteralScalarString(row[4]),
-                        "en": ruamel.yaml.scalarstring.LiteralScalarString(row[5])
+                        "en": ruamel.yaml.scalarstring.LiteralScalarString(row[5].replace(" \n", "\n")) # trim spaces before newlines
                     })
             except:
                 continue;
@@ -901,7 +901,7 @@ def doctoyaml(output_file):
     print("done")
 
 
-def yamltodoc(script_file, html_file):
+def yamltohtml(script_file, html_file):
     # Read the file
     with open(script_file, "r", encoding="utf-8") as f:
         script_yaml = yaml.load(f, Loader=yaml.Loader)
@@ -938,8 +938,8 @@ def main():
         decompress(sys.argv[2], int(sys.argv[3], 0))
     elif verb == "doctoyaml":
         doctoyaml(sys.argv[2])
-    elif verb == "yamltodoc":
-        yamltodoc(sys.argv[2], sys.argv[3])
+    elif verb == "yamltohtml":
+        yamltohtml(sys.argv[2], sys.argv[3])
     else:
         raise Exception(f"Unknown verb \"{verb}\"")
 

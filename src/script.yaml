@@ -43,48 +43,61 @@
 - index: 295
   character: Guard
   ja: |-
-    アンリおうに もうしあげます!
+    アンリおうに　もうしあげます！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Queen Anri!
+  ja-kanji: |-
+    アンリ王に　申し上げます！
+  literal: |-
+    Queen Anri!
   en: |-
     Queen Anri!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 296
   character: Guard
   ja: |-
-    ただいま ルーンたいりくのみなみ
-    サイプレスこくよりの ししゃが
-    ごあいさつにと まいっております
+    ただいま　ルーンたいりくのみなみ
+    サイプレスこくよりの　ししゃが
+    ごあいさつにと　まいっております
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Messengers from Cypress, south of Rune, have come to meet with you.
+  ja-kanji: |-
+    ただいま　ルーン大陸の南
+    サイプレス国よりの　使者が
+    ご挨拶にと　参っております
+  literal: |-
+    Messengers from Cypress, south of Rune, have come to meet with you.
   en: |-
     Messengers from
     Cypress, south of
     Rune, have come to
     meet with you.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 297
   character: Lowe
   ja: |-
     なんと
     <delay 01> サイプレスよりのししゃ?
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Messengers from Cypress?
+  ja-kanji: |-
+    何と　サイプレスよりの使者？
+  literal: |-
+    Messengers from Cypress?
   en: |-
     Messengers from
     Cypress?
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 298
   character: Lowe
   ja: |-
-    アンリさま どういたしましょうか?
-    サイプレスは みかいたくのばしょ
-    こうせんてきな とちとききますぞ
+    アンリさま　どういたしましょうか？
+    サイプレスは　みかいたくのぱしょ
+    こうせんてきな　とちとききますぞ
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Queen Anri, what should we do? I have heard Cypress is a wild and warlike place!
+  ja-kanji: |-
+    アンリ様　どういたしましょうか？
+    サイプレスは　未開拓の場所
+    好戦的な　土地と聞きますぞ
+  literal: |-
+    Queen Anri, what should we do? I have heard Cypress is a wild and warlike place!
   en: |-
     Queen Anri, what
     should we do?
@@ -92,43 +105,53 @@
     Cypress is a wild
     and warlike place!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 299
-  character: Narrator
+  character: Narration
   ja: |-
-    そのとき おもてのほうから
-    あらそう ものおとがした
+    そのとき　おもてのほうから
+    あらそう　ものおとがした
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: At that time, there was a noise from the people who were fighting.
+  ja-kanji: |-
+    その時　表の方から
+    争う　物音がした
+  literal: |-
+    Suddenly, the sounds of battle
+    erupt outside.
   en: |-
     Suddenly, the
     sounds of battle
     erupt outside.
-    <delay 01><delay 01><delay 01><delay 01><end> 
-  # Edited to something that sounds a bit less dry and descriptive, and more illustrative of what's happening in the story. Feel free to revert, just my two cents.
-
+    <delay 01><delay 01><delay 01><delay 01><end>
 - index: 300
   character: Guard
   ja: |-
-    おまちください! ただいま
-    おとりつぎを しているところです
+    おまちください！　ただいま
+    おとりつぎを　しているところです
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Please be patient! The queen will meet with you soon!
+  ja-kanji: |-
+    お待ちください！　ただいま
+    お取次を　しているところです
+  literal: |-
+    Please be patient! The queen will meet with you soon!
   en: |-
     Please be patient!
     The queen will
     meet with you
     soon!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 301
   character: Woldol
   ja: |-
-    うるさい! こんなところで
-    おめおめと まっていられるか!
-    おまえらこそ だまるがいい!
+    うるさい！　こんなところで
+    おめおめと　まっていられるか！
+    おまえらこそ　だまるがいい！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Shut up! How dare you make us wait in a place like this! You should all be silenced!
+  ja-kanji: |-
+    うるさい！　こんな所で
+    おめおめと　待っていられるか！
+    おまえらこそ　黙るがいい！
+  literal: |-
+    Shut up! How dare you make us wait in a place like this! You should all be silenced!
   en: |-
     Shut up! How dare
     you make us wait
@@ -136,92 +159,109 @@
     this! You should
     all be silenced!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 302
   character: Woldol
   ja: |-
-    くらえ! スパーク レベル３!
+    くらえ！　スパーク　レベル３！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Eat this! Spark level 3!
+  ja-kanji: |-
+    くらえ！　スパーク　レベル３！
+  literal: |-
+    Eat this! Spark level 3!
   en: |-
     Eat this!
-    Spark level 3!
+    Bolt level 3!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 303
   character: Woldol
   ja: |-
-    ばかめ! おとなしくしていれば
-    てあらなまねを せずにすんだものを
-    さて アンリおうにあうとするか
+    ばかめ！　おとなしくしていれば
+    てあらなまねを　せずにすんだものを
+    さて　アンリおうにあうとするか
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Fools! If you had stayed quiet, I wouldn't have resorted to violence. Well then, shall we meet Queen Anri?
+  ja-kanji: |-
+    ばかめ！　大人しくしていれば
+    手荒真似を　せずにすんだ物を
+    さて　アンリ王に会うとするか
+  literal: |-
+    Fools! If you had stayed quiet, I wouldn't have resorted to violence. Well then, shall we meet Queen Anri?
   en: |-
-    Fools!
-    If you had stayed
-    quiet, I wouldn't
-    have resorted to
-    violence.
-    <delay 01><delay 01>
+    Fools! If you had
+    stayed quiet, I
+    wouldn’t have had
+    to resort to
+    violence.<delay 01><delay 01>
     Well then, shall
     we meet Queen
     Anri?
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 304
   character: Ken
   ja: |-
-    ひかえろ! ろうぜきものめ!
-    わが ガーディアナおうのまえで
-    かってなふるまいは ゆるさんぞ!
+    ひかえる！　そうぜきものめ！
+    わが　ガーディアナおうのまえで
+    かってなふるまいは　ゆるさんぞ！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Stay back, violent scum! I won't let you do as you please in the presence of Guardiana's queen!
+  ja-kanji: |-
+    控える！　そうぜきものめ！
+    わが　ガーディアナ王の前で
+    勝手な振る舞いは　許さんぞ！
+  literal: |-
+    Stay back, violent scum! I won't let you do as you please in the presence of Guardiana's queen!
   en: |-
     Stay back, violent
     scum!
     <delay 01><delay 01>
-    I won't let you do
+    I won’t let you do
     as you please in
     the presence of
-    Guardiana's queen!
+    Guardiana’s queen!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 305
-  character: Narrator
+  character: Narration
   ja: |-
-    ケンは ヤリをもって みがまえた
+    ケンは　やりをもって　みがまえた
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Ken stands ready, brandishing his spear.
+  ja-kanji: |-
+    ケンは　槍をもって　身構えた
+  literal: |-
+    Ken stands ready, brandishing his spear.
   en: |-
     Ken stands ready,
     brandishing his
     spear.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 306
   character: Woldol
   ja: |-
-    グフッ グフッ グフフフッ
-    うわさでは・・・ガーディアナは
-    みな れいせつをわきまえるとか・・・
+    グフッ　グフッ　グフフフッ
+    うわさでは…カーディアナは
+    みな　れいせつをわきまえるとか…
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Heh heh heheheh... I've heard rumors of the courtesy of Guardiana's people...
+  ja-kanji: |-
+    グフッ　グフッ　グフフフッ
+    噂では…ガーディアナは
+    みな　礼節を弁えるとか…
+  literal: |-
+    Heh heh heheheh… I've heard rumors of the courtesy of Guardiana's people…
   en: |-
     Heh heh heheheh...
-    I've heard rumors
+    I’ve heard rumors
     of the courtesy of
     Guardiana's
     people...
     <delay 01><delay 01><delay 01><delay 01><end>
-  # Gufu Gufu Gufufufu is like a "warlock'y laugh" so-to-speak in japanese, it resembles a "witch laugh" which is fufufufu for good reason. Wily and rough. And evil warlock laughs with heh's typically in English fantasy literature.
-
 - index: 307
   character: Woldol
   ja: |-
-    しかし うわさは あてにならぬな
-    ダントム! フレーベル!
+    しかし　うわさは　あてにならめな
+    ダントム！　フレーベル！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: But such rumors must be unreliable! Dantom! Frabell!
+  ja-kanji: |-
+    しかし　噂は　当てにならめな
+    ダントム！　フレーベル！
+  literal: |-
+    But such rumors must be unreliable! Dantom! Frabell!
   en: |-
     But such rumors
     must be
@@ -233,19 +273,29 @@
 - index: 308
   character: Dantom
   ja: |-
-    ウォォォーッ!
+    ウォォォーッ！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Uoooo!
-  en: Uoooo!<delay 01><delay 01><delay 01><delay 01><end>
-
+  ja-kanji: |-
+    ウォォォーッ！
+  literal: |-
+    Uoooo!
+  en: |-
+    Uoooo!
+    <delay 01><delay 01><delay 01><delay 01><end>
 - index: 309
   character: Dantom
   ja: |-
-    グシュ-・・・ グシュー・・・
-    われらに はむかうとはバカなやつ!
-    さあ くるがいい えんりょはいらぬ
+    グシュー…　グシュー…
+    われらに　はむかうとはバカなやつ！
+    さあ　くるがいい　えんりょはいらぬ！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Crunch... crunch... You are fools to defy us! Come on, then! Don't hold back!
+  ja-kanji: |-
+    グシュー…　グシュー…
+    我らに　歯向かうとはバカなやつ！
+    さあ　くらがいい　遠慮は要らぬ！
+  literal: |-
+    Crunch… crunch... 
+    You are fools to defy us! Come on, then! Don't hold back!
   en: |-
     Crunch...<delay 01>crunch...
     <delay 01><delay 01>
@@ -259,11 +309,16 @@
 - index: 310
   character: Frabell
   ja: |-
-    そのきしは あたしのもんだよ
-    さあ おいでシャイニング・フォース
-    ひかりのちからを みせておくれ
+    そのきしは　あたしのもんだよ
+    さあ　おいでシャイニング.フォース
+    ひかりのちからを　みせておくれ
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: That knight is mine! Come, Shining Force, show me the power of the Light!
+  ja-kanji: |-
+    その騎士は　あたしのもんだよ
+    さあ　おいでシャイニング.フォース
+    光の力を　見せておくれ
+  literal: |-
+    That knight is mine! Come, Shining Force, show me the power of the Light!
   en: |-
     That knight is
     mine! Come,
@@ -271,161 +326,198 @@
     show me the power
     of the Light!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 311
   character: Anri
   ja: |-
-    まって! みんな おどきなさい!
+    まって！　みんあ　おどきなさい！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Wait! Lowe, Ken, please step aside!
+  ja-kanji: |-
+    まって！　みなあ　おどきなさい！
+  literal: |-
+    Wait! Lowe, Ken, please step aside!
   en: |-
     Wait!<delay 01> Lowe, Ken,
     please step aside!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 312
   character: Anri
   ja: |-
-    わたしが このくにをとうちするもの
-    ガーディアナのおう アンリです
+    わたしが　このくにをとうちするもの
+    ガーディアナのおう　アンリです
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: I am Anri, the ruler of this kingdom, Guardiana.
+  ja-kanji: |-
+    私が　この国を統治する物
+    ガーディアナの王　アンリです
+  literal: |-
+    I am Anri, the ruler of this kingdom, Guardiana.
   en: |-
     I am Anri, the
     ruler of this
     kingdom,
     Guardiana.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 313
   character: Anri
   ja: |-
     なんぽうよりのごししゃにたいしての
-    かずかずのぶれい おゆるしください
+    かずかずのぶれい　おゆるしください
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Please forgive our rudeness towards you, messengers from the south.
+  ja-kanji: |-
+    南方よりのご使者にたいしての
+    数々の無礼　お許しください
+  literal: |-
+    Please forgive our rudeness towards you, messengers from the south.
   en: |-
     Please forgive our
     rudeness towards
     you, messengers
     from the south.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 314
   character: Woldol
   ja: |-
-    これはこれは ごていねいな・・・
+    これはこれは　ごていねいな…
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: My, my... Such courtesy...
+  ja-kanji: |-
+    これはこれは　ご丁寧な…
+  literal: |-
+    My, my... Such courtesy…
   en: |-
     My, my...
     Such courtesy...
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 315
   character: Woldol
   ja: |-
-    わたくしは サイプレスこくのししゃ
-    そして だいしんかんのウォルドル
-    ひかえるのは せいえいたちです
+    わたくしは　サイプレスこくのししゃ
+    そして　だいしんかんのウォルドル
+    ひかえるのは　せいえいたちです
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: I am Woldol, Cypress's messenger and high priest.
+  ja-kanji: |-
+    わたくしは　サイブレス国の使者
+    そして　大神官のウォルドル
+    控えるのは　精鋭たちです
+  literal: |-
+    I am Woldol, Cypress's messenger and high priest.
   en: |-
     I am Woldol,
-    Cypress's
-    messenger and
-    high priest.
+    Cypress’ messenger
+    and high priest.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 316
   character: Woldol
   ja: |-
-    われわれが ほんじつまいったのは
-    アンリおうに サイプレスこくおうの
-    おくりものを おとどけするため
+    われわれが　ほんじつまいったのは
+    アンリおうに　サイプレスこくおうの
+    おくりものを　おとどけするため
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: My companions are elite warriors. We came here today to deliver a gift of goodwill from Cypress's king to Queen Anri.
+  ja-kanji: |-
+    我々が　本日まいったのは
+    アンリ王に　サイプレス国王の
+    贈り物を　おとどけするため
+  literal: |-
+    My companions are elite warriors. We came here today to deliver a gift of goodwill from Cypress's king to Queen Anri.
   en: |-
     My companions are
     elite warriors.
     <delay 01><delay 01>
     We came here today
     to deliver a gift
-    of goodwill from
-    Cypress's king to
+    of good will from
+    Cypress’ king to
     Queen Anri.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 317
   character: Woldol
   ja: |-
-    わがくにの ゆうこうのあかしとして
-    さあ どうか おうけとりください
-    そしてどうか おたしかめください
+    わがくにの　ゆうこうのあかしとして
+    さあ　どうか　おうけとりください
+    そしてどうか　おたしかめください
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Please receive it as a token of our friendship and take a look.
+  ja-kanji: |-
+    我が国の　友好の証として
+    さあ　どうか　お受取りください
+    そしてどうか　お確かめください
+  literal: |-
+    Please receive it as a token of our friendship and take a look.
   en: |-
     Please receive it
     as a token of our
     friendship and
     take a look.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 318
-  character: Narrator
+  character: Narration
   ja: |-
-    アンリは こばこをひらいた・・・
+    アンリは　こばこをひらいた…
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Anri opened the small box...
+  ja-kanji: |-
+    アンリは　小箱を開いた…
+  literal: |-
+    Anri opened the small box...
   en: |-
     Anri opened the
     small box...
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 319
-  character: Narrator
+  character: Narration
   ja: |-
-    こばこから くろいガスがふきだした
+    こばこから　くろいガスがふきだした
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: A black gas blew out of the box!
+  ja-kanji: |-
+    小箱から　黒いガス吹きだした
+  literal: |-
+    A black gas blew out of the box!
   en: |-
     A black gas blew
     out of the box!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 320
   character: Lowe
   ja: |-
-    あっ! アンリさまーっ!
+    あっ！　アンリさまーっ！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Queen Anri!
+  ja-kanji: |-
+    あっ！　アンリさまーっ！
+    <delay 01><delay 01><delay 01><delay 01><end>
+  literal: |-
+    Queen Anri!
   en: |-
     Queen Anri!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 321
   character: Woldol
   ja: |-
-    グフッ グフッ グフフフッ
-    ガ-ディアナのものどもーっ
-    こころして きくがよいぞ!
+    グフッ　グフッ　グフフフッ
+    カーディアナのものどもーっ
+    こころして　きくがよいぞ！
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Heh heh heheheh... Listen carefully, servants of Guardiana!
+  ja-kanji: |-
+    グフッ　グフッ　グフフフッ
+    ガーディアナの者どもーっ
+    心して　聞くがよいぞ！
+  literal: |-
+    Heh heh heheheh...
+    Listen carefully, servants of Guardiana!
   en: |-
     Heh heh heheheh...
     Listen carefully,
     servants of
     Guardiana!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 322
   character: Woldol
   ja: |-
-    アンリおうは とわのねむりについた
-    しかしながら わがかみのちからで
-    ふたたび めをさますこともできる
+    アンリおうは　とわのねむりについた
+    しかしながら　わがかみのちからで
+    ふたたび　めをさますこともできる
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Queen Anri has fallen into eternal sleep. However, by the power of our god, she can be awakened once again.
+  ja-kanji: |-
+    アンリ王は　とわの眠りについた
+    しかしながら　わが神の力で
+    再び　目を覚ますこともできる
+  literal: |-
+    Queen Anri has fallen into eternal sleep. However, by the power of our god, she can be awakened once again.
   en: |-
     Queen Anri has
     fallen into
@@ -437,54 +529,273 @@
     awakened once
     again.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 323
   character: Woldol
   ja: |-
-    そのためには わが サイプレスに
-    ふくじゅうを ちかわなければならぬ
-    それとも わがくにに せめこむか?
+    そのためには　わが　サイプレスに
+    ふくじゅうを　ちかわなければならぬ
+    それとも　わがくにに　せめこむか？
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Will you swear fealty to Cypress? Or will you invade us instead?
+  ja-kanji: |-
+    その為に　わが　サイプレスに
+    服従を　誓わなければならぬ
+    それとも　我が国に　せめこむか？
+  literal: |-
+    Will you swear fealty to Cypress? Or will you invade us instead?
   en: |-
     Will you swear
     fealty to Cypress?
     Or will you invade
     us instead?
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 324
   character: Woldol
   ja: |-
-    いずれにしろ よくかんがえることだ
-    アンリおうを たすけるためには
-    サイプレスまで やってくることだ
+    いずれにしろ　よくかんがえることだ
+    アンリおうを　たすけるためには
+    サイプレスまで　やってくることだ
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Either way, consider your decision carefully. To save your queen, you must come to Cypress.
+  ja-kanji: |-
+    何れにしろ　よく考えることだ
+    アンリ王を　助ける為には
+    サイプレスまで　やってくることだ
+  literal: |-
+    Either way, consider your decision carefully. To save your queen, you must come to Cypress.
   en: |-
     Either way,
     consider your
     decision
     carefully.
-    <delay 01><delay 01>
+    <delay 01><delay 01><delay 01>
     To save your
     queen, you must
-    come to Cypress!
+    come to Cypress.
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 325
-  character: Narrator
+  character: Narration
   ja: |-
-    かくて ガーディアナこくは
+    かくて　ガーディアナこくは
     じゃあくなるものとのたたかいに
-    まきこまれて いくのだった
+    まきこまれて　いくのだった
     <delay 01><delay 01><delay 01><delay 01><end>
-  literal: Thus was Guardiana dragged into a war against evil.
+  ja-kanji: |-
+    かくて　ガーディアナ国は
+    邪悪なる物との戦いに
+    巻き込まれて　行くのだった
+  literal: |-
+    Thus was Guardiana dragged into a war against evil.
   en: |-
     Thus was Guardiana
     dragged into a war
     against evil.
     <delay 01><delay 01><delay 01><delay 01><end>
+- index: 109
+  character: Narration
+  ja: |-
+    アンリじょおうの ねむりを
+    さますために・・・<end>
+  ja-kanji: |-
+    アンリ女王の　眠りを
+    しますために…
+  literal: |-
+    In order to awaken Queen Anri…
+  en: |-
+    In order to
+    awaken Queen
+    Anri...<end>
+
+- index: 110
+  character: Narration
+  ja: |-
+    <wait more>ラグをたいちょうとした
+    えんせいぐんを さしむけた・・・
+    <delay 01><end>
+  ja-kanji: |-
+    ラグを隊長とした
+    遠征軍を　差し向けた…
+  literal: |-
+    An expedition force led by Lug was sent.
+  en: |-
+    <wait more>An expedition
+    force led by Lug
+    was sent.
+    <delay 01><end>
+- index: 111
+  character: Narration
+  ja: |-
+    わー! これから どうなるのかな?
+    <wait more><end>
+  ja-kanji: |-
+    わー！　これから　どうなるのかな？
+  literal: |-
+    Wow! I wonder what happens next.
+  en: |-
+    Wow! I wonder what
+    happens next.
+    <wait more><end>
+- index: 112
+  character: Narration
+  ja: |-
+    あっ　おきゃくさまね！
+    このごほんをよみにきたんでしょ
+    じゃっ　いっしょに　よみましょう！
+    <end>
+  ja-kanji: |-
+    あっ　お客様ね！
+    このご本を読みにきたんでしょ
+    じゃっ　一緒に　読みましょう！
+  literal: |-
+    Oh, a visitor!
+    Wouldn’t you like to read this mysterious story?
+    Well, let’s read it together!
+  en: |-
+    Oh, a visitor!
+    You came to read
+    this book, didn’t
+    you? Well, let’s
+    read it together!
+    <end>
+- index: 113
+  character: Girl
+  ja: |-
+    ねえねえ <delay 01>このしゅじんこうは
+    なんていう おなまえなの?
+    <wait more><end>
+  ja-kanji: |-
+    ねえねえ　この主人公は
+    何て言う　お名前なの？
+  literal: |-
+    Hey, what’s the protagonist’s name?
+  en: |-
+    Hey,<delay 01> what's the
+    protagonist's
+    name?
+    <wait more><end>
+- index: 114
+  character: Girl
+  ja: |-
+    <party leader>さんて いうのね<delay 01>
+    かっこいいんだーっ!
+    <wait more><end>
+  ja-kanji: |-
+    ニックさんて　言うのね
+    かっこいいんだーっ！
+  literal: |-
+    It’s Nick, huh?
+    Cool name!
+  en: |-
+    It's <party leader>,
+    huh?<delay 01>
+    Cool name!
+    <wait more><end>
+
+- index: 115
+  character: ''
+  ja: |-
+    それじゃ はやくよんで!
+    <delay 01>
+    はやく はやくーっ!<wait><end>
+  literal: ''
+  en: |-
+    Hurry up and read
+    it!<delay 01>
+    Hurry, hurry!<wait><end>
+
+- index: 116
+  character: Girl
+  ja: |-
+    このまえの つづきを
+    よんで きかせて くれるのね!
+    <wait more><end>
+  ja-kanji: |-
+    この前の　続きを
+    読んで　聞かせて　くれるのね！
+  literal: |-
+    Reading from where you left off?
+    Only if you let me listen!
+  en: |-
+    Reading from where
+    you left off?
+    Only if you let
+    me listen!
+    <wait more><end>
+- index: 117
+  character: Girl
+  ja: |-
+    どの　つづきを　よんでくれるの？
+  ja-kanji: |-
+    どの　続きを　読んでくれるの？
+  literal: |-
+    Where will you continue reading from?
+  en: |-
+    Where will you
+    continue reading
+    From?
+    <end>
+
+  # Unused? Can't find in the menu
+- index: 118
+  character: ''
+  ja: |-
+    わ-! たのしみ-!
+    <delay 01>
+    はやく よんできかせてー!<wait><end>
+  literal: ''
+  en: ''
+  # Unused? ^^^
+
+- index: 119
+  character: ''
+  ja: |-
+    えー? そうなんだ・・
+    <delay 01>
+    どれを なくしちゃうの?<end>
+  literal: ''
+  en: |-
+    Ah, I see...<delay 01>
+    Which one should
+    I get rid of?
+    <end>
+- index: 135
+  character: Girl
+  ja: |-
+    あら！　ほんとに けしちゃうの?<end>
+  ja-kanji: |-
+    あら！　本当に　消しちゃうの？
+  literal: |-
+    Oh, are you sure you want to delete it?
+  en: |-
+    Oh, are you sure
+    you want to
+    delete it?<end>
+
+- index: 120
+  character: ''
+  ja: |-
+    うん これでなくなったよ
+    <wait more><end>
+  literal: ''
+  en: |-
+    Alright, it's
+    gone!
+    <wait more><end>
+
+- index: 121
+  character: ''
+  ja: |-
+    どこに うつすの?<end>
+  literal: ''
+  en: |-
+    Where should it
+    be copied to?<end>
+
+- index: 122
+  character: ''
+  ja: |-
+    これで うつしたよ
+    <wait more><end>
+  literal: ''
+  en: It's copied.<wait more><end>
 
 
 ######################
@@ -492,12 +803,15 @@
 ######################
 
 - index: 326
-  character: Narrator
+  character: Narration
   ja: |-
-    アンリじょおうに かけられた
+    アンリじょおうに　かけられた
     とわのねむりをさますため
-    <wait><end>
-  literal: To awaken Queen Anri from the eternal slumber put on her,
+  ja-kanji: |-
+    アンリ女王に　掛けられた
+    永久の眠りを覚ますため
+  literal: |-
+    To awaken Queen Anri from the eternal slumber put on her,
   en: |-
     To awaken Queen
     Anri from the
@@ -506,7 +820,7 @@
     <wait><end>
 
 - index: 327
-  character: Narrator
+  character: Narration
   ja: |-
     ガーディアナは サイプレスに
     よりすぐりの せいえいたちを
@@ -6086,187 +6400,6 @@
   en: ''
 
 
-###########################################################
-# Main menu　girl dialogue
-###########################################################
-
-- index: 109
-  character: ''
-  ja: |-
-    アンリじょおうの ねむりを
-    さますために・・・<end>
-  literal: ''
-  en: |-
-    In order to
-    awaken Queen
-    Anri...<end>
-
-- index: 110
-  character: ''
-  ja: |-
-    <wait more>ラグをたいちょうとした
-    えんせいぐんを さしむけた・・・
-    <delay 01><end>
-  literal: ''
-  en: |-
-    <wait more>
-    An expedition
-    force led by Lug
-    was sent.
-    <delay 01><end>
-
-- index: 111
-  character: ''
-  ja: |-
-    わー! これから どうなるのかな?
-    <wait more><end>
-  literal: ''
-  en: |-
-    <wait more>
-    Wow! I wonder what
-    happens next.
-    <wait more><end>
-
-- index: 112
-  character: ''
-  ja: |-
-    あっ おきゃくさまね!
-    このごほんをよみにきたんでしょ
-    じゃっ いっしょに よみましょう!
-    <end>
-  literal: ''
-  en: |-
-    Oh, a visitor!
-    You came to read
-    this book, didn't
-    you? Well, let's
-    read it together!
-    <end>
-
-- index: 113
-  character: ''
-  ja: |-
-    ねえねえ <delay 01>このしゅじんこうは
-    なんていう おなまえなの?
-    <wait more><end>
-  literal: ''
-  en: |-
-    Hey,<delay 01> what's the
-    protagonist's
-    name?
-    <wait more><end>
-
-- index: 114
-  character: ''
-  ja: |-
-    <party leader>さんて いうのね<delay 01>
-    かっこいいんだーっ!
-    <wait more><end>
-  literal: ''
-  en: |-
-    It's <party leader>,
-    huh?<delay 01>
-    Cool name!
-    <wait more><end>
-
-- index: 115
-  character: ''
-  ja: |-
-    それじゃ はやくよんで!
-    <delay 01>
-    はやく はやくーっ!<wait><end>
-  literal: ''
-  en: |-
-    Hurry up and read
-    it!<delay 01>
-    Hurry, hurry!<wait><end>
-
-- index: 116
-  character: ''
-  ja: |-
-    このまえの つづきを
-    よんで きかせて くれるのね!
-    <wait more><end>
-  literal: ''
-  en: |-
-    Reading from where
-    you left off?
-    Only if you let
-    me listen!
-    <wait more><end>
-
-- index: 117
-  character: ''
-  ja: |-
-    どの つづきを よんでくれるの?<end>
-  literal: ''
-  en: |-
-    Where will you
-    continue reading
-    from?
-    <end>
-
-  # Unused? Can't find in the menu
-- index: 118
-  character: ''
-  ja: |-
-    わ-! たのしみ-!
-    <delay 01>
-    はやく よんできかせてー!<wait><end>
-  literal: ''
-  en: ''
-  # Unused? ^^^
-
-- index: 119
-  character: ''
-  ja: |-
-    えー? そうなんだ・・
-    <delay 01>
-    どれを なくしちゃうの?<end>
-  literal: ''
-  en: |-
-    Ah, I see...<delay 01>
-    Which one should
-    I get rid of?
-    <end>
-
-- index: 135
-  character: ''
-  ja: |-
-    あら！ ほんとに けしちゃうの?<end>
-  literal: ''
-  en: |-
-    Oh, are you sure
-    you want to
-    delete it?<end>
-
-- index: 120
-  character: ''
-  ja: |-
-    うん これでなくなったよ
-    <wait more><end>
-  literal: ''
-  en: |-
-    Alright, it's
-    gone!
-    <wait more><end>
-
-- index: 121
-  character: ''
-  ja: |-
-    どこに うつすの?<end>
-  literal: ''
-  en: |-
-    Where should it
-    be copied to?<end>
-
-- index: 122
-  character: ''
-  ja: |-
-    これで うつしたよ
-    <wait more><end>
-  literal: ''
-  en: It's copied.<wait more><end>
 
 - index: 123
   character: ''
