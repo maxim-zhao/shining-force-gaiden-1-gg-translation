@@ -723,7 +723,7 @@
   en: |-
     Where will you
     continue reading
-    From?
+    from?
     <end>
 
   # Unused? Can't find in the menu
@@ -986,13 +986,12 @@
     Aren’t you Lug’s only son, <name>, the
     apprentice fighter? What do you mean by “us”?
   en: |-
-    Aren’t you Lug’s
-    only son,
-    <name>, the
+    You are Lug’s only
+    son, <name>; an
     apprentice
-    fighter?
+    fighter.
     <wait more>
-    What do you mean
+    What did you mean
     by “us”?
     <wait><end>
 - index: 337
@@ -1005,7 +1004,7 @@
   literal: |-
     Of course, let me show you!
   en: |-
-    Of course! Let me
+    Right! Let me
     show you!
     <wait><end>
 - index: 338
@@ -1070,7 +1069,7 @@
     course.
     <wait more>
     I am here by his
-    orders, along with
+    command. He sends
     his regards.
     <wait><end>
 - index: 342
@@ -1091,10 +1090,11 @@
     giantfolk monk,
     aren’t you?
     <wait more>
-    You look quite
+    You look very much
     like a warrior of
     Light I know.
-    A hunch, perhaps?
+    Just a hunch,
+    maybe?
     <wait><end>
 - index: 343
   character: Sig
@@ -1115,18 +1115,21 @@
   literal: |-
     You mean Uncle Gong? I’ve heard many tales of your bravery. I’ve joined this group to help in my uncle’s place. You can call me <name>. It’s nice to meet you.
   en: |-
-    You mean my uncle
+    You mean uncle
     Gong? I’ve heard
-    many tales of your
-    Bravery.
+    rumors about you.
+    A very brave
+    person you were.
     <wait more>
-    I’ve  joined this
-    group to help in
-    my uncle’s place.
+    I’ve joined this
+    group because I
+    thought I’d be of
+    use in place of
+    my uncle.
     <wait more>
-    You can call me
-    <name>. It’s
-    nice to meet you.
+    My name is
+    <name>. Nice
+    to meet you.
     <wait><end>
 - index: 344
   character: Ken
@@ -1168,12 +1171,14 @@
     This must be my chance!
   en: |-
     Tao and the others
-    always boast about
-    it, so of course I
+    are always boasting
+    about it!
+    <wait more>
+    So, of course, I
     want to become a
     warrior of Light!
     <wait more>
-    This must be my
+    This is surely my
     chance!
     <wait><end>
 - index: 346
@@ -1191,7 +1196,7 @@
     Knight <name>... my son. You... are you sure? It’s going to be a very dangerous expedition!
   en: |-
     Knight <name>...
-    my son.
+    My son.
     You... Are you
     Sure?
     <wait more>
@@ -1213,7 +1218,7 @@
   literal: |-
     Yes, father! Ah, I mean, Captain Ken! I’ve made up my mind. Please leave it to us!
   en: |-
-    Yes, father! Ah, I
+    Yes, father! Ah! I
     mean, Captain Ken!
     I’ve made up my
     mind. Please leave
@@ -1235,11 +1240,11 @@
   en: |-
     And you...
     <wait more>
-    I suppose you wish
-    to rescue your
-    father, Lug, the
-    commander of the
-    expedition force.
+    wish to rescue
+    your father, Lug,
+    the commander of
+    the expedition
+    force, yes?
     <wait more><end>
 - index: 349
   character: Ken
@@ -1360,14 +1365,15 @@
   en: |-
     Rather, he is
     <party leader>, from
-    Prompt. Since
-    leaving the
+    Prompt.
+    <wait more>
+    He says that,
+    since leaving the
     ancients’ land,
     <wait more>
     he has been
-    traveling to
-    various countries
-    to train.
+    traveling to train
+    in many countries.
     <wait more><end>
 - index: 356
   character: Ruce
@@ -1383,11 +1389,11 @@
   literal: |-
     When we were discussing this endeavor, he encouraged us to go. Thus, we’ve come to a resolution!
   en: |-
-    When we were
-    discussing this
-    endeavor, he
+    He was the one who
     encouraged us to
-    go.
+    go when we were
+    discussing this
+    endeavor.
     <wait more>
     Thus, we’ve
     come to a
@@ -1438,9 +1444,9 @@
   literal: |-
     However, I shall also accompany you. Let’s go and give Cypress a surprise!
   en: |-
-    However, I shall
-    also accompany
-    you. Let’s go and
+    But I shall
+    accompany you.
+    Let’s go and
     give Cypress a
     surprise!
     <wait><end>
@@ -1647,23 +1653,30 @@
     あまくみすぎて　いたようだぜ・・・
     <wait more><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    Seems like I have underestimated the apprentice force of Guardiana…
+  en: |-
+    It seems I have
+    underestimated the
+    apprentice force
+    of Guardiana.
+    <wait more><end>
 - index: 373
   character: Dark Mage
   ja: |-
     しかし　おれさまもタダではしなねえ
     このふねも　みちずれだ！　あばよ
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    But I’m not going out just like that, I’ll take this ship down with me! Bye!
   en: |-
     But I’m not going
     out just like
-    that, I’ll take
-    this ship down
-    with me! See ya!
+    that! I’ll take
+    this whole ship
+    down with me! Bye!
     <wait><end>
-
 - index: 374
   character: Lowe
   ja: |-
@@ -1671,14 +1684,15 @@
     やつは じばくするちからをつかい
     ふねに あなをあけていきましたぞ
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Unbelievable, he self-destructed and made a hole in the ship!
   en: |-
-    Unbelievable, he
-    self-destructed
-    and made a hole in
+    Unbelievable! He
+    destroyed himself
+    to make a hole in
     the ship!
     <wait more><end>
-
 - index: 375
   character: Lowe
   ja: |-
@@ -1686,40 +1700,43 @@
     どうにか およぎつくしかありません
     さあ はやく とびこむのです・・・
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    We have no other choice but to somehow make it swimming to that island over there. Quickly, jump off the ship....
   en: |-
     We have no other
-    choice but to
-    somehow make it
-    swimming to that
-    island over there.<wait more>
-    Quickly, jump
-    overboard...
+    choice but to swim
+    to that island
+    over there and
+    pray that we make
+    it! Quickly!
+    Abandon ship!
     <wait><end>
-
 - index: 376
   character: Voice
   ja: |-
     <party leader>! しっかりして!<line><party leader>! めをさまして・・・<wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Nick, come to your senses! Nick, open your eyes…
   en: |-
-    <party leader>, come to
-    your senses!
-    <party leader>, open
-    your eyes...
+    <party leader>! Come to
+    your senses!<line>
+    <party leader>!
+    Open your eyes…
     <wait more><end>
-
 - index: 377
   character: Lowe
   ja: |-
     よかった! きがつきましたね
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Okay, good! You’re conscious.
   en: |-
-    Okay, good! You’re
-    conscious.
+    Thank goodness!
+    You’re conscious.
     <wait more><end>
-
 - index: 378
   character: Lowe
   ja: |-
@@ -1727,30 +1744,31 @@
     みんな そうびひんをなくしました
     いま てきとあったらたいへんですよ
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    However, everyone lost their equipment when we jumped off the ship. If we encounter enemies now we’d be in trouble.
   en: |-
-    However, everyone
-    lost their
-    equipment when
-    they jumped off
-    the ship.<wait more>
-    If we encounter
-    enemies now we
-    will be in a
-    pickle.
+    However, we all
+    lost our equipment
+    when we jumped off
+    the ship. If we
+    encounter
+    resistance now,
+    we’ll be in
+    big trouble.
     <wait><end>
-
 - index: 379
-  character: Cray’s sister
+  character: Cray’s Sister
   ja: |-
     やめて! どうか おゆるしください
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    No, stop, please let me go!
   en: |-
-    Stop, please let
-    me go!
+    No! Stop! Please!
+    Let me go!
     <wait><end>
-
 - index: 380
   character: Dwarf
   ja: |-
@@ -1758,16 +1776,16 @@
     おまえのたよりの つよいあにきも
     ここには いないんだからな ワハハ
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I won’t let you go! Quit it out already! Your trusty brother ain’t around either anyway wahaha
   en: |-
-    No, give it up
-    already. And your
-    trusted brother
+    Fat chance! Cut it
+    out already! Your
+    trusty brother
     ain’t around
-    either anyway.<wait more>
-    Hahaha!
+    anyway. Wahaha!
     <wait more><end>
-
 - index: 381
   character: Dwarf
   ja: |-
@@ -1775,36 +1793,40 @@
     おまえのようなうつくしいむすめに
     あえるとは おもわなかったぞ!
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I didn’t think I’d meet such a beautiful girl on such a boring island like Miniyom!
   en: |-
-    I didn’t think I’d
-    meet such a
-    beautiful lady on
+    I never thought
+    I’d find such a
+    beautiful girl on
     such a boring
-    island like Miniyom!
+    island like
+    Miniyom!
     <wait><end>
-
 - index: 382
-  character: Cray’s sister
+  character: Cray’s Sister
   ja: |-
     いや-っ! いやーっ!
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    No! Nooo!
   en: |-
-    No! No!
+    No! Nooo!
     <wait><end>
-
 - index: 383
   character: Lowe
   ja: |-
     やめんか! サイプレスのうじむしめ!
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Stop that, Cypress maggots!
   en: |-
-    Stop it, Cypress
+    Stop that, Cypress
     maggots!
     <wait><end>
-
 - index: 384
   character: Dwarf
   ja: |-
@@ -1812,15 +1834,16 @@
     じゃまするやつらは ようしゃしねえぞ
     やろうども! みなごろしだ!
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    What!? Who are you? I won’t forgive you for interfering. Guys, kill them all!
   en: |-
-    What!? Who are
-    you? I won’t
+    What?! Who are
+    you?! I won’t
     forgive you for
-    interfering. Guys,
+    interfering! Guys,
     kill them all!
     <wait><end>
-
 - index: 385
   character: Lowe
   ja: |-
@@ -1828,34 +1851,31 @@
     やつらをむかえうたなければなりません
     さぁ あたりをしらべるのです
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Everyone, weaponize whatever you can find around you and engage them. Investigate your surroundings!
   en: |-
     Everyone,
-    weaponize whatever
-    you can find
-    around you and
-    engage them.<wait more>
+    improvise whatever
+    weaponry you can
+    find lying around
+    and engage them!
     Investigate your
     surroundings!
-    <wait><end>
-
-######################
-# Battle 2
-######################
-
 - index: 386
   character: Dwarf
   ja: |-
     そっ そうか・・・わかったぞ・・・
     おまえらは ガーディアナぐんだな
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I see… you must be the Guardiana force.
   en: |-
-    I see... you must
+    I see... You must
     be the Guardiana
-    force.
+    Force.
     <wait more><end>
-
 - index: 387
   character: Dwarf
   ja: |-
@@ -1863,16 +1883,18 @@
     このしまにじょうりくするとは・・・
     おもっても いなかった・・・グフッ
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    We didn’t think that...  you’d come to this island, where the main Cypress army isn’t stationed at… *dies*
   en: |-
     We didn’t think
     that... you’d come
-    to this island,
-    the main Cypress
-    army isn’t
+    to this island.
+    The main Cypress
+    army isn’t even
     stationed here...
+    Cough! Hack! Gasp!
     <wait><end>
-
 - index: 388
   character: Cray
   ja: |-
@@ -1880,67 +1902,73 @@
     サイプレスのやつらが いもうとを
     つれていったときいて あわてたぞ
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Are you okay? Are you hurt? I panicked when I heard that those Cypress scum took my sister.
   en: |-
-    Are you okay? Are
-    you hurt?<wait more>
-    I panicked when I
-    learned that those
-    Cypress scum took
-    my sister.
+    Are you okay?! Are
+    you hurt?! I
+    panicked when I
+    heard that those
+    Cypress scum had
+    taken my sister!
     <wait><end>
-
 - index: 389
-  character: Cray’s sister
+  character: Cray’s Sister
   ja: |-
     もう! ほんとにあぶなかったのよ
     でも ガーディアナのみなさんに
     たすけていただけて よかった
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    It was really close, but I was lucky to have been saved by Guardiana folks.
   en: |-
-    It was close, but
-    I was lucky to
-    have been saved by
-    Guardiana folks.
+    It was really
+    close, but I was
+    lucky to have been
+    saved by Guardiana
+    folks.
     <wait more><end>
-
 - index: 390
-  character: Cray’s sister
+  character: Cray’s Sister
   ja: |-
     さもなけりゃ・・・いまごろ・・・
     ああ かんがえただけでゾッとする
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Otherwise, now… I’d be… oh, just thinking about it makes me shudder.
   en: |-
     Otherwise, now...
-    I’d be... oh, just
+    I’d be... Oh, just
     thinking about it
-    makes me shudder.
+    makes me shudder!
     <wait><end>
-
 - index: 391
   character: Cray
   ja: |-
     なに! ガーディアナぐんだと!
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    What!? The Guardiana force?
   en: |-
-    What!? The
-    Guardiana force?
+    What?! The
+    Guardiana Force?!
     <wait><end>
-
 - index: 392
   character: Cray
   ja: |-
     おまちしてました あなたがたを!
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I’ve been waiting for you all.
   en: |-
     I’ve been waiting
-    for you.
+    for you all!
     <wait more><end>
-
 - index: 393
   character: Cray
   ja: |-
@@ -1948,19 +1976,20 @@
     せめてくると けいかいしていました
     しかし まさかこのしまにくるとは
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The Cypress army has been on alert expecting the Guardiana force’s attack. However, they did not expect that you’d come to this island.
   en: |-
     The Cypress army
-    has been on alert
-    due to the
-    Guardiana forces’
-    assault.<wait more>
-    However, they did
-    not expect that
-    you’d come to this
+    has been on alert,
+    expecting the
+    Guardiana Force’s
+    attack. However,
+    they did not
+    expect that you’d
+    come here, to this
     island.
     <wait more><end>
-
 - index: 394
   character: Cray
   ja: |-
@@ -1968,17 +1997,18 @@
     しんかんウォルドルたちをたおし
     くにのへいわをとりもどしてください
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I beg of you, please save Cypress. Defeat the priest Woldol and his lackeys and restore peace to the country.
   en: |-
-    I beg of you,
-    please save
-    Cypress.<wait more>
-    Defeat the priest
-    Woldol and his
-    lackeys and retake
-    the country.
+    I beg of you!
+    Please save
+    Cypress. Defeat
+    the priest Woldol
+    and his lackeys,
+    and restore peace
+    to the country.
     <wait more><end>
-
 - index: 395
   character: Cray
   ja: |-
@@ -1986,51 +2016,54 @@
     われわれにも なりひびいています
     わたしも おともさせてください
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The fame of Guardiana’s force of light has reached us as well. I too wish to join you.
   en: |-
     The fame of
-    Guardiana’s force
-    of light has
-    reached us as
-    well.<wait more>
-    I too wish to join
-    you.
-    <wait more><end>
-
+    Guardiana’s
+    Shining Force has
+    reached us even
+    here. I too wish
+    to join you.
+    <wait><end>
 - index: 396
-  character: Cray's sister
+  character: Cray’s Sister
   ja: |-
     にいさん・・・きもちはわかったわ
     もうなにもいわない・・・たおしてね
     そして へいわをとりもどしてね
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Brother… I understand your feelings. I’m not gonna say anything… defeat them and restore the peace.
   en: |-
     Brother... I
-    understand your
-    feelings. I’m not
+    understand how you
+    feel. I’m not
     gonna say
-    anything...<wait more>
-    Defeat them and
-    restore the peace.
+    anything... Defeat
+    them, and restore
+    the peace.
     <wait more><end>
-
 - index: 397
-  character: Cray’s sister
+  character: Cray’s SIster
   ja: |-
     みなさん! むらにおいでください
     このさき ほきゅうできませんから
     そうびなどを ととのえてください
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Everyone, please come to our village. You won’t be able to resupply after this so make your preparations.
   en: |-
     Everyone, please
-    come to the
-    village.<wait more>
-    You won’t be able
-    to resupply after
+    come to our
+    village. You won’t
+    be able to
+    resupply after
     this, so make your
-    preparations.
+    Preparations.
     <wait><end>
 
 # (Miniyom village)
@@ -2042,61 +2075,66 @@
     まず ふねをてにいれなければ!
     ミニヨムとりでに まいりましょう!
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    In order to reach the mainland of Cypress we must obtain a ship. Let’s go to Miniyom fortress!
   en: |-
     In order to reach
     the mainland of
     Cypress, we must
-    obtain a ship.<wait more>
+    obtain a ship.
     Let’s go to
-    Miniyom fortress.
+    Miniyom Fortress!
     <wait><end>
-
 - index: 399
-  character: Cypress knight
+  character: Cypress Knight
   ja: |-
     さがしたぞ! ガーディアナぐん!
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    We’ve been looking for you, Guardiana force!
   en: |-
     We’ve been looking
     for you, Guardiana
-    force!
-    <wait><end>
-
+    Force!
 - index: 400
-  character: Cypress knight
+  character: Cypress Knight
   ja: |-
     ゴブリンたちが かえってこないので
     まさかとはおもったが やはりそうか!
     きさまらに たおされていたのだな!
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The goblins have not come back. I didn’t think it would be possible, but it was you who defeated them after all!
   en: |-
     The goblins have
-    not come back.<wait more>
-    I didn’t think it
+    not come back. I
+    didn’t think it
     would be possible,
-    but it was you who
+    but it WAS you who
     defeated them
     after all!
     <wait more><end>
-
 - index: 401
-  character: Cypress knight
+  character: Cypress Knight
   ja: |-
     しかし やつらをたおしたくらいで
     いいきになるのも これまでだ!
     われらの ぐんもんにくだるがいい
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    However, don’t be full of yourselves just because you managed to defeat them. This is where it ends, surrender now!
   en: |-
     However, don’t be
     full of yourselves
-    cuz you’ve managed
-    to defeat them.<wait more>
-    This is where it
-    ends, surrender.
+    just because you
+    managed to defeat
+    them. This is
+    where it ends.
+    Surrender now!
     <wait><end>
 
 ######################

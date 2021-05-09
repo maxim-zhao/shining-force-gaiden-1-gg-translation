@@ -487,13 +487,15 @@ def encode_script(script_file, trees_file, data_file):
                 text = node["literal"]
         
             # Check line lengths
-            lines = re.sub("<[^>]+>", "", text).replace("<line>", "\n").split("\n")
+            # First substitute 8 chars for names
+            s = text.replace("<name>", "XXXXXXXX").replace("<party leader>", "XXXXXXXX")
+            lines = re.sub("<[^>]+>", "", s).replace("<line>", "\n").split("\n")
             for line in lines:
                 line = line.rstrip()
                 if len(line) > 18:
                     print(f"Line too long ({len(line)}) in script entry {index}: \"{line}\"")
 
-        script.append(ScriptEntry(line, f"Script{index}"))
+        script.append(ScriptEntry(text, f"Script{index}"))
 
     # Then we build a table of byte counts
     script_symbols_count = 0
