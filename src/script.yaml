@@ -295,7 +295,9 @@
     Crunch… crunch... 
     You are fools to defy us! Come on, then! Don't hold back!
   en: |-
-    Crunch...<delay 01> crunch...
+    Crunch...
+    Crunch...
+    <delay 01><delay 01>
     You are fools to
     defy us!
     Come on, then!
@@ -1171,8 +1173,8 @@
     This must be my chance!
   en: |-
     Tao and the others
-    are always boasting
-    about it!
+    are always
+    boasting about it!
     <wait more>
     So, of course, I
     want to become a
@@ -1605,8 +1607,9 @@
     army from
     Guardiana was
     coming, so I came
-    to take a look,
-    but... you are
+    to take a look.
+    <wait more>
+    But... you are
     just a bunch of
     brats, how
     pathetic!
@@ -1704,12 +1707,13 @@
   literal: |-
     We have no other choice but to somehow make it swimming to that island over there. Quickly, jump off the ship....
   en: |-
-    We have no other
-    choice but to swim
-    to that island
-    over there and
-    pray that we make
-    it! Quickly!
+    We have no choice
+    but to swim to
+    that island over
+    there and pray
+    that we make it!
+    <wait more>
+    Quickly!
     Abandon ship!
     <wait><end>
 - index: 376
@@ -1751,8 +1755,9 @@
     However, we all
     lost our equipment
     when we jumped off
-    the ship. If we
-    encounter
+    the ship.
+    <wait more>
+    If we encounter
     resistance now,
     we’ll be in
     big trouble.
@@ -1801,8 +1806,7 @@
     I’d find such a
     beautiful girl on
     such a boring
-    island like
-    Miniyom!
+    island as Miniyom!
     <wait><end>
 - index: 382
   character: Cray’s Sister
@@ -1860,8 +1864,10 @@
     weaponry you can
     find lying around
     and engage them!
+    <wait more>
     Investigate your
     surroundings!
+    <wait><end>
 - index: 386
   character: Dwarf
   ja: |-
@@ -1890,9 +1896,11 @@
     We didn’t think
     that... you’d come
     to this island.
+    <wait more>
     The main Cypress
     army isn’t even
     stationed here...
+    <wait more>
     Cough! Hack! Gasp!
     <wait><end>
 - index: 388
@@ -1907,8 +1915,9 @@
     Are you okay? Are you hurt? I panicked when I heard that those Cypress scum took my sister.
   en: |-
     Are you okay?! Are
-    you hurt?! I
-    panicked when I
+    you hurt?!
+    <wait more>
+    I panicked when I
     heard that those
     Cypress scum had
     taken my sister!
@@ -1984,11 +1993,12 @@
     has been on alert,
     expecting the
     Guardiana Force’s
-    attack. However,
-    they did not
-    expect that you’d
-    come here, to this
-    island.
+    attack.
+    <wait more>
+    However, they did
+    not expect that
+    you’d come here,
+    to this island.
     <wait more><end>
 - index: 394
   character: Cray
@@ -2003,11 +2013,13 @@
   en: |-
     I beg of you!
     Please save
-    Cypress. Defeat
-    the priest Woldol
-    and his lackeys,
-    and restore peace
-    to the country.
+    Cypress.
+    <wait more>
+    Defeat the priest
+    Woldol and his
+    lackeys, and
+    restore peace to
+    the country.
     <wait more><end>
 - index: 395
   character: Cray
@@ -2024,8 +2036,10 @@
     Guardiana’s
     Shining Force has
     reached us even
-    here. I too wish
-    to join you.
+    here.
+    <wait more>
+    I too wish to join
+    you.
     <wait><end>
 - index: 396
   character: Cray’s Sister
@@ -2042,9 +2056,10 @@
     understand how you
     feel. I’m not
     gonna say
-    anything... Defeat
-    them, and restore
-    the peace.
+    anything...
+    <wait more>
+    Defeat them, and
+    restore the peace.
     <wait more><end>
 - index: 397
   character: Cray’s SIster
@@ -2059,15 +2074,13 @@
   en: |-
     Everyone, please
     come to our
-    village. You won’t
-    be able to
-    resupply after
+    village.
+    <wait more>
+    You won’t be able
+    to resupply after
     this, so make your
     Preparations.
     <wait><end>
-
-# (Miniyom village)
-
 - index: 398
   character: Cray
   ja: |-
@@ -2083,6 +2096,7 @@
     the mainland of
     Cypress, we must
     obtain a ship.
+    <wait more>
     Let’s go to
     Miniyom Fortress!
     <wait><end>
@@ -2098,6 +2112,7 @@
     We’ve been looking
     for you, Guardiana
     Force!
+    <wait><end>
 - index: 400
   character: Cypress Knight
   ja: |-
@@ -2110,8 +2125,9 @@
     The goblins have not come back. I didn’t think it would be possible, but it was you who defeated them after all!
   en: |-
     The goblins have
-    not come back. I
-    didn’t think it
+    not come back.
+    <wait more>
+    I didn’t think it
     would be possible,
     but it WAS you who
     defeated them
@@ -2132,9 +2148,11 @@
     full of yourselves
     just because you
     managed to defeat
-    them. This is
-    where it ends.
-    Surrender now!
+    them.
+    <wait more>
+    This is where it
+    ends. Surrender
+    now!
     <wait><end>
 
 ######################
