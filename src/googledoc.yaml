@@ -253,8 +253,7 @@
     Crunch… crunch... 
     You are fools to defy us! Come on, then! Don't hold back!
   en: |-
-    Crunch...<delay 01>crunch...
-    <delay 01><delay 01>
+    Crunch...<delay 01> crunch...
     You are fools to
     defy us!
     Come on, then!
@@ -373,8 +372,7 @@
     My companions are elite warriors. We came here today to deliver a gift of goodwill from Cypress's king to Queen Anri.
   en: |-
     My companions are
-    elite warriors.
-    <delay 01><delay 01>
+    elite warriors.<delay 01><delay 01>
     We came here today
     to deliver a gift
     of good will from
@@ -475,8 +473,7 @@
   en: |-
     Queen Anri has
     fallen into
-    eternal sleep.
-    <delay 01><delay 01><delay 01>
+    eternal sleep.<delay 01><delay 01><delay 01>
     However, by the
     power of our god,
     she can be
@@ -519,8 +516,7 @@
     Either way,
     consider your
     decision
-    carefully.
-    <delay 01><delay 01><delay 01>
+    carefully.<delay 01><delay 01><delay 01>
     To save your
     queen, you must
     come to Cypress.
@@ -747,7 +743,7 @@
     Too long! They’ve taken too long!
   en: |-
     Too long!
-    .<delay 01>.<delay 01>.<delay 01>They’ve taken
+    .<delay 01>.<delay 01>.<delay 01> They’ve taken
     too long!
     <wait><end>
 - index: 329
@@ -884,10 +880,8 @@
     戦士見習いの<name>ではないか
     私たちに　とはどういうことだ
   literal: |-
-    Aren’t you Lug’s only son, 
-    <name>, the
-    apprentice fighter?
-    What do you mean by “us”?
+    Aren’t you Lug’s only son, <name>, the
+    apprentice fighter? What do you mean by “us”?
   en: |-
     Aren’t you Lug’s
     only son,
@@ -970,10 +964,11 @@
   en: |-
     He resides in the
     elven forest, of
-    course. I am here
-    by his orders,
-    along with his
-    regards.
+    Course.
+    <wait more>
+    I am here by his
+    orders, along with
+    his regards.
     <wait><end>
 - index: 342
   character: Ken
@@ -1219,7 +1214,8 @@
     No<delay 01>.<delay 01>.<delay 01>.
     You resemble him,
     but<delay 01>.<delay 01>.<delay 01>.<delay 01>
-    It seems I’m mistaken.
+    It seems I’m
+    mistaken.
     <wait><end>
 - index: 354
   character: Ruce

@@ -266,8 +266,7 @@
     But such rumors
     must be
     unreliable!
-    <delay 01><delay 01>
-    Dantom!<delay 01> Frabell!
+    Dantom! Frabell!
     <delay 01><delay 01><delay 01><delay 01><end>
 - index: 308
   character: Dantom
@@ -296,7 +295,7 @@
     Crunch… crunch... 
     You are fools to defy us! Come on, then! Don't hold back!
   en: |-
-    Crunch...<delay 01>crunch...
+    Crunch...<delay 01> crunch...
     You are fools to
     defy us!
     Come on, then!
@@ -847,7 +846,7 @@
     Too long! They’ve taken too long!
   en: |-
     Too long!
-    .<delay 01>.<delay 01>.<delay 01>They’ve taken
+    .<delay 01>.<delay 01>.<delay 01> They’ve taken
     too long!
     <wait><end>
 - index: 329
@@ -984,10 +983,8 @@
     戦士見習いの<name>ではないか
     私たちに　とはどういうことだ
   literal: |-
-    Aren’t you Lug’s only son, 
-    <name>, the
-    apprentice fighter?
-    What do you mean by “us”?
+    Aren’t you Lug’s only son, <name>, the
+    apprentice fighter? What do you mean by “us”?
   en: |-
     Aren’t you Lug’s
     only son,
@@ -1070,10 +1067,11 @@
   en: |-
     He resides in the
     elven forest, of
-    course. I am here
-    by his orders,
-    along with his
-    regards.
+    course.
+    <wait more>
+    I am here by his
+    orders, along with
+    his regards.
     <wait><end>
 - index: 342
   character: Ken
@@ -1319,7 +1317,8 @@
     No<delay 01>.<delay 01>.<delay 01>.
     You resemble him,
     but<delay 01>.<delay 01>.<delay 01>.<delay 01>
-    It seems I’m mistaken.
+    It seems I’m
+    mistaken.
     <wait><end>
 - index: 354
   character: Ruce
