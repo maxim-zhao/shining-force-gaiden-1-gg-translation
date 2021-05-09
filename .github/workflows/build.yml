@@ -26,7 +26,7 @@ jobs:
     - name: get Py deps
       shell: pwsh
       run: |
-        pip install PyYaml
+        pip install PyYaml ruamel.yaml google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
     - name: build
       shell: cmd
