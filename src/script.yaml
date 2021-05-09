@@ -156,7 +156,7 @@
     Shut up! How dare
     you make us wait
     in a place like
-    this! You should
+    this?! You should
     all be silenced!
     <delay 01><delay 01><delay 01><delay 01><end>
 - index: 302
@@ -248,7 +248,7 @@
     Heh heh heheheh...
     I’ve heard rumors
     of the courtesy of
-    Guardiana's
+    Guardiana’s
     people...
     <delay 01><delay 01><delay 01><delay 01><end>
 - index: 307
@@ -269,7 +269,6 @@
     <delay 01><delay 01>
     Dantom!<delay 01> Frabell!
     <delay 01><delay 01><delay 01><delay 01><end>
-
 - index: 308
   character: Dantom
   ja: |-
@@ -298,7 +297,6 @@
     You are fools to defy us! Come on, then! Don't hold back!
   en: |-
     Crunch...<delay 01>crunch...
-    <delay 01><delay 01>
     You are fools to
     defy us!
     Come on, then!
@@ -419,8 +417,7 @@
     My companions are elite warriors. We came here today to deliver a gift of goodwill from Cypress's king to Queen Anri.
   en: |-
     My companions are
-    elite warriors.
-    <delay 01><delay 01>
+    elite warriors.<delay 01><delay 01>
     We came here today
     to deliver a gift
     of good will from
@@ -521,8 +518,7 @@
   en: |-
     Queen Anri has
     fallen into
-    eternal sleep.
-    <delay 01><delay 01><delay 01>
+    eternal sleep.<delay 01><delay 01><delay 01>
     However, by the
     power of our god,
     she can be
@@ -565,8 +561,7 @@
     Either way,
     consider your
     decision
-    carefully.
-    <delay 01><delay 01><delay 01>
+    carefully.<delay 01><delay 01><delay 01>
     To save your
     queen, you must
     come to Cypress.
@@ -603,7 +598,6 @@
     In order to
     awaken Queen
     Anri...<end>
-
 - index: 110
   character: Narration
   ja: |-
@@ -745,12 +739,16 @@
   # Unused? ^^^
 
 - index: 119
-  character: ''
+  character: Girl
   ja: |-
-    えー? そうなんだ・・
-    <delay 01>
-    どれを なくしちゃうの?<end>
-  literal: ''
+    えー？　そうなんだ…
+    どれを　なくしちゃうの？
+  ja-kanji: |-
+    えー？　そうなんだ…
+    どれを　なくしちゃうの？
+  literal: |-
+    Ah, I see…
+    Which one should I get rid of?
   en: |-
     Ah, I see...<delay 01>
     Which one should
@@ -807,6 +805,7 @@
   ja: |-
     アンリじょおうに　かけられた
     とわのねむりをさますため
+    <wait><end>
   ja-kanji: |-
     アンリ女王に　掛けられた
     永久の眠りを覚ますため
@@ -816,90 +815,108 @@
     To awaken Queen
     Anri from the
     eternal slumber
-    put on her,
+    put upon her,
     <wait><end>
-
 - index: 327
   character: Narration
   ja: |-
-    ガーディアナは サイプレスに
-    よりすぐりの せいえいたちを
-    さしむけたのだった・・・が・
-    <delay 01>・<delay 01>・<delay 01><end>
-  literal: Guardiana sent its finest warriors to Cypress. However…
+    ガーディアナは　サイプレスに
+    よりすぐりの　せいえいたちを
+    さしむけたのだった・・・が・<delay 01>・<delay 01>・<delay 01>
+    <end>
+  ja-kanji: |-
+    ガーディアナは　サイプレスに
+    選りすぐりの　精鋭たちを
+    差し向けたのだった…が…
+  literal: |-
+    Guardiana sent its finest warriors to Cypress. However…
   en: |-
     Guardiana sent its
     finest warriors to
-    Cypress.
-    However
-    <delay 01>.<delay 01>.<delay 01>.<delay 01><end>
-
+    Cypress.<delay 01>
+    However.<delay 01>.<delay 01>.
+    <delay 01><end>
 - index: 328
   character: Ken
   ja: |-
-    おそい!・
-    <delay 01>・<delay 01>・<delay 01> おそすぎるぞ!<wait><end>
-  literal: Too long! They've taken too long!
+    おそい！・<delay 01>・<delay 01>・<delay 01>　おそすぎるぞ！
+    <wait><end>
+  ja-kanji: |-
+    遅い！…　遅すぎるぞ！
+  literal: |-
+    Too long! They’ve taken too long!
   en: |-
     Too long!
-    .<delay 01>.<delay 01>.<delay 01>
-    They've taken
+    .<delay 01>.<delay 01>.<delay 01>They’ve taken
     too long!
     <wait><end>
-
 - index: 329
   character: Ken
   ja: |-
-    ロウどの! そう おもいませんか?
+    ロウどの！　そう　おもいませんか？
     <wait><end>
-  literal: Lowe! Don't you think so?
+  ja-kanji: |-
+    ロウどの！　そう　思いませんか？
+  literal: |-
+    Don’t you think so, Lowe?
   en: |-
-    Don't you think
-    so, Lowe?
+    Don’t you think
+    so, Lowe?!
     <wait><end>
-
 - index: 330
   character: Lowe
   ja: |-
     ふむー・・・たしかに・・・
-    あれから ひとつきのあいだ
-    なんのれんらくも ありませんね
+    あれから　ひとつきのあいだ
+    なんのれんらくも　ありませんね
     <wait more><end>
-  literal: Hmm… True… A month has passed, and we haven't heard from them since.
+  ja-kanji: |-
+    ふむー…確かに…
+    あれから　一月の間
+    何の連絡も　ありませんね
+  literal: |-
+    Hmm… True… A month has passed, and we haven’t heard from them since.
   en: |-
     Hmm... True...
     A month has
     passed, and we
-    haven't heard
+    haven’t heard
     from them since.
     <wait more><end>
-
 - index: 331
   character: Lowe
   ja: |-
     せいえいぐんがやぶれたとしたら
     われらのちからのおよばぬはなしだ
-    ケンどの どうなさるつもりですか?
+    ケンどの　どうなさるつもりですか？
     <wait><end>
-  literal: If indeed our expedition force was defeated, we are just not up to the task. Do you have a plan, Ken?
+  ja-kanji: |-
+    精鋭軍が敗れたとしたら
+    我らの力の及ばぬはなしだ
+    ケンどの　どうなさるつもりですか？
+  literal: |-
+    If indeed our expedition force was defeated, we are just not up to the task. Do you have a plan, Ken?
   en: |-
-    If indeed our
+    If, indeed, our
     expedition force
     was defeated, we
     are just not up to
-    the task.<wait more>
+    the task.
+    <wait more>
     Do you have a
     plan, Ken?
     <wait><end>
-
-
 - index: 332
   character: Ken
   ja: |-
-    このまま むざむざとサイプレスに
-    ふくじゅうを ちかえといわれるか!
+    このまま　むざむざとサイプレスに
+    ふくじゅうを　ちかえといわれるか！
     <wait more><end>
-  literal: What would you suggest? That we submit to Cypress without resistance?
+  ja-kanji: |-
+    このまま　むざむざとサイプレスに
+    服従を　誓えと言われるか！
+  literal: |-
+    What would you suggest? That we submit to Cypress without resistance?
   en: |-
     What would you
     suggest? That we
@@ -907,451 +924,584 @@
     without
     resistance?
     <wait more><end>
-
 - index: 333
   character: Ken
   ja: |-
-    しかし われらは るすをまもるみ
+    しかし　われらは　るすをまもるみ
     おっしゃるとおりかもしれません・・・
-    ほかに はけんできるものもいない
+    ほかに　はけんできるものもいない
     <wait><end>
-  literal: However, we were to remain here as guards. Perhaps you are right… Besides, there is no one left to send.
+  ja-kanji: |-
+    しかし　我らは　留守を守る身
+    仰る通り化かもしれません・・・
+    他に　派遣できるものもいない
+  literal: |-
+    However, we were to remain here as guards. Perhaps you are right… Besides, there is no one left to send.
   en: |-
     However, we were
     to remain here as
     guards. Perhaps
-    you are right...<wait more>
+    you are right...
+    <wait more>
     Besides, there is
     no one left to
     send.
     <wait><end>
-
 - index: 334
   character: Ruce
   ja: |-
+    まってください！
+    <wait><end>
+  ja-kanji: |-
     まってください!
+  literal: |-
+    Please wait!
+  en: |-
+    Please wait!
     <wait><end>
-  literal: Please wait!
-  en: Please wait!<wait><end>
-
 - index: 335
-  character: Ruc
+  character: Ruce
   ja: |-
-    どうか わたしたちにいかせてください
+    どうか　わたしたちにいかせてください
     <wait><end>
-  literal: Please let us go in your stead.
+  ja-kanji: |-
+    どうか　私たちに行かせてください
+  literal: |-
+    Please let us go in your stead.
   en: |-
     Please let us go
-    in your stead.
+    in your stead!
     <wait><end>
-
 - index: 336
   character: Ken
   ja: |-
-    おまえは ラグのひとりむすこの
-    せんしみならいの
-    <name>ではないか<line>わたしたちに とはどういうことだ<wait><end>
-  literal: Aren’t you Lug’s only son, <name>, the apprentice fighter? What do you mean by “us”?
-  # <name> is Ruce
-  en: |-
-    Aren’t you Lug's
-    only son, <name>,
-    the apprentice
-    fighter? What do
-    you mean by “us”?
+    おまえは　ラグのひとりむすこの
+    せんしみならいの<name>ではないか
+    わたしたちに　とはどういうことだ
     <wait><end>
-
+  ja-kanji: |-
+    お前は　ラグの一人息子の
+    戦士見習いの<name>ではないか
+    私たちに　とはどういうことだ
+  literal: |-
+    Aren’t you Lug’s only son, 
+    <name>, the
+    apprentice fighter?
+    What do you mean by “us”?
+  en: |-
+    Aren’t you Lug’s
+    only son,
+    <name>, the
+    apprentice
+    fighter?
+    <wait more>
+    What do you mean
+    by “us”?
+    <wait><end>
 - index: 337
   character: Ruce
   ja: |-
-    はい それは こういうことです
+    はい　それは　こういうことです
     <wait><end>
-  literal: Of course, let me show you!
+  ja-kanji: |-
+    はい　それは　こういうことです
+  literal: |-
+    Of course, let me show you!
   en: |-
-    Of course, let me
+    Of course! Let me
     show you!
     <wait><end>
-
 - index: 338
-  character: Narrator
+  character: Narration
   ja: |-
-    <name>は ゆびぶえをふいた<wait><end>
-  literal: Ruce whistled with his fingers.
-  # <name> is Ruce
+    <line><name>は　ゆびぶえをふいた<wait><end>
+  ja-kanji: |-
+    <name>は　指笛を吹いた
+  literal: |-
+    <name> put his fingers in his mouth and whistled.
   en: |-
     <name> put his
     fingers in his
     mouth and
     whistled.
     <wait><end>
-  # current translation pause
-
 - index: 339
   character: Ken
   ja: |-
-    おお なんと おまえたちは・・・
+    おお　なんと　おまえたちは・・・
     <wait><end>
-  literal: Oh, you are...
+  ja-kanji: |-
+    おお　なんと　お前たちは…
+  literal: |-
+    Oh, you are...
   en: |-
     Oh, you are...
     <wait><end>
-
 - index: 340
   character: Ken
   ja: |-
-    ひさしぶりだな エルフの
-    <name><line>おちちうえのハンスは おげんきか?<wait><end>
-  literal: Long time no see, Shade the elf. How is your father, Hans?
-  # <name> is Shade
+    ひさしぶりだな　エルフの<name>
+    おちちうえのハンスは　おげんきか？
+    <wait><end>
+  ja-kanji: |-
+    久しぶりだな　えるふの<name>
+    お父上のハンスは　お元気か？
+  literal: |-
+    Long time no see, <name> the elf. How is your father, Hans?
   en: |-
     Long time no see,
     <name> the elf.
     How is your
     father, Hans?
     <wait><end>
-
 - index: 341
   character: Shade
   ja: |-
-    オフコース エルフのもりにて
-    ちちのめいれいで まいりました
-    ちちからも くれぐれもよろしくと
+    オフコース　エルフのもりにて
+    ちちのめいれいで　まいりました
+    ちちからも　くれぐれもよろしくと
     <wait><end>
-  literal: Of course, he is in the elven forest. He ordered me to come. He also sends his regards.
+  ja-kanji: |-
+    オフコース　エルフの森にて
+    父の命令で　まいりました
+    父からも　くれぐれもよろしくと
+  literal: |-
+    He resides in the elven forest, of course. I am here by his orders, along with his regards.
   en: |-
     He resides in the
     elven forest, of
-    course.<wait more>
-    I am here by his
-    orders, along with
-    his regards.
+    course. I am here
+    by his orders,
+    along with his
+    regards.
     <wait><end>
-
 - index: 342
   character: Ken
   ja: |-
-    きみは きょじんぞくのモンクだね
+    きみは　きょじんぞくのモンクだね
     ぼくのしっているひかりのせんしに
-    よくにているような きがするが?
+    よくにているような　きがするが？
     <wait><end>
-  literal: You are a giantfolk monk, aren’t you? You look very much like a warrior of light I know. Just a hunch maybe?
+  ja-kanji: |-
+    君は　巨人族のモンクだね
+    僕の知っている光の戦士に
+    よく似ているような　気がするが？
+  literal: |-
+    You are a giantfolk monk, aren’t you? You look quite like a warrior of light I know. A hunch, perhaps?
   en: |-
-    You are a giant-
-    folk monk, aren’t
-    you?<wait more>
-    You look very much
+    You are a
+    giantfolk monk,
+    aren’t you?
+    <wait more>
+    You look quite
     like a warrior of
-    light I know. Just
-    a hunch maybe?
+    Light I know.
+    A hunch, perhaps?
     <wait><end>
-
 - index: 343
   character: Sig
   ja: |-
-    ゴングおじさんのことですか?
-    あなたのおうわさは きいています
-    とても ゆうかんなかただったと<wait more><line>おじさんのかわりにやくにたとうと<line>このわるだくみにさんかしました<line><name>といいます
-    どうぞよろしく
-    <wait><end>
-  literal: You mean Uncle Gong? I’ve heard rumors about you, a very brave person you were. I’ve joined this group as I thought I’d be of use in place of my uncle. My name is Sig, nice to meet you.
+    ゴングおじさんのことですか？
+    あなたのおうわさは　きいています
+    とても　ゆうかんなかただったと<wait more>
+    おじさんのかわりにやくにたとうと
+    このわるだくみにさんかしました
+    <name>といいます　どうぞよろしく<wait><end>
+  ja-kanji: |-
+    ゴングおじさんのことですか？
+    あなたのお噂は　聞いています
+    とても　勇敢なほうだったと
+    おじさんの代わりに役に立とうと
+    この悪だくみに参加しました
+    <name>といいます　どうぞよろしく
+  literal: |-
+    You mean Uncle Gong? I’ve heard many tales of your bravery. I’ve joined this group to help in my uncle’s place. You can call me <name>. It’s nice to meet you.
   en: |-
-    You mean Uncle
+    You mean my uncle
     Gong? I’ve heard
-    rumors about you,
-    a very brave
-    person you were.<wait more>
-    I’ve joined this
-    group as I thought
-    I’d be of use in
-    place of my uncle.<wait more>
-    My name is <name>,
+    many tales of your
+    Bravery.
+    <wait more>
+    I’ve  joined this
+    group to help in
+    my uncle’s place.
+    <wait more>
+    You can call me
+    <name>. It’s
     nice to meet you.
     <wait><end>
-
 - index: 344
   character: Ken
   ja: |-
-    きみたちには いつもおどろかされる
-    びじんしまいの すえっこだったね
-    <name> きみまでどうしたんだ?<wait><end>
-  literal: I’m always startled by you, the beautiful sisters. You are the youngest one, Wendy. Why do you want to join as well?
+    きみたちには　いつもおどろかされる
+    びじんしまいの　すえっこだったね
+    <name>　きみまでどうしたんだ？<wait><end>
+  ja-kanji: |-
+    きみたちには　いつも驚かされる
+    美人姉妹の　末っ子だったね
+    <name>　きみまでどうしたんだ？
+  literal: |-
+    You beautiful sisters never fail to surprise me, <name>.
+    As the youngest, why do you want to join?
   en: |-
-    I’m always
-    startled by you,
-    the beautiful
-    sisters.<wait more>
-    You are the
-    youngest one,
-    <name>. Why do you
-    want to join as
-    well?
+    You and your
+    beautiful sisters
+    never fail to
+    surprise me,
+    <name>.
+    <wait more>
+    As the youngest,
+    why do you wish to
+    join us?
     <wait><end>
-
 - index: 345
   character: Wendy
   ja: |-
-    タオたちが いつもじまんするの
-    もちろん ひかりのせんしのことよ
-    こんどのことは いいチャンスよね
+    タオたちが　いつもじまんするの
+    もちろん　ひかりのせんしのことよ
+    こんどのことは　いいチャンスよね
     <wait><end>
-  literal: Tao and the others are always boasting about it, so of course it’s because I want to be a warrior of light! This is my chance!
+  ja-kanji: |-
+    タオたちが　いつも自慢するの
+    もちろん　光の戦士のことよ
+    今度のことは　いいチャンスよね
+  literal: |-
+    Tao and the others always boast about it, so of course I want to become a warrior of light!
+    This must be my chance!
   en: |-
     Tao and the others
-    are always
-    boasting about it,<wait more>
-    so of course it’s
-    because I want to
-    be a warrior of
-    light! This is my
+    always boast about
+    it, so of course I
+    want to become a
+    warrior of Light!
+    <wait more>
+    This must be my
     chance!
     <wait><end>
-
 - index: 346
   character: Ken
   ja: |-
-    きし
-    <name>・・・わがむすこよ<line>おまえ・・・ほんとうにいいのだな<line>きけんなえんせいになるぞ<wait><end>
-  literal: Knight Apis… my son. You… are you sure? It’s going to be a very dangerous expedition!
+    きし<name>・・・わがむすこよ
+    おまえ・・・ほんとうにいいのだな
+    きけんなえんせいになるぞ
+    <wait><end>
+  ja-kanji: |-
+    騎士<name>・・・我が息子よ
+    お前・・・本当にいいのだな
+    危険な遠征になるぞ
+  literal: |-
+    Knight <name>... my son. You... are you sure? It’s going to be a very dangerous expedition!
   en: |-
     Knight <name>...
-    my son. You... are
-    you sure?<wait more>
+    my son.
+    You... Are you
+    Sure?
+    <wait more>
     It’s going to be a
     very dangerous
     expedition!
     <wait><end>
-
 - index: 347
   character: Apis
   ja: |-
-    はい ちちうえ! あっ いえっ
-    ケンきしちょう! かくごのうえです
-    どうか われわれにおまかせください
+    はい　ちちうえ！　あっ　いえっ
+    ケンきしちょう！　かくごのうえです
+    どうか　われわれにおまかせください
     <wait><end>
-  literal: Yes, father! Ah, I mean, Captain Ken! I’ve made up my mind, please leave it to us!
+  ja-kanji: |-
+    はい　父上！　あっ　いえっ
+    ケン騎士長！　覚悟の上です
+    どうか　我々にお任せください
+  literal: |-
+    Yes, father! Ah, I mean, Captain Ken! I’ve made up my mind. Please leave it to us!
   en: |-
     Yes, father! Ah, I
     mean, Captain Ken!
     I’ve made up my
-    mind, please leave
+    mind. Please leave
     it to us!
     <wait><end>
-
 - index: 348
   character: Ken
   ja: |-
-    そして きみは・・・ちちおやを
+    そして　きみは・・・ちちおやを
     えんせいしきかんのラグたいちょうを
-    たすけにいくと そういうわけだな
+    たすけにいくと　そういうわけだな
     <wait more><end>
-  literal: And you… wish to rescue your father, Lug, the commander of the expedition force, right?
+  ja-kanji: |-
+    そして　きみは・・・父親を
+    遠征指揮官のラグ隊長を
+    助けに行くと　そういうわけだな
+  literal: |-
+    And you… I suppose you wish to rescue your father, Lug, the commander of the expedition force.
   en: |-
-    And you... <wait more>
-    wish to rescue
-    your father, Lug,
-    the commander of
-    the expedition
-    force, right?
+    And you...
+    <wait more>
+    I suppose you wish
+    to rescue your
+    father, Lug, the
+    commander of the
+    expedition force.
     <wait more><end>
-
 - index: 349
   character: Ken
   ja: |-
-    <name>! リ-ダーは だれなんだ<line>おまえたちだけのわるだくみでは<line>ないことぐらいは おみとおしだ<wait><end>
-  literal: Ruce! Who will be the leader? I don’t think you guys came up with this on your own.
-  en: |-
-    <name>! Who will be
-    the leader? I
-    don’t think you
-    guys came up with
-    this on your own.
+    <name>！　リーダーは　だれなんだ
+    おまえたちだけのわるだくみでは
+    ないことぐらいは　おみとおしだ
     <wait><end>
-
+  ja-kanji: |-
+    <name>!　リーダーは　誰なんだ
+    おまえたちだけのわるだくみでは
+    ないことぐらいは　お見通しだ
+  literal: |-
+    <name>! Who will be the leader? I doubt you came up with this plan on your own.
+  en: |-
+    <name>! Who will
+    be the leader?
+    I doubt you came
+    up with this plan
+    on your own.
+    <wait><end>
 - index: 350
   character: Ruce
   ja: |-
-    それが
-    <delay 01>・<delay 01>・<delay 01>・<delay 01><end>
-  literal: Well…
-  en: Well<delay 01>.<delay 01>.<delay 01>.<delay 01><end>
-
+    それが<delay 01>・<delay 01>・<delay 01>・<delay 01><end>
+  ja-kanji: |-
+    それが…
+  literal: |-
+    Well...
+  en: |-
+    Well<delay 01>.<delay 01>.<delay 01>.
+    <delay 01><end>
 - index: 351
   character: Ruce
   ja: |-
-    おーいっ ちょっと たのむよ
-    ばれちまった でてきてくれよ
+    おーいっ　ちょっと　たのむよ
+    ばれちまった　でてきてくれよ
     <wait><end>
-  literal: Hey, would you mind coming out? They’ve found it out!
+  ja-kanji: |-
+    おーいっ　ちょっと　頼むよ
+    ばれちまった　出てきてくれよ
+  literal: |-
+    Hey! Would you mind coming out? They’ve figured it out.
   en: |-
-    Hey, would you
+    Hey! Would you
     mind coming out?
-    They’ve found it
-    out!
+    They’ve figured it
+    out.
     <wait><end>
-
 - index: 352
   character: Ken
   ja: |-
-    きっ きみは!
-    <delay 01> あなたはマックス?<wait><end>
-  literal: You! Are you Max?
-  en: |-
-    You! Are you Max?
+    きっ　きみは！<delay 01>　あなたはマックス？
     <wait><end>
-
+  ja-kanji: |-
+    きっ　きみは!　あなたはマックス?
+  literal: |-
+    Y-you! Are you...Max?
+  en: |-
+    Y-you!<delay 01>
+    Are you... Max?!
+    <wait><end>
 - index: 353
   character: Ken
   ja: |-
-    いや
-    <delay 01>・<delay 01>・<delay 01> にているが<delay 01>・<delay 01>・<line>ちがうようだ<wait><end>
-  literal: Nope, you look alike, but… I’m wrong it seems.
-  en: |-
-    Nope, you look
-    alike, but<delay 01>.<delay 01>.<delay 01>.<delay 01>
-    I’m wrong, it
-    seems.
+    いや<delay 01>・<delay 01>・<delay 01>　にているが<delay 01>・<delay 01>・
+    ちがうようだ
     <wait><end>
-
+  ja-kanji: |-
+    いや・・　にているが・・
+    ちがうようだ
+  literal: |-
+    No… You resemble him, but… It seems I’m mistaken.
+  en: |-
+    No<delay 01>.<delay 01>.<delay 01>.
+    You resemble him,
+    but<delay 01>.<delay 01>.<delay 01>.<delay 01>
+    It seems I’m mistaken.
+    <wait><end>
 - index: 354
   character: Ruce
   ja: |-
     ふう・・・おどろかさないでくださいよ
-    かれが でんせつのひかりのせんしの
-    リ-ダーだったひとなのかとおもった
+    かれが　でんせつのひかりのせんしの
+    リーダーだったひとなのかとおもった
     <wait more><end>
-  literal: Don’t startle me like that! Thought he was the leader of the legendary warriors of light for a moment.
+  ja-kanji: |-
+    ふう・・・驚かさないでくださいよ
+    彼が伝説の光の戦士の
+    リーダーだった人なのかと思った
+  literal: |-
+    Don’t startle me like that! For a moment I thought he was the leader of the legendary warriors of Light.
   en: |-
     Don’t startle me
-    like that!<wait more>
-    Thought he was the
+    like that!
+    <wait more>
+    For a moment, I
+    thought he was the
     leader of the
     legendary warriors
-    of light for a
-    moment.
+    of Light.
     <wait more><end>
-
 - index: 355
   character: Ruce
   ja: |-
-    かれは プロンプトの
-    <party leader>!<line>こだいじんのくにから しょこくに<line>しゅぎょうのたびをしているそうです<wait more><end>
-  literal: He is Nick from Prompt, he said he was traveling around to train in many countries.
-  en: |-
-    He is <party leader>
-    from Prompt,<wait more>
-    he said he was
-    traveling around
-    to train in many
-    countries.
+    かれは　プロンプトの<party leader>！
+    こだいじんのくにから　しょこくに
+    しゅぎょうのたびをしているそうです
     <wait more><end>
-
+  ja-kanji: |-
+    彼は　プロンプトの<party leader>!
+    古代人の国から　諸国に
+    修行の旅をしているそうです。
+  literal: |-
+    Rather, he is <party leader>, from Prompt.
+    Since leaving the ancients’ land, he has been traveling to various countries to train.
+  en: |-
+    Rather, he is
+    <party leader>, from
+    Prompt. Since
+    leaving the
+    ancients’ land,
+    <wait more>
+    he has been
+    traveling to
+    various countries
+    to train.
+    <wait more><end>
 - index: 356
   character: Ruce
   ja: |-
-    ぼくらが はなしあいをしているとき
-    くちぞえしてくれたのが かれでした
-    おかげで けっしんがつきました!
+    ぼくらが　はなしあいをしているとき
+    くちぞえしてくれたのが　かれでした
+    おかげで　けっしんがつきました！
     <wait more><end>
-  literal: He was the one who encouraged us when we were discussing this endeavor.
+  ja-kanji: |-
+    僕らが　話し合いをしている時
+    口添えしてくれたのが　彼でした
+    おかげで　決心が着きました！
+  literal: |-
+    When we were discussing this endeavor, he encouraged us to go. Thus, we’ve come to a resolution!
   en: |-
-    He was the one who
-    encouraged us when
-    we were discussing
-    this endeavor.
+    When we were
+    discussing this
+    endeavor, he
+    encouraged us to
+    go.
+    <wait more>
+    Thus, we’ve
+    come to a
+    resolution!
     <wait more><end>
-
 - index: 357
   character: Ruce
   ja: |-
-    どうか おねがいします
+    どうか　おねがいします
     ぼくらにいかせてください
     <wait><end>
-  literal: Please, let us go on this journey.
+  ja-kanji: |-
+    どうか　お願いします
+    僕らに行かせてください
+  literal: |-
+    Please, let us go on this journey!
   en: |-
-    Please, let us go
-    on this journey.
+    Please! Let us go
+    on this journey!
     <wait><end>
-
 - index: 358
   character: Lowe
   ja: |-
-    かれらが これほどまでにいうのだ
-    いかせてやろうではないですか?
+    かれらが　これほどまでにいうのだ
+    いかせてやろうではないですか？
     <wait more><end>
-  literal: If they want to go so badly, then who are we to say no?
+  ja-kanji: |-
+    彼らが　これほどまでに言うのだ
+    行かせてやろうではないですか？
+  literal: |-
+    If they want to go so badly, then who are we to say no?
   en: |-
     If they want to go
     so badly, then who
     are we to say no?
     <wait more><end>
-
 - index: 359
   character: Lowe
   ja: |-
-    そのかわり わたしもまいります
-    そして サイプレスこくのやつらに
-    ひとあわふかせてやりましょうぞ!
+    そのかわり　わたしもまいります
+    そして　サイプレスこくのやつらに
+    ひとあわふかせてやりましょうぞ！
     <wait><end>
-  literal: But I shall also accompany you. Let’s go and give Cypress a surprise!
+  ja-kanji: |-
+    その代わり　私もまいります
+    そして　サイプレス国王の奴らに
+    ひとあわふかせてやりましょうぞ！
+  literal: |-
+    However, I shall also accompany you. Let’s go and give Cypress a surprise!
   en: |-
-    But I shall also
-    accompany you.
-    Let’s go and give
-    Cypress a
+    However, I shall
+    also accompany
+    you. Let’s go and
+    give Cypress a
     surprise!
     <wait><end>
-
 - index: 360
-  character: Narrator
+  character: Narration
   ja: |-
-    <party leader>たちは みなとから<line>サイプレスにむかってたびだった<wait more><end>
-  literal: Nick’s force went on a voyage from the port towards Cypress.
-  # Will need to reformat this if names get longer.
-  en: |-
-    <party leader>’s force went
-    on a voyage from
-    the port towards
-    Cypress.
+    <party leader>たちは　みなとから
+    サイプレスにむかってたびだった
     <wait more><end>
-
+  ja-kanji: |-
+    <party leader>たちは　港から
+    サイプレスに向かって旅立った
+  literal: |-
+    <party leader>’s force left port on a voyage to Cypress.
+  en: |-
+    <party leader>’s force
+    left port on a
+    voyage to Cypress.
+    <wait more><end>
 - index: 361
-  character: Narrator
+  character: Narration
   ja: |-
-    このさき かれらをまつものは・・
+    このさき　かれらをまつものは・・
     つらくながいたびのはじまりだった
     <wait><end>
-  literal: What awaited them… was a tough and long trip.
+  ja-kanji: |-
+    この先　彼らを待つ物は・・
+    つらく長い旅の始まりだった
+  literal: |-
+    What awaited them... was a long and difficult journey.
   en: |-
     What awaited
-    them... was a
-    tough and long
-    trip.
+    them... was a long
+    and difficult
+    journey.
     <wait><end>
-
-
-######################
-# Chapter 1: The second expedition force
-######################
-
 - index: 362
-  character: Narrator
+  character: Narration
   ja: |-
-    <party leader>たちが たびだってから<line>すでに １しゅうかんがすぎていた<wait more><end>
-  literal: It has already been one week since Nick and his friends had started their journey.
+    <party leader>たちが　たびだってから
+    すでに　１しゅうかんがすぎていた
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    <party leader>’s force had been traveling for a week.
   en: |-
     <party leader>’s force
     had been traveling
     for a week.
     <wait more><end>
-
 - index: 363
-  character: Narrator
+  character: Narration
   ja: |-
-    このまま あとすうじつのあいだ
-    ぶじなたびが つづくのならば
-    サイプレスに じょうりくできるはず
+    このまま　あとすうじつのあいだ
+    ぶじなたびが　つづくのならば
+    サイプレスに　じょうりくできるはず
     <wait more><end>
-  literal: If we can keep this up for the next few days, we should be able to make it to Cypress.
+  ja-kanji: |
+  literal: |-
+    If all goes well, they should be hitting shore on Cypress in a couple of days.
   en: |-
     If all goes well,
     they should be
@@ -1359,14 +1509,15 @@
     Cypress in a
     couple of days.
     <wait more><end>
-
 - index: 364
-  character: Narrator
+  character: Narration
   ja: |-
-    しかし かれらのあわいきたいは
-    うらぎられることに なるのだった
+    しかし　かれらのあわいきたいは
+    うらぎられることに　なるのだった
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Little did they know that their faint hopes would be crushed by treachery.
   en: |-
     Little did they
     know that their
@@ -1374,107 +1525,114 @@
     be crushed by
     treachery.
     <wait><end>
-
 - index: 365
   character: Ruce
   ja: |-
-    あ-あ なんてたいくつなんだろう
-    からだが なまってしかたないなー
+    あーあ　なんてたいくつなんだろう
+    からだが　なまってしかたないなー
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    So boring, my body is starting to grow dull.
   en: |-
-    So boring, my body
+    So boring! My body
     is starting to
     grow dull.
     <wait><end>
-
 - index: 366
   character: Apis
   ja: |-
-    まったくだ! ふねのたびなんて
-    こんりんざい おことわりだよ・・・
+    まったくだ！　ふねのたびなんて
+    こんりんざい　おことわりだよ・・・
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Exactly! I hate voyages from the bottom of my heart…
   en: |-
     Exactly! I hate
     voyages from the
     bottom of my
     heart...
     <wait more><end>
-
 - index: 367
   character: Apis
   ja: |-
-    ちょっとみんな あそこをみてみろ!
-    ひかりのたまが ちかづいてくるぞ!
+    ちょっとみんな　あそこをみてみろ！
+    ひかりのたまが　ちかづいてくるぞ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Everyone, look over there! A sphere of light is getting closer!
   en: |-
     Everyone, look
     over there! A
     sphere of light is
-    getting closer!
+    approaching!
     <wait><end>
-
 - index: 368
   character: Dark Mage
   ja: |-
-    ムヒョヒョヒョ・・・どうした?
-    なにを びっくりしているんだ!
-    ははー おれさまにおどろいたのか?
+    ムヒョヒョヒョ・・・どうした？
+    なにを　びっくりしているんだ！
+    ははー　おれさまにおどろいたのか？
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    *laughs* What? Why are you surprised? Haha, did I scare you?
   en: |-
-    Ha ha ha! What?
+    Mwahahaha! What?
     Why are you
-    surprised? Haha,
-    did I scare you?
+    surprised? Haha!
+    Did I scare you?
     <wait more><end>
-
 - index: 369
   character: Dark Mage
   ja: |-
-    ガーディアナぐんが くるというんで
+    ガーディアナぐんが　くるというんで
     そのマヌケづらをおがみにきてみたが
-    ケッ ガキばかりとは なさけねえ!
+    ケッ　ガキばかりとは　なさけねえ！
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I was told that an army from Guardiana is coming, so I came to take a look, but… You are just a bunch of brats, how pathetic!
   en: |-
     I was told that an
     army from
-    Guardiana is
+    Guardiana was
     coming, so I came
     to take a look,
-    but... You are
+    but... you are
     just a bunch of
     brats, how
     pathetic!
     <wait><end>
-
 - index: 370
   character: Dark Mage
   ja: |-
-    おれたちだけで みなごろしだ!
-    さあ しんでもらおうじゃねえか!
+    おれたちだけで　みなごろしだ！
+    さあ　しんでもらおうじゃねえか！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    We are more than enough to massacre you all! Die!
   en: |-
     We are more than
     enough to massacre
     you all! Die!
     <wait><end>
-
 - index: 371
   character: Lowe
   ja: |-
-    やつらは われわれをあまくみてます
-    このスキに かえりうちましょうぞ!
+    やつらは　われわれをあまくみてます
+    このスキに　かえりうちましょうぞ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    They are underestimating us. Let’s use this to turn the tables on them!
   en: |-
     They are
     underestimating
-    us. Let’s use this
+    us. Let’s use that
     to turn the tables
     on them!
     <wait><end>
@@ -1486,22 +1644,17 @@
 - index: 372
   character: Dark Mage
   ja: |-
-    ガーディアナの みならいぶたいを
-    あまくみすぎて いたようだぜ・・・
+    ガーディアナの　みならいぶたいを
+    あまくみすぎて　いたようだぜ・・・
     <wait more><end>
-  literal: ''
-  en: |-
-    Seems like I have
-    underestimated the
-    apprentice force
-    of Guardiana...
-    <wait more><end>
-
+  ja-kanji: |
+  literal: |
+  en: |
 - index: 373
   character: Dark Mage
   ja: |-
-    しかし おれさまもタダではしなねえ
-    このふねも みちずれだ! あばよ
+    しかし　おれさまもタダではしなねえ
+    このふねも　みちずれだ！　あばよ
     <wait><end>
   literal: ''
   en: |-

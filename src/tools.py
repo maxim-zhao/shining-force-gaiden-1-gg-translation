@@ -95,17 +95,18 @@ def english_to_bytes(text, is_menu):
     s = text
     # Replace some "smart" punctuation
     # Also allow _ as visible whitespace
-    # Replace line breaks with <line>
-    # Finally remove any <line> before another tag on the assumption that it's not for display
     for k, v in {
         ("“", "\""),
         ("”", "\""),
         ("’", "'"),
         ("…", "..."),
-        ("_", " "),
-        ("\n", "<line>"),
-        ("<line><", "<")}:
+        ("_", " ")}:
         s = s.replace(k, v)
+    # Remove newlines before lines consisting only of tags
+    s = re.sub("\n((<[^>]+>)+)$", "\\1", s, flags=re.MULTILINE)
+    # Replace remaining newlines with <line>
+    s = s.replace("\n", "<line>")
+
     while len(s) > 0:
         # Check for a tag
         match = re.match("<[^>]+?>", s)
@@ -411,9 +412,9 @@ def dump_script(rom, output_file):
                 # We massage the format a little...
                 # - Change line breaks into newlines
                 s = s.replace("<line>", "\n")
-                # - Add newlines before end tags
-                s = re.sub("(<[^\n]+>)$", "\n\\1", s)                
-                # - Explicit newlines at start of text
+                # - Add newline before end tags
+                s = re.sub("((<[^>]+>)+)$", "\n\\1", s)                
+                # - Keep explicit newlines at start of text
                 s = re.sub("^\n", "<line>", s)
                 
                 script.append({
@@ -457,9 +458,11 @@ class ScriptEntry:
 
         # Encode into a buffer
         self.buffer = english_to_bytes(s, False)
-
+        
     def __str__(self):
-        return f"{self.text} ({' '.join('{:02x}'.format(x) for x in self.buffer)})"
+        hex_encoded = ' '.join('{:02x}'.format(x) for x in self.buffer)
+        encoded_form = ''.join(codes[x] if x in codes else en_character_map_script[x] for x in self.buffer)
+        return f"{self.text}\n{hex_encoded}\n{encoded_form}"
 
 
 def encode_script(script_file, trees_file, data_file):
@@ -474,14 +477,22 @@ def encode_script(script_file, trees_file, data_file):
     for index in range(1, 718 + 1):
         if index not in script_yaml:
             print(f"Error: entry {index} missing")
-            line = "<end>"
+            text = "<end>"
         else:
             node = script_yaml[index]
-            line = node["en"]
-            if line is None:
+            text = node["en"]
+            if text is None:
                 raise Exception(f"No text for {node}")
-            if len(line) == 0:
-                line = node["literal"]
+            if len(text) == 0:
+                text = node["literal"]
+        
+            # Check line lengths
+            lines = re.sub("<[^>]+>", "", text).replace("<line>", "\n").split("\n")
+            for line in lines:
+                line = line.rstrip()
+                if len(line) > 18:
+                    print(f"Line too long ({len(line)}) in script entry {index}: \"{line}\"")
+
         script.append(ScriptEntry(line, f"Script{index}"))
 
     # Then we build a table of byte counts

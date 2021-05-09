@@ -168,7 +168,8 @@
     Stay back, violent scum! I won't let you do as you please in the presence of Guardiana's queen!
   en: |-
     Stay back, violent
-    scum!<delay 01><delay 01>
+    scum!
+    <delay 01><delay 01>
     I won’t let you do
     as you please in
     the presence of
@@ -883,8 +884,10 @@
     戦士見習いの<name>ではないか
     私たちに　とはどういうことだ
   literal: |-
-    Aren’t you Lug’s only son, <name>, the
-    apprentice fighter? What do you mean by “us”?
+    Aren’t you Lug’s only son, 
+    <name>, the
+    apprentice fighter?
+    What do you mean by “us”?
   en: |-
     Aren’t you Lug’s
     only son,

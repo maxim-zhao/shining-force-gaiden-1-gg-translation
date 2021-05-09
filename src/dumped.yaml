@@ -2531,15 +2531,15 @@
   ja: |-
     ガーディアナは　サイプレスに
     よりすぐりの　せいえいたちを
-    さしむけたのだった・・・が・
-    <delay 01>・<delay 01>・<delay 01><end>
+    さしむけたのだった・・・が・<delay 01>・<delay 01>・<delay 01>
+    <end>
   literal: ''
   en: ''
 - index: 328
   character: ''
   ja: |-
-    おそい！・
-    <delay 01>・<delay 01>・<delay 01>　おそすぎるぞ！<wait><end>
+    おそい！・<delay 01>・<delay 01>・<delay 01>　おそすぎるぞ！
+    <wait><end>
   literal: ''
   en: ''
 - index: 329
