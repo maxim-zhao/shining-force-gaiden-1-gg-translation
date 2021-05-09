@@ -2,7 +2,6 @@ import re
 import sys
 import struct
 import math
-import yaml
 import os
 import ruamel.yaml
 import html
@@ -468,7 +467,8 @@ class ScriptEntry:
 def encode_script(script_file, trees_file, data_file):
     # Read the file
     with open(script_file, "r", encoding="utf-8") as f:
-        script_yaml = yaml.load(f, Loader=yaml.Loader)
+        yaml = ruamel.yaml.YAML()
+        script_yaml = yaml.load(f)
 
     # Convert to dictionary
     script_yaml = {x["index"]: x for x in script_yaml}
@@ -672,13 +672,15 @@ def dump_menus(rom_filename, output_filename):
             })
 
     with open(output_filename, 'w', encoding="utf-8") as file:
-        documents = yaml.dump(menus, file, sort_keys=False, allow_unicode=True)
+        yaml = ruamel.yaml.YAML()
+        documents = yaml.dump(menus, file)
 
 
 def encode_menus(yaml_filename, asm_filename):
     # Read the file
     with open(yaml_filename, "r", encoding="utf-8") as f:
-        menus = yaml.load(f, Loader=yaml.Loader)
+        yaml = ruamel.yaml.YAML()
+        menus = yaml.load(f)
     # Write the output
     with open(asm_filename, "w", encoding="utf-8") as f:
         for menu in menus:
@@ -746,13 +748,15 @@ def dump_names(rom_filename, output_filename):
                     break
 
     with open(output_filename, 'w', encoding="utf-8") as file:
-        documents = yaml.dump(tables, file, sort_keys=False, allow_unicode=True)
+        yaml = ruamel.yaml.YAML()
+        documents = yaml.dump(tables, file)
 
 
 def encode_names(yaml_filename, asm_filename):
     # Read the file
     with open(yaml_filename, "r", encoding="utf-8") as f:
-        tables = yaml.load(f, Loader=yaml.Loader)
+        yaml = ruamel.yaml.YAML()
+        tables = yaml.load(f)
     # Write the output
     with open(asm_filename, "w", encoding="utf-8") as f:
         for table in tables:
@@ -917,7 +921,8 @@ def doctoyaml(output_file):
 def yamltohtml(script_file, html_file):
     # Read the file
     with open(script_file, "r", encoding="utf-8") as f:
-        script_yaml = yaml.load(f, Loader=yaml.Loader)
+        yaml = ruamel.yaml.YAML()
+        script_yaml = yaml.load(f)
     # Convert to HTML
     with open(html_file, "w", encoding="utf-8") as f:
         f.write("<html><body><style>.mono{font-family:monospace}</style><table border=1>")
