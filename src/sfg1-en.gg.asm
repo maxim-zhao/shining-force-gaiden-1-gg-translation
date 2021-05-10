@@ -277,12 +277,12 @@ ShowChapterTitle:
   push hl
     push af
       rst $30
-      .db $fd ; Stop music?
+      .db $fd ; Fade out music
       
       call $3B ; ScreenOff
 
       ld hl, 60 ; 1s
-      call $9CA ; Delay
+      call $9CA ; Delay for the fade out to finish
     pop af
     push af
       ; Look up the data
@@ -302,7 +302,7 @@ ShowChapterTitle:
       call _LoadData
         
       ld hl, 60 ; 1s
-      call $9CA ; Delay
+      call $9CA ; Delay before showing
     pop af
 
     ; If the high bit is set, load assets for "end"
@@ -312,11 +312,10 @@ ShowChapterTitle:
     ld hl, _EndPointer
     call _LoadData
 
-    ; Play a sound?
     rst $30 ; _LABEL_30_SoundEngineControl
-.db $FE
+    .db $FE ; Volume reset?
     rst $30 ; _LABEL_30_SoundEngineControl
-.db $0F
+    .db $0F ; Play music
   
 +:  ; Load the palette
     ld hl, _Palette
@@ -402,6 +401,8 @@ _LoadData:
   ei
   ret
 
+.define ZX7ToVRAM
+.include "ZX7 decompressor.asm"
 
 _TitlePointers:
 .db :Chapter1Tiles
@@ -439,11 +440,4 @@ Chapter4Tilemap: .incbin "images\chapter4.png.tilemap.zx7"
 .section "End text data" superfree
 EndTiles:        .incbin "images\end.png.tiles.zx7"
 EndTilemap:      .incbin "images\end.png.tilemap.zx7"
-.ends
-
-.bank 0 slot 0
-.section "ZX7 decompressor" free
-.define ZX7ToVRAM
-;.define ZX7ToVRAMScreenOn ; for interrupt safety
-.include "ZX7 decompressor.asm"
 .ends
