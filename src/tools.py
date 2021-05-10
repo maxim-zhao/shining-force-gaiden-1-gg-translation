@@ -435,7 +435,7 @@ def dump_script(rom, output_file):
                     print(f"Consumed {bytes_consumed} bytes, expected {entry_length}. First extra byte is 0x{byte.hex()}")
 
     with open(output_file, 'w', encoding="utf-8") as file:
-        ruamel.yaml.dump(script, file)
+        ruamel.yaml.YAML().dump(script, file)
 
 
 class ScriptEntry:
@@ -466,7 +466,7 @@ class ScriptEntry:
 def encode_script(script_file, trees_file, data_file):
     # Read the file
     with open(script_file, "r", encoding="utf-8") as f:
-        script_yaml = ruamel.yaml.safe_load(f)
+        script_yaml = ruamel.yaml.YAML().load(f)
 
     # Convert to dictionary
     script_yaml = {x["index"]: x for x in script_yaml}
@@ -670,13 +670,13 @@ def dump_menus(rom_filename, output_filename):
             })
 
     with open(output_filename, 'w', encoding="utf-8") as file:
-        documents = ruamel.yaml.dump(menus, file)
+        documents = ruamel.yaml.YAML().dump(menus, file)
 
 
 def encode_menus(yaml_filename, asm_filename):
     # Read the file
     with open(yaml_filename, "r", encoding="utf-8") as f:
-        menus = ruamel.yaml.safe_load(f)
+        menus = ruamel.yaml.YAML().load(f)
     # Write the output
     with open(asm_filename, "w", encoding="utf-8") as f:
         for menu in menus:
@@ -744,13 +744,13 @@ def dump_names(rom_filename, output_filename):
                     break
 
     with open(output_filename, 'w', encoding="utf-8") as file:
-        documents = ruamel.yaml.dump(tables, file)
+        documents = ruamel.yaml.YAML().dump(tables, file)
 
 
 def encode_names(yaml_filename, asm_filename):
     # Read the file
     with open(yaml_filename, "r", encoding="utf-8") as f:
-        tables = ruamel.yaml.safe_load(f)
+        tables = ruamel.yaml.YAML().load(f)
     # Write the output
     with open(asm_filename, "w", encoding="utf-8") as f:
         for table in tables:
@@ -907,14 +907,14 @@ def doctoyaml(output_file):
                 continue;
     print(f"- saving as {output_file}")
     with open(output_file, 'w', encoding="utf-8") as file:
-        ruamel.yaml.dump(script, file)
+        ruamel.yaml.YAML().dump(script, file)
     print("done")
 
 
 def yamltohtml(script_file, html_file):
     # Read the file
     with open(script_file, "r", encoding="utf-8") as f:
-        script_yaml = ruamel.yaml.safe_load(f)
+        script_yaml = ruamel.yaml.YAML().load(f)
     # Convert to HTML
     with open(html_file, "w", encoding="utf-8") as f:
         f.write("<html><body><style>.mono{font-family:monospace}</style><table border=1>")

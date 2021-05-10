@@ -294,6 +294,8 @@
   literal: |-
     Crunch… crunch... 
     You are fools to defy us! Come on, then! Don't hold back!
+
+    # "Gashyuu... Gashyuu..." This is the sound of him softly grinding his jaws. it's likely based on the sound effect "gasha" which is a crunching sound, gapu as well is a biting sound, they are closely related. Scrunch/crunch are good onomatopoeia equivalents in English.
   en: |-
     Crunch...
     Crunch...
@@ -303,8 +305,6 @@
     Come on, then!
     Don't hold back!
     <delay 01><delay 01><delay 01><delay 01><end>
-  # "Gashyuu... Gashyuu..." This is the sound of him softly grinding his jaws. it's likely based on the sound effect "gasha" which is a crunching sound, gapu as well is a biting sound, they are closely related. Scrunch/crunch are good onomatopeia equivalents in English.
-
 - index: 310
   character: Frabell
   ja: |-
@@ -811,7 +811,7 @@
     アンリ女王に　掛けられた
     永久の眠りを覚ますため
   literal: |-
-    To awaken Queen Anri from the eternal slumber put on her,
+    To awaken Queen Anri from the eternal slumber that was put on her,
   en: |-
     To awaken Queen
     Anri from the
@@ -830,7 +830,7 @@
     選りすぐりの　精鋭たちを
     差し向けたのだった…が…
   literal: |-
-    Guardiana sent its finest warriors to Cypress. However…
+    Guardiana has selected its elites and sent them to Cypress, but…
   en: |-
     Guardiana sent its
     finest warriors to
@@ -845,7 +845,7 @@
   ja-kanji: |-
     遅い！…　遅すぎるぞ！
   literal: |-
-    Too long! They’ve taken too long!
+    Late! They are very late!
   en: |-
     Too long!
     .<delay 01>.<delay 01>.<delay 01> They’ve taken
@@ -859,7 +859,7 @@
   ja-kanji: |-
     ロウどの！　そう　思いませんか？
   literal: |-
-    Don’t you think so, Lowe?
+    Don’t you think so too, Lowe?
   en: |-
     Don’t you think
     so, Lowe?!
@@ -876,7 +876,7 @@
     あれから　一月の間
     何の連絡も　ありませんね
   literal: |-
-    Hmm… True… A month has passed, and we haven’t heard from them since.
+    Hmmm… right… it has been a month. And we haven’t heard from them since.
   en: |-
     Hmm... True...
     A month has
@@ -896,7 +896,7 @@
     我らの力の及ばぬはなしだ
     ケンどの　どうなさるつもりですか？
   literal: |-
-    If indeed our expedition force was defeated, we are just not up to the task. Do you have a plan, Ken?
+    If indeed our expedition force was defeated, it means that we are just not up to the task. Ken, what will we do?
   en: |-
     If, indeed, our
     expedition force
@@ -917,7 +917,7 @@
     このまま　むざむざとサイプレスに
     服従を　誓えと言われるか！
   literal: |-
-    What would you suggest? That we submit to Cypress without resistance?
+    Are you saying that we should resign to Cypress without resistance?
   en: |-
     What would you
     suggest? That we
@@ -937,7 +937,8 @@
     仰る通り化かもしれません・・・
     他に　派遣できるものもいない
   literal: |-
-    However, we were to remain here as guards. Perhaps you are right… Besides, there is no one left to send.
+    However, our part is to remain in retroguard. Maybe you are right…
+    There is no one else whom we could dispatch.
   en: |-
     However, we were
     to remain here as
@@ -968,7 +969,7 @@
   ja-kanji: |-
     どうか　私たちに行かせてください
   literal: |-
-    Please let us go in your stead.
+    Please let us go.
   en: |-
     Please let us go
     in your stead!
@@ -985,8 +986,7 @@
     戦士見習いの<name>ではないか
     私たちに　とはどういうことだ
   literal: |-
-    Aren’t you Lug’s only son, <name>, the
-    apprentice fighter? What do you mean by “us”?
+    You are Lug’s only son, Ruce, an apprentice fighter. What did you mean by “us”?
   en: |-
     You are Lug’s only
     son, <name>; an
@@ -1004,7 +1004,7 @@
   ja-kanji: |-
     はい　それは　こういうことです
   literal: |-
-    Of course, let me show you!
+    Yes, let me show you.
   en: |-
     Right! Let me
     show you!
@@ -1016,7 +1016,7 @@
   ja-kanji: |-
     <name>は　指笛を吹いた
   literal: |-
-    <name> put his fingers in his mouth and whistled.
+    Narrator: Ruce whistled with his fingers.
   en: |-
     <name> put his
     fingers in his
@@ -1045,7 +1045,7 @@
     久しぶりだな　えるふの<name>
     お父上のハンスは　お元気か？
   literal: |-
-    Long time no see, <name> the elf. How is your father, Hans?
+    Long time no see, Shade the elf. How is your father, Hans?
   en: |-
     Long time no see,
     <name> the elf.
@@ -1064,7 +1064,7 @@
     父の命令で　まいりました
     父からも　くれぐれもよろしくと
   literal: |-
-    He resides in the elven forest, of course. I am here by his orders, along with his regards.
+    Of course, he is in the elven forest. He ordered me to come. He also sends his regards.
   en: |-
     He resides in the
     elven forest, of
@@ -1086,7 +1086,7 @@
     僕の知っている光の戦士に
     よく似ているような　気がするが？
   literal: |-
-    You are a giantfolk monk, aren’t you? You look quite like a warrior of light I know. A hunch, perhaps?
+    You are a giantfolk monk, aren’t you? You look very much like a warrior of light I know. Just a hunch maybe?
   en: |-
     You are a
     giantfolk monk,
@@ -1115,7 +1115,8 @@
     この悪だくみに参加しました
     <name>といいます　どうぞよろしく
   literal: |-
-    You mean Uncle Gong? I’ve heard many tales of your bravery. I’ve joined this group to help in my uncle’s place. You can call me <name>. It’s nice to meet you.
+    You mean Uncle Gong? I’ve heard rumors about you, a very brave person you were.
+    I’ve joined this group as I thought I’d be of use in place of my uncle. My name is Sig, nice to meet you.
   en: |-
     You mean uncle
     Gong? I’ve heard
@@ -1144,8 +1145,7 @@
     美人姉妹の　末っ子だったね
     <name>　きみまでどうしたんだ？
   literal: |-
-    You beautiful sisters never fail to surprise me, <name>.
-    As the youngest, why do you want to join?
+    I’m always startled by you, the beautiful sisters. You are the youngest one, Wendy. Why do you want to join as well?
   en: |-
     You and your
     beautiful sisters
@@ -1169,8 +1169,7 @@
     もちろん　光の戦士のことよ
     今度のことは　いいチャンスよね
   literal: |-
-    Tao and the others always boast about it, so of course I want to become a warrior of light!
-    This must be my chance!
+    Tao and the others are always boasting about it, so of course it’s because I want to be a warrior of light! This is my chance!
   en: |-
     Tao and the others
     are always
@@ -1195,7 +1194,7 @@
     お前・・・本当にいいのだな
     危険な遠征になるぞ
   literal: |-
-    Knight <name>... my son. You... are you sure? It’s going to be a very dangerous expedition!
+    Knight Apis… my son. You… are you sure? It’s going to be a very dangerous expedition!
   en: |-
     Knight <name>...
     My son.
@@ -1218,7 +1217,7 @@
     ケン騎士長！　覚悟の上です
     どうか　我々にお任せください
   literal: |-
-    Yes, father! Ah, I mean, Captain Ken! I’ve made up my mind. Please leave it to us!
+    Yes, father! Ah, I mean, Captain Ken! I’ve made up my mind, please leave it to us!
   en: |-
     Yes, father! Ah! I
     mean, Captain Ken!
@@ -1238,7 +1237,7 @@
     遠征指揮官のラグ隊長を
     助けに行くと　そういうわけだな
   literal: |-
-    And you… I suppose you wish to rescue your father, Lug, the commander of the expedition force.
+    And you… wish to rescue your father, Lug, the commander of the expedition force, right?
   en: |-
     And you...
     <wait more>
@@ -1260,7 +1259,7 @@
     おまえたちだけのわるだくみでは
     ないことぐらいは　お見通しだ
   literal: |-
-    <name>! Who will be the leader? I doubt you came up with this plan on your own.
+    Ruce! Who will be the leader? I don’t think you guys came up with this on your own.
   en: |-
     <name>! Who will
     be the leader?
@@ -1289,7 +1288,7 @@
     おーいっ　ちょっと　頼むよ
     ばれちまった　出てきてくれよ
   literal: |-
-    Hey! Would you mind coming out? They’ve figured it out.
+    Hey, would you mind coming out? They’ve found it out!
   en: |-
     Hey! Would you
     mind coming out?
@@ -1304,7 +1303,7 @@
   ja-kanji: |-
     きっ　きみは!　あなたはマックス?
   literal: |-
-    Y-you! Are you...Max?
+    You! Are you Max?
   en: |-
     Y-you!<delay 01>
     Are you... Max?!
@@ -1319,7 +1318,7 @@
     いや・・　にているが・・
     ちがうようだ
   literal: |-
-    No… You resemble him, but… It seems I’m mistaken.
+    Nope, you look alike, but… I’m wrong it seems.
   en: |-
     No<delay 01>.<delay 01>.<delay 01>.
     You resemble him,
@@ -1339,7 +1338,7 @@
     彼が伝説の光の戦士の
     リーダーだった人なのかと思った
   literal: |-
-    Don’t startle me like that! For a moment I thought he was the leader of the legendary warriors of Light.
+    Don’t startle me like that! Thought he was the leader of the legendary warriors of light for a moment.
   en: |-
     Don’t startle me
     like that!
@@ -1362,8 +1361,7 @@
     古代人の国から　諸国に
     修行の旅をしているそうです。
   literal: |-
-    Rather, he is <party leader>, from Prompt.
-    Since leaving the ancients’ land, he has been traveling to various countries to train.
+    He is Nick from Prompt, he said he was traveling around to train in many countries.
   en: |-
     Rather, he is
     <party leader>, from
@@ -1389,7 +1387,7 @@
     口添えしてくれたのが　彼でした
     おかげで　決心が着きました！
   literal: |-
-    When we were discussing this endeavor, he encouraged us to go. Thus, we’ve come to a resolution!
+    He was the one who encouraged us when we were discussing this endeavor.
   en: |-
     He was the one who
     encouraged us to
@@ -1411,7 +1409,7 @@
     どうか　お願いします
     僕らに行かせてください
   literal: |-
-    Please, let us go on this journey!
+    Please, let us go on this journey.
   en: |-
     Please! Let us go
     on this journey!
@@ -1444,7 +1442,7 @@
     そして　サイプレス国王の奴らに
     ひとあわふかせてやりましょうぞ！
   literal: |-
-    However, I shall also accompany you. Let’s go and give Cypress a surprise!
+    But I shall also accompany you. Let’s go and give Cypress a surprise!
   en: |-
     But I shall
     accompany you.
@@ -1462,7 +1460,7 @@
     <party leader>たちは　港から
     サイプレスに向かって旅立った
   literal: |-
-    <party leader>’s force left port on a voyage to Cypress.
+    Narrator: Nick’s force went on a voyage from the port towards Cypress.
   en: |-
     <party leader>’s force
     left port on a
@@ -1478,7 +1476,7 @@
     この先　彼らを待つ物は・・
     つらく長い旅の始まりだった
   literal: |-
-    What awaited them... was a long and difficult journey.
+    What awaited them… was a tough and long trip.
   en: |-
     What awaited
     them... was a long
@@ -2041,6 +2039,21 @@
     I too wish to join
     you.
     <wait><end>
+- index: 278
+  character: Narration
+  ja: |-
+    <class name>の <name>が
+    なかまに なった
+    <end>
+  ja-kanji: |
+  literal: |-
+    Cray the monk has joined the force.
+  en: |-
+    <name> the
+    <class name>
+    has joined the
+    Force.
+    <end>
 - index: 396
   character: Cray’s Sister
   ja: |-
@@ -2160,170 +2173,197 @@
 ######################
 
 - index: 402
-  character: Cypress knight
+  character: Cypress Knight
   ja: |-
-    くっ こともあろうに おれたちが・・
-    こんなこぞうどもに まけるとは・・・
-    グググッ ふかくだっ・・・グフッ
+    くっ　こともあろうに　おれたちが・・
+    こんなこぞうどもに　まけるとは・・・
+    グググッ　ふかくだっ・・・グフッ
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Of all things, we… lose to these brats… *dying* failure… *dies*
   en: |-
     Of all things,
     we... lose to
     these brats...
     failure...
+    *dies*
     <wait><end>
-
 - index: 403
   character: Lowe
   ja: |-
-    ついに われわれのしょざいが
-    サイプレスに しれましたね
-    さあ さきをいそぎましょう
+    ついに　われわれのしょざいが
+    サイプレスに　しれましたね
+    さあ　さきをいそぎましょう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    In the end, our whereabouts are now known to Cypress. Let’s press on.
   en: |-
     In the end, our
-    whereabouts is now
-    known to Cypress.
-    Let’s press on.
+    whereabouts are
+    now known to
+    Cypress. Let’s
+    press on.
     <wait><end>
-
 - index: 404
   character: Lowe
   ja: |-
     あれがサイプレスぐんのとりでですね
     しかし・・・はねばしをおろさなければ
-    なかにはいることが できません・・・
+    なかにはいることが　できません・・・
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    So that is the fortress of the Cypress army. However… we cannot enter unless we get the drawbridge down…
   en: |-
     So that is the
     fortress of the
-    Cypress army...<wait>
-    However, we cannot
-    enter unless we
-    get the drawbridge
-    down...
+    Cypress army.
+    <wait more>
+    However... we
+    cannot enter
+    unless we get the
+    drawbridge down...
     <wait><end>
-
 - index: 405
-  character: 
+  character: Lowe
   ja: |-
-    <name>をよみがえらせて どうするかを<line>そうだんしなければ なりませんね<delay 01><line>いまいちど キャンプにもどりましょう<wait><end>
-  literal: ''
-  en: |-
-    We must revive
-    <name> and
-    discuss how to do
-    it.<delay 01>
-    Let's go back to
-    camp again.
+    <name>をよみがえらせて　どうするかを
+    そうだんしなければ　なりませんね<delay 01>
+    いまいちど　キャンプにもどりましょう
     <wait><end>
-  # Missing from translation?
-
+  ja-kanji: |
+  literal: |-
+    We should discuss how to revive Cray, shouldn’t we? Let’s return to camp once more.
+    If Cray died during Battle 3 and was not resurrected before Battle 4.
+  en: |-
+    We should discuss
+    how to revive
+    <name>,
+    shouldn’t we?<delay 01>
+    Let’s return to
+    camp once more.
+    <wait><end>
 - index: 406
   character: Cray
   ja: |-
-    ボクは あそこにいたことがあるので
-    ここは ボクにまかせてください
+    ボクは　あそこにいたことがあるので
+    ここは　ボクにまかせてください
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I’ve been inside before, let me handle this.
   en: |-
     I’ve been inside
     before, let me
     handle this.
     <wait><end>
-
 - index: 407
   character: Cray
   ja: |-
-    じつは とりでのしれいかんに
+    じつは　とりでのしれいかんに
     ガーディアナぐんについての
-    じょうほうがあってまいりました!
+    じょうほうがあってまいりました！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I’ve come to relay information about the Guardiana force to the commander of the fortress.
   en: |-
-    I’ve come to
-    inform the
-    commander of the
-    fortress regarding
-    the Guardiana
-    force.
+    I’ve come to relay
+    information to the
+    fortress commander
+    about the
+    Guardiana force.
     <wait><end>
-
 - index: 408
   character: Dwarf
   ja: |-
-    おお おまえは
-    <name>ではないか!<line>ガーディアナぐんのじょうほうだと!<line>わかった いま はねばしをおろそう<wait><end>
-  literal: ''
+    おお　おまえは<name>ではないか！
+    ガーディアナぐんのじょうほうだと！
+    わかった　いま　はねばしをおろそう
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Oh, it’s you Cray! You have information on the Guardiana force? Understood, I’ll lower the drawbridge now.
   en: |-
     Oh, it’s you
     <name>! You have
     information on the
     Guardiana force?
+    <wait more>
     Understood, I’ll
     lower the
     drawbridge now.
     <wait><end>
-
 - index: 409
   character: Cray
   ja: |-
-    ありがとう・・・が おあいにくだな
-    ボクも ガーディアナぐんなのさ!
+    ありがとう・・・が　おあいにくだな
+    ボクも　ガーディアナぐんなのさ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Thanks… but I am also of the Guardiana force!
   en: |-
-    Thanks, but I am
+    Thanks... but I am
     also of the
     Guardiana force!
     <wait><end>
-
 - index: 410
-  character: Narrator
+  character: Narration
   ja: |-
-    <name>は こうげきした!<wait><end>
-  literal: ''
+    <line><name>は　こうげきした！<wait><end>
+  ja-kanji: |
+  literal: |-
+    Cray attacked!
   en: |-
-    <name> attacked!<wait><end>
-
+    <line><name> attacked!
+    <wait><end>
 - index: 411
   character: Dwarf
   ja: |-
-    きっ きさま! はかったな・・・
-    <delay 01><line>しぬまえに このことだけでも・・・<wait><end>
-  literal: ''
+    きっ　きさま！　はかったな・・・<delay 01>
+    しぬまえに　このことだけでも・・・
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    You! You’ve deceived me… Before I die, at least I can do this much…
   en: |-
-    You have deceived
-    me... Before I
-    die, at least I
-    can do this
-    much...
+    You! You’ve
+    deceived me...
+    <delay 01>
+    Before I die, at
+    least I can do
+    this much...
     <wait><end>
-
 - index: 412
-  character: Narrator
+  character: Narration
   ja: |-
-    ドワーフは よびこをふいた
+    ドワーフは　よびこをふいた
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Dwarf blew his whistle.
   en: |-
     Dwarf blew his
     whistle.
     <wait><end>
-
 - index: 413
   character: Lowe
   ja: |-
-    みんな! てきがあらわれますぞ!
-    <delay 01><line>ぜんいん せんとうはいびをとって<line>いっきに とりでにはいるのです<wait><end>
-  literal: ''
+    みんな！　てきがあらわれますぞ！<delay 01>
+    ぜんいん　せんとうはいびをとって
+    いっきに　とりでにはいるのです
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Everyone, enemies will start appearing! All take battle formation and push into the fortress at once.
   en: |-
     Everyone, enemies
     will start
-    appearing!<delay 01>
+    appearing!
+    <wait more>
     All take battle
     formation and push
     into the fortress
@@ -2337,90 +2377,101 @@
 - index: 414
   character: Lowe
   ja: |-
-    さあ とりでにはいりましょう・・・
-    <delay 01><line>ただし ゆだんはきんもつですよ<wait><end>
-  literal: ''
+    さあ　とりでにはいりましょう・・・<delay 01>
+    ただし　ゆだんはきんもつですよ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Let’s enter the fortress then… still, don’t let your guard down!
   en: |-
     Let’s enter the
     fortress then...
     still, don’t let
     your guard down!
     <wait><end>
-
 - index: 415
   character: Lowe
   ja: |-
-    ここが サイプレスのとりで
-    うすきみ わるいですな・・・
+    ここが　サイプレスのとりで
+    うすきみ　わるいですな・・・
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The Cypress fortress, it’s eerie…
   en: |-
-    This is the
-    Cypress fortress,
-    so eerie...
+    The Cypress
+    fortress, it’s
+    eerie...
     <wait><end>
-
 - index: 416
-  character: Brass loader
+  character: Brass Loader
   ja: |-
-    ふふふ うすきみがわるいか?
+    ふふふ　うすきみがわるいか？
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    *laughs* So, you find it eerie?
   en: |-
-    Ha ha ha! So, you
-    find it eerie?
+    *laughs*
+    So, you find it
+    eerie?
     <wait><end>
-
 - index: 417
   character: Lowe
   ja: |-
-    だっ だれだ!
+    だっ　だれだ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Who’s there?
   en: |-
     Who’s there?
     <wait><end>
-
 - index: 418
-  character: Brass loader
+  character: Brass Loader
   ja: |-
-    だれだ? とは ごあいさつだな!
-    ガーディアナの しんまいぐんめ!
+    だれだ？　とは　ごあいさつだな！
+    ガーディアナの　しんまいぐんめ！
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    That’s not the proper way to introduce oneself, Guardiana noobs!
   en: |-
-    How rude of you to
-    say that,
+    That’s not the
+    proper way to
+    introduce oneself,
     Guardiana noobs!
     <wait more><end>
-
 - index: 419
-  character: Brass loader
+  character: Brass Loader
   ja: |-
-    まったく むこうみずなものだな
-    だいたんにも サイプレスぐんの
-    とりでに おしいるとは
+    まったく　むこうみずなものだな
+    だいたんにも　サイプレスぐんの
+    とりでに　おしいるとは
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    You are fools to just waltz into Cypress’ fortress.
   en: |-
-    You are foolhardy
-    to just waltz into
+    You are fools to
+    just waltz into
     Cypress’ fortress.
     <wait more><end>
-    
 - index: 420
-  character: Brass loader
+  character: Brass Loader
   ja: |-
-    そのむこうみずさが いのちとりだ!
-    もう だれも いきてはかえさぬぞ
+    そのむこうみずさが　いのちとりだ！
+    もう　だれも　いきてはかえさぬぞ
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    That recklessness will be your undoing! Nobody will be allowed to leave alive!
   en: |-
     That recklessness
     will be your
     undoing! Nobody
-    will be allowed
-    to leave alive!
+    will be allowed to
+    leave alive!
     <wait><end>
 
 ######################
@@ -2430,271 +2481,308 @@
 - index: 421
   character: Barry
   ja: |-
-    わたしは レジスタンスの
-    <name>!<wait more><end>
-  literal: ''
+    わたしは　レジスタンスの
+    <name>！<wait more><end>
+  ja-kanji: |
+  literal: |-
+    I am Barry of the Resistance!
   en: |-
-    I am <name> of 
-    the Resistance!
+    I am <name>
+    of the Resistance!
     <wait more><end>
-
 - index: 422
   character: Barry
   ja: |-
     あなたがたガーディアナぐんのかたと
-    あうために このしまにきたのですが
+    あうために　このしまにきたのですが
     こんなふうにおあいできるとは・・・
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I came to this island to meet you, the Guardiana force, but I didn’t expect to meet you like this...
   en: |-
-    I came to this 
-    island to meet 
-    you, the Guardiana 
-    force, but I 
-    didn’t expect to 
-    meet you like 
-    this...
+    I came to this
+    island to meet
+    you, the Guardiana
+    force,
+    <wait more>
+    but I didn’t
+    expect to meet you
+    like this...
     <wait more><end>
-
 - index: 423
   character: Barry
   ja: |-
     われわれレジスタンスのものたちは
-    ガーディアナぐんに ごうりゅうして
-    サイプレスぐんを たおすつもりです
+    ガーディアナぐんに　ごうりゅうして
+    サイプレスぐんを　たおすつもりです
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The Resistance aims to join up with the Guardiana force and defeat the Cypress army.
   en: |-
-    The Resistance 
-    aims to join up 
-    with the Guardiana 
-    force and defeat 
+    The Resistance
+    aims to join up
+    with the Guardiana
+    force and defeat
     the Cypress army.
     <wait><end>
-
 - index: 424
-  character: Narrator
+  character: Narration
   ja: |-
-    <name>はボタンをおした<wait><end>
-  literal: ''
+    <line><name>はボタンをおした<wait><end>
+  ja-kanji: |
+  literal: |-
+    Barry pushed a button.
   en: |-
-    <name> pushed a 
-    button.
+    <line><name> pushed
+    a button.
     <wait><end>
-
 - index: 425
   character: Barry
   ja: |-
-    このさきに わたしのふねがあります
-    それで サイプレスのぜんせんきち
-    アスリートじまに わたりましょう
+    このさきに　わたしのふねがあります
+    それで　サイプレスのぜんせんきち
+    アスリートじまに　わたりましょう
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    My ship is there. We can get to Cypress’ frontline base, to Athlete island.
   en: |-
-    My ship is there. 
-    We can get to 
-    Cypress’ outpost 
-    base, to Athlete 
+    My ship is there.
+    We can get to
+    Cypress’ frontline
+    base, to Athlete
     island.
     <wait more><end>
-
 - index: 426
   character: Barry
   ja: |-
-    わたしのなかまたちも みなさんを
+    わたしのなかまたちも　みなさんを
     だいかんげいすることでしょう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    My comrades will welcome you warmly as well.
   en: |-
-    My comrades will 
-    welcome you warmly 
+    My comrades will
+    welcome you warmly
     as well.
     <wait><end>
-
 - index: 427
-  character: Narrator
+  character: Narration
   ja: |-
     ミニヨムとりでをかいめつした
-    <party leader>たちが つぎにむかうのは<line>レジスタンスのいるしまアスリート<wait more><end>
-  literal: ''
+    <party leader>たちが　つぎにむかうのは
+    レジスタンスのいるしまアスリート
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    After annihilating the Miniyom fortress, Nick’s force heads towards their next destination, Athlete island, where the Resistance is based.
   en: |-
-    After annihilating 
-    the Miniyom 
-    fortress, 
-    <party leader>’s force 
-    heads towards 
-    their next 
-    destination, 
-    Athlete island, 
-    where the 
-    Resistance is 
+    After annihilating
+    the Miniyom
+    fortress,
+    <wait more>
+    <party leader>’s force
+    heads towards
+    their next
+    destination,
+    Athlete island,
+    <wait more>
+    where the
+    Resistance is
     based.
     <wait more><end>
-
 - index: 428
-  character: Narrator
+  character: Narration
   ja: |-
     おなじこころざしをもつものたちが
     めざすサイプレスのほんきょちは
-    まだ はるかかなたにあるのだった
+    まだ　はるかかなたにあるのだった
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Although their HQ is still far away, people with the same intentions await them in Cypress.
   en: |-
-    Although their HQ 
-    is still far away, 
-    people with the 
-    same goals await 
-    them in Cypress.
+    Although their HQ
+    is still far away,
+    <wait more>
+    people with the
+    same intentions
+    await them in
+    Cypress.
+    <wait><end>
 
 ######################
 # Chapter 2 - The Secret of Cypress
 ######################
 
 - index: 429
-  character: Narrator
+  character: Narration
   ja: |-
-    アスリートじまは サイプレスの
+    アスリートじまは　サイプレスの
     ぜんせんきちというだけあって
-    しまのけいびも げんじゅうだった
+    しまのけいびも　げんじゅうだった
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Given that Athlete island was Cypress’ frontline base, the island’s defenses were strong.
   en: |-
-    Athlete island 
-    being Cypress’ 
-    outpost base, the 
-    island’s defenses 
-    were strong.
+    Given that Athlete
+    island was
+    Cypress’ frontline
+    Base,
+    <wait more>
+    the island’s
+    defenses were
+    strong.
     <wait more><end>
-
 - index: 430
-  character: Narrator
+  character: Narration
   ja: |-
-    しかし 
-    <name>のじょげんによって<line>しゅびのうすいばしょをみつけて<line>ぶじに じょうりくしたのだが・・・<wait more><end>
-  literal: ''
+    しかし　<name>のじょげんによって
+    しゅびのうすいばしょをみつけて
+    ぶじに　じょうりくしたのだが・・・
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    But thanks to Barry’s advice, they have found a weak point in their defenses and made a landing without a hitch, however...
   en: |-
     But thanks to
-    <name>’s advice, 
-    they have found a 
-    weak point in 
-    their defenses and 
-    made a landing 
-    without a hitch, 
-    however....
+    <name>’s advice,
+    they have found a
+    weak point in
+    their defenses,
+    <wait more>
+    and made a landing
+    without a hitch.
+    However...
     <wait more><end>
-
 - index: 431
-  character: Narrator
+  character: Narration
   ja: |-
-    そこは サイプレスにたてつくもの
+    そこは　サイプレスにたてつくもの
     レジスタンスをねだやしにするための
-    かりが おこなわれていたのだった
+    かりが　おこなわれていたのだった
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Cypress had been on the hunt to root out the opposing Resistance.
   en: |-
-    Cypress had been 
-    on the hunt to 
-    root out the 
-    opposing 
+    Cypress had been
+    on the hunt to
+    root out the
+    opposing
     Resistance.
     <wait><end>
-
 - index: 432
   character: Barry
   ja: |-
-    ややっ アスリートむらのまわりを
-    サイプレスぐんが かこんでいるぞ
+    ややっ　アスリートむらのまわりを
+    サイプレスぐんが　かこんでいるぞ
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Oh-oh, the Cypress army surrounded the village of Athlete!
   en: |-
-    Uh-oh, the Cypress 
-    army surrounded 
-    the village of 
+    Oh-oh, the Cypress
+    army surrounded
+    the village of
     Athlete!
     <wait more><end>
-    
 - index: 433
   character: Barry
   ja: |-
-    もしや! われわれレジスタンスの
-    きょてんであることが ばれたのか!
+    もしや！　われわれレジスタンスの
+    きょてんであることが　ばれたのか！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    They might have found out the location of our Resistance!
   en: |-
-    They might have 
-    found out the 
-    location of our 
+    They might have
+    found out the
+    location of our
     Resistance!
     <wait><end>
-
 - index: 434
-  character: Hell soldier
+  character: Hell Soldier
   ja: |-
-    みんな! よーくみはっていろよ
-    ねこのこ いっぴきたりとも
-    にげださせるんじゃねえぞ!
+    みんな！　よーくみはっていろよ
+    ねこのこ　いっぴきたりとも
+    にげださせるんじゃねえぞ！
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Everyone, make sure to be on guard at all times! Do not let a single kitten escape!
   en: |-
-    Everyone, make 
-    sure to be on 
-    guard at all 
-    times! Do not let 
-    a single kitten 
+    Everyone, make
+    sure to be on
+    guard at all
+    times!
+    <wait more>
+    Do not let a
+    single kitten
     escape!
     <wait more><end>
-
 - index: 435
-  character: Hell soldier
+  character: Hell Soldier
   ja: |-
-    まどうしバズーさまからのしれいだ!
-    なんとしても あのかたをみつけ
-    やみのもとに ほおむりさるんだ!
+    まどうしバズーさまからのしれいだ！
+    なんとしても　あのかたをみつけ
+    やみのもとに　ほおむりさるんだ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    These are orders from the wizard Bazoo himself! Do whatever you can to find and bury that person six feet deep!
   en: |-
-    These are orders 
-    from the wizard 
-    Bazoo himself! Do 
-    whatever you can 
-    to find that 
-    person and bury 
-    them six feet 
-    deep!
+    These are orders
+    from the wizard
+    Bazoo himself!
+    <wait more>
+    Do whatever you
+    can to find and
+    bury that person
+    six feet deep!
     <wait><end>
-    
 - index: 436
   character: Lowe
   ja: |-
-    やつのはなしを ききましたか?
-    サイプレスぐんには なにやら
+    やつのはなしを　ききましたか？
+    サイプレスぐんには　なにやら
     さがしているじんぶつがいるようです
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Did you hear that? For some reason, the Cypress army seems to be searching for someone.
   en: |-
-    Did you hear that? 
-    For some reason, 
-    the Cypress army 
-    seems to be 
-    searching for 
+    Did you hear that?
+    <wait more>
+    For some reason,
+    the Cypress army
+    seems to be
+    searching for
     someone.
     <wait more><end>
-
 - index: 437
   character: Lowe
   ja: |-
-    しかも ほうむろうとしている・・・
-    そのひとが あのむらにいるのならば
-    われわれが さきにみつけましょう
+    しかも　ほうむろうとしている・・・
+    そのひとが　あのむらにいるのならば
+    われわれが　さきにみつけましょう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Also, they plan to kill them… If that person is in that village then we must find them first.
   en: |-
-    Also, they plan to 
-    kill them... If 
-    that person is in 
-    that village then 
-    we must find them 
-    first.
+    Also, they plan to
+    kill them...
+    <wait more>
+    If that person is
+    in that village
+    then we must find
+    them first.
     <wait><end>
     
 ######################
@@ -2704,184 +2792,208 @@
 - index: 438
   character: Lowe
   ja: |-
-    みんな! むらのなかから
-    あらそうものおとがします!
-    さあ はやくむらのなかに!
+    みんな！　むらのなかから
+    あらそうものおとがします！
+    さあ　はやくむらのなかに！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Everyone, I can hear noises of fighting coming from the village! Let’s check it out, quick!
   en: |-
-    Everyone, I can 
-    hear noises of 
-    fighting coming 
-    from the village! 
-    Let’s check it 
+    Everyone, I can
+    hear noises of
+    fighting coming
+    from the village!
+    <wait more>
+    Let’s check it
     out, quick!
     <wait><end>
-
 - index: 439
   character: Villager
   ja: |-
-    くっそー! いったいなぜだ!
-    どうして むらのものをころす!
-    われわれが なにをしたというのだ
+    くっそー！　いったいなぜだ！
+    どうして　むらのものをころす！
+    われわれが　なにをしたというのだ
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Damn it, why!? Why are you killing the villagers! What have we ever done to you?
   en: |-
-    Damn it, why!? Why 
-    are you killing 
-    the villagers! 
-    What have we ever 
+    Damn it, why!? Why
+    are you killing
+    the villagers!
+    What have we ever
     done to you?
     <wait><end>
-
 - index: 440
-  character: Dark mage
+  character: Dark Mage
   ja: |-
-    われらの ひそかなるしめいを
-    しられただけで しにあたいする
-    サイプレスおうじを うらむがいい
+    われらの　ひそかなるしめいを
+    しられただけで　しにあたいする
+    サイプレスおうじを　うらむがいい
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Just by knowing of our secret orders is enough reason for you to die. Blame the prince of Cypress for that, if you will.
   en: |-
-    Just by knowing of 
-    our secret orders 
-    is enough reason 
-    for you to die. 
-    You can blame the 
-    prince of Cypress 
-    for that.
+    Just by knowing of
+    our secret orders
+    is enough reason
+    for you to die.
+    <wait more>
+    Blame the prince
+    of Cypress for
+    that, if you will.
     <wait><end>
-
 - index: 441
   character: Priest
   ja: |-
-    おかしい・・・これだけしかいない?
-    そんなばかなことが あるか・・・
+    おかしい・・・これだけしかいない？
+    そんなばかなことが　あるか・・・
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Strange… aren’t there more of them around? This cannot be…
   en: |-
-    Strange... aren’t 
-    there more of them 
-    around? This 
-    cannot be...
+    Strange... aren’t
+    there more of them
+    around? This
+    cannot be…
     <wait more><end>
-
 - index: 442
   character: Priest
   ja: |-
-    すくなくとも しさいのむすめの
-    <name>ぐらいは いるはずだ<line>くさのねわけても さがしだせ!<wait><end>
-  literal: ''
+    すくなくとも　しさいのむすめの
+    <name>ぐらいは　いるはずだ
+    くさのねわけても　さがしだせ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    At least the priestess Mayfair should be here. Search every nook and cranny!
   en: |-
-    At least, Mayfair 
-    the priestess 
-    should be here. 
-    Search every nook 
+    At least the
+    priestess <name>
+    should be here.
+    Search every nook
     and cranny!
     <wait><end>
-
 - index: 443
-  character: Hell soldier
+  character: Hell Soldier
   ja: |-
-    プリ-ストさまーッ!
+    プリーストさまーッ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Priest!
   en: |-
     Priest!
     <wait><end>
-
 - index: 444
-  character: Hell soldier
+  character: Hell Soldier
   ja: |-
-    ここにある いわがうごきます!
+    ここにある　いわがうごきます！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Priest! This rock here is loose!
   en: |-
-    This rock here is 
-    loose!
+    Priest! This rock
+    here is loose!
     <wait><end>
-    
 - index: 445
-  character: Hell soldier
+  character: Hell Soldier
   ja: |-
-    あっ しかも そのうしろがわに
-    かいだんが ありました!
+    あっ　しかも　そのうしろがわに
+    かいだんが　ありました！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Ah, and there was a staircase beneath it!
   en: |-
-    Ah, and there was 
-    a staircase beneath it!
+    Ah, and there was
+    a staircase
+    beneath it!
     <wait><end>
-
 - index: 446
   character: Stock
   ja: |-
-    くそー! ついにみつかったか!
-    しかし このかいだんのさきには
-    いっぽも いかせるものか!
+    くそー！　ついにみつかったか！
+    しかし　このかいだんのさきには
+    いっぽも　いかせるものか！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Damn it, they’ve finally found it! However, I won’t let you take one step down this staircase!
   en: |-
-    Damn it, they’ve 
-    finally found it! 
-    However, I won’t 
-    let you take one 
-    step down this 
+    Damn it, they’ve
+    finally found it!
+    <wait more>
+    However, I won’t
+    let you take one
+    step down this
     staircase!
     <wait><end>
-
 - index: 447
   character: Priest
   ja: |-
-    フハハハ-ッ ばかなやつめ!
-    きさまひとりに なにができる!
+    フハハハーッ　ばかなやつめ！
+    きさまひとりに　なにができる！
     みなのものーっ
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    *fuhahaha* Fool, you alone cannot stand against us! Hey, everyone!
   en: |-
-    *laughs* 
-    Fool, you alone 
-    cannot stand 
-    against us! 
+    Fuhahaha! Fool,
+    you alone cannot
+    stand against us!
     Hey, everyone!
     <wait more><end>
-    
 - index: 448
-  character: Dark mage
+  character: Dark Mage
   ja: |-
-    おおっ なんだ?? きさまら!
-    <end>
-  literal: ''
-  en: |-
-    What!? You guys? 
-    Priest!
-    <end>
+    おおっ　なんだ？？　きさまら！
 
+    <end>
+  ja-kanji: |
+  literal: |-
+    Errr, what!? You guys!? Priest!
+  en: |-
+    Errr, what!? You
+    guys!? Priest!
+    <end>
 - index: 449
   character: Priest
   ja: |-
-    しまった ガーディアナぐんか!
-    ならば きさまらから ちまつりだ!
+    しまった　ガーディアナぐんか！
+    ならば　きさまらから　ちまつりだ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Darn it, it’s the Guardiana force! In that case we shall start the blood bath with you!
   en: |-
-    Darn it, it’s the 
-    Guardiana force! 
-    If that’s the case 
-    we shall start the 
-    blood bath with 
+    Darn it, it’s the
+    Guardiana force!
+    <wait more>
+    In that case we
+    shall start the
+    blood bath with
     you!
     <wait><end>
-
 - index: 450
   character: Lowe
   ja: |-
-    <party leader>! まにあいましたね!<line>さあ やつらを むかえうちましょう<wait><end>
-  literal: ''
+    <party leader>！　まにあいましたね！
+    さあ　やつらを　むかえうちましょう
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Nick, looks like we made it in time. Let’s engage them!
   en: |-
-    <party leader>, we made
-    it in time.
-    Let’s engage!
+    <party leader>, looks
+    like we made it in
+    time. Let’s engage
+    them!
     <wait><end>
 
 ######################
@@ -2891,142 +3003,160 @@
 - index: 451
   character: Lowe
   ja: |-
-    あちらに むらのひとがいます
-    はなしを ききにいきましょう
+    あちらに　むらのひとがいます
+    はなしを　ききにいきましょう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    There are villagers over there. Let’s hear what they have to say.
   en: |-
-    There are 
-    villagers over 
-    there. Let’s hear 
-    what they have to 
+    There are
+    villagers over
+    there. Let’s hear
+    what they have to
     say.
     <wait><end>
-
 - index: 452
   character: Stock
   ja: |-
-    もはやだめかと おもいましたが
-    <name>が みなさんをつれてきて<line>くれたおかげで たすかりました<wait more><end>
-  literal: ''
-  en: |-
-    I thought we were 
-    goners, but 
-    <name> brought 
-    you here. Thanks 
-    to that, we were 
-    rescued.
+    もはやだめかと　おもいましたが
+    <name>が　みなさんをつれてきて
+    くれたおかげで　たすかりました
     <wait more><end>
-    
+  ja-kanji: |
+  literal: |-
+    I thought we were goners, but Barry brought you here. Thanks to that, we were rescued.
+  en: |-
+    I thought we were
+    goners, but
+    <name> brought
+    you here.
+    <wait more>
+    Thanks to that, we
+    were rescued.
+    <wait more><end>
 - index: 453
   character: Stock
   ja: |-
-    わたしは レンジャーの 
+    わたしは　レンジャーの
     <name><wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I am Stock, a ranger.
   en: |-
-    I am <name>, a 
-    ranger.
+    I am <name>, a
+    Ranger.
     <wait><end>
-    
 - index: 454
   character: Stock
   ja: |-
-    そして 
-    <name>! でておいで!<wait><end>
-  literal: ''
+    そして
+    <name>！　でておいで！<wait><end>
+  ja-kanji: |
+  literal: |-
+    And this is Mayfair! You can come out now!
   en: |-
-    And this is 
-    <name>! You can 
+    And this is
+    <name>! You can
     come out now!
     <wait><end>
-
 - index: 455
   character: Mayfair
   ja: |-
-    わたしは そうりょの 
-    <name>です<line>サイプレスのおうきゅうしんかんの<line>むすめでございました・・・でも<wait><end>
-  literal: ''
-  en: |-
-    I am <name>, a 
-    priestess. I am 
-    the daughter of 
-    the former high 
-    priest of Cypress 
-    castle...
+    わたしは　そうりょの　<name>です
+    サイプレスのおうきゅうしんかんの
+    むすめでございました・・・でも
     <wait><end>
-
+  ja-kanji: |
+  literal: |-
+    I am Mayfair, a priestess. I am the daughter of the former high priest of Cypress castle...
+  en: |-
+    I am <name>, a
+    Priestess.
+    <wait more>
+    I am the daughter
+    of the former high
+    priest of Cypress
+    castle…
+    <wait><end>
 - index: 456
   character: Stock
   ja: |-
     かのじょのちちおやは
-    ウォルドルに ころされ
-    かのじょも あぶないところでした
+    ウォルドルに　ころされ
+    かのじょも　あぶないところでした
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Her father was killed by Woldol. She was in grave danger.
   en: |-
-    Her father was 
-    killed by Woldol. 
-    She was in grave 
+    Her father was
+    killed by Woldol.
+    She was in grave
     danger.
     <wait more><end>
-
 - index: 457
   character: Stock
   ja: |-
-    そのたたかいで かのじょはすべてを
-    しりょくまで うしなったのです
-    このむらさえ ほろびかけたのです
+    そのたたかいで　かのじょはすべてを
+    しりょくまで　うしなったのです
+    このむらさえ　ほろびかけたのです
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    In that fight, she lost everything, even her eyesight. Even this village got ruined.
   en: |-
-    In that 
-    fight, she lost 
-    everything, even 
-    her eyesight. 
-    Even this village 
+    In that fight, she
+    lost everything,
+    even her eyesight.
+    Even this village
     got ruined.
     <wait more><end>
-    
 - index: 458
   character: Stock
   ja: |-
-    どうか なかまにしてください・・・
-    にっくきウォルドルを たおすために
+    どうか　なかまにしてください・・・
+    にっくきウォルドルを　たおすために
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Please, let us join you… to defeat that accursed Woldol.
   en: |-
-    Please, let us 
-    join you... to 
-    defeat that 
+    Please, let us
+    join you... to
+    defeat that
     accursed Woldol.
     <wait><end>
-
 - index: 459
-  character: Narrator
+  character: Narration
   ja: |-
-    レンジャーの 
-    <name> そして<line>そうりょの <name>が<line>なかまに なった<end>
-  literal: ''
+    レンジャーの　<name>　そして
+    そうりょの　<name>が
+    なかまに　なった
+    <end>
+  ja-kanji: |
+  literal: |-
+    Stock the ranger and Mayfair the priestess joined the force.
   en: |-
-    <name> the 
-    ranger and 
-    <name> the 
-    priestess joined 
+    <name> the
+    ranger and
+    <name> the
+    priestess joined
     the force.
     <end>
-
 - index: 460
   character: Mayfair
   ja: |-
-    さあ さきをいそぐまえにこのむらで
-    そうびのほきゅうを してください
+    さあ　さきをいそぐまえにこのむらで
+    そうびのほきゅうを　してください
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Before we rush on, please restock your equipment in this village.
   en: |-
-    Before we rush on, 
-    please restock 
-    your equipment in 
+    Before we rush on,
+    please restock
+    your equipment in
     this village.
     <wait><end>
 
@@ -3035,58 +3165,69 @@
 - index: 461
   character: Stock
   ja: |-
-    あそこにみえる きょだいなとうは
+    あそこにみえる　きょだいなとうは
     ウォルドルのしてんのうのひとり
-    まどうしバズーが まもっています
+    まどうしバズーが　まもっています
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    That huge tower over there. One of the four of Woldol, the wizard Bazoo, protects it.
   en: |-
-    That huge tower 
-    over there. One of 
-    the four of Woldol 
-    protects it.
+    That huge tower
+    over there. One of
+    the four of
+    Woldol, the wizard
+    Bazoo, protects
+    it.
     <wait><end>
-
 - index: 462
   character: Mayfair
   ja: |-
-    ウォルドルと かれらしてんのうが
+    ウォルドルと　かれらしてんのうが
     サイプレスはんらんのはじまりでした
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Woldol and his four lieutenants are responsible for starting the uprising in Cypress.
   en: |-
-    Woldol and his 
-    four lieutenants 
-    are responsible 
-    for the uprising 
-    in Cypress.
+    Woldol and his
+    four lieutenants
+    are responsible
+    for starting the
+    uprising in
+    Cypress.
     <wait more><end>
-
 - index: 463
   character: Mayfair
   ja: |-
-    それにのせられて おうのおとうと
-    エドモンドさまが てをくんだのです
+    それにのせられて　おうのおとうと
+    エドモンドさまが　てをくんだのです
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The king’s younger brother, Edmond, was deceived into joining forces with them.
   en: |-
-    The king’s younger 
-    brother, Edmond, 
-    was deceived into 
-    joining forces 
+    The king’s younger
+    brother, Edmond,
+    was deceived into
+    joining forces
     with them.
     <wait><end>
-    
 - index: 464
   character: Lowe
   ja: |-
-    <party leader>! とうにはいりましょう<line>そして かれらのさがすじんぶつを<line>バズーから ききだしましょう!<wait><end>
-  literal: ''
+    <party leader>！　とうにはいりましょう
+    そして　かれらのさがすじんぶつを
+    バズーから　ききだしましょう！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Nick, let’s enter the tower, and ask Bazoo who they were looking for!
   en: |-
-    <party leader>, let’s 
-    enter the tower, 
-    and ask Bazoo who 
-    they were looking 
+    <party leader>, let’s
+    enter the tower,
+    and ask Bazoo who
+    they were looking
     for!
     <wait><end>
 
@@ -3098,95 +3239,109 @@
   character: Lowe
   ja: |-
     とうのまもりはなくなりました
-    さあ まどうし バズーとやらと
+    さあ　まどうし　バズーとやらと
     たいけつといきましょう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    And with that, the tower’s defenders have been vanquished. Let’s go face that Bazoo wizard.
   en: |-
-    And with that, the 
-    tower’s defenders 
-    have been 
-    vanquished. Let’s 
-    go face that Bazoo 
-    wizard.
+    And with that, the
+    tower’s defenders
+    have been
+    vanquished.
+    <wait more>
+    Let’s go face that
+    Bazoo wizard.
     <wait><end>
-
 - index: 466
   character: Bazoo
   ja: |-
-    フハハハ-ッ ガ-ディアナぐんよ!
-    このアスリートとうに ようこそ!
-    こころより かんげいさせてもらう
+    フハハハーッ　ガーディアナぐんよ！
+    このアスリートとうに　ようこそ！
+    こころより　かんげいさせてもらう
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    fuhahaha Guardiana force, let me welcome you to Athlete tower from the bottom of my heart!
   en: |-
-    *laughs* 
-    Guardiana force, 
-    let me welcome you 
-    to Athlete tower 
-    from the bottom of 
+    Fuhahaha!
+    <wait more>
+    Guardiana force,
+    let me welcome you
+    to Athlete tower
+    from the bottom of
     my heart!
     <wait more><end>
-
 - index: 467
   character: Bazoo
   ja: |-
-    だが はたして・・・
-    ここまで やってこれるかな!
+    だが　はたして・・・
+    ここまで　やってこれるかな！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    But I wonder if… you are able to come along.
   en: |-
     But I wonder if...
-    you are able to 
+    you are able to
     come along.
     <wait><end>
-
 - index: 468
-  character: Narrator
+  character: Narration
   ja: |-
-    バズーは あしきじゅもんをとなえた
+    バズーは　あしきじゅもんをとなえた
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Bazoo chanted an evil incantation.
   en: |-
-    Bazoo chanted an 
+    Bazoo chanted an
     evil incantation.
     <wait><end>
-
-- index: 471 # Note: out of order
+- index: 471
   character: Bazoo
   ja: |-
-    フハハハーッ うえでまってるぞ!
+    フハハハーッ　うえでまってるぞ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    fuhahaha I’ll be waiting for you upstairs!
   en: |-
-    *laughs* 
-    I’ll be waiting 
-    for you upstairs!
+    fuhahaha! I’ll be
+    waiting for you
+    upstairs!
     <wait><end>
-
 - index: 469
   character: Lowe
   ja: |-
     やつがバズー・・・おそろしいほどの
-    あしきまりょくを もっていました
+    あしきまりょくを　もっていました
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    That’s Bazoo… He possesses terrifyingly evil magical powers.
   en: |-
-    That’s Bazoo... He 
-    possesses 
-    terrifyingly evil 
+    That’s Bazoo... He
+    possesses
+    terrifyingly evil
     magical powers.
     <wait more><end>
-
 - index: 470
   character: Lowe
   ja: |-
-    しかし だからこそ たおしましょう
-    めざすは あのかいだんです
+    しかし　だからこそ　たおしましょう
+    めざすは　あのかいだんです
     <wait><end>
-  literal: ''
-  en: |-
+  ja-kanji: |
+  literal: |-
     However, that is why we shall defeat him. Our goal is that staircase.
+  en: |-
+    However, that is
+    why we shall
+    defeat him. Our
+    goal is that
+    staircase.
     <wait><end>
 
 ######################
@@ -3196,86 +3351,93 @@
 - index: 472
   character: Lowe
   ja: |-
-    その かいだんをのぼれば
+    その　かいだんをのぼれば
     バズーがまっているはず
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Bazoo should be waiting for us upstairs.
   en: |-
-    Bazoo should be 
-    waiting for us 
+    Bazoo should be
+    waiting for us
     upstairs.
     <wait more><end>
-
 - index: 473
   character: Lowe
   ja: |-
-    サイプレスの ぜんせんきちを
-    まかされる バズーのちからと
+    サイプレスの　ぜんせんきちを
+    まかされる　バズーのちからと
     たいけつするときです
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    It’s time for the showdown with him. He was entrusted with this forward base of Cypress.
   en: |-
-    It’s time for the 
-    showdown with him. 
-    He was entrusted 
-    with this Cypress 
-    outpost.
+    It’s time for the
+    showdown with him.
+    He was entrusted
+    with this forward
+    base of Cypress.
     <wait><end>
-
 - index: 474
   character: Bazoo
   ja: |-
-    なんと! あのぼうえいせんを
-    こえてきたか! ガーディアナ!
+    なんと！　あのぼうえいせんを
+    こえてきたか！　ガーディアナ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Oh, you’ve broken through those defenses too, Guardiana!
   en: |-
-    Oh, you’ve broken 
-    through my 
-    defenses, 
+    Oh, you’ve broken
+    through those
+    defenses too,
     Guardiana!
     <wait><end>
-
 - index: 475
   character: Lowe
   ja: |-
-    バズー きさまらのさがしている
-    じんぶつとは いったいだれだ!
+    バズー　きさまらのさがしている
+    じんぶつとは　いったいだれだ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Bazoo, who are you guys looking for?
   en: |-
-    Bazoo, who are you 
+    Bazoo, who are you
     guys looking for?
     <wait><end>
-
 - index: 476
   character: Bazoo
   ja: |-
-    しりたいか! しりたければ
-    わたしを たおすことだな
+    しりたいか！　しりたければ
+    わたしを　たおすことだな
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    You wanna know, huh? I’ll tell you if you can defeat me.
   en: |-
-    You wanna know, 
-    huh? I’ll tell you 
-    if you can defeat 
+    You wanna know,
+    huh? I’ll tell you
+    if you can defeat
     me.
     <wait more><end>
-
 - index: 477
   character: Bazoo
   ja: |-
-    しかし おまえらのそのちからで
-    このバズーを たおせるかな?
-    さあ ためしてみるがよい!
+    しかし　おまえらのそのちからで
+    このバズーを　たおせるかな？
+    さあ　ためしてみるがよい！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    But can you defeat me with your miniscule powers? Well, you can certainly try!
   en: |-
-    But can you defeat 
-    me with your 
-    meager strength?
-    You can certainly 
-    try!
+    But can you defeat
+    me with your
+    miniscule powers?
+    Well, you can
+    certainly try!
     <wait><end>
 
 ######################
@@ -3283,199 +3445,224 @@
 ######################
 
 - index: 478
-  character: Bazoo # dying
+  character: Bazoo
   ja: |-
-    ぐぐぐ・・・まっ まけた・・・
+    ぐぐぐ・・・まっ　まけた・・・
     やくそくだ・・・おしえてやろう
     われらのさがしていたのは・・・
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    *dying* … I-I lost… As promised… I will tell you. We were looking for…
   en: |-
-    ... I-I lost... As 
-    promised... I will 
-    tell you. We were 
-    looking for...
+    ...I-I lost... As
+    promised... I will
+    tell you. We were
+    looking for…
     <wait><end>
-
 - index: 479
   character: Bazoo
   ja: |-
-    きさまだ! 
-    <party leader>みつけたぞ!<line>どれだけ われらがさがしたことか!<line>ガーディアナぐんにいたとは・・・<wait><end>
-  literal: ''
-  en: |-
-    I can’t believe 
-    it! We’ve found 
-    <party leader>! We were 
-    looking everywhere 
-    and he was with 
-    the Guardiana 
-    force...
+    きさまだ！　<party leader>みつけたぞ！
+    どれだけ　われらがさがしたことか！
+    ガーディアナぐんにいたとは・・・
     <wait><end>
-
+  ja-kanji: |
+  literal: |-
+    I can’t believe it! We’ve found Nick! We were looking everywhere and he was with the Guardiana force…
+  en: |-
+    I can’t believe
+    it! We’ve found
+    <party leader>!
+    <wait more>
+    We were looking
+    everywhere and he
+    was with the
+    Guardiana force...
+    <wait><end>
 - index: 480
   character: Bazoo
   ja: |-
-    こうなれば・・・ このバズ-は
-    しにはしないぞ!ウォルドルさま!
-    このバズ-を すくいたまえーっ!
+    こうなれば・・・　このバズーは
+    しにはしないぞ！ウォルドルさま！
+    このバズーを　すくいたまえーっ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    If this is the case, I, Bazoo, cannot die here! Woldol, save me!
   en: |-
-    If this is the 
-    case, I, Bazoo, 
-    cannot die here! 
+    If this is the
+    case, I, Bazoo,
+    cannot die here!
     Woldol, save me!
     <wait><end>
-    
 - index: 481
   character: Bazoo
   ja: |-
-    ワハハハッ! 
-    <party leader>よ<line>サイプレスほんどで あおうぞ!<wait><end>
-  literal: ''
+    ワハハハッ！　<party leader>よ
+    サイプレスほんどで　あおうぞ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    fuhahaha Nick, we shall meet on Cypress mainland!
   en: |-
-    *laughs* 
+    Fuhahaha!
     <party leader>, we shall
-    meet on Cypress 
+    meet on Cypress
     mainland!
     <wait><end>
-
 - index: 482
   character: Lowe
   ja: |-
-    ・・・
-    <party leader>・・・あれは<line>バズーのいったことばのいみは<line>いったい どういうことです!<wait><end>
-  literal: ''
+    ・・・<party leader>・・・あれは
+    バズーのいったことばのいみは
+    いったい　どういうことです！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    … Nick… What the heck did Bazoo mean by that!?
   en: |-
-    ... <party leader>...
-    What the heck did 
-    Bazoo mean by 
+    ...<party leader>...
+    What the heck did
+    Bazoo mean by
     that!?
     <wait><end>
-    
 - index: 483
   character: Yeesha
   ja: |-
-    バズーが とおざかったことで
+    バズーが　とおざかったことで
     けっかいのちからがよわまって
     にげだしてくることができました
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    With Bazoo away, the barrier’s power has faded and I could escape.
   en: |-
-    I am Yeesha the 
-    mage. With Bazoo 
-    away, the 
-    barrier’s power 
-    has faded and I 
-    could escape. 
+    With Bazoo away,
+    the barrier’s
+    power has faded
+    and I could
+    escape.
     <wait more><end>
-
 - index: 484
   character: Yeesha
   ja: |-
-    わたしも つれていってください
-    きっと おやくにたちます
+    わたしも　つれていってください
+    きっと　おやくにたちます
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Please take me with you, I’ll surely be of use to you.
   en: |-
-    Please take me 
-    with you, I’ll 
-    surely be of use 
+    Please take me
+    with you, I’ll
+    surely be of use
     to you.
     <wait><end>
-
 - index: 485
   character: Yeesha
   ja: |-
-    おや? もしや あなたは・・・
-    ひょっとして 
-    <party leader>さま?<line><party leader>さまでは ありませんか!<wait><end>
-  literal: ''
+    おや？　もしや　あなたは・・・
+    ひょっとして　<party leader>さま？
+    <party leader>さまでは　ありませんか！<wait><end>
+  ja-kanji: |
+  literal: |-
+    Oh? Are you by any chance… Nick maybe? You are Nick indeed!
   en: |-
-    Oh? Are you by any 
+    Oh? Are you by any
     chance... <party leader>
-    maybe? You are 
+    maybe? You are
     <party leader> indeed!
     <wait><end>
-    
 - index: 486
   character: Lowe
   ja: |-
-    <name> そなたはしっているのか?<line><party leader>が だれなのかを!<wait><end>
-  literal: ''
+    <name>　そなたはしっているのか？
+    <party leader>が　だれなのかを！<wait><end>
+  ja-kanji: |
+  literal: |-
+    Yeesha, do you know him? You know who Nick is!?
   en: |-
-    <name>, do you 
-    know him? You know 
+    <name>, do you
+    know him? You know
     who <party leader> is!?
     <wait><end>
-
 - index: 487
   character: Yeesha
   ja: |-
-    もちろん わすれるものですか!
-    <party leader>さまは わたしのつかえた<line>サイプレスのおうじなのですから!<wait><end>
-  literal: ''
+    もちろん　わすれるものですか！
+    <party leader>さまは　わたしのつかえた
+    サイプレスのおうじなのですから！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Of course, how could I forget! I served Nick, the prince of Cypress!
   en: |-
-    Of course, how 
-    could I forget! I 
-    served <party leader>, 
-    the prince of 
+    Of course, how
+    could I forget! I
+    served <party leader>,
+    the prince of
     Cypress!
     <wait><end>
-
 - index: 488
-  character: Narrator
+  character: Narration
   ja: |-
     サイプレスおうじのみぶんを
-    かくしていた 
-    <party leader><line>それは しょうげきだった!<wait more><end>
-  literal: ''
-  en: |-
-    <party leader> was 
-    hiding his 
-    identity of being 
-    the prince of 
-    Cypress! 
-    What a shocking 
-    revelation!
+    かくしていた　<party leader>
+    それは　しょうげきだった！
     <wait more><end>
-
+  ja-kanji: |
+  literal: |-
+    Nick was hiding his identity of being the prince of Cypress! What a shocking revelation!
+  en: |-
+    <party leader> was
+    hiding his
+    identity of being
+    the prince of
+    Cypress!
+    <wait more>
+    What a shocking revelation!
+    <wait more><end>
 - index: 489
-  character: Narrator
+  character: Narration
   ja: |-
-    いったい なぜ? どうして?
-    しかし 
-    <party leader>はかもくに<line>おおくをかたろうとしないのだった<wait more><end>
-  literal: ''
-  en: |-
-    Why on earth was 
-    he hiding it? But 
-    <party leader> remained 
-    silent to avoid 
-    speaking about the 
-    subject.
+    いったい　なぜ？　どうして？
+    しかし　<party leader>はかもくに
+    おおくをかたろうとしないのだった
     <wait more><end>
-
-- index: 490
-  character: Narrator
-  ja: |-
-    ぜんいんの ぎわくをつれて
-    いっこうは サイプレスほんど
-    けっせんのばへと むかった・・・
-    <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Why on earth was he hiding it? But Nick remained silent to avoid speaking about the subject.
   en: |-
-    The party 
-    proceeded to head 
-    towards the 
-    Cypress mainland, 
-    getting closer to 
-    their final 
-    battle. 
-    Together with 
-    their 
-    suspicions...
+    Why on earth was
+    he hiding it?
+    <wait more>
+    But <party leader>
+    remained silent to
+    avoid speaking
+    about the subject.
+    <wait more><end>
+- index: 490
+  character: Narration
+  ja: |-
+    ぜんいんの　ぎわくをつれて
+    いっこうは　サイプレスほんど
+    けっせんのばへと　むかった・・・
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    The party proceeded to head towards the Cypress mainland, towards their final battle. Together with their suspicions…
+  en: |-
+    The party
+    proceeded to head
+    towards the
+    Cypress mainland,
+    <wait more>
+    towards their
+    final battle.
+    Together with
+    their
+    suspicions…
     <wait><end>
 
 ######################
