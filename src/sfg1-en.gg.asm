@@ -257,3 +257,193 @@ ScriptIndex:
 .ends
 
 .include "names.asm"
+
+
+; Chapter titles
+; Routine at 46eb8..46f60, takes index (0..3) in a
+; Tile data at 46f61..47a04?, compressed
+; Tilemaps at 47a05..47d94, 228 bytes x 4 and 47d95..47da8
+; Palette at 47da9..47dc8
+; Blank space to end of bank is already cleared above
+; Total space is then 4424 bytes
+.unbackground $46eb8 $47dc8
+  ROMPosition $46eb8 1
+.section "Chapter titles" force
+ShowChapterTitle:
+  ; The function does a bunch of stuff that we replicate blindly...
+  push af
+  push bc
+  push de
+  push hl
+    push af
+      rst $30
+      .db $fd ; Stop music?
+      
+      call $3B ; ScreenOff
+
+      ld hl, 60 ; 1s
+      call $9CA ; Delay
+    pop af
+    push af
+      ; Look up the data
+      ld de, _TitlePointers
+      ld h, 0
+      and 3
+      ld l, a
+      ; 9 bytes per entry
+      add a, a
+      add a, a
+      add a, a
+      add a, l
+      ld l, a
+      add hl, de
+      
+      ; Load the data for tiles and tilemap
+      call _LoadData
+        
+      ld hl, 60 ; 1s
+      call $9CA ; Delay
+    pop af
+
+    ; If the high bit is set, load assets for "end"
+    bit 7,a
+    jr z,+
+
+    ld hl, _EndPointer
+    call _LoadData
+
+    ; Play a sound?
+    rst $30 ; _LABEL_30_SoundEngineControl
+.db $FE
+    rst $30 ; _LABEL_30_SoundEngineControl
+.db $0F
+  
++:  ; Load the palette
+    ld hl, _Palette
+    ld de, $a27c ; TargetPalette
+    ld bc, 32
+    ldir
+    
+    ; Set some flags, not sure what they are for
+    ld a, $FF
+    ld ($a27b), a
+    ld a, $04
+    ld ($a2c3), a
+    
+    call $3651 ; WaitForVBlank
+    
+    ld c, $04
+    call $79B ; FadeIn
+    
+    ld hl, 60*5 ; 5s
+    call $9CA ; Delay
+    
+    ld c, $04
+    call $73C ; FadeOut
+    call $3B  ; ScreenOff
+    call $940 ; ClearTilemap
+    
+    ; Restore palette - twice
+    ld hl, $125E ; DialoguePalette
+    ld de, $A27C ; TargetPalette
+    ld bc, 32
+    ldir
+    ld hl, $125E
+    ld bc, 32
+    ldir
+    
+    xor a
+    ld ($a2C3), a
+    ld a, $FF
+    ld ($a27B), a
+    
+    call $3651 ; WaitForVBlank
+    call $4E ; ScreenOn
+  pop hl
+  pop de
+  pop bc
+  pop af
+  ret
+  
+_decompress:
+  ; hl points to dest, src
+  ld e, (hl)
+  inc hl
+  ld d, (hl)
+  inc hl
+  ld a, (hl)
+  inc hl
+  push hl
+    ld h, (hl)
+    ld l, a
+    call zx7_decompress
+  pop hl
+  inc hl
+  ret
+  
+_LoadData:
+  di
+  ; Select bank
+  ld a, (hl)
+  inc hl
+  
+  push hl
+    ld hl, $fffc
+    res 3, (hl) ; enable ROM
+    ld ($ffff), a ; select bank
+  pop hl
+  
+  ; first pointer is the tile data
+  call _decompress
+  call _decompress
+
+  ld hl, $fffc
+  set 3, (hl) ; enable SRAM
+  ei
+  ret
+
+
+_TitlePointers:
+.db :Chapter1Tiles
+.dw $5400, Chapter1Tiles, $7800, Chapter1Tilemap
+.db :Chapter2Tiles
+.dw $5400, Chapter2Tiles, $7800, Chapter2Tilemap
+.db :Chapter3Tiles             
+.dw $5400, Chapter3Tiles, $7800, Chapter3Tilemap
+.db :Chapter4Tiles             
+.dw $5400, Chapter4Tiles, $7800, Chapter4Tilemap
+_EndPointer:
+.db :EndTiles
+.dw $6400, EndTiles, $7bc0, EndTilemap
+
+_Palette: .incbin "images\chapter1.png.palette.bin"
+.ends
+
+.slot 2
+.section "Chapter 1 data" superfree
+Chapter1Tiles:   .incbin "images\chapter1.png.tiles.zx7"
+Chapter1Tilemap: .incbin "images\chapter1.png.tilemap.zx7"
+.ends
+.section "Chapter 2 data" superfree
+Chapter2Tiles:   .incbin "images\chapter2.png.tiles.zx7"
+Chapter2Tilemap: .incbin "images\chapter2.png.tilemap.zx7"
+.ends
+.section "Chapter 3 data" superfree
+Chapter3Tiles:   .incbin "images\chapter3.png.tiles.zx7"
+Chapter3Tilemap: .incbin "images\chapter3.png.tilemap.zx7"
+.ends
+.section "Chapter 4 data" superfree
+Chapter4Tiles:   .incbin "images\chapter4.png.tiles.zx7"
+Chapter4Tilemap: .incbin "images\chapter4.png.tilemap.zx7"
+.ends
+.section "End text data" superfree
+EndTiles:        .incbin "images\end.png.tiles.zx7"
+EndTilemap:      .incbin "images\end.png.tilemap.zx7"
+.ends
+
+.bank 0 slot 0
+.section "ZX7 decompressor" free
+.define ZX7ToVRAM
+;.define ZX7ToVRAMScreenOn ; for interrupt safety
+.include "ZX7 decompressor.asm"
+.ends

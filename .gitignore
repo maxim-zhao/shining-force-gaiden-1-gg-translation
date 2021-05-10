@@ -16,3 +16,4 @@ linkfile
 /src/credentials.json
 /src/token.json
 *.bak
+*.zx7

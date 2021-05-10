@@ -806,7 +806,7 @@ _SRAM_21FB_ db
 
 .enum $A27B export
 _SRAM_227B_ db
-_SRAM_227C_ db
+_SRAM_227C_TargetPalette db
 _SRAM_227D_ db
 _SRAM_227E_ dw
 _SRAM_2280_ dsb $c
@@ -1139,8 +1139,8 @@ _LABEL_28_CallDE:
 ; Data from 2E to 2F (2 bytes)
 .db $00 $00
 
-_LABEL_30_:
-  jp _LABEL_369_Rst30
+_LABEL_30_SoundEngineControl:
+  jp _LABEL_369_Rst30_SoundEngineControl
 
 ; Data from 33 to 37 (5 bytes)
 .db $00 $00 $00 $00 $00
@@ -1576,36 +1576,38 @@ _DATA_357_:
 .db $FF $82 $FF $83 $FF $84 $FF $85 $FB $86 $00 $87 $00 $88 $00 $89
 .db $A7 $8A
 
-_LABEL_369_Rst30:
+_LABEL_369_Rst30_SoundEngineControl:
+  ; Register saving for optional args?
   ld (_RAM_D686_), de
   ld (_RAM_D688_), a
   ex (sp), hl
-  ld a, (hl)
+  ld a, (hl) ; Retrieve arg follwoing in code
   ld (_SRAM_23F6_), a
   inc hl
   ex (sp), hl
   ld a, (_RAM_FFFE_)
   push af
+    ; Page in bank 7
     ld a, $07
     ld (_RAM_FFFE_), a
+    ex de, hl ; save hl while we calculate
+      ld h, $40
+      ld l, $02
+      ld a, (hl) ; Look up pointer at $4002 = $400A = $1C00A which points to _LABEL_1C110_
+      inc hl
+      ld h, (hl)
+      ld l, a
     ex de, hl
-    ld h, $40
-    ld l, $02
-    ld a, (hl)
-    inc hl
-    ld h, (hl)
-    ld l, a
-    ex de, hl
-    ld a, (_SRAM_23F6_)
+    ld a, (_SRAM_23F6_) ; get arg in a
     push bc
       ld b, $00
       rst $28 ; _LABEL_28_CallDE
     pop bc
-    ld a, (_RAM_D688_)
-    ex (sp), hl
-    ld l, a
-    ld a, h
-    ld (_RAM_FFFE_), a
+    ld a, (_RAM_D688_) ; restore a
+    ex (sp), hl ; Get saved bank from stack (push af above)
+    ld l, a ; save a
+      ld a, h
+      ld (_RAM_FFFE_), a
     ld a, l
   pop hl
   ret
@@ -1843,7 +1845,7 @@ _LABEL_4B5_:
   ret
 
 _LABEL_51C_:
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   xor a
   out (Port_VDPAddress), a
   ld a, $C0
@@ -2186,11 +2188,11 @@ _LABEL_73C_FadeOut:
   add ix, de
   push ix
   pop de
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld bc, $0040
   ldir
   pop bc
-  ld iy, _SRAM_227C_
+  ld iy, _SRAM_227C_TargetPalette
   ld b, $20
   ld a, $80
 -:
@@ -2236,11 +2238,11 @@ _LABEL_79B_FadeIn:
   add ix, de
   push ix
   pop de
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld bc, $0040
   ldir
   pop bc
-  ld iy, _SRAM_227C_
+  ld iy, _SRAM_227C_TargetPalette
   ld b, $20
   xor a
 -:
@@ -3539,7 +3541,7 @@ _LABEL_E87_:
   ret
 
 _LABEL_EFA_ScrollMenuIn:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from EFB to EFB (1 bytes)
 .db $2A
 
@@ -3735,7 +3737,7 @@ _LABEL_FDF_:
     inc hl
     add a, a
     jr nc, +
-    call _LABEL_FFD_
+    call _LABEL_FFD_LoadTilemapRect
     jr ++
 +:  call _LABEL_10C1_
 ++:
@@ -3745,7 +3747,7 @@ _LABEL_FDF_:
   pop af
   ret
 
-_LABEL_FFD_:
+_LABEL_FFD_LoadTilemapRect:
   push af
   push bc
   push de
@@ -4176,11 +4178,11 @@ _LABEL_11E6_:
   ld de, $5400
   ld bc, $1400
   call _LABEL_305_CopyToVRAM
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   ld hl, _RAM_D676_
@@ -4232,7 +4234,7 @@ _DATA_122A_:
   ret
 
 ; Data from 125E to 127D (32 bytes)
-_DATA_125E_:
+_DATA_125E_DialoguePalette:
 .db $00 $00 $EE $0E $00 $00 $CE $0A $64 $0C $8C $06 $B5 $06 $0A $05
 .db $C6 $08 $62 $06 $84 $0E $66 $06 $CE $0A $8C $04 $CE $06 $00 $0A
 
@@ -5657,7 +5659,7 @@ _LABEL_1C1A_:
   jr z, +
   push bc
   push de
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld de, _SRAM_229C_
   ld bc, $0020
   ldir
@@ -7013,7 +7015,7 @@ _DATA_2685_:
 _LABEL_273D_:
   call _LABEL_3B_ScreenOff
   call _LABEL_91D_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 2744 to 2744 (1 bytes)
 .db $FE
 
@@ -7065,11 +7067,11 @@ _LABEL_275D_:
   ld hl, _RAM_FFFC_
   set 3, (hl)
   pop hl
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   ret
@@ -9018,7 +9020,7 @@ _LABEL_4061_:
   ld a, (_SRAM_26B5_)
   or a
   jr z, +
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 40E7 to 40E7 (1 bytes)
 .db $2C
 
@@ -9095,7 +9097,7 @@ _LABEL_414C_:
   ld a, (_SRAM_26B5_)
   or a
   jr z, +
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 4169 to 4169 (1 bytes)
 .db $2C
 
@@ -9843,7 +9845,7 @@ _LABEL_4629_:
 
   jr nc, +
   ld hl, $4651
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 464A to 464A (1 bytes)
 .db $11
 
@@ -9866,7 +9868,7 @@ _DATA_4651_:
 
   jr nc, ++
   ld hl, $468E
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 4672 to 4672 (1 bytes)
 .db $11
 
@@ -9906,7 +9908,7 @@ _DATA_468E_:
 
   jr nc, +
   ld hl, _DATA_4651_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 46B3 to 46B3 (1 bytes)
 .db $11
 
@@ -9925,7 +9927,7 @@ _DATA_468E_:
 
   jr nc, ++
   ld hl, _DATA_468E_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 46CE to 46CE (1 bytes)
 .db $11
 
@@ -9977,7 +9979,7 @@ _LABEL_46F6_:
   bit 6, (hl)
   jr z, _LABEL_4727_
   ld hl, $4651
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 4720 to 4720 (1 bytes)
 .db $11
 
@@ -10072,7 +10074,7 @@ _LABEL_4768_:
   bit 6, (hl)
   jr z, +
   ld hl, $4651
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 47B0 to 47B0 (1 bytes)
 .db $11
 
@@ -10141,7 +10143,7 @@ _LABEL_47EB_:
   bit 6, (hl)
   jr z, +
   ld hl, $4651
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 4812 to 4812 (1 bytes)
 .db $11
 
@@ -10245,7 +10247,7 @@ _LABEL_487F_:
 ; Data from 48A8 to 48A9 (2 bytes)
 .db $34 $04
 
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 48AB to 48AB (1 bytes)
 .db $10
 
@@ -10306,7 +10308,7 @@ _LABEL_487F_:
 
   pop hl
   pop af
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 48F0 to 48F0 (1 bytes)
 .db $0C
 
@@ -10361,7 +10363,7 @@ _LABEL_491E_:
 ; Data from 4928 to 4929 (2 bytes)
 .db $34 $04
 
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 492B to 492B (1 bytes)
 .db $10
 
@@ -10422,7 +10424,7 @@ _LABEL_491E_:
 
   pop hl
   pop af
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 4970 to 4970 (1 bytes)
 .db $0C
 
@@ -10481,7 +10483,7 @@ _LABEL_499E_:
 .db $BC $04
 
   jr c, +
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 49B5 to 49B5 (1 bytes)
 .db $10
 
@@ -11262,7 +11264,7 @@ _LABEL_4DAD_:
 .db $08 $04
 
   call _LABEL_6DD2_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 4E6D to 4E6D (1 bytes)
 .db $FD
 
@@ -11899,18 +11901,18 @@ _LABEL_52D4_:
   pop af
   ld hl, $001E
   call _LABEL_9CA_wait
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 5318 to 5318 (1 bytes)
 .db $2B
 
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld de, _SRAM_229C_
   ld bc, $0020
   ldir
   ld c, $0A
 --:
   ld b, $10
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
 -:
   ld (hl), $FF
   inc hl
@@ -11923,7 +11925,7 @@ _LABEL_52D4_:
   call _LABEL_9CA_wait
   push bc
   ld hl, _SRAM_229C_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
   pop bc
@@ -11969,7 +11971,7 @@ _LABEL_5361_:
 
   pop hl
   pop af
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 538C to 538C (1 bytes)
 .db $2B
 
@@ -12124,7 +12126,7 @@ _LABEL_548B_:
   or a
   jr z, +
 _LABEL_5491_:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 5492 to 5492 (1 bytes)
 .db $07
 
@@ -12623,11 +12625,11 @@ _LABEL_56C1_:
   ld (hl), $00
   ld bc, $057F
   ldir
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   ld a, $FF
@@ -12924,7 +12926,7 @@ _LABEL_591D_:
   res 2, e
   dec d
   jr nz, --
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 5934 to 5934 (1 bytes)
 .db $30
 
@@ -14426,7 +14428,7 @@ _LABEL_5F35_:
   ld h, $03
   call _LABEL_3976_
   call _LABEL_390D_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 5F6F to 5F6F (1 bytes)
 .db $52
 
@@ -14703,7 +14705,7 @@ _LABEL_60EE_:
   push bc
   push de
   push hl
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld de, _SRAM_229C_
   ld bc, $0020
   ldir
@@ -15293,7 +15295,7 @@ _LABEL_63B8_:
   call _LABEL_3B_ScreenOff
   call _LABEL_940_ClearTilemap
   ld hl, _DATA_67A0_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
   ld hl, _DATA_67A0_
@@ -15503,7 +15505,7 @@ _LABEL_6571_:
   ld a, (_SRAM_22C7_)
   or a
   jr nz, +
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 65C4 to 65C4 (1 bytes)
 .db $44
 
@@ -15625,7 +15627,7 @@ _LABEL_6651_:
   ld a, (_SRAM_22C7_)
   or a
   jr nz, ++
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 66AE to 66AE (1 bytes)
 .db $47
 
@@ -15662,7 +15664,7 @@ _LABEL_66E0_:
   ld a, (ix+1)
   cp $0A
   ret c
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 66FE to 66FE (1 bytes)
 .db $2B
 
@@ -15686,7 +15688,7 @@ _LABEL_670F_:
   ld a, (ix+1)
   cp $0A
   ret c
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 6727 to 6727 (1 bytes)
 .db $2B
 
@@ -15889,7 +15891,7 @@ _LABEL_682D_:
 
   dec a
   jp p, -
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 68A1 to 68A1 (1 bytes)
 .db $02
 
@@ -15936,7 +15938,7 @@ _LABEL_68CC_:
 ; Data from 68CF to 68D0 (2 bytes)
 .db $08 $04
 
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 68D2 to 68D2 (1 bytes)
 .db $05
 
@@ -15957,11 +15959,11 @@ _LABEL_68CC_:
   ld (hl), $00
   ld bc, $057F
   ldir
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   ld a, $FF
@@ -16030,7 +16032,7 @@ _LABEL_6958_:
 ; Data from 695B to 695C (2 bytes)
 .db $0A $04
 
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 695E to 695E (1 bytes)
 .db $05
 
@@ -16045,11 +16047,11 @@ _LABEL_6958_:
 ; Data from 696C to 696D (2 bytes)
 .db $0C $04
 
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   rst $18 ; _LABEL_18_CallBankedFunction
@@ -16094,7 +16096,7 @@ _LABEL_6958_:
 ++:
   xor a
 -:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 69BA to 69BA (1 bytes)
 .db $05
 
@@ -16332,7 +16334,7 @@ _LABEL_6AA5_:
   ld (hl), $00
   ld bc, $057F
   ldir
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 6AC1 to 6AC1 (1 bytes)
 .db $02
 
@@ -16561,7 +16563,7 @@ _LABEL_6BEA_:
 
   pop hl
 ++:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 6C04 to 6C04 (1 bytes)
 .db $FD
 
@@ -16581,11 +16583,11 @@ _LABEL_6BEA_:
   ld (hl), $00
   ld bc, $057F
   ldir
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   ld a, $FF
@@ -16738,7 +16740,7 @@ _LABEL_6E2F_:
   jr z, _LABEL_6E8C_
   xor a
   ld (_SRAM_26B1_), a
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 6E60 to 6E60 (1 bytes)
 .db $0B
 
@@ -16973,13 +16975,13 @@ _LABEL_6FA6_:
   ld (hl), $00
   ld bc, $057F
   ldir
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
   ld hl, $0078
   call _LABEL_9CA_wait
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 6FD1 to 6FD1 (1 bytes)
 .db $02
 
@@ -17027,7 +17029,7 @@ _LABEL_6FA6_:
 
   ld hl, $3840
   call _LABEL_9CA_wait
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 701D to 701D (1 bytes)
 .db $FD
 
@@ -17656,7 +17658,7 @@ _LABEL_76C6_:
   ld bc, $057F
   ldir
   ld hl, _DATA_77A8_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
   ld a, $FF
@@ -17673,13 +17675,13 @@ _LABEL_76C6_:
   ld hl, $7788
   ld de, $040E
   ld bc, $0B01
-  call _LABEL_FFD_
+  call _LABEL_FFD_LoadTilemapRect
   ld hl, $779E
   ld de, _DATA_710_
   ld bc, $0501
-  call _LABEL_FFD_
+  call _LABEL_FFD_LoadTilemapRect
   call _LABEL_3651_WaitForVBlank
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 771C to 771C (1 bytes)
 .db $0A
 
@@ -17690,7 +17692,7 @@ _LABEL_76C6_:
   ld hl, $7764
   ld de, $010B
   ld bc, $1201
-  call _LABEL_FFD_
+  call _LABEL_FFD_LoadTilemapRect
   ld b, $0F
 -:
   call _LABEL_3651_WaitForVBlank
@@ -17748,7 +17750,7 @@ _LABEL_77C8_:
   ld bc, $057F
   ldir
   ld hl, _DATA_7E8E_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
   ld a, $FF
@@ -18045,7 +18047,7 @@ _LABEL_7EAE_:
   cp $81
   ret nz
   ld hl, _DATA_7F34_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
   ld c, $08
@@ -18110,7 +18112,7 @@ _LABEL_7EAE_:
   jr --
 
 ++++:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 7F1B to 7F1B (1 bytes)
 .db $FD
 
@@ -19520,7 +19522,7 @@ _DATA_882F_:
 .db $8E $04
 
   call _LABEL_8691_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 887B to 887B (1 bytes)
 .db $0F
 
@@ -19652,7 +19654,7 @@ _LABEL_88BC_:
 .db $30 $04
 
   call _LABEL_8691_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8936 to 8936 (1 bytes)
 .db $0E
 
@@ -19943,7 +19945,7 @@ _DATA_8A7F_:
 .db $EA $04
 
   call _LABEL_8691_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8A9F to 8A9F (1 bytes)
 .db $0E
 
@@ -20132,7 +20134,7 @@ _LABEL_8B06_:
   push de
   push af
   call _LABEL_91B1_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8BA5 to 8BA5 (1 bytes)
 .db $10
 
@@ -20230,7 +20232,7 @@ _LABEL_8C19_:
   call _LABEL_9D8A_
   cp $FF
   jp z, _LABEL_8CDC_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8C31 to 8C31 (1 bytes)
 .db $29
 
@@ -20527,7 +20529,7 @@ _LABEL_8DAD_:
   bit 6, (hl)
   jr z, _LABEL_8E1E_
   call _LABEL_864C_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8E07 to 8E07 (1 bytes)
 .db $11
 
@@ -20621,7 +20623,7 @@ _LABEL_8E1E_:
   bit 6, (hl)
   jr z, +
   call _LABEL_864C_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8E9D to 8E9D (1 bytes)
 .db $11
 
@@ -20757,7 +20759,7 @@ _LABEL_8F29_:
 
   jr nc, +
   call _LABEL_864C_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8F76 to 8F76 (1 bytes)
 .db $11
 
@@ -20786,7 +20788,7 @@ _LABEL_8F29_:
 
   jr nc, ++
   call _LABEL_864C_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8F99 to 8F99 (1 bytes)
 .db $11
 
@@ -20823,7 +20825,7 @@ _LABEL_8F29_:
 
   jr nc, +
   call _LABEL_864C_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8FCF to 8FCF (1 bytes)
 .db $11
 
@@ -20852,7 +20854,7 @@ _LABEL_8F29_:
 
   jr nc, ++
   call _LABEL_864C_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 8FF2 to 8FF2 (1 bytes)
 .db $11
 
@@ -20948,7 +20950,7 @@ _LABEL_9024_:
   bit 6, (hl)
   jr z, +
   call _LABEL_864C_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 907F to 907F (1 bytes)
 .db $11
 
@@ -21076,7 +21078,7 @@ _LABEL_9117_:
 ; Data from 9136 to 9137 (2 bytes)
 .db $1E $01
 
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9139 to 9139 (1 bytes)
 .db $0D
 
@@ -21113,7 +21115,7 @@ _LABEL_9117_:
 ; Data from 9169 to 916A (2 bytes)
 .db $04 $08
 
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 916C to 916C (1 bytes)
 .db $FD
 
@@ -21558,7 +21560,7 @@ _LABEL_9352_:
   ld hl, (_RAM_C104_)
   call _LABEL_FDF_
   pop hl
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 93DB to 93DB (1 bytes)
 .db $28
 
@@ -21626,7 +21628,7 @@ _LABEL_9422_:
   ld l, $01
   ld c, $02
   call _LABEL_BE49_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9432 to 9432 (1 bytes)
 .db $28
 
@@ -21666,7 +21668,7 @@ _LABEL_9436_:
   ld hl, (_RAM_C104_)
   call _LABEL_FDF_
   pop hl
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 947B to 947B (1 bytes)
 .db $28
 
@@ -21757,7 +21759,7 @@ _LABEL_9492_:
 +:
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_A77F_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 94FB to 94FB (1 bytes)
 .db $28
 
@@ -21885,7 +21887,7 @@ _LABEL_9530_:
   ld hl, (_RAM_C100_)
   call _LABEL_FDF_
   pop hl
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 95C1 to 95C1 (1 bytes)
 .db $28
 
@@ -22027,7 +22029,7 @@ _LABEL_9610_:
   ld hl, (_RAM_C100_)
   call _LABEL_FDF_
   pop hl
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 96A1 to 96A1 (1 bytes)
 .db $28
 
@@ -22158,7 +22160,7 @@ _LABEL_9725_:
   call _LABEL_FDF_
   pop hl
   ld c, b
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9768 to 9768 (1 bytes)
 .db $28
 
@@ -22167,7 +22169,7 @@ _LABEL_9725_:
 ++:
   pop af
   ld a, b
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld de, _SRAM_229C_
   ld bc, $0020
   ldir
@@ -22237,7 +22239,7 @@ _LABEL_9792_:
 ++:
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_A9CC_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 97E8 to 97E8 (1 bytes)
 .db $28
 
@@ -22390,7 +22392,7 @@ _LABEL_9875_:
   ld hl, (_RAM_C000_)
   call _LABEL_FDF_
   pop hl
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 98C2 to 98C2 (1 bytes)
 .db $28
 
@@ -22670,7 +22672,7 @@ _LABEL_9A43_:
   rra
   rra
 ++:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9A6E to 9A6E (1 bytes)
 .db $28
 
@@ -22798,7 +22800,7 @@ _LABEL_9AD0_:
   ld hl, (_RAM_C000_)
   call _LABEL_FDF_
   pop hl
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9B41 to 9B41 (1 bytes)
 .db $28
 
@@ -23037,7 +23039,7 @@ _LABEL_9C5B_:
   call _LABEL_FDF_
   pop hl
   call _LABEL_B2A5_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9CBC to 9CBC (1 bytes)
 .db $28
 
@@ -23142,7 +23144,7 @@ _LABEL_9D0C_:
   call _LABEL_FDF_
   pop hl
   call _LABEL_B360_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9D67 to 9D67 (1 bytes)
 .db $28
 
@@ -23248,7 +23250,7 @@ _LABEL_9DC5_:
   call _LABEL_FDF_
   pop hl
   call _LABEL_B3EB_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9E1D to 9E1D (1 bytes)
 .db $28
 
@@ -23373,7 +23375,7 @@ _LABEL_9E86_:
 ++:
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_B5DD_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9EDF to 9EDF (1 bytes)
 .db $28
 
@@ -23450,7 +23452,7 @@ _LABEL_9F00_:
 ++:
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_B688_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 9F59 to 9F59 (1 bytes)
 .db $28
 
@@ -23616,7 +23618,7 @@ _LABEL_9FDE_:
   call _LABEL_FDF_
   pop hl
   call _LABEL_B84C_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from A04D to A04D (1 bytes)
 .db $28
 
@@ -23698,7 +23700,7 @@ _LABEL_A06B_ShowMenu:
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_B947_
   call _LABEL_B929_MainMenuCursorWidthSelector
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from A0CF to A0CF (1 bytes)
 .db $28
 
@@ -23777,7 +23779,7 @@ _LABEL_A0EE_:
 ++:
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_BA03_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from A14A to A14A (1 bytes)
 .db $28
 
@@ -23864,7 +23866,7 @@ _LABEL_A170_:
 ++:
   call _LABEL_BE78_HandleIncDecWithLimits
   call _LABEL_BA03_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from A1CF to A1CF (1 bytes)
 .db $28
 
@@ -24016,7 +24018,7 @@ _UD:
 +++:
     call _LABEL_BD79_DrawCursor
     call _LABEL_BD3B_CalculateNextCharPosition
-    rst $30 ; _LABEL_30_
+    rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from A2A9 to A2A9 (1 bytes)
 .db $28
 
@@ -24036,7 +24038,7 @@ _Button2:
     ; fall through
 
 +:
-    rst $30 ; _LABEL_30_
+    rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from A2B9 to A2B9 (1 bytes)
 .db $29
 
@@ -29448,7 +29450,7 @@ _LABEL_C2B2_:
   inc h
   res 2, h
   djnz -
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from C2DE to C2DE (1 bytes)
 .db $30
 
@@ -29662,7 +29664,7 @@ _LABEL_C3D5_:
   push hl
   ld a, $0F
 -:
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld de, _RAM_C000_
   ld bc, $0040
   ldir
@@ -29678,7 +29680,7 @@ _LABEL_C3D5_:
   ld hl, $0006
   call _LABEL_9CA_wait
   ld hl, _RAM_C000_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0040
   ldir
   ld hl, _SRAM_227B_
@@ -30234,11 +30236,11 @@ _LABEL_C693_:
   ld (hl), $00
   ld bc, $057F
   ldir
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   ld hl, _RAM_D676_
@@ -30588,7 +30590,7 @@ _LABEL_C876_:
   push bc
   push de
   push hl
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld de, _SRAM_2302_
   ld bc, $0020
   ldir
@@ -30614,7 +30616,7 @@ _LABEL_C89F_:
   push de
   push hl
   ld hl, _SRAM_2302_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
   ld hl, _SRAM_227B_
@@ -31031,11 +31033,11 @@ _LABEL_CAF4_:
   push bc
   push de
   push hl
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   ld hl, _RAM_D676_
@@ -31635,11 +31637,11 @@ _LABEL_CDFF_:
   ld (hl), $00
   ld bc, $057F
   ldir
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   ld a, $FF
@@ -47279,11 +47281,11 @@ _DATA_18004_:
   ld c, $08
   call _LABEL_73C_FadeOut
   call _LABEL_3B_ScreenOff
-  ld hl, _DATA_125E_
-  ld de, _SRAM_227C_
+  ld hl, _DATA_125E_DialoguePalette
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0020
   ldir
-  ld hl, _DATA_125E_
+  ld hl, _DATA_125E_DialoguePalette
   ld bc, $0020
   ldir
   pop de
@@ -47449,7 +47451,7 @@ _LABEL_1814A_:
   ld a, (_RAM_C6FB_)
   or a
   jr nz, +
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 18178 to 18178 (1 bytes)
 .db $04
 
@@ -47458,14 +47460,14 @@ _LABEL_1814A_:
 +:
   dec a
   jr nz, +
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 1817F to 1817F (1 bytes)
 .db $18
 
   jr ++
 
 +:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 18183 to 18183 (1 bytes)
 .db $19
 
@@ -47598,7 +47600,7 @@ _LABEL_182B3_:
 
 +:
   call _LABEL_19BF3_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 182CC to 182CC (1 bytes)
 .db $FD
 
@@ -47619,7 +47621,7 @@ _LABEL_182B3_:
   call _LABEL_11E6_
   xor a
   ld (_SRAM_21AD_), a
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 182F8 to 182F8 (1 bytes)
 .db $FC
 
@@ -47720,7 +47722,7 @@ _LABEL_182B3_:
   ld hl, (_RAM_C490_)
   call _LABEL_FDF_
   pop hl
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 183A5 to 183A5 (1 bytes)
 .db $46
 
@@ -48012,7 +48014,7 @@ _LABEL_184F1_:
   or a
   jr nz, ++
   ld hl, _RAM_C6B6_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0040
   ldir
   ld a, $FF
@@ -48021,7 +48023,7 @@ _LABEL_184F1_:
   jr ++
 
 +:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 18575 to 18575 (1 bytes)
 .db $2E
 
@@ -48045,7 +48047,7 @@ _LABEL_184F1_:
   ld sp, ix
   ld ix, $000C
   add ix, sp
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 18598 to 18598 (1 bytes)
 .db $31
 
@@ -48105,7 +48107,7 @@ _LABEL_18605_:
   ld sp, ix
   ld ix, $0040
   add ix, sp
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 18616 to 18616 (1 bytes)
 .db $31
 
@@ -48114,13 +48116,13 @@ _LABEL_18605_:
   ld hl, _RAM_FFC0_
   add hl, de
   ex de, hl
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld bc, $0040
   push de
   push de
   ldir
   pop ix
-  ld iy, _SRAM_227C_
+  ld iy, _SRAM_227C_TargetPalette
   ld a, $0A
   call +
   call _LABEL_18668_
@@ -48138,7 +48140,7 @@ _LABEL_18605_:
   ld (_SRAM_22C4_), a
   call _LABEL_3651_WaitForVBlank
   pop de
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld bc, $0040
   ldir
   push de
@@ -48338,7 +48340,7 @@ _LABEL_18712_:
   or a
   jr nz, ++
   ld hl, _RAM_C6B6_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $0040
   ldir
   ld a, $FF
@@ -48347,7 +48349,7 @@ _LABEL_18712_:
   jr ++
 
 +:
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 18796 to 18796 (1 bytes)
 .db $2E
 
@@ -49880,7 +49882,7 @@ _LABEL_19B7F_:
   ld l, a
   or h
   jr z, _LABEL_19BCE_
-  rst $30 ; _LABEL_30_
+  rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 19BA4 to 19BA4 (1 bytes)
 .db $2B
 
@@ -49888,11 +49890,11 @@ _LABEL_19B7F_:
   ld b, $0A
   ld a, $FF
 -:
-  ld (_SRAM_227C_), hl
+  ld (_SRAM_227C_TargetPalette), hl
   ld (_SRAM_229C_), hl
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
-  ld (_SRAM_227C_), de
+  ld (_SRAM_227C_TargetPalette), de
   ld (_SRAM_229C_), de
   ld (_SRAM_227B_), a
   call _LABEL_3651_WaitForVBlank
@@ -50903,12 +50905,11 @@ _DATA_1B680_:
 .BANK 7 SLOT 1
 .ORG $0000
 
-; Data from 1C000 to 1C001 (2 bytes)
-.db $4A $41
+.dw $414a
 
 ; Data from 1C002 to 1C009 (8 bytes)
 _DATA_1C002_:
-.db $0A $40 $10 $41 $8C $46 $A1 $46
+.dw +, _LABEL_1C110_, $468C $46A1
 
 +:
   push af
@@ -55686,14 +55687,14 @@ _LABEL_44222_:
   ld hl, $4E53
   ld de, $0001
   ld bc, $1408
-  call _LABEL_FFD_
+  call _LABEL_FFD_LoadTilemapRect
   ld a, (_SRAM_22C7_)
   or a
   jr z, +
   ld hl, $4F93
   ld de, $0D08
   ld bc, $0501
-  call _LABEL_FFD_
+  call _LABEL_FFD_LoadTilemapRect
 +:
   pop hl
   pop de
@@ -55722,7 +55723,7 @@ _LABEL_44F9D_:
   ld hl, $5E55
   ld de, $0002
   ld bc, $1408
-  call _LABEL_FFD_
+  call _LABEL_FFD_LoadTilemapRect
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
   ld (hl), $00
@@ -55743,7 +55744,7 @@ _LABEL_44F9D_:
   dec a
   jr nz, -
   ld hl, _DATA_45F95_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $001C
   ldir
   ld a, $FF
@@ -55810,7 +55811,7 @@ _LABEL_46015_:
   ld hl, $6B1D
   ld de, $0400
   ld bc, $0C11
-  call _LABEL_FFD_
+  call _LABEL_FFD_LoadTilemapRect
   ld hl, _SRAM_1C20_
   ld de, _SRAM_1C20_ + 1
   ld (hl), $00
@@ -55831,7 +55832,7 @@ _LABEL_46015_:
   dec a
   jr nz, -
   ld hl, _DATA_46CB5_
-  ld de, _SRAM_227C_
+  ld de, _SRAM_227C_TargetPalette
   ld bc, $001C
   ldir
   ld a, $FF
@@ -55910,7 +55911,7 @@ _LABEL_46D35_:
   ld hl, $C000
   ld de, $0002
   ld bc, $0702
-  call _LABEL_FFD_
+  call _LABEL_FFD_LoadTilemapRect
   ld ix, _DATA_46E98_
   ld iy, _SRAM_229C_
   ld b, $10
@@ -55960,13 +55961,14 @@ _DATA_46E7C_:
 _DATA_46E98_:
 .incbin "Shining Force Gaiden (JP)_DATA_46E98_.inc"
 
-_LABEL_46EB8_:
+_LABEL_46EB8_: ; Chapter title loader
+  ; a = index
   push af
   push bc
   push de
   push hl
     push af
-      rst $30 ; _LABEL_30_
+      rst $30 ; _LABEL_30_SoundEngineControl
 .db $FD
 
       call _LABEL_3B_ScreenOff
@@ -55985,58 +55987,66 @@ _LABEL_46EB8_:
       call _LABEL_9CA_wait
     pop af
     push af
-      ; Look up tilemap?
+      ; Look up tilemap from a = 0..3
       and $07
       ld hl, $00E4 ; 228 bytes = 19x6x2 tilemap area
       call _LABEL_552_Multiply
-      ld de, _DATA_47A05_ ; data
+      ld de, _DATA_47A05_ChapterTilemaps ; data
       add hl, de
-      ld de, $0004
-      ld bc, $1306
-      call _LABEL_FFD_
+      ld de, $0004 ; Location?
+      ld bc, $1306 ; W, H
+      call _LABEL_FFD_LoadTilemapRect
     pop af
     bit 7, a
     jr z, +
-    ld hl, _DATA_47D95_ ; Top row?
-    ld de, $070B
-    ld bc, $0502
-    call _LABEL_FFD_
-    rst $30 ; _LABEL_30_
+    ; If the high bit is set, draw "end" "おわり"
+    ld hl, _DATA_47D95_EndTilemap ; Extra tilemap
+    ld de, $070B ; Location?
+    ld bc, $0502 ; W, H
+    call _LABEL_FFD_LoadTilemapRect
+
+    rst $30 ; _LABEL_30_SoundEngineControl
 .db $FE
-    rst $30 ; _LABEL_30_
+    rst $30 ; _LABEL_30_SoundEngineControl
 .db $0F
   
 +:  
-    ld hl, _DATA_47DA9_
-    ld de, _SRAM_227C_
+    ld hl, _DATA_47DA9_ChapterTitlePalette
+    ld de, _SRAM_227C_TargetPalette
     ld bc, $0020
     ldir
+    
     ld a, $FF
     ld (_SRAM_227B_), a
     ld a, $04
     ld (_SRAM_22C3_), a
-    call _LABEL_3651_
+    
+    call _LABEL_3651_WaitForVBlank
+    
     ld c, $04
     call _LABEL_79B_FadeIn
+    
     ld hl, $012C
-    call _LABEL_9CA_
+    call _LABEL_9CA_Delay?
+    
     ld c, $04
     call _LABEL_73C_FadeOut
     call _LABEL_3B_ScreenOff
     call _LABEL_940_ClearTilemap
-    ld hl, _DATA_125E_
-    ld de, _SRAM_227C_
+    
+    ld hl, _DATA_125E_DialoguePalette
+    ld de, _SRAM_227C_TargetPalette
     ld bc, $0020
     ldir
-    ld hl, _DATA_125E_
+    ld hl, _DATA_125E_DialoguePalette
     ld bc, $0020
     ldir
     xor a
     ld (_SRAM_22C3_), a
     ld a, $FF
     ld (_SRAM_227B_), a
-    call _LABEL_3651_
-    call _LABEL_4E_
+    call _LABEL_3651_WaitForVBlank
+    call _LABEL_4E_ScreenOn
     pop hl
     pop de
     pop bc
@@ -56255,7 +56265,7 @@ _DATA_59400_:
   ld de, _SRAM_22B8_
   ld bc, $0004
   ldir
-  ld hl, _SRAM_227C_
+  ld hl, _SRAM_227C_TargetPalette
   ld de, _RAM_C6B6_
   ld bc, $0040
   ldir
