@@ -412,10 +412,10 @@ def dump_script(rom, output_file):
                 # - Change line breaks into newlines
                 s = s.replace("<line>", "\n")
                 # - Add newline before end tags
-                s = re.sub("((<[^>]+>)+)$", "\n\\1", s)                
+                s = re.sub("((<[^>]+>)+)$", "\n\\1", s)
                 # - Keep explicit newlines at start of text
                 s = re.sub("^\n", "<line>", s)
-                
+
                 script.append({
                     "index": entry_index,
                     "character": "",
@@ -456,12 +456,13 @@ class ScriptEntry:
 
         # Encode into a buffer
         self.buffer = english_to_bytes(s, False)
-        
+
     def __str__(self):
         hex_encoded = ' '.join('{:02x}'.format(x) for x in self.buffer)
-        encoded_form = ''.join(codes[x] if x in codes else en_character_map_script[x] for x in self.buffer)
-        return f"{self.text}\n{hex_encoded}\n{encoded_form}"
+        return f"{self.text}\n{hex_encoded}\n{self.encoded()}"
 
+    def encoded(self):
+        return ''.join(codes[x] if x in codes else en_character_map_script[x] for x in self.buffer)
 
 def encode_script(script_file, trees_file, data_file):
     # Read the file
@@ -483,18 +484,36 @@ def encode_script(script_file, trees_file, data_file):
                 raise Exception(f"No text for {node}")
             if len(text) == 0:
                 text = node["literal"]
-        
+
             # Check line lengths
-            # First substitute 8 chars for names
-            s = text.replace("<name>", "XXXXXXXX").replace("<party leader>", "XXXXXXXX")
-            lines = re.sub("<[^>]+>", "", s).replace("<line>", "\n").split("\n")
+            # First substitute names and line breaks
+            s = text
+            for k, v in {
+                ("<name>", "NAME---"),
+                ("<party leader>", "NAME---"),
+                ("<class name>", "CLASS-NAME------"),
+                ("<line>", "\n")}:
+                s = s.replace(k, v)
+            # Next remove tags and split
+            lines = re.sub("<[^>]+>", "", s).split("\n")
             for line in lines:
                 line = line.rstrip()
                 if len(line) > 18:
-                    print(f"Line too long ({len(line)}) in script entry {index}: \"{line}\"")
+                    raise Exception(f"Line too long ({len(line)}) in script entry {index}: \"{line}\"")
 
-        script.append(ScriptEntry(text, f"Script{index}"))
-
+        entry = ScriptEntry(text, f"Script{index}")
+        script.append(entry)
+        
+        # After this processing, we check for runs of over 5 lines...
+        s = entry.encoded()
+        for tag in ["<wait>", "<wait more>", "(<delay 01>)+"]:
+            s = re.sub(tag, "#", s)
+        # Then count line breaks in each part and report the ones that are too long
+        for chunk in s.replace("<line>", "\n").split("#"):
+            lines = len(chunk.strip().split("\n"))
+            if lines > 5:
+                raise Exception(f"Text is {lines} lines in script entry {index}:\n{chunk}")
+        
     # Then we build a table of byte counts
     script_symbols_count = 0
     symbol_counts = [0] * 256
@@ -860,7 +879,7 @@ def extract_row(row):
                 s += element['textRun']['content']
         result.append(s.strip())
     return result
-    
+
 
 def doctoyaml(output_file):
     print("Converting Google doc to YAML...")
@@ -891,7 +910,7 @@ def doctoyaml(output_file):
     for table in [x['table'] for x in elements if 'table' in x]:
         if table['columns'] < 6:
             continue
-        
+
         for row in [extract_row(x) for x in table['tableRows']]:
             try:
                 script.append(
@@ -928,7 +947,7 @@ def yamltohtml(script_file, html_file):
             f.write("<td class=mono>" + html.escape(x['en']).replace('\n', '<br>') + "</td>")
             f.write("</tr>")
         f.write("</table></body></html>")
-    
+
 
 def main():
     verb = sys.argv[1]

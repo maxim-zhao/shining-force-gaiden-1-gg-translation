@@ -3173,9 +3173,11 @@
   literal: |-
     That huge tower over there. One of the four of Woldol, the wizard Bazoo, protects it.
   en: |-
-    That huge tower
-    over there. One of
-    the four of
+    Do you see that 
+    huge tower over 
+    there?
+    <wait more>
+    One of the four of
     Woldol, the wizard
     Bazoo, protects
     it.
@@ -3193,6 +3195,7 @@
     Woldol and his
     four lieutenants
     are responsible
+    <wait more>
     for starting the
     uprising in
     Cypress.
@@ -3621,7 +3624,8 @@
     the prince of
     Cypress!
     <wait more>
-    What a shocking revelation!
+    What a shocking 
+    revelation!
     <wait more><end>
 - index: 489
   character: Narration
@@ -3681,6 +3685,7 @@
     The Guardiana 
     force headed 
     towards Cypress, 
+    <wait more>
     increasing their 
     military power on 
     the way.
@@ -3698,7 +3703,9 @@
     As they were 
     trying to 
     circumvent the 
-    harbor, they were 
+    harbor, 
+    <wait more>
+    they were 
     intercepted by the 
     Cypress fleet and 
     led to port.
@@ -3717,9 +3724,10 @@
     under martial law 
     and every ship had 
     to go through 
-    inspection. They 
-    were waiting in 
-    line.
+    inspection. 
+    <wait more>
+    They were waiting 
+    in line.
     <wait more><end>
 
 - index: 494
@@ -3749,6 +3757,7 @@
     from the evil 
     clutches of the 
     Guardiana force. 
+    <wait more>
     I’m a fisherman 
     from Astral 
     island.
@@ -3821,7 +3830,9 @@
     <wait><end>
   literal: ''
   en: |-
-    Hmmm, a human brat! State your business!
+    Hmmm, a human 
+    brat! State your 
+    business!
     <wait><end>
 
 - index: 502
@@ -3933,7 +3944,9 @@
     is up! Everyone, 
     throw down your 
     fisherman 
-    disguise! We must 
+    disguise! 
+    <wait more>
+    We must 
     open an escape 
     route!
     <wait><end>
@@ -3967,8 +3980,10 @@
     And you also 
     brought the 
     Guardiana force 
-    with you! Edmond 
-    panicked and fled! 
+    with you! 
+    <wait more>
+    Edmond panicked 
+    and fled! 
     *laughs*
     <wait more><end>
 
@@ -3980,7 +3995,9 @@
     <wait><end>
   literal: ''
   en: |-
-    Um... what’s wrong? Why are you so silent?
+    Um... what’s 
+    wrong? Why are you 
+    so silent?
     <wait><end>
 
 - index: 514
@@ -4049,8 +4066,9 @@
     Nonsense, the 
     prince traveled 
     falsifying his 
-    social status for 
-    the benefit of 
+    social status,
+    <wait more>
+    for the benefit of 
     Guardiana.
     <wait more><end>
 
@@ -4083,6 +4101,7 @@
     wanted to take 
     revenge as soon as 
     possible. 
+    <wait more>
     Please... believe 
     in the prince!
 
@@ -4098,6 +4117,7 @@
     I see... <party leader>, 
     apologies for 
     doubting you. 
+    <wait more>
     Let’s fight 
     together once 
     more!
@@ -4188,6 +4208,7 @@
     unfortunate... we 
     have no obstacles 
     to conceal us, 
+    <wait more>
     they will find us 
     immediately for 
     sure.
@@ -4271,7 +4292,9 @@
   literal: ''
   en: |-
     *laughs*
-    It’s you Teddy... 
+    It’s you,
+    <name>... 
+    <wait more>
     Don’t get all 
     worked up, this is 
     but my shadow. It 
@@ -4307,7 +4330,9 @@
     You are all 
     trapped like rats 
     in a bag. 
-    Everyone, trample them!
+    <wait more>
+    Everyone, trample 
+    them!
     <wait><end>
 
 - index: 536
@@ -4336,11 +4361,13 @@
   literal: ''
   en: |-
     Lord Woldol, leave 
-    it to us! Please 
-    enjoy the 
+    it to us! 
+    <wait more>
+    Please enjoy the 
     spectacle of 
     Prince <party leader>’s 
     demise!
+    <wait><end>
     
 ######################
 # Battle 12
