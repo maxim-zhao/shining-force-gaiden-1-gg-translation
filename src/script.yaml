@@ -1716,13 +1716,14 @@
 - index: 376
   character: Voice
   ja: |-
-    <party leader>! しっかりして!<line><party leader>! めをさまして・・・<wait more><end>
+    <party leader>! しっかりして!
+    <party leader>! めをさまして・・・<wait more><end>
   ja-kanji: |
   literal: |-
     Nick, come to your senses! Nick, open your eyes…
   en: |-
     <party leader>! Come to
-    your senses!<line>
+    your senses!
     <party leader>!
     Open your eyes…
     <wait more><end>
@@ -3708,7 +3709,7 @@
     they were
     intercepted by the
     Cypress fleet and
-    were escorted to 
+    were escorted to
     the port.
     <wait more><end>
 - index: 493
@@ -3888,7 +3889,7 @@
     I see... okay
     then... alright,
     you can pass!
-    Next, come 
+    Next, come
     forward!
     <wait><end>
 - index: 505
@@ -4156,7 +4157,7 @@
   literal: |-
     I see… Nick, apologies for doubting you. Let’s fight together once more!
   en: |-
-    I see... <party leader>, 
+    I see... <party leader>,
     apologies for
     doubting you.
     <wait more>
@@ -4429,120 +4430,196 @@
 ######################
 
 - index: 538
-  character: ''
+  character: Deadly Bone
   ja: |-
-    ぐふー・・・しっ しくじった・・・
+    ぐふー・・・しっ　しくじった・・・
     <wait more><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |-
+    *dying* I-I failed…
+  en: |-
+    I-I failed...
+    <wait more><end>
 - index: 539
-  character: ''
+  character: Deadly Bone
   ja: |-
-    ・・・だが おまえらにこのさきの
-    しのどうくつのきのこがやぶれるか?
+    ・・・だが　おまえらにこのさきの
+    しのどうくつのきのこがやぶれるか？
     <wait more><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |-
+    but can you overcome the mushrooms in the death cave that’s beyond?
+  en: |-
+    But can you
+    overcome the
+    mushrooms in the
+    death cave that’s
+    beyond?
+    <wait more><end>
 - index: 540
-  character: ''
+  character: Deadly Bone
   ja: |-
-    いや やぶれまい・・・あきらめろ
-    おまえらも おれとおなじになるのだ
+    いや　やぶれまい・・・あきらめろ
+    おまえらも　おれとおなじになるのだ
     <wait><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |-
+    No, I don’t think so… you should give up. You’ll end up just like me.
+  en: |-
+    No, I don’t think
+    so... you should
+    give up. You’ll
+    end up just like
+    me.
+    <wait><end>
 - index: 541
-  character: ''
+  character: Lowe
   ja: |-
-    なんと ふきつなことばでしょう
-    ・・・しかし まいりましょう
-    しのどうくつを ぬけるのです
+    なんと　ふきつなことばでしょう
+    ・・・しかし　まいりましょう
+    しのどうくつを　ぬけるのです
     <wait><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |-
+    Such sinister words… however, let’s press on and go through the death cave.
+  en: |-
+    Such sinister
+    words... however,
+    let’s press on and
+    go through the
+    death cave.
+    <wait><end>
 - index: 542
-  character: ''
+  character: Ghoul
   ja: |-
-    やってきたな! 
-    <party leader>おうじ!<wait more><end>
-  literal: ''
-  en: ''
-
-- index: 543
-  character: ''
-  ja: |-
-    ここは つうしょう しのどうくつ!
-    サイプレスのだれもが おそれる
-    じょうさいガンドールへむかうみちだ!
+    やってきたな！
+    <party leader>おうじ！<wait more><end>
+  ja-kanji: |
+  literal: |-
+    You’ve arrived, Prince Nick!
+  en: |-
+    You’ve arrived,
+    Prince <party leader>!
     <wait more><end>
-  literal: ''
-  en: ''
-
+- index: 543
+  character: Ghoul
+  ja: |-
+    ここは　つうしょう　しのどうくつ！
+    サイプレスのだれもが　おそれる
+    じょうさいガンドールへむかうみちだ！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    This place was dubbed as the death cave. Everyone in Cypress fears it. It is the route leading to the Citadel of Gundoll.
+  en: |-
+    This place was
+    dubbed as the
+    death cave.
+    Everyone in
+    Cypress fears it.
+    <wait more>
+    It is the route
+    leading to the
+    Citadel of
+    Gundoll.
+    <wait more><end>
 - index: 544
-  character: ''
+  character: Ghoul
   ja: |-
     ガーディアナのせんばつぶたいが
-    ここで いのちをおとしていったのだ
-    おまえらも そのみちづれとなれ!
+    ここで　いのちをおとしていったのだ
+    おまえらも　そのみちづれとなれ！
     <wait><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |-
+    The elite force from Guardiana got destroyed here. You are next
+  en: |-
+    The elite force
+    from Guardiana got
+    destroyed here.
+    You are next!
+    <wait><end>
 - index: 545
-  character: ''
+  character: Kashing
   ja: |-
-    みんな! とちゅうにわながあるぞ!
-    きのこだ! きのこが しかけられて
-    ガーディアナぐんも それにやられた
+    みんな！　とちゅうにわながあるぞ！
+    きのこだ！　きのこが　しかけられて
+    ガーディアナぐんも　それにやられた
     <wait><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |-
+    Everyone, there are traps midway! Mushrooms are set as traps, the Guardiana force got annihilated by those.
+  en: |-
+    Everyone, there
+    are traps midway!
+    <wait more>
+    Mushrooms are set
+    as traps, the
+    Guardiana force
+    got annihilated by
+    those.
+    <wait><end>
 - index: 546
-  character: ''
+  character: Ghoul
   ja: |-
-    きっ きさま! ガーディアナ!
-    よけいなことを! だまらんか!
+    きっ　きさま！　ガーディアナ！
+    よけいなことを！　だまらんか！
     <wait><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |-
+    Y-you, you are from Guardiana! You’ve talked enough, shut it!
+  en: |-
+    Y-you, you are
+    from Guardiana!
+    You’ve talked
+    enough, shut it!
+    <wait><end>
 - index: 547
-  character: ''
+  character: Lowe
   ja: |-
-    おお あれは きしの 
-    <name>!<line><party leader>! きをつけてください<line>なにか わながしかけられていますぞ<wait><end>
-  literal: ''
-  en: ''
+    おお　あれは　きしの　<name>！
+    <party leader>！　きをつけてください
+    なにか　わながしかけられていますぞ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Ah, that’s the knight Kashing! Nick, watch out for traps!
+  en: |-
+    Ah, that’s the
+    knight Kashing!
+    <party leader>, watch
+    out for traps!
+    <wait><end>
+    
+######################
+# Battle 13
+######################
 
 - index: 548
   character: ''
   ja: |-
     くっ・・・われらのわながやぶれた
     これもみな・・・ガーディアナの
-    きしのせい・・・むっ むねん
+    きしのせい・・・むっ　むねん
     <wait><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |
+  en: |
 - index: 549
   character: ''
   ja: |-
     うっ・・・うーん
     <wait><end>
-  literal: ''
-  en: ''
-
+  ja-kanji: |
+  literal: |
+  en: |
 - index: 550
   character: ''
   ja: |-
-    おお 
-    <name>が めざめた!<wait><end>
-  literal: ''
+    おお
+    <name>が　めざめた！<wait><end>
+  ja-kanji: |
+  literal: |
   en: ''
 
 - index: 551
@@ -4595,7 +4672,10 @@
 - index: 556
   character: ''
   ja: |-
-    <party leader> よろしいですな<line>ガーディアナのなかまたちを<line>たすけに いきましょう<wait><end>
+    <party leader> よろしいですな
+    ガーディアナのなかまたちを
+    たすけに いきましょう
+    <wait><end>
   literal: ''
   en: ''
 
@@ -4621,8 +4701,10 @@
 - index: 559
   character: ''
   ja: |-
-    いま ウォリア-の 
-    <name>どのが<line>ガンドールにむかっていますから<line>いっこくもはやく まいりましょう<wait><end>
+    いま ウォリア-の <name>どのが
+    ガンドールにむかっていますから
+    いっこくもはやく まいりましょう
+    <wait><end>
   literal: ''
   en: ''
 
@@ -4683,8 +4765,9 @@
 - index: 566
   character: ''
   ja: |-
-    おお! おぬしは 
-    <name>!<line>そんなにあわてて どうした?<wait><end>
+    おお! おぬしは <name>!
+    そんなにあわてて どうした?
+    <wait><end>
   literal: ''
   en: ''
 
@@ -4710,15 +4793,18 @@
   character: ''
   ja: |-
     なんと! それはたいへんだ!
-    <party leader>! いっこくもはやく<line>ガンドールのなかまをすくいましょう<wait><end>
+    <party leader>! いっこくもはやく
+    ガンドールのなかまをすくいましょう
+    <wait><end>
   literal: ''
   en: ''
 
 - index: 570
   character: ''
   ja: |-
-    グルル 
-    <party leader>おうじ<line>おひさしゅうございます<wait more><end>
+    グルル <party leader>おうじ
+    おひさしゅうございます
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -4800,7 +4886,8 @@
 - index: 579
   character: ''
   ja: |-
-    <party leader>おうじ! きをつけて<line>とてつもないわなが ありますぞ!<wait><end>
+    <party leader>おうじ! きをつけて
+    とてつもないわなが ありますぞ!<wait><end>
   literal: ''
   en: ''
 
@@ -4864,15 +4951,18 @@
   character: ''
   ja: |-
     ダントムよ! そなたのちからで
-    <party leader>おうじとガーディアナを<line>かならずや うちはたすのだ!<wait><end>
+    <party leader>おうじとガーディアナを
+    かならずや うちはたすのだ!<wait><end>
   literal: ''
   en: ''
 
 - index: 587
   character: ''
   ja: |-
-    きいたとおりだ <party leader>おうじ!<line>しかし このままたたかったのでは<line>ひきょうものに なってしまう・・・<wait
-    more><end>
+    きいたとおりだ <party leader>おうじ!
+    しかし このままたたかったのでは
+    ひきょうものに なってしまう・・・
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -4954,8 +5044,9 @@
 - index: 596
   character: ''
   ja: |-
-    おお バ-ドラーの 
-    <name>!<line>ほかのみんなは どうしたんだ<wait><end>
+    おお バ-ドラーの <name>!
+    ほかのみんなは どうしたんだ
+    <wait><end>
   literal: ''
   en: ''
 
@@ -5000,7 +5091,10 @@
 - index: 601
   character: ''
   ja: |-
-    <party leader>! まいりましょう!<line>この さんがくちたいをこえれば<line>まちにまったサイプレスのまちです<wait><end>
+    <party leader>! まいりましょう!
+    この さんがくちたいをこえれば
+    まちにまったサイプレスのまちです
+    <wait><end>
   literal: ''
   en: ''
 
@@ -5095,8 +5189,10 @@
 - index: 611
   character: ''
   ja: |-
-    <party leader>・・・このひとでなしめ<line>おまえのおじであり サイプレスの<line>おうであるわたしを たおしおったな<wait
-    more><end>
+    <party leader>・・・このひとでなしめ
+    おまえのおじであり サイプレスの
+    おうであるわたしを たおしおったな
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -5123,8 +5219,10 @@
 - index: 614
   character: ''
   ja: |-
-    おかえりなさい! 
-    <party leader>さま<line>まさか? この<name>のことを<line>おわすれでは ありますまいな!<wait more><end>
+    おかえりなさい! <party leader>さま
+    まさか? この<name>のことを
+    おわすれでは ありますまいな!
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -5223,8 +5321,9 @@
 - index: 625
   character: ''
   ja: |-
-    あらわれたか! 
-    <party leader>おうじ<line>まちすぎて アクビがとまらんよ<wait more><end>
+    あらわれたか! <party leader>おうじ
+    まちすぎて アクビがとまらんよ
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -5300,16 +5399,19 @@
   character: ''
   ja: |-
     そのこたえは しろのなかか・・・
-    さあ 
-    <party leader>! いきましょう<line>ウォルドルたちは しろのなかです<wait><end>
+    さあ <party leader>! いきましょう
+    ウォルドルたちは しろのなかです
+    <wait><end>
   literal: ''
   en: ''
 
 - index: 634
   character: ''
   ja: |-
-    グフグフ やってきたな
-    <party leader><line>ゲッペルまで たおすとはな・・・<line>おまえを あまくみすぎたようだ<wait more><end>
+    グフグフ やってきたな<party leader>
+    ゲッペルまで たおすとはな・・・
+    おまえを あまくみすぎたようだ
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -5346,7 +5448,8 @@
   character: ''
   ja: |-
     ホホホ-ッ そうはさせないわ
-    <party leader>をたおすのは わたし<line>バズーといえども ゆずれないよ<wait><end>
+    <party leader>をたおすのは わたし
+    バズーといえども ゆずれないよ<wait><end>
   literal: ''
   en: ''
 
@@ -5441,8 +5544,10 @@
 - index: 648
   character: ''
   ja: |-
-    やはりそうでした! 
-    <party leader>!<line>まじんが うごきだすまでのあいだに<line>どんなことをしてでも たおすのです<wait><end>
+    やはりそうでした! <party leader>!
+    まじんが うごきだすまでのあいだに
+    どんなことをしてでも たおすのです
+    <wait><end>
   literal: ''
   en: ''
 
@@ -5543,7 +5648,10 @@
 - index: 659
   character: ''
   ja: |-
-    <party leader>! はじゃのつるぎで<line>やつを こうげきしなければ<line>やつを たおすことができない!<wait more><end>
+    <party leader>! はじゃのつるぎで
+    やつを こうげきしなければ
+    やつを たおすことができない!
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -5581,7 +5689,9 @@
 - index: 664
   character: ''
   ja: |-
-    <clear screen><party leader>は<line>どくえきを みぎてにうけた<end>
+    <clear screen><party leader>は
+    どくえきを みぎてにうけた
+    <end>
   literal: ''
   en: ''
 
@@ -5615,8 +5725,9 @@
 - index: 668
   character: ''
   ja: |-
-    それにしても よかったな
-    <name>!<line>ラグたいちょうが いきててさ!<delay 01><delay 01><delay 01><delay 01><end>
+    それにしても よかったな<name>!
+    ラグたいちょうが いきててさ!
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
@@ -5641,7 +5752,10 @@
 - index: 671
   character: ''
   ja: |-
-    <name>・・・たくましくなったな<line>おそろしくつよいと ひょうばんの<line>ガーディアナぐんが おまえたちとは<delay 01><delay 01><delay 01><delay 01><end>
+    <name>・・・たくましくなったな
+    おそろしくつよいと ひょうばんの
+    ガーディアナぐんが おまえたちとは
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
@@ -5666,7 +5780,9 @@
   character: ''
   ja: |-
     ああっ なんと おうじのみぎてが!
-    <party leader>おうじの みっ みぎてが<line>いしになっている!<delay 01><delay 01><delay 01><delay 01><end>
+    <party leader>おうじの みっ みぎてが
+    いしになっている!
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
@@ -5692,15 +5808,19 @@
 - index: 677
   character: ''
   ja: |-
-    <party leader>よ! そなたのみぎうでは<line>つぎのときまで あずかっておくぞ<line>グハッ グハッ グハハハハーッ・・・<delay 01><delay 01><delay 01><delay 01><end>
+    <party leader>よ! そなたのみぎうでは
+    つぎのときまで あずかっておくぞ
+    グハッ グハッ グハハハハーッ・・・
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
 - index: 678
   character: ''
   ja: |-
-    こうして 
-    <party leader>らのおかげで<line>いちおうへいわを とりもどしました<delay 01><delay 01><delay 01><delay 01><end>
+    こうして <party leader>らのおかげで
+    いちおうへいわを とりもどしました
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
@@ -5717,8 +5837,9 @@
 - index: 680
   character: ''
   ja: |-
-    ・・・それにしても
-    <party leader>どのの<line>みぎうでが きがかりですね・・・<delay 01><delay 01><delay 01><delay 01><end>
+    ・・・それにしても<party leader>どのの
+    みぎうでが きがかりですね・・・
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
@@ -5762,8 +5883,9 @@
 - index: 685
   character: ''
   ja: |-
-    そうですとも!
-    <party leader>の みぎうでを<line>とりもどすためにね<delay 01><delay 01><delay 01><delay 01><end>
+    そうですとも!<party leader>の みぎうでを
+    とりもどすためにね
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
@@ -5796,14 +5918,19 @@
 - index: 689
   character: ''
   ja: |-
-    <clear screen>しかし そのころサイプレスでは<line>あらたなじけんのタネが<line>めばえようとしていた<delay 01><delay 01><delay 01><delay 01><end>
+    <clear screen>しかし そのころサイプレスでは
+    あらたなじけんのタネが
+    めばえようとしていた
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
 - index: 690
   character: ''
   ja: |-
-    <clear screen>じゃあくしん イ・オムのいしは<line>すでに うごきだしていたのだった<delay 01><delay 01><delay 01><delay 01><end>
+    <clear screen>じゃあくしん イ・オムのいしは
+    すでに うごきだしていたのだった
+    <delay 01><delay 01><delay 01><delay 01><end>
   literal: ''
   en: ''
 
@@ -6032,7 +6159,9 @@
 - index: 2
   character: ''
   ja: |-
-    <party leader> しゅつじんの<line>したくは いいですか?<delay 01><end>
+    <party leader> しゅつじんの
+    したくは いいですか?
+    <delay 01><end>
   literal: ''
   en: ''
 
@@ -6054,36 +6183,46 @@
 - index: 5
   character: ''
   ja: |-
-    では きをつけて
-    <delay 01><line>むりは きんもつですよ<wait><end>
+    では きをつけて<delay 01>
+    むりは きんもつですよ
+    <wait><end>
   literal: ''
   en: ''
 
 - index: 6
   character: ''
   ja: |-
-    <party leader> むりを しすぎましたね<line>ここは おちついて さくせんを<line>ねってみては どうですか?<delay 01><end>
+    <party leader> むりを しすぎましたね
+    ここは おちついて さくせんを
+    ねってみては どうですか?
+    <delay 01><end>
   literal: ''
   en: ''
 
 - index: 7
   character: ''
   ja: |-
-    <party leader> ときには<line>ひくことも かんじんです<line>じっくり さくせんを おねりなさい<delay 01><end>
+    <party leader> ときには
+    ひくことも かんじんです
+    じっくり さくせんを おねりなさい
+    <delay 01><end>
   literal: ''
   en: ''
 
 - index: 8
   character: ''
   ja: |-
-    <party leader> もどりましたね<line>しゅつじんのしたくは いいですか?<delay 01><end>
+    <party leader> もどりましたね
+    しゅつじんのしたくは いいですか?
+    <delay 01><end>
   literal: ''
   en: ''
 
 - index: 9
   character: ''
   ja: |-
-    <party leader> たたかいに<line>おもむくのですね?<end>
+    <party leader> たたかいに
+    おもむくのですね?<end>
   literal: ''
   en: ''
 
@@ -6098,35 +6237,44 @@
 - index: 11
   character: ''
   ja: |-
-    <name>にかわって <name>が<line>たたかいに のぞみます<wait more><end>
+    <name>にかわって <name>が
+    たたかいに のぞみます
+    <wait more><end>
   literal: ''
   en: ''
 
 - index: 12
   character: ''
   ja: |-
-    <party leader> ざんねんですが<line>こうたいできる なかまが いません<wait more><end>
+    <party leader> ざんねんですが
+    こうたいできる なかまが いません
+    <wait more><end>
   literal: ''
   en: ''
 
 - index: 13
   character: ''
   ja: |-
-    <name>は しんでいますが<line>それでも いいのですか?<end>
+    <name>は しんでいますが
+    それでも いいのですか?
+    <end>
   literal: ''
   en: ''
 
 - index: 14
   character: ''
   ja: |-
-    ほかにも こうたいさせますか?<end>
+    ほかにも こうたいさせますか?
+    <end>
   literal: ''
   en: ''
 
 - index: 15
   character: ''
   ja: |-
-    <name>がぬけて<line>どうしようというのです<wait more><end>
+    <name>がぬけて
+    どうしようというのです
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6141,14 +6289,18 @@
 - index: 17
   character: ''
   ja: |-
-    <item>を<line>だれに つかいますか?<delay 01><end>
+    <item>を
+    だれに つかいますか?
+    <delay 01><end>
   literal: ''
   en: ''
 
 - index: 18
   character: ''
   ja: |-
-    <party leader>! <delay 01><item>を<line>どうしようと いうのです!<wait more><end>
+    <party leader>! <delay 01><item>を
+    どうしようと いうのです!
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6170,14 +6322,18 @@
 - index: 21
   character: ''
   ja: |-
-    <item>を<line>だれに わたしすまか?<delay 01><end>
+    <item>を
+    だれに わたしすまか?
+    <delay 01><end>
   literal: ''
   en: ''
 
 - index: 22
   character: ''
   ja: |-
-    <party leader>! <item>は<line>のろいで はずれません!<wait more><end>
+    <party leader>! <item>は
+    のろいで はずれません!
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6206,8 +6362,9 @@
 - index: 26
   character: ''
   ja: |-
-    なんと! 
-    <name>が<line>のろわれて しまいました!<wait more><end>
+    なんと! <name>が
+    のろわれて しまいました!
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6229,7 +6386,10 @@
 - index: 29
   character: ''
   ja: |-
-    <party leader>! <item>は<line>すてないほうが いいと<line>おもいますよ<wait more><end>
+    <party leader>! <item>は
+    すてないほうが いいと
+    おもいますよ
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6243,21 +6403,27 @@
 - index: 31
   character: ''
   ja: |-
-    <party leader>! <name>は<line>なにも もっていませんよ<wait more><end>
+    <party leader>! <name>は
+    なにも もっていませんよ
+    <wait more><end>
   literal: ''
   en: ''
 
 - index: 32
   character: ''
   ja: |-
-    <item>を <name>に<line>わたしました<wait more><end>
+    <item>を <name>に
+    わたしました
+    <wait more><end>
   literal: ''
   en: ''
 
 - index: 33
   character: ''
   ja: |-
-    <item>を <name>の<line><item>と こうかんしました<wait more><end>
+    <item>を <name>の
+    <item>と こうかんしました
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6280,8 +6446,8 @@
 - index: 36
   character: ''
   ja: |-
-    ほんとうに 
-    <item>を<line>すてて いいのですか?<end>
+    ほんとうに <item>を
+    すてて いいのですか?<end>
   literal: ''
   en: ''
 
@@ -6302,8 +6468,9 @@
 - index: 39
   character: ''
   ja: |-
-    うーむ ざんねんですが 
-    <name>は<line>そうびできるものが ないようですね<wait more><end>
+    うーむ ざんねんですが <name>は
+    そうびできるものが ないようですね
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6312,8 +6479,8 @@
   ja: |-
     まよえる こひつじよ!
     よくぞ わがきょうかいに
-    まいられた<wait more>かみとひかりのなにおいて そなたの<line>のぞみを
-    かなえて しんぜよう!
+    まいられた<wait more>かみとひかりのなにおいて そなたの
+    のぞみをかなえて しんぜよう!
     <delay 01><end>
   literal: ''
   en: ''
@@ -6380,8 +6547,8 @@
 - index: 48
   character: ''
   ja: |-
-    それでは 
-    <party leader> あなたがたを<line>しらべて あげましょう<wait more><end>
+    それでは <party leader> あなたがたを
+    しらべて あげましょう<wait more><end>
   literal: ''
   en: ''
 
@@ -6406,16 +6573,18 @@
 - index: 51
   character: ''
   ja: |-
-    おおっ なんと 
-    <name>は<line>どくにおかされているではないですか!<wait more><line><end>
+    おおっ なんと <name>は
+    どくにおかされているではないですか!
+    <wait more><line><end>
   literal: ''
   en: ''
 
 - index: 52
   character: ''
   ja: |-
-    おおっ なんと 
-    <name>は<line>のろわれているではないですか!<wait more><line><end>
+    おおっ なんと <name>は
+    のろわれているではないですか!
+    <wait more><line><end>
   literal: ''
   en: ''
 
@@ -6423,8 +6592,8 @@
   character: ''
   ja: |-
     ちりょうして あげましょう
-    きんか
-    <number>まいに なりますが<line>よろしいですか?<end>
+    きんか<number>まいに なりますが
+    よろしいですか?<end>
   literal: ''
   en: ''
 
@@ -6450,14 +6619,18 @@
 - index: 56
   character: ''
   ja: |-
-    <name>の どくは<line>すべて きえさりました<wait more><end>
+    <name>の どくは
+    すべて きえさりました
+    <wait more><end>
   literal: ''
   en: ''
 
 - index: 57
   character: ''
   ja: |-
-    <name>の のろいは<line>すべて とけました<wait more><end>
+    <name>の のろいは
+    すべて とけました
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6472,8 +6645,9 @@
 - index: 59
   character: ''
   ja: |-
-    なんと 
-    <name>が<line>しんでいる ではないですか!<wait more><line><end>
+    なんと <name>が
+    しんでいる ではないですか!
+    <wait more><line><end>
   literal: ''
   en: ''
 
@@ -6481,15 +6655,17 @@
   character: ''
   ja: |-
     たましいを よびもどしてあげましょう
-    きんか
-    <number>まいに なりますが<line>よろしいですか?<end>
+    きんか<number>まいに なりますが
+    よろしいですか?<end>
   literal: ''
   en: ''
 
 - index: 61
   character: ''
   ja: |-
-    <name>は<line>みごとに ふっかつしました!<wait more><end>
+    <name>は
+    みごとに ふっかつしました!
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6524,37 +6700,48 @@
   character: ''
   ja: |-
     うーむ
-    <delay 01> <name>は<line>まだ しゅぎょうが たりませんねえ<wait more><end>
+    <delay 01> <name>は
+    まだ しゅぎょうが たりませんねえ
+    <wait more><end>
   literal: ''
   en: ''
 
 - index: 66
   character: ''
   ja: |-
-    わかりました 
-    <name>が<line>てんしょくするのですね<end>
+    わかりました <name>が
+    てんしょくするのですね
+    <end>
   literal: ''
   en: ''
 
 - index: 67
   character: ''
   ja: |-
-    おほん<delay 01> では・・・<line><delay 01>かみと ひかりの なにおいて・・・<line><delay 01><class name>・<name>は・・・<line><wait more><class name>と なるがよい!<wait more><end>
+    おほん<delay 01> では・・・
+    <delay 01>かみと ひかりの なにおいて・・・
+    <delay 01><class name>・<name>は・・・
+    <wait more><class name>と なるがよい!
+    <wait more><end>
   literal: ''
   en: ''
 
 - index: 68
   character: ''
   ja: |-
-    <name>は みごとに<line><class name>に なりました!<wait more><end>
+    <name>は みごとに
+    <class name>に なりました!
+    <wait more><end>
   literal: ''
   en: ''
 
 - index: 69
   character: ''
   ja: |-
-    うーむ
-    <delay 01> <name>は<line>いまの しょくぎょうを<line>つづけたほうが いいですね<wait more><end>
+    うーむ<delay 01> <name>は
+    いまの しょくぎょうを
+    つづけたほうが いいですね
+    <wait more><end>
   literal: ''
   en: ''
 
@@ -6790,8 +6977,9 @@
 - index: 99
   character: ''
   ja: |-
-    よしそれじゃ わたしてもら・・・?<delay 01><line>・・・<delay 01> これ ひょっとして<line>のろわれてないか?<wait
-    more>
+    よしそれじゃ わたしてもら・・・?<delay 01>
+    ・・・<delay 01> これ ひょっとして
+    のろわれてないか?<wait more>
     こまるなあ へんなもの
     おしつけられちゃあ・・・
     <wait more><end>
@@ -6801,8 +6989,8 @@
 - index: 100
   character: ''
   ja: |-
-    おいおい 
-    <name>さんは<line>なんにも もってないようだぜ<wait more><end>
+    おいおい <name>さんは
+    なんにも もってないようだぜ<wait more><end>
   literal: ''
   en: ''
 
@@ -6818,8 +7006,8 @@
 - index: 102
   character: ''
   ja: |-
-    そいつなら きんか
-    <number>まいで<line>なおせるけど それでいいかい?<end>
+    そいつなら きんか<number>まいで
+    なおせるけど それでいいかい?<end>
   literal: ''
   en: ''
 

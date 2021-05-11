@@ -912,6 +912,9 @@ def doctoyaml(output_file):
             continue
 
         for row in [extract_row(x) for x in table['tableRows']]:
+            if row[0] == "ID":
+                continue
+                
             try:
                 script.append(
                     {
@@ -922,8 +925,13 @@ def doctoyaml(output_file):
                         "literal": ruamel.yaml.scalarstring.LiteralScalarString(row[4]),
                         "en": ruamel.yaml.scalarstring.LiteralScalarString(row[5].replace(" \n", "\n")) # trim spaces before newlines
                     })
-            except:
-                continue;
+            except Exception as e:
+                # Failure is probably a "comment" line
+                # We don;t seem to have a way to do that so we add it as a loose string...
+                line = "".join(row)
+                if len(line) > 0:
+                    script.append(line)
+
     print(f"- saving as {output_file}")
     with open(output_file, 'w', encoding="utf-8") as file:
         ruamel.yaml.YAML().dump(script, file)

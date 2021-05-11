@@ -1540,6 +1540,7 @@
     to turn the tables
     on them!
     <wait><end>
+- Battle 1
 - index: 372
   character: Dark Mage
   ja: |-
@@ -1610,15 +1611,17 @@
 - index: 376
   character: Voice
   ja: |-
-    <party leader>! しっかりして!<line><party leader>! めをさまして・・・<wait more><end>
+    <party leader>! しっかりして!
+    <party leader>! めをさまして・・・
+    <wait more><end>
   ja-kanji: |
   literal: |-
     Nick, come to your senses! Nick, open your eyes…
   en: |-
     <party leader>! Come to
-    your senses!<line>
+    your senses!
     <party leader>!
-    Open your eyes…
+    Open your eyes...
     <wait more><end>
 - index: 377
   character: Lowe
@@ -1722,6 +1725,7 @@
     Stop that, Cypress
     maggots!
     <wait><end>
+- (Repeat index 382)
 - index: 384
   character: Dwarf
   ja: |-
@@ -1759,6 +1763,7 @@
     Investigate your
     surroundings!
     <wait><end>
+- Battle 2
 - index: 386
   character: Dwarf
   ja: |-
@@ -1987,6 +1992,7 @@
     this, so make your
     Preparations.
     <wait><end>
+- (Miniyom Village)
 - index: 398
   character: Cray
   ja: |-
@@ -2060,6 +2066,7 @@
     ends. Surrender
     now!
     <wait><end>
+- Battle 3
 - index: 402
   character: Cypress Knight
   ja: |-
@@ -2257,6 +2264,7 @@
     into the fortress
     at once.
     <wait><end>
+- Battle 4
 - index: 414
   character: Lowe
   ja: |-
@@ -2356,6 +2364,7 @@
     will be allowed to
     leave alive!
     <wait><end>
+- Battle 5
 - index: 421
   character: Barry
   ja: |-
@@ -2405,6 +2414,7 @@
     force and defeat
     the Cypress army.
     <wait><end>
+- Barry the birdman joined the force.
 - index: 424
   character: Narration
   ja: |-
@@ -2657,6 +2667,7 @@
     then we must find
     them first.
     <wait><end>
+- Battle 6
 - index: 438
   character: Lowe
   ja: |-
@@ -2863,6 +2874,7 @@
     time. Let’s engage
     them!
     <wait><end>
+- Battle 7
 - index: 451
   character: Lowe
   ja: |-
@@ -3022,6 +3034,7 @@
     your equipment in
     this village.
     <wait><end>
+- (Athlete village)
 - index: 461
   character: Stock
   ja: |-
@@ -3090,6 +3103,7 @@
     they were looking
     for!
     <wait><end>
+- Battle 8
 - index: 465
   character: Lowe
   ja: |-
@@ -3198,6 +3212,7 @@
     goal is that
     staircase.
     <wait><end>
+- Battle 9
 - index: 472
   character: Lowe
   ja: |-
@@ -3289,6 +3304,7 @@
     Well, you can
     certainly try!
     <wait><end>
+- Battle 10
 - index: 478
   character: Bazoo
   ja: |-
@@ -3305,6 +3321,7 @@
     tell you. We were
     looking for…
     <wait><end>
+- "???Nick......\n<wait><end>"
 - index: 479
   character: Bazoo
   ja: |-
@@ -3372,6 +3389,7 @@
     Bazoo mean by
     that!?
     <wait><end>
+- "???YeeshaI am Yeesha the mage.I am Yeesha the \nMage.\n<wait more>"
 - index: 483
   character: Yeesha
   ja: |-
@@ -3404,6 +3422,7 @@
     surely be of use
     to you.
     <wait><end>
+- NarrationYeesha the mage joined the force.
 - index: 485
   character: Yeesha
   ja: |-
@@ -3546,7 +3565,8 @@
     they were
     intercepted by the
     Cypress fleet and
-    were escorted to the port.
+    were escorted to
+    the port.
     <wait more><end>
 - index: 493
   character: Narration
@@ -3725,7 +3745,8 @@
     I see... okay
     then... alright,
     you can pass!
-    Next, come forward!
+    Next, come
+    forward!
     <wait><end>
 - index: 505
   character: Edmond
@@ -3811,6 +3832,7 @@
     We must open an
     escape route!
     <wait><end>
+- Battle 11
 - index: 511
   character: Teddy
   ja: |-
@@ -3829,7 +3851,7 @@
     Cypress!
     <wait more><end>
 - index: 512
-  character: ''
+  character: Teddy
   ja: |-
     しかも　ガーディアナぐんをつれて！
     エドモンドが　あわてふためいて
@@ -3987,7 +4009,8 @@
   literal: |-
     I see… Nick, apologies for doubting you. Let’s fight together once more!
   en: |-
-    I see... <party leader>, apologies for
+    I see... <party leader>,
+    apologies for
     doubting you.
     <wait more>
     Let’s fight
@@ -4023,6 +4046,8 @@
     march on Cypress
     castle.
     <wait><end>
+- NarrationTeddy the beastman joined the force.
+- (Cypress port town)
 - index: 524
   character: Teddy
   ja: |-
@@ -4116,6 +4141,7 @@
     while you guys are
     taking a rest.
     <wait><end>
+- (camp)
 - index: 530
   character: Teddy
   ja: |-
@@ -4248,3 +4274,197 @@
     of Prince
     <name>!
     <wait><end>
+- Battle 12
+- "DomingoOhoho, you’ve found me! As a reward, let me assist you.Ohoho, you’ve \n\
+  found me! As a \nreward, let me \nassist you.\n<wait><end>"
+- NarrationDomingo the magical creature joined the force.
+- "DomingoBy the way, did you know that night comes because the earth spins?By the\
+  \ way, did \nyou know that \nnight comes \nbecause the earth \nspins?\n<wait><end>"
+- index: 538
+  character: Deadly Bone
+  ja: |-
+    ぐふー・・・しっ　しくじった・・・
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    *dying* I-I failed…
+  en: |-
+    I-I failed...
+    <wait more><end>
+- index: 539
+  character: Deadly Bone
+  ja: |-
+    ・・・だが　おまえらにこのさきの
+    しのどうくつのきのこがやぶれるか？
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    but can you overcome the mushrooms in the death cave that’s beyond?
+  en: |-
+    But can you
+    overcome the
+    mushrooms in the
+    death cave that’s
+    beyond?
+    <wait more><end>
+- index: 540
+  character: Deadly Bone
+  ja: |-
+    いや　やぶれまい・・・あきらめろ
+    おまえらも　おれとおなじになるのだ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    No, I don’t think so… you should give up. You’ll end up just like me.
+  en: |-
+    No, I don’t think
+    so... you should
+    give up. You’ll
+    end up just like
+    me.
+    <wait><end>
+- index: 541
+  character: Lowe
+  ja: |-
+    なんと　ふきつなことばでしょう
+    ・・・しかし　まいりましょう
+    しのどうくつを　ぬけるのです
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Such sinister words… however, let’s press on and go through the death cave.
+  en: |-
+    Such sinister
+    words... however,
+    let’s press on and
+    go through the
+    death cave.
+    <wait><end>
+- index: 542
+  character: Ghoul
+  ja: |-
+    やってきたな！
+    <party leader>おうじ！<wait more><end>
+  ja-kanji: |
+  literal: |-
+    You’ve arrived, Prince Nick!
+  en: |-
+    You’ve arrived,
+    Prince <party leader>!
+    <wait more><end>
+- index: 543
+  character: Ghoul
+  ja: |-
+    ここは　つうしょう　しのどうくつ！
+    サイプレスのだれもが　おそれる
+    じょうさいガンドールへむかうみちだ！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    This place was dubbed as the death cave. Everyone in Cypress fears it. It is the route leading to the Citadel of Gundoll.
+  en: |-
+    This place was
+    dubbed as the
+    death cave.
+    Everyone in
+    Cypress fears it.
+    <wait more>
+    It is the route
+    leading to the
+    Citadel of
+    Gundoll.
+    <wait more><end>
+- index: 544
+  character: Ghoul
+  ja: |-
+    ガーディアナのせんばつぶたいが
+    ここで　いのちをおとしていったのだ
+    おまえらも　そのみちづれとなれ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    The elite force from Guardiana got destroyed here. You are next
+  en: |-
+    The elite force
+    from Guardiana got
+    destroyed here.
+    You are next!
+    <wait><end>
+- index: 545
+  character: Kashing
+  ja: |-
+    みんな！　とちゅうにわながあるぞ！
+    きのこだ！　きのこが　しかけられて
+    ガーディアナぐんも　それにやられた
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Everyone, there are traps midway! Mushrooms are set as traps, the Guardiana force got annihilated by those.
+  en: |-
+    Everyone, there
+    are traps midway!
+    <wait more>
+    Mushrooms are set
+    as traps, the
+    Guardiana force
+    got annihilated by
+    those.
+    <wait><end>
+- index: 546
+  character: Ghoul
+  ja: |-
+    きっ　きさま！　ガーディアナ！
+    よけいなことを！　だまらんか！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Y-you, you are from Guardiana! You’ve talked enough, shut it!
+  en: |-
+    Y-you, you are
+    from Guardiana!
+    You’ve talked
+    enough, shut it!
+    <wait><end>
+- index: 547
+  character: Lowe
+  ja: |-
+    おお　あれは　きしの　<name>！
+    <party leader>！　きをつけてください
+    なにか　わながしかけられていますぞ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Ah, that’s the knight Kashing! Nick, watch out for traps!
+  en: |-
+    Ah, that’s the
+    knight Kashing!
+    <party leader>, watch
+    out for traps!
+    <wait><end>
+- Battle 13
+- index: 548
+  character: ''
+  ja: |-
+    くっ・・・われらのわながやぶれた
+    これもみな・・・ガーディアナの
+    きしのせい・・・むっ　むねん
+    <wait><end>
+  ja-kanji: |
+  literal: |
+  en: |
+- index: 549
+  character: ''
+  ja: |-
+    うっ・・・うーん
+    <wait><end>
+  ja-kanji: |
+  literal: |
+  en: |
+- index: 550
+  character: ''
+  ja: |-
+    おお
+    <name>が　めざめた！<wait><end>
+  ja-kanji: |
+  literal: |
+  en: |
