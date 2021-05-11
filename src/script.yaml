@@ -1178,7 +1178,6 @@
     So, of course, I
     want to become a
     warrior of Light!
-    <wait more>
     This is surely my
     chance!
     <wait><end>
@@ -3624,7 +3623,7 @@
     the prince of
     Cypress!
     <wait more>
-    What a shocking 
+    What a shocking
     revelation!
     <wait more><end>
 - index: 489
@@ -3666,7 +3665,7 @@
     final battle.
     Together with
     their
-    suspicions…
+    suspicions...
     <wait><end>
 
 ######################
@@ -3674,283 +3673,309 @@
 ######################
 
 - index: 491
-  character: Narrator
+  character: Narration
   ja: |-
-    おおがたせんを てにいれて
+    おおがたせんを　てにいれて
     サイプレスほんどにむかった
     ガーディアナぐんのいっこう
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The Guardiana force obtained a large ship and headed towards Cypress mainland.
   en: |-
-    The Guardiana 
-    force headed 
-    towards Cypress, 
-    <wait more>
-    increasing their 
-    military power on 
-    the way.
+    The Guardiana
+    force obtained a
+    large ship and
+    headed towards
+    Cypress mainland.
     <wait more><end>
-
 - index: 492
-  character: Narrator
+  character: Narration
   ja: |-
-    みなとを うかいしようとしたとき
-    とつぜん サイプレスせんだんにより
-    ごういんに ゆうどうされてしまった
+    みなとを　うかいしようとしたとき
+    とつぜん　サイプレスせんだんにより
+    ごういんに　ゆうどうされてしまった
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    As they were trying to circumvent the harbor they were intercepted by the Cypress fleet and were escorted to the port.
   en: |-
-    As they were 
-    trying to 
-    circumvent the 
-    harbor, 
+    As they were
+    trying to
+    circumvent the
+    harbor,
     <wait more>
-    they were 
-    intercepted by the 
-    Cypress fleet and 
-    led to port.
+    they were
+    intercepted by the
+    Cypress fleet and
+    were escorted to 
+    the port.
     <wait more><end>
-
 - index: 493
-  character: Narrator
+  character: Narration
   ja: |-
-    いま みなとはかいげんれいによって
-    すべてのふねが けんえつされるため
-    じゅんばんを まっているのだった
+    いま　みなとはかいげんれいによって
+    すべてのふねが　けんえつされるため
+    じゅんばんを　まっているのだった
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The harbor was under martial law and every ship had to go through inspection. They were waiting in line.
   en: |-
-    The harbor was 
-    under martial law 
-    and every ship had 
-    to go through 
-    inspection. 
+    The harbor was
+    under martial law
+    and every ship had
+    to go through
+    inspection.
     <wait more>
-    They were waiting 
+    They were waiting
     in line.
     <wait more><end>
-
 - index: 494
-  character: Narrator
+  character: Narration
   ja: |-
-    そして いま いっこうの
+    そして　いま　いっこうの
     けんえつされるばんとなった
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    And then, it was their turn to get inspected.
   en: |-
-    And then, it was 
-    their turn to get 
+    And then, it was
+    their turn to get
     inspected.
     <wait><end>
-
 - index: 495
   character: Ruce
   ja: |-
-    ・・・で ガーディアナぐんの
-    まのてから のがれてきました
+    ・・・で　ガーディアナぐんの
+    まのてから　のがれてきました
     アストラルじまのりょうしです
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    … and thus I managed to escape from the evil clutches of the Guardiana force. I’m a fisherman from Astral island.
   en: |-
-    ...and thus I 
-    managed to escape 
-    from the evil 
-    clutches of the 
-    Guardiana force. 
+    ...and thus I
+    managed to escape
+    from the evil
+    clutches of the
+    Guardiana force.
     <wait more>
-    I’m a fisherman 
-    from Astral 
+    I’m a fisherman
+    from Astral
     island.
     <wait><end>
-
 - index: 496
   character: Lizardman
   ja: |-
-    ようしわかった! いってよし!
+    ようしわかった！　いってよし！
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Alright, you can pass!
   en: |-
-    Alright, you may 
+    Alright, you can
     pass!
-    <wait more><end>
-
+    <wait><end>
 - index: 498
   character: Sig
   ja: |-
-    つぎは 
-    <party leader>のばんだな<line>ばれなければ いいが・・・<wait><end>
-  literal: ''
+    つぎは　<party leader>のばんだな
+    ばれなければ　いいが・・・
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Next up is Nick, hope he won’t get exposed…
   en: |-
-    Next up is 
-    <party leader>, hope 
-    he won’t be 
+    Next up is
+    <party leader>, hope he
+    won’t get
     exposed...
     <wait><end>
-
 - index: 497
   character: Lizardman
   ja: |-
-    つぎのもの! まえへ!
+    つぎのもの！　まえへ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Next! Come forward!
   en: |-
-    Next! Come 
+    Next! Come
     forward!
     <wait><end>
-    
 - index: 499
   character: Harbor guards(?)
   ja: |-
-    エドモンドおうさまのおつきーっ!
+    エドモンドおうさまのおつきーっ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    King Edmond has arrived!!
   en: |-
-    King Edmond has 
+    King Edmond has
     arrived!!
     <wait><end>
-
 - index: 500
   character: Ruce
   ja: |-
-    やばい! エドモンドおうって
-    <party leader>のおじさんだろ・・・<line>これは たいへんなことになったぞ<wait><end>
-  literal: ''
-  en: |-
-    Uh-oh, it’s King 
-    Edmond, <party leader>’s 
-    uncle... we are in 
-    trouble!
+    やばい！　エドモンドおうって
+    <party leader>のおじさんだろ・・・
+    これは　たいへんなことになったぞ
     <wait><end>
-
+  ja-kanji: |
+  literal: |-
+    Oh-oh, it’s King Edmond, Nick’s uncle… we are in trouble now!
+  en: |-
+    Oh-oh, it’s King
+    Edmond, <party leader>’s
+    uncle... we are in
+    trouble now!
+    <wait><end>
 - index: 501
   character: Lizardman
   ja: |-
-    ウーム にんげんぞくのこぞうか!
-    さあ しんこくするがいい!
+    ウーム　にんげんぞくのこぞうか！
+    さあ　しんこくするがいい！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Hmmm, a human brat! Declare yourself!
   en: |-
-    Hmmm, a human 
-    brat! State your 
-    business!
+    Hmmm, a human
+    brat! Declare
+    yourself!
     <wait><end>
-
 - index: 502
   character: Nick
   ja: |-
     ・・・・・
     <delay 03><end>
-  literal: '...'
-  en: ...<delay 03><end>
-
+  ja-kanji: |
+  literal: |-
+    ...
+  en: |-
+    ...
+    <delay 03><end>
 - index: 503
   character: Ruce
   ja: |-
-    そいつは わたしのなかまでして
-    ちょっと くちがふじゆうですが
-    あやしいものではありません!
+    そいつは　わたしのなかまでして
+    ちょっと　くちがふじゆうですが
+    あやしいものではありません！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    He is my friend. He is just mute, nothing suspicious!
   en: |-
-    He is my friend. 
-    He is just mute, 
-    nothing 
+    He is my friend.
+    He is just mute,
+    nothing
     suspicious!
     <wait><end>
-
 - index: 504
   character: Lizardman
   ja: |-
     そうか・・・ならばよいか・・・
-    よーし いってよいぞ!
-    つぎのもの! くるがいい!
+    よーし　いってよいぞ！
+    つぎのもの！　くるがいい！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I see… okay then… alright, you can pass! Next, come forward!
   en: |-
-    I see... okay 
-    then... alright, 
-    you may pass! 
+    I see... okay
+    then... alright,
+    you can pass!
     Next, come 
     forward!
     <wait><end>
-
 - index: 505
   character: Edmond
   ja: |-
-    ちょっと まて! そいつ・・・
+    ちょっと　まて！　そいつ・・・
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Hold on! He is…
   en: |-
-    Hold on! He is... 
+    Hold on! He is...
     <wait><end>
-
 - index: 506
   character: Edmond
   ja: |-
     どこかで・・・みたような・・・
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I think I’ve... seen him before somewhere....
   en: |-
-    I think I’ve... 
-    seen him before 
-    somewhere....
-    <wait more><end>
-
+    I think I’ve...
+    seen him before
+    somewhere...
+    <wait><end>
 - index: 507
   character: Edmond
   ja: |-
-    おっ おおおっ 
-    <party leader>!<wait><end>
-  literal: ''
+    おっ　おおおっ
+    <party leader>！<wait><end>
+  ja-kanji: |
+  literal: |-
+    Oh, it’s Nick!
   en: |-
-    I-It’s <party leader>!
+    Oh, it’s <party leader>!
     <wait><end>
-
 - index: 508
   character: Edmond
   ja: |-
-    おまえ! ちちおやのかたきうちに
-    サイプレスに まいもどったのだな
+    おまえ！　ちちおやのかたきうちに
+    サイプレスに　まいもどったのだな
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    You’ve come back to Cypress to avenge your father, haven’t you?
   en: |-
-    You’ve come back 
-    to Cypress to 
-    avenge your 
-    father, haven’t 
+    You’ve come back
+    to Cypress to
+    avenge your
+    father, haven’t
     you?
     <wait more><end>
-
 - index: 509
   character: Edmond
   ja: |-
-    でっ であえ であえーっ
-    <party leader>おうじがあらわれた!<wait><end>
-  literal: ''
-  en: |- 
-    I! Found! Him!
-    Prince <party leader> is 
-    here!
+    でっ　であえ　であえーっ
+    <party leader>おうじがあらわれた！<wait><end>
+  ja-kanji: |
+  literal: |-
+    I-I found, I found him! Prince Nick is here!
+  en: |-
+    I-I found, I found
+    him! Prince
+    <party leader> is here!
     <wait><end>
-
 - index: 510
   character: Apis
   ja: |-
-    しまった! 
-    <party leader>がばれた<line>みんな りょうしのふくをぬげ!<line>ぜんいんで けつろをひらくんだ!<wait><end>
-  literal: ''
-  en: |-
-    Darn it! The jig 
-    is up! Everyone, 
-    throw down your 
-    fisherman 
-    disguise! 
-    <wait more>
-    We must 
-    open an escape 
-    route!
+    しまった！　<party leader>がばれた
+    みんな　りょうしのふくをぬげ！
+    ぜんいんで　けつろをひらくんだ！
     <wait><end>
-    
+  ja-kanji: |
+  literal: |-
+    Damn, the jig is up! Everyone, throw down your fisherman disguise! We must open an escape route!
+  en: |-
+    Damn, the jig is
+    up! Everyone,
+    throw down your
+    fisherman
+    Disguise!
+    <wait more>
+    We must open an
+    escape route!
+    <wait><end>
+
 ######################
 # Battle 11
 ######################
@@ -3958,196 +3983,214 @@
 - index: 511
   character: Teddy
   ja: |-
-    <party leader>おうじさまーっ!<line>やくそくどおりに ふたたび<line>サイプレスに もどられましたな!<wait more><end>
-  literal: ''
+    <party leader>おうじさまーっ！
+    やくそくどおりに　ふたたび
+    サイプレスに　もどられましたな！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Prince Nick! You’ve kept your promise and returned to Cypress!
   en: |-
-    Prince <party leader>! 
-    You’ve kept your 
-    promise and 
-    returned to 
+    Prince <party leader>!
+    You’ve kept your
+    promise and
+    returned to
     Cypress!
     <wait more><end>
-
 - index: 512
   character: Teddy
   ja: |-
-    しかも ガーディアナぐんをつれて!
-    エドモンドが あわてふためいて
-    にげていきましたぞ ワッハッハッ
+    しかも　ガーディアナぐんをつれて！
+    エドモンドが　あわてふためいて
+    にげていきましたぞ　ワッハッハッ
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    And you also brought the Guardiana force with you! Edmond panicked and fled! fuhhahha
   en: |-
-    And you also 
-    brought the 
-    Guardiana force 
-    with you! 
+    And you also
+    brought the
+    Guardiana force
+    with you! Edmond
+    panicked and fled!
     <wait more>
-    Edmond panicked 
-    and fled! 
-    *laughs*
+    Fuh-hah-ha!
     <wait more><end>
-
 - index: 513
   character: Teddy
   ja: |-
-    ウム・・・どうしたのですかな?
-    なぜに しずまりかえっているのだ!
+    ウム・・・どうしたのですかな？
+    なぜに　しずまりかえっているのだ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Um… what’s wrong? Why are you so silent?
   en: |-
-    Um... what’s 
-    wrong? Why are you 
+    Um... what’s
+    wrong? Why are you
     so silent?
     <wait><end>
-
 - index: 514
   character: Lowe
-  ja: |- 
-    <party leader>は みんなのしんらいを
+  ja: |-
+    <party leader>は　みんなのしんらいを
     うしなってしまったようなのです
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Seems like Nick has lost everyone’s trust.
   en: |-
-    Seems like 
-    <party leader> lost 
+    Seems like
+    <party leader> has lost
     everyone’s trust.
     <wait><end>
-
 - index: 515
   character: Teddy
   ja: |-
-    それはまた どんなわけですか!
+    それはまた　どんなわけですか！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    What’s the meaning of this!?
   en: |-
-    What do you mean 
-    by that!?
-    <wait><end>
-
+    What’s the meaning
+    of this!?
+    <wait more><end>
 - index: 516
   character: Lowe
   ja: |-
-    <party leader>は みぶんをいつわって
-    われわれの なかまにくわわった
-    ・・・それが まずかったのです
+    <party leader>は　みぶんをいつわって
+    われわれの　なかまにくわわった
+    ・・・それが　まずかったのです
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    He joined us while hiding his true identity… that wasn’t nice.
   en: |-
-    He joined us while 
-    hiding his true 
-    identity... that 
+    He joined us while
+    hiding his true
+    identity... that
     wasn’t nice.
     <wait more><end>
-
 - index: 517
   character: Lowe
   ja: |-
-    しょうじきに もうしあげますと
-    わたしも どうかんがえたらいいか?
-    <party leader>を しんじられない!
-    <wait><end>
-  literal: ''
-  en: |-
-    To be frank, I’m 
-    also not sure what 
-    to think of him.
-    We can’t trust 
-    <party leader> anymore.
+    しょうじきに　もうしあげますと
+    わたしも　どうかんがえたらいいか？
 
+    <party leader>を　しんじられない！<wait><end>
+  ja-kanji: |
+  literal: |-
+    To be frank, I’m also not sure what to think of him.
+    We can’t trust Nick anymore.
+  en: |-
+    To be frank, I’m
+    also not sure what
+    to think of him.
+    We can’t trust
+    <party leader> anymore.
+    <wait><end>
 - index: 518
   character: Teddy
   ja: |-
-    ばかな! なにをいわれるのだ!
-    おうじは ガーディアナのために
-    じぶんをいつわり たびだった
+    ばかな！　なにをいわれるのだ！
+    おうじは　ガーディアナのために
+    じぶんをいつわり　たびだった
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Nonsense, the prince traveled falsifying his social status for the benefit of Guardiana.
   en: |-
-    Nonsense, the 
-    prince traveled 
-    falsifying his 
-    social status,
+    Nonsense, the
+    prince traveled
+    falsifying his
+    social status
     <wait more>
-    for the benefit of 
+    for the benefit of
     Guardiana.
     <wait more><end>
-
 - index: 519
   character: Teddy
   ja: |-
-    それは ウォルドルたちのもくろむ
-    ガーディアナを せいはしようとする
-    わるだくみを しらせるためだった
+    それは　ウォルドルたちのもくろむ
+    ガーディアナを　せいはしようとする
+    わるだくみを　しらせるためだった
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    He did this to inform you about Woldol’s scheme of conquering Guardiana.
   en: |-
-    He did this to 
-    inform you about 
-    Woldol’s scheme 
-    of conquering 
+    He did this to
+    inform you about
+    Woldol’s scheme of
+    conquering
     Guardiana.
     <wait more><end>
-
 - index: 520
   character: Teddy
   ja: |-
-    ほんらいなら いっこくもはやく
-    かたきを うちたかったはずです
-    どうか・・・おうじをしんじてくれ!
+    ほんらいなら　いっこくもはやく
+    かたきを　うちたかったはずです
+    どうか・・・おうじをしんじてくれ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    In reality, he wanted to take revenge as soon as possible. Please… believe him!
   en: |-
-    In reality, he 
-    wanted to take 
-    revenge as soon as 
-    possible. 
+    In reality, he
+    wanted to take
+    revenge as soon as
+    possible.
     <wait more>
-    Please... believe 
-    in the prince!
-
+    Please... believe
+    him!
+    <wait><end>
 - index: 521
   character: Lowe
   ja: |-
     そうだったのか・・・<party leader>よ
-    うたがって もうしわけなかったな
-    もういちど いっしょにたたかおう
+    うたがって　もうしわけなかったな
+    もういちど　いっしょにたたかおう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I see… Nick, apologies for doubting you. Let’s fight together once more!
   en: |-
     I see... <party leader>, 
-    apologies for 
-    doubting you. 
+    apologies for
+    doubting you.
     <wait more>
-    Let’s fight 
-    together once 
-    more!
-    <wait><end>
-
+    Let’s fight
+    together once
+    More!<wait><end>
 - index: 522
   character: Teddy
   ja: |-
-    うたがいがはれたなら よいのです
-    さあ サイプレスじょうはちかい
+    うたがいがはれたなら　よいのです
+    さあ　サイプレスじょうはちかい
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Glad we could clear that up. So, Cypress castle is close.
   en: |-
-    Glad we could 
-    clear that up. So, 
-    Cypress castle is 
-    close.
+    Glad we could
+    clear that up. So,
+    Cypress castle is
+    Close.
     <wait more><end>
-
 - index: 523
   character: Teddy
   ja: |-
-    みなとまちで ほきゅうをととのえ
-    サイプレスじょうに まいりましょう
+    みなとまちで　ほきゅうをととのえ
+    サイプレスじょうに　まいりましょう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Let’s resupply in the port town and march on Cypress castle.
   en: |-
-    Let’s resupply in 
-    the port town and 
-    march on Cypress 
+    Let’s resupply in
+    the port town and
+    march on Cypress
     castle.
     <wait><end>
 
@@ -4158,215 +4201,227 @@
 - index: 524
   character: Teddy
   ja: |-
-    ぜんた-い! とまれーっ!
+    ぜんたーい！　とまれーっ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Everyone, halt!
   en: |-
     Everyone, halt!
     <wait><end>
-
 - index: 525
   character: Teddy
   ja: |-
-    どうやら ここまでのところ
-    サイプレスぐんに みつからずに
-    やってきました しかし・・・
+    どうやら　ここまでのところ
+    サイプレスぐんに　みつからずに
+    やってきました　しかし・・・
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Seems like we weren’t detected by the Cypress army, however…
   en: |-
-    For some reason, 
-    we weren’t 
-    detected by the 
-    Cypress army, 
-    however...
+    Seems like we
+    weren’t detected
+    by the Cypress
+    army, however...
     <wait more><end>
-
 - index: 526
   character: Teddy
   ja: |-
-    このさきの へいげんちたいは
-    これまでのようには いきますまい
+    このさきの　へいげんちたいは
+    これまでのようには　いきますまい
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    From this point on the terrain changes and we need to adapt.
   en: |-
-    From this point 
-    the terrain 
-    changes and we 
+    From this point on
+    the terrain
+    changes and we
     need to adapt.
     <wait><end>
-
 - index: 527
   character: Lowe
   ja: |-
-    こっ これはまいりましたな・・・
-    しょうがいぶつが なにもない
-    これでは すぐにみつかってしまう
+    こっ　これはまいりましたな・・・
+    しょうがいぶつが　なにもない
+    これでは　すぐにみつかってしまう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    That is unfortunate… we have no obstacles to conceal us, they will find us immediately for sure.
   en: |-
-    That is 
-    unfortunate... we 
-    have no obstacles 
-    to conceal us, 
+    That is
+    unfortunate... we
+    have no obstacles
+    to conceal us,
     <wait more>
-    they will find us 
-    immediately for 
+    they will find us
+    immediately for
     sure.
     <wait><end>
-
 - index: 528
   character: Teddy
   ja: |-
-    ひとまず ここにキャンプをはり
-    よるになるのをまって へいげんを
+    ひとまず　ここにキャンプをはり
+    よるになるのをまって　へいげんを
     ぬけることにしましょう
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Let’s set up camp here for now. Wait until nightfall and then cross the plains.
   en: |-
-    Let’s set up camp 
-    here for now. Wait 
-    until nightfall 
-    and then cross the 
+    Let’s set up camp
+    here for now. Wait
+    until nightfall
+    and then cross the
     plains.
     <wait><end>
-
 - index: 529
   character: Teddy
   ja: |-
-    わたしが みはりにたちますから
-    みなさんは やすんでください
+    わたしが　みはりにたちますから
+    みなさんは　やすんでください
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    I’ll keep watch while you guys are taking a rest.
   en: |-
-    I’ll keep watch 
-    while you guys are 
+    I’ll keep watch
+    while you guys are
     taking a rest.
     <wait><end>
-
 - index: 530
   character: Teddy
   ja: |-
-    さて そろそろ よるだな・・・
-    おうじさまたちを おこすとするか
+    さて　そろそろ　よるだな・・・
+    おうじさまたちを　おこすとするか
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    It’s almost dusk… I should wake the prince and the others.
   en: |-
-    It’s almost 
-    dusk... I should 
-    wake the prince 
+    It’s almost
+    dusk... I should
+    wake the prince
     and the others.
-    
+    <wait><end>
 - index: 531
-  character: Teddy
+  character: Woldol
   ja: |-
     グフグフ・・・やっとみつけたぞ
-    おうじはテントで おやすみかな?
+    おうじはテントで　おやすみかな？
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    gufugufu ...I found you at last! The prince is sleeping in his tent, I wonder?
   en: |-
-    *laughs* 
-    ...I found you at 
-    last! The prince 
-    is sleeping in a 
+    Gufugufu... I
+    found you at last!
+    The prince is
+    sleeping in his
     tent, I wonder?
     <wait><end>
-    
 - index: 532
   character: Teddy
   ja: |-
-    そっ そのこえは ウォルドル!
+    そっ　そのこえは　ウォルドル！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    That voice… Woldol!
   en: |-
-    That voice... 
+    That voice...
     Woldol!
     <wait><end>
-
 - index: 533
   character: Woldol
   ja: |-
-    グフフ おぬしは<name>だな・・・
-    あんしんしろ これはわたしのかげだ
-    なんのきがいも くわえられぬわい
+    グフフ　おぬしは<name>だな・・・
+    あんしんしろ　これはわたしのかげだ
+    なんのきがいも　くわえられぬわい
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    gufufu It’s you Teddy… Don’t get all worked up, this is just my shadow. It cannot harm you.
   en: |-
-    *laughs*
-    It’s you,
-    <name>... 
+    Ggufufu... It’s
+    you <name>...
     <wait more>
-    Don’t get all 
-    worked up, this is 
-    but my shadow. It 
+    Don’t get all
+    worked up, this is
+    just my shadow. It
     cannot harm you.
     <wait more><end>
-
 - index: 534
   character: Woldol
   ja: |-
-    かしこいな やみをりようして
-    だいへいげんを ぬけようとするか?
-    しかし そのもくろみもくずれたな!
+    かしこいな　やみをりようして
+    だいへいげんを　ぬけようとするか？
+    しかし　そのもくろみもくずれたな！
     <wait more><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Smart of you to use the darkness to cross the great plains, but your plan failed!
   en: |-
-    Smart of you to 
-    use the darkness 
-    to cross the great 
-    plains, but your 
-    plan collapses!
-
+    Smart of you to
+    use the darkness
+    to cross the great
+    plains, but your
+    plan failed!
+    <wait more><end>
 - index: 535
   character: Woldol
   ja: |-
-    サイプレスへいだんが はいびされ
-    もはや ふくろのねずみというものだ
-    みなのもの! かかれ ふみつぶせ!
+    サイプレスへいだんが　はいびされ
+    もはや　ふくろのねずみというものだ
+    みなのもの！　かかれ　ふみつぶせ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    The Cypress army had already been deployed. You are all trapped like rats in a bag. Everyone, trample them!
   en: |-
-    The Cypress army 
-    has been deployed. 
-    You are all 
-    trapped like rats 
-    in a bag. 
+    The Cypress army
+    had already been
+    deployed. You are
+    all trapped like
+    rats in a bag.
     <wait more>
-    Everyone, trample 
+    Everyone, trample
     them!
     <wait><end>
-
 - index: 536
   character: Teddy
   ja: |-
-    しっ しまった <party leader>さま-っ
-    みんな-っ おきてくださ-いっ!
-    てっ てきのしゅうらいですぞーっ!
+    しっ　しまった　<party leader>さまーっ
+    みんなーっ　おきてくださーいっ！
+    てっ　てきのしゅうらいですぞーっ！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Darn, Prince Nick, everyone, wake up! We are under attack!
   en: |-
     Darn, Prince
-    <party leader>, 
-    everyone, wake up! 
-    We are under 
-    attack!
+    <name>, everyone,
+    wake up! We are
+    under attack!
     <wait><end>
-    
 - index: 537
   character: Deadly Bone
   ja: |-
-    ウォルドルさま おまかせください
-    われらが <party leader>おうじを
-    たおして ごらんにいれます!
+    ウォルドルさま　おまかせください
+    われらが　<party leader>おうじを
+    たおして　ごらんにいれます！
     <wait><end>
-  literal: ''
+  ja-kanji: |
+  literal: |-
+    Lord Woldol, leave it to us! Let us display the demise of Prince Nick!
   en: |-
-    Lord Woldol, leave 
-    it to us! 
-    <wait more>
-    Please enjoy the 
-    spectacle of 
-    Prince <party leader>’s 
-    demise!
+    Lord Woldol, leave
+    it to us! Let us
+    display the demise
+    of Prince
+    <name>!
     <wait><end>
     
 ######################

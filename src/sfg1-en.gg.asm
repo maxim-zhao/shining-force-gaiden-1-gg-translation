@@ -22,48 +22,49 @@ banks 32
 .emptyfill $00
 
 ; Unbackground ranges are inclusive of the start and end
-.unbackground $03a83 $03fff ; Unused
-.unbackground $0f4c4 $0ffff ; Unused
-.unbackground $13d36 $13fff ; Unused
-.unbackground $17c1b $17fff ; Unused
-.unbackground $1b7e3 $1bfff ; Unused
-.unbackground $1fe9f $1ffff ; Unused
+.unbackground $03a83 $03fff ; [0] Unused
+.unbackground $07f54 $07fef ; [1] Unused
+; Run of $01 at end of bank 2 is used to draw blank menus, it's a run of " "
+.unbackground $0f4c4 $0ffff ; [3] Unused
+.unbackground $13d36 $13fff ; [4] Unused
+.unbackground $17c1b $17fff ; [5] Unused
+.unbackground $1b7e3 $1bfff ; [6] Unused
+.unbackground $1fe9f $1ffff ; [7] Unused
 
 ; Scripting engine lives in the first part of this bank, thus it's somewhat dependent on the script fitting in after it...
 ; Total space for script = 15571 bytes
-.unbackground $20391 $23b76 ; Script data
-.unbackground $23b77 $23b7c ; Script index
-.unbackground $23b7d $23fff ; Unused space
-.unbackground $2800c $2922b ; Font
-.unbackground $299d0 $29b85 ; Trees index
+.unbackground $20391 $23b76 ; [8] Script data
+.unbackground $23b77 $23b7c ; [8] Script index
+.unbackground $23b7d $23fff ; [8] Unused space
+.unbackground $2527c $27fff ; [9] Unused space 
+.unbackground $2800c $2922b ; [10] Font
+.unbackground $299d0 $29b85 ; [10] Trees index
 ; Not sure what is in this gap
-.unbackground $29bcd $2a7d2 ; Trees
-.unbackground $2a7d3 $2bfff ; Unused space
+.unbackground $29bcd $2a7d1 ; [10] Trees
+.unbackground $2a7d2 $2bfff ; [10] Unused space
 ; Total space for trees = 6189 bytes
 
-.unbackground $2527c $27fff ; Unused
-.unbackground $2a72d $2bfff ; Unused
-.unbackground $2ffde $2ffff ; Unused
-.unbackground $33f70 $33fff ; Unused
-.unbackground $37bf0 $37fff ; Unused
-.unbackground $3bf56 $3bfff ; Unused
-.unbackground $3dec0 $3ffff ; Unused
-.unbackground $42a93 $43fff ; Unused
-.unbackground $47dc9 $47fff ; Unused
-.unbackground $4bef7 $4bfff ; Unused
-.unbackground $4ff17 $4ffff ; Unused
-.unbackground $53f18 $53fff ; Unused
-.unbackground $57a07 $57fff ; Unused
-.unbackground $5b42e $5bfff ; Unused
-.unbackground $5ebce $5ffff ; Unused
-.unbackground $634a9 $63fff ; Unused
-.unbackground $67f4f $67fff ; Unused
-.unbackground $6b5b7 $6bfff ; Unused
-.unbackground $6f7f9 $6ffff ; Unused
-.unbackground $73dea $73fff ; Unused
-.unbackground $7786b $77fff ; Unused
-.unbackground $799cd $7bfff ; Unused
-.unbackground $7da49 $7ffff ; Unused
+.unbackground $2ffde $2ffff ; [11] Unused
+.unbackground $33f70 $33fff ; [12] Unused
+.unbackground $37bf0 $37fff ; [13] Unused
+.unbackground $3bf56 $3bfff ; [14] Unused
+.unbackground $3dec0 $3ffff ; [15] Unused
+.unbackground $42a93 $43fff ; [16] Unused
+.unbackground $47dc9 $47fff ; [17] Unused
+.unbackground $4bef7 $4bfff ; [18] Unused
+.unbackground $4ff17 $4ffff ; [19] Unused
+.unbackground $53f18 $53fff ; [20] Unused
+.unbackground $57a07 $57fff ; [21] Unused
+.unbackground $5b42e $5bfff ; [22] Unused
+.unbackground $5ebce $5ffff ; [23] Unused
+.unbackground $634a9 $63fff ; [24] Unused
+.unbackground $67f4f $67fff ; [25] Unused
+.unbackground $6b5b7 $6bfff ; [26] Unused
+.unbackground $6f7f9 $6ffff ; [27] Unused
+.unbackground $73dea $73fff ; [28] Unused
+.unbackground $7786b $77fff ; [29] Unused
+.unbackground $799cd $7bfff ; [30] Unused
+.unbackground $7da49 $7ffff ; [31] Unused
 
 
 
