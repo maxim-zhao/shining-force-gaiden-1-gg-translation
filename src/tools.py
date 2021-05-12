@@ -570,38 +570,49 @@ def encode_script(script_file, trees_file, data_file):
             trees_size += tree.emit_structure(f)
             f.write("\n")
 
-        print(f"Huffman trees take {trees_size} bytes")
-
     # Emit the Huffman-encoded script
     with open(data_file, "w", encoding="utf-8") as f:
         f.write("; Script entries, Huffman compressed\n")
 
-        script_size = 0
+        script_compressed_size = 0
+        script_raw_size = 0
+        longest_entry = 0
 
-        for entry in script:
-            f.write(f"\n{entry.label}:\n/* {entry} */\n")
+        # We split the script into three chunks
+        for chunk_index in range(3):
+            f.write(f"\n.section \"Script part {chunk_index}\" superfree\n")
 
-            # Starting tree number
-            preceding_byte = 0xda
+            for entry in script[chunk_index*256:chunk_index*256+256]:
+                f.write(f"\n{entry.label}:\n/* {entry} */\n")
 
-            # Write into a buffer
-            bit_writer = BitWriter()
-            for symbol in entry.buffer:
-                trees[preceding_byte].emit_bits(symbol, bit_writer)
+                # Starting tree number
+                preceding_byte = 0xda
 
-                # Use new symbol as fresh index
-                preceding_byte = symbol
+                # Write into a buffer
+                bit_writer = BitWriter()
+                for symbol in entry.buffer:
+                    trees[preceding_byte].emit_bits(symbol, bit_writer)
 
-            bit_writer.flush()
+                    # Use new symbol as fresh index
+                    preceding_byte = symbol
 
-            script_size += len(bit_writer.buffer)
+                bit_writer.flush()
 
-            # Emit as assembly
-            f.write(f".db {len(bit_writer.buffer)},")
-            for b in bit_writer.buffer:
-                f.write(f" %{b:08b}")
+                script_compressed_size += len(bit_writer.buffer)
+                script_raw_size += len(entry.buffer)
 
-    print(f"Script is {script_size} bytes")
+                # Emit as assembly
+                f.write(f".db {len(bit_writer.buffer)},")
+                for b in bit_writer.buffer:
+                    f.write(f" %{b:08b}")
+                    
+                longest_entry = max(longest_entry, len(bit_writer.buffer))
+
+            f.write(f"\n.ends\n")
+
+    compression_level = (script_raw_size - script_compressed_size - trees_size) / script_raw_size
+    print(f"Script is {script_raw_size} bytes data compressed to {script_compressed_size} bytes data + {trees_size} bytes Huffman trees, effective compression {compression_level:%}")
+    print(f"Longest script entry is {longest_entry} bytes")
 
 
 def dump_menus(rom_filename, output_filename):

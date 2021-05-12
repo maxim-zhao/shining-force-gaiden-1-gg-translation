@@ -32,7 +32,7 @@ banks 32
 .unbackground $1fe9f $1ffff ; [7] Unused
 
 ; Scripting engine lives in the first part of this bank, thus it's somewhat dependent on the script fitting in after it...
-; Total space for script = 15571 bytes
+; Total space for script = 15471 bytes
 .unbackground $20391 $23b76 ; [8] Script data
 .unbackground $23b77 $23b7c ; [8] Script index
 .unbackground $23b7d $23fff ; [8] Unused space
@@ -67,6 +67,13 @@ banks 32
 .unbackground $7da49 $7ffff ; [31] Unused
 
 
+; RAM usage
+; The original game makes extensive use of the on-cartridge RAM for both saves 
+; and active use in-game.
+; The region from $da00 seems to be unused.
+.enum $da00
+ScriptBuffer dsb 90 ; see output of script building
+.ende
 
 ; Helpful macros for patching stuff
 .macro ROMPosition args _address, _slot
@@ -110,23 +117,93 @@ PatchAt\1:
 .endm
 
 
-.bank 8 slot 1
-.org 0
-
-.section "Script" free
+; The script includes its own sections to split it up...
+.slot 2
 .include "script.asm"
-.ends
 
 .section "Script index" free
 ; This holds pointers to the start and every 256th entry after that
 ScriptIndex:
-.dw Script1, Script257, Script513
+.db :Script1
+.dw Script1
+.db :Script257
+.dw Script257
+.db :Script513
+.dw Script513
 .ends
 
 ; We need to patch the pointer to ScriptIndex
-  ROMPosition $20014 1
-.section "Script index pointer patch" overwrite
-  ld hl,ScriptIndex
+  RemoveChunkAndReplace $2000c $20027 1
+.section "Look up script entry hook" force
+LookupScriptEntry:
+  jp LookupScriptEntryImpl
+.ends
+
+.section "Look up script entry part 2" free ; same bank as above
+LookupScriptEntryImpl:
+  ; We replace a function here which the game uses to point hl at the hl'th script entry.
+  ; In the original, the script fits in the same bank as the decoder - but the Huffman
+  ; tables live elsewhere. For English, the script does not fit - so we put it in chunks
+  ; throughout the ROM. Thus to enable this to work, we will instead copy the script entry
+  ; to system RAM.
+  push bc
+  push de
+    ld a, ($ffff)
+    push af
+      ; hl = script index
+      ; We first check which 256-entry range it is in
+      ld b, l
+      ; compute de = range index * 3
+      ld a, h
+      add a, a
+      add a, h
+      ld e, a
+      ld d, 0
+      ;  look up bank/ptr for range
+      ld hl, ScriptIndex
+      add hl, de
+
+      ; Now we retrieve the page and select it...
+      ld a, (hl)
+      inc hl
+      push hl
+        ld hl, $fffc
+        di ; disable interrupts while SRAM is disabled
+        res 3, (hl) ; enable ROM
+        ld ($ffff), a ; select bank
+      pop hl
+      ; And the pointer
+      ld c, (hl)
+      inc hl
+      ld h, (hl)
+      ld l, c
+      inc b ; increment low byte ready to be a counter. This means 0 is handled properly.
+      jr +
+
+  -:  ld e, (hl) ; get entry length - not including itself
+      inc hl
+      add hl, de
+  +:  djnz -
+      
+      ; Now we have hl pointing at the length byte...
+      ld c, (hl)
+      inc hl
+      ; Copy to RAM
+      ld de, ScriptBuffer
+      ld b, 0
+      ldir
+
+    pop af
+    ld ($ffff), a
+
+    ld hl, $fffc
+    set 3, (hl) ; enable SRAM
+    ei
+
+    ld hl, ScriptBuffer
+  pop de
+  pop bc
+  ret
 .ends
 
 .bank 10 slot 1
