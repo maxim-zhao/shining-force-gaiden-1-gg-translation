@@ -4717,7 +4717,7 @@
     Shining Force
     legend before. So,
     it was true…
-    <waiT><end>
+    <wait><end>
 - index: 565
   character: Gates
   ja: |-
@@ -4967,10 +4967,493 @@
     <wait><end>
 - Battle 15
 - index: 580
-  character: ''
+  character: Frabell
   ja: |-
     まさか！　フィズル・ボールのわなを
     やつらが　やぶってしまうとは・・・
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    This cannot be! I never thought they’d manage to disarm the Fizzle ball trap…
+  en: |-
+    This cannot be! I
+    never thought
+    they’d manage to
+    disarm the Fizzle
+    ball trap...
+    <wait><end>
+- index: 581
+  character: Frabell
+  ja: |-
+    ダントムよ！　おまえのへいだんを
+    たのむ！　わたしにかしておくれ！
+    わたしのてで　やつらをたおす！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Dantom, lend me your soldiers! I will personally defeat them!
+  en: |-
+    Dantom, lend me
+    your soldiers! I
+    will personally
+    defeat them!
+    <wait><end>
+- index: 582
+  character: Dantom
+  ja: |-
+    グルル・・・みぐるしいぞ！
+    いまごろは　ウォルドルさまも
+    なげいておられるにちがいない
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    *growls*… You are a disgrace! I’m sure Lord Woldol thinks the same way too
+  en: |-
+    Grr... You are a
+    disgrace! I’m sure
+    Lord Woldol thinks
+    the same way too.
+    <wait><end>
+- index: 583
+  character: Woldol
+  ja: |-
+    そのとおりだ！　フレーベルよ
+    なんとなさけない　はいぼくだ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    This is true! Frabell, what a shameful defeat.
+  en: |-
+    This is true!
+    Frabell, what a
+    shameful defeat.
+    <wait><end>
+- index: 584
+  character: Frabell
+  ja: |-
+    おききください　ウォルドルさま
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Please, hear me out, Lord Woldol.
+  en: |-
+    Please, hear me
+    out, Lord Woldol.
+    <wait><end>
+- index: 585
+  character: Woldol
+  ja: |-
+    いいや！　なにもききたくない
+    すぐにサイプレスじょうにもどり
+    イ・オムのかみに　おわびするのだ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    No, I don’t want to hear your excuses. You are to return to Cypress castle immediately and apologize to God Iom.
+  en: |-
+    No, I don’t want
+    to hear your
+    excuses.
+    You are to return
+    to Cypress castle
+    <wait more>
+    immediately and
+    apologize to God
+    Iom.
+    <wait><end>
+- index: 586
+  character: Woldol
+  ja: |-
+    ダントムよ！　そなたのちからで
+    <party leader>おうじとガーディアナを
+    かならずや　うちはたすのだ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Dantom, make sure to crush Prince Nick and Guardiana with your might
+  en: |-
+    Dantom, make sure
+    to crush Prince
+    <party leader> and
+    Guardiana with
+    your might.
+    <wait><end>
+- index: 587
+  character: Dantom
+  ja: |-
+    きいたとおりだ　<party leader>おうじ！
+    しかし　このままたたかったのでは
+    ひきょうものに　なってしまう・・・
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    You heard it, Prince Nick! However, I’d be a coward if I fought with the given circumstances…
+  en: |-
+    You heard it,
+    Prince <party leader>!
+    However, I’d be a
+    coward if I fought
+    with the given
+    circumstances...
+    <wait more><end>
+- index: 588
+  character: Dantom
+  ja: |-
+    わたしは　ガンドールのなかでまつ
+    よういができたら　はいってこい！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    I will be waiting inside Gundoll, enter once you are ready!
+  en: |-
+    I will be waiting
+    inside Gundoll,
+    enter once you are
+    ready!
+    <wait><end>
+- (enter Citadel of Gundoll)
+- index: 589
+  character: Dantom
+  ja: |-
+    グルル・・・やってきたのだな
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    *growls*... So, you’ve come.
+  en: |-
+    Grr... So, you’ve
+    come.
+    <wait more><end>
+- index: 590
+  character: Dantom
+  ja: |-
+    わたしは　せんだいのおうさまから
+    サイプレスに　おつかえしたもの
+    おうじと　たたかうことになるとは
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    I used to serve the previous king of Cypress. I never thought I’d have to fight the prince.
+  en: |-
+    I used to serve
+    the previous king
+    of Cypress.
+    <wait more>
+    I never thought
+    I’d have to fight
+    the prince.
+    <wait more><end>
+- index: 591
+  character: Dantom
+  ja: |-
+    だが　あなたのきしょうからして
+    ひきかえしては　いただけけまいな
+    やむをえない　さあ　いざいざ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    But since you are here like this, there is no turning back anymore.
+    It’s unavoidable, well then, let’s throw down!
+  en: |-
+    But since you are
+    here like this,
+    there is no
+    turning back
+    anymore.
+    <wait more>
+    It’s unavoidable,
+    well then, let’s
+    throw down!
+    <wait><end>
+- Battle 16
+- index: 592
+  character: Dantom
+  ja: |-
+    グルル・・・おみごとでした・・・
+    やはり　わたしにはおうじのことを
+    てにかけることが　できなかった
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    *growls*... Well fought... As expected, I couldn’t kill the prince with my own hands.
+  en: |-
+    Grr... Well
+    fought...
+    <wait more>
+    As expected, I
+    couldn’t kill the
+    prince with my own
+    Hands.
+    <wait more><end>
+- index: 593
+  character: Dantom
+  ja: |-
+    イ・オムに　きをつけてください
+    あれは　きけんなかみですぞ・・・
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Be careful with Iom, they are a dangerous god…
+  en: |-
+    Be careful with
+    Iom, they are a
+    dangerous god...
+    <wait more><end>
+- index: 594
+  character: Dantom
+  ja: |-
+    ウォルドルは　そのてしたにすぎず
+    エドモンドさまは　やつらのちからに
+    おぼれてしまったのです・・・ぐふ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Woldol is no more than their subordinate. Lord Edmond is being controlled by them… *dies*
+  en: |-
+    Woldol is no more
+    than their
+    subordinate.
+    <wait more>
+    Lord Edmond is
+    being controlled
+    by them... *dies*
+    <wait><end>
+- index: 595
+  character: Shriek
+  ja: |-
+    イヤッホー！　みんなありがとう！
+    おかげで　いのちびろいしたぜ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Yahoo! Thanks everyone! Thanks to you I just barely made it out alive!
+  en: |-
+    Yahoo! Thanks
+    everyone! Thanks
+    to you I just
+    barely made it out
+    Alive!
+    <wait><end>
+- index: 596
+  character: Lowe
+  ja: |-
+    おお　バードラーの　<name>！
+    ほかのみんなは　どうしたんだ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Oh, it’s the bird battler Shriek! What happened to the others?
+  en: |-
+    Oh, it’s the bird
+    battler <name>!
+    What happened to
+    the others?
+    <wait><end>
+- index: 597
+  character: Shriek
+  ja: |-
+    ・・・ざんねんですが・・・
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    … Sadly, they did not make it…
+  en: |-
+    ...Sadly, they did
+    not make it...
+    <wait more><end>
+- index: 598
+  character: Shriek
+  ja: |-
+    わたしもダントムにたすけられて
+    こうしていきていられたようなもの
+    ・・・きしょうのいいやつでした・・・
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    I too was saved by Dantom. He was such a person... with a good nature…
+  en: |-
+    I too was saved by
+    Dantom. He was
+    such a person...
+    with a good
+    nature...
+    <wait><end>
+- index: 599
+  character: Shriek
+  ja: |-
+    そうだ！　ラグどのが　いきています！
+    ガンドールのてまえではぐれましたが
+    サイプレスにむかったはずです！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Ah, yes! Lug is alive! We lost him in front of Gundoll, but he should be on his way to Cypress!
+  en: |-
+    Ah, yes! Lug is
+    Alive!
+    <wait more>
+    We lost him in
+    front of Gundoll,
+    but he should be
+    on his way to
+    Cypress!
+    <wait><end>
+- index: 600
+  character: Lowe
+  ja: |-
+    なんとっ！　ラグがいきているとな！
+    あいつめ！　あくうんのつよいやつだ
+    そうか・・・いきているのかラグ！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    What!? Lug lives! That guy! He has the devil’s luck! I see… so you are alive, huh, Lug!
+  en: |-
+    What!? Lug lives!
+    That guy! He has
+    the devil’s luck!
+    <wait more>
+    I see... so you
+    are alive, huh,
+    Lug!
+    <wait more><end>
+- index: 601
+  character: ''
+  ja: |-
+    <party leader>！　まいりましょう！
+    この　さんがくちたいをこえれば
+    まちにまったサイプレスのまちです
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Nick, let’s go! If we cross this mountainous area we will be finally in the city of Cypress.
+  en: |-
+    <party leader>, let’s
+    go!
+    <wait more>
+    If we cross this
+    mountainous area
+    we will be finally
+    in the city of
+    Cypress.
+    <wait><end>
+- NarrationShriek the bird battler joined the force.
+- index: 602
+  character: Narration
+  ja: |-
+    ようさいガンドールをかいほうし
+    ラグのせいぞんを　しったことで
+    いきあがる
+    <party leader>たち！<wait more><end>
+  ja-kanji: |
+  literal: |-
+    Nick and his friends’ mood had risen having liberated Gundoll citadel and knowing that Lug is alive!
+  en: |-
+    <party leader> and his
+    friends’ mood had
+    risen having
+    liberated Gundoll
+    citadel
+    <wait more>
+    and knowing that
+    Lug is alive!
+    <wait more><end>
+- index: 603
+  character: Narration
+  ja: |-
+    それは　このあとにまっているはずの
+    しれつなたたかいを　ほんのいっとき
+    わすれさろうと　するかのようだった
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Not that they could forget for even a short while what fierce battles await them beyond.
+  en: |-
+    Not that they
+    could forget for
+    even a short while
+    <wait more>
+    what fierce
+    battles await them
+    beyond.
+    <wait more><end>
+- index: 604
+  character: Narration
+  ja: |-
+    はかりしれぬちからのウォルドルや
+    きょうりょくなそのしもべたちなど
+    きをぬくことのできぬ　たびはつづく
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    They weren’t losing their focus as they continued their trip knowing that the unfathomable power of Woldol and his strong underlings awaited them.
+  en: |-
+    They weren’t
+    losing their focus
+    as they continued
+    their trip,
+    <wait more>
+    knowing that the
+    unfathomable power
+    of Woldol and his
+    strong underlings
+    awaited them.
+    <wait><end>
+- index: 605
+  character: ''
+  ja: |-
+    ガンドールさんみゃくをこえて
+    ついに　ガーディアナぐんいっこうは
+    サイプレスの　しゅとにたどりついた
+    <wait more><end>
+  ja-kanji: |
+  literal: |
+  en: |
+- index: 606
+  character: ''
+  ja: |-
+    しかし　そのゆくてをはばむのは
+    サイプレスおうのおとうとである
+    エドモンドこうしゃくだった・・・
+    <wait><end>
+  ja-kanji: |
+  literal: |
+  en: |
+- index: 607
+  character: ''
+  ja: |-
+    サイプレスのおうたるわたしが
+    なぜ？　ぜんせんでたたかうのだ
+    <wait more><end>
+  ja-kanji: |
+  literal: |
+  en: |
+- index: 608
+  character: ''
+  ja: |-
+    これというのも　ウォルドルが
+    わたしをおうさまにするなどという
+    くちぐるまに　のったせいなのか？
+    <wait><end>
+  ja-kanji: |
+  literal: |
+  en: |
+- index: 609
+  character: ''
+  ja: |-
+    おうさま！　ガーディアナぐんが
+    すぐそこに　せまってきました
+
+    <party leader>おうじも　いっしょです！<wait><end>
+  ja-kanji: |
+  literal: |
+  en: |
+- index: 610
+  character: ''
+  ja: |-
+    ひーっ！　やつまできたというのか？
+    こうなったら　やるしかないのだ！
+    あにのこどもに　まけてたまるか！
     <wait><end>
   ja-kanji: |
   literal: |
