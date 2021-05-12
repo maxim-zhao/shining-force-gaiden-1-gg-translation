@@ -4442,29 +4442,536 @@
     out for traps!
     <wait><end>
 - Battle 13
+- NarratorMagical mushroom appeared!
 - index: 548
-  character: ''
+  character: Ghoul
   ja: |-
     くっ・・・われらのわながやぶれた
     これもみな・・・ガーディアナの
     きしのせい・・・むっ　むねん
     <wait><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    *dying* Our trap was unsuccessful. All because... of that Guardianan knight… oh, the regret.
+  en: |-
+    Our trap was
+    Unsuccessful.
+    <wait more>
+    All because... of
+    that Guardianan
+    knight... oh, the
+    regret.
+    <wait><end>
 - index: 549
-  character: ''
+  character: Kashing
   ja: |-
     うっ・・・うーん
     <wait><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    Oof!
+  en: |-
+    Oof!
+    <wait><end>
 - index: 550
-  character: ''
+  character: Lowe
   ja: |-
     おお
     <name>が　めざめた！<wait><end>
+  ja-kanji: |
+  literal: |-
+    Oh, Kashing woke up!
+  en: |-
+    Oh, <name> woke
+    up!
+    <wait><end>
+- index: 551
+  character: Kashing
+  ja: |-
+    おおっ　みんなぶじだったようだな
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Oho, everyone seems okay.
+  en: |-
+    Oho, everyone
+    seems okay.
+    <wait><end>
+- index: 552
+  character: Lowe
+  ja: |-
+    しんぱいしたぞ！　ほかのものは
+    ガーディアナのぶたいはどこだ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    We were worried! Where are the others from the Guardiana army?
+  en: |-
+    We were worried!
+    Where are the
+    others from the
+    Guardiana army?
+    <wait><end>
+- index: 553
+  character: Kashing
+  ja: |-
+    サイプレスぐんに　やられたか
+    ほりょとして　つれていかれ・・・
+    のこったものは　ほんのわずか
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Either killed by the Cypress army or taken hostage… Not many have survived.
+  en: |-
+    Either killed by
+    the Cypress army
+    or taken
+    Hostage…
+    <wait more>
+    Not many have
+    survived.
+    <wait more><end>
+- index: 554
+  character: Kashing
+  ja: |-
+    みんなをここで　まっていたのも
+    ほりょとして　しゅうようされた
+    なかまを　たすけたいがためです
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    I vowed to wait for you here and rescue my comrades who have been captured.
+  en: |-
+    I vowed to wait
+    for you here and
+    rescue my comrades
+    who have been
+    captured.
+    <wait more><end>
+- index: 555
+  character: Kashing
+  ja: |-
+    わたしを　なかまにいれてください
+    そして　ガンドールようさいにいる
+    なかまを　たすけにいってください
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Let me join you and let’s free our friends that are being held captive in Gundoll Citadel.
+  en: |-
+    Let me join you
+    and let’s free our
+    friends
+    <wait more>
+    that are being
+    held captive in
+    Gundoll Citadel.
+    <wait><end>
+- NarrationKashing the knight joined the force.
+- index: 556
+  character: Lowe
+  ja: |-
+    <party leader>　よろしいですな
+    ガーディアナのなかまたちを
+    たすけに　いきましょう
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Nick, you are okay with this, right? Let’s go and rescue our fellow Guardianans.
+  en: |-
+    <party leader>, you are
+    okay with this,
+    right?
+    <wait more>
+    Let’s go and
+    rescue our
+    fellow
+    Guardianans.
+    <wait><end>
+- index: 557
+  character: Kashing
+  ja: |-
+    あのさんがくの　むこうにあるのが
+    ガンドールようさいといって
+    してんのうが　まもっています
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    On the other side of those mountains is the Citadel of Gundoll, protected by the four of Woldol.
+  en: |-
+    On the other side
+    of those mountains
+    is the Citadel of
+    Gundoll,
+    <wait more>
+    protected by the
+    four of Woldol.
+    <wait more><end>
+- index: 558
+  character: Kashing
+  ja: |-
+    そして　われらのなかまたちが
+    つかまっているはずなのです
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    And also possibly where our companions are being held prisoner.
+  en: |-
+    And also possibly
+    where our
+    companions are
+    being held
+    prisoner.
+    <wait more><end>
+- index: 559
+  character: Kashing
+  ja: |-
+    いま　ウォリアーの　<name>どのが
+    ガンドールにむかっていますから
+    いっこくもはやく　まいりましょう
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Gates the warrior is heading towards Gundoll as we speak, we must catch up to him.
+  en: |-
+    <name> the
+    warrior is heading
+    towards Gundoll as
+    we speak, we must
+    catch up to him.
+    <wait><end>
+- index: 560
+  character: Minotauros
+  ja: |-
+    きっ　きたか！　ガーディアナ！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Y-you’ve come, Guardiana!
+  en: |-
+    Y-you’ve come,
+    Guardiana!
+    <wait more><end>
+- index: 561
+  character: Minotauros
+  ja: |-
+    バズーさまとゲッペルさまの
+    おふたりが　かえるまでのあいだ
+    ぜったいガンドールにいれるものか
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    You think you can reach Gundoll until Lord Bazoo and Lord Geppel are back?
+  en: |-
+    You think you can
+    reach Gundoll
+    until Lord Bazoo
+    and Lord Geppel
+    are back?
+    <wait more><end>
+- index: 562
+  character: Minotauros
+  ja: |-
+    ガーディアナなどおそれるな！
+    われらだけで　たおしてしまえ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Don’t fear Guardiana, we are more than enough to defeat them!
+  en: |-
+    Don’t fear
+    Guardiana, we are
+    more than enough
+    to defeat them!
+    <wait><end>
+- Battle 14
+- index: 563
+  character: Minotauros
+  ja: |-
+    バッ　バズーさまのいわれたとおり
+    まえのガーディアナとはちがった
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Just as Lord Bazoo said, you are different from the previous Guardiana army.
+  en: |-
+    Just as Lord Bazoo
+    said, you are
+    different from the
+    previous Guardiana
+    Army.
+    <wait more><end>
+- index: 564
+  character: Minotauros
+  ja: |-
+    かっ　かつてきいたガーディアナの
+    シャイニング・フォースでんせつは
+    ほんとうだったのか・・・グフッ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    I-I’ve heard about Guardiana’s Shining Force legend before. So, it was true… *dies*
+  en: |-
+    I-I’ve heard about
+    Guardiana’s
+    Shining Force
+    legend before. So,
+    it was true…
+    <waiT><end>
+- index: 565
+  character: Gates
+  ja: |-
+    みんな！　まっていたぞ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Everyone, I’ve been waiting for you!
+  en: |-
+    Everyone, I’ve
+    been waiting for
+    you!
+    <wait><end>
+- index: 566
+  character: Lowe
+  ja: |-
+    おお！　おぬしは　<name>！
+    そんなにあわてて　どうした？
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Oh, it’s Gates! What happened to you? You look rough.
+  en: |-
+    Oh, it’s <name>!
+    What happened to
+    you? You look
+    rough.
+    <wait><end>
+- index: 567
+  character: Gates
+  ja: |-
+    ガンドールのなかまたちが・・・
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    My companions in Gundoll…
+  en: |-
+    My companions in
+    Gundoll...
+    <wait more><end>
+- index: 568
+  character: Gates
+  ja: |-
+    おぬしたちが　はちくのいきおいで
+    サイプレスぐんをげきはしてくると
+    そのたびに　ちまつりになっている！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    You’ve been pushing through crushing the Cypress army with great success, as a result, they’ve started massacring them!
+  en: |-
+    You’ve been
+    pushing through
+    crushing the
+    Cypress army with
+    great success,
+    <wait more>
+    as a result,
+    they’ve started
+    massacring them!
+    <wait><end>
+- index: 569
+  character: Lowe
+  ja: |-
+    なんと！　それはたいへんだ！
+    <party leader>！　いっこくもはやく
+    ガンドールのなかまをすくいましょう
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Oh dear, that is very bad news! Nick, we must hurry to free our friends in Gundoll.
+  en: |-
+    Oh dear, that is
+    very bad news!
+    <wait more>
+    <party leader>, we must
+    hurry to free our
+    friends in
+    Gundoll.
+    <wait><end>
+- NarrationGates the warrior joined the force.
+- (enter Gundoll)
+- index: 570
+  character: Dantom
+  ja: |-
+    グルル　<party leader>おうじ
+    おひさしゅうございます
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    *growls* Prince Nick, long time no see.
+  en: |-
+    *growls* Prince
+    <party leader>, long
+    time no see.
+    <wait more><end>
+- index: 571
+  character: Dantom
+  ja: |-
+    まさか・・・くににもどられるとは
+    おもいも　よりませんでしたぞ！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Not even... in my wildest dreams have I imagined you coming back to this country.
+  en: |-
+    Not even... in my
+    wildest dreams
+    have I imagined
+    you coming back to
+    this country.
+    <wait more><end>
+- index: 572
+  character: Dantom
+  ja: |-
+    バズーに　てきずをおわせたぐらいで
+    いいきにでも　なられたのだろうが
+    われわれも　みそこなわれたものだ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    The reason why Bazoo got gravely wounded was because he underestimated them. We too have misjudged their strength!
+  en: |-
+    The reason why
+    Bazoo got gravely
+    wounded was
+    because he under-
+    estimated them.
+    <wait more>
+    We too have
+    misjudged their
+    strength!
+    <wait><end>
+- index: 573
+  character: Frabell
+  ja: |-
+    そういきりたつな！　ダントムよ！
+    このフレーベルのひきいるぐんだんが
+    あやつらをふみつぶしてくれるわ！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Don’t lose your temper, Dantom! The Frabell army will crush them!
+  en: |-
+    Don’t lose your
+    temper, Dantom!
+    The Frabell army
+    will crush them!
+    <wait more><end>
+- index: 574
+  character: Frabell
+  ja: |-
+    フィズル・ボールというわなにも
+    きずいていないとみえる！
+    とんでひにいるなつのむしだ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    They seem to have not noticed the Fizzle ball trap either! They are like moths flying into the flame.
+  en: |-
+    They seem to have
+    not noticed the
+    Fizzle ball trap
+    either!
+    <wait more>
+    They are like
+    moths flying into
+    the flame.
+    <wait more><end>
+- index: 575
+  character: Frabell
+  ja: |-
+    いけ！　そして　ほおむってしまえ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Go and inter them all!
+  en: |-
+    Go and inter them
+    all!
+    <wait><end>
+- index: 576
+  character: Minotauros
+  ja: |-
+    ハッ　かしこまりました
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Yes, without fail!
+  en: |-
+    Yes, without fail!
+    <wait><end>
+- index: 577
+  character: Gates
+  ja: |-
+    やつらが　ウォルドルしてんのう！
+    あんこくのパラディン・フレーベルと
+    まじゅうぐんだんのダントムですぞ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    They are of the four of Woldol! Frabell, paladin of darkness and Dantom of the magical beast army.
+  en: |-
+    They are of the
+    four of Woldol!
+    <wait more>
+    Frabell, paladin
+    of darkness and
+    Dantom of the
+    magical beast
+    army.
+    <wait more><end>
+- index: 578
+  character: ''
+  ja: |-
+    フレーベルのぐんだんがあいてですな
+    しかし・・・おかしい　おかしいぞ！
+    まほうのつかいてが　どこにもいない
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    We will be facing the Frabell army it seems. However… there is something weird! I don’t see any magic users.
+  en: |-
+    We will be facing
+    the Frabell army
+    it seems.
+    <wait more>
+    However... there
+    is something
+    weird! I don’t see
+    any magic users.
+    <wait more><end>
+- index: 579
+  character: ''
+  ja: |-
+    <party leader>おうじ！　きをつけて
+    とてつもないわなが　ありますぞ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Prince Nick, be careful! There is surely some absurd trap!
+  en: |-
+    Prince <party leader>,
+    be careful! There
+    is surely some
+    absurd trap!
+    <wait><end>
+- Battle 15
+- index: 580
+  character: ''
+  ja: |-
+    まさか！　フィズル・ボールのわなを
+    やつらが　やぶってしまうとは・・・
+    <wait><end>
   ja-kanji: |
   literal: |
   en: |
