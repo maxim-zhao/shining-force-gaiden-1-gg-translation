@@ -5091,6 +5091,7 @@
   en: |-
     You heard it,
     Prince <party leader>!
+    <wait more>
     However, I’d be a
     coward if I fought
     with the given
@@ -5400,61 +5401,1492 @@
     awaited them.
     <wait><end>
 - index: 605
-  character: ''
+  character: Narration
   ja: |-
     ガンドールさんみゃくをこえて
     ついに　ガーディアナぐんいっこうは
     サイプレスの　しゅとにたどりついた
     <wait more><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    Having crossed the mountains of Gundoll, at last, the Guardiana force had reached the capital of Cypress.
+  en: |-
+    Having crossed the
+    mountains of
+    Gundoll, at last,
+    <wait more>
+    the Guardiana
+    force had reached
+    the capital of
+    Cypress.
+    <wait more><end>
 - index: 606
-  character: ''
+  character: Narration
   ja: |-
     しかし　そのゆくてをはばむのは
     サイプレスおうのおとうとである
     エドモンドこうしゃくだった・・・
     <wait><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    However, their path was obstructed by King Cypress’s younger brother, Duke Edmond
+  en: |-
+    However, their
+    path was
+    obstructed
+    <wait more>
+    by King Cypress’s
+    younger brother,
+    Duke Edmond.
+    <wait><end>
 - index: 607
-  character: ''
+  character: Edmond
   ja: |-
     サイプレスのおうたるわたしが
     なぜ？　ぜんせんでたたかうのだ
     <wait more><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    Why do I, who deserves the throne of Cypress, have to fight on the frontline?
+  en: |-
+    Why do I, who
+    deserves the
+    throne of Cypress,
+    have to fight on
+    the frontline?
+    <wait more><end>
 - index: 608
-  character: ''
+  character: Edmond
   ja: |-
     これというのも　ウォルドルが
     わたしをおうさまにするなどという
     くちぐるまに　のったせいなのか？
     <wait><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    Am I in this situation because Woldol deceived me into believing that he will help me become king
+  en: |-
+    Am I in this
+    situation because
+    Woldol deceived me
+    <wait more>
+    into believing
+    that he will help
+    me become king?
+    <wait><end>
 - index: 609
-  character: ''
+  character: Cleric
   ja: |-
     おうさま！　ガーディアナぐんが
     すぐそこに　せまってきました
-
     <party leader>おうじも　いっしょです！<wait><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    My liege, the Guardiana force is almost here. With Prince Nick!
+  en: |-
+    My liege, the
+    Guardiana force is
+    almost here. With
+    Prince <party leader>!
+    <wait><end>
 - index: 610
-  character: ''
+  character: Edmond
   ja: |-
     ひーっ！　やつまできたというのか？
     こうなったら　やるしかないのだ！
     あにのこどもに　まけてたまるか！
     <wait><end>
   ja-kanji: |
-  literal: |
-  en: |
+  literal: |-
+    Oh no, even Nick is coming? If that’s the case then I have no choice! I’m not going to be defeated by my brother’s son!
+  en: |-
+    Oh no, even
+    <party leader> is
+    coming? If that’s
+    the case then I
+    have no choice!
+    <wait more>
+    I’m not going to
+    be defeated by my
+    brother’s son!
+    <wait><end>
+- Battle 17
+- NarrationGolem appeared!
+- index: 611
+  character: Edmond
+  ja: |-
+    <party leader>・・・このひとでなしめ
+    おまえのおじであり　サイプレスの
+    おうであるわたしを　たおしおったな
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Nick… you monster! You’ve killed your uncle, the king of Cypress!
+  en: |-
+    <party leader>... you
+    monster! You’ve
+    killed your uncle,
+    the king of
+    Cypress!
+    <wait more><end>
+- index: 612
+  character: Edmond
+  ja: |-
+    おまえは　はんぎゃくしゃだ・・・
+    わたしをたおし　おうになるつもりだ
+    ・・・おれは　ふこうだ・・・ぐふっ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    You are a traitor… you wanted to defeat me and take the throne… I’m dying… *dies*
+  en: |-
+    You are a
+    traitor... you
+    wanted to defeat
+    me and take the
+    throne...
+    <wait more>
+    I’m dying...
+    *dies*
+    <wait><end>
+- index: 613
+  character: Randolf
+  ja: |-
+    ・・・なんとふびんなエドモンドさま
+    ウォルドルに　のせられたがために
+    なんとむごいまつろなのでしょう
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    How pitiful, Duke Edmond was deceived by Woldol. What a cruel end.
+  en: |-
+    How pitiful, Duke
+    Edmond was
+    deceived by
+    Woldol. What a
+    cruel end.
+    <wait more><end>
+- index: 614
+  character: Randolf
+  ja: |-
+    おかえりなさい！　<party leader>さま
+    まさか？　この<name>のことを
+    おわすれでは　ありますまいな！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Welcome back, Prince Nick! Have you forgotten about me?
+  en: |-
+    Welcome back,
+    Prince <party leader>!
+    Have you forgotten
+    about me?
+    <wait more><end>
+- index: 615
+  character: Randolf
+  ja: |-
+    わがきしだんが　やぶれてから
+    どれほど　このひをまちわびたか！
+    わたしもおともさせてください
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Since my knights have been defeated I’ve been longing for this day to come! Let me join you.
+  en: |-
+    Since my knights
+    have been defeated
+    I’ve been longing
+    for this day to
+    come!
+    <wait more>
+    Let me join you.
+    <wait><end>
+- Randolf the paladin joined the force.
+- index: 617
+  character: Randolf
+  ja: |-
+    ウォルドルとの　けっせんのまえに
+    ながたびのつかれを　いやすのです
+    サイプレスのまちに　はいりましょう
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Before we head off to fight Woldol you should rest after your long trip. Let’s enter the town of Cypress.
+  en: |-
+    Before we head off
+    to fight Woldol
+    you should rest
+    after your long
+    trip.
+    <wait more>
+    Let’s enter the
+    town of Cypress.
+    <wait><end>
+- (Cypress town)
+- index: 618
+  character: Randolf
+  ja: |-
+    あのたかだいに　そびえるしろに
+    にっくきウォルドルが　いるはず
+    む　む　むしゃぶるいが　しますな
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    That accursed Woldol should be in that castle towering on that highland over there. I’m trembling with excitement.
+  en: |-
+    That accursed
+    Woldol should be
+    in that castle
+    towering on that
+    highland over
+    <wait more>
+    there. I’m
+    trembling with
+    excitement.
+    <wait><end>
+- index: 619
+  character: Executor
+  ja: |-
+    おうじたちめ　しんぐんするきか？
+    あとすこし　じかんがかせげれば
+    あのかたたちが　きょうかされる
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    The damned prince’s force, seems like they want to attack? If we can win some more time, they could become even stronger.
+  en: |-
+    The damned
+    prince’s force,
+    seems like they
+    want to attack?
+    <wait more>
+    If we can win some
+    more time, they
+    could become even
+    stronger.
+    <wait more><end>
+- index: 620
+  character: Executor
+  ja: |-
+    みなのもの　すこしでもよい！
+    じかんを！　じかんをかせぐのだ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Everyone, even a little will do! Hold out as long as you can!
+  en: |-
+    Everyone, even a
+    little will do!
+    Hold out as long
+    as you can!
+    <wait><end>
+- Battle 18
+- index: 621
+  character: Executor
+  ja: |-
+    くううっ　やられてしまったのか？
+    <end>
+  ja-kanji: |
+  literal: |-
+    *dying* Have I lost?
+  en: |-
+    *dying*
+    Have I lost?
+    <end>
+- index: 622
+  character: Executor
+  ja: |-
+    しかし　どうあがいたところで
+    やはり　おまえらにかちめはない！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    But it matters not how much you try, you won’t have a chance to win in the end!
+  en: |-
+    But it matters not
+    how much you try,
+    you won’t have a
+    chance to win in
+    the end!
+    <wait more><end>
+- index: 623
+  character: Executor
+  ja: |-
+    ウォルドルさまには　じゃしんのかみ
+    イ・オムのかみが　ついておられる！
+    ひとあしさきに　じごくでまっているぞ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Lord Woldol has the evil god, God Iom, by his side! Take one step ahead and hell awaits you!
+  en: |-
+    Lord Woldol has
+    the evil god, God
+    Iom, by his side!
+    <wait more>
+    Take one step
+    ahead and hell
+    awaits you!
+    <wait><end>
+- index: 624
+  character: Lowe
+  ja: |-
+    ついに！　ここまできました
+    さあ　しろに　はいりましょう
+    けっせんは　まぢかですぞ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Finally, we made it this far. Let’s enter the castle. The final battle is near!
+  en: |-
+    Finally, we made
+    it this far. Let’s
+    enter the castle.
+    The final battle
+    is near!
+    <wait><end>
+- (enter courtyard)
+- index: 625
+  character: Geppel
+  ja: |-
+    あらわれたか！　<party leader>おうじ
+    まちすぎて　アクビがとまらんよ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Finally, Prince Nick. I’ve been waiting so long I can’t stop yawning!
+  en: |-
+    Finally, Prince
+    <party leader>. I’ve
+    been waiting so
+    long I can’t stop
+    yawning!
+    <wait more><end>
+- index: 626
+  character: Geppel
+  ja: |-
+    しかし　おれは　みなおしたぞ！
+    ダントムやエドモンドなどといった
+    つわものを　たおしてきたそうだな！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    But, I got a better opinion of you! I’ve heard that you’ve come all this way defeating strong opponents like Dantom and Edmond!
+  en: |-
+    But, I got a
+    better opinion of
+    you!
+    <wait more>
+    I’ve heard that
+    you’ve come all
+    this way defeating
+    strong opponents
+    <wait more>
+    like Dantom and
+    Edmond!
+    <wait><end>
+- index: 627
+  character: Geppel
+  ja: |-
+    まっ　おれはいたくもかゆくもない
+    まして　たおしがいのあるやつを
+    のこしてくれて　かんしゃしてるぜ！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Well, it doesn’t matter to me really. Actually, I am grateful that they’ve left you to me. Someone who’s worth my time and effort!
+  en: |-
+    Well, it doesn’t
+    matter to me
+    really.
+    <wait more>
+    Actually, I am
+    grateful that
+    they’ve left you
+    to me.
+    <wait more>
+    Someone who’s
+    worth my time and
+    effort!
+    <wait more><end>
+- index: 628
+  character: Geppel
+  ja: |-
+    さっ　ながばなしが　すぎたようだ
+    そろそろ　おたのしみをはじめようぜ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    I’ve been talking long enough, let’s start the fun!
+  en: |-
+    I’ve been talking
+    long enough, let’s
+    start the fun!
+    <wait><end>
+- Battle 19
+- "AmigoWow, you’ve managed to find me, huh?\nI’ve found someone to play with, I am\
+  \ veeery happy!Wow, you’ve \nmanaged to find \nme, huh?\nI’ve found someone \nto\
+  \ play with, I am \nveeery happy!"
+- NarrationAmigo the magical creature joined the force.
+- "AmigoThe world is one. We should not be fighting!\nWell then, I’ll be at the HQ,\
+  \ okay?\niAdiós Amigo!The world is one. \nWe should not be \nfighting!\nWell then,\
+  \ I’ll be \nat the HQ, okay?\niAdiós Amigo!"
+- NarrationDullahan appeared!
+- index: 629
+  character: Geppel
+  ja: |-
+    やっ　やられちまったってわけか
+    けっ　だらしねえおわりかただ
+    ウォルドルさまの　おもうつぼだぜ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Have I really lost? Heh, what a crappy ending. Just as Lord Woldol had expected!
+  en: |-
+    Have I really
+    lost? Heh, what a
+    crappy ending.
+    <wait more>
+    Just as Lord
+    Woldol had
+    expected!
+    <wait more><end>
+- index: 630
+  character: Geppel
+  ja: |-
+    ・・・いいことをおしえてやるぜ
+    バズーとフレーベルをおぼえてるか？
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    … Let me tell you something. Do you remember Bazoo and Frabell?
+  en: |-
+    ...Let me tell you
+    something. Do you
+    remember Bazoo and
+    Frabell?
+    <wait more><end>
+- index: 631
+  character: Geppel
+  ja: |-
+    ウォルドルさまが　やつらのことを
+    きょうかしているってわけだ・・・
+    じゅうぶん　ちゅういするこったぜ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    I heard that Lord Woldol is making them stronger… Beware!
+  en: |-
+    I heard that Lord
+    Woldol is making
+    them stronger...
+    Beware!
+    <wait><end>
+- index: 632
+  character: Lowe
+  ja: |-
+    バズーとフレーベルのきょうか？
+    いまでさえ　あれだけつよいやつらが
+    いったい　どこまでつよくなるのだ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Bazoo and Frabel are being made stronger? How much more stronger can those already strong enemies become?
+  en: |-
+    Bazoo and Frabel
+    are being made
+    stronger?
+    <wait more>
+    How much more
+    stronger can
+    those already
+    strong enemies
+    become?
+    <wait more><end>
+- index: 633
+  character: ''
+  ja: |-
+    そのこたえは　しろのなかか・・・
+    さあ　<party leader>！　いきましょう
+    ウォルドルたちは　しろのなかです
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    The answer probably lies inside the castle… Nick, let’s go! Woldol and his lackeys are inside the castle.
+  en: |-
+    The answer
+    probably lies
+    inside the
+    castle...
+    <wait more>
+    <party leader>, let’s
+    go! Woldol and his
+    lackeys are inside
+    the castle.
+    <wait><end>
+- (enter castle)
+- index: 634
+  character: Woldol
+  ja: |-
+    グフグフ　やってきたな<party leader>
+    ゲッペルまで　たおすとはな・・・
+    おまえを　あまくみすぎたようだ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    gufugufu So you’ve arrived, Nick. You’ve even defeated Geppel… he must have underestimated you.
+  en: |-
+    Gufugufu... So
+    you’ve arrived,
+    <party leader>.
+    <wait more>
+    You’ve even
+    defeated Geppel...
+    he must have
+    underestimated
+    you.
+    <wait more><end>
+- index: 635
+  character: Woldol
+  ja: |-
+    ざんねんだが　サイプレスこくを
+    せいふくするのは　あきらめた！
+    そのかわり　このくにをほろぼす！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Unfortunately, my intentions have changed. I’ve given up on conquesting Cypress, I will destroy this country instead!
+  en: |-
+    Unfortunately, my
+    intentions have
+    Changed.
+    <wait more>
+    I’ve given up on
+    conquesting
+    Cypress, I will
+    destroy this
+    country instead!
+    <wait more><end>
+- index: 636
+  character: Woldol
+  ja: |-
+    これから　わたしはぎょくざのへやで
+    あしきまじんを　しょうかんする
+    それが　このくにのさいごとなろう！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    I’ll be in the throne room summoning an evil fiend. That’ll be the end for this land!
+  en: |-
+    I’ll be in the
+    throne room
+    summoning an evil
+    Fiend.
+    <wait more>
+    That’ll be the end
+    for this land!
+    <wait><end>
+- index: 637
+  character: Bazoo
+  ja: |-
+    いつぞやは　ふかくをとったが
+    こんどは　そうはいかんぞ！
+    <party leader>　おまえをたおす！<wait><end>
+  ja-kanji: |
+  literal: |-
+    You’ve defeated me some time ago but this time will be different! Nick, I will defeat you!
+  en: |-
+    You’ve defeated me
+    some time ago but
+    this time will be
+    different!
+    <party leader>, I will
+    defeat you!
+    <wait><end>
+- index: 638
+  character: Frabell
+  ja: |-
+    ホホホーッ　そうはさせないわ
+    <party leader>をたおすのは　わたし
+    バズーといえども　ゆずれないよ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    hohoho No, I shall be the one to defeat Nick!
+  en: |-
+    Hohoho... No, I
+    shall be the one
+    to defeat
+    <party leader>!
+    <wait><end>
+- Battle 20
+- (If Bazoo is killed first)
+- index: 639
+  character: Bazoo
+  ja: |-
+    ぐっ　ぐぐぐ・・・おれのまけだ
+    しかし　まにあわなかったようだな
+    まじんのこどうが　きこえてくる
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    *dying* … I lost. However, it seems like you didn’t make it in time. I can hear the palpitations of the fiend.
+  en: |-
+    *dying* ...I lost.
+    However, it seems
+    like you didn’t
+    make it in time.
+    <wait more>
+    I can hear the
+    palpitations of
+    the fiend.
+    <wait><end>
+- index: 640
+  character: ''
+  ja: |-
+    まじんが　うごきだしてしまえば
+    もうだれも　とめることはできん
+    サイプレスをはかいするまで・・・
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Once the fiend starts moving nobody will be able to stop it. Until it destroys Cypress…
+  en: |-
+    Once the fiend
+    starts moving
+    nobody will be
+    able to stop it.
+    <wait more>
+    Until it destroys
+    Cypress...
+    <wait><end>
+- (If Frabell is killed first)
+- index: 641
+  character: Frabell
+  ja: |-
+    やっ　やられた・・・わたしのまけ
+    でも・・・まにあわなかったようね
+    まじんのこどうが　きこえてくるわ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    I-I’ve been defeated… I lost. But… seems like you didn’t make it in time. I can hear the palpitations of the fiend.
+  en: |-
+    I-I’ve been
+    defeated... I
+    lost. But... seems
+    like you didn’t
+    make it in time.
+    <wait more>
+    I can hear the
+    palpitations of
+    the fiend.
+    <wait more><end>
+- index: 642
+  character: Frabell
+  ja: |-
+    まじんが　うごきだしてしまえば
+    もうだれも　とめることはできない
+    サイプレスをはかいするまで・・・
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Once the fiend starts moving nobody can stop it, until it destroys Cypress…
+    (t.n.: No matter whom you kill first, Lowe still mentions Bazoo in his next line...)
+  en: |-
+    Once the fiend
+    starts moving
+    nobody can stop
+    it, until it
+    destroys Cypress...
+    <wait><end>
+- index: 643
+  character: Lowe
+  ja: |-
+    うごきだしたら　とまらないだって！
+    <party leader>！　チャンスはまだある<wait more><end>
+  ja-kanji: |
+  literal: |-
+    He said once it started moving! Nick, we still have a chance.
+  en: |-
+    He said once it
+    started moving!
+    <party leader>, we still
+    have a chance.
+    <wait more><end>
+- index: 644
+  character: Lowe
+  ja: |-
+    バズーのいったことが　ほんとなら
+    まじんが　うごくまえにたたかえば
+    たおせるかも！さあ　いそぎましょう
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    If what Bazoo said was true, then if we fight the fiend before it starts moving, we might be able to defeat it! Let’s make haste!
+  en: |-
+    If what Bazoo said
+    was true, then if
+    we fight the fiend
+    before it starts
+    moving,
+    <wait more>
+    we might be able
+    to defeat it!
+    Let’s make haste!
+    <wait><end>
+- (enter throne room)
+- index: 645
+  character: Woldol
+  ja: |-
+    グフフフフーッ　おそかったな！
+    ざんねんながら　これまでのようだな
+    やみのまじんは　しょうかんされたぞ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    gufufufufu You are too late! Too bad for you but this is as far as you go. The fiend of darkness has been summoned!
+  en: |-
+    Gufufufufu! You
+    are too late! Too
+    bad for you but
+    this is as far as
+    you go.
+    <wait more>
+    The fiend of
+    darkness has been
+    Summoned!
+    <wait more><end>
+- index: 646
+  character: Woldol
+  ja: |-
+    きさまら　まじんはめざめたばかりが
+    さいだいの　じゃくてんであることを
+    しっているのだな！ギリギリギリ
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    I see you know about the freshly awakened fiend’s greatest weakness! *grinds teeth*
+  en: |-
+    I see you know
+    about the freshly
+    awakened fiend’s
+    greatest weakness!
+    *grinds teeth*
+    <wait more><end>
+- index: 647
+  character: Woldol
+  ja: |-
+    みなのもの！　まじんをまもるのだ
+    うごけるように　なるまでのあいだ
+    やつらを　ちかづけてはならん！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    All of you, protect the fiend. Don’t let them get close to it until it can move!
+  en: |-
+    All of you,
+    protect the fiend.
+    Don’t let them get
+    close to it until
+    it can move!
+    <wait><end>
+- index: 648
+  character: Lowe
+  ja: |-
+    やはりそうでした！　<party leader>！
+    まじんが　うごきだすまでのあいだに
+    どんなことをしてでも　たおすのです
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    So it was true! Nick, while the fiend cannot move you must do whatever to defeat it!
+  en: |-
+    So it was true!
+    <wait more>
+    <party leader>, while
+    the fiend cannot
+    move you must do
+    whatever to defeat
+    it!
+    <wait><end>
+- Battle 21
+- (If Woldol dies before the fiend)
+- "WoldolD-damn you… But I won’t die! As long as the fiend lives I am immortal. Guardiana\
+  \ rookies, you’ll serve as sacrifice for the fiend! wahahahahahaD-damn you... But\
+  \ \nI won’t die! \nAs long as the \nfiend lives I am \nimmortal. \n<wait more>\n\
+  Guardiana rookies, \nyou’ll serve as \nsacrifice for the \nfiend! \nWahahahahaha!\n\
+  <wait><end>"
+- Fiend*roars*...*roars*...
+- index: 649
+  character: Woldol
+  ja: |-
+    なっ　なんと　まじんがやられた！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    How!? The fiend was defeated!
+  en: |-
+    How!? The fiend
+    was defeated!
+    <wait more><end>
+- index: 650
+  character: Woldol
+  ja: |-
+    こうなったら　あのたからをもって
+    いちど　たいさんすることにしよう
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    If this is the case, I will take that treasure and withdraw for now.
+  en: |-
+    If this is the
+    case, I will take
+    that treasure and
+    withdraw for now.
+    <wait><end>
+- index: 651
+  character: Lug
+  ja: |-
+    そうはさせないぜ！　ウォルドル！
+    ラグさまのめのいろのくろいうちは
+    おまえのようなやつをにがしはしない
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    I won’t let you do that, Woldol! While I am alive, a scoundrel like you won’t have a chance to escape.
+  en: |-
+    I won’t let you do
+    that, Woldol!
+    <wait more>
+    While I am alive,
+    a scoundrel like
+    you won’t have a
+    chance to escape.
+    <wait more><end>
+- index: 652
+  character: Lug
+  ja: |-
+    おまえさんのいっていたたからは
+    これじゃなかったのかい？
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Did you just mention something about this treasure?
+  en: |-
+    Did you just
+    mention something
+    about this
+    treasure?
+    <wait><end>
+- index: 653
+  character: Narration
+  ja: |-
+    ラグは　はじゃのつるぎをかかげた
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Lug brandished the Sword of evilsbane.
+  en: |-
+    Lug brandished the
+    Sword of
+    evilsbane.
+    <wait><end>
+- index: 654
+  character: Woldol
+  ja: |-
+    きさまは　ガーディアナのラグ！
+    いつのまに　そのつるぎをみつけた！
+    かえしてもらおう！かえさんか！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Impossible, Lug of Guardiana! When did you find that sword! Give it back to me! Give it!
+  en: |-
+    Impossible, Lug of
+    Guardiana! When
+    did you find that
+    sword!
+    <wait more>
+    Give it back to
+    me! Give it!
+    <wait><end>
+- index: 655
+  character: Lug
+  ja: |-
+    ことわる！　おまえらがこのくににきて
+    むほんをおこしたほんとうのりゆうも
+    このつるぎが　ほしいがため！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    No! You came to this country and incited a rebellion just to get this sword!
+  en: |-
+    No! You came to
+    this country and
+    incited a
+    rebellion just to
+    get this sword!
+    <wait more><end>
+- index: 656
+  character: Lug
+  ja: |-
+    これは　じゃしんよけのつるぎ！
+    これがあるため　イ・オムのかみは
+    このくにに　ちかよれないでいたのさ
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    This sword repels evil gods! This sword is the reason why God Iom cannot come near this country.
+  en: |-
+    This sword repels
+    evil gods! This
+    sword is the
+    reason why God Iom
+    cannot come near
+    this country.
+    <wait><end>
+- index: 657
+  character: Woldol
+  ja: |-
+    うぬぬっ　もはやこれまでか・・・
+    おまえのいうとおり　なにもかも
+    そのつるぎを　ほうむるためだった
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Ungh, you already knew that much, huh… just as you said, I did everything to get rid of that sword.
+  en: |-
+    Ungh, you already
+    knew that much,
+    huh...
+    <wait more>
+    Just as you said,
+    I did everything
+    to get rid of that
+    sword.
+    <wait more><end>
+- index: 658
+  character: Woldol
+  ja: |-
+    しかし　こうなればはなしがかわる
+    そのひみつをしったものすべては
+    イ・オムのいけにえとしてくれる！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    But given this situation, everything changes. Everyone who knows about that secret will be sacrificed to Iom!
+  en: |-
+    But given this
+    situation,
+    everything
+    changes.
+    <wait more>
+    Everyone who knows
+    about that secret
+    will be sacrificed
+    to Iom!
+    <wait><end>
+- index: 659
+  character: Lug
+  ja: |-
+    <party leader>！　はじゃのつるぎで
+    やつを　こうげきしなければ
+    やつを　たおすことができない！
+    <wait more><end>
+  ja-kanji: |
+  literal: |-
+    Nick, only by attacking him with the Sword of evilsbane can he be defeated!
+  en: |-
+    <party leader>, only by
+    attacking him with
+    the Sword of
+    evilsbane can he
+    be defeated!
+    <wait more><end>
+- index: 660
+  character: Lug
+  ja: |-
+    ぼくのところに　きてくれっ！
+    そして　このつるぎでたたかうんだ！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Come over here, take this sword and use it to fight!
+  en: |-
+    Come over here,
+    take this sword
+    and use it to
+    fight!
+    <wait><end>
+- Battle 22
+- (If attacking Woldol before using the Sword of evilsbane)
+- "NarrationHowever, damage cannot be inflicted to Woldol.However, damage \ncannot\
+  \ be \ninflicted to \nWoldol.\n<wait><end>"
+- (If Nick attacks Woldol with the Sword of evilsbane)
+- index: 661
+  character: Woldol
+  ja: |-
+    <line><clear screen>グエエエーッ　よくもやりおったな！<end>
+  ja-kanji: |
+  literal: |-
+    *is disgusted* How dare you!
+  en: |-
+    Yuck! How dare
+    you!
+    <end>
+- index: 662
+  character: Woldol
+  ja: |-
+    このわたしに　きずをつけたつみ！
+    そのからだで　つぐなってもらうぞ！
+    <end>
+  ja-kanji: |
+  literal: |-
+    Take this as punishment for wounding me!
+  en: |-
+    Take this as
+    punishment for
+    wounding me!
+    <end>
+- index: 663
+  character: Narration
+  ja: |-
+    <line><clear screen>ウォルドルは　どくえきをはいた！<end>
+  ja-kanji: |
+  literal: |-
+    Woldol spat out venom!
+  en: |-
+    <line><clear screen>Woldol spat out
+    venom!<end>
+- index: 664
+  character: Narration
+  ja: |-
+    <clear screen><party leader>は
+    どくえきを　みぎてにうけた
+    <end>
+  ja-kanji: |
+  literal: |-
+    Nick’s right arm was hit by the venom.
+  en: |-
+    <clear screen><party leader>’s right
+    arm was hit by the
+    venom.<end>
+- index: 694
+  character: Woldol
+  ja: |-
+    グオォォォォォォォ・・・
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    *roars*...
+  en: |-
+    *roars*...
+    <wait><end>
+- index: 665
+  character: Apis
+  ja: |-
+    ぼくたちが　かったんだね・・・
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    So, we won, right?...
+  en: |-
+    So, we won,
+    Right?...
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 666
+  character: Wendy
+  ja: |-
+    なにを　ねぼけたこといってるの！
+    まちがいなく　かったのよ
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Are you half asleep? Of course we won!
+  en: |-
+    Are you half
+    asleep? Of course
+    we won!
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 667
+  character: Shade
+  ja: |-
+    ウォルドルには　おどろいたよな！
+    まさか　サソリのばけものなんだもの
+    ほらみて　まだあしがふるえている
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Woldol surprised us all, didn’t think he was a scorpion monster. Look at my legs, still shaking.
+  en: |-
+    Woldol surprised
+    us all, didn’t
+    think he was a
+    scorpion monster.
+    <delay 01><delay 01><delay 01><delay 01>
+    Look at my legs,
+    still shaking.
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 668
+  character: Shade
+  ja: |-
+    それにしても　よかったな<name>！
+    ラグたいちょうが　いきててさ！
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Besides that, Ruce, Captain Lug is alive!
+  en: |-
+    Besides that,
+    <name>, Captain
+    Lug is alive!
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 669
+  character: Ruce
+  ja: |-
+    とうさん・・・いきてたんだね
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Father… you live!
+  en: |-
+    Father... you
+    live!
+    <delay 01><delay 01><end>
+- index: 670
+  character: Ruce
+  ja: |-
+    おれさ・・・しんぱいだったんだぜ
+    ・・・だけど　なかまたちみんなと
+    はげましあって　やってきたんだ
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    I… I was so worried! … but, all my friends kept encouraging me and we came all this way.
+  en: |-
+    I... I was so
+    worried!
+    <delay 01><delay 01>
+    ...but, all my friends kept encouraging me and we came all
+    this way.
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 671
+  character: Lug
+  ja: |-
+    <name>・・・たくましくなったな
+    おそろしくつよいと　ひょうばんの
+    ガーディアナぐんが　おまえたちとは
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Ruce… You’ve become sturdy. I’ve heard that there was a force from Guardiana, being dreadfully strong. I didn’t think that it was you guys.
+  en: |-
+    <name>... You’ve
+    become sturdy.
+    <delay 01><delay 01>
+    I’ve heard that
+    there was a force
+    from Guardiana,
+    being dreadfully
+    strong.
+    <delay 01><delay 01><delay 01><delay 01>
+    I didn’t think
+    that it was you
+    guys.
+    <delay 01><delay 01><delay 01><end>
+- index: 672
+  character: Lug
+  ja: |-
+    しかも　そのぐんをひきいているのが
+    サイプレスのおうじだったとはな！
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Furthermore, the force is led by the prince of Cypress himself!
+  en: |-
+    Furthermore, the
+    force is led by
+    the prince of
+    Cypress himself!
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 673
+  character: Teddy
+  ja: |-
+    おうじ？？　どうなさいました！
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Prince?? What’s wrong!?
+  en: |-
+    Prince?? What’s
+    wrong!?
+    <delay 01><delay 01><end>
+- index: 674
+  character: Teddy
+  ja: |-
+    ああっ　なんと　おうじのみぎてが！
+    <party leader>おうじの　みっ　みぎてが
+    いしになっている！
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Ah, oh my, the prince’s right arm! Prince Nick’s right arm is turning to stone!
+  en: |-
+    Ah, oh my, the
+    prince’s right
+    arm! Prince
+    <party leader>’s right
+    arm is turning to
+    stone!
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 675
+  character: Iom
+  ja: |-
+    ガーディアナとサイプレスのものよ
+    よくぞ！　わがしもべをたおした
+    そのちから！　ほめてとらそう
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Guardiana and Cypress! Admirable! I commend your power for defeating my minions!
+  en: |-
+    Guardiana and
+    Cypress!
+    <delay 01><delay 01>
+    Admirable! I
+    commend your power
+    for defeating my
+    minions!
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 676
+  character: Iom
+  ja: |-
+    しかし　われらのしんりゃくは
+    はじまったばかりなのだ
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    However, our invasion had just begun.
+  en: |-
+    However, our
+    invasion has just
+    begun.
+    <delay 01><delay 01><delay 01><end>
+- index: 677
+  character: Iom
+  ja: |-
+    <party leader>よ！　そなたのみぎうでは
+    つぎのときまで　あずかっておくぞ
+    グハッ　グハッ　グハハハハーッ・・・
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Nick, I shall keep your right arm until the next time we meet!
+    guha guha guhahahaha...
+  en: |-
+    <party leader>, I shall
+    keep your right
+    arm until the next
+    time we meet!
+    <delay 01><delay 01><delay 01><delay 01>
+    Guha, guha,
+    guhahahaha...
+    <delay 01><delay 01><end>
+- index: 678
+  character: Narration
+  ja: |-
+    こうして　<party leader>らのおかげで
+    いちおうへいわを　とりもどしました
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Thus, thanks to Nick and his friends, peace had been restored for the time being.
+  en: |-
+    Thus, thanks to
+    <party leader> and his
+    friends, peace had
+    been restored for
+    the time being.
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 679
+  character: Ann
+  ja: |-
+    みんな・・・ほんとうにごくろうさま
+    そのおかげで　もういちど　わたしも
+    げんきになることができました
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Everyone… I must congratulate you on a job well done. Thanks to you all I am in good health once more.
+  en: |-
+    Everyone... I must
+    congratulate you
+    on a job well
+    done.
+    <delay 01><delay 01><delay 01><delay 01>
+    Thanks to you all
+    I am in good
+    health once more.
+    <delay 01><delay 01><delay 01><end>
+- index: 680
+  character: Ann
+  ja: |-
+    ・・・それにしても<party leader>どのの
+    みぎうでが　きがかりですね・・・
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    … At any rate, Nick’s right arm is concerning…
+  en: |-
+    ...At any rate,
+    <party leader>’s right
+    arm is
+    concerning...
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 681
+  character: Lowe
+  ja: |-
+    はい・・・それでサイプレスでも
+    へいりょくが　ととのいしだい
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Yes… for that same reason, I heard that Cypress is preparing its military force
+  en: |-
+    Yes... for that
+    same reason, I
+    heard that Cypress
+    is preparing its
+    military force
+    <wait more>
+- index: 682
+  character: Lowe
+  ja: |-
+    あのたいりくのおくちにむかって
+    はへいすることに　なったそうです
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    to advance to the inland of that continent.
+  en: |-
+    to advance to the
+    inland of that
+    continent.
+    <delay 01><delay 01><delay 01><end>
+- index: 683
+  character: Ann
+  ja: |-
+    そうですか・・・そういうことなら
+    われわれガーディアナとしても
+    てだすけしなくてはなりませんね
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    I see… if that’s the case then Guardiana must assist them in their endeavor.
+  en: |-
+    I see... if that’s
+    the case then
+    Guardiana must
+    assist them in
+    their endeavor.
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 684
+  character: Lowe
+  ja: |-
+    もういちど・・・
+    いくしか　ありませんな
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    We have to set out… one more time.
+  en: |-
+    We have to set
+    out... one more
+    time.
+    <delay 01><delay 01><delay 01><end>
+- index: 685
+  character: Ken
+  ja: |-
+    そうですとも！
+    <party leader>の　みぎうでを
+    とりもどすためにね
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    That’s right! To recover Nick’s right arm.
+  en: |-
+    That’s right! To
+    recover <party ledder>’s
+    right arm.
+    <delay 01><delay 01><delay 01><end>
+- index: 686
+  character: Lug
+  ja: |-
+    やつへのかりを　かえすために
+    もういちど　いきましょう
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    To return the favor to him, let’s go again.
+  en: |-
+    To return the
+    favor to him,
+    let’s go again.
+    <delay 01><delay 01><delay 01><end>
+- index: 687
+  character: Everyone
+  ja: |-
+    サイプレスへ！
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    To Cypress!
+  en: |-
+    To Cypress!
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 688
+  character: Narration
+  ja: |-
+    つかのまの　へいわを
+    よろこびあう　ガーディアナ
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    Guardiana is rejoicing in a brief moment of peace.
+  en: |-
+    Guardiana is
+    rejoicing in a
+    brief moment of
+    peace.
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 689
+  character: ''
+  ja: |-
+    <clear screen>しかし　そのころサイプレスでは
+    あらたなじけんのタネが
+    めばえようとしていた
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    However, meanwhile in Cypress, a new event’s seed was sprouting.
+  en: |-
+    However, meanwhile
+    in Cypress, a new
+    event’s seed was
+    sprouting.
+    <delay 01><delay 01><delay 01><delay 01><end>
+- index: 690
+  character: ''
+  ja: |-
+    <clear screen>じゃあくしん　イ・オムのいしは
+    すでに　うごきだしていたのだった
+    <delay 01><delay 01><delay 01><delay 01><end>
+  ja-kanji: |
+  literal: |-
+    The will of the evil god, Iom, was already in motion.
+  en: |-
+    The will of the
+    evil god, Iom, was
+    already in motion.
+    <delay 01><delay 01><delay 01><delay 01><end>
