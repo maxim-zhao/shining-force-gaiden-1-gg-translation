@@ -6000,6 +6000,7 @@
     some time ago but
     this time will be
     different!
+    <wait more>
     <party leader>, I will
     defeat you!
     <wait><end>
@@ -6097,8 +6098,10 @@
     Once the fiend
     starts moving
     nobody can stop
-    it, until it
-    destroys Cypress...
+    it,
+    <wait more>
+    until it destroys
+    Cypress...
     <wait><end>
 - index: 643
   character: Lowe
@@ -6340,8 +6343,9 @@
     This sword repels evil gods! This sword is the reason why God Iom cannot come near this country.
   en: |-
     This sword repels
-    evil gods! This
-    sword is the
+    evil gods!
+    <wait more>
+    This sword is the
     reason why God Iom
     cannot come near
     this country.
@@ -6568,8 +6572,11 @@
     I... I was so
     worried!
     <delay 01><delay 01>
-    ...but, all my friends kept encouraging me and we came all
-    this way.
+    ...but, all my
+    friends kept
+    encouraging me and
+    we came all this
+    way.
     <delay 01><delay 01><delay 01><delay 01><end>
 - index: 671
   character: Lug
@@ -6635,10 +6642,11 @@
   en: |-
     Ah, oh my, the
     prince’s right
-    arm! Prince
-    <party leader>’s right
-    arm is turning to
-    stone!
+    arm!
+    <delay 01><delay 01><delay 01>
+    Prince <party leader>’s
+    right arm is
+    turning to stone!
     <delay 01><delay 01><delay 01><delay 01><end>
 - index: 675
   character: Iom
@@ -6817,7 +6825,7 @@
     That’s right! To recover Nick’s right arm.
   en: |-
     That’s right! To
-    recover <party ledder>’s
+    recover <party leader>’s
     right arm.
     <delay 01><delay 01><delay 01><end>
 - index: 686

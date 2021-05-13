@@ -121,7 +121,14 @@ PatchAt\1:
 .slot 2
 .include "script.asm"
 
-.section "Script index" free
+; We need to patch the pointer to ScriptIndex
+  RemoveChunkAndReplace $2000c $20027 1
+.section "Look up script entry hook" force
+LookupScriptEntry:
+  jp LookupScriptEntryImpl
+.ends
+
+.section "Script index" free ; same bank as above
 ; This holds pointers to the start and every 256th entry after that
 ScriptIndex:
 .db :Script1
@@ -130,13 +137,6 @@ ScriptIndex:
 .dw Script257
 .db :Script513
 .dw Script513
-.ends
-
-; We need to patch the pointer to ScriptIndex
-  RemoveChunkAndReplace $2000c $20027 1
-.section "Look up script entry hook" force
-LookupScriptEntry:
-  jp LookupScriptEntryImpl
 .ends
 
 .section "Look up script entry part 2" free ; same bank as above
