@@ -439,8 +439,9 @@ def dump_script(rom, output_file):
 
 
 class ScriptEntry:
-    def __init__(self, text, name):
+    def __init__(self, text, name, index):
         self.label = name
+        self.index = index
 
         s = text
 
@@ -469,39 +470,41 @@ def encode_script(script_file, trees_file, data_file):
     with open(script_file, "r", encoding="utf-8") as f:
         script_yaml = ruamel.yaml.YAML().load(f)
 
-    # Convert to dictionary
-    script_yaml = {x["index"]: x for x in script_yaml}
+    max_width = 18
+    max_height = 5
 
     script = []
-    for index in range(1, 718 + 1):
-        if index not in script_yaml:
-            print(f"Error: entry {index} missing")
-            text = "<end>"
-        else:
-            node = script_yaml[index]
-            text = node["en"]
-            if text is None:
-                raise Exception(f"No text for {node}")
-            if len(text) == 0:
-                text = node["literal"]
+    for node in script_yaml:
+        # We parse in order to get the width/height right
+        
+        if "width" in node:
+            max_width = int(node["width"])
+        if "height" in node:
+            max_height = int(node["height"])
+            
+        if "en" not in node:
+            continue
 
-            # Check line lengths
-            # First substitute names and line breaks
-            s = text
-            for k, v in {
-                ("<name>", "NAME---"),
-                ("<party leader>", "NAME---"),
-                ("<class name>", "CLASS-NAME------"),
-                ("<line>", "\n")}:
-                s = s.replace(k, v)
-            # Next remove tags and split
-            lines = re.sub("<[^>]+>", "", s).split("\n")
-            for line in lines:
-                line = line.rstrip()
-                if len(line) > 18:
-                    raise Exception(f"Line too long ({len(line)}) in script entry {index}: \"{line}\"")
+        text = node["en"]
+        index = node["index"]
 
-        entry = ScriptEntry(text, f"Script{index}")
+        # Check line lengths
+        # First substitute names and line breaks
+        s = text
+        for k, v in {
+            ("<name>", "NAME---"),
+            ("<party leader>", "NAME---"),
+            ("<class name>", "CLASS-NAME------"),
+            ("<line>", "\n")}:
+            s = s.replace(k, v)
+        # Next remove tags and split
+        lines = re.sub("<[^>]+>", "", s).split("\n")
+        for line in lines:
+            line = line.rstrip()
+            if len(line) > max_width:
+                raise Exception(f"Line too long ({len(line)}) in script entry {index}: \"{line}\"")
+
+        entry = ScriptEntry(text, f"Script{index}", index)
         script.append(entry)
         
         # After this processing, we check for runs of over 5 lines...
@@ -511,8 +514,22 @@ def encode_script(script_file, trees_file, data_file):
         # Then count line breaks in each part and report the ones that are too long
         for chunk in s.replace("<line>", "\n").split("#"):
             lines = len(chunk.strip().split("\n"))
-            if lines > 5:
+            if lines > max_height:
                 raise Exception(f"Text is {lines} lines in script entry {index}:\n{chunk}")
+                
+    # Check for duplicates
+    seen = set()
+    for entry in script:
+        if entry.index in seen:
+            raise Exception(f"Script index {entry.index} has duplicate entries")
+        seen.add(entry.index)
+    # Check for missing items
+    for index in range(1, 718+1):
+        if not index in seen:
+            print(f"Missing entry for script index {index}, defaulting...")
+            script.append(ScriptEntry("", f"Script{index}", index))
+    # Sort the script
+    script.sort(key = lambda x: x.index)
         
     # Then we build a table of byte counts
     script_symbols_count = 0

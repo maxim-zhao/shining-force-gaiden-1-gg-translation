@@ -36,6 +36,10 @@
 # For indented multi-line text, that is here:
 #   ##################
 
+# These set the script size so we can fail when lines are too long or not split up enough.
+- width: 18
+  height: 5
+
 ######################
 # Opening sequence
 ######################
@@ -782,7 +786,8 @@
 - index: 121
   character: ''
   ja: |-
-    どこに うつすの?<end>
+    どこに うつすの?
+    <end>
   literal: ''
   en: |-
     Where should it
@@ -794,7 +799,9 @@
     これで うつしたよ
     <wait more><end>
   literal: ''
-  en: It's copied.<wait more><end>
+  en: |-
+    It's copied.
+    <wait more><end>
 
 
 ######################
@@ -7067,6 +7074,13 @@
     already in motion.
     <delay 01><delay 01><delay 01><delay 01><end>
 
+######################
+# Battle dialogue
+######################
+
+- width: 18
+  height: 3
+
 - index: 691
   character: ''
   ja: |-
@@ -7092,14 +7106,6 @@
     まじんの いけにえと なるがよい
     わははははは
     <wait><clear screen><end>
-  literal: ''
-  en: ''
-
-- index: 694
-  character: ''
-  ja: |-
-    グオォォォォォォォ・・・
-    <wait><end>
   literal: ''
   en: ''
 
@@ -8206,7 +8212,7 @@
     <delay 01>
     ざんねんねぇ・・・
     <delay 01><end>
-  literal: ''
+  literal: ...Is it over? Sorry...
   en: ''
 
 - index: 124
@@ -9437,14 +9443,6 @@
   ja: |-
     わたしは 
     <class name>の<name><delay 01><end>
-  literal: ''
-  en: ''
-
-- index: 278
-  character: ''
-  ja: |-
-    <class name>の <name>が
-    なかまに なった<end>
   literal: ''
   en: ''
 
