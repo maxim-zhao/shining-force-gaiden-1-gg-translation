@@ -180,12 +180,12 @@
   data_at: '0xaf8e'
   data_length: 7
   ja: -アイテム-
-  en: -Item-
+  en: -Items-
 - reference_at: '0xaf83'
   data_at: '0xaf95'
   data_length: 7
   ja: もっていない
-  en: "Don't have"
+  en: "Nothing" # No items in inventory
 - reference_at: '0xafcf'
   data_at: '0xaff5'
   data_length: 9
