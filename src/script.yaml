@@ -657,8 +657,8 @@
 - index: 113
   character: Girl
   ja: |-
-    ねえねえ <delay 01>このしゅじんこうは
-    なんていう おなまえなの?
+    ねえねえ　<delay 01>このしゅじんこうは
+    なんていう　おなまえなの？
     <wait more><end>
   ja-kanji: |-
     ねえねえ　この主人公は
@@ -673,8 +673,8 @@
 - index: 114
   character: Girl
   ja: |-
-    <party leader>さんて いうのね<delay 01>
-    かっこいいんだーっ!
+    <party leader>さんて　いうのね<delay 01>
+    かっこいいんだーっ！
     <wait more><end>
   ja-kanji: |-
     ニックさんて　言うのね
@@ -691,20 +691,26 @@
 - index: 115
   character: ''
   ja: |-
-    それじゃ はやくよんで!
-    <delay 01>
-    はやく はやくーっ!<wait><end>
-  literal: ''
+    それじゃ　はやくよんで！<delay 01>
+    はやく　はやくーっ！
+    <wait><end>
+  ja-kanji: |-
+    それじゃ　早く読んで！
+    早く　早くーっ！
+  literal: |-
+    Hurry up and read it!
+    Hurry, hurry!
   en: |-
     Hurry up and read
     it!<delay 01>
-    Hurry, hurry!<wait><end>
-
+    Hurry, hurry!
+    <wait><end>
+# (Continue)
 - index: 116
   character: Girl
   ja: |-
-    このまえの つづきを
-    よんで きかせて くれるのね!
+    このまえの　つづきを
+    よんで　きかせて　くれるのね！
     <wait more><end>
   ja-kanji: |-
     この前の　続きを
@@ -722,6 +728,7 @@
   character: Girl
   ja: |-
     どの　つづきを　よんでくれるの？
+    <end>
   ja-kanji: |-
     どの　続きを　読んでくれるの？
   literal: |-
@@ -736,18 +743,20 @@
 - index: 118
   character: ''
   ja: |-
-    わ-! たのしみ-!
-    <delay 01>
-    はやく よんできかせてー!<wait><end>
-  literal: ''
-  en: ''
-  # Unused? ^^^
-
+    わー！　たのしみー！<delay 01>
+    はやく　よんできかせてー！
+    <wait><end>
+  ja-kanji: |
+  literal: |-
+    Wow! I’m looking forward to it! Hurry up and read it to me!
+  en: |
+# (Delete)
 - index: 119
   character: Girl
   ja: |-
-    えー？　そうなんだ…
+    えー？　そうなんだ・・<delay 01>
     どれを　なくしちゃうの？
+    <end>
   ja-kanji: |-
     えー？　そうなんだ…
     どれを　なくしちゃうの？
@@ -762,7 +771,8 @@
 - index: 135
   character: Girl
   ja: |-
-    あら！　ほんとに けしちゃうの?<end>
+    あら！　ほんとに けしちゃうの?
+    <end>
   ja-kanji: |-
     あら！　本当に　消しちゃうの？
   literal: |-
@@ -771,34 +781,41 @@
     Oh, are you sure
     you want to
     delete it?<end>
-
 - index: 120
-  character: ''
+  character: Girl
   ja: |-
     うん これでなくなったよ
     <wait more><end>
-  literal: ''
+  ja-kanji: |-
+    うん　これでなくなったよ
+  literal: |-
+    Alright, it’s gone!
   en: |-
     Alright, it's
     gone!
     <wait more><end>
-
+# (Copy)
 - index: 121
-  character: ''
+  character: Girl
   ja: |-
     どこに うつすの?
     <end>
-  literal: ''
+  ja-kanji: |-
+    どこに　移すの？
+  literal: |-
+    Where should it be copied to?
   en: |-
     Where should it
     be copied to?<end>
-
 - index: 122
-  character: ''
+  character: Girl
   ja: |-
     これで うつしたよ
     <wait more><end>
-  literal: ''
+  ja-kanji: |-
+    これで　移したよ
+  literal: |-
+    It’s copied.
   en: |-
     It's copied.
     <wait more><end>
