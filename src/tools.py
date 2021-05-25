@@ -51,7 +51,7 @@ en_character_map_script = "█ " \
                           "abcdefghijklmnopqrstuvwxyz" \
                           "'\"/" \
                           "██████████████████████████" \
-                          "♥*█" \
+                          "♥*%" \
                           "██████████████████████████"
 
 en_character_map_menus = "█ " \
@@ -63,7 +63,7 @@ en_character_map_menus = "█ " \
                          "██████████████████████████" \
                          "'\"/" \
                          "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
-                         "♥*█" \
+                         "♥*%" \
                          "abcdefghijklmnopqrstuvwxyz"
 
 
