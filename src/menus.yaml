@@ -75,7 +75,7 @@
   data_at: '0x4d2d'
   ja: ちけいこうか
   data_length: 7
-  en: Terrain Effect
+  en: Terr. # Terrain Advantage?
 
 - reference_at: '0xa558'
   data_at: '0xa593'

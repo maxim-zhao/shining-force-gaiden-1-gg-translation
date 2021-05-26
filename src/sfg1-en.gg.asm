@@ -338,6 +338,9 @@ LookupScriptEntryImpl:
   PatchB $a9db $1b ; Yes width
   PatchB $a9e3 $13 ; No width
   PatchB $a9e5 $8a ; No X
+  
+; Terrain Advantage window
+  PatchB $4d23 $73 ; '%' character
 
 .include "names.asm"
 

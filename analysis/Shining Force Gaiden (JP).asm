@@ -9342,7 +9342,7 @@ _LABEL_426D_:
 ; Data from 42D1 to 42D2 (2 bytes)
 .db $60 $04
 
-  call _LABEL_4CD7_
+  call _LABEL_4CD7_TerrainWindow
   call _LABEL_4D34_
 _LABEL_42D9_:
   ld a, (_RAM_D6AD_)
@@ -10968,7 +10968,7 @@ _LABEL_4BD3_:
   pop af
   ret
 
-_LABEL_4CD7_:
+_LABEL_4CD7_TerrainWindow:
   push af
   push bc
   push de
@@ -11011,7 +11011,7 @@ _LABEL_4CD7_:
   ld (_SRAM_2631_), hl
   pop hl
   push af
-  ld a, $82
+  ld a, $82 ; '%'
   call _LABEL_DD3_DrawOneLetter
   pop af
   pop hl
@@ -11337,7 +11337,7 @@ _LABEL_4EA4_:
 ; Data from 4EF4 to 4EF5 (2 bytes)
 .db $60 $04
 
-  call _LABEL_4CD7_
+  call _LABEL_4CD7_TerrainWindow
   call _LABEL_4D34_
   ld a, (_RAM_D6AD_)
   rst $20 ; _LABEL_20_
