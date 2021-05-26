@@ -104,12 +104,13 @@
   en: Yes  No
   
 # Options menu: status
-# ┌──────────────────╖
-# │ Name  Class    LV║
-# │                  ║
-# │ Nick  Swordsman #║
-# │                  ║
-# │ Nick  Swordsman #║
+# Original layout      Amended layout?
+# ┌──────────────────╖ ┌──────────────────╖
+# │ Name  Class    LV║ │ Name  LV Class   ║
+# │                  ║ │ Nick     Swords- ║
+# │ Nick  Swordsman #║ │        #  man    ║
+# │                  ║ │ Wendy    Magician║
+# │ Wendy Magician  #║ │        #         ║
 # │                  ║
 # │ Nick  Swordsman #║
 # │                  ║
@@ -126,13 +127,13 @@
 # │                  ║
 # │ Nick  ## ## ## ##║
 # ╘══════════════════╝
-# ┌──────────────────╖
-# │ Name  AG Equip   ║
-# │                  ║
-# │ Nick  ## Battle A║
-# │                  ║
-# │ Nick  ## Battle A║
-# │                  ║
+# ┌──────────────────╖┌──────────────────╖
+# │ Name  AG Equip   ║│ Name  AG Weapon  ║ AG = speed?
+# │                  ║│ Nickkkkk Battle  ║
+# │ Nick  ## Battle A║│        #  Axe    ║
+# │                  ║│ Wendy    Power   ║
+# │ Nick  ## Battle  ║│        #  Stick  ║
+# │           Axe    ║
 # │ Nick  ## Battle A║
 # │                  ║
 # │ Nick  ## Battle A║
@@ -157,7 +158,7 @@
   data_at: '0xad3b'
   data_length: 10
   ja: AG そうびひん
-  en: AG Equip
+  en: AG Weapon
 
 # Battle menu: character status
 # ┌────────╖
@@ -223,7 +224,7 @@
   data_length: 7
   ja: もっていない
   en: Nothing 
-  # No items in inventory
+  # No items in inventory? Also in names list?
 - reference_at: '0xafcf'
   data_at: '0xaff5'
   data_length: 9

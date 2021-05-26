@@ -201,131 +201,131 @@
   # Items and weapons
   entries:
   - ja: やくそう
-    en: medicinal plants
+    en: Med.Plnt # Medicinal Plants
   - ja: かいふくのみ
-    en: recovery only
+    en: Rec.Wter # Recovery Water
   - ja: どくけしそう
-    en: poisonous fungus
+    en: Pois.Fun # Poisonous Fungus
   - ja: めぐみのあめ
-    en: Blessing Rain
+    en: BlesRain # Blessing Rain
   - ja: てんしのはね
-    en: angel's feather
+    en: AngFeath # Angel's Feather
   - ja: ちからのワイン
-    en: wine of strength
+    en: StrWine  # Wine of Strength
   - ja: まもりのミルク
-    en: milk of fortune
+    en: MilkFort # Milk of Fortune
   - ja: はやてのチキン
-    en: Hayate's chicken
+    en: Chicken  # Hayate's chicken
   - ja: いだてんピーマン
-    en: Idaiten green pepper
+    en: Pepper   # Idaiten green pepper
   - ja: げんきのパン
-    en: Bread of Cheer
+    en: Bread    # Bread of Cheer
   - ja: ちからのリング
-    en: Ring of Strength
+    en: StrRing  # Ring of Strength
   - ja: まもりのリング
-    en: Ring of Strength
+    en: ProtRing # Ring of Protection
   - ja: はやてのリング
-    en: Hayate's ring
+    en: GaleRing # Hayate's ring
   - ja: いだてんリング
-    en: Idaiten ring
+    en: SkanRing # Idaiten ring
   - ja: しろのリング
-    en: White ring
+    en: WhitRing # White ring
   - ja: くろのリング
-    en: Black ring
+    en: BlckRing # Black ring
   - ja: イビルリング
-    en: Evil ring
+    en: EviLRing # Evil ring
   - ja: レザーグラブ
-    en: Leather grab
+    en: LthrGlve # Leather Glove
   - ja: パワーグラブ
-    en: Power Grab
+    en: PowrGlve # Power Glove
   - ja: ソーングラブ
-    en: Thorngrab
+    en: ThrnGlve # Thorn Glove
   - ja: アイアンクロウ
-    en: Ironclaw
+    en: Ironclaw # Iron Claw
   - ja: こんぼう
-    en: Kombat
+    en: WoodClub # Wooden Club
   - ja: イビルアックス
     en: Evil Axe
   - ja: ショートアックス
-    en: Short Axe
+    en: ShortAxe # Short Axe
   - ja: ブロンズロッド
-    en: Bronze Rod
+    en: BrnzeRod # Bronze Rod
   - ja: アイアンロッド
     en: Iron Rod
   - ja: てつのや
-    en: Iron Yar
+    en: IrnArrow # Iron Arrow
   - ja: グレートショット
-    en: Great Shot
+    en: Grt Shot # Great Shot
   - ja: グレートアックス
-    en: Great Axe
+    en: GreatAxe # Great Axe
   - ja: ショートソード
-    en: Short Sword
+    en: ShrtSwrd # Short Sword
   - ja: ミドルソード
-    en: Middle Sword
+    en: MidSword # Middle Sword
   - ja: ロングソード
-    en: Longsword
+    en: LongSwrd # Long Sword
   - ja: スチールソード
-    en: Steel Sword
+    en: StlSword # Steel Sword
   - ja: ブロードソード
-    en: Broad Sword
+    en: BrdSword # Broad Sword
   - ja: ひっさつのつるぎ
-    en: Sword of Supernatural Power
+    en: DdlySwrd # Deadly Sword
   - ja: きのぼう
-    en: Tree of Life
+    en: WoodStck # Wooden Stick
   - ja: ロビンのや
-    en: Robin's Field
+    en: RobinArw # Robin Arrow
   - ja: あんこくのつるぎ
-    en: Sword of Anxiety
+    en: DrkSword # Sword of Darkness
   - ja: ぼくとう
-    en: Bokuto
+    en: WoodSwrd # Wooden Sword
   - ja: はじゃのつるぎ
-    en: Jashira no Tsurugi
+    en: HajaSwrd # Sword of Hajya
   - ja: ブロンズランス
-    en: Bronze Lance
+    en: BrnzLnce # Bronze Lance
   - ja: スチールランス
-    en: Steel Lance
+    en: StlLance # Steel Lance
   - ja: クロムランス
-    en: Chrome Lance
+    en: ChrmLnce # Chrome Lance
   - ja: イビルランス
-    en: Evil Lance
+    en: EvilLnce # Evil Lance
   - ja: ハルバート
     en: Halberd
   - ja: スピア
     en: Spear
   - ja: パワースピア
-    en: Power Spear
+    en: PowerSpr # Power Spear
   - ja: バルキリー
     en: Valkyrie
   - ja: ハンドアックス
     en: Hand Axe
   - ja: ミドルアックス
-    en: Middle Axe
+    en: Mid Axe  # Middle Axe
   - ja: バトルアックス
-    en: Battle Axe
+    en: Btle Axe # Battle Axe
   - ja: ヒートアックス
     en: Heat Axe
   - ja: アトラスのおの
-    en: Axe of Atlas
+    en: AtlasAxe # Axe of Atlas
   - ja: きのつえ
-    en: Staff of Wood
+    en: WoodStff # Wooden Staff
   - ja: まもりのつえ
-    en: Staff of Protection
+    en: ProtStff # Staff of Protection
   - ja: せいじゃのつえ
-    en: Viper's Staff
+    en: SaintStf # Saint Staff
   - ja: パワースティック
-    en: Power Stick
+    en: PowStick # Power Stick
   - ja: デーモンロッド
-    en: Demon Rod
+    en: DemonRod # Demon Rod
   - ja: フレイル
     en: Flail
   - ja: きのや
-    en: Tree house
+    en: WoodArrw # Wooden Arrow
   - ja: はがねのや
-    en: Leaf Leaf
+    en: StlArrow # Steel Arrow
   - ja: アサルトシェル
-    en: Assault Shell
+    en: AssltShll # Assault Shell
   - ja: バスターショット
-    en: Buster Shot
+    en: BustrShot # Buster Shot
   - ja: なにももたない
     en: Nothing
   end: 11813

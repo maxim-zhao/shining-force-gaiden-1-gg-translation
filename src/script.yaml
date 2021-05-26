@@ -7304,13 +7304,58 @@
 
 
 
+# Saving your game
+
 - index: 1
   character: ''
   ja: |-
     ゲームを ちゅうだんします
     よろしいですか?<end>
+  literal: I'm going to play a game. Are you sure you want to do this?
+  en: |-
+    Game will be 
+    suspended, okay?
+    <end>
+
+- index: 123
+  character: ''
+  ja: |-
+    ・・もう おしまい?
+    <delay 01>
+    ざんねんねぇ・・・
+    <delay 01><end>
+  literal: ...you’re already done? Too bad...
+  en: |-
+    ...you’re already 
+    done?
+    <delay 01>
+    Too bad...
+    <delay 01><end>
+
+- index: 124
+  character: ''
+  ja: |-
+    
+    きょうは もうかえるのね・・
+    <delay 01>
+    また おはなし きかせてね
+    <delay 01>
+    バイバ-イ
+    <delay 02><delay 02><delay 02><delay 02><end>
   literal: ''
-  en: ''
+  en: |-
+    That’s it for 
+    today then I 
+    guess...
+    <delay 01>
+    Come and read more 
+    again, okay?
+    <delay 01>
+    Bye bye
+    <delay 02><delay 02><delay 02><delay 02><end>
+
+
+
 
 - index: 2
   character: ''
@@ -8221,29 +8266,6 @@
   en: ''
 
 
-
-- index: 123
-  character: ''
-  ja: |-
-    ・・もう おしまい?
-    <delay 01>
-    ざんねんねぇ・・・
-    <delay 01><end>
-  literal: ...Is it over? Sorry...
-  en: ''
-
-- index: 124
-  character: ''
-  ja: |-
-    
-    きょうは もうかえるのね・・
-    <delay 01>
-    また おはなし きかせてね
-    <delay 01>
-    バイバ-イ
-    <delay 02><delay 02><delay 02><delay 02><end>
-  literal: ''
-  en: ''
 
 - index: 125
   character: ''
