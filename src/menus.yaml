@@ -27,7 +27,7 @@
   data_length: 14
   ja: ' ????? バトル ?'
   en: " Empty slot"
-  # Empty slot selection, ????? becomes your name in Japanese
+  # Empty slot selection, ????? becomes your name in Japanese, ? = battle number
 
 # Begin -> name entry screen
 - reference_at: '0xbb40'
@@ -75,17 +75,18 @@
   data_at: '0x4d2d'
   ja: ちけいこうか
   data_length: 7
-  en: ''
+  en: Terrain Effect
+
 - reference_at: '0xa558'
   data_at: '0xa593'
   data_length: 7
   ja: こうげきカ
-  en: ''
+  en: Attack
 - reference_at: '0xa568'
   data_at: '0xa59a'
   data_length: 8
   ja: ぼうぎょカ
-  en: ''
+  en: Defense
 - reference_at: '0xa578'
   data_at: '0xa5a2'
   data_length: 6
@@ -95,32 +96,58 @@
   data_at: '0xa5a8'
   data_length: 8
   ja: いどうきょり
-  en: Distance
+  en: Dist2
 - reference_at: '0xa9bc'
   data_at: '0xa9c4'
   data_length: 8
   ja: はい  いいえ
   en: Yes  No
+  
+# Options menu: status
+# ┌──────────────────╖
+# │ Name  Class    LV║
+# │                  ║
+# │ Nick  Swordsman #║
+# │                  ║
+# │ Nick  Swordsman #║
+# │                  ║
+# │ Nick  Swordsman #║
+# │                  ║
+# │ Nick  Swordsman #║
+# ╘══════════════════╝
+# ┌──────────────────╖
+# │ Name  HP MP AT DF║
+# │                  ║
+# │ Nick  ## ## ## ##║
+# │                  ║
+# │ Nick  ## ## ## ##║
+# │                  ║
+# │ Nick  ## ## ## ##║
+# │                  ║
+# │ Nick  ## ## ## ##║
+# ╘══════════════════╝
+# ┌──────────────────╖
+# │ Name  AG Equip   ║
+# │                  ║
+# │ Nick  ## Battle A║
+# │                  ║
+# │ Nick  ## Battle A║
+# │                  ║
+# │ Nick  ## Battle A║
+# │                  ║
+# │ Nick  ## Battle A║
+# ╘══════════════════╝
+
 - reference_at: '0xab43'
   data_at: '0xab5a'
   data_length: 4
   ja: なまえ
   en: Name
-- reference_at: '0xabbe'
-  data_at: '0xac0c'
-  data_length: 5
-  ja: ' どく'
-  en: Poisoned
-- reference_at: '0xabc9'
-  data_at: '0xac11'
-  data_length: 4
-  ja: のろい
-  en: Cursed
 - reference_at: '0xabf3'
   data_at: '0xac00'
   data_length: 12
   ja: クラス      LV
-  en: Class     LV
+  en: Class    LV
 - reference_at: '0xac8a'
   data_at: '0xac97'
   data_length: 12
@@ -130,7 +157,27 @@
   data_at: '0xad3b'
   data_length: 10
   ja: AG そうびひん
-  en: ''
+  en: AG Equip
+
+# Battle menu: character status
+# ┌────────╖
+# │Wendy v1║ Name, ??
+# │        ║
+# │Magician║ Character class
+# │        ║
+# │HP ##/##║
+# │MP ##/##║
+# │        ║
+# │Exp.  ##║ Experience
+# │        ║
+# │Att.  ##║ Attack
+# │        ║
+# │Def.  ##║ Defense
+# │        ║
+# │Speed ##║ Speed
+# │        ║
+# │Dist. ##║ Distance
+# ╘════════╝
 - reference_at: '0xad7d'
   data_at: '0xadd8'
   data_length: 7
@@ -141,16 +188,21 @@
   data_length: 7
   ja: MP   /
   en: MP   /
+- reference_at: '0xaec2'
+  data_at: '0xaf0d'
+  data_length: 6
+  ja: けいけんち
+  en: Exp.
 - reference_at: '0xad9d'
   data_at: '0xade6'
   data_length: 7
   ja: こうげきカ
-  en: ''
+  en: Att.
 - reference_at: '0xadad'
   data_at: '0xaded'
   data_length: 8
   ja: ぼうぎょカ
-  en: ''
+  en: Def.
 - reference_at: '0xadbd'
   data_at: '0xadf5'
   data_length: 6
@@ -160,22 +212,7 @@
   data_at: '0xadfb'
   data_length: 8
   ja: いどうきょり
-  en: Distance
-- reference_at: '0xae6a'
-  data_at: '0xaf04'
-  data_length: 5
-  ja: ' どく'
-  en: Poisoned
-- reference_at: '0xae75'
-  data_at: '0xaf09'
-  data_length: 4
-  ja: のろい
-  en: Cursed
-- reference_at: '0xaec2'
-  data_at: '0xaf0d'
-  data_length: 6
-  ja: けいけんち
-  en: Experience
+  en: Dist.
 - reference_at: '0xaf46'
   data_at: '0xaf8e'
   data_length: 7
@@ -185,27 +222,55 @@
   data_at: '0xaf95'
   data_length: 7
   ja: もっていない
-  en: "Nothing" # No items in inventory
+  en: Nothing 
+  # No items in inventory
 - reference_at: '0xafcf'
   data_at: '0xaff5'
   data_length: 9
   ja: -まほう-  L
-  en: ''
+  en: Magic  L
+  # L = level
+
+# TODO: duplicate strings can be merged?
+- reference_at: '0xae6a'
+  data_at: '0xaf04'
+  data_length: 5
+  ja: ' どく'
+  en: Poisoned
 - reference_at: '0xb4aa'
   data_at: '0xb56a'
   data_length: 5
   ja: ' どく'
   en: Poisoned
+- reference_at: '0xabbe'
+  data_at: '0xac0c'
+  data_length: 5
+  ja: ' どく'
+  en: Poisoned
+
+- reference_at: '0xae75'
+  data_at: '0xaf09'
+  data_length: 4
+  ja: のろい
+  en: Cursed
 - reference_at: '0xb4b5'
   data_at: '0xb56f'
   data_length: 4
   ja: のろい
   en: Cursed
+- reference_at: '0xabc9'
+  data_at: '0xac11'
+  data_length: 4
+  ja: のろい
+  en: Cursed
+
 - reference_at: '0xb54b'
   data_at: '0xb558'
   data_length: 18
   ja: HP MP AT DF AG MV
   en: HP MP AT DF AG MV
+
+# Options menu: battle messages
 - reference_at: '0xb5a3'
   data_at: '0xb5bb'
   data_length: 17
@@ -216,6 +281,8 @@
   data_length: 17
   ja: ひょうじする ひょうじしない
   en: Show    Hide
+
+# Options menu: game speed
 - reference_at: '0xb634'
   data_at: '0xb65c'
   data_length: 18
@@ -230,7 +297,7 @@
   data_at: '0xb67b'
   data_length: 13
   ja: おそい ---- はやい
-  en: Slow ---- Fast
+  en: Slow -- Fast
 - reference_at: '0xb6ee'
   data_at: '0xb781'
   data_length: 7

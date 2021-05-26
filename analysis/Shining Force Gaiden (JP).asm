@@ -779,7 +779,7 @@ _SRAM_212C_ db
 
 .enum $A19C export
 _SRAM_219C_ dsb $4
-_SRAM_21A0_ dw
+_SRAM_21A0_TextDrawingState dw
 _SRAM_21A2_ dw
 _SRAM_21A4_DrawingYX dw
 _SRAM_21A6_TreeIndex db
@@ -1814,7 +1814,7 @@ _LABEL_4B5_:
   push de
   push hl
   ld hl, $A1A2
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_21A4_DrawingYX), hl
   ld hl, _SRAM_2469_
@@ -2986,10 +2986,10 @@ _LABEL_C73_DecompressionDone:
   ret
 
 _LABEL_C79_DrawMenuItem:
-  ; bc = parameter
+  ; bc = text for meni
   push de
   push hl
-    ld hl, (_SRAM_21A0_) ; Retrieve pointer
+    ld hl, (_SRAM_21A0_TextDrawingState) ; Retrieve pointer
     ; Get first word
     ld e, (hl)
     inc hl
@@ -3003,7 +3003,7 @@ _LABEL_C79_DrawMenuItem:
     pop hl
     ; hl = first, de = second
     call _LABEL_C95_DrawMenuItem
-    ld hl, (_SRAM_21A0_)
+    ld hl, (_SRAM_21A0_TextDrawingState)
     inc hl
     inc hl
     ld (hl), e
@@ -3030,23 +3030,23 @@ _LABEL_C95_DrawMenuItem:
 _LABEL_CA2_DrawMultipleItems: ; Clone of _LABEL_C79_DrawMenuItem that draws a consecutive items
   push de
   push hl
-  ld hl, (_SRAM_21A0_)
-  ld e, (hl)
-  inc hl
-  ld d, (hl)
-  inc hl
-  push de
-  ld e, (hl)
-  inc hl
-  ld d, (hl)
-  pop hl
-  call _LABEL_CBE_
-  ld hl, (_SRAM_21A0_)
-  inc hl
-  inc hl
-  ld (hl), e
-  inc hl
-  ld (hl), d
+    ld hl, (_SRAM_21A0_TextDrawingState)
+    ld e, (hl)
+    inc hl
+    ld d, (hl)
+    inc hl
+    push de
+      ld e, (hl)
+      inc hl
+      ld d, (hl)
+    pop hl
+    call _LABEL_CBE_
+    ld hl, (_SRAM_21A0_TextDrawingState)
+    inc hl
+    inc hl
+    ld (hl), e
+    inc hl
+    ld (hl), d
   pop hl
   pop de
   ret
@@ -3075,78 +3075,78 @@ _LABEL_CD1_DrawBox:
   push bc
   push de
   push hl
-  ld (hl), a ; Tilemap high byte?
-  and $7F
-  inc hl
-  ld (hl), d ; Y?
-  inc hl
-  ld (hl), e ; X?
-  inc hl
-  ld (hl), b ; Width?
-  inc hl
-  ld (hl), c ; Height?
-  inc hl
+    ld (hl), a ; Tilemap high byte?
+    and $7F
+    inc hl
+    ld (hl), d ; Y?
+    inc hl
+    ld (hl), e ; X?
+    inc hl
+    ld (hl), b ; Width?
+    inc hl
+    ld (hl), c ; Height?
+    inc hl
   
-  ld e, b
-  ld d, c
-  dec d
-  dec d
-  dec e
-  dec e
-  ld (hl), $7E ; Top left tile
-  inc hl
-  ld (hl), a
-  inc hl
-  ld b, e
-  ld c, $7F ; Top
+    ld e, b
+    ld d, c
+    dec d
+    dec d
+    dec e
+    dec e
+    ld (hl), $7E ; Top left tile
+    inc hl
+    ld (hl), a
+    inc hl
+    ld b, e
+    ld c, $7F ; Top
 -:
-  ld (hl), c
-  inc hl
-  ld (hl), a
-  inc hl
-  djnz -
-  ld (hl), $7E
-  inc hl
-  ld (hl), a
-  set 1, (hl)
-  inc hl
+    ld (hl), c
+    inc hl
+    ld (hl), a
+    inc hl
+    djnz -
+    ld (hl), $7E
+    inc hl
+    ld (hl), a
+    set 1, (hl)
+    inc hl
 --:
-  ld (hl), $80
-  inc hl
-  ld (hl), a
-  inc hl
-  ld b, e
-  ld c, $01
+    ld (hl), $80
+    inc hl
+    ld (hl), a
+    inc hl
+    ld b, e
+    ld c, $01
 -:
-  ld (hl), c
-  inc hl
-  ld (hl), a
-  inc hl
-  djnz -
-  ld (hl), $80
-  inc hl
-  ld (hl), a
-  set 1, (hl)
-  inc hl
-  dec d
-  jr nz, --
-  ld (hl), $7E
-  inc hl
-  set 2, a
-  ld (hl), a
-  inc hl
-  ld b, e
-  ld c, $7F
+    ld (hl), c
+    inc hl
+    ld (hl), a
+    inc hl
+    djnz -
+    ld (hl), $80
+    inc hl
+    ld (hl), a
+    set 1, (hl)
+    inc hl
+    dec d
+    jr nz, --
+    ld (hl), $7E
+    inc hl
+    set 2, a
+    ld (hl), a
+    inc hl
+    ld b, e
+    ld c, $7F
 -:
-  ld (hl), c
-  inc hl
-  ld (hl), a
-  inc hl
-  djnz -
-  ld (hl), $7E
-  inc hl
-  set 1, a
-  ld (hl), a
+    ld (hl), c
+    inc hl
+    ld (hl), a
+    inc hl
+    djnz -
+    ld (hl), $7E
+    inc hl
+    set 1, a
+    ld (hl), a
   pop hl
   pop de
   pop bc
@@ -3299,7 +3299,7 @@ _LABEL_DD3_DrawOneLetter:
   push de
   push hl
     ; Get drawing context pointer
-    ld hl, (_SRAM_21A0_)
+    ld hl, (_SRAM_21A0_TextDrawingState)
     ; Read pointed data to dehl
     ld e, (hl)
     inc hl
@@ -3313,7 +3313,7 @@ _LABEL_DD3_DrawOneLetter:
     ; draw character in a
     call _LABEL_DEF_DrawCharacter
     ; save new drawing position (?)
-    ld hl, (_SRAM_21A0_)
+    ld hl, (_SRAM_21A0_TextDrawingState)
     inc hl
     inc hl
     ld (hl), e
@@ -3324,6 +3324,10 @@ _LABEL_DD3_DrawOneLetter:
   ret
 
 _LABEL_DEF_DrawCharacter:
+; hl = ptr to char
+; b = row index
+; c = column index
+; de = dest x, y?
   push af
   push bc
   push hl
@@ -3445,7 +3449,7 @@ _LABEL_DEF_DrawCharacter:
 _LABEL_E87_:
   push de
   push hl
-  ld hl, (_SRAM_21A0_)
+  ld hl, (_SRAM_21A0_TextDrawingState)
   ld e, (hl)
   inc hl
   ld d, (hl)
@@ -3456,7 +3460,7 @@ _LABEL_E87_:
   ld d, (hl)
   pop hl
   call +
-  ld hl, (_SRAM_21A0_)
+  ld hl, (_SRAM_21A0_TextDrawingState)
   inc hl
   inc hl
   ld (hl), e
@@ -3545,7 +3549,7 @@ _LABEL_EFA_ScrollMenuIn:
 ; Data from EFB to EFB (1 bytes)
 .db $2A
 
-_LABEL_EFC_:
+_LABEL_EFC_ScrollMenuInWithoutBeep:
   push af
   push bc
   push de
@@ -4378,7 +4382,7 @@ _DATA_1340_:
 
 ; 11th entry of Jump Table from 1340 (indexed by unknown)
 _LABEL_1370_:
-  ld de, _SRAM_21A0_
+  ld de, _SRAM_21A0_TextDrawingState
   ld hl, _SRAM_219C_
   ld bc, $057C
   lddr
@@ -4420,7 +4424,7 @@ _LABEL_13A0_:
 
 ; 15th entry of Jump Table from 1340 (indexed by unknown)
 _LABEL_13AC_:
-  ld de, _SRAM_21A0_
+  ld de, _SRAM_21A0_TextDrawingState
   ld hl, _SRAM_211C_
   ld bc, $04FC
   lddr
@@ -4428,7 +4432,7 @@ _LABEL_13AC_:
 
 ; 13th entry of Jump Table from 1340 (indexed by unknown)
 _LABEL_13B8_:
-  ld de, _SRAM_21A0_
+  ld de, _SRAM_21A0_TextDrawingState
   ld hl, _SRAM_2120_
   ld bc, $0500
   lddr
@@ -4436,7 +4440,7 @@ _LABEL_13B8_:
 
 ; 14th entry of Jump Table from 1340 (indexed by unknown)
 _LABEL_13C4_:
-  ld de, _SRAM_21A0_
+  ld de, _SRAM_21A0_TextDrawingState
   ld hl, _SRAM_2124_
   ld bc, $0504
   lddr
@@ -4851,7 +4855,7 @@ _LABEL_1662_:
   jp _LABEL_19E5_
 
 +:
-  ld de, _SRAM_21A0_
+  ld de, _SRAM_21A0_TextDrawingState
   ld hl, _SRAM_219C_
   ld bc, $057C
   lddr
@@ -4875,7 +4879,7 @@ _LABEL_1683_:
   jp _LABEL_19E5_
 
 +:
-  ld de, _SRAM_21A0_
+  ld de, _SRAM_21A0_TextDrawingState
   ld hl, _SRAM_211C_
   ld bc, $04FC
   lddr
@@ -4894,7 +4898,7 @@ _LABEL_16AF_:
   jp _LABEL_19E5_
 
 +:
-  ld de, _SRAM_21A0_
+  ld de, _SRAM_21A0_TextDrawingState
   ld hl, _SRAM_2120_
   ld bc, $0500
   lddr
@@ -4922,7 +4926,7 @@ _LABEL_16D0_:
   jp _LABEL_19E5_
 
 +:
-  ld de, _SRAM_21A0_
+  ld de, _SRAM_21A0_TextDrawingState
   ld hl, _SRAM_2124_
   ld bc, $0504
   lddr
@@ -10799,7 +10803,7 @@ _LABEL_4BD3_:
   push de
   push hl
   ld hl, $A461
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_2463_), hl
   ld hl, _SRAM_23F8_
@@ -10974,7 +10978,7 @@ _LABEL_4CD7_:
   push de
   push hl
   ld hl, $A62F
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_2631_), hl
   ld hl, _SRAM_25EA_
@@ -11643,7 +11647,7 @@ _LABEL_514A_:
   push de
   push hl
   ld hl, $A1A2
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_21A4_DrawingYX), hl
   ld hl, _SRAM_2469_
@@ -12020,7 +12024,7 @@ _LABEL_539B_:
   push de
   push hl
   ld hl, $A1A2
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_21A4_DrawingYX), hl
   ld hl, _SRAM_2469_
@@ -14587,7 +14591,7 @@ _LABEL_6023_:
   push de
   push hl
   ld hl, $A6AD
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_26AF_), hl
   ld hl, _SRAM_2654_
@@ -19153,7 +19157,7 @@ _LABEL_864C_:
   push de
   push hl
   ld hl, $A1A2
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_21A4_DrawingYX), hl
   ld hl, _RAM_C000_
@@ -19197,7 +19201,7 @@ _LABEL_8691_:
   push de
   push hl
   ld hl, $A1A2
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_21A4_DrawingYX), hl
   ld hl, _RAM_C000_
@@ -22196,75 +22200,75 @@ _LABEL_9725_:
 _LABEL_9792_:
   push bc
   push hl
-  push af
-  ld b, $00
-  ld l, $FF
-  ld h, b
-  call _LABEL_BE6C_
-  call _LABEL_A98C_
-  push af
-  push de
-  push hl
-  ld d, $06
-  ld e, $08
-  ld hl, (_RAM_C000_)
-  ld a, $06
-  call _LABEL_EFA_ScrollMenuIn
-  pop hl
-  pop de
-  pop af
-  call _LABEL_A9CC_
-  call _LABEL_4A8_ButtonsHeldCountdownThing
+    push af
+      ld b, $00
+      ld l, $FF
+      ld h, b
+      call _LABEL_BE6C_
+      call _LABEL_A98C_DrawYesNoMenu
+      push af
+      push de
+      push hl
+        ld d, $06
+        ld e, $08
+        ld hl, (_RAM_C000_)
+        ld a, $06
+        call _LABEL_EFA_ScrollMenuIn
+      pop hl
+      pop de
+      pop af
+      call _LABEL_A9CC_YesNoMenuCursorAdjuster
+      call _LABEL_4A8_ButtonsHeldCountdownThing
 -:
-  call _LABEL_3651_WaitForVBlank
-  call _LABEL_BF96_
-  call _LABEL_47A_GetControllerInputs
-  bit 2, a
-  jp nz, +
-  bit 3, a
-  jp nz, +
-  bit 0, a
-  jp nz, ++
-  bit 1, a
-  jp nz, ++
-  bit 4, a
-  jr nz, +++
-  bit 5, a
-  jr nz, ++++
-  jr -
+      call _LABEL_3651_WaitForVBlank
+      call _LABEL_BF96_
+      call _LABEL_47A_GetControllerInputs
+      bit 2, a
+      jp nz, +
+      bit 3, a
+      jp nz, +
+      bit 0, a
+      jp nz, ++
+      bit 1, a
+      jp nz, ++
+      bit 4, a
+      jr nz, +++
+      bit 5, a
+      jr nz, ++++
+      jr -
 
 +:
-  rra
-  rra
+      rra
+      rra
 ++:
-  call _LABEL_BE78_HandleIncDecWithLimits
-  call _LABEL_A9CC_
-  rst $30 ; _LABEL_30_SoundEngineControl
+      call _LABEL_BE78_HandleIncDecWithLimits
+      call _LABEL_A9CC_YesNoMenuCursorAdjuster
+      rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from 97E8 to 97E8 (1 bytes)
 .db $28
 
-  jp -
+      jp -
 
 +++:
-  ld b, $FF
+      ld b, $FF
 ++++:
-  pop af
-  ld a, b
-  rst $18 ; _LABEL_18_CallBankedFunction
+    pop af
+    ld a, b
+    rst $18 ; _LABEL_18_CallBankedFunction
 ; Data from 97F1 to 97F2 (2 bytes)
 .db $18 $03
 
-  push af
-  push de
-  push hl
-  ld d, $F7
-  ld e, $08
-  ld hl, (_RAM_C000_)
-  ld a, $06
-  call _LABEL_EFA_ScrollMenuIn
-  pop hl
-  pop de
-  pop af
+    push af
+    push de
+    push hl
+      ld d, $F7
+      ld e, $08
+      ld hl, (_RAM_C000_)
+      ld a, $06
+      call _LABEL_EFA_ScrollMenuIn
+    pop hl
+    pop de
+    pop af
   pop hl
   pop bc
   ret
@@ -23651,7 +23655,7 @@ _LABEL_A06B_ShowMenu:
   push de
   push hl
   push af
-  call _LABEL_BEAD_
+  call _LABEL_BEAD_CheckSaveSlots
   ld l, $00
   ld b, $00
   ld a, c
@@ -23661,9 +23665,9 @@ _LABEL_A06B_ShowMenu:
   inc a
 +:
   ld h, a
-  call _LABEL_B947_
+  call _LABEL_B947_AdjustMenuIndexForSlotInfo
   call _LABEL_BE6C_
-  call _LABEL_B879_
+  call _LABEL_B879_GameBeginLoadMenu
   push af
   push de
   push hl
@@ -23693,12 +23697,12 @@ _LABEL_A06B_ShowMenu:
   jr nz, +++
   jr -
 
-+:
++:; Convert L/R to U/D
   rra
   rra
 ++:
   call _LABEL_BE78_HandleIncDecWithLimits
-  call _LABEL_B947_
+  call _LABEL_B947_AdjustMenuIndexForSlotInfo
   call _LABEL_B929_MainMenuCursorWidthSelector
   rst $30 ; _LABEL_30_SoundEngineControl
 ; Data from A0CF to A0CF (1 bytes)
@@ -23707,6 +23711,7 @@ _LABEL_A06B_ShowMenu:
   jp -
 
 +++:
+  ; Item selected
   pop af
   ld a, d
   rst $18 ; _LABEL_18_CallBankedFunction
@@ -23716,14 +23721,15 @@ _LABEL_A06B_ShowMenu:
   push af
   push de
   push hl
-  ld d, $14
-  ld e, $02
-  ld hl, (_RAM_C000_)
-  ld a, $06
-  call _LABEL_EFA_ScrollMenuIn
+    ld d, $14
+    ld e, $02
+    ld hl, (_RAM_C000_)
+    ld a, $06
+    call _LABEL_EFA_ScrollMenuIn
   pop hl
   pop de
   pop af
+
   pop hl
   pop de
   pop bc
@@ -23734,7 +23740,7 @@ _LABEL_A0EE_:
   push de
   push hl
   push af
-  call _LABEL_BEAD_
+  call _LABEL_BEAD_CheckSaveSlots
   ld c, b
   ld b, $00
   ld l, $00
@@ -23819,7 +23825,7 @@ _LABEL_A170_:
   push de
   push hl
   push af
-  call _LABEL_BEAD_
+  call _LABEL_BEAD_CheckSaveSlots
   ld a, $03
   sub b
   ld c, a
@@ -24179,7 +24185,7 @@ _LABEL_A36F_:
   push de
   push hl
   ld hl, $C104
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C106_), hl
   ld hl, _RAM_C1C1_
@@ -24229,7 +24235,7 @@ _LABEL_A3C2_:
   push de
   push hl
   ld hl, $C100
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C102_), hl
   ld hl, _RAM_C108_
@@ -24479,7 +24485,7 @@ _LABEL_A528_:
   push de
   push hl
   ld hl, $C100
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C102_), hl
   ld hl, _RAM_C108_
@@ -24557,7 +24563,7 @@ _LABEL_A5B0_:
   push de
   push hl
   ld hl, $C104
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C106_), hl
   ld hl, _RAM_C1C1_
@@ -25083,24 +25089,24 @@ _LABEL_A831_:
   ld b, $95
   ld d, $78
   ld e, $8B
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   inc a
   inc a
   ld b, $97
   ld d, $68
   ld e, $93
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   inc a
   inc a
   ld b, $99
   ld d, $88
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   inc a
   inc a
   ld b, $9B
   ld d, $78
   ld e, $9B
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   pop de
   pop bc
   pop af
@@ -25115,7 +25121,7 @@ _LABEL_A863_:
     push de
     push hl
       ld hl, $C000
-      ld (_SRAM_21A0_), hl
+      ld (_SRAM_21A0_TextDrawingState), hl
       ld de, _DATA_A8BA_
       ld hl, _RAM_C004_
       ld (_RAM_C000_), hl
@@ -25251,65 +25257,65 @@ _LABEL_A94F_:
   pop af
   ret
 
-_LABEL_A98C_:
+_LABEL_A98C_DrawYesNoMenu:
   push af
-  push af
-  push bc
-  push de
-  push hl
-  ld hl, $C000
-  ld (_SRAM_21A0_), hl
-  ld hl, $0000
-  ld (_RAM_C002_), hl
-  ld hl, _RAM_C004_
-  ld (_RAM_C000_), hl
-  ld b, $09
-  ld c, $03
-  xor a
-  call _LABEL_CD1_DrawBox
-  pop hl
-  pop de
-  pop bc
-  pop af
-  push hl
-  ld hl, (_RAM_C000_)
-  inc hl
-  ld (hl), $14
-  inc hl
-  ld (hl), $08
-  pop hl
-  push bc
-  ld bc, _DATA_E9C4_
-  call _LABEL_C79_DrawMenuItem
-  pop bc
+    push af
+    push bc
+    push de
+    push hl
+      ld hl, $C000
+      ld (_SRAM_21A0_TextDrawingState), hl
+      ld hl, $0000
+      ld (_RAM_C002_), hl
+      ld hl, _RAM_C004_
+      ld (_RAM_C000_), hl
+      ld b, $09
+      ld c, $03
+      xor a
+      call _LABEL_CD1_DrawBox
+    pop hl
+    pop de
+    pop bc
+    pop af
+    push hl
+      ld hl, (_RAM_C000_)
+      inc hl
+      ld (hl), $14
+      inc hl
+      ld (hl), $08
+    pop hl
+    push bc
+      ld bc, _DATA_A9C4_YesNo
+      call _LABEL_C79_DrawMenuItem
+    pop bc
   pop af
   ret
 
 ; Data from A9C4 to A9CB (8 bytes)
-_DATA_A9C4_:
+_DATA_A9C4_YesNo:
 .db $25 $0D $01 $01 $0D $0D $0F $00
 
-_LABEL_A9CC_:
+_LABEL_A9CC_YesNoMenuCursorAdjuster:
   push af
   push bc
   push de
-  ld a, $02
-  ld (_SRAM_2301_), a
-  xor a
-  ld (_SRAM_2302_), a
-  ld e, $5F
-  ld c, $13
-  ld d, $62
-  inc b
-  dec b
-  jr z, +
-  ld c, $1B
-  ld d, $82
+    ld a, $02
+    ld (_SRAM_2301_), a
+    xor a
+    ld (_SRAM_2302_), a
+    ld e, $5F ; Y
+    ld c, $13 ; W?
+    ld d, $62 ; X
+    inc b
+    dec b
+    jr z, +
+    ld c, $1B
+    ld d, $82
 +:
-  ld b, $91
-  xor a
-  ld (_SRAM_2300_), a
-  call _LABEL_BF4A_
+    ld b, $91
+    xor a
+    ld (_SRAM_2300_), a
+    call _LABEL_BF4A_SetMenuCursor
   pop de
   pop bc
   pop af
@@ -25503,7 +25509,7 @@ _LABEL_AB09_:
   push de
   push hl
   ld hl, $C000
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C002_), hl
   ld hl, _RAM_C004_
@@ -25901,7 +25907,7 @@ _LABEL_AD45_:
   push de
   push hl
   ld hl, $C000
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C002_), hl
   ld hl, _RAM_C008_
@@ -26228,7 +26234,7 @@ _LABEL_AF13_:
   push de
   push hl
   ld hl, $C004
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C006_), hl
   ld hl, _RAM_C175_
@@ -26317,7 +26323,7 @@ _LABEL_AF9C_:
   push de
   push hl
   ld hl, $C004
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C006_), hl
   ld hl, _RAM_C175_
@@ -26490,7 +26496,7 @@ _LABEL_B07E_:
   push de
   push hl
   ld hl, $C000
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C002_), hl
   ld hl, _RAM_C004_
@@ -26766,7 +26772,7 @@ _LABEL_B229_:
   push de
   push hl
   ld hl, $C000
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C002_), hl
   ld hl, _RAM_C00C_
@@ -26871,7 +26877,7 @@ _LABEL_B2A5_:
   ld b, $91
   xor a
   ld (_SRAM_2300_), a
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   pop hl
   pop de
   pop bc
@@ -26888,7 +26894,7 @@ _LABEL_B2E6_:
   push de
   push hl
   ld hl, $C004
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C006_), hl
   ld hl, _RAM_C115_
@@ -26991,7 +26997,7 @@ _LABEL_B360_:
   ld b, $91
   ld a, $02
   ld (_SRAM_2300_), a
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   pop hl
   pop de
   pop bc
@@ -27097,7 +27103,7 @@ _LABEL_B418_:
   push de
   push hl
   ld hl, $C008
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C00A_), hl
   ld hl, _RAM_C1A6_
@@ -27349,7 +27355,7 @@ _LABEL_B573_:
   push de
   push hl
   ld hl, $C000
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C002_), hl
   ld hl, _RAM_C004_
@@ -27414,7 +27420,7 @@ _LABEL_B5DD_:
   ld b, $91
   xor a
   ld (_SRAM_2300_), a
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   pop de
   pop bc
   pop af
@@ -27427,7 +27433,7 @@ _LABEL_B604_:
   push de
   push hl
   ld hl, $C000
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C002_), hl
   ld hl, _RAM_C004_
@@ -27505,7 +27511,7 @@ _LABEL_B688_:
   ld b, $91
   xor a
   ld (_SRAM_2300_), a
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   pop de
   pop bc
   pop af
@@ -27521,7 +27527,7 @@ _LABEL_B6B3_:
   push de
   push hl
   ld hl, $A461
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_2463_), hl
   ld hl, _SRAM_23F8_
@@ -27674,7 +27680,7 @@ _LABEL_B78F_:
   push de
   push hl
   ld hl, $C17F
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C181_), hl
   ld hl, _RAM_C183_
@@ -27730,7 +27736,7 @@ _LABEL_B7F1_:
   push de
   push hl
   ld hl, $C0E9
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C0EB_), hl
   ld hl, _RAM_C0ED_
@@ -27807,104 +27813,112 @@ _LABEL_B84C_:
   ld b, $91
   xor a
   ld (_SRAM_2300_), a
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   pop de
   pop bc
   pop af
   ret
 
-_LABEL_B879_:
+_LABEL_B879_GameBeginLoadMenu:
   push af
   push bc
-  ld a, c
-  cp $02
-  jr nz, +
-  inc a
+    ; Calculate box size
+    ; c = 0 means no slots are used? -> only show Begin (height 3)
+    ; c = 1 means all slots are full, we only have Load/Erase (height 5)
+    ; c = 2 means we have some slots used and empty, we show all items (height 9)
+    ld a, c
+    cp $02
+    jr nz, +
+    inc a
++:  inc a
+    sla a
+    inc a
+    push af
+    push bc
+    push de
+    push hl
+      ld hl, $C000
+      ld (_SRAM_21A0_TextDrawingState), hl
+      ld hl, $0000
+      ld (_RAM_C002_), hl
+      ld hl, _RAM_C004_
+      ld (_RAM_C000_), hl
+      ld b, $07 ; Width
+      ld c, a
+      xor a
+      call _LABEL_CD1_DrawBox
+    pop hl
+    pop de
+    pop bc
+    pop af
+    ; init drawing state
+    push hl
+      ld hl, (_RAM_C000_)
+      inc hl
+      ld (hl), $14 ; x
+      inc hl
+      ld (hl), $02 ; y
+    pop hl
+    ; check what to draw
+    ld b, $00
+    ld a, c
+    cp $01
+    jr z, +
+    ; 0 or 2 -> Begin
+    push af
+      ld a, $00
+      ld (_RAM_C003_), a
+      ld a, b
+      ld (_RAM_C002_), a
+    pop af
+    push bc
+      ld bc, _DATA_B914_NewSaveNameData
+      call _LABEL_C79_DrawMenuItem
+    pop bc
 +:
-  inc a
-  sla a
-  inc a
-  push af
-  push bc
-  push de
-  push hl
-  ld hl, $C000
-  ld (_SRAM_21A0_), hl
-  ld hl, $0000
-  ld (_RAM_C002_), hl
-  ld hl, _RAM_C004_
-  ld (_RAM_C000_), hl
-  ld b, $07
-  ld c, a
-  xor a
-  call _LABEL_CD1_DrawBox
-  pop hl
-  pop de
-  pop bc
-  pop af
-  push hl
-  ld hl, (_RAM_C000_)
-  inc hl
-  ld (hl), $14
-  inc hl
-  ld (hl), $02
-  pop hl
-  ld b, $00
-  ld a, c
-  cp $01
-  jr z, +
-  push af
+    or a
+    jr z, +
+    ; 1 or 2 -> Load, Erase
+    inc b
+    inc b
+    push af
     ld a, $00
     ld (_RAM_C003_), a
     ld a, b
     ld (_RAM_C002_), a
-  pop af
-  push bc
-    ld bc, _DATA_B914_NewSaveNameData
-    call _LABEL_C79_DrawMenuItem
-  pop bc
+    pop af
+    push bc
+      ld bc, _DATA_B91B_LoadMenu
+      call _LABEL_C79_DrawMenuItem
+    pop bc
+    inc b
+    inc b
+    push af
+      ld a, $00
+      ld (_RAM_C003_), a
+      ld a, b
+      ld (_RAM_C002_), a
+    pop af
+    push bc
+      ld bc, _DATA_B922_EraseMenu
+      call _LABEL_C79_DrawMenuItem
+    pop bc
 +:
-  or a
-  jr z, +
-  inc b
-  inc b
-  push af
-  ld a, $00
-  ld (_RAM_C003_), a
-  ld a, b
-  ld (_RAM_C002_), a
-  pop af
-  push bc
-    ld bc, _DATA_B91B_
-    call _LABEL_C79_DrawMenuItem
-  pop bc
-  inc b
-  inc b
-  push af
-  ld a, $00
-  ld (_RAM_C003_), a
-  ld a, b
-  ld (_RAM_C002_), a
-  pop af
-  push bc
-  ld bc, _DATA_B922_
-  call _LABEL_C79_DrawMenuItem
-  pop bc
-+:
-  cp $02
-  jr nz, +
-  inc b
-  inc b
-  push af
-  ld a, $00
-  ld (_RAM_C003_), a
-  ld a, b
-  ld (_RAM_C002_), a
-  pop af
-  push bc
-  ld bc, _DATA_F925_
-  call _LABEL_C79_DrawMenuItem
-  pop bc
+    cp $02
+    jr nz, +
+    ; 2 -> Copy
+    inc b
+    inc b
+    push af
+      ld a, $00
+      ld (_RAM_C003_), a
+      ld a, b
+      ld (_RAM_C002_), a
+    pop af
+    push bc
+      ld bc, _DATA_B925_CopyMenu
+      call _LABEL_C79_DrawMenuItem
+    pop bc
 +:
   pop bc
   pop af
@@ -27913,21 +27927,17 @@ _LABEL_B879_:
 ; Data from B914 to B91A (7 bytes)
 _DATA_B914_NewSaveNameData:
 .db $25 $7A $17 $2D $11 $32 $00
-;    ``------``------``------`` Tile indices
-;      
 
 ; Data from B91B to B921 (7 bytes)
-_DATA_B91B_:
+_DATA_B91B_LoadMenu:
 .db $1D $7A $1D $12 $11 $32 $00
-;    ``------``--``--``--``---- Tile indices
-;        ``-- ???
 
 ; Data from B922 to B924 (3 bytes)
-_DATA_B922_:
+_DATA_B922_EraseMenu:
 .db $14 $18 $00
 
 ; Data from B925 to B928 (4 bytes)
-_DATA_B925_:
+_DATA_B925_CopyMenu:
 .db $0E $1D $18 $00
 
 _LABEL_B929_MainMenuCursorWidthSelector:
@@ -27962,17 +27972,18 @@ _LABEL_B929_MainMenuCursorWidthSelector:
   pop af
   ret
 
-_LABEL_B947_:
+_LABEL_B947_AdjustMenuIndexForSlotInfo:
   push af
-  ld d, $00
-  ld a, c
-  cp $01
-  jr nz, +
-  ld d, $01
-+:
-  ld a, d
-  add a, b
-  ld d, a
+    ; d = b     (if c != 1)
+    ;   = b + 1 (if c == 1)
+    ld d, $00
+    ld a, c
+    cp $01
+    jr nz, +
+    ld d, $01
++:  ld a, d
+    add a, b
+    ld d, a
   pop af
   ret
 
@@ -27989,7 +28000,7 @@ _LABEL_B956_:
   push de
   push hl
   ld hl, $C06B
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C06D_), hl
   ld hl, _RAM_C06F_
@@ -28130,7 +28141,7 @@ _LABEL_BA26_:
     push de
     push hl
       ld hl, $C06B
-      ld (_SRAM_21A0_), hl
+      ld (_SRAM_21A0_TextDrawingState), hl
       ld hl, $0000
       ld (_RAM_C06D_), hl
       ld hl, _RAM_C06F_ ; drawing data location?
@@ -28223,7 +28234,7 @@ _LABEL_BAC2_DrawNameBox:
     push de
     push hl
       ld hl, $C1C1
-      ld (_SRAM_21A0_), hl
+      ld (_SRAM_21A0_TextDrawingState), hl
       ld hl, $0000
       ld (_RAM_C1C3_), hl
       ld hl, _RAM_C1C5_
@@ -28271,7 +28282,7 @@ _LABEL_BB10_:
     push de
     push hl
       ld hl, $C000
-      ld (_SRAM_21A0_), hl
+      ld (_SRAM_21A0_TextDrawingState), hl
       ld hl, $0000
       ld (_RAM_C002_), hl
       ld hl, _RAM_C004_
@@ -28678,13 +28689,13 @@ _LABEL_BD79_DrawCursor:
   push de
   ld b, $91
   ld a, $01
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   ld a, $08
   add a, e
   ld e, a
   ld a, $03
   ld b, $93
-  call _LABEL_BF4A_
+  call _LABEL_BF4A_SetMenuCursor
   pop de
   srl c
   srl c
@@ -28777,9 +28788,9 @@ _LABEL_BE5A_:
 _LABEL_BE6C_:
   push af
   push bc
-  ld a, $00
-  ld b, $04
-  call _LABEL_BED3_
+    ld a, $00
+    ld b, $04
+    call _LABEL_BED3_
   pop bc
   pop af
   ret
@@ -28841,30 +28852,32 @@ _LABEL_BE93_:
   pop hl
   ret
 
-_LABEL_BEAD_:
+_LABEL_BEAD_CheckSaveSlots:
+  ; returns c = 0 if none are used, 1 if all are used, 2 otherwise
+  ; returns b = count of used slots
   push af
-  ld a, (_SRAM_1B0F_)
-  and $0E
-  ld c, $00
-  or a
-  jr z, +
-  ld c, $01
-  cp $0E
-  jr z, +
-  ld c, $02
+    ld a, (_SRAM_1B0F_)
+    and $0E ; %0001110
+    ld c, $00
+    or a
+    jr z, +
+    ld c, $01
+    cp $0E
+    jr z, +
+    ld c, $02
 +:
-  ld b, $00
-  bit 1, a
-  jr z, +
-  inc b
+    ld b, $00
+    bit 1, a
+    jr z, +
+    inc b
 +:
-  bit 2, a
-  jr z, +
-  inc b
+    bit 2, a
+    jr z, +
+    inc b
 +:
-  bit 3, a
-  jr z, +
-  inc b
+    bit 3, a
+    jr z, +
+    inc b
 +:
   pop af
   ret
@@ -28915,43 +28928,43 @@ _LABEL_BF0D_:
   push bc
   push de
   push af
-  ld (_SRAM_2300_), a
-  ld a, $02
-  ld (_SRAM_2301_), a
-  xor a
-  ld (_SRAM_2302_), a
-  sla c
-  sla c
-  sla c
-  inc c
-  inc c
-  inc c
-  ld a, d
-  add a, $06
-  sla a
-  sla a
-  sla a
-  inc a
-  inc a
-  ld d, a
-  sla b
-  ld a, e
-  add a, b
-  add a, $04
-  sla a
-  sla a
-  sla a
-  dec a
-  ld e, a
-  pop af
-  ld b, $91
-  call _LABEL_BF4A_
+    ld (_SRAM_2300_), a
+    ld a, $02
+    ld (_SRAM_2301_), a
+    xor a
+    ld (_SRAM_2302_), a
+    sla c
+    sla c
+    sla c
+    inc c
+    inc c
+    inc c
+    ld a, d
+    add a, $06
+    sla a
+    sla a
+    sla a
+    inc a
+    inc a
+    ld d, a
+    sla b
+    ld a, e
+    add a, b
+    add a, $04
+    sla a
+    sla a
+    sla a
+    dec a
+    ld e, a
+    pop af
+    ld b, $91
+    call _LABEL_BF4A_SetMenuCursor
   pop de
   pop bc
   pop af
   ret
 
-_LABEL_BF4A_:
+_LABEL_BF4A_SetMenuCursor:
   push af
   push bc
   push de
@@ -31278,40 +31291,40 @@ _LABEL_CC07_:
   push bc
   push de
   push hl
-  push hl
-  push bc
-    ld a, d
-    or a
-    jp nz, ++
-    ld a, $63
-    cp e
-    jp c, ++
-    ex de, hl
-    ld de, $000A
-    call _LABEL_56B_
-    ld b, $01
-    inc c
-    dec c
-    jp z, +
-    ld a, $02
-    add a, c
-    ld b, a
+    push hl
+    push bc
+      ld a, d
+      or a
+      jp nz, ++
+      ld a, $63
+      cp e
+      jp c, ++
+      ex de, hl
+      ld de, $000A
+      call _LABEL_56B_
+      ld b, $01
+      inc c
+      dec c
+      jp z, +
+      ld a, $02
+      add a, c
+      ld b, a
 +:
-    ld a, $02
-    add a, l
-    ld c, a
-    jp +++
+      ld a, $02
+      add a, l
+      ld c, a
+      jp +++
 
 ++:
-  ld b, $8E
-  ld c, $8E
+      ld b, $8E ; '?'
+      ld c, $8E ; '?'
 +++:
-  pop de
-  pop hl
-  ld a, b
-  call _LABEL_DEF_DrawCharacter
-  ld a, c
-  call _LABEL_DEF_DrawCharacter
+    pop de
+    pop hl
+    ld a, b
+    call _LABEL_DEF_DrawCharacter
+    ld a, c
+    call _LABEL_DEF_DrawCharacter
   pop hl
   pop de
   pop bc
@@ -31328,7 +31341,7 @@ _LABEL_CC44_:
   push de
   push hl
   ld hl, $C000
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C002_), hl
   ld hl, _RAM_C004_
@@ -47479,7 +47492,7 @@ _LABEL_1814A_:
   push de
   push hl
   ld hl, $A1A2
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_21A4_DrawingYX), hl
   ld hl, _RAM_C542_
@@ -47904,7 +47917,7 @@ _LABEL_184AE_:
   push de
   push hl
   ld hl, $A1A2
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_SRAM_21A4_DrawingYX), hl
   ld hl, _RAM_C542_
@@ -49232,7 +49245,7 @@ _LABEL_18E21_:
   push de
   push hl
   ld hl, $C490
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C492_), hl
   ld hl, _RAM_C498_
@@ -49433,7 +49446,7 @@ _LABEL_18F7E_:
   push de
   push hl
   ld hl, $C494
-  ld (_SRAM_21A0_), hl
+  ld (_SRAM_21A0_TextDrawingState), hl
   ld hl, $0000
   ld (_RAM_C496_), hl
   ld hl, _RAM_C4ED_
@@ -54046,7 +54059,7 @@ _LABEL_20028_:
     ld e, l
     ld hl, (_SRAM_21A2_)
     ld a, $05
-    call _LABEL_EFC_
+    call _LABEL_EFC_ScrollMenuInWithoutBeep
   pop hl
   pop de
   pop af
@@ -54101,7 +54114,7 @@ _LABEL_20073_:
   ld e, l
   ld hl, (_SRAM_21A2_)
   ld a, $05
-  call _LABEL_EFC_
+  call _LABEL_EFC_ScrollMenuInWithoutBeep
   pop hl
   pop de
   pop af

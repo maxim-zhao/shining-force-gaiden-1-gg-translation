@@ -334,6 +334,11 @@ LookupScriptEntryImpl:
   ret
 .ends
 
+; Yes/No menu cursor widths
+  PatchB $a9db $1b ; Yes width
+  PatchB $a9e3 $13 ; No width
+  PatchB $a9e5 $8a ; No X
+
 .include "names.asm"
 
 

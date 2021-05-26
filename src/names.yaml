@@ -1,3 +1,5 @@
+# Do not re-order these tables!
+
 - ptr: 66511
   table_ptr: 12004
   # Enemies
@@ -146,36 +148,36 @@
     en: Executioner
   end: 12563
 
+# Player classes
 - ptr: 67045
   table_ptr: 11151
-  # Player classes
   entries:
   - ja: けんし
-    en: silk thread
+    en: Swordsman
   - ja: ゆうしゃ
-    en: hero
+    en: Hero
   - ja: きし
-    en: professional killer
+    en: Knight
   - ja: パラディン
-    en: paladin
+    en: Paladin
   - ja: せんし
-    en: warrior
+    en: Warrior
   - ja: ウォリアー
-    en: warrior
+    en: Warrior
   - ja: まじゅつし
-    en: magician
+    en: Magician # Wendy
   - ja: ウイザード
-    en: wizard
+    en: Wizard
   - ja: そうりょ
-    en: warrior
+    en: Priest
   - ja: しさい
     en: Scythe
   - ja: アーチャー
     en: Archer
   - ja: スナイパー
-    en: sniper
+    en: Sniper
   - ja: ちょうじん
-    en: superhero
+    en: Birdman
   - ja: バードラー
     en: Birdler
   - ja: モンク
@@ -183,7 +185,7 @@
   - ja: マスターモンク
     en: Master Monk
   - ja: じゅうじん
-    en: Jounin
+    en: Ninja
   - ja: ベルセルク
     en: Berserk
   - ja: レンジャー
@@ -191,7 +193,7 @@
   - ja: ボウナイト
     en: Bow Knight
   - ja: まほうせいぶつ
-    en: Magical Creatures
+    en: Magical Creature
   end: 11283
 
 - ptr: 67053
